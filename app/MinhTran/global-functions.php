@@ -3,240 +3,111 @@ function getPermissionDefault($level) {
     $roles = array();
 
     $roles['T'] = array(
-        'hhthitruong' => array(
+        'kkdvlt' => array(
             'index' => 1,
             'create' => 0,
             'edit' => 0,
             'delete' => 0,
             'approve'=> 1
         ),
-        'hhdvtn' => array(
+        'kkdvvtxk' => array(
             'index' => 1,
             'create' => 0,
             'edit' => 0,
             'delete' => 0,
             'approve'=> 1
         ),
-        'hhxnk' => array(
+        'kkdvvtxb' => array(
             'index' => 1,
             'create' => 0,
             'edit' => 0,
             'delete' => 0,
             'approve'=> 1
         ),
-        'kkgtw' => array(
+        'kkdvvtxtx' => array(
             'index' => 1,
             'create' => 0,
             'edit' => 0,
             'delete' => 0,
             'approve'=> 1
         ),
-        'kkgdp' => array(
+        'kkdvvtch' => array(
             'index' => 1,
             'create' => 0,
             'edit' => 0,
             'delete' => 0,
             'approve'=> 1
-        ),
-        'tsnnnhadat' => array(
-            'index' => 1,
-            'create' => 0,
-            'edit' => 0,
-            'delete' => 0,
-            'approve'=> 1
-        ),
-        'tsnnotokhac' => array(
-            'index' => 1,
-            'create' => 0,
-            'edit' => 0,
-            'delete' => 0,
-            'approve'=> 1
-        ),
-        'gttruocba' => array(
-            'index' => 1,
-            'create' => 0,
-            'edit' => 0,
-            'delete' => 0,
-            'approve'=> 1
-        ),
-        'tdgia' => array(
-            'index' => 1,
-            'create' => 0,
-            'edit' => 0,
-            'delete' => 0,
-            'approve'=> 1
-        ),
-        'congbogia' => array(
-            'index' => 1,
-            'create' => 0,
-            'edit' => 0,
-            'delete' => 0,
-            'approve'=> 0
-        ),
-        'ttqd' => array(
-            'index' => 1,
-            'create' => 1,
-            'edit' => 1,
-            'delete' => 1
         ),
     );
-    $roles['H'] = array(
-        'hhthitruong' => array(
+    $roles['DVLT'] = array(
+        'dvlt' => array(
+            'index' => 1,
+            'create' => 1,
+            'edit' => 1,
+            'delete' => 1,
+        ),
+        'kkdvlt' => array(
             'index' => 1,
             'create' => 1,
             'edit' => 1,
             'delete' => 1,
             'approve'=> 1
-        ),
-        'hhdvtn' => array(
-            'index' => 1,
-            'create' => 1,
-            'edit' => 1,
-            'delete' => 1,
-            'approve'=> 1
-        ),
-        'hhxnk' => array(
-            'index' => 1,
-            'create' => 1,
-            'edit' => 1,
-            'delete' => 1,
-            'approve'=> 1
-        ),
-        'kkgtw' => array(
-            'index' => 1,
-            'create' => 1,
-            'edit' => 1,
-            'delete' => 1,
-            'approve'=> 1
-        ),
-        'kkgdp' => array(
-            'index' => 1,
-            'create' => 1,
-            'edit' => 1,
-            'delete' => 1,
-            'approve'=> 1
-        ),
-        'tsnnnhadat' => array(
-            'index' => 1,
-            'create' => 1,
-            'edit' => 1,
-            'delete' => 1,
-            'approve'=> 1
-        ),
-        'tsnnotokhac' => array(
-            'index' => 1,
-            'create' => 1,
-            'edit' => 1,
-            'delete' => 1,
-            'approve'=> 1
-        ),
-        'gttruocba' => array(
-            'index' => 1,
-            'create' => 1,
-            'edit' => 1,
-            'delete' => 1,
-            'approve'=> 1
-        ),
-        'tdgia' => array(
-            'index' => 1,
-            'create' => 1,
-            'edit' => 1,
-            'delete' => 1,
-            'approve'=> 1,
-        ),
-        'congbogia' => array(
-            'index' => 1,
-            'create' => 1,
-            'edit' => 1,
-            'delete' => 1,
-            'approve'=> 1,
-        ),
-        'ttqd' => array(
-            'index' => 1,
-            'create' => 0,
-            'edit' => 0,
-            'delete' => 0
         ),
     );
-    $roles['X'] = array(
-        'hhthitruong' => array(
+    $roles['DVVT'] = array(
+        'dvvtxk' => array(
             'index' => 1,
-            'create' => 0,
-            'edit' => 0,
-            'delete' => 0,
-            'approve'=> 0
+            'create' => 1,
+            'edit' => 1,
+            'delete' => 1,
         ),
-        'hhdvtn' => array(
+        'kkdvvtxk' => array(
             'index' => 1,
-            'create' => 0,
-            'edit' => 0,
-            'delete' => 0,
-            'approve'=> 0
+            'create' => 1,
+            'edit' => 1,
+            'delete' => 1,
+            'approve'=> 1
         ),
-        'hhxnk' => array(
+        'dvvtxb' => array(
             'index' => 1,
-            'create' => 0,
-            'edit' => 0,
-            'delete' => 0,
-            'approve'=> 0
+            'create' => 1,
+            'edit' => 1,
+            'delete' => 1,
         ),
-        'kkgtw' => array(
+        'kkdvvtxb' => array(
             'index' => 1,
-            'create' => 0,
-            'edit' => 0,
-            'delete' => 0,
-            'approve'=> 0
+            'create' => 1,
+            'edit' => 1,
+            'delete' => 1,
+            'approve'=> 1
         ),
-        'kkgdp' => array(
+        'dvvtxtx' => array(
             'index' => 1,
-            'create' => 0,
-            'edit' => 0,
-            'delete' => 0,
-            'approve'=> 0
+            'create' => 1,
+            'edit' => 1,
+            'delete' => 1,
         ),
-        'tsnnnhadat' => array(
-            'index' => 0,
-            'create' => 0,
-            'edit' => 0,
-            'delete' => 0,
-            'approve'=> 0
-        ),
-        'tsnnotokhac' => array(
+        'kkdvvtxtx' => array(
             'index' => 1,
-            'create' => 0,
-            'edit' => 0,
-            'delete' => 0,
-            'approve'=> 0
+            'create' => 1,
+            'edit' => 1,
+            'delete' => 1,
+            'approve'=> 1
         ),
-        'gttruocba' => array(
+        'dvvtch' => array(
             'index' => 1,
-            'create' => 0,
-            'edit' => 0,
-            'delete' => 0,
-            'approve'=> 0
+            'create' => 1,
+            'edit' => 1,
+            'delete' => 1,
         ),
-        'tdgia' => array(
+        'kkdvvtch' => array(
             'index' => 1,
-            'create' => 0,
-            'edit' => 0,
-            'delete' => 0,
-            'approve'=> 0
-        ),
-        'congbogia' => array(
-            'index' => 1,
-            'create' => 0,
-            'edit' => 0,
-            'delete' => 0,
-            'approve'=> 0
-        ),
-        'ttqd' => array(
-            'index' => 1,
-            'create' => 0,
-            'edit' => 0,
-            'delete' => 0
+            'create' => 1,
+            'edit' => 1,
+            'delete' => 1,
+            'approve'=> 1
         ),
     );
-
     return json_encode($roles[$level]);
 }
 
@@ -300,6 +171,18 @@ function canDvCc($module = null, $action = null)
     }else
         return false;
 
+}
+
+function canDV($perm=null,$module = null, $action = null){
+    if($perm == ''){
+        return false;
+    }else {
+        $permission = json_decode($perm,true);
+        if (isset($permission[$module][$action]) && $permission[$module][$action] == 1) {
+            return true;
+        } else
+            return false;
+    }
 }
 
 function getGeneralConfigs() {

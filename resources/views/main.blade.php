@@ -284,21 +284,11 @@ License: You must have a valid license purchased only from themeforest(the above
                         <span class="arrow "></span>
                     </a>
                     <ul class="sub-menu">
-                        <li>
-                            <a href="">Hàng hóa thị trường<span class="arrow"></span> </a>
-                            <ul class="sub-menu">
-                                <li>
-                                    <a href="{{url('giahhdv-thitruong')}}">Giá HH thị trường</a>
-                                </li>
-                                <li>
-                                    <a href="{{url('thongtin-giathitruong')}}">Thông tin giá HH thị trường</a>
-                                </li>
-                                <li>
-                                    <a href="{{url('timkiem-giahhdv-thitruong')}}">Tìm kiếm thông tin giá HH thị trường</a>
-                                </li>
-
-                            </ul>
-                        </li>
+                        <li><a href="">Thông tin doanh nghiệp</a></li>
+                        <li><a href="">Thông tin CSKD</a></li>
+                        <li><a href="">Kê khai dịch vụ lưu trú </a></li>
+                        <li><a href="">Xét duyệt hồ sơ kê khai</a></li>
+                        <li><a href="">Tìm kiếm TT kê khai</a></li>
                     </ul>
                 </li>
                 <li>
@@ -308,19 +298,76 @@ License: You must have a valid license purchased only from themeforest(the above
                         <span class="arrow "></span>
                     </a>
                     <ul class="sub-menu">
+                        <li><a href="">Thông tin doanh nghiệp</a> </li>
                         <li>
-                            <a href="">Hàng hóa thị trường<span class="arrow"></span> </a>
+                            <a href="">Dịch vụ vận tải xe khách<span class="arrow"></span> </a>
                             <ul class="sub-menu">
                                 <li>
-                                    <a href="{{url('giahhdv-thitruong')}}">Giá HH thị trường</a>
+                                    <a href="">Thông tin DVVT</a>
                                 </li>
                                 <li>
-                                    <a href="{{url('thongtin-giathitruong')}}">Thông tin giá HH thị trường</a>
+                                    <a href="">Kê khai giá DVVT</a>
                                 </li>
                                 <li>
-                                    <a href="{{url('timkiem-giahhdv-thitruong')}}">Tìm kiếm thông tin giá HH thị trường</a>
+                                    <a href="">Xét duyệt hồ sơ kê khai</a>
+                                </li>
+                                <li>
+                                    <a href="">Tìm kiếm thông tin kê khai</a>
                                 </li>
 
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="">Dịch vụ vận tải xe buýt<span class="arrow"></span> </a>
+                            <ul class="sub-menu">
+                                <li>
+                                    <a href="">Thông tin DVVT</a>
+                                </li>
+                                <li>
+                                    <a href="">Kê khai giá DVVT</a>
+                                </li>
+                                <li>
+                                    <a href="">Xét duyệt hồ sơ kê khai</a>
+                                </li>
+                                <li>
+                                    <a href="">Tìm kiếm thông tin kê khai</a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="">Dịch vụ vận tải xe taxi<span class="arrow"></span> </a>
+                            <ul class="sub-menu">
+                                <li>
+                                    <a href="">Thông tin DVVT</a>
+                                </li>
+                                <li>
+                                    <a href="">Kê khai giá DVVT</a>
+                                </li>
+                                <li>
+                                    <a href="">Xét duyệt hồ sơ kê khai</a>
+                                </li>
+                                <li>
+                                    <a href="">Tìm kiếm thông tin kê khai</a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="">Dịch vụ vận tải chở hàng<span class="arrow"></span> </a>
+                            <ul class="sub-menu">
+                                <li>
+                                    <a href="">Thông tin DVVT</a>
+                                </li>
+                                <li>
+                                    <a href="">Kê khai giá DVVT</a>
+                                </li>
+                                <li>
+                                    <a href="">Xét duyệt hồ sơ kê khai</a>
+                                </li>
+                                <li>
+                                    <a href="">Tìm kiếm thông tin kê khai</a>
+                                </li>
                             </ul>
                         </li>
                     </ul>
@@ -334,18 +381,14 @@ License: You must have a valid license purchased only from themeforest(the above
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub-menu">
+                        <li><a href="">Dịch vụ lưu trú</a></li>
                         <li>
-                            <a href="">Hàng hóa dịch vụ<span class="arrow"></span> </a>
+                            <a href="">Dịch vụ vận tải<span class="arrow"></span> </a>
                             <ul class="sub-menu">
-                                <li>
-                                    <a href="{{url('reports/tt55-2011-BTC')}}">Thông tư 55/2011-TT-BTC</a>
-                                </li>
-                                <li>
-                                    <a href="{{url('reports/tt142-2015-BTC')}}">Thông tư 142/2015-TT-BTC</a>
-                                </li>
-                                <li>
-                                    <a href="{{url('reports/bctkkhac')}}">Báo cáo thống kê khác</a>
-                                </li>
+                                <li><a href="{{url('reports/dvxk/danhsach')}}">Vận tải xe khách</a></li>
+                                <li><a href="{{url('reports/dvxb/danhsach')}}">Vận tải xe buýt</a></li>
+                                <li><a href="{{url('reports/dvxk/danhsach')}}">Vận tải xe taxi</a></li>
+                                <li><a href="{{url('reports/dvxb/danhsach')}}">Vận tải chở hàng</a></li>
                             </ul>
                         </li>
 
@@ -358,14 +401,10 @@ License: You must have a valid license purchased only from themeforest(the above
                         <span class="arrow "></span>
                     </a>
                     <ul class="sub-menu">
-
-                        <li><a href="{{url('dmloaixe-thuetruocba')}}">Doanh nghiệp dịch vụ lưu trú</a> </li>
-
-                        <li><a href="{{url('phong-ban')}}">Doanh nghiệp dịch vụ vận tải</a></li>
-                        <li><a href="{{url('users/pl=quan-ly')}}"> Quản lý tài khoản</a></li>
-
-                        <li><a href="{{url('cau-hinh-he-thong')}}">Cấu hình hệ thống</a></li>
-
+                        <li><a href="{{url('dn_dichvu_luutru')}}">DN dịch vụ lưu trú</a> </li>
+                        <li><a href="{{url('dn_dichvu_vantai')}}">DN dịch vụ vận tải</a></li>
+                        <li><a href="{{url('users/pl=quan_ly')}}"> Quản lý tài khoản</a></li>
+                        <li><a href="{{url('cau_hinh_he_thong')}}">Cấu hình hệ thống</a></li>
                     </ul>
                 </li>
             </ul>

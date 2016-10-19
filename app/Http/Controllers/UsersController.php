@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\DnDvLt;
+use App\DonViDvVt;
 use App\Users;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -10,112 +13,159 @@ use Illuminate\Support\Facades\Session;
 
 class UsersController extends Controller
 {
-    public function login(){
+    public function login()
+    {
         return view('system.users.login')
-            ->with('pageTitle','Đăng nhập hệ thống');
+            ->with('pageTitle', 'Đăng nhập hệ thống');
     }
 
-    public function signin(Request $request){
+    public function signin(Request $request)
+    {
         $input = $request->all();
-        $check = Users::where('username',$input['username'])->count();
-        if($check == 0)
+        $check = Users::where('username', $input['username'])->count();
+        if ($check == 0)
             return view('errors.invalid-user');
         else
             $ttuser = Users::where('username', $input['username'])->first();
 
 
-        if(md5($input['password'])== $ttuser->password){
-            if($ttuser->status == "Kích hoạt"){
+        if (md5($input['password']) == $ttuser->password) {
+            if ($ttuser->status == "Kích hoạt") {
                 Session::put('admin', $ttuser);
 
-                if($ttuser->pldv == 'DVVT'){
-                    $ttdnvt = DonViDvVt::where('masothue',$ttuser->mahuyen)
+                if ($ttuser->pldv == 'DVVT') {
+                    $ttdnvt = DonViDvVt::where('masothue', $ttuser->mahuyen)
                         ->first();
-                    Session::put('ttdnvt',$ttdnvt);
+                    Session::put('ttdnvt', $ttdnvt);
                 }
                 return redirect('')
-                    -> with('pageTitle', 'Tổng quan');
-            }else
+                    ->with('pageTitle', 'Tổng quan');
+            } else
                 return view('errors.lockuser');
 
-        }else
+        } else
             return view('errors.invalid-pass');
     }
 
-    public function cp(){
+    public function cp()
+    {
 
-        if(Session::has('admin')){
+        if (Session::has('admin')) {
 
             return view('system.users.change-pass')
-                ->with('pageTitle','Thay đổi mật khẩu');
+                ->with('pageTitle', 'Thay đổi mật khẩu');
 
-        }else
+        } else
             return view('errors.notlogin');
 
     }
 
-    public function cpw(Request $request){
+    public function cpw(Request $request)
+    {
 
         $update = $request->all();
 
-        $username = session('admin')->username;
+        //$username = session('admin')->username;
 
-        $password = session('admin')->password;
+        //$password = session('admin')->password;
 
         $newpass2 = $update['newpassword2'];
 
         $currentPassword = $update['current-password'];
 
-        if(md5($currentPassword) == $password){
-            $ttuser = Users::where('username',$username)->first();
+        if (md5($currentPassword) == $password) {
+            $ttuser = Users::where('username', $username)->first();
             $ttuser->password = md5($newpass2);
-            if($ttuser->save()){
+            if ($ttuser->save()) {
                 Session::flush();
                 return view('errors.changepassword-success');
             }
-        }else{
+        } else {
             dd('Mật khẩu cũ không đúng???');
         }
     }
 
-    public function checkpass(Request $request){
+    public function checkpass(Request $request)
+    {
         $input = $request->all();
         $passmd5 = md5($input['pass']);
 
-        if(session('admin')->password == $passmd5){
+        if (session('admin')->password == $passmd5) {
             echo 'ok';
-        }else {
+        } else {
             echo 'cancel';
         }
     }
 
-    public function checkuser(Request $request){
+    public function checkuser(Request $request)
+    {
         $input = $request->all();
         $newusser = $input['user'];
-        $model = Users::where('username',$newusser)
+
+        $model = Users::where('username', $newusser)
             ->first();
-        if(isset($model)){
+        if (isset($model)) {
             echo 'cancel';
-        }else {
+        } else {
             echo 'ok';
         }
     }
 
-    public function logout() {
+    public function checkmasothue(Request $request)
+    {
+        $input = $request->all();
+        if ($input['pl'] == 'DVLT') {
+            $model = DnDvLt::where('masothue', $input['masothue'])
+                ->first();
+        }elseif($input['pl']=='DVVT'){
+            $model = DonViDvVt::where('masothue',$input['masothue'])
+                ->first();
+        }
+        if (isset($model)) {
+            echo 'cancel';
+        } else {
+            echo 'ok';
+        }
+    }
 
-        if (Session::has('admin'))
-        {
+    public function logout()
+    {
+        if (Session::has('admin')) {
             Session::flush();
             return redirect('/login');
-
-        }else {
+        } else {
             return redirect('');
         }
     }
 
-    public function index()
+    public function index($pl)
     {
-        //
+        if (Session::has('admin')) {
+            if ($pl == 'quan_ly')
+                $level = 'T';
+            elseif ($pl == 'dich_vu_luu_tru')
+                $level = 'DVLT';
+            elseif ($pl == 'dich_vu_van_tai')
+                $level = 'DVVT';
+
+            $model = Users::where('level', $level)
+                ->get();
+            $index_unset = 0;
+            foreach ($model as $user) {
+                if ($user->sadmin == 'ssa' || $user->sadmin == 'sa') {
+                    unset($model[$index_unset]);
+                }
+                $index_unset++;
+            }
+
+            return view('system.users.index')
+                ->with('model', $model)
+                ->with('pl', $pl)
+                ->with('pageTitle', 'Danh sách tài khoản');
+
+        } else {
+            return redirect('');
+        }
     }
 
     public function create()
@@ -131,7 +181,7 @@ class UsersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -142,34 +192,159 @@ class UsersController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
+        if (Session::has('admin')) {
+            $model = Users::findOrFail($id);
+            return view('system.users.edit')
+                ->with('model', $model)
+                ->with('pageTitle', 'Chỉnh sửa thông tin tài khoản');
+
+        } else {
+            return redirect('');
+        }
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //
+        if (Session::has('admin')) {
+            $input = $request->all();
+            $model = Users::findOrFail($id);
+            $model->name = $input['name'];
+            $model->phone = $input['phone'];
+            $model->email = $input['email'];
+            $model->status = $input['status'];
+            $model->username = $input['username'];
+            if ($input['newpass'] != '')
+                $model->password = md5($input['newpass']);
+            $model->save();
+            if ($model->pldv == 'DVLT')
+                $pl = 'dich_vu_luu_tru';
+            elseif ($model->pldv == 'DVVT')
+                $pl = 'dich_vu_van_tai';
+            else
+                $pl = 'quan_ly';
+
+            return redirect('users/pl=' . $pl);
+
+        } else {
+            return redirect('');
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        if (Session::has('admin')) {
+            $id = $request->all()['iddelete'];
+            $model = Users::findorFail($id);
+
+            if ($model->level == 'T')
+                $pl = 'quan_ly';
+            elseif ($model->level == 'DVLT')
+                $pl = 'dich_vu_luu_tru';
+            elseif ($model->level == 'DVVT')
+                $pl = 'dich_vu_van_tai';
+
+            $model->delete();
+
+            return redirect('users/pl=' . $pl);
+
+        } else
+            return view('errors.notlogin');
+    }
+
+    public function permission($id)
+    {
+        if (Session::has('admin')) {
+
+            $model = Users::findorFail($id);
+            if($model->level == 'DVVT') {
+                $ttdn = DonViDvVt::where('masothue',$model->mahuyen)
+                    ->first();
+                $setting = $ttdn->setting;
+
+            }else
+                $setting = '';
+            $permission = !empty($model->permission) ? $model->permission : getPermissionDefault($model->level);
+            //dd(json_decode($permission));
+            return view('system.users.perms')
+                ->with('permission', json_decode($permission))
+                ->with('setting',$setting)
+                ->with('model', $model)
+                ->with('pageTitle', 'Phân quyền cho tài khoản');
+
+        } else
+            return view('errors.notlogin');
+    }
+
+    public function uppermission(Request $request)
+    {
+        if (Session::has('admin')) {
+            $update = $request->all();
+            $id = $request['id'];
+
+            $model = Users::findOrFail($id);
+            //dd($model);
+            if (isset($model)) {
+
+                $update['roles'] = isset($update['roles']) ? $update['roles'] : null;
+                $model->permission = json_encode($update['roles']);
+                $model->save();
+                if ($model->level == 'T')
+                    $pl = 'quan_ly';
+                elseif ($model->level == 'DVLT')
+                    $pl = 'dich_vu_luu_tru';
+                elseif ($model->level == 'DVVT')
+                    $pl = 'dich_vu_van_tai';
+                return redirect('users/pl=' . $pl);
+
+            } else
+                dd('Tài khoản không tồn tại');
+
+        } else
+            return view('errors.notlogin');
+    }
+
+    public function lockuser($id)
+    {
+
+        $arrayid = explode('-', $id);
+        foreach ($arrayid as $ids) {
+            $model = Users::findOrFail($ids);
+            if ($model->status != "Chưa kích hoạt") {
+                $model->status = "Vô hiệu";
+                $model->save();
+            }
+        }
+        return redirect('users/pl=quan-ly');
+
+    }
+
+    public function unlockuser($id)
+    {
+
+        $arrayid = explode('-', $id);
+
+        foreach ($arrayid as $ids) {
+            $model = Users::findOrFail($ids);
+
+            if ($model->status != "Chưa kích hoạt") {
+
+                $model->status = "Kích hoạt";
+                $model->save();
+            }
+        }
+        return redirect('users/pl=quan-ly');
+
     }
 }

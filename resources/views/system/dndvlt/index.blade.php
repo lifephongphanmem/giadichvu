@@ -51,9 +51,7 @@
             }
 
         }
-        function confirmDelete(id) {
-            $('#frmDelete').attr('action', "/delete/" + id);
-        }
+
         function getId(id){
             document.getElementById("iddelete").value=id;
         }
@@ -85,7 +83,7 @@
 @section('content')
 
     <h3 class="page-title">
-        Quản lý <small>&nbsp;tài khoản</small>
+        Thông tin doanh nghiêp cung cấp <small>&nbsp;dịch vụ lưu trú</small>
     </h3>
     <!-- END PAGE HEADER-->
     <div class="row">
@@ -93,71 +91,36 @@
             <!-- BEGIN EXAMPLE TABLE PORTLET-->
             <div class="portlet box">
                 <div class="portlet-title">
-                    <div class="caption">
-                    </div>
                     <div class="actions">
-
-                        <button id="btnMultiLockUser" type="button" onclick="multiLock()" class="btn btn-default btn-sm" data-target="#lockuser-modal-confirm" data-toggle="modal"><i class="fa fa-lock"></i>&nbsp;
-                            Khóa</button>
-                        <button id="btnMultiUnLockUser" type="button" onclick="multiUnLock()" class="btn btn-default btn-sm" data-target="#unlockuser-modal-confirm" data-toggle="modal"><i class="fa fa-unlock"></i>&nbsp;
-                            Mở khóa</button>
-                        <!--a href="" class="btn btn-default btn-sm">
-                            <i class="fa fa-print"></i> Print </a-->
+                        <a href="{{url('dn_dichvu_luutru/create')}}" class="btn btn-default btn-sm">
+                            <i class="fa fa-plus"></i> Thêm mới </a>
                     </div>
                 </div>
                 <div class="portlet-body">
                     <div class="portlet-body">
-                        <div class="table-toolbar">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <select class="form-control" name="phanloai" id="phanloai">
-                                            <option value="quan_ly" {{($pl == "quan_ly") ? 'selected' : ''}}>Cấp Quản lý</option>
-                                            <option value="dich_vu_luu_tru" {{($pl == "dich_vu_luu_tru") ? 'selected' : ''}}>Dịch vụ lưu trú</option>
-                                            <option value="dich_vu_van_tai" {{($pl == "dich_vu_van_tai") ? 'selected' : ''}}>Dịch vụ vận tải</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                        </div>
                     <table class="table table-striped table-bordered table-hover" id="sample_3">
                         <thead>
                         <tr>
-                            <th class="table-checkbox">
-                                <input type="checkbox" class="group-checkable" data-set="#sample_3 .checkboxes"/>
-                            </th>
                             <th style="text-align: center" width="2%">STT</th>
-                            <th style="text-align: center">Tên tài khoản</th>
-                            <th style="text-align: center">Username</th>
-                            <th style="text-align: center">Tel</th>
-                            <th style="text-align: center">Email</th>
-                            <th style="text-align: center" width="5%">Trạng thái</th>
-                            <th style="text-align: center" width="25%">Thao tác</th>
+                            <th style="text-align: center">Tên doanh nghiệp</th>
+                            <th style="text-align: center">Mã số thuế</th>
+                            <th style="text-align: center">Số điện thoại<br>trụ sở</th>
+                            <th style="text-align: center">Số fax trụ sở</th>
+                            <th style="text-align: center">Địa chỉ trụ sở</th>
+                            <th style="text-align: center" width="20%">Thao tác</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($model as $key=>$tt)
                         <tr class="odd gradeX">
-                            <td>
-                                <input type="checkbox" class="checkboxes" value="{{$tt->id}}" name="ck_value" id="ck_value"/>
-                            </td>
                             <td style="text-align: center">{{$key + 1}}</td>
-                            <td>{{$tt->name}}</td>
-                            <td class="active">{{$tt->username}}</td>
-                            <td>{{$tt->phone}}</td>
-                            <td>{{$tt->email}}</td>
-                            <td style="text-align: center">
-                                @if($tt->status == 'Kích hoạt')
-                                    <span class="label label-sm label-success">{{$tt->status}}</span>
-                                @else
-                                    <span class="label label-sm label-danger">{{$tt->status}}</span>
-                                @endif
-                            </td>
+                            <td class="active" >{{$tt->tendn}}</td>
+                            <td>{{$tt->masothue}}</td>
+                            <td>{{$tt->teldn}}</td>
+                            <td>{{$tt->faxdn}}</td>
+                            <td>{{$tt->diachidn}}</td>
                             <td>
-                                <a href="{{url('users/'.$tt->id.'/edit')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</a>
-                                <a href="{{url('users/'.$tt->id.'/phan-quyen')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-cogs"></i>&nbsp;Phân quyền</a>
+                                <a href="{{url('dn_dichvu_luutru/'.$tt->id.'/edit')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</a>
                                 <button type="button" onclick="getId('{{$tt->id}}')" class="btn btn-default btn-xs mbs" data-target="#delete-modal" data-toggle="modal"><i class="fa fa-trash-o"></i>&nbsp;
                                     Xóa</button>
                             </td>
@@ -178,7 +141,7 @@
         <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    {!! Form::open(['url'=>'users/delete','id' => 'frm_delete'])!!}
+                    {!! Form::open(['url'=>'dn_dichvu_luutru/delete','id' => 'frm_delete'])!!}
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                         <h4 class="modal-title">Đồng ý xóa?</h4>

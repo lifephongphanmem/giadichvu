@@ -22,12 +22,12 @@
                     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                         <div class="dashboard-stat red-intense">
                             <div class="visual">
-                                <i class="fa fa-user"></i>
+                                <i class="fa fa-building"></i>
                             </div>
                             <div class="details">
                                 <div class="number"></div>
                                 <div class="desc">
-                                    Hàng hóa thị trường
+                                    Giá dịch vụ lưu trú
                                 </div>
                             </div>
                             <a class="more" href="{{url('thongtin-giathitruong')}}">
@@ -38,12 +38,12 @@
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="dashboard-stat blue-madison">
                         <div class="visual">
-                            <i class="fa fa-truck"></i>
+                            <i class="fa fa-car"></i>
                         </div>
                         <div class="details">
                             <div class="number"></div>
                             <div class="desc">
-                                Hàng hóa trong nước
+                                Giá vận tải xe khách
                             </div>
                         </div>
                         <a class="more" href="{{url('giahhdv-trongnuoc')}}">
@@ -54,12 +54,12 @@
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="dashboard-stat red-intense">
                         <div class="visual">
-                            <i class="fa fa-plane"></i>
+                            <i class="fa fa-car"></i>
                         </div>
                         <div class="details">
                             <div class="number"></div>
                             <div class="desc">
-                                Hàng hóa xuất nhập khẩu
+                                Giá vận tải xe buýt
                             </div>
                         </div>
                         <a class="more" href="">
@@ -70,12 +70,12 @@
                     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                         <div class="dashboard-stat purple-plum">
                             <div class="visual">
-                                <i class="fa fa-home"></i>
+                                <i class="fa fa-taxi"></i>
                             </div>
                             <div class="details">
                                 <div class="number"></div>
                                 <div class="desc">
-                                    Tài sản là nhà, đất
+                                    Giá vận tải xe taxi
                                 </div>
                             </div>
                             <a class="more" href="">
@@ -86,12 +86,12 @@
                     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                         <div class="dashboard-stat blue-madison">
                             <div class="visual">
-                                <i class="fa fa-car"></i>
+                                <i class="fa fa-truck"></i>
                             </div>
                             <div class="details">
                                 <div class="number"></div>
                                 <div class="desc">
-                                    Tài sản là ôtô, tài sản khác
+                                    Giá vận tải chở hàng
                                 </div>
                             </div>
                             <a class="more" href="">
@@ -99,102 +99,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <div class="dashboard-stat red-intense">
-                            <div class="visual">
-                                <i class="fa fa-globe"></i>
-                            </div>
-                            <div class="details">
-                                <div class="number"></div>
-                                <div class="desc">
-                                    Giá thuế trước bạ
-                                </div>
-                            </div>
-                            <a class="more" href="">
-                                Xem chi tiết<i class="m-icon-swapright m-icon-white"></i>
-                            </a>
-                        </div>
-                    </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="dashboard-stat green-haze">
-                        <div class="visual">
-                            <i class="fa fa-bar-chart-o"></i>
-                        </div>
-                        <div class="details">
-                            <div class="number"></div>
-                            <div class="desc">
-                                Thẩm định giá
-                            </div>
-                        </div>
-                        <a class="more" href="">
-                            Xem chi tiết<i class="m-icon-swapright m-icon-white"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="dashboard-stat purple-plum">
-                        <div class="visual">
-                            <i class="fa fa-globe"></i>
-                        </div>
-                        <div class="details">
-                            <div class="number"></div>
-                            <div class="desc">
-                                Công bố giá VLXD
-                            </div>
-                        </div>
-                        <a class="more" href="">
-                            Xem chi tiết<i class="m-icon-swapright m-icon-white"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="dashboard-stat red-intense">
-                        <div class="visual">
-                            <i class="fa fa-file-word-o"></i>
-                        </div>
-                        <div class="details">
-                            <div class="number"></div>
-                            <div class="desc">
-                                Thông tư quyết định nhà nước
-                            </div>
-                        </div>
-                        <a class="more" href="">
-                            Xem chi tiết <i class="m-icon-swapright m-icon-white"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="dashboard-stat purple-plum">
-                        <div class="visual">
-                            <i class="fa fa-file-word-o"></i>
-                        </div>
-                        <div class="details">
-                            <div class="number"></div>
-                            <div class="desc">
-                                Thông tư quyết định tỉnh
-                            </div>
-                        </div>
-                        <a class="more" href="">
-                            Xem chi tiết <i class="m-icon-swapright m-icon-white"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="dashboard-stat blue-madison">
-                        <div class="visual">
-                            <i class="fa fa-file-word-o"></i>
-                        </div>
-                        <div class="details">
-                            <div class="number"></div>
-                            <div class="desc">
-                                Thanh kiểm tra về giá
-                            </div>
-                        </div>
-                        <a class="more" href="">
-                            Xem chi tiết <i class="m-icon-swapright m-icon-white"></i>
-                        </a>
-                    </div>
-                </div>
+
             </div>
             <div class="clearfix">
             </div>

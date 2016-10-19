@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\GeneralConfigs;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -23,69 +24,35 @@ class HomeController extends Controller
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function setting()
     {
-        //
-    }
+        if (Session::has('admin')) {
+            if(session('admin')->sadmin == 'ssa')
+            {
+                $model = GeneralConfigs::first();
+                $setting = $model->setting;
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+                return view('system.general.setting')
+                    ->with('setting',json_decode($setting))
+                    ->with('pageTitle','Cấu hình chức năng chương trình');
+            }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        }else
+            return view('welcome');
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function upsetting(Request $request)
     {
-        //
-    }
+        if (Session::has('admin')) {
+            $update = $request->all();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+            $model = GeneralConfigs::first();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+            $update['roles'] = isset($update['roles']) ? $update['roles'] : null;
+            $model->setting = json_encode($update['roles']);
+            $model->save();
+
+            return redirect('cau_hinh_he_thong');
+        }else
+            return view('welcome');
     }
 }

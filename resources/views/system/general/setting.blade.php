@@ -41,107 +41,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-3">
-                                <h4 style="text-align: center">Hàng hóa dịch vụ</h4>
-                                <table class="table table-striped table-bordered table-hover">
-                                    <thead class="action">
-                                        <tr>
-                                            <th class="table-checkbox" width="5%">
-                                                <!--input type="checkbox" class="group-checkable" data-set="#sample_3 .checkboxes"/-->
-                                            </th>
-                                            <th>Chức năng</th>
-
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><input type="checkbox" {{ (isset($setting->hhdv->hhthitruong) && $setting->hhdv->hhthitruong == 1) ? 'checked' : '' }} value="1" name="roles[hhdv][hhthitruong]"/></td>
-                                            <td>Hàng hóa thị trường</td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" {{ (isset($setting->hhdv->hhdvtn) && $setting->hhdv->hhdvtn == 1) ? 'checked' : '' }} value="1" name="roles[hhdv][hhdvtn]"/></td>
-                                            <td>Hàng hóa dịch vụ trong nước</td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" {{ (isset($setting->hhdv->hhxnk) && $setting->hhdv->hhxnk == 1) ? 'checked' : '' }} value="1" name="roles[hhdv][hhxnk]"/></td>
-                                            <td>Hàng hóa xuất nhập khẩu</td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" {{ (isset($setting->hhdv->kkgtw) && $setting->hhdv->kkgtw == 1) ? 'checked' : '' }} value="1" name="roles[hhdv][kkgtw]"/></td>
-                                            <td>Kê khai giá trung ương</td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" {{ (isset($setting->hhdv->kkgdp) && $setting->hhdv->kkgdp == 1) ? 'checked' : '' }} value="1" name="roles[hhdv][kkgdp]"/></td>
-                                            <td>Kê khai giá địa phương</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="col-md-3">
-                                <h4 style="text-align: center">Tài sản nhà nước</h4>
-                                <table class="table table-striped table-bordered table-hover">
-                                    <thead class="action">
-                                    <tr>
-                                        <th class="table-checkbox" width="5%">
-                                            <!--input type="checkbox" class="group-checkable" data-set="#sample_3 .checkboxes"/-->
-                                        </th>
-                                        <th>Chức năng</th>
-
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td><input type="checkbox" {{ (isset($setting->tsnn->tsnnnhadat) && $setting->tsnn->tsnnnhadat == 1) ? 'checked' : '' }} value="1" name="roles[tsnn][tsnnnhadat]"/></td>
-                                        <td>Tài sản nhà nước (nhà và đất)</td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox" {{ (isset($setting->tsnn->tsnnotokhac) && $setting->tsnn->tsnnotokhac == 1) ? 'checked' : '' }} value="1" name="roles[tsnn][tsnnotokhac]"/></td>
-                                        <td>Tài sản nhà nước (ôtô - khác)</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="col-md-3">
-                                <h4 style="text-align: center">Giá thuế trước bạ</h4>
-                                <table class="table table-striped table-bordered table-hover">
-                                    <thead class="action">
-                                    <tr>
-                                        <th class="table-checkbox" width="5%">
-                                            <!--input type="checkbox" class="group-checkable" data-set="#sample_3 .checkboxes"/-->
-                                        </th>
-                                        <th>Chức năng</th>
-
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td><input type="checkbox" {{ (isset($setting->gttruocba->gttruocba) && $setting->gttruocba->gttruocba == 1) ? 'checked' : '' }} value="1" name="roles[gttruocba][gttruocba]"/></td>
-                                        <td>Giá thuế trước bạ</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="col-md-3">
-                                <h4 style="text-align: center">Thẩm định giá</h4>
-                                <table class="table table-striped table-bordered table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th class="table-checkbox" width="5%">
-                                            <!--input type="checkbox" class="group-checkable" data-set="#sample_3 .checkboxes"/-->
-                                        </th>
-                                        <th>Chức năng</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><input type="checkbox" {{ (isset($setting->thamdinhgia->thamdinhgia) && $setting->thamdinhgia->thamdinhgia == 1) ? 'checked' : '' }} value="1" name="roles[thamdinhgia][thamdinhgia]"/></td>
-                                            <td>Thẩm định giá</td>
-                                        </tr>
-
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="col-md-3">
-                                <h4 style="text-align: center">Công bố giá</h4>
+                                <h4 style="text-align: center">Dịch vụ lưu trú</h4>
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                     <tr>
@@ -153,15 +53,15 @@
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        <td><input type="checkbox" {{ (isset($setting->congbogia->congbogia) && $setting->congbogia->congbogia == 1) ? 'checked' : '' }} value="1" name="roles[congbogia][congbogia]"/></td>
-                                        <td>Công bố giá</td>
+                                        <td><input type="checkbox" {{ (isset($setting->dvlt->dvlt) && $setting->dvlt->dvlt == 1) ? 'checked' : '' }} value="1" name="roles[dvlt][dvlt]"/></td>
+                                        <td>Dịch vụ lưu trú</td>
                                     </tr>
 
                                     </tbody>
                                 </table>
                             </div>
                             <div class="col-md-3">
-                                <h4 style="text-align: center">Thông tư- Quyết định</h4>
+                                <h4 style="text-align: center">Dịch vụ vận tải</h4>
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                     <tr>
@@ -172,24 +72,40 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td><input type="checkbox" {{ (isset($setting->ttqd->ttqd) && $setting->ttqd->ttqd == 1) ? 'checked' : '' }} value="1" name="roles[ttqd][ttqd]"/></td>
-                                            <td>Thông tư- Quyết định</td>
-                                        </tr>
-
+                                    <tr>
+                                        <td><input type="checkbox" {{ (isset($setting->dvvt->vtxk) && $setting->dvvt->vtxk == 1) ? 'checked' : '' }} value="1" name="roles[dvvt][vtxk]"/></td>
+                                        <td>Vận tải xe khách</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" {{ (isset($setting->dvvt->vtxb) && $setting->dvvt->vtxb == 1) ? 'checked' : '' }} value="1" name="roles[dvvt][vtxb]"/></td>
+                                        <td>Vận tải xe buýt</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" {{ (isset($setting->dvvt->vtxtx) && $setting->dvvt->vtxtx == 1) ? 'checked' : '' }} value="1" name="roles[dvvt][vtxtx]"/></td>
+                                        <td>Vận tải xe taxi</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" {{ (isset($setting->dvvt->vtch) && $setting->dvvt->vtch == 1) ? 'checked' : '' }} value="1" name="roles[dvvt][vtch]"/></td>
+                                        <td>Vận tải chở hàng</td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>
+
                         </div>
-                        <div class="form-actions" style="text-align: center">
-                                <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Cập nhật</button>
-                        </div>
+
                     </div>
                 </div>
                 <!-- END EXAMPLE TABLE PORTLET-->
-                {!! Form::close() !!}
+
             </div>
         </div>
+        <div class="row" style="text-align: center">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Cập nhật</button>
+            </div>
+        </div>
+        {!! Form::close() !!}
 
         <!-- BEGIN DASHBOARD STATS -->
 
