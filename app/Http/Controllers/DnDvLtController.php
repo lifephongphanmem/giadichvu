@@ -26,11 +26,7 @@ class DnDvLtController extends Controller
             return view('errors.notlogin');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         if (Session::has('admin')) {
@@ -42,12 +38,7 @@ class DnDvLtController extends Controller
             return view('errors.notlogin');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         if (Session::has('admin')) {
@@ -83,23 +74,13 @@ class DnDvLtController extends Controller
             return view('errors.notlogin');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
         if (Session::has('admin')) {
@@ -113,13 +94,7 @@ class DnDvLtController extends Controller
             return view('errors.notlogin');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
         if (Session::has('admin')) {
@@ -178,5 +153,51 @@ class DnDvLtController extends Controller
         }else {
             echo 'ok';
         }
+    }
+
+    public function ttdn(){
+        if (Session::has('admin')) {
+
+            $model = DnDvLt::where('masothue',session('admin')->mahuyen)
+                ->first();
+            return view('manage.dvlt.ttdn.index')
+                ->with('model',$model)
+                ->with('pageTitle','Danh sách doanh nghiệp cung cấp dịch vụ lưu trú');
+
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function ttdnedit($id){
+        if (Session::has('admin')) {
+
+            $model = DnDvLt::findOrFail($id);
+
+            return view('manage.dvlt.ttdn.edit')
+                ->with('model',$model)
+                ->with('pageTitle','Thông tin doanh nghiệp cung cấp dịch vụ lưu trú chỉnh sửa');
+
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function ttdnupdate(Request $request,$id){
+        if (Session::has('admin')) {
+            $update = $request->all();
+            $model = DnDvLt::findOrFail($id);
+            $model->diachidn = $update['diachidn'];
+            $model->teldn = $update['teldn'];
+            $model->faxdn = $update['faxdn'];
+            $model->noidknopthue= $update['noidknopthue'];
+            $model->chucdanhky = $update['chucdanhky'];
+            $model->nguoiky = $update['nguoiky'];
+            $model->diadanh = $update['diadanh'];
+            //$model->tailieu = $update['tailieu'];
+            //$model->email = $update['email'];
+            $model->save();
+
+            return redirect('ttdn_dich_vu_luu_tru');
+        }else
+            return view('errors.notlogin');
     }
 }

@@ -284,10 +284,12 @@ class ComposerStaticInitd7de3fb6aaadd474bf447891cb3bef8d
     );
 
     public static $classMap = array (
+        'CreateCskddvltTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_20_074005_create_cskddvlt_table.php',
         'CreateDndvltTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_14_013710_create-dndvlt-table.php',
         'CreateDonvidvvtTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_18_014826_create-donvidvvt-table.php',
         'CreateGeneralConfigsTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_14_022915_create-general-configs-table.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
+        'CreateTtphongTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_20_082824_create_ttphong_table.php',
         'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_000000_create_users_table.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',

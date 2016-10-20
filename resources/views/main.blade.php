@@ -284,8 +284,8 @@ License: You must have a valid license purchased only from themeforest(the above
                         <span class="arrow "></span>
                     </a>
                     <ul class="sub-menu">
-                        <li><a href="">Thông tin doanh nghiệp</a></li>
-                        <li><a href="">Thông tin CSKD</a></li>
+                        <li><a href="{{url('ttdn_dich_vu_luu_tru')}}">Thông tin doanh nghiệp</a></li>
+                        <li><a href="{{url('ttcskd_dich_vu_luu_tru')}}">Thông tin CSKD</a></li>
                         <li><a href="">Kê khai dịch vụ lưu trú </a></li>
                         <li><a href="">Xét duyệt hồ sơ kê khai</a></li>
                         <li><a href="">Tìm kiếm TT kê khai</a></li>
@@ -381,7 +381,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub-menu">
-                        <li><a href="">Dịch vụ lưu trú</a></li>
+                        <li><a href="{{url('reports/dich_vu_luu_tru')}}">Dịch vụ lưu trú</a></li>
                         <li>
                             <a href="">Dịch vụ vận tải<span class="arrow"></span> </a>
                             <ul class="sub-menu">
