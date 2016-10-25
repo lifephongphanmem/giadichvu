@@ -72,17 +72,59 @@ Route::patch('ttdn_dich_vu_luu_tru/{id}','DnDvLtController@ttdnupdate');
 //Thông tin CSKD
 Route::get('ttcskd_dich_vu_luu_tru','CsKdDvLtController@index');
 Route::get('ttcskd_dich_vu_luu_tru/create','CsKdDvLtController@create');
-Route::post('ttcskd_dich_vu_luu_tru','CsKdDvLtController@store');
-
+    //Ajax ttphong create
 Route::get('ttphong/store','CsKdDvLtController@ttphongstore');
 Route::get('ttphong/edit','CsKdDvLtController@ttphongedit');
 Route::get('ttphong/update','CsKdDvLtController@ttphongupdate');
 Route::get('ttphong/delete','CsKdDvLtController@ttphongdelete');
+    //End Ajax ttphong create
+Route::post('ttcskd_dich_vu_luu_tru','CsKdDvLtController@store');
 
-Route::get('ttcskd_dich_vu_luu_tru/{id}/edit','CsKdDvLtController@ttdnedit');
-Route::patch('ttcskd_dich_vu_luu_tru/{id}','CsKdDvLtController@ttdnupdate');
+Route::get('ttcskd_dich_vu_luu_tru/{id}/edit','CsKdDvLtController@edit');
+    //Ajax ttphong edit
+Route::get('ttphong/themmoi','CsKdDvLtController@ttphongthemmoi');
+Route::get('ttphong/chinhsua','CsKdDvLtController@ttphongchinhsua');
+Route::get('ttphong/capnhat','CsKdDvLtController@ttphongcapnhat');
+Route::get('ttphong/xoa','CsKdDvLtController@ttphongxoa');
+    //End Ajax ttphongedit
+Route::patch('ttcskd_dich_vu_luu_tru/{id}','CsKdDvLtController@update');
+Route::post('ttcskd_dich_vu_luu_tru/delete','CsKdDvLtController@destroy');
+
+//Kê khai giá dịch vụ lưu trú
+Route::get('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh','KkGDvLtController@cskd');
+Route::get('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh={macskd}&nam={nam}','KkGDvLtController@index');
+Route::get('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh={macskd}/create','KkGDvLtController@create');
+    //Ajax ttphong create
+Route::get('/kkgdvlt/kkgia','KkGDvLtCtDfController@kkgia');
+Route::get('/kkgdvlt/upkkgia','KkGDvLtCtDfController@upkkgia');
+Route::get('kkgdvlt/storettp','KkGDvLtCtDfController@storettp');
+Route::get('kkgdvlt/editttp','KkGDvLtCtDfController@editttp');
+Route::get('kkgdvlt/update','KkGDvLtCtDfController@updatettp');
+Route::get('kkgdvlt/delete','KkGDvLtCtDfController@destroy');
+    //End Ajax ttphong create
+Route::post('ke_khai_dich_vu_luu_tru','KkGDvLtController@store');
+Route::get('ke_khai_dich_vu_luu_tru/{id}/edit','KkGDvLtController@edit');
+    //Ajax ttphong edit
+Route::get('/kkgdvlt/boxungttp','KkGDvLtCtController@boxungttp');
+Route::get('/kkgdvlt/kkgiachinhsua','KkGDvLtCtController@kkgiachinhsua');
+Route::get('/kkgdvlt/capnhatkkgia','KkGDvLtCtController@capnhatkkgia');
+Route::get('/kkgdvlt/chinhsuattp','KkGDvLtCtController@chinhsuattp');
+Route::get('/kkgdvlt/capnhatttp','KkGDvLtCtController@capnhatttp');
+Route::get('/kkgdvlt/xoattp','KkGDvLtCtController@xoattp');
+    //End Ajax ttphong edit
+Route::patch('ke_khai_dich_vu_luu_tru/{id}','KkGDvLtController@update');
+Route::post('ke_khai_dich_vu_luu_tru/chuyen','KkGDvLtController@chuyen');
+Route::post('ke_khai_dich_vu_luu_tru/delete','KkGDvLtController@destroy');
+
+    //Print Kê khai
+Route::get('ke_khai_dich_vu_luu_tru/report_ke_khai/{id}','ReportsController@kkgdvlt');
+//End kê khai giá dịch vụ lưu trú
+
+
 //End Thông tin CSKD
     //End Dịch vụ lưu trú
+
+
     //Dịch vụ vận tải
         //Vận tải xe khách
         //End Vận tải xe khách
