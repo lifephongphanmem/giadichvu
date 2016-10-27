@@ -114,10 +114,23 @@ Route::get('/kkgdvlt/xoattp','KkGDvLtCtController@xoattp');
     //End Ajax ttphong edit
 Route::patch('ke_khai_dich_vu_luu_tru/{id}','KkGDvLtController@update');
 Route::post('ke_khai_dich_vu_luu_tru/chuyen','KkGDvLtController@chuyen');
+Route::get('/kkgdvlt/viewlydo','KkGDvLtController@viewlydo');
 Route::post('ke_khai_dich_vu_luu_tru/delete','KkGDvLtController@destroy');
 
+    //Xét duyệt kê khai
+Route::get('xet_duyet_ke_khai_dich_vu_luu_tru/thang={thang}&nam={nam}&pl={pl}','KkGDvLtXdController@index');
+Route::post('xet_duyet_ke_khai_dich_vu_luu_tru/tralai','KkGDvLtXdController@tralai');
+Route::get('/xdkkgiadvlt/nhanhs','KkGDvLtXdController@getTTnHs');
+Route::post('xet_duyet_ke_khai_dich_vu_luu_tru/nhanhs','KkGDvLtXdController@nhanhs');
+Route::get('/xdkkgiadvlt/nhanhsedit','KkGDvLtXdController@getTTnHsedit');
+Route::post('xet_duyet_ke_khai_dich_vu_luu_tru/nhanhsedit','KkGDvLtXdController@updatettnhs');
+    //End xét duyệt kê khai
+    //Search kê khai
+Route::get('search_ke_khai_dich_vu_luu_tru','KkGDvLtController@search');
+Route::get('search_ke_khai_dich_vu_luu_tru/co_so_kinh_doanh={macskd}&namhs={nam}','KkGDvLtController@viewsearch');
+    //End search kê khai
     //Print Kê khai
-Route::get('ke_khai_dich_vu_luu_tru/report_ke_khai/{id}','ReportsController@kkgdvlt');
+Route::get('ke_khai_dich_vu_luu_tru/report_ke_khai/{mahs}','ReportsController@kkgdvlt');
 //End kê khai giá dịch vụ lưu trú
 
 

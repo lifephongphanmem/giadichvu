@@ -287,8 +287,8 @@ License: You must have a valid license purchased only from themeforest(the above
                         <li><a href="{{url('ttdn_dich_vu_luu_tru')}}">Thông tin doanh nghiệp</a></li>
                         <li><a href="{{url('ttcskd_dich_vu_luu_tru')}}">Thông tin CSKD</a></li>
                         <li><a href="{{url('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh')}}">Kê khai dịch vụ lưu trú </a></li>
-                        <li><a href="">Xét duyệt hồ sơ kê khai</a></li>
-                        <li><a href="">Tìm kiếm TT kê khai</a></li>
+                        <li><a href="{{url('xet_duyet_ke_khai_dich_vu_luu_tru/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')}}">Xét duyệt hồ sơ kê khai</a></li>
+                        <li><a href="{{url('search_ke_khai_dich_vu_luu_tru')}}">Tìm kiếm TT kê khai</a></li>
                     </ul>
                 </li>
                 <li>

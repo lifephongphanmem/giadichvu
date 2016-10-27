@@ -14,7 +14,6 @@ use Carbon\Carbon;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Session;
 
-
 class KkGDvLtController extends Controller
 {
     public function cskd(){
@@ -187,6 +186,76 @@ class KkGDvLtController extends Controller
             return view('errors.notlogin');
     }
 
+    public function viewlydo(Request $request){
+        $result = array(
+            'status' => 'fail',
+            'message' => 'error',
+        );
+        if(!Session::has('admin')) {
+            $result = array(
+                'status' => 'fail',
+                'message' => 'permission denied',
+            );
+            die(json_encode($result));
+        }
+        //dd($request);
+        $inputs = $request->all();
 
+        if(isset($inputs['id'])){
+            $model = KkGDvLt::where('id',$inputs['id'])
+                ->first();
+
+            //$result['message'] = '<div class="col-md-9 " id="ndlydo">';
+            $result['message'] = '<textarea id="lydo" class="form-control required" name="lydo" cols="30" rows="6">'.$model->lydo.'</textarea>';
+            //$result['message'] .= '</div>';
+            $result['status'] = 'success';
+
+        }
+        die(json_encode($result));
+    }
+
+    public function search(){
+        if (Session::has('admin')) {
+            $cskd = CsKdDvLt::all();
+            return view('manage.dvlt.search.index')
+                ->with('nam',date('Y'))
+                ->with('cskd',$cskd)
+                ->with('pageTitle','Tìm kiếm thông tin kê khai giá dịch vụ lưu trú');
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function viewsearch($macskd,$nam){
+        if (Session::has('admin')) {
+            $cskd = CsKdDvLt::all();
+            if($macskd == 'all'){
+                $model = KkGDvLt::whereYear('ngaynhan',$nam)
+                    ->where('trangthai','Duyệt')
+                    ->get();
+            }else{
+                $model = KkGDvLt::where('macskd',$macskd)
+                    ->whereYear('ngaynhan',$nam)
+                    ->where('trangthai','Duyệt')
+                    ->get();
+            }
+            foreach($model as $ttkk){
+                $this->getTTCSKD($cskd,$ttkk);
+            }
+            return view('manage.dvlt.search.view')
+                ->with('model',$model)
+                ->with('nam',$nam)
+                ->with('macskd',$macskd)
+                ->with('cskd',$cskd)
+                ->with('pageTitle','Tìm kiếm thông tin kê khai giá dịch vụ lưu trú');
+        }else
+            return view('errors.notlogin');
+    }
+    public function getTTCSKD($cskds,$array){
+        foreach($cskds as $cskd){
+            if($cskd->masothue == $array->masothue){
+                $array->tencskd = $cskd->tencskd;
+            }
+        }
+    }
 
 }

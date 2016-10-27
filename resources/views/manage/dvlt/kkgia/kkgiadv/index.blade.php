@@ -44,6 +44,25 @@
             $('#frm_chuyen').submit();
         }
 
+        function viewLyDo(id) {
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            //alert(id);
+            $.ajax({
+                url: '/kkgdvlt/viewlydo',
+                type: 'GET',
+                data: {
+                    _token: CSRF_TOKEN,
+                    id: id
+                },
+                dataType: 'JSON',
+                success: function (data) {
+                    if(data.status == 'success') {
+                        $('#lydo').replaceWith(data.message);
+                    }
+                }
+            })
+        }
+
     </script>
 @stop
 
@@ -122,7 +141,7 @@
                                     </td>
                                 @endif
                                 <td>
-                                    <a href="{{url('ke_khai_dich_vu_luu_tru/report_ke_khai/'.$tt->id)}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Xem chi tiết</a>
+                                    <a href="{{url('ke_khai_dich_vu_luu_tru/report_ke_khai/'.$tt->mahs)}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Xem chi tiết</a>
                                     @if($tt->trangthai == 'Chờ chuyển' || $tt->trangthai == 'Bị trả lại')
                                         <a href="{{url('ke_khai_dich_vu_luu_tru/'.$tt->id.'/edit')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</a>
 
@@ -131,9 +150,10 @@
                                         <button type="button" onclick="confirmChuyen('{{$tt->id}}')" class="btn btn-default btn-xs mbs" data-target="#chuyen-modal" data-toggle="modal"><i class="fa fa-share-square-o"></i>&nbsp;
                                             Chuyển</button>
                                         @if( $tt->trangthai == 'Bị trả lại')
-                                            <button type="button" data-target="#modal-lydo" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="viewLyDo({{$tt->id}});"><i class="fa fa-search"></i>&nbsp;Lý do trả lại</button>
+                                        <button type="button" data-target="#lydo-modal" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="viewLyDo({{$tt->id}});"><i class="fa fa-search"></i>&nbsp;Lý do trả lại</button>
                                         @endif
                                     @endif
+
                                 </td>
                             </tr>
                         @endforeach
@@ -176,8 +196,29 @@
             </div>
             <!-- /.modal-dialog -->
         </div>
-    <!--Modal delete-->
 
+    <!--Model lý do-->
+    <div class="modal fade" id="lydo-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title"><b>Lý do trả lại hồ sơ?</b></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <textarea id="lydo" class="form-control" name="lydo" cols="30" rows="5"></textarea></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn default" data-dismiss="modal">Hủy</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+        <!--Modal delete-->
     <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">

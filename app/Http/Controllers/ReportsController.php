@@ -13,13 +13,14 @@ use Illuminate\Support\Facades\Session;
 
 class ReportsController extends Controller
 {
-    public function kkgdvlt($id){
+    public function kkgdvlt($mahs){
         if (Session::has('admin')) {
             //dd($id);
-            $modelkk = KkGDvLt::findOrFail($id);
+            $modelkk = KkGDvLt::where('mahs',$mahs)->first();
             //dd($modelkk);
             $modeldn = DnDvLt::where('masothue',$modelkk->masothue)
                 ->first();
+            //dd($modelkk->masothue);
             $modelcskd = CsKdDvLt::where('macskd',$modelkk->macskd)
                 ->first();
             $modelkkct = KkGDvLtCt::where('mahs',$modelkk->mahs)
