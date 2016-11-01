@@ -3,6 +3,11 @@ Route::get('/', 'HomeController@index');
 Route::get('/setting','HomeController@setting');
 Route::post('/setting','HomeController@upsetting');
 
+Route::get('register/dich_vu_luu_tru','HomeController@regdvlt');
+Route::get('checkrgmasothue','HomeController@checkrgmasothue');
+Route::get('checkrguser','HomeController@checkrguser');
+Route::post('register/dich_vu_luu_tru','HomeController@regdvltstore');
+
 // <editor-fold defaultstate="collapsed" desc="--Setting--">
 Route::get('cau_hinh_he_thong','GeneralConfigsController@index');
 Route::get('cau_hinh_he_thong/{id}/edit','GeneralConfigsController@edit');

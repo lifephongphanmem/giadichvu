@@ -27,6 +27,10 @@ class CreateDonvidvvtTable extends Migration
             $table->string('nguoiky')->nullable();
             $table->string('dknopthue')->nullable();
             $table->text('setting');
+            $table->boolean('dvxk');
+            $table->boolean('dvxb');
+            $table->boolean('dvxtx');
+            $table->boolean('dvk');
             $table->string('toado')->nullable();
             $table->string('ghichu')->nullable();
             $table->string('trangthai')->nullable();

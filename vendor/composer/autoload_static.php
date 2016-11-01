@@ -286,9 +286,10 @@ class ComposerStaticInitd7de3fb6aaadd474bf447891cb3bef8d
     public static $classMap = array (
         'CreateCbkkgdvltTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_22_025029_create_cbkkgdvlt_table.php',
         'CreateCskddvltTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_20_074005_create_cskddvlt_table.php',
-        'CreateDndvltTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_14_013710_create-dndvlt-table.php',
-        'CreateDonvidvvtTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_18_014826_create-donvidvvt-table.php',
-        'CreateGeneralConfigsTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_14_022915_create-general-configs-table.php',
+        'CreateDndvltTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_14_013710_create_dndvlt_table.php',
+        'CreateDndvltregTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_01_144542_create_dndvltreg_table.php',
+        'CreateDonvidvvtTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_18_014826_create_donvidvvt_table.php',
+        'CreateGeneralConfigsTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_14_022915_create_general-configs_table.php',
         'CreateKkgdvltTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_21_073706_create_kkgdvlt_table.php',
         'CreateKkgdvltctTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_21_083946_create_kkgdvltct_table.php',
         'CreateKkgdvltctdfTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_21_084015_create_kkgdvltctdf_table.php',

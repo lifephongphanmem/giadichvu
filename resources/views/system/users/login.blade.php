@@ -91,12 +91,12 @@ License: You must have a valid license purchased only from themeforest(the above
 			<br>
 		</div>
 		{!! Form::close() !!}
-		<!--div class="create-account">
+		<div class="create-account">
 			<p>
 				Bạn chưa có tài khoản?&nbsp; <a data-target="#dangky-doanhnghiep" data-toggle="modal">
 					Đăng ký tài khoản </a>
 			</p>
-		</div-->
+		</div>
 </div>
 <!-- END LOGIN -->
 <!-- BEGIN COPYRIGHT -->
@@ -117,9 +117,9 @@ License: You must have a valid license purchased only from themeforest(the above
 				<div class="form-horizontal">
 					<div class="form-group">
 						<div class="col-md-12" align="center">
-							<a class="btn btn-primary" data-toggle="modal" href="{{url('register/dich-vu-luu-tru')}}">
+							<a class="btn btn-primary" data-toggle="modal" href="{{url('register/dich_vu_luu_tru')}}">
 								Dịch vụ lưu trú </a>
-							<a class="btn btn-success" data-toggle="modal" href="{{url('register/dich-vu-van-tai')}}">
+							<a class="btn btn-success" data-toggle="modal" href="{{url('register/dich_vu_van_tai')}}">
 								Dịch vụ vận tải </a>
 						</div>
 					</div>
