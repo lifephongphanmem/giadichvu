@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\DnDvLt;
+use App\DnDvLtReg;
 use App\DonViDvVt;
+use App\DonViDvVtReg;
+use App\Register;
 use App\Users;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
@@ -332,9 +335,7 @@ class UsersController extends Controller
 
     public function unlockuser($id)
     {
-
         $arrayid = explode('-', $id);
-
         foreach ($arrayid as $ids) {
             $model = Users::findOrFail($ids);
 
@@ -346,5 +347,114 @@ class UsersController extends Controller
         }
         return redirect('users/pl=quan-ly');
 
+    }
+
+    public function register($pl){
+        if (Session::has('admin')) {
+            if($pl == 'dich_vu_luu_tru'){
+                $model = Register::where('pl','DVLT')
+                    ->get();
+            }elseif($pl== 'dich_vu_van_tai'){
+                $model = Register::where('pl','DVVT')
+                    ->get();
+            }
+            return view('system.users.register.index')
+                ->with('model',$model)
+                ->with('pl',$pl)
+                ->with('pageTitle','Thông tin tài khoản đăng ký');
+
+        } else
+            return view('errors.notlogin');
+    }
+
+    public function registershow($id){
+        if (Session::has('admin')) {
+            $model = Register::findOrFail($id);
+            if($model->pl == 'DVLT'){
+                return view('system.users.register.dvlt')
+                    ->with('model',$model)
+                    ->with('pageTitle','Thông tin đăng ký tài khoản dịch vụ lưu trú');
+            }elseif($model->pl == 'DVVT'){
+                return view('system.users.register.dvvt')
+                    ->with('model',$model)
+                    ->with('pageTitle','Thông tin đăng ký tài khoản dịch vụ vận tải');
+            }
+        }else
+            return view('errors.notlogin');
+
+    }
+
+    public function registerdvlt(Request $request){
+        if (Session::has('admin')) {
+            $input = $request->all();
+            $id = $input['idregister'];
+            $model = Register::findOrFail($id);
+            $modeldn = new DnDvLt();
+            $modeldn->tendn = $model->tendn;
+            $modeldn->masothue = $model->masothue;
+            $modeldn->teldn = $model->tel;
+            $modeldn->faxdn = $model->fax;
+            $modeldn->email = $model->email;
+            $modeldn->diachidn = $model->diachi;
+            $modeldn->trangthai = 'Kích hoạt';
+            $modeldn->noidknopthue = $model->noidknopthue;
+            $modeldn->tailieu = $model->tailieu;
+            if($modeldn->save()){
+                $modeluser = new Users();
+                $modeluser->name = $model->tendn;
+                $modeluser->username = $model->username;
+                $modeluser->password = $model->password;
+                $modeluser->phone = $model->tel;
+                $modeluser->email = $model->email;
+                $modeluser->status = 'Kích hoạt';
+                $modeluser->mahuyen = $model->masothue;
+                $modeluser->level = 'DVLT';
+                $modeluser->save();
+            }
+            $delete = Register::findOrFail($id)->delete();
+            return redirect('users/register/pl=dich_vu_luu_tru');
+
+        } else
+            return view('errors.notlogin');
+    }
+
+    public function registerdvvt(Request $request){
+        if (Session::has('admin')) {
+            $input = $request->all();
+            $id = $input['idregister'];
+            $model = Register::findOrFail($id);
+            $modeldn = new DonViDvVt();
+            $modeldn->tendonvi = $model->tendn;
+            $modeldn->masothue = $model->masothue;
+            $modeldn->dienthoai = $model->tel;
+            $modeldn->fax = $model->fax;
+            $modeldn->email = $model->email;
+            $modeldn->diachi = $model->diachi;
+            $modeldn->dknopthue = $model->noidknopthue;
+            $modeldn->tailieu = $model->tailieu;
+            $modeldn->giayphepkd = $model->giayphepkd;
+            $modeldn->setting = $model->setting;
+            $modeldn->dvxk = $model->dvxk;
+            $modeldn->dvxb = $model->dvxb;
+            $modeldn->dvxtx = $model->dvxtx;
+            $modeldn->dvk = $model->dvk;
+            $modeldn->toado = $model->diachi!= '' ? getAddMap($model->diachi) : '';
+            if($modeldn->save()){
+                $modeluser = new Users();
+                $modeluser->name = $model->tendn;
+                $modeluser->username = $model->username;
+                $modeluser->password = $model->password;
+                $modeluser->phone = $model->tel;
+                $modeluser->email = $model->email;
+                $modeluser->status = 'Kích hoạt';
+                $modeluser->mahuyen = $model->masothue;
+                $modeluser->level = 'DVVT';
+                $modeluser->save();
+            }
+            $delete = Register::findOrFail($id)->delete();
+            return redirect('users/register/pl=dich_vu_van_tai');
+
+        } else
+            return view('errors.notlogin');
     }
 }

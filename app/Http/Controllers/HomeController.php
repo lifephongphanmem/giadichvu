@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\DnDvLt;
 use App\DnDvLtReg;
 use App\DonViDvVt;
+use App\DonViDvVtReg;
 use App\GeneralConfigs;
+use App\Register;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 
@@ -68,17 +70,57 @@ class HomeController extends Controller
 
     public function regdvltstore(Request $request){
         $input = $request->all();
-        $model = new DnDvLtReg();
+        $model = new Register();
         $model->tendn = $input['tendn'];
         $model->masothue = $input['masothue'];
-        $model->diachidn = $input['diachidn'];
-        $model->teldn  = $input['teldn'];
-        $model->faxdn= $input['faxdn'];
+        $model->diachi = $input['diachidn'];
+        $model->tel  = $input['teldn'];
+        $model->fax = $input['faxdn'];
+        $model->email = $input['emaildn'];
         $model->noidknopthue = $input['noidknopthue'];
         $model->giayphepkd = $input['giayphepkd'];
         $model->tailieu = $input['tailieu'];
         $model->username = $input['username'];
         $model->password = md5($input['rpassword']);
+        $model->pl = 'DVLT';
+        $model->dvxk = 0;
+        $model->dvxb = 0;
+        $model->dvxtx = 0;
+        $model->dvk = 0;
+        $model->save();
+        return view('errors.register-success');
+    }
+
+    public function regdvvt(){
+        return view('system.register.dvvt.register')
+            ->with('pageTitle','Đăng ký thông tin doanh nghiệp cung cấp dịch vụ vận tải');
+    }
+
+    public function regdvvtstore(Request $request){
+        $input = $request->all();
+        $model = new Register();
+
+        $model->tendn = $input['tendn'];
+        $model->masothue = $input['masothue'];
+        $model->diachi = $input['diachidn'];
+        $model->tel  = $input['teldn'];
+        $model->fax = $input['faxdn'];
+        $model->email = $input['emaildn'];
+        $model->noidknopthue = $input['noidknopthue'];
+        $model->giayphepkd = $input['giayphepkd'];
+        $model->tailieu = $input['tailieu'];
+        $model->username = $input['username'];
+        $model->password = md5($input['rpassword']);
+        $model->pl = 'DVVT';
+
+        $input['roles'] = isset($input['roles']) ? $input['roles'] : null;
+        $model->setting = json_encode($input['roles']);
+        $x = $input['roles'];
+        $model->dvxk = isset($x['dvvt']['vtxk']) ? 1 : 0;
+        $model->dvxb = isset($x['dvvt']['vtxb']) ? 1 : 0;
+        $model->dvxtx = isset($x['dvvt']['vtxtx']) ? 1 : 0;
+        $model->dvk = isset($x['dvvt']['vtch']) ? 1 : 0;
+
         $model->save();
         return view('errors.register-success');
     }
@@ -88,10 +130,14 @@ class HomeController extends Controller
         if ($input['pl'] == 'DVLT') {
             $model = DnDvLt::where('masothue', $input['masothue'])
                 ->first();
-            $modelrg = DnDvLtReg::where('masothue', $input['masothue'])
+            $modelrg = Register::where('masothue', $input['masothue'])
+                ->where('pl','DVLT')
                 ->first();
         }elseif($input['pl']=='DVVT'){
             $model = DonViDvVt::where('masothue',$input['masothue'])
+                ->first();
+            $modelrg = Register::where('masothue',$input['masothue'])
+                ->where('pl','DVVT')
                 ->first();
         }
         if(isset($model)) {
@@ -109,10 +155,12 @@ class HomeController extends Controller
         if ($input['pl'] == 'DVLT') {
             $model = User::where('username', $input['user'])
                 ->first();
-            $modelrg = DnDvLtReg::where('username', $input['user'])
+            $modelrg = Register::where('username', $input['user'])
                 ->first();
         }elseif($input['pl']=='DVVT'){
             $model = User::where('username', $input['user'])
+                ->first();
+            $modelrg = Register::where('username', $input['user'])
                 ->first();
         }
         if(isset($model)) {

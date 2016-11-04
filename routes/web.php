@@ -8,6 +8,10 @@ Route::get('checkrgmasothue','HomeController@checkrgmasothue');
 Route::get('checkrguser','HomeController@checkrguser');
 Route::post('register/dich_vu_luu_tru','HomeController@regdvltstore');
 
+Route::get('register/dich_vu_van_tai','HomeController@regdvvt');
+
+Route::post('register/dich_vu_van_tai','HomeController@regdvvtstore');
+
 // <editor-fold defaultstate="collapsed" desc="--Setting--">
 Route::get('cau_hinh_he_thong','GeneralConfigsController@index');
 Route::get('cau_hinh_he_thong/{id}/edit','GeneralConfigsController@edit');
@@ -30,6 +34,10 @@ Route::post('users/phan-quyen','UsersController@uppermission');
 Route::post('users/delete','UsersController@destroy');
 Route::get('users/lock/{id}','UsersController@lockuser');
 Route::get('users/unlock/{id}','UsersController@unlockuser');
+Route::get('users/register/pl={pl}','UsersController@register');
+Route::get('users/register/{id}/show','UsersController@registershow');
+Route::post('register/createdvlt','UsersController@registerdvlt');
+Route::post('register/createdvvt','UsersController@registerdvvt');
 //EndUsers
 
 //DN Dịch vụ lưu trú

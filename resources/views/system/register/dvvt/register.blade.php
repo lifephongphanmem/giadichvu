@@ -52,7 +52,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- BEGIN LOGO -->
 <div class="logo">
     <a href="">
-        <img src="{{ url('images/LIFESOFT.png')}}"  width="200" alt="Công ty TNHH phát triển phần mềm Cuộc Sống"/>
+        <img src="{{ url('images/LIFESOFT.png')}}"  width="180" alt="Công ty TNHH phát triển phần mềm Cuộc Sống"/>
     </a>
 </div>
 <!-- END LOGO -->
@@ -63,7 +63,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- BEGIN LOGIN -->
 <div class="content">
     <!-- BEGIN REGISTER FORM -->
-    {!! Form::open(['url'=>'/register/dvvt','id' => 'form-register', 'class'=>'register-form"']) !!}
+    {!! Form::open(['url'=>'register/dich_vu_van_tai','id' => 'form-register', 'class'=>'register-form"']) !!}
     <!--form class="register-form" action="index.html" method="post" novalidate="novalidate" style="display: block;"-->
     <div class="row">
     <div class="col-md-12">
@@ -162,32 +162,14 @@ License: You must have a valid license purchased only from themeforest(the above
             <div class="col-md-12">
                 <div class="form-group">
                     <div class="icheck-inline">
-                        <span><input type="checkbox" name="dvxk" value="1" checked></span>Vận tải xe khách
-                        <span><input type="checkbox" name="dvxb" value="1" checked></span>Vận tải xe buýt
-                        <span><input type="checkbox" name="dvxtx" value="1" checked></span>Vận tải xe taxi
-                        <span><input type="checkbox" name="dvk" value="1" checked></span>Vận tải chở hàng
+                        <span><input type="checkbox" value="1" name="roles[dvvt][vtxk]" checked> Vận tải xe khách </label>
+                        <span><input type="checkbox" value="1" name="roles[dvvt][vtxb]" checked> Vận tải xe buýt </label>
+                        <span><input type="checkbox" value="1" name="roles[dvvt][vtxtx]" checked> Vận tải xe taxi </label>
+                        <span><input type="checkbox" value="1" name="roles[dvvt][vtch]" checked> Vận tải chở hàng</label>
                     </div>
                 </div>
             </div>
         </div>
-        <!--div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <div class="input-icon">
-                        <i class="fa fa-user"></i>
-                        <input class="form-control placeholder-no-fix" type="text" placeholder="Chức danh người ký" name="email" required>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <div class="input-icon">
-                        <i class="fa fa-user"></i>
-                        <input class="form-control placeholder-no-fix" type="text" placeholder="Họ và tên người ký" name="masothue" required>
-                    </div>
-                </div>
-            </div>
-        </div-->
 
         <p>Thông tin đăng nhập</p>
         <div class="form-group">
@@ -222,6 +204,7 @@ License: You must have a valid license purchased only from themeforest(the above
         </div>
     </div>
     </div>
+    {!! Form::close() !!}
     <!--/form-->
 </div>
 <!-- END LOGIN -->
@@ -282,26 +265,20 @@ License: You must have a valid license purchased only from themeforest(the above
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         $.ajax({
             type: 'GET',
-            url: '/register/checkmstdvvt/' + $('#masothue').val(),
+            url: '/checkrgmasothue',
             data: {
-                _token: CSRF_TOKEN
+                _token: CSRF_TOKEN,
+                masothue:$(this).val(),
+                pl: 'DVVT'
             },
             success: function (respond) {
                 //alert(respond);
-                if(respond == 'ok') {
-
-                }else{
-                    if(respond == 'dktt') {
-                        toastr.error("Đã tồn tại đăng ký thông tin đơn vị!", "Lỗi!");
-                        $('input[name="masothue"]').val('');
-                        $('#masothue').focus();
-                    }
-                    else {
-                        toastr.error("Danh sách đơn vị đã có thông tin đơn vị!", "Lỗi!");
-                        $('input[name="masothue"]').val('');
-                        $('#masothue').focus();
-                    }
-                }
+                if(respond != 'ok'){
+                    toastr.error("Bạn cần nhập lại mã số thuế", "Mã số thuế nhập vào đã tồn tại hoặc đã được đăng ký!!!");
+                    $('input[name="masothue"]').val('');
+                    $('input[name="masothue"]').focus();
+                }else
+                    toastr.success("Mã số thuế sử dụng được!", "Thành công!");
             }
         });
     });
@@ -310,23 +287,19 @@ License: You must have a valid license purchased only from themeforest(the above
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         $.ajax({
             type: 'GET',
-            url: '/register/checkuserdvvt/'+ $('#username').val(),
+            url: '/checkrguser',
             data: {
-                _token: CSRF_TOKEN
+                _token: CSRF_TOKEN,
+                user:$(this).val(),
+                pl: 'DVLT'
             },
             success: function (respond) {
-                if(respond !='ok') {
-                    if (respond == 'dktt') {
-                        toastr.error("Đã tồn tại đăng ký thông tin user!", "Lỗi!");
-                        $('input[name="username"]').val('');
-                        $('#username').focus();
-                    }
-                    else {
-                        toastr.error("Danh sách user đã có thông tin user!", "Lỗi!");
-                        $('input[name="username"]').val('');
-                        $('#username').focus();
-                    }
-                }
+                if(respond != 'ok'){
+                    toastr.error("Bạn cần nhập lại tài khoản đăng ký", "Tài khoản đăng ký nhập vào đã tồn tại hoặc đã được đăng ký!!!");
+                    $('input[name="username"]').val('');
+                    $('#username').focus();
+                }else
+                    toastr.success("Tài khoản đăng ký sử dụng được!", "Thành công!");
             }
 
         });

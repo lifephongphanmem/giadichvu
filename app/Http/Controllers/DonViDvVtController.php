@@ -52,10 +52,10 @@ class DonViDvVtController extends Controller
             $insert['roles'] = isset($insert['roles']) ? $insert['roles'] : null;
             $model->setting = json_encode($insert['roles']);
             $x = $insert['roles'];
-            $model->dvxk = isset($x['dvvt']['dvxk']) ? 1 : 0;
-            $model->dvxb = isset($x['dvvt']['dvxb']) ? 1 : 0;
-            $model->dvxtx = isset($x['dvvt']['dvxtx']) ? 1 : 0;
-            $model->dvk = isset($x['dvvt']['dvk']) ? 1 : 0;
+            $model->dvxk = isset($x['dvvt']['vtxk']) ? 1 : 0;
+            $model->dvxb = isset($x['dvvt']['vtxb']) ? 1 : 0;
+            $model->dvxtx = isset($x['dvvt']['vtxtx']) ? 1 : 0;
+            $model->dvk = isset($x['dvvt']['vtch']) ? 1 : 0;
 
             $model->toado = $insert['diachi']!= '' ? getAddMap($insert['diachi']) : '';
             //$model->tailieu =$insert['tailieu'];

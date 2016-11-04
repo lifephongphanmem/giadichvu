@@ -394,6 +394,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
                     </ul>
                 </li>
+                @if(session('admin')->sadmin == 'sa' || session('admin')->sadmin == 'ssa')
                 <li>
                     <a href="">
                         <i class="icon-settings"></i>
@@ -404,9 +405,11 @@ License: You must have a valid license purchased only from themeforest(the above
                         <li><a href="{{url('dn_dichvu_luutru')}}">DN dịch vụ lưu trú</a> </li>
                         <li><a href="{{url('dn_dichvu_vantai')}}">DN dịch vụ vận tải</a></li>
                         <li><a href="{{url('users/pl=quan_ly')}}"> Quản lý tài khoản</a></li>
+                        <li><a href="{{url('users/register/pl=dich_vu_luu_tru')}}"> Quản lý tài khoản đăng ký</a></li>
                         <li><a href="{{url('cau_hinh_he_thong')}}">Cấu hình hệ thống</a></li>
                     </ul>
                 </li>
+                @endif
             </ul>
 
             <!-- END SIDEBAR MENU -->
