@@ -94,8 +94,10 @@
             <div class="portlet box">
                 <div class="portlet-title">
                     <div class="actions">
+                        @if(can('kkdvlt','create'))
                         <a href="{{url('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh='.$macskd.'/create')}}" class="btn btn-default btn-sm">
                             <i class="fa fa-plus"></i> Thêm mới </a>
+                        @endif
                     </div>
                 </div>
                 <div class="portlet-body">
@@ -143,12 +145,17 @@
                                 <td>
                                     <a href="{{url('ke_khai_dich_vu_luu_tru/report_ke_khai/'.$tt->mahs)}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Xem chi tiết</a>
                                     @if($tt->trangthai == 'Chờ chuyển' || $tt->trangthai == 'Bị trả lại')
+                                        @if(can('kkdvlt','edit'))
                                         <a href="{{url('ke_khai_dich_vu_luu_tru/'.$tt->id.'/edit')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</a>
-
+                                        @endif
+                                        @if(can('kkdvlt','delete'))
                                         <button type="button" onclick="getId('{{$tt->id}}')" class="btn btn-default btn-xs mbs" data-target="#delete-modal" data-toggle="modal"><i class="fa fa-trash-o"></i>&nbsp;
                                             Xóa</button>
+                                        @endif
+                                        @if(can('approve','approve'))
                                         <button type="button" onclick="confirmChuyen('{{$tt->id}}')" class="btn btn-default btn-xs mbs" data-target="#chuyen-modal" data-toggle="modal"><i class="fa fa-share-square-o"></i>&nbsp;
                                             Chuyển</button>
+                                        @endif
                                         @if( $tt->trangthai == 'Bị trả lại')
                                         <button type="button" data-target="#lydo-modal" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="viewLyDo({{$tt->id}});"><i class="fa fa-search"></i>&nbsp;Lý do trả lại</button>
                                         @endif

@@ -277,6 +277,8 @@ License: You must have a valid license purchased only from themeforest(the above
                         <span class="selected"></span>
                     </a>
                 </li>
+                @if(canGeneral('dvlt','dvlt'))
+                    @if(can('dvlt','index') || can('kkdvlt','index'))
                 <li>
                     <a href="">
                         <i class="fa fa-laptop"></i>
@@ -284,13 +286,24 @@ License: You must have a valid license purchased only from themeforest(the above
                         <span class="arrow "></span>
                     </a>
                     <ul class="sub-menu">
-                        <li><a href="{{url('ttdn_dich_vu_luu_tru')}}">Thông tin doanh nghiệp</a></li>
-                        <li><a href="{{url('ttcskd_dich_vu_luu_tru')}}">Thông tin CSKD</a></li>
-                        <li><a href="{{url('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh')}}">Kê khai dịch vụ lưu trú </a></li>
-                        <li><a href="{{url('xet_duyet_ke_khai_dich_vu_luu_tru/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')}}">Xét duyệt hồ sơ kê khai</a></li>
-                        <li><a href="{{url('search_ke_khai_dich_vu_luu_tru')}}">Tìm kiếm TT kê khai</a></li>
+                        @if(can('dvlt','index'))
+                            <li><a href="{{url('ttdn_dich_vu_luu_tru')}}">Thông tin doanh nghiệp</a></li>
+                            <li><a href="{{url('ttcskd_dich_vu_luu_tru')}}">Thông tin CSKD</a></li>
+                        @endif
+                        @if(can('kkdvlt','index'))
+                            @if(session('admin')->level=='DVLT')
+                                <li><a href="{{url('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh')}}">Kê khai dịch vụ lưu trú </a></li>
+                            @endif
+                            @if(session('admin')->level == 'T')
+                                <li><a href="{{url('xet_duyet_ke_khai_dich_vu_luu_tru/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')}}">Xét duyệt hồ sơ kê khai</a></li>
+                                <li><a href="{{url('search_ke_khai_dich_vu_luu_tru')}}">Tìm kiếm TT kê khai</a></li>
+                            @endif
+                        @endif
+
                     </ul>
                 </li>
+                    @endif
+                @endif
                 <li>
                     <a href="">
                         <i class="fa fa-laptop"></i>
@@ -373,7 +386,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     </ul>
                 </li>
 
-
+                @if(session('admin')->level == 'T')
                 <li>
                     <a href="">
                         <i class="fa fa-file-o fa-fw"></i>
@@ -394,6 +407,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
                     </ul>
                 </li>
+                @endif
                 @if(session('admin')->sadmin == 'sa' || session('admin')->sadmin == 'ssa')
                 <li>
                     <a href="">

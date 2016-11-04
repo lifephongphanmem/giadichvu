@@ -26,8 +26,10 @@
                     <div class="caption">
                     </div>
                     <div class="actions">
-                        <a href="{{url('ttdn_dich_vu_luu_tru/'.$model->id.'/edit')}}" class="btn btn-default btn-sm">
-                            <i class="fa fa-edit"></i> Chỉnh sửa </a>
+                        @if(can('dvlt','edit'))
+                            <a href="{{url('ttdn_dich_vu_luu_tru/'.$model->id.'/edit')}}" class="btn btn-default btn-sm">
+                                <i class="fa fa-edit"></i> Chỉnh sửa </a>
+                        @endif
                         <!--a href="" class="btn btn-default btn-sm">
                             <i class="fa fa-print"></i> Print </a-->
                     </div>
