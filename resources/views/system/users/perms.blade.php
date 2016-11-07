@@ -26,7 +26,7 @@
 @section('content')
 
     <h3 class="page-title">
-        Quản lý <small>&nbsp;tài khoản</small>
+        Quản lý <small>&nbsp;tài khoản</small> {{$setting}}
     </h3>
     <!-- END PAGE HEADER-->
     <div class="row">
@@ -55,7 +55,6 @@
                                                 <!--input type="checkbox" class="group-checkable" data-set="#sample_3 .checkboxes"/-->
                                             </th>
                                             <th>Chức năng</th>
-
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -89,7 +88,6 @@
                                                 <!--input type="checkbox" class="group-checkable" data-set="#sample_3 .checkboxes"/-->
                                             </th>
                                             <th>Chức năng</th>
-
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -123,6 +121,7 @@
                             <!--Vận tải xe khách-->
                             @if(canGeneral('dvvt','vtxk'))
                                 @if($model->level == 'DVVT')
+                                    @if(canDVVT($setting,'dvvt','vtxk'))
                                     <div class="col-md-3">
                                         <h4 style="text-align: center;color: #0000ff  ">Vận tải xe khách</h4>
                                         <table class="table table-striped table-bordered table-hover">
@@ -155,8 +154,9 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                    @endif
                                 @endif
-                                @if($model->level  == 'DVVT' || $model->level == 'T')
+                                @if(canDVVT($setting,'dvvt','vtxk') || $model->level == 'T')
                                         <div class="col-md-3">
                                             <h4 style="text-align: center;color: #0000ff  ">Kê khai dịch vụ vận tải xe khách</h4>
                                             <table class="table table-striped table-bordered table-hover">
@@ -201,6 +201,7 @@
                             <!--Vận tải xe buýt-->
                             @if(canGeneral('dvvt','vtxb'))
                                 @if($model->level == 'DVVT')
+                                    @if(canDVVT($setting,'dvvt','vtxb'))
                                     <div class="col-md-3">
                                         <h4 style="text-align: center;color: #0000ff  ">Vận tải xe buýt</h4>
                                         <table class="table table-striped table-bordered table-hover">
@@ -233,8 +234,9 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                    @endif
                                 @endif
-                                @if($model->level  == 'DVVT' || $model->level == 'T')
+                                @if(canDVVT($setting,'dvvt','vtxb') || $model->level == 'T')
                                     <div class="col-md-3">
                                         <h4 style="text-align: center;color: #0000ff  ">Kê khai dịch vụ vận tải xe buýt</h4>
                                         <table class="table table-striped table-bordered table-hover">
@@ -280,6 +282,7 @@
                             <!--Vận tải xe taxi-->
                             @if(canGeneral('dvvt','vtxtx'))
                                 @if($model->level == 'DVVT')
+                                    @if(canDVVT($setting,'dvvt','vtxtx'))
                                     <div class="col-md-3">
                                         <h4 style="text-align: center;color: #0000ff  ">Vận tải xe taxi</h4>
                                         <table class="table table-striped table-bordered table-hover">
@@ -312,8 +315,9 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                    @endif
                                 @endif
-                                @if($model->level  == 'DVVT' || $model->level == 'T')
+                                @if(canDVVT($setting,'dvvt','vtxtx') || $model->level == 'T')
                                     <div class="col-md-3">
                                         <h4 style="text-align: center;color: #0000ff  ">Kê khai dịch vụ vận tải xe taxi</h4>
                                         <table class="table table-striped table-bordered table-hover">
@@ -357,6 +361,7 @@
                             <!--Vận tải chở hàng-->
                             @if(canGeneral('dvvt','vtch'))
                                 @if($model->level == 'DVVT')
+                                    @if(canDVVT($setting,'dvvt','vtch'))
                                     <div class="col-md-3">
                                         <h4 style="text-align: center;color: #0000ff  ">Vận tải chở hàng</h4>
                                         <table class="table table-striped table-bordered table-hover">
@@ -389,10 +394,11 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                    @endif
                                 @endif
-                                @if($model->level  == 'DVVT' || $model->level == 'T')
+                                @if(canDVVT($setting,'dvvt','vtch') || $model->level == 'T')
                                     <div class="col-md-3">
-                                        <h4 style="text-align: center;color: #0000ff  ">Kê khai dịch vụ vận tải xe taxi</h4>
+                                        <h4 style="text-align: center;color: #0000ff  ">Kê khai dịch vụ vận tải chở hàng</h4>
                                         <table class="table table-striped table-bordered table-hover">
                                             <thead class="action">
                                             <tr>

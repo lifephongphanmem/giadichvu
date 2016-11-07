@@ -199,6 +199,16 @@ function getDouble($str)
     return floatval($sKQ);
 }
 
+function canDVVT($setting = null,$module = null, $action = null){
+    $setting = json_decode($setting, true);
+
+    //check permission
+    if(isset($setting[$module][$action]) && $setting[$module][$action] == 1) {
+        return true;
+    }else
+        return false;
+}
+
 function canshow($module = null, $action = null)
 {
     $permission = getShowMenu(getGeneralConfigs()['madv']);
