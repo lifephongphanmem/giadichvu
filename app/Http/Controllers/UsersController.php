@@ -68,9 +68,9 @@ class UsersController extends Controller
 
         $update = $request->all();
 
-        //$username = session('admin')->username;
+        $username = session('admin')->username;
 
-        //$password = session('admin')->password;
+        $password = session('admin')->password;
 
         $newpass2 = $update['newpassword2'];
 

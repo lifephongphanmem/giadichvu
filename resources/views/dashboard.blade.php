@@ -19,6 +19,8 @@
             <!-- BEGIN DASHBOARD STATS -->
 
             <div class="row">
+                @if(canGeneral('dvlt','dvlt'))
+                    @if(can('dvlt','index') || can('kkdvlt','index'))
                     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                         <div class="dashboard-stat red-intense">
                             <div class="visual">
@@ -27,14 +29,24 @@
                             <div class="details">
                                 <div class="number"></div>
                                 <div class="desc">
-                                    Giá dịch vụ lưu trú
+                                    Giá dịch vụ lưu trú<br>
+                                    <?php
+                                    $model = \App\KkGDvLt::where('trangthai','Chờ nhận')
+                                        ->count()
+                                    ?>
+                                    <h5>{{(session('admin')->level == 'T')? 'Chờ nhận: '.$model.' hồ sơ' : ''}}</h5>
+
                                 </div>
                             </div>
-                            <a class="more" href="{{url('thongtin-giathitruong')}}">
+                            <a class="more" href="
+                                {{(session('admin')->level == 'T')? url('xet_duyet_ke_khai_dich_vu_luu_tru/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')
+                                : url('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh')}}">
                                 Xem chi tiết <i class="m-icon-swapright m-icon-white"></i>
                             </a>
                         </div>
                     </div>
+                    @endif
+                @endif
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="dashboard-stat blue-madison">
                         <div class="visual">

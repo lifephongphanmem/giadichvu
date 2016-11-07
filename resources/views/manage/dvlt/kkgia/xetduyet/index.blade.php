@@ -281,17 +281,17 @@
                                 @endif
                                 <td>
                                     <a href="{{url('ke_khai_dich_vu_luu_tru/report_ke_khai/'.$tt->mahs)}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Xem chi tiết</a>
-                                    @if(can('kkgdvlt','approve'))
-                                    @if($tt->trangthai == 'Chờ nhận')
-                                    <button type="button" onclick="confirmTraLai({{$tt->id}})" class="btn btn-default btn-xs mbs" data-target="#tralai-modal" data-toggle="modal"><i class="fa fa-reply"></i>&nbsp;
-                                        Trả lại</button>
-                                        <button type="button" onclick="confirmNhanHs({{$tt->id}})" class="btn btn-default btn-xs mbs" data-target="#nhanhs-modal" data-toggle="modal"><i class="fa fa-share"></i>&nbsp;
-                                            Nhận hồ sơ</button>
-                                    @endif
-                                    @if($pl=='cong_bo')
-                                        <button type="button" onclick="confirmNhanHsedit({{$tt->mahs}})" class="btn btn-default btn-xs mbs" data-target="#nhanhsedit-modal" data-toggle="modal"><i class="fa fa-edit"></i>&nbsp;
-                                            Chỉnh sửa</button>
-                                    @endif
+                                    @if(can('kkdvlt','approve'))
+                                        @if($tt->trangthai == 'Chờ nhận')
+                                        <button type="button" onclick="confirmTraLai({{$tt->id}})" class="btn btn-default btn-xs mbs" data-target="#tralai-modal" data-toggle="modal"><i class="fa fa-reply"></i>&nbsp;
+                                            Trả lại</button>
+                                            <button type="button" onclick="confirmNhanHs({{$tt->id}})" class="btn btn-default btn-xs mbs" data-target="#nhanhs-modal" data-toggle="modal"><i class="fa fa-share"></i>&nbsp;
+                                                Nhận hồ sơ</button>
+                                        @endif
+                                        @if($pl=='cong_bo')
+                                            <button type="button" onclick="confirmNhanHsedit({{$tt->mahs}})" class="btn btn-default btn-xs mbs" data-target="#nhanhsedit-modal" data-toggle="modal"><i class="fa fa-edit"></i>&nbsp;
+                                                Chỉnh sửa</button>
+                                        @endif
                                     @endif
                                 </td>
                             </tr>
