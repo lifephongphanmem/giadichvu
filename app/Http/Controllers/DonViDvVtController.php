@@ -11,16 +11,14 @@ use Illuminate\Support\Facades\Session;
 
 class DonViDvVtController extends Controller
 {
+    // <editor-fold defaultstate="collapsed" desc="--Thông tin doanh nghiệp trong menu hệ thống--">
     public function index(){
         if (Session::has('admin')) {
-
             $model = DonViDvVt::where('trangthai','Kích hoạt')
                 ->get();
-
             return view('system.dndvvt.index')
                 ->with('model',$model)
                 ->with('pageTitle','Danh sách doanh nghiệp cung cấp dịch vụ vận tải');
-
         }else
             return view('errors.notlogin');
     }
@@ -34,6 +32,7 @@ class DonViDvVtController extends Controller
         }else
             return view('errors.notlogin');
     }
+
     public function store(Request $request){
         if (Session::has('admin')) {
             $insert = $request->all();
@@ -133,4 +132,55 @@ class DonViDvVtController extends Controller
         }else
             return view('errors.notlogin');
     }
+    // </editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="--Thông tin doanh nghiệp trong menu nhập liệu--">
+    public function TtDnIndex(){
+        if (Session::has('admin')) {
+            $model = DonViDvVt::where('masothue',session('admin')->mahuyen)
+                ->first();
+            $setting = $model->setting;
+            return view('manage.dvvt.ttdn.index')
+                ->with('model',$model)
+                ->with('setting',json_decode($setting))
+                ->with('pageTitle','Thông tin doanh nghiệp cung cấp dịch vụ vận tải');
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function TtDnedit($id)
+    {
+        if (Session::has('admin')) {
+            $model = DonViDvVt::findOrFail($id);
+            $setting = $model->setting;
+            return view('manage.dvvt.ttdn.edit')
+                ->with('model',$model)
+                ->with('setting',json_decode($setting))
+                ->with('pageTitle','Chỉnh sửa thông tin doanh nghiệp cung cấp dịch vụ vận tải');
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function TtDnupdate(Request $request, $id)
+    {
+        if (Session::has('admin')) {
+            $upd = $request->all();
+            $model = DonViDvVt::findOrFail($id);
+            $model->diachi = $upd['diachi'];
+            $model->dienthoai = $upd['dienthoai'];
+            $model->fax = $upd['fax'];
+            $model->dknopthue = $upd['dknopthue'];
+            $model->giayphepkd = $upd['giayphepkd'];
+            $model->chucdanh = $upd['chucdanh'];
+            $model->nguoiky = $upd['nguoiky'];
+            $model->diadanh = $upd['diadanh'];
+            $input['roles'] = isset($upd['roles']) ? $upd['roles'] : null;
+            $model->setting = json_encode($upd['roles']);
+            $model->toado = getAddMap($upd['diachi']);
+            $model->save();
+            return redirect('dich_vu_van_tai/thong_tin_don_vi');
+        } else
+            return view('errors.notlogin');
+    }
+    // </editor-fold>
 }

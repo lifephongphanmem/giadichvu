@@ -12,8 +12,6 @@
 @stop
 
 @section('content')
-
-
     <h3 class="page-title">
         Thông tin doanh nghiệp cung cấp dịch vụ lưu trú<small> chỉnh sửa</small>
     </h3>
@@ -141,10 +139,10 @@
 
             var validator = $("#update_ttdndvvt").validate({
                 rules: {
-                    name :"required",
+                    name :"required"
                 },
                 messages: {
-                    name :"Chưa nhập dữ liệu",
+                    name :"Chưa nhập dữ liệu"
                 }
             });
         }
@@ -169,7 +167,6 @@
                         }else
                             toastr.success("Mã số thuế sử dụng được!", "Thành công!");
                     }
-
                 });
             })
         }(jQuery));

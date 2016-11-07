@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class DonViDvVt extends Model
 {
     protected $table = 'donvidvvt';
-    protected $filltable = [
+    protected $fillable = [
         'id',
         'tendonvi',
         'masothue',
