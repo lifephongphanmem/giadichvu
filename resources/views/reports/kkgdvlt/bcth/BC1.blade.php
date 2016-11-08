@@ -61,6 +61,19 @@
         <th>Ngày thực hiện<br> mức giá kê khai</th>
         <th>Trạng thái hồ sơ</th>
     </tr>
+    @foreach($model as $key => $ttkk)
+        <tr>
+            <th style="text-align: center">{{$key + 1}}</th>
+            <th style="text-align: left">{{$ttkk->tencskd}}</th>
+            <th style="text-align: center">{{$ttkk->loaihang}} sao</th>
+            <th style="text-align: left">{{$ttkk->diachikd}}</th>
+            <th style="text-align: center">{{$ttkk->telkd}}</th>
+            <th style="text-align: center">{{$ttkk->socv}}</th>
+            <th style="text-align: center">{{getDayVn($ttkk->ngaynhap)}}</th>
+            <th style="text-align: center">{{getDayVn($ttkk->ngayhieuluc)}}</th>
+            <th style="text-align: center">{{$ttkk->trangthai}}</th>
+        </tr>
+    @endforeach
 
 </table>
 <table width="96%" border="0" cellspacing="0" cellpadding="8" style="margin:20px auto; text-align: center;">

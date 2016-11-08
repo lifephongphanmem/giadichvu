@@ -40,7 +40,7 @@ class ReportsController extends Controller
         if (Session::has('admin')) {
             $input = $request->all();
             //dd($input);
-            /*$model = KkGDvLt::where('trangthai','Chờ duyệt')
+            $model = KkGDvLt::where('trangthai','Chờ duyệt')
                 ->OrWhere('trangthai','Duyệt')
                 ->whereBetween('ngaychuyen', [$input['ngaytu'], $input['ngayden']])
                 ->get();
@@ -52,11 +52,11 @@ class ReportsController extends Controller
                 $kk->telkd = $modelcskd->telkd;
                 $kk->loaihang = $modelcskd->loaihang;
 
-            }*/
+            }
 
             return view('reports.kkgdvlt.bcth.BC1')
                 ->with('input',$input)
-                //->with('model',$model)
+                ->with('model',$model)
                 ->with('pageTitle','Báo cáo thống kê các đơn vị kê khai giá trong khoảng thời gian');
         }else
             return view('errors.notlogin');
@@ -65,7 +65,7 @@ class ReportsController extends Controller
         if (Session::has('admin')) {
             $input = $request->all();
             //dd($input);
-            /*$model = KkGDvLt::where('trangthai','Chờ duyệt')
+            $model = KkGDvLt::where('trangthai','Chờ duyệt')
                 ->OrWhere('trangthai','Duyệt')
                 ->whereBetween('ngaychuyen', [$input['ngaytu'], $input['ngayden']])
                 ->get();
@@ -82,13 +82,13 @@ class ReportsController extends Controller
             }
 
             $modelctkk = KkGDvLtCt::whereIn('mahs',explode(',',$mahss))
-                ->get();*/
+                ->get();
 
 
             return view('reports.kkgdvlt.bcth.BC2')
                 ->with('input',$input)
-                //->with('model',$model)
-                //->with('modelctkk',$modelctkk)
+                ->with('model',$model)
+                ->with('modelctkk',$modelctkk)
                 ->with('pageTitle','Báo cáo thống kê các đơn vị kê khai giá trong khoảng thời gian');
         }else
             return view('errors.notlogin');

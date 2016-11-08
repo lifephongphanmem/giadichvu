@@ -60,6 +60,29 @@
         <th>Mức tăng giảm</th>
         <th>Tỷ lệ (%)</th>
     </tr>
+    @foreach($model as $cskd)
+        <tr>
+            <th style="text-align: left" colspan="8">
+                {{$cskd->tencskd}}-Loại hạng {{$cskd->loaihang}}-ngày kê khai {{getDayVn($cskd->ngaynhap)}}- ngày thực hiện mức giá kê khai {{getDayVn($cskd->ngayhieuluc)}}
+                - Trạng thái hồ sơ {{$cskd->trangthai}}
+            </th>
+        </tr>
+        @foreach($modelctkk as $key=>$ctkk)
+            @if($ctkk->mahs == $cskd->mahs)
+                <tr>
+                    <th style="text-align: center">{{$key +1}}</th>
+                    <th style="text-align: left">{{$ctkk->loaip}}</th>
+                    <th style="text-align: left">{{$ctkk->qccl}}</th>
+                    <th style="text-align: left">{{$ctkk->sohieu}}</th>
+                    <th style="text-align: right">{{number_format($ctkk->mucgialk)}}</th>
+                    <th style="text-align: right">{{number_format($ctkk->mucgiakk)}}</th>
+                    <th style="text-align: right"></th>
+                    <th style="text-align: right"></th>
+                </tr>
+            @endif
+        @endforeach
+
+    @endforeach
 
 </table>
 <table width="96%" border="0" cellspacing="0" cellpadding="8" style="margin:20px auto; text-align: center;">
