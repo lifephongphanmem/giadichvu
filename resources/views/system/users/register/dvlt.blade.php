@@ -55,14 +55,14 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">Số điện thoại trụ sở chính</label>
-                                    <input type="text" class="form-control" name="teldn" id="teldn" value="{{$model->tel}}" readonly>
+                                    <input type="text" class="form-control" name="teldn" id="teldn" value="{{$model->teldn}}" readonly>
                                 </div>
                             </div>
                             <!--/span-->
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">Số fax trụ sở chính</label>
-                                    <input type="text" class="form-control" name="faxdn" id="faxdn" value="{{$model->fax}}" readonly>
+                                    <input type="text" class="form-control" name="faxdn" id="faxdn" value="{{$model->faxdn}}" readonly>
                                 </div>
                             </div>
                             <!--/span-->
@@ -71,7 +71,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">Địa chỉ trụ sở</label>
-                                    <input type="text" class="form-control" name="diachidn" id="diachidn" value="{{$model->diachi}}" readonly>
+                                    <input type="text" class="form-control" name="diachidn" id="diachidn" value="{{$model->diachidn}}" readonly>
                                 </div>
                             </div>
                             <div class="col-md-6">

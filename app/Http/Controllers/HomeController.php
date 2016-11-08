@@ -73,9 +73,9 @@ class HomeController extends Controller
         $model = new Register();
         $model->tendn = $input['tendn'];
         $model->masothue = $input['masothue'];
-        $model->diachi = $input['diachidn'];
-        $model->tel  = $input['teldn'];
-        $model->fax = $input['faxdn'];
+        $model->diachidn = $input['diachidn'];
+        $model->teldn  = $input['teldn'];
+        $model->faxdn = $input['faxdn'];
         $model->email = $input['emaildn'];
         $model->noidknopthue = $input['noidknopthue'];
         $model->giayphepkd = $input['giayphepkd'];
@@ -102,9 +102,9 @@ class HomeController extends Controller
 
         $model->tendn = $input['tendn'];
         $model->masothue = $input['masothue'];
-        $model->diachi = $input['diachidn'];
-        $model->tel  = $input['teldn'];
-        $model->fax = $input['faxdn'];
+        $model->diachidn = $input['diachidn'];
+        $model->teldn  = $input['teldn'];
+        $model->faxdn = $input['faxdn'];
         $model->email = $input['emaildn'];
         $model->noidknopthue = $input['noidknopthue'];
         $model->giayphepkd = $input['giayphepkd'];

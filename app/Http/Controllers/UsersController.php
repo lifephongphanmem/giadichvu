@@ -392,10 +392,10 @@ class UsersController extends Controller
             $modeldn = new DnDvLt();
             $modeldn->tendn = $model->tendn;
             $modeldn->masothue = $model->masothue;
-            $modeldn->teldn = $model->tel;
-            $modeldn->faxdn = $model->fax;
+            $modeldn->teldn = $model->teldn;
+            $modeldn->faxdn = $model->faxdn;
             $modeldn->email = $model->email;
-            $modeldn->diachidn = $model->diachi;
+            $modeldn->diachidn = $model->diachidn;
             $modeldn->trangthai = 'Kích hoạt';
             $modeldn->noidknopthue = $model->noidknopthue;
             $modeldn->tailieu = $model->tailieu;
@@ -404,7 +404,7 @@ class UsersController extends Controller
                 $modeluser->name = $model->tendn;
                 $modeluser->username = $model->username;
                 $modeluser->password = $model->password;
-                $modeluser->phone = $model->tel;
+                $modeluser->phone = $model->teldn;
                 $modeluser->email = $model->email;
                 $modeluser->status = 'Kích hoạt';
                 $modeluser->mahuyen = $model->masothue;
@@ -426,10 +426,10 @@ class UsersController extends Controller
             $modeldn = new DonViDvVt();
             $modeldn->tendonvi = $model->tendn;
             $modeldn->masothue = $model->masothue;
-            $modeldn->dienthoai = $model->tel;
-            $modeldn->fax = $model->fax;
+            $modeldn->dienthoai = $model->teldn;
+            $modeldn->fax = $model->faxdn;
             $modeldn->email = $model->email;
-            $modeldn->diachi = $model->diachi;
+            $modeldn->diachi = $model->diachidn;
             $modeldn->dknopthue = $model->noidknopthue;
             $modeldn->tailieu = $model->tailieu;
             $modeldn->giayphepkd = $model->giayphepkd;
@@ -439,6 +439,8 @@ class UsersController extends Controller
             $modeldn->dvxtx = $model->dvxtx;
             $modeldn->dvk = $model->dvk;
             $modeldn->toado = $model->diachi!= '' ? getAddMap($model->diachi) : '';
+            $modeldn->trangthai = 'Kích hoạt';
+
             if($modeldn->save()){
                 $modeluser = new Users();
                 $modeluser->name = $model->tendn;

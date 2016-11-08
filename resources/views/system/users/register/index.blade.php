@@ -119,9 +119,9 @@
                                 <td style="text-align: center">{{$key + 1}}</td>
                                 <td class="active" >{{$tt->tendn}}</td>
                                 <td>{{$tt->masothue}}</td>
-                                <td>{{$tt->tel}}</td>
-                                <td>{{$tt->fax}}</td>
-                                <td>{{$tt->diachi}}</td>
+                                <td>{{$tt->teldn}}</td>
+                                <td>{{$tt->faxdn}}</td>
+                                <td>{{$tt->diachidn}}</td>
                                 <td>
                                     <a href="{{url('users/register/'.$tt->id.'/show')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Xem chi tiết</a>
                                 </td>
