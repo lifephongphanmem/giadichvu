@@ -202,8 +202,8 @@ Route::group(['prefix'=>'dich_vu_van_tai'],function(){
             //Route::get('ket_qua','KkDvVtXkController@getsearch');
         });
         //Printf
-        Route::get('in/{masokk}','KkDvVtXkCtController@printKK');
-        Route::get('inPAG/{masokk}','KkDvVtXkCtController@printPAG');
+        Route::get('in/{masokk}','KkDvVtXkController@printKK');
+        Route::get('inPAG/{masokk}','KkDvVtXkController@printPAG');
     });
     // </editor-fold>
 
@@ -344,8 +344,14 @@ Route::group(['prefix'=>'dich_vu_van_tai'],function(){
         Route::get('inPAG/{masokk}','KkDvVtKhacController@printPAG');
     });
     // </editor-fold>
-    //End Dịch vụ vận tải
+    //Báo cáo
+    Route::group(['prefix'=>'bao_cao'],function(){
+        Route::get('', 'DonViDvVtController@TtDnIndex');
+        Route::get('{id}/edit', 'DonViDvVtController@TtDnedit');
+        Route::patch('{id}/update', 'DonViDvVtController@TtDnupdate');
+    });
 });
+    //End Dịch vụ vận tải
 // </editor-fold>//End Manage
 
 

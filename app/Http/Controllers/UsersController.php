@@ -34,7 +34,7 @@ class UsersController extends Controller
 
         if (md5($input['password']) == $ttuser->password) {
             if ($ttuser->status == "Kích hoạt") {
-                if ($ttuser->pldv == 'DVVT') {
+                if ($ttuser->level == 'DVVT') {
                     $ttdnvt = DonViDvVt::where('masothue', $ttuser->mahuyen)
                         ->first();
                     $dvvt = $ttdnvt->setting;
