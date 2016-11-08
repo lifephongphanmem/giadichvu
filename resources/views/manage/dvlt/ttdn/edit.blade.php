@@ -117,10 +117,10 @@
 
             var validator = $("#update_tttaikhoan").validate({
                 rules: {
-                    name :"required",
+                    name :"required"
                 },
                 messages: {
-                    name :"Chưa nhập dữ liệu",
+                    name :"Chưa nhập dữ liệu"
                 }
             });
         }

@@ -320,76 +320,41 @@ License: You must have a valid license purchased only from themeforest(the above
                         <span class="arrow "></span>
                     </a>
                     <ul class="sub-menu">
-                        <li><a href="">Thông tin doanh nghiệp</a> </li>
+                        <li><a href="{{url('/dich_vu_van_tai/thong_tin_don_vi')}}">Thông tin doanh nghiệp</a> </li>
                         <li>
                             <a href="">Dịch vụ vận tải xe khách<span class="arrow"></span> </a>
                             <ul class="sub-menu">
-                                <li>
-                                    <a href="">Thông tin DVVT</a>
-                                </li>
-                                <li>
-                                    <a href="">Kê khai giá DVVT</a>
-                                </li>
-                                <li>
-                                    <a href="">Xét duyệt hồ sơ kê khai</a>
-                                </li>
-                                <li>
-                                    <a href="">Tìm kiếm thông tin kê khai</a>
-                                </li>
-
+                                <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_khach/danh_muc')}}">Danh mục dịch vụ</a></li>
+                                <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_khach/ke_khai')}}">Kê khai giá dịch vụ</a></li>
+                                <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_khach/xet_duyet/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')}}">Xét duyệt hồ sơ kê khai</a></li>
+                                <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_khach/tim_kiem/masothue=all&nam='.date('Y'))}}">Tìm kiếm thông tin kê khai</a></li>
                             </ul>
                         </li>
                         <li>
                             <a href="">Dịch vụ vận tải xe buýt<span class="arrow"></span> </a>
                             <ul class="sub-menu">
-                                <li>
-                                    <a href="">Thông tin DVVT</a>
-                                </li>
-                                <li>
-                                    <a href="">Kê khai giá DVVT</a>
-                                </li>
-                                <li>
-                                    <a href="">Xét duyệt hồ sơ kê khai</a>
-                                </li>
-                                <li>
-                                    <a href="">Tìm kiếm thông tin kê khai</a>
-                                </li>
-
+                                <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_bus/danh_muc')}}">Danh mục dịch vụ</a></li>
+                                <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_bus/ke_khai')}}">Kê khai giá dịch vụ</a></li>
+                                <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_bus/xet_duyet/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')}}">Xét duyệt hồ sơ kê khai</a></li>
+                                <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_bus/tim_kiem/masothue=all&nam='.date('Y'))}}">Tìm kiếm thông tin kê khai</a></li>
                             </ul>
                         </li>
                         <li>
                             <a href="">Dịch vụ vận tải xe taxi<span class="arrow"></span> </a>
                             <ul class="sub-menu">
-                                <li>
-                                    <a href="">Thông tin DVVT</a>
-                                </li>
-                                <li>
-                                    <a href="">Kê khai giá DVVT</a>
-                                </li>
-                                <li>
-                                    <a href="">Xét duyệt hồ sơ kê khai</a>
-                                </li>
-                                <li>
-                                    <a href="">Tìm kiếm thông tin kê khai</a>
-                                </li>
-
+                                <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_taxi/danh_muc')}}">Danh mục dịch vụ</a></li>
+                                <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_taxi/ke_khai')}}">Kê khai giá dịch vụ</a></li>
+                                <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_taxi/xet_duyet/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')}}">Xét duyệt hồ sơ kê khai</a></li>
+                                <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_taxi/tim_kiem/masothue=all&nam='.date('Y'))}}">Tìm kiếm thông tin kê khai</a></li>
                             </ul>
                         </li>
                         <li>
                             <a href="">Dịch vụ vận tải chở hàng<span class="arrow"></span> </a>
                             <ul class="sub-menu">
-                                <li>
-                                    <a href="">Thông tin DVVT</a>
-                                </li>
-                                <li>
-                                    <a href="">Kê khai giá DVVT</a>
-                                </li>
-                                <li>
-                                    <a href="">Xét duyệt hồ sơ kê khai</a>
-                                </li>
-                                <li>
-                                    <a href="">Tìm kiếm thông tin kê khai</a>
-                                </li>
+                                <li><a href="{{url('/dich_vu_van_tai/dich_vu_cho_hang/danh_muc')}}">Danh mục dịch vụ</a></li>
+                                <li><a href="{{url('/dich_vu_van_tai/dich_vu_cho_hang/ke_khai')}}">Kê khai giá dịch vụ</a></li>
+                                <li><a href="{{url('/dich_vu_van_tai/dich_vu_cho_hang/xet_duyet/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')}}">Xét duyệt hồ sơ kê khai</a></li>
+                                <li><a href="{{url('/dich_vu_van_tai/dich_vu_cho_hang/tim_kiem/masothue=all&nam='.date('Y'))}}">Tìm kiếm thông tin kê khai</a></li>
                             </ul>
                         </li>
                     </ul>

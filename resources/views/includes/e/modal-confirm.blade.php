@@ -39,6 +39,7 @@
                     <button type="button" data-dismiss="modal" aria-hidden="true"
                             class="close">&times;</button>
                     <h4 id="modal-header-primary-label" class="modal-title">Đồng ý xoá?</h4>
+                    <input type="hidden" id="iddelete" name="iddelete"/>
                 </div>
                 <div class="modal-footer">
                     <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>

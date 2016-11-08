@@ -157,9 +157,9 @@ class DnDvLtController extends Controller
 
     public function ttdn(){
         if (Session::has('admin')) {
-
             $model = DnDvLt::where('masothue',session('admin')->mahuyen)
                 ->first();
+
             return view('manage.dvlt.ttdn.index')
                 ->with('model',$model)
                 ->with('pageTitle','Danh sách doanh nghiệp cung cấp dịch vụ lưu trú');
