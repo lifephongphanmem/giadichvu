@@ -34,13 +34,13 @@ class UsersController extends Controller
 
         if (md5($input['password']) == $ttuser->password) {
             if ($ttuser->status == "Kích hoạt") {
-                Session::put('admin', $ttuser);
-
                 if ($ttuser->pldv == 'DVVT') {
                     $ttdnvt = DonViDvVt::where('masothue', $ttuser->mahuyen)
                         ->first();
-                    Session::put('ttdnvt', $ttdnvt);
+                    $dvvt = $ttdnvt->setting;
+                    $ttuser->dvvtcc = $dvvt;
                 }
+                Session::put('admin', $ttuser);
                 return redirect('')
                     ->with('pageTitle', 'Tổng quan');
             } else

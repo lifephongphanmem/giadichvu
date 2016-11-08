@@ -149,6 +149,7 @@ function can($module = null, $action = null)
 
 }
 
+
 function canGeneral($module = null, $action =null)
 {
     $model = \App\GeneralConfigs::first();
@@ -211,7 +212,7 @@ function canDVVT($setting = null,$module = null, $action = null){
 
 function canshow($module = null, $action = null)
 {
-    $permission = getShowMenu(getGeneralConfigs()['madv']);
+    $permission = !empty(session('admin')->dvvtcc) ? session('admin')->dvvtcc : '{"dvvt":{"vtxk":"1","vtxb":"1","vtxtx":"1","vtch":"1"}}';
     $permission = json_decode($permission, true);
 
     //check permission

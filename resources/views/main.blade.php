@@ -328,76 +328,84 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <li><a href="{{url('/dich_vu_van_tai/thong_tin_don_vi')}}">Thông tin doanh nghiệp</a> </li>
                                 @endif
                                 @if(can('dvvtxk','index') || can('kkdvvtxk','index'))
-                                <li>
-                                    <a href="">Dịch vụ vận tải xe khách<span class="arrow"></span> </a>
-                                    <ul class="sub-menu">
-                                        @if(can('dvvtxk','index'))
-                                        <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_khach/danh_muc')}}">Danh mục dịch vụ</a></li>
-                                        @endif
-                                        @if(can('kkdvvtxk','index'))
-                                            @if(session('admin')->level != 'T')
-                                                <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_khach/ke_khai')}}">Kê khai giá dịch vụ</a></li>
-                                            @else
-                                                <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_khach/xet_duyet/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')}}">Xét duyệt hồ sơ kê khai</a></li>
-                                                <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_khach/tim_kiem/masothue=all&nam='.date('Y'))}}">Tìm kiếm thông tin kê khai</a></li>
-                                            @endif
-                                        @endif
-                                    </ul>
-                                </li>
+                                    @if(canshow('dvvt','vtxk'))
+                                        <li>
+                                            <a href="">Dịch vụ vận tải xe khách<span class="arrow"></span> </a>
+                                            <ul class="sub-menu">
+                                                @if(can('dvvtxk','index'))
+                                                <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_khach/danh_muc')}}">Danh mục dịch vụ</a></li>
+                                                @endif
+                                                @if(can('kkdvvtxk','index'))
+                                                    @if(session('admin')->level != 'T')
+                                                        <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_khach/ke_khai')}}">Kê khai giá dịch vụ</a></li>
+                                                    @else
+                                                        <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_khach/xet_duyet/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')}}">Xét duyệt hồ sơ kê khai</a></li>
+                                                        <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_khach/tim_kiem/masothue=all&nam='.date('Y'))}}">Tìm kiếm thông tin kê khai</a></li>
+                                                    @endif
+                                                @endif
+                                            </ul>
+                                        </li>
+                                    @endif
                                 @endif
                                 @if( can('dvvtxb','index') || can('kkdvvtxb','index'))
-                                <li>
-                                    <a href="">Dịch vụ vận tải xe buýt<span class="arrow"></span> </a>
-                                    <ul class="sub-menu">
-                                        @if(can('dvvtxb','index'))
-                                            <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_bus/danh_muc')}}">Danh mục dịch vụ</a></li>
-                                        @endif
-                                        @if(can('kkdvvtxb','index'))
-                                            @if(session('admin')->level != 'T')
-                                                <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_bus/ke_khai')}}">Kê khai giá dịch vụ</a></li>
-                                            @else
-                                                <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_bus/xet_duyet/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')}}">Xét duyệt hồ sơ kê khai</a></li>
-                                                <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_bus/tim_kiem/masothue=all&nam='.date('Y'))}}">Tìm kiếm thông tin kê khai</a></li>
-                                            @endif
-                                        @endif
-                                    </ul>
-                                </li>
+                                    @if(canshow('dvvt','vtxb'))
+                                        <li>
+                                            <a href="">Dịch vụ vận tải xe buýt<span class="arrow"></span> </a>
+                                            <ul class="sub-menu">
+                                                @if(can('dvvtxb','index'))
+                                                    <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_bus/danh_muc')}}">Danh mục dịch vụ</a></li>
+                                                @endif
+                                                @if(can('kkdvvtxb','index'))
+                                                    @if(session('admin')->level != 'T')
+                                                        <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_bus/ke_khai')}}">Kê khai giá dịch vụ</a></li>
+                                                    @else
+                                                        <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_bus/xet_duyet/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')}}">Xét duyệt hồ sơ kê khai</a></li>
+                                                        <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_bus/tim_kiem/masothue=all&nam='.date('Y'))}}">Tìm kiếm thông tin kê khai</a></li>
+                                                    @endif
+                                                @endif
+                                            </ul>
+                                        </li>
+                                    @endif
                                 @endif
                                 @if(can('dvvtxtx','index') || can('kkdvvtxtx','index'))
-                                <li>
-                                    <a href="">Dịch vụ vận tải xe taxi<span class="arrow"></span> </a>
-                                    <ul class="sub-menu">
-                                        @if(can('dvvtxtx','index'))
-                                        <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_taxi/danh_muc')}}">Danh mục dịch vụ</a></li>
-                                        @endif
-                                        @if(can('kkdvvtxtx','index'))
-                                            @if(session('admin')->level != 'T')
-                                                <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_taxi/ke_khai')}}">Kê khai giá dịch vụ</a></li>
-                                            @else
-                                                <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_taxi/xet_duyet/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')}}">Xét duyệt hồ sơ kê khai</a></li>
-                                                <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_taxi/tim_kiem/masothue=all&nam='.date('Y'))}}">Tìm kiếm thông tin kê khai</a></li>
-                                            @endif
-                                        @endif
-                                    </ul>
-                                </li>
+                                    @if(canshow('dvvt','vtxtx'))
+                                        <li>
+                                            <a href="">Dịch vụ vận tải xe taxi<span class="arrow"></span> </a>
+                                            <ul class="sub-menu">
+                                                @if(can('dvvtxtx','index'))
+                                                <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_taxi/danh_muc')}}">Danh mục dịch vụ</a></li>
+                                                @endif
+                                                @if(can('kkdvvtxtx','index'))
+                                                    @if(session('admin')->level != 'T')
+                                                        <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_taxi/ke_khai')}}">Kê khai giá dịch vụ</a></li>
+                                                    @else
+                                                        <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_taxi/xet_duyet/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')}}">Xét duyệt hồ sơ kê khai</a></li>
+                                                        <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_taxi/tim_kiem/masothue=all&nam='.date('Y'))}}">Tìm kiếm thông tin kê khai</a></li>
+                                                    @endif
+                                                @endif
+                                            </ul>
+                                        </li>
+                                    @endif
                                 @endif
                                 @if(can('dvvtch','index') || can('kkdvvtch','index'))
-                                <li>
-                                    <a href="">Dịch vụ vận tải chở hàng<span class="arrow"></span> </a>
-                                    <ul class="sub-menu">
-                                        @if(can('dvvtch','index'))
-                                            <li><a href="{{url('/dich_vu_van_tai/dich_vu_cho_hang/danh_muc')}}">Danh mục dịch vụ</a></li>
-                                        @endif
-                                        @if(can('kkdvvtch','index'))
-                                            @if(session('admin')->level != 'T')
-                                                <li><a href="{{url('/dich_vu_van_tai/dich_vu_cho_hang/ke_khai')}}">Kê khai giá dịch vụ</a></li>
-                                            @else
-                                                <li><a href="{{url('/dich_vu_van_tai/dich_vu_cho_hang/xet_duyet/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')}}">Xét duyệt hồ sơ kê khai</a></li>
-                                                <li><a href="{{url('/dich_vu_van_tai/dich_vu_cho_hang/tim_kiem/masothue=all&nam='.date('Y'))}}">Tìm kiếm thông tin kê khai</a></li>
-                                            @endif
-                                        @endif
-                                    </ul>
-                                </li>
+                                    @if(canshow('dvvt','vtch'))
+                                        <li>
+                                            <a href="">Dịch vụ vận tải chở hàng<span class="arrow"></span> </a>
+                                            <ul class="sub-menu">
+                                                @if(can('dvvtch','index'))
+                                                    <li><a href="{{url('/dich_vu_van_tai/dich_vu_cho_hang/danh_muc')}}">Danh mục dịch vụ</a></li>
+                                                @endif
+                                                @if(can('kkdvvtch','index'))
+                                                    @if(session('admin')->level != 'T')
+                                                        <li><a href="{{url('/dich_vu_van_tai/dich_vu_cho_hang/ke_khai')}}">Kê khai giá dịch vụ</a></li>
+                                                    @else
+                                                        <li><a href="{{url('/dich_vu_van_tai/dich_vu_cho_hang/xet_duyet/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')}}">Xét duyệt hồ sơ kê khai</a></li>
+                                                        <li><a href="{{url('/dich_vu_van_tai/dich_vu_cho_hang/tim_kiem/masothue=all&nam='.date('Y'))}}">Tìm kiếm thông tin kê khai</a></li>
+                                                    @endif
+                                                @endif
+                                            </ul>
+                                        </li>
+                                    @endif
                                 @endif
                             </ul>
                         </li>
