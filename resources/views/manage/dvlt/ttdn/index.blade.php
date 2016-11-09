@@ -96,7 +96,7 @@
                                 <b>Chức danh người ký</b>
                             </td>
                             <td style="width:35%">
-                                <span class="text-muted">{{$model->chucdanh}}
+                                <span class="text-muted">{{$model->chucdanhky}}
                                 </span>
                             </td>
                         </tr>

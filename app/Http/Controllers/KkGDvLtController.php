@@ -99,7 +99,8 @@ class KkGDvLtController extends Controller
             $model->socv = $insert['socv'];
             $model->ngayhieuluc = $insert['ngayhieuluc'];
             $model->socvlk = $insert['socvlk'];
-            $model->ngaycvlk = $insert['ngaycvlk'];
+            if($insert['ngaycvlk'] != '')
+                $model->ngaycvlk = $insert['ngaycvlk'];
             $model->trangthai = 'Chờ chuyển';
             $model->macskd = $insert['macskd'];
             $model->masothue = session('admin')->mahuyen;

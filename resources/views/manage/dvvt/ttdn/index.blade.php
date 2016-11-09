@@ -18,6 +18,9 @@
 @stop
 
 @section('content')
+    <h3 class="page-title">
+        Thông tin doanh nghiệp cung cấp <small>dịch vụ vận tải</small>
+    </h3>
     <div class="row">
         <div class="col-md-12">
             <!-- BEGIN EXAMPLE TABLE PORTLET-->
