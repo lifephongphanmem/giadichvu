@@ -412,29 +412,29 @@ License: You must have a valid license purchased only from themeforest(the above
                             </li>
                         @endif
                     @endif
+                @endif
 
-                    @if(session('admin')->level == 'T')
-                    <li>
-                        <a href="">
-                            <i class="fa fa-file-o fa-fw"></i>
-                            <span class="title">Báo cáo thống kê</span>
-                            <span class="arrow"></span>
-                        </a>
-                        <ul class="sub-menu">
-                            <li><a href="{{url('reports/dich_vu_luu_tru')}}">Dịch vụ lưu trú</a></li>
-                            <li>
-                                <a href="">Dịch vụ vận tải<span class="arrow"></span> </a>
-                                <ul class="sub-menu">
-                                    <li><a href="{{url('reports/dvxk/danhsach')}}">Vận tải xe khách</a></li>
-                                    <li><a href="{{url('reports/dvxb/danhsach')}}">Vận tải xe buýt</a></li>
-                                    <li><a href="{{url('reports/dvxk/danhsach')}}">Vận tải xe taxi</a></li>
-                                    <li><a href="{{url('reports/dvxb/danhsach')}}">Vận tải chở hàng</a></li>
-                                </ul>
-                            </li>
+                @if(session('admin')->level == 'T')
+                <li>
+                    <a href="">
+                        <i class="fa fa-file-o fa-fw"></i>
+                        <span class="title">Báo cáo thống kê</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li><a href="{{url('reports/dich_vu_luu_tru')}}">Dịch vụ lưu trú</a></li>
+                        <li>
+                            <a href="">Dịch vụ vận tải<span class="arrow"></span> </a>
+                            <ul class="sub-menu">
+                                <li><a href="{{url('/bao_cao/dich_vu_xe_khach')}}">Vận tải xe khách</a></li>
+                                <li><a href="{{url('/bao_cao/dich_vu_xe_bus')}}">Vận tải xe buýt</a></li>
+                                <li><a href="{{url('/bao_cao/dich_vu_xe_taxi')}}">Vận tải xe taxi</a></li>
+                                <li><a href="{{url('/bao_cao/dich_vu_cho_hang')}}">Vận tải chở hàng</a></li>
+                            </ul>
+                        </li>
 
                         </ul>
                     </li>
-                    @endif
                 @endif
                 @if(session('admin')->sadmin == 'sa' || session('admin')->sadmin == 'ssa')
                 <li>

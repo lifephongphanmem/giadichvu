@@ -37,7 +37,9 @@
             <div class="portlet box">
                 <div class="portlet-title">
                     <div class="actions">
-                        <button type="button" id="_btnThemDV" class="btn btn-success btn-xs" onclick="addDVXK()" ><i class="fa fa-plus"></i>&nbsp;Thêm mới</button>
+                        @if($per['create'])
+                            <button type="button" id="_btnThemDV" class="btn btn-success btn-xs" onclick="addDVXK()" ><i class="fa fa-plus"></i>&nbsp;Thêm mới</button>
+                        @endif
                     </div>
                 </div>
                 <div class="portlet-body">
@@ -64,9 +66,13 @@
                                     <td name="qccl">{{$dv->qccl}}</td>
                                     <td name="dvt">{{$dv->dvt}}</td>
                                     <td>
-                                        <button type="button" class="btn btn-default btn-xs mbs" onclick="editDVXK(this,'{{$dv->id}}')"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</button>
-                                        <button type="button" onclick="confirmDel('{{$dv->id}}')" class="btn btn-default btn-xs mbs" data-target="#del-modal-confirm" data-toggle="modal"><i class="fa fa-trash-o"></i>&nbsp;
+                                        @if($per['edit'])
+                                            <button type="button" class="btn btn-default btn-xs mbs" onclick="editDVXK(this,'{{$dv->id}}')"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</button>
+                                        @endif
+                                        @if($per['delete'])
+                                            <button type="button" onclick="confirmDel('{{$dv->id}}')" class="btn btn-default btn-xs mbs" data-target="#del-modal-confirm" data-toggle="modal"><i class="fa fa-trash-o"></i>&nbsp;
                                             Xóa</button>
+                                        @endif
                                     </td>
 
                                 </tr>

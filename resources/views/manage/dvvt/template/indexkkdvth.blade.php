@@ -89,16 +89,14 @@
                             <td>
                                 <button type="button" onclick="InChiTiet('{{$kk->masokk}}')" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Chi tiết</button>
                                 <button type="button" onclick="InPAG('{{$kk->masokk}}')" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Phương án giá</button>
-                                @if($kk->trangthai == 'Chờ nhận')
-                                    <button type="button" onclick="TTNguoiChuyen('{{$kk->ttnguoinop}}')" class="btn btn-default btn-xs mbs" data-target="#chuyendvvt-modal-confirm" data-toggle="modal"><i class="fa fa-user"></i>&nbsp;Người chuyển</button>
-                                    <button type="button" onclick="confirmNhan('{{$kk->id}}')" class="btn btn-default btn-xs mbs" data-target="#nhandvvt-modal-confirm" data-toggle="modal"><i class="fa fa-share-square-o"></i>&nbsp;Nhận hồ sơ</button>
-                                    <button type="button" onclick="confirmTraLai('{{$kk->id}}')" class="btn btn-default btn-xs mbs" data-target="#tradvvt-modal-confirm" data-toggle="modal"><i class="fa fa-share-square-o"></i>&nbsp;Trả lại</button>
-                                @elseif($kk->trangthai == 'Chờ duyệt')
-                                    <button type="button" onclick="comfirmDuyet('{{$kk->id}}')" class="btn btn-default btn-xs mbs" data-target="#duyeths-modal-confirm" data-toggle="modal"><i class="fa fa-check-square"></i>&nbsp;Duyệt hồ sơ</button>
-                                    <button type="button" onclick="confirmTraLai('{{$kk->id}}')" class="btn btn-default btn-xs mbs" data-target="#tradvvt-modal-confirm" data-toggle="modal"><i class="fa fa-share-square-o"></i>&nbsp;Trả lại</button>
-                                    <button type="button" onclick="confirmNhanCS('{{$kk->id.'?'.$kk->sohsnhan.'?'.$kk->ngaynhan}}')" class="btn btn-default btn-xs mbs" data-target="#nhandvvt-modal-confirm" data-toggle="modal"><i class="fa fa-share-square-o"></i>&nbsp;Chỉnh sửa</button>
-                                @elseif($kk->trangthai == 'Đang công bố')
-                                    <button type="button" onclick="confirmNhanCS('{{$kk->id.'?'.$kk->sohsnhan.'?'.$kk->ngaynhan}}')" class="btn btn-default btn-xs mbs" data-target="#nhandvvt-modal-confirm" data-toggle="modal"><i class="fa fa-share-square-o"></i>&nbsp;Chỉnh sửa</button>
+                                @if($per['approve'])
+                                    @if($kk->trangthai == 'Chờ nhận')
+                                        <button type="button" onclick="TTNguoiChuyen('{{$kk->ttnguoinop}}')" class="btn btn-default btn-xs mbs" data-target="#chuyendvvt-modal-confirm" data-toggle="modal"><i class="fa fa-user"></i>&nbsp;Người chuyển</button>
+                                        <button type="button" onclick="confirmNhan('{{$kk->id}}')" class="btn btn-default btn-xs mbs" data-target="#nhandvvt-modal-confirm" data-toggle="modal"><i class="fa fa-share-square-o"></i>&nbsp;Nhận hồ sơ</button>
+                                        <button type="button" onclick="confirmTraLai('{{$kk->id}}')" class="btn btn-default btn-xs mbs" data-target="#tradvvt-modal-confirm" data-toggle="modal"><i class="fa fa-share-square-o"></i>&nbsp;Trả lại</button>
+                                    @elseif($kk->trangthai == 'Đang công bố')
+                                        <button type="button" onclick="confirmNhanCS('{{$kk->id.'?'.$kk->sohsnhan.'?'.$kk->ngaynhan}}')" class="btn btn-default btn-xs mbs" data-target="#nhandvvt-modal-confirm" data-toggle="modal"><i class="fa fa-share-square-o"></i>&nbsp;Chỉnh sửa</button>
+                                    @endif
                                 @endif
                             </td>
                         </tr>

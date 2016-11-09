@@ -344,12 +344,38 @@ Route::group(['prefix'=>'dich_vu_van_tai'],function(){
         Route::get('inPAG/{masokk}','KkDvVtKhacController@printPAG');
     });
     // </editor-fold>
-    //Báo cáo
-    Route::group(['prefix'=>'bao_cao'],function(){
-        Route::get('', 'DonViDvVtController@TtDnIndex');
-        Route::get('{id}/edit', 'DonViDvVtController@TtDnedit');
-        Route::patch('{id}/update', 'DonViDvVtController@TtDnupdate');
+});
+
+    //Báo cáo dịch vụ vận tải
+Route::group(['prefix'=>'bao_cao'],function(){
+    //Xe khách
+    Route::group(['prefix'=>'dich_vu_xe_khach'],function(){
+        Route::get('','ReportsDvVtController@indexxk');
+        Route::post('BC1','ReportsDvVtController@dvxkbc1');
+        Route::post('BC2','ReportsDvVtController@dvxkbc2');
     });
+    //
+    //Xe buýt
+    Route::group(['prefix'=>'dich_vu_xe_bus'],function(){
+        Route::get('','ReportsDvVtController@indexxb');
+        Route::post('BC1','ReportsDvVtController@dvxbbc1');
+        Route::post('BC2','ReportsDvVtController@dvxbbc2');
+    });
+    //
+    //Xe taxi
+    Route::group(['prefix'=>'dich_vu_xe_taxi'],function(){
+        Route::get('','ReportsDvVtController@indexxtx');
+        Route::post('BC1','ReportsDvVtController@dvxtxbc1');
+        Route::post('BC2','ReportsDvVtController@dvxtxbc2');
+    });
+    //
+    //Chở hàng
+    Route::group(['prefix'=>'dich_vu_cho_hang'],function(){
+        Route::get('','ReportsDvVtController@indexch');
+        Route::post('BC1','ReportsDvVtController@dvchbc1');
+        Route::post('BC2','ReportsDvVtController@dvchbc2');
+    });
+    //
 });
     //End Dịch vụ vận tải
 // </editor-fold>//End Manage

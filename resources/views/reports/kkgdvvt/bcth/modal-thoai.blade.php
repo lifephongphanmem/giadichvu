@@ -11,7 +11,7 @@
 <!--Modal Thoại BC1-->
 <div id="BC1-thoai-confirm" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade">
     <div class="modal-dialog">
-        {!! Form::open(['url'=>'reports/dvch/BC1','target'=>'_blank' , 'id' => 'frm_BC1', 'class'=>'form-horizontal form-validate']) !!}
+        {!! Form::open(['url'=>$url.'BC1','target'=>'_blank' , 'id' => 'frm_BC1', 'class'=>'form-horizontal form-validate']) !!}
         <div class="modal-content">
             <div class="modal-header modal-header-primary">
                 <button type="button" data-dismiss="modal" aria-hidden="true"
@@ -48,7 +48,7 @@
 <!--Modal Thoại BC2-->
 <div id="BC2-thoai-confirm" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade">
     <div class="modal-dialog">
-        {!! Form::open(['url'=>'reports/dvch/BC2','target'=>'_blank' , 'id' => 'frm_BC2', 'class'=>'form-horizontal form-validate']) !!}
+        {!! Form::open(['url'=>$url.'BC2','target'=>'_blank' , 'id' => 'frm_BC2', 'class'=>'form-horizontal form-validate']) !!}
         <div class="modal-content">
             <div class="modal-header modal-header-primary">
                 <button type="button" data-dismiss="modal" aria-hidden="true"

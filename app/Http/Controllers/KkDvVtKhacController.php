@@ -40,8 +40,16 @@ class KkDvVtKhacController extends Controller
                     ->orderBy('ngaynhap', 'esc')
                     ->get();
 
+            $per=array(
+                'create'=>can('dvvtxtx','create'),
+                'edit' =>can('dvvtxtx','edit'),
+                'delete' =>can('dvvtxtx','delete'),
+                'approve'=>can('dvvtxtx','approve')
+            );
+
             return view('manage.dvvt.dvkhac.kkdv.index')
                 ->with('model',$model)
+                ->with('per',$per)
                 ->with('url','/dich_vu_van_tai/dich_vu_cho_hang/')
                 ->with('pageTitle','Kê khai giá dịch vụ vận tải');
         }else
@@ -75,12 +83,20 @@ class KkDvVtKhacController extends Controller
             foreach($model as $dv){
                 $this->getTenDV($modeldv, $dv);
             }
-            //dd($model);
+
+            $per=array(
+                'create'=>can('dvvtxtx','create'),
+                'edit' =>can('dvvtxtx','edit'),
+                'delete' =>can('dvvtxtx','delete'),
+                'approve'=>can('dvvtxtx','approve')
+            );
+
             return view('manage.dvvt.dvkhac.xetduyet.index')
                 ->with('model',$model)
                 ->with('thang',$thang)
                 ->with('nam',$nam)
                 ->with('pl',$pl)
+                ->with('per',$per)
                 ->with('url','/dich_vu_van_tai/dich_vu_cho_hang/')
                 ->with('pageTitle','Xét duyệt kê khai giá dịch vụ vận tải');
         }else
@@ -97,8 +113,6 @@ class KkDvVtKhacController extends Controller
             $masothue=session('admin')->mahuyen;
             KkDvVtKhacCtDf::where('masothue', $masothue)->delete();
             PagDvVtKhac_Temp::where('masothue', $masothue)->delete();
-            //$sql=" INSERT INTO thamdinhgia (masothue,diemdau,diemcuoi,madichvu,loaixe,tendichvu,qccl,dvt) SELECT masothue,diemdau,diemcuoi,madichvu,loaixe,tendichvu,qccl,dvt FROM dmDvVtKhac where masothue='". session('admin')->mahuyen."'";
-            //DB::statement($sql);
 
             $modelCB=CbKkDvVtKhac::select('socv','ngaynhap','masokk')->where('masothue', $masothue)->first();
             $solk=null;

@@ -20,8 +20,17 @@ class DmDvVtKhacController extends Controller
     {
         if (Session::has('admin')) {
             $model = DmDvVtKhac::where('masothue',session('admin')->mahuyen)->get();
+
+            $per=array(
+                'create'=>can('dvvtch','create'),
+                'edit' =>can('dvvtch','edit'),
+                'delete' =>can('dvvtch','delete'),
+                'approve'=>can('dvvtch','approve')
+            );
+
             return view('manage.dvvt.dvkhac.dmdv.index')
                 ->with('url','/dich_vu_van_tai/dich_vu_cho_hang/')
+                ->with('per',$per)
                 ->with('model',$model)
                 ->with('pageTitle','Danh mục dịch vụ vận tải');
 

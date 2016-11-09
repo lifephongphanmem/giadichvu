@@ -34,7 +34,9 @@
                 <div class="portlet box">
                     <div class="portlet-title">
                         <div class="actions">
-                            <a href="{{url($url.'ke_khai/create')}}" class="btn btn-success btn-xs"><i class="fa fa-plus"></i> Kê khai giá mới</a>
+                            @if($per['create'])
+                                <a href="{{url($url.'ke_khai/create')}}" class="btn btn-success btn-xs"><i class="fa fa-plus"></i> Kê khai giá mới</a>
+                            @endif
                         </div>
                     </div>
                     @include('manage.dvvt.template.indexkkdv')

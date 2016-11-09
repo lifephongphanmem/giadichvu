@@ -46,38 +46,44 @@
             <div class="portlet box">
                 <div class="portlet-title">
                     <div class="actions">
-                        <button type="button" id="_btnThemDV" class="btn btn-success btn-xs" onclick="addDVXK()" ><i class="fa fa-plus"></i>&nbsp;Thêm mới</button>
+                        @if($per['create'])
+                            <button type="button" id="_btnThemDV" class="btn btn-success btn-xs" onclick="addDVXK()" ><i class="fa fa-plus"></i>&nbsp;Thêm mới</button>
+                        @endif
                     </div>
                 </div>
                 <div class="portlet-body">
                     <div class="portlet-body">
                         <table id="sample_3" class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                                            <thead>
-                                                <tr>
-                                                    <th style="width: 10%">Loại xe</th>
-                                                    <th style="width: 25%">Mô tả dịch vụ</th>
-                                                    <th style="width: 20%">Quy cách chất lượng</th>
-                                                    <th style="width: 10%">Đơn vị tính</th>
-                                                    <th style="width: 25%">Ghi chú</th>
-                                                    <th style="width: 10%">Thao tác</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="noidung">
-                                            @foreach($model as $dv)
-                                                <tr>
-                                                    <td name="loaixe">{{$dv->loaixe}}</td>
-                                                    <td name="tendichvu">{{$dv->tendichvu}}</td>
-                                                    <td name="qccl">{{$dv->qccl}}</td>
-                                                    <td name="dvt">{{$dv->dvt}}</td>
-                                                    <td name="ghichu">{{$dv->ghichu}}</td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-default btn-xs mbs" onclick="editDVXK(this,'{{$dv->id}}')"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</button>
-                                                        <button type="button" onclick="confirmDel('{{$dv->id}}')" class="btn btn-default btn-xs mbs" data-target="#del-modal-confirm" data-toggle="modal"><i class="fa fa-trash-o"></i>&nbsp;Xóa</button>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                            </tbody>
-                                        </table>
+                            <thead>
+                                <tr>
+                                    <th style="width: 10%">Loại xe</th>
+                                    <th style="width: 25%">Mô tả dịch vụ</th>
+                                    <th style="width: 20%">Quy cách chất lượng</th>
+                                    <th style="width: 10%">Đơn vị tính</th>
+                                    <th style="width: 25%">Ghi chú</th>
+                                    <th style="width: 10%">Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="noidung">
+                            @foreach($model as $dv)
+                                <tr>
+                                    <td name="loaixe">{{$dv->loaixe}}</td>
+                                    <td name="tendichvu">{{$dv->tendichvu}}</td>
+                                    <td name="qccl">{{$dv->qccl}}</td>
+                                    <td name="dvt">{{$dv->dvt}}</td>
+                                    <td name="ghichu">{{$dv->ghichu}}</td>
+                                    <td>
+                                        @if($per['edit'])
+                                            <button type="button" class="btn btn-default btn-xs mbs" onclick="editDVXK(this,'{{$dv->id}}')"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</button>
+                                        @endif
+                                        @if($per['delete'])
+                                            <button type="button" onclick="confirmDel('{{$dv->id}}')" class="btn btn-default btn-xs mbs" data-target="#del-modal-confirm" data-toggle="modal"><i class="fa fa-trash-o"></i>&nbsp;Xóa</button>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

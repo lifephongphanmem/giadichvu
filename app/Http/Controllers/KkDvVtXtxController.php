@@ -39,9 +39,15 @@ class KkDvVtXtxController extends Controller
                 $model = KkDvVtXtx::where('masothue',session('admin')->mahuyen)
                     ->orderBy('ngaynhap', 'esc')
                     ->get();
-
+            $per=array(
+                'create'=>can('dvvtxtx','create'),
+                'edit' =>can('dvvtxtx','edit'),
+                'delete' =>can('dvvtxtx','delete'),
+                'approve'=>can('dvvtxtx','approve')
+            );
             return view('manage.dvvt.dvxtx.kkdv.index')
                 ->with('model',$model)
+                ->with('per',$per)
                 ->with('url','/dich_vu_van_tai/dich_vu_xe_taxi/')
                 ->with('pageTitle','Kê khai giá dịch vụ vận tải');
         }else
@@ -75,12 +81,20 @@ class KkDvVtXtxController extends Controller
             foreach($model as $dv){
                 $this->getTenDV($modeldv, $dv);
             }
-            //dd($model);
+
+            $per=array(
+                'create'=>can('dvvtxtx','create'),
+                'edit' =>can('dvvtxtx','edit'),
+                'delete' =>can('dvvtxtx','delete'),
+                'approve'=>can('dvvtxtx','approve')
+            );
+
             return view('manage.dvvt.dvxk.xetduyet.index')
                 ->with('model',$model)
                 ->with('thang',$thang)
                 ->with('nam',$nam)
                 ->with('pl',$pl)
+                ->with('per',$per)
                 ->with('url','/dich_vu_van_tai/dich_vu_xe_taxi/')
                 ->with('pageTitle','Xét duyệt kê khai giá dịch vụ vận tải');
         }else

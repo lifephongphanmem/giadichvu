@@ -27,8 +27,9 @@ class ReportsDvVtController extends Controller
      */
     public function indexxk(){
         if (Session::has('admin')) {
-            return view('reports.kkgdvvt.bcth.dvxk.index')
-                ->with('pageTitle','Báo cáo tổng hợp dịch vụ vận tải');
+            return view('reports.kkgdvvt.bcth.index')
+                ->with('url','/bao_cao/dich_vu_xe_khach/')
+                ->with('pageTitle','Báo cáo tổng hợp dịch vụ vận tải xe khách');
         }else
             return view('errors.notlogin');
     }
@@ -98,8 +99,9 @@ class ReportsDvVtController extends Controller
 
     public function indexxb(){
         if (Session::has('admin')) {
-            return view('reports.kkgdvvt.bcth.dvxb.index')
-                ->with('pageTitle','Báo cáo tổng hợp dịch vụ vận tải');
+            return view('reports.kkgdvvt.bcth.index')
+                ->with('url','/bao_cao/dich_vu_xe_bus/')
+                ->with('pageTitle','Báo cáo tổng hợp dịch vụ vận tải xe bus');
         }else
             return view('errors.notlogin');
     }
@@ -169,8 +171,9 @@ class ReportsDvVtController extends Controller
 
     public function indexxtx(){
         if (Session::has('admin')) {
-            return view('reports.kkgdvvt.bcth.dvxtx.index')
-                ->with('pageTitle','Báo cáo tổng hợp dịch vụ vận tải');
+            return view('reports.kkgdvvt.bcth.index')
+                ->with('url','/bao_cao/dich_vu_xe_taxi/')
+                ->with('pageTitle','Báo cáo tổng hợp dịch vụ vận tải xe taxi');
         }else
             return view('errors.notlogin');
     }
@@ -240,8 +243,9 @@ class ReportsDvVtController extends Controller
 
     public function indexch(){
         if (Session::has('admin')) {
-            return view('reports.kkgdvvt.bcth.dvch.index')
-                ->with('pageTitle','Báo cáo tổng hợp dịch vụ vận tải');
+            return view('reports.kkgdvvt.bcth.index')
+                ->with('url','/bao_cao/dich_vu_cho_hang/')
+                ->with('pageTitle','Báo cáo tổng hợp dịch vụ vận tải chở hàng');
         }else
             return view('errors.notlogin');
     }
