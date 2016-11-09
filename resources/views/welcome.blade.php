@@ -40,7 +40,7 @@
     <br>
     <br>
     <br>
-    <h1><b>PHẦM MỀM CƠ SỞ DỮ LIỆU VỀ GIÁ</b></h1>
+    <h1><b>PHẦN MỀM CƠ SỞ DỮ LIỆU VỀ GIÁ</b></h1>
 
     <br>
 </div>
