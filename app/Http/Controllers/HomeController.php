@@ -87,6 +87,7 @@ class HomeController extends Controller
         $model->dvxb = 0;
         $model->dvxtx = 0;
         $model->dvk = 0;
+        $model->setting = '';
         $model->save();
         return view('errors.register-success');
     }
