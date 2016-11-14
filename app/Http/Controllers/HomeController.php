@@ -83,6 +83,7 @@ class HomeController extends Controller
         $model->username = $input['username'];
         $model->password = md5($input['rpassword']);
         $model->pl = 'DVLT';
+        $model->setting = '';
         $model->dvxk = 0;
         $model->dvxb = 0;
         $model->dvxtx = 0;
