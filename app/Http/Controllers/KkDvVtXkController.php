@@ -83,10 +83,11 @@ class KkDvVtXkController extends Controller
             }
 
             $per=array(
-                'create'=>can('dvvtxtx','create'),
-                'edit' =>can('dvvtxtx','edit'),
-                'delete' =>can('dvvtxtx','delete'),
-                'approve'=>can('dvvtxtx','approve')
+                'index'=>can('kkdvvtxk','index'),
+                'create'=>can('kkdvvtxk','create'),
+                'edit' =>can('kkdvvtxk','edit'),
+                'delete' =>can('kkdvvtxk','delete'),
+                'approve'=>can('kkdvvtxk','approve')
             );
 
             return view('manage.dvvt.dvxk.xetduyet.index')
