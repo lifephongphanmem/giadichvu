@@ -143,7 +143,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 <div class="form-group">
                     <div class="input-icon">
                         <i class="fa fa-file-pdf-o"></i>
-                        <input class="form-control placeholder-no-fix" type="text" placeholder="Giấy phép đăng ký kinh doanh" name="giayphepkd" id="giayphepkd" required>
+                        <input class="form-control placeholder-no-fix" type="text" placeholder="Số giấy phép đăng ký kinh doanh" name="giayphepkd" id="giayphepkd" required>
                     </div>
                 </div>
             </div>

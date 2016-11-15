@@ -318,7 +318,7 @@ class UsersController extends Controller
             return view('errors.notlogin');
     }
 
-    public function lockuser($id)
+    public function lockuser($id,$pl)
     {
 
         $arrayid = explode('-', $id);
@@ -329,11 +329,11 @@ class UsersController extends Controller
                 $model->save();
             }
         }
-        return redirect('users/pl=quan-ly');
+        return redirect('users/pl='.$pl);
 
     }
 
-    public function unlockuser($id)
+    public function unlockuser($id,$pl)
     {
         $arrayid = explode('-', $id);
         foreach ($arrayid as $ids) {
@@ -345,7 +345,7 @@ class UsersController extends Controller
                 $model->save();
             }
         }
-        return redirect('users/pl=quan-ly');
+        return redirect('users/pl='.$pl);
 
     }
 
@@ -456,6 +456,23 @@ class UsersController extends Controller
             $delete = Register::findOrFail($id)->delete();
             return redirect('users/register/pl=dich_vu_van_tai');
 
+        } else
+            return view('errors.notlogin');
+    }
+
+    public function registerdelete(Request $request){
+        if (Session::has('admin')) {
+            $input = $request->all();
+            $id = $input['iddelete'];
+            $model = Register::findOrFail($id);
+            $pl = $model->pl;
+            if($pl == 'DVLT')
+                $dv = 'dich_vu_luu_tru';
+            elseif($pl == 'DVVT')
+                $dv = 'dich_vu_van_tai';
+            $model->delete();
+
+            return redirect('users/register/pl='.$dv);
         } else
             return view('errors.notlogin');
     }

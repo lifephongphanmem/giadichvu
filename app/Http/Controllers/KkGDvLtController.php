@@ -32,10 +32,13 @@ class KkGDvLtController extends Controller
             $model = KkGDvLt::where('macskd',$macskd)
                 ->whereYear('ngaynhap',$nam)
                 ->get();
+            $modelcskd = CsKdDvLt::where('macskd',$macskd)
+                ->first();
             return view('manage.dvlt.kkgia.kkgiadv.index')
                 ->with('model',$model)
                 ->with('nam',$nam)
                 ->with('macskd',$macskd)
+                ->with('modelcskd',$modelcskd)
                 ->with('pageTitle','Thông tin kê khai giá dịch vụ lưu trú');
         }else
             return view('errors.notlogin');
@@ -176,11 +179,14 @@ class KkGDvLtController extends Controller
             $input = $request->all();
             $id = $input['idchuyen'];
             $model = KkGDvLt::findOrFail($id);
-            $model->ttnguoinop = $input['ttnguoinop'];
-            $model->trangthai = 'Chờ nhận';
-            $model->ngaychuyen = $tgchuyen;
-            $model->save();
+            if($input['ttnguoinop'] != ''){
+                $model->ttnguoinop = $input['ttnguoinop'];
+                $model->trangthai = 'Chờ nhận';
+                $model->ngaychuyen = $tgchuyen;
+                $model->save();
+            }
             $macskd = $model->macskd;
+
 
             return redirect('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh='.$macskd.'&nam='.date('Y'));
         }else

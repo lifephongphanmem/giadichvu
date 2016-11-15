@@ -41,7 +41,13 @@
             document.getElementById("idchuyen").value =id;
         }
         function ClickChuyen(){
-            $('#frm_chuyen').submit();
+            if($('#ttnguoinop').val() != ''){
+                toastr.success("Hồ sơ đã được chuyển!", "Thành công!");
+                $('#frm_chuyen').submit();
+            }else{
+                toastr.error("Bạn cần nhập thông tin người chuyển", "Lỗi!!!");
+            }
+
         }
 
         function viewLyDo(id) {
@@ -63,13 +69,14 @@
             })
         }
 
+
     </script>
 @stop
 
 @section('content')
 
     <h3 class="page-title">
-        Thông tin kê khai giá<small>&nbsp;dịch vụ lưu trú</small>
+        Thông tin kê khai giá<small>&nbsp;dịch vụ lưu trú</small> - Cơ sở kinh doanh <small>{{$modelcskd->tencskd}}</small>
     </h3>
     <input type="hidden" name="macskd" id="macskd" value="{{$macskd}}">
     <div class="row">
@@ -189,7 +196,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label><b>Thông tin người nộp</b></label>
-                            <textarea id="ttnguoinop" class="form-control" name="ttnguoinop" cols="30" rows="5"></textarea></div>
+                            <textarea id="ttnguoinop" class="form-control required" name="ttnguoinop" cols="30" rows="5"></textarea></div>
                     </div>
                     <input type="hidden" name="idchuyen" id="idchuyen">
                     <div class="modal-footer">

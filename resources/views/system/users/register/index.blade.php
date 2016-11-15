@@ -19,41 +19,6 @@
         jQuery(document).ready(function() {
             TableManaged.init();
         });
-        function  getSelectedCheckboxes(){
-
-            var ids = '';
-            $.each($("input[name='ck_value']:checked"), function(){
-                ids += ($(this).attr('value')) + '-';
-            });
-            return ids = ids.substring(0, ids.length - 1);
-
-        }
-        function multiLock() {
-
-            var ids = getSelectedCheckboxes();
-            if(ids == '') {
-                $('#btnMultiLockUser').attr('data-target', '#notid-modal-confirm');
-            }else {
-
-                $('#btnMultiLockUser').attr('data-target', '#lockuser-modal-confirm');
-                $('#frmLockUser').attr('action', "{{ url('users/lock')}}/" + ids);
-            }
-
-        }
-        function multiUnLock() {
-
-            var ids = getSelectedCheckboxes();
-            if(ids == '') {
-                $('#btnMultiUnLockUser').attr('data-target', '#notid-modal-confirm');
-            }else {
-                $('#btnMultiUnLockUser').attr('data-target', '#unlockuser-modal-confirm');
-                $('#frmUnLockUser').attr('action', "{{ url('users/unlock')}}/" + ids);
-            }
-
-        }
-        function confirmDelete(id) {
-            $('#frmDelete').attr('action', "/delete/" + id);
-        }
         function getId(id){
             document.getElementById("iddelete").value=id;
         }
@@ -124,6 +89,8 @@
                                 <td>{{$tt->diachidn}}</td>
                                 <td>
                                     <a href="{{url('users/register/'.$tt->id.'/show')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Xem chi tiết</a>
+                                    <button type="button" onclick="getId('{{$tt->id}}')" class="btn btn-default btn-xs mbs" data-target="#delete-modal" data-toggle="modal"><i class="fa fa-trash-o"></i>&nbsp;
+                                        Xóa</button>
                                 </td>
                             </tr>
                         @endforeach
@@ -140,7 +107,26 @@
 
     <!-- END DASHBOARD STATS -->
 
-    @include('includes.e.modal-confirm')
+    <div class="clearfix"></div>
+    <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                {!! Form::open(['url'=>'register/delete','id' => 'frm_delete'])!!}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Đồng ý xóa?</h4>
+                </div>
+                <input type="hidden" name="iddelete" id="iddelete">
+                <div class="modal-footer">
+                    <button type="submit" class="btn blue" onclick="ClickDelete()">Đồng ý</button>
+                    <button type="button" class="btn default" data-dismiss="modal">Hủy</button>
+                </div>
+                {!! Form::close() !!}
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
 
 
 @stop

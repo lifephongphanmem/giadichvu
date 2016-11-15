@@ -127,7 +127,13 @@
             document.getElementById("idtralai").value =id;
         }
         function ClickTraLai(){
-            $('#frm_tralai').submit();
+            if($('#lydo').val() != ''){
+                toastr.success("Hồ sơ đã được trả lại!", "Thành công!");
+                $('#frm_tralai').submit();
+            }else{
+                toastr.error("Bạn cần nhập lý do trả lại hồ sơ", "Lỗi!!!");
+            }
+
         }
         function confirmNhanHs(id){
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');

@@ -31,23 +31,25 @@
         function multiLock() {
 
             var ids = getSelectedCheckboxes();
+            var pl = $('#phanloai').val();
             if(ids == '') {
                 $('#btnMultiLockUser').attr('data-target', '#notid-modal-confirm');
             }else {
 
                 $('#btnMultiLockUser').attr('data-target', '#lockuser-modal-confirm');
-                $('#frmLockUser').attr('action', "{{ url('users/lock')}}/" + ids);
+                $('#frmLockUser').attr('action', "{{ url('users/lock')}}/" + ids + '/' + pl);
             }
 
         }
         function multiUnLock() {
 
             var ids = getSelectedCheckboxes();
+            var pl = $('#phanloai').val();
             if(ids == '') {
                 $('#btnMultiUnLockUser').attr('data-target', '#notid-modal-confirm');
             }else {
                 $('#btnMultiUnLockUser').attr('data-target', '#unlockuser-modal-confirm');
-                $('#frmUnLockUser').attr('action', "{{ url('users/unlock')}}/" + ids);
+                $('#frmUnLockUser').attr('action', "{{ url('users/unlock')}}/" + ids + '/' + pl);
             }
 
         }

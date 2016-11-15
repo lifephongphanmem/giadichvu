@@ -32,12 +32,13 @@ Route::patch('users/{id}','UsersController@update');
 Route::get('users/{id}/phan-quyen','UsersController@permission');
 Route::post('users/phan-quyen','UsersController@uppermission');
 Route::post('users/delete','UsersController@destroy');
-Route::get('users/lock/{id}','UsersController@lockuser');
-Route::get('users/unlock/{id}','UsersController@unlockuser');
+Route::get('users/lock/{id}/{pl}','UsersController@lockuser');
+Route::get('users/unlock/{id}/{pl}','UsersController@unlockuser');
 Route::get('users/register/pl={pl}','UsersController@register');
 Route::get('users/register/{id}/show','UsersController@registershow');
 Route::post('register/createdvlt','UsersController@registerdvlt');
 Route::post('register/createdvvt','UsersController@registerdvvt');
+Route::post('register/delete','UsersController@registerdelete');
 //EndUsers
 
 //DN Dịch vụ lưu trú

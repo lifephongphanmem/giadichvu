@@ -56,9 +56,11 @@ class KkGDvLtXdController extends Controller
             $input = $request->all();
             $id = $input['idtralai'];
             $model = KkGDvLt::findOrFail($id);
-            $model->lydo = $input['lydo'];
-            $model->trangthai = 'Bị trả lại';
-            $model->save();
+            if($input['lydo'] != '') {
+                $model->lydo = $input['lydo'];
+                $model->trangthai = 'Bị trả lại';
+                $model->save();
+            }
             return redirect('xet_duyet_ke_khai_dich_vu_luu_tru/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan');
         }else
             return view('errors.notlogin');
