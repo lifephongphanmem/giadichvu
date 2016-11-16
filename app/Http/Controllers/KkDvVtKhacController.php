@@ -41,10 +41,10 @@ class KkDvVtKhacController extends Controller
                     ->get();
 
             $per=array(
-                'create'=>can('dvvtxtx','create'),
-                'edit' =>can('dvvtxtx','edit'),
-                'delete' =>can('dvvtxtx','delete'),
-                'approve'=>can('dvvtxtx','approve')
+                'create'=>can('kkdvvtch','create'),
+                'edit' =>can('kkdvvtch','edit'),
+                'delete' =>can('kkdvvtch','delete'),
+                'approve'=>can('kkdvvtch','approve')
             );
 
             return view('manage.dvvt.dvkhac.kkdv.index')

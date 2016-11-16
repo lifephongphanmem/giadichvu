@@ -54,78 +54,10 @@
             var url='{{$url}}'+'inPAG/'+ masokk;
             window.open(url,'_blank');
         }
-
-        function confirmChuyen(id) {
-            $('#idkk').attr('value', id);
-        }
-
-        function confirmTraLai(id) {
-            $('#idtra').attr('value', id);
-        }
-
-        function LyDoTraLai(str){
-            $('#lydotra').attr('value', str);
-            $('#idtra').attr('value', 'null');
-        }
-
-        function TTNguoiChuyen(str){
-            $('#ttnguoinop').attr('value', str);
-            $('#idkk').attr('value', 'null');
-        }
-
-        function clickTraDVVT() {
-            //$('#frmTraLai').attr('action', "dvvantai/thaotackkdvxk/tralai/" + id);
-            if ($('#idtra').attr('value') != 'null') {
-                var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-                $.ajax({
-                    url: '{{$url}}'+'thao_tac/tralai',
-                    type: 'GET',
-                    data: {
-                        _token: CSRF_TOKEN,
-                        id: $('#idtra').val(),
-                        lydo: $('#lydotra').val()
-                    },
-                    dataType: 'JSON',
-                    success: function (data) {
-                        if (data.status == 'success') {
-                            alert('Trả lại bảng kê khai thành công.');
-                            location.reload();
-                        }
-                    },
-                    error: function (message) {
-                        alert(message);
-                    }
-                })
-            }
-        }
-
-        function clickChuyenDVVT() {
-            if ($('#idkk').attr('value') != 'null') {
-                var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-                $.ajax({
-                    url: '{{$url}}'+'thao_tac/chuyen',
-                    type: 'GET',
-                    data: {
-                        _token: CSRF_TOKEN,
-                        id: $('#idkk').val(),
-                        ttnguoinop: $('textarea[name="ttnguoinop"]').val()
-                    },
-                    dataType: 'JSON',
-                    success: function (data) {
-                        if (data.status == 'success') {
-                            alert('Chuyển bảng kê khai thành công.');
-                            location.reload();
-                        }
-                    },
-                    error: function (message) {
-                        alert(message);
-                    }
-                })
-            }
-        }
     </script>
     @include('manage.dvvt.template.modal-delete')
-    @include('includes.e.modal-confirm')
+    @include('manage.dvvt.template.modal-chuyen')
+    @include('manage.dvvt.template.modal-tralai')
 @stop
 
 

@@ -52,7 +52,7 @@
                         @if($per['delete'])
                             <button type="button" onclick="confirmDel('{{$kk->id}}')" class="btn btn-default btn-xs mbs" data-target="#del-modal-confirm" data-toggle="modal"><i class="fa fa-trash-o"></i>&nbsp;Xóa</button>
                         @endif
-                            @if($per['approve'])
+                        @if($per['approve'])
                             <button type="button" onclick="confirmChuyen('{{$kk->id}}')" class="btn btn-default btn-xs mbs" data-target="#chuyendvvt-modal-confirm" data-toggle="modal"><i class="fa fa-share-square-o"></i>&nbsp;Chuyển</button>
                         @endif
                     @elseif($kk->trangthai == 'Chờ nhận')

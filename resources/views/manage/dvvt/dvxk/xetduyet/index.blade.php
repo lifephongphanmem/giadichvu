@@ -60,7 +60,9 @@
         Thông tin kê khai giá dịch vụ vận tải<small> xe khách</small>
     </h3>
     @include('manage.dvvt.template.indexkkdvth')
-    @include('includes.e.modal-confirm')
+    @include('manage.dvvt.template.modal-chuyen')
+    @include('manage.dvvt.template.modal-tralai')
+    @include('manage.dvvt.template.modal-nhanhs')
 @stop
 
 
