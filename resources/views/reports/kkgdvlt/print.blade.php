@@ -87,13 +87,19 @@
 
 <table width="96%" border="0" cellspacing="0" cellpadding="8" style="margin:10px auto;">
     <tr>
-        <td style="text-align: left;" width="30%">
-            <b><i>Nơi nhận:</i></b><br>
+        <td style="text-align: left" width="30%">
+            <b style="padding-top:0px;"><i>Nơi nhận:</i></b><br>
             - Như trên:<br>
             - Lưu.
         </td>
         <td style="text-align: center; text-transform: uppercase;" width="70%">
             <b>{{$modeldn->chucdanhky}}</b><br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <b style="text-transform: uppercase;">{{$modeldn->nguoiky}}</b>
 
         </td>
     </tr>
@@ -160,6 +166,12 @@
         </td>
         <td style="text-align: center;text-transform: uppercase; " width="70%">
             <b>{{$modeldn->chucdanhky}}</b><br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <b style="text-transform: uppercase;">{{$modeldn->nguoiky}}</b>
 
         </td>
     </tr>
@@ -224,6 +236,12 @@
         </td>
         <td style="text-align: center; text-transform: uppercase;" width="70%">
             <b>{{$modeldn->chucdanhky}}</b><br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <b style="text-transform: uppercase;">{{$modeldn->nguoiky}}</b>
         </td>
     </tr>
 <br><br><br><br>

@@ -23,14 +23,14 @@
 
             $('#namhs').change(function() {
                 var namhs = $('#namhs').val();
-                var macskd = $('#cskd').val();
-                var url = 'search_ke_khai_dich_vu_luu_tru/co_so_kinh_doanh='+macskd+'&namhs='+namhs;
+                var masothue = $('#masothue').val();
+                var url = 'search_ke_khai_dich_vu_luu_tru/doanh_nghiep='+masothue + '&co_so_kinh_doanh=all'+'&namhs='+namhs;
                 window.location.href = url;
             });
-            $('#cskd').change(function(){
+            $('#masothue').change(function(){
                 var namhs = $('#namhs').val();
-                var macskd = $('#cskd').val();
-                var url = 'search_ke_khai_dich_vu_luu_tru/co_so_kinh_doanh='+macskd+'&namhs='+namhs;
+                var masothue = $('#masothue').val();
+                var url = 'search_ke_khai_dich_vu_luu_tru/doanh_nghiep='+masothue + '&co_so_kinh_doanh=all'+'&namhs='+namhs;
                 window.location.href = url;
             });
         });
@@ -56,14 +56,15 @@
         </div>
         <div class="col-md-5">
             <div class="form-group">
-                <select class="form-control select2me" id="cskd" name="cskd">
-                    <option value="all">-- Nhập thông tin cơ sở kinh doanh --</option>
-                    @foreach($cskd as $ks)
-                        <option value="{{$ks->macskd}}">{{$ks->tencskd}}</option>
+                <select class="form-control select2me" id="masothue" name="masothue">
+                    <option value="all">-- Nhập thông tin doanh nghiệp --</option>
+                    @foreach($dn as $tt)
+                        <option value="{{$tt->masothue}}">{{$tt->tendn}}</option>
                     @endforeach
                 </select>
             </div>
         </div>
+
     </div>
     <!-- END PAGE HEADER-->
     <div class="row">

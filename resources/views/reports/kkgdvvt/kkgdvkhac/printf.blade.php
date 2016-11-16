@@ -78,6 +78,7 @@
         </td>
         <td style="text-align: center; text-transform: uppercase;" width="40%">
             <b>{{$modeldonvi->chucdanh}}</b><br> <span style="font-style: italic; font-weight: normal; text-transform: none">(Ký tên, đóng dấu)</span>
+
         </td>
     </tr>
     <tr></tr>
@@ -162,6 +163,12 @@
         </td>
         <td style="text-align: center;text-transform: uppercase; " width="40%">
             <b>{{$modeldonvi->chucdanh}}</b><br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <b style="text-transform: uppercase;">{{$modeldonvi->nguoiky}}</b>
         </td>
     </tr>
 

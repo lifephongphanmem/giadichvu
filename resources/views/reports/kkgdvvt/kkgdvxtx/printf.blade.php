@@ -84,6 +84,7 @@
     <tr>
         <td style="height: 100px"></td>
         <td><span style="text-align: center;">{{$modeldonvi->nguoiky}}</span></td>
+
     </tr>
 </table>
 
@@ -162,11 +163,17 @@
         </td>
         <td style="text-align: center;text-transform: uppercase; " width="40%">
             <b>{{$modeldonvi->chucdanh}}</b><br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <b style="text-transform: uppercase;">{{$modeldonvi->nguoiky}}</b>
         </td>
     </tr>
 
 </table>
 
-<p style="page-break-before: always">
+<!--p style="page-break-before: always"-->
 </body>
 </html>

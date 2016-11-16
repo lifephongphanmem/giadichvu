@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\CbKkGDvLt;
 use App\CsKdDvLt;
+use App\DnDvLt;
 use App\KkGDvLt;
 use App\KkGDvLtCt;
 use App\KkGDvLtCtDf;
@@ -224,32 +225,48 @@ class KkGDvLtController extends Controller
     public function search(){
         if (Session::has('admin')) {
             $cskd = CsKdDvLt::all();
+            $dn = DnDvLt::all();
             return view('manage.dvlt.search.index')
                 ->with('nam',date('Y'))
                 ->with('cskd',$cskd)
+                ->with('dn',$dn)
                 ->with('pageTitle','Tìm kiếm thông tin kê khai giá dịch vụ lưu trú');
         }else
             return view('errors.notlogin');
     }
 
-    public function viewsearch($macskd,$nam){
+    public function viewsearch($masothue,$macskd,$nam){
         if (Session::has('admin')) {
-            $cskd = CsKdDvLt::all();
-            if($macskd == 'all'){
+            $allcskd = CsKdDvLt::all();
+            $cskd = CsKdDvLt::where('masothue',$masothue)
+                ->get();
+            $dn = DnDvLt::all();
+            if($masothue == 'all'){
                 $model = KkGDvLt::whereYear('ngaynhan',$nam)
                     ->where('trangthai','Duyệt')
                     ->get();
             }else{
-                $model = KkGDvLt::where('macskd',$macskd)
-                    ->whereYear('ngaynhan',$nam)
-                    ->where('trangthai','Duyệt')
-                    ->get();
+                if($macskd == 'all')
+                    $model = KkGDvLt::where('masothue',$masothue)
+                        ->whereYear('ngaynhan',$nam)
+                        ->where('trangthai','Duyệt')
+                        ->get();
+                else
+                    $model = KkGDvLt::where('masothue',$masothue)
+                        ->where('macskd',$macskd)
+                        ->whereYear('ngaynhan',$nam)
+                        ->where('trangthai','Duyệt')
+                        ->get();
+
             }
+            //dd($model);
             foreach($model as $ttkk){
-                $this->getTTCSKD($cskd,$ttkk);
+                $this->getTTCSKD($allcskd,$ttkk);
             }
             return view('manage.dvlt.search.view')
                 ->with('model',$model)
+                ->with('masothue',$masothue)
+                ->with('dn',$dn)
                 ->with('nam',$nam)
                 ->with('macskd',$macskd)
                 ->with('cskd',$cskd)
@@ -259,7 +276,7 @@ class KkGDvLtController extends Controller
     }
     public function getTTCSKD($cskds,$array){
         foreach($cskds as $cskd){
-            if($cskd->masothue == $array->masothue){
+            if($cskd->macskd == $array->macskd){
                 $array->tencskd = $cskd->tencskd;
             }
         }
