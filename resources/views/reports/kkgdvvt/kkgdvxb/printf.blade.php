@@ -187,7 +187,6 @@
             <b style="text-transform: uppercase;">{{$modeldonvi->nguoiky}}</b>
         </td>
     </tr>
-
 </table>
 
 <!--p style="page-break-before: always"-->

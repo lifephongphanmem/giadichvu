@@ -3,12 +3,13 @@
         <thead>
         <tr>
             <th style="text-align: center" width="2%">STT</th>
-            <th style="width: 10%">Ngày kê khai</th>
-            <th style="width: 10%">Áp dụng từ ngày</th>
-            <th style="width: 15%">Số công văn</th>
-            <th style="width: 15%">Số công văn liền kề</th>
-            <th style="width: 15%">Trạng thái</th>
-            <th style="width: 15%">Thao tác</th>
+            <th>Ngày kê khai</th>
+            <th>Áp dụng từ ngày</th>
+            <th>Số công văn</th>
+            <th>Số công văn liền kề</th>
+            <th>Người chuyển</th>
+            <th>Trạng thái</th>
+            <th>Thao tác</th>
         </tr>
         </thead>
         <tbody id="noidung">
@@ -25,7 +26,7 @@
                     @endif
                 </td>
                 <td>{{$kk->socvlk .' - '. (getDayVn($kk->ngaynhaplk)=='01/01/1970'?'':getDayVn($kk->ngaynhaplk))}}</td>
-
+                <td>{{$kk->ttnguoinop}}
                 <td align="center">
                     @if($kk->trangthai == "Chờ chuyển")
                         <span class="badge badge-warning">{{$kk->trangthai}}</span>
@@ -56,7 +57,7 @@
                             <button type="button" onclick="confirmChuyen('{{$kk->id}}')" class="btn btn-default btn-xs mbs" data-target="#chuyendvvt-modal-confirm" data-toggle="modal"><i class="fa fa-share-square-o"></i>&nbsp;Chuyển</button>
                         @endif
                     @elseif($kk->trangthai == 'Chờ nhận')
-                        <button type="button" onclick="TTNguoiChuyen('{{$kk->ttnguoinop}}')" class="btn btn-default btn-xs mbs" data-target="#chuyendvvt-modal-confirm" data-toggle="modal"><i class="fa fa-user"></i>&nbsp;Người chuyển</button>
+                        <!--button type="button" onclick="TTNguoiChuyen('{{$kk->ttnguoinop}}')" class="btn btn-default btn-xs mbs" data-target="#chuyendvvt-modal-confirm" data-toggle="modal"><i class="fa fa-user"></i>&nbsp;Người chuyển</button-->
                     @elseif($kk->trangthai == 'Bị trả lại')
                         @if($per['edit'])
                             <a href="{{url($url.'ke_khai/edit/'.$kk->id)}}" class="btn btn-default btn-xs mbs"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</a>

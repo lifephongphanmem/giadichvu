@@ -51,7 +51,7 @@
                         <th>Ngày kê khai</th>
                         <th>Áp dụng từ ngày</th>
                         <th>Số công văn</th>
-                        <th>Thông tin người nộp</th>
+                        <th>Người chuyển</th>
                         <th style="width: 15%">Trạng thái</th>
                         <th style="width: 20%">Thao tác</th>
                     </tr>
@@ -91,7 +91,7 @@
                                 <button type="button" onclick="InPAG('{{$kk->masokk}}')" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Phương án giá</button>
                                 @if($per['approve'])
                                     @if($kk->trangthai == 'Chờ nhận')
-                                        <button type="button" onclick="TTNguoiChuyen('{{$kk->ttnguoinop}}')" class="btn btn-default btn-xs mbs" data-target="#chuyendvvt-modal-confirm" data-toggle="modal"><i class="fa fa-user"></i>&nbsp;Người chuyển</button>
+                                        <!--button type="button" onclick="TTNguoiChuyen('{{$kk->ttnguoinop}}')" class="btn btn-default btn-xs mbs" data-target="#chuyendvvt-modal-confirm" data-toggle="modal"><i class="fa fa-user"></i>&nbsp;Người chuyển</button-->
                                         <button type="button" onclick="confirmNhan('{{$kk->id}}')" class="btn btn-default btn-xs mbs" data-target="#nhandvvt-modal-confirm" data-toggle="modal"><i class="fa fa-share-square-o"></i>&nbsp;Nhận hồ sơ</button>
                                         <button type="button" onclick="confirmTraLai('{{$kk->id}}')" class="btn btn-default btn-xs mbs" data-target="#tradvvt-modal-confirm" data-toggle="modal"><i class="fa fa-share-square-o"></i>&nbsp;Trả lại</button>
                                     @elseif($kk->trangthai == 'Đang công bố')
