@@ -58,16 +58,18 @@ class KkGDvLtController extends Controller
                 ->first();
 
             if(isset($modelcb)) {
-                $modelgcb  = KkGDvLt::where('mahs',$modelcb->mahs)
+                $modelgcb  = KkGDvLtCt::where('mahs',$modelcb->mahs)
                     ->get();
+
                 foreach ($modelph as $ph) {
                     foreach ($modelgcb as $giaph) {
                         if ($giaph->maloaip == $ph->maloaip) {
-                            $ph->mucgialk = $giaph->mucgiakk;
+                            $ph->gialk = $giaph->mucgiakk;
                         }
                     }
                 }
             }
+            //dd($modelph);
 
             foreach($modelph as $ttph){
                 $dsph = new KkGDvLtCtDf();
