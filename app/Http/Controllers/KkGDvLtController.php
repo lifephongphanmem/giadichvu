@@ -63,7 +63,7 @@ class KkGDvLtController extends Controller
                 foreach ($modelph as $ph) {
                     foreach ($modelgcb as $giaph) {
                         if ($giaph->maloaip == $ph->maloaip) {
-                            $ph->gialk = $giaph->mucgiakk;
+                            $ph->mucgialk = $giaph->mucgiakk;
                         }
                     }
                 }

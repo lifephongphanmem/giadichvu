@@ -30,7 +30,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">Tên doanh nghiệp<span class="require">*</span></label>
-                                    {!!Form::text('tendonvi', null, array('id' => 'tendonvi','class' => 'form-control required','autofocus'))!!}
+                                    {!!Form::text('tendonvi', null, array('id' => 'tendonvi','class' => 'form-control required','readonly'=>'true'))!!}
                                 </div>
                             </div>
                             <!--/span-->

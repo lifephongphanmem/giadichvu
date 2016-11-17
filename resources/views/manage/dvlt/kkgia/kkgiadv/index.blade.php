@@ -116,7 +116,8 @@
                             <th style="text-align: center">Ngày kê khai</th>
                             <th style="text-align: center">Ngày thực hiện<br>mức giá kê khai</th>
                             <th style="text-align: center">Số công văn</th>
-                            <th style="text-align: center">Số công văn liền kề</th>
+                            <th style="text-align: center">Số công văn<br> liền kề</th>
+                            <th style="text-align: center">Người chuyển</th>
                             <th style="text-align: center">Trạng thái</th>
                             <th style="text-align: center" width="25%">Thao tác</th>
                         </tr>
@@ -129,6 +130,7 @@
                                 <td style="text-align: center">{{getDayVn($tt->ngayhieuluc)}}</td>
                                 <td style="text-align: center" class="active">{{$tt->socv}}</td>
                                 <td style="text-align: center">{{$tt->socvlk}}</td>
+                                <td style="text-align: center">{{$tt->ttnguoinop}}</td>
                                     @if($tt->trangthai == "Chờ chuyển")
                                 <td align="center"><span class="badge badge-warning">{{$tt->trangthai}}</span></td>
                                 @elseif($tt->trangthai == 'Chờ duyệt')
