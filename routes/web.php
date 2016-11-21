@@ -170,7 +170,7 @@ Route::group(['prefix'=>'dich_vu_van_tai'],function(){
         Route::get('deldm','DmDvVtXkController@destroy');
 
         Route::group(['prefix'=>'ke_khai'],function(){
-            Route::get('','KkDvVtXkController@index');
+            Route::get('/nam={nam}','KkDvVtXkController@index');
             Route::get('edit/{id}','KkDvVtXkController@edit');
             Route::get('create','KkDvVtXkController@create');
             Route::patch('store','KkDvVtXkController@store');
@@ -216,7 +216,7 @@ Route::group(['prefix'=>'dich_vu_van_tai'],function(){
         Route::get('deldm','DmDvVtXbController@destroy');
 
         Route::group(['prefix'=>'ke_khai'],function(){
-            Route::get('','KkDvVtXbController@index');
+            Route::get('/nam={nam}','KkDvVtXbController@index');
             Route::get('edit/{id}','KkDvVtXbController@edit');
             Route::get('create','KkDvVtXbController@create');
             Route::patch('store','KkDvVtXbController@store');
@@ -262,7 +262,7 @@ Route::group(['prefix'=>'dich_vu_van_tai'],function(){
         Route::get('deldm','DmDvVtXtxController@destroy');
 
         Route::group(['prefix'=>'ke_khai'],function(){
-            Route::get('','KkDvVtXtxController@index');
+            Route::get('/nam={nam}','KkDvVtXtxController@index');
             Route::get('edit/{id}','KkDvVtXtxController@edit');
             Route::get('create','KkDvVtXtxController@create');
             Route::patch('store','KkDvVtXtxController@store');
@@ -300,7 +300,8 @@ Route::group(['prefix'=>'dich_vu_van_tai'],function(){
     });
     // </editor-fold>
 
-    // <editor-fold defaultstate="collapsed" desc="--Dịch vụ vận tải chở hàng--">
+    //<editor-fold defaultstate="collapsed" desc="--Dịch vụ vận tải chở hàng--">
+
     Route::group(['prefix'=>'dich_vu_cho_hang'],function(){
         //Danh mục dịch vụ
         Route::get('danh_muc','DmDvVtKhacController@index');
@@ -308,7 +309,7 @@ Route::group(['prefix'=>'dich_vu_van_tai'],function(){
         Route::get('deldm','DmDvVtKhacController@destroy');
 
         Route::group(['prefix'=>'ke_khai'],function(){
-            Route::get('','KkDvVtKhacController@index');
+            Route::get('/nam={nam}','KkDvVtKhacController@index');
             Route::get('edit/{id}','KkDvVtKhacController@edit');
             Route::get('create','KkDvVtKhacController@create');
             Route::patch('store','KkDvVtKhacController@store');
@@ -333,13 +334,13 @@ Route::group(['prefix'=>'dich_vu_van_tai'],function(){
             Route::get('duyet','KkDvVtKhacController@accept');
             Route::get('tra_lai','KkDvVtKhacController@tralai');
             //Route::get('search','KkDvVtXkController@search');
-            //End Xét duyệt
         });
-        //Tìm kiếm
+
         Route::group(['prefix'=>'tim_kiem'],function() {
             Route::get('/masothue={masothue}&nam={nam}','KkDvVtKhacController@search');
             //Route::get('ket_qua','KkDvVtXkController@getsearch');
         });
+
         //Printf
         Route::get('in/{masokk}','KkDvVtKhacController@printKK');
         Route::get('inPAG/{masokk}','KkDvVtKhacController@printPAG');

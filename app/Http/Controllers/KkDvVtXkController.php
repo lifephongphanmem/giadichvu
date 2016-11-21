@@ -26,19 +26,15 @@ class KkDvVtXkController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($nam)
     {
         if (Session::has('admin')) {
             //$datetime = Carbon::now()->toDateTimeString();
-            if(session('admin')->level == 'T')
-                $model = KkDvVtXk::where('trangthai','<>','Chờ chuyển')
-                    ->where('trangthai','<>','Bị trả lại')
-                    ->orderBy('ngaynhap', 'esc')
-                    ->get();
-            else
-                $model = KkDvVtXk::where('masothue',session('admin')->mahuyen)
-                    ->orderBy('ngaynhap', 'esc')
-                    ->get();
+            $model = KkDvVtXk::where('masothue',session('admin')->mahuyen)
+                ->whereYear('ngaynhap', $nam)
+                ->orderBy('ngaynhap', 'asc')
+                ->get();
+
             $per=array(
                 'create'=>can('kkdvvtxk','create'),
                 'edit' =>can('kkdvvtxk','edit'),
@@ -49,6 +45,7 @@ class KkDvVtXkController extends Controller
             return view('manage.dvvt.dvxk.kkdv.index')
                 ->with('model',$model)
                 ->with('per',$per)
+                ->with('nam',$nam)
                 ->with('url','/dich_vu_van_tai/dich_vu_xe_khach/')
                 ->with('pageTitle','Kê khai giá dịch vụ vận tải');
         }else
@@ -199,7 +196,7 @@ class KkDvVtXkController extends Controller
                 ->get()->toarray();
             PagDvVtXk::insert($m_pag);
 
-            return redirect('/dich_vu_van_tai/dich_vu_xe_khach/ke_khai');
+            return redirect('/dich_vu_van_tai/dich_vu_xe_khach/ke_khai/'.'nam='.date('Y'));
         }else
             return view('errors.notlogin');
     }
@@ -244,7 +241,7 @@ class KkDvVtXkController extends Controller
             $model->ghichu = $update['ghichu'];
             $model->uudai = $update['uudai'];
             $model->save();
-            return redirect('/dich_vu_van_tai/dich_vu_xe_khach/ke_khai');
+            return redirect('/dich_vu_van_tai/dich_vu_xe_khach/ke_khai/'.'nam='.date('Y'));
         }else
             return view('errors.notlogin');
     }
@@ -266,7 +263,7 @@ class KkDvVtXkController extends Controller
                 KkDvVtXkCt::where('masokk', $model->masokk)->delete();
                 PagDvVtXk::where('masokk', $model->masokk)->delete();
             }
-            return redirect('/dich_vu_van_tai/dich_vu_xe_khach/ke_khai');
+            return redirect('/dich_vu_van_tai/dich_vu_xe_khach/ke_khai/'.'nam='.date('Y'));
         }else
             return view('errors.notlogin');
     }

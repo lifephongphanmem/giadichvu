@@ -26,7 +26,7 @@ class KkDvVtXbController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($nam)
     {
         if (Session::has('admin')) {
             //$datetime = Carbon::now()->toDateTimeString();
@@ -49,6 +49,7 @@ class KkDvVtXbController extends Controller
             return view('manage.dvvt.dvxb.kkdv.index')
                 ->with('model',$model)
                 ->with('per',$per)
+                ->with('nam',$nam)
                 ->with('url','/dich_vu_van_tai/dich_vu_xe_bus/')
                 ->with('pageTitle','Kê khai giá dịch vụ vận tải');
         }else
@@ -201,7 +202,7 @@ class KkDvVtXbController extends Controller
                 ->get()->toarray();
             PagDvVtXb::insert($m_pag);
 
-            return redirect('/dich_vu_van_tai/dich_vu_xe_bus/ke_khai');
+            return redirect('/dich_vu_van_tai/dich_vu_xe_bus/ke_khai/'.'nam='.date('Y'));
         }else
             return view('errors.notlogin');
     }
@@ -246,7 +247,7 @@ class KkDvVtXbController extends Controller
             $model->ghichu = $update['ghichu'];
             $model->uudai = $update['uudai'];
             $model->save();
-            return redirect('/dich_vu_van_tai/dich_vu_xe_bus/ke_khai');
+            return redirect('/dich_vu_van_tai/dich_vu_xe_bus/ke_khai/'.'nam='.date('Y'));
         }else
             return view('errors.notlogin');
     }
@@ -268,7 +269,7 @@ class KkDvVtXbController extends Controller
                 KkDvVtXbCt::where('masokk', $model->masokk)->delete();
                 PagDvVtXb::where('masokk', $model->masokk)->delete();
             }
-            return redirect('/dich_vu_van_tai/dich_vu_xe_bus/ke_khai');
+            return redirect('/dich_vu_van_tai/dich_vu_xe_bus/ke_khai/'.'nam='.date('Y'));
         }else
             return view('errors.notlogin');
     }

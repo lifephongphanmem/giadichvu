@@ -38,6 +38,7 @@
                             <a href="{{url($url.'ke_khai/create')}}" class="btn btn-success btn-xs"><i class="fa fa-plus"></i> Kê khai giá mới</a>
                         @endif
                     </div>
+                    @include('manage.dvvt.template.indexkkdv_boloc')
                 </div>
                 @include('manage.dvvt.template.indexkkdv')
             </div>
@@ -45,6 +46,14 @@
     </div>
 
     <script>
+        $(function(){
+            $('#namhs').change(function() {
+                var namhs = $('#namhs').val();
+                var url = '{{$url}}' + 'ke_khai/nam='+namhs;
+                window.location.href = url;
+            });
+        });
+
         function InChiTiet(masokk){
             var url='{{$url}}'+'in/'+ masokk;
             window.open(url,'_blank');

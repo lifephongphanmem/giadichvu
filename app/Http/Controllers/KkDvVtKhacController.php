@@ -26,19 +26,15 @@ class KkDvVtKhacController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($nam)
     {
         if (Session::has('admin')) {
             //$datetime = Carbon::now()->toDateTimeString();
-            if(session('admin')->level == 'T')
-                $model = KkDvVtKhac::where('trangthai','<>','Chờ chuyển')
-                    ->where('trangthai','<>','Bị trả lại')
-                    ->orderBy('ngaynhap', 'esc')
-                    ->get();
-            else
-                $model = KkDvVtKhac::where('masothue',session('admin')->mahuyen)
-                    ->orderBy('ngaynhap', 'esc')
-                    ->get();
+
+            $model = KkDvVtKhac::where('masothue',session('admin')->mahuyen)
+                ->whereYear('ngaynhap', $nam)
+                ->orderBy('ngaynhap', 'asc')
+                ->get();
 
             $per=array(
                 'create'=>can('kkdvvtch','create'),
@@ -50,6 +46,7 @@ class KkDvVtKhacController extends Controller
             return view('manage.dvvt.dvkhac.kkdv.index')
                 ->with('model',$model)
                 ->with('per',$per)
+                ->with('nam',$nam)
                 ->with('url','/dich_vu_van_tai/dich_vu_cho_hang/')
                 ->with('pageTitle','Kê khai giá dịch vụ vận tải');
         }else
@@ -197,7 +194,7 @@ class KkDvVtKhacController extends Controller
                 ->get()->toarray();
             PagDvVtKhac::insert($m_pag);
 
-            return redirect('/dich_vu_van_tai/dich_vu_cho_hang/ke_khai');
+            return redirect('/dich_vu_van_tai/dich_vu_cho_hang/ke_khai/'.'nam='.date('Y'));
         }else
             return view('errors.notlogin');
     }
@@ -242,7 +239,7 @@ class KkDvVtKhacController extends Controller
             $model->ghichu = $update['ghichu'];
             $model->uudai = $update['uudai'];
             $model->save();
-            return redirect('/dich_vu_van_tai/dich_vu_cho_hang/ke_khai');
+            return redirect('/dich_vu_van_tai/dich_vu_cho_hang/ke_khai/'.'nam='.date('Y'));
         }else
             return view('errors.notlogin');
     }
@@ -264,7 +261,7 @@ class KkDvVtKhacController extends Controller
                 KkDvVtKhacCt::where('masokk', $model->masokk)->delete();
                 PagDvVtKhac::where('masokk', $model->masokk)->delete();
             }
-            return redirect('/dich_vu_van_tai/dich_vu_cho_hang/ke_khai');
+            return redirect('/dich_vu_van_tai/dich_vu_cho_hang/ke_khai/'.'nam='.date('Y'));
         }else
             return view('errors.notlogin');
     }
