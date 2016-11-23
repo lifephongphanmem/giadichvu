@@ -43,6 +43,7 @@ class ReportsController extends Controller
             $model = KkGDvLt::where('trangthai','Chờ duyệt')
                 ->OrWhere('trangthai','Duyệt')
                 ->whereBetween('ngaychuyen', [$input['ngaytu'], $input['ngayden']])
+                ->orderBy('id')
                 ->get();
             //dd($model);
             foreach($model as $kk){
@@ -68,6 +69,7 @@ class ReportsController extends Controller
             $model = KkGDvLt::where('trangthai','Chờ duyệt')
                 ->OrWhere('trangthai','Duyệt')
                 ->whereBetween('ngaychuyen', [$input['ngaytu'], $input['ngayden']])
+                ->orderBy('id')
                 ->get();
             //dd($model);
             $mahss = '';

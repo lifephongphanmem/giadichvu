@@ -99,7 +99,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <a href="{{$model->tailieu}}">Xem giấy phép đăng ký kinh doanh</a>
+                                    <a href="{{$model->tailieu}}" target="_blank">Xem giấy phép đăng ký kinh doanh</a>
                                 </div>
                             </div>
                             <div class="col-md-6">

@@ -32,6 +32,7 @@ class KkGDvLtController extends Controller
         if (Session::has('admin')) {
             $model = KkGDvLt::where('macskd',$macskd)
                 ->whereYear('ngaynhap',$nam)
+                ->orderBy('id')
                 ->get();
             $modelcskd = CsKdDvLt::where('macskd',$macskd)
                 ->first();

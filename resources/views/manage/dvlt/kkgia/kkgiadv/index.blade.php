@@ -79,19 +79,7 @@
         Thông tin kê khai giá<small>&nbsp;dịch vụ lưu trú</small> - Cơ sở kinh doanh <small>{{$modelcskd->tencskd}}</small>
     </h3>
     <input type="hidden" name="macskd" id="macskd" value="{{$macskd}}">
-    <div class="row">
-        <div class="col-md-2">
-            <div class="form-group">
-                <select name="namhs" id="namhs" class="form-control">
-                    @if ($nam_start = intval(date('Y')) - 15 ) @endif
-                    @if ($nam_stop = intval(date('Y')) + 5 ) @endif
-                    @for($i = $nam_start; $i <= $nam_stop; $i++)
-                        <option value="{{$i}}" {{$i == $nam ? 'selected' : ''}}>{{$i}}</option>
-                    @endfor
-                </select>
-            </div>
-        </div>
-    </div>
+
 
 
     <!-- END PAGE HEADER-->
@@ -103,8 +91,21 @@
                     <div class="actions">
                         @if(can('kkdvlt','create'))
                         <a href="{{url('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh='.$macskd.'/create')}}" class="btn btn-default btn-sm">
-                            <i class="fa fa-plus"></i> Thêm mới </a>
+                            <i class="fa fa-plus"></i> Kê khai mới </a>
                         @endif
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <select name="namhs" id="namhs" class="form-control">
+                                    @if ($nam_start = intval(date('Y')) - 5 ) @endif
+                                    @if ($nam_stop = intval(date('Y')) ) @endif
+                                    @for($i = $nam_start; $i <= $nam_stop; $i++)
+                                        <option value="{{$i}}" {{$i == $nam ? 'selected' : ''}}>Năm {{$i}}</option>
+                                    @endfor
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="portlet-body">
@@ -134,7 +135,7 @@
                                     @if($tt->trangthai == "Chờ chuyển")
                                 <td align="center"><span class="badge badge-warning">{{$tt->trangthai}}</span></td>
                                 @elseif($tt->trangthai == 'Chờ duyệt')
-                                    <td align="center"><span class="badge badge-warning">{{$tt->trangthai}}</span>
+                                    <td align="center"><span class="badge badge-blue">{{$tt->trangthai}}</span>
                                         <br>Thời gian chuyển:<br><b>{{getDateTime($tt->ngaychuyen)}}</b>
                                     </td>
                                 @elseif($tt->trangthai == 'Chờ nhận')
@@ -198,7 +199,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label><b>Thông tin người nộp</b></label>
-                            <textarea id="ttnguoinop" class="form-control required" name="ttnguoinop" cols="30" rows="5"></textarea></div>
+                            <textarea id="ttnguoinop" class="form-control required" name="ttnguoinop" cols="30" rows="5" placeholder="Họ và tên người chuyển- Số ĐT liên lạc- Email lien lạc"></textarea></div>
                     </div>
                     <input type="hidden" name="idchuyen" id="idchuyen">
                     <div class="modal-footer">

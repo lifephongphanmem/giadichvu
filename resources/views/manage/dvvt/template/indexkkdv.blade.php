@@ -3,30 +3,30 @@
         <thead>
         <tr>
             <th style="text-align: center" width="2%">STT</th>
-            <th>Ngày kê khai</th>
-            <th>Áp dụng từ ngày</th>
-            <th>Số công văn</th>
-            <th>Số công văn liền kề</th>
-            <th>Người chuyển</th>
-            <th>Trạng thái</th>
-            <th>Thao tác</th>
+            <th style="text-align: center">Ngày kê khai</th>
+            <th style="text-align: center">Áp dụng từ ngày</th>
+            <th style="text-align: center">Số công văn</th>
+            <th style="text-align: center">Số công văn liền kề</th>
+            <th style="text-align: center">Người chuyển</th>
+            <th style="text-align: center">Trạng thái</th>
+            <th style="text-align: center">Thao tác</th>
         </tr>
         </thead>
         <tbody id="noidung">
         <?php $i=1;?>
         @foreach($model as $kk)
             <tr>
-                <td>{{$i++}}</td>
-                <td>{{getDayVn($kk->ngaynhap)}}</td>
-                <td>{{getDayVn($kk->ngayhieuluc)}}</td>
-                <td>{{$kk->socv}}
+                <td style="text-align: center">{{$i++}}</td>
+                <td style="text-align: center">{{getDayVn($kk->ngaynhap)}}</td>
+                <td style="text-align: center">{{getDayVn($kk->ngayhieuluc)}}</td>
+                <td style="text-align: center">{{$kk->socv}}
                     @if($kk->trangthai == 'Chờ duyệt')
                         <br>Số hồ sơ:<br><b>{{$kk->sohsnhan}}</b>
                         <br>Thời gian nhận:<br><b>{{getDayVn($kk->ngaynhan)}}</b>
                     @endif
                 </td>
-                <td>{{$kk->socvlk .' - '. (getDayVn($kk->ngaynhaplk)=='01/01/1970'?'':getDayVn($kk->ngaynhaplk))}}</td>
-                <td>{{$kk->ttnguoinop}}
+                <td style="text-align: center">{{$kk->socvlk .' - '. (getDayVn($kk->ngaynhaplk)=='01/01/1970'?'':getDayVn($kk->ngaynhaplk))}}</td>
+                <td style="text-align: center">{{$kk->ttnguoinop}}
                 <td align="center">
                     @if($kk->trangthai == "Chờ chuyển")
                         <span class="badge badge-warning">{{$kk->trangthai}}</span>

@@ -24,7 +24,7 @@
                 @if ($nam_start = intval(date('Y')) - 5 ) @endif
                 @if ($nam_stop = intval(date('Y')) ) @endif
                 @for($i = $nam_start; $i <= $nam_stop; $i++)
-                    <option value="{{$i}}" {{$i == $nam ? 'selected' : ''}}>{{$i}}</option>
+                    <option value="{{$i}}" {{$i == $nam ? 'selected' : ''}}>Năm {{$i}}</option>
                 @endfor
             </select>
         </div>
@@ -46,14 +46,14 @@
                 <table id="sample_3" class="table table-hover table-striped table-bordered table-advanced tablesorter">
                     <thead>
                     <tr>
-                        <th style="width: 2%; padding: 10px; background: #efefef">STT</th>
-                        <th>Đơn vị kê khai</th>
-                        <th>Ngày kê khai</th>
-                        <th>Áp dụng từ ngày</th>
-                        <th>Số công văn</th>
-                        <th>Người chuyển</th>
-                        <th style="width: 15%">Trạng thái</th>
-                        <th style="width: 20%">Thao tác</th>
+                        <th style="width: 2%; text-align: center">STT</th>
+                        <th style="text-align: center">Đơn vị kê khai</th>
+                        <th style="text-align: center">Ngày kê khai</th>
+                        <th style="text-align: center">Áp dụng từ ngày</th>
+                        <th style="text-align: center">Số công văn</th>
+                        <th style="text-align: center">Người chuyển</th>
+                        <th style="width: 15%;text-align: center">Trạng thái</th>
+                        <th style="width: 20%;text-align: center">Thao tác</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -62,15 +62,15 @@
                         <tr>
                             <td style="text-align: center">{{$i++}}</td>
                             <td>{{$kk->tendonvi}}</td>
-                            <td>{{getDayVn($kk->ngaynhap)}}</td>
-                            <td>{{getDayVn($kk->ngayhieuluc)}}</td>
-                            <td>{{$kk->socv}}
+                            <td style="text-align: center">{{getDayVn($kk->ngaynhap)}}</td>
+                            <td style="text-align: center">{{getDayVn($kk->ngayhieuluc)}}</td>
+                            <td style="text-align: center">{{$kk->socv}}
                                 @if($kk->trangthai == 'Chờ duyệt')
                                     <br>Số hồ sơ:<br><b>{{$kk->sohsnhan}}</b>
                                     <br>Thời gian nhận:<br><b>{{getDayVn($kk->ngaynhan)}}</b>
                                 @endif
                             </td>
-                            <td>{{$kk->ttnguoinop}}
+                            <td style="text-align: center">{{$kk->ttnguoinop}}
                             </td>
                             <td align="center">
 

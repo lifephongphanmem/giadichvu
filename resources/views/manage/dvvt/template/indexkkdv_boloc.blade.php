@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-2">
         <div class="form-group">
             <select name="namhs" id="namhs" class="form-control">
                 @if ($nam_start = intval(date('Y')) - 5 ) @endif

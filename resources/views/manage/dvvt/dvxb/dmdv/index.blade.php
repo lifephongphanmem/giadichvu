@@ -37,7 +37,7 @@
                 <div class="portlet-title">
                     <div class="actions">
                         @if($per['create'])
-                            <button type="button" id="_btnThemDV" class="btn btn-success btn-xs" onclick="addDVXK()" ><i class="fa fa-plus"></i>&nbsp;Thêm mới</button>
+                            <button type="button" id="_btnThemDV" class="bbtn btn-default btn-sm" onclick="addDVXK()" ><i class="fa fa-plus"></i>&nbsp;Thêm mới</button>
                         @endif
                     </div>
                 </div>

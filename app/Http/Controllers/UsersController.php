@@ -152,6 +152,7 @@ class UsersController extends Controller
                 $level = 'DVVT';
 
             $model = Users::where('level', $level)
+                ->orderBy('id')
                 ->get();
             $index_unset = 0;
             foreach ($model as $user) {
