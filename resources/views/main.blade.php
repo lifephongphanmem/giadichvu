@@ -313,7 +313,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     </li>
                         @endif
                     @endif
-                    @if(canGeneral('dvlt','dvlt'))
+                    @if(canGeneral('dvvt','vtxk') || canGeneral('dvvt','vtxb') || canGeneral('dvvt','vtxtx') || canGeneral('dvvt','vtch'))
                         @if(can('dvvtxk','index') || can('kkdvvtxk','index')
                             || can('dvvtxb','index') || can('kkdvvtxb','index')
                             || can('dvvtxtx','index') || can('kkdvvtxtx','index')

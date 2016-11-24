@@ -183,4 +183,18 @@ class DonViDvVtController extends Controller
             return view('errors.notlogin');
     }
     // </editor-fold>
+
+    public function prints(){
+        if (Session::has('admin')) {
+            $model = DonViDvVt::all();
+            $dv = 'VẬN TẢI';
+            $pl = 'DVVT';
+            return view('reports.dn.doanhnghiep')
+                ->with('dv',$dv)
+                ->with('pl',$pl)
+                ->with('model',$model)
+                ->with('pageTitle','Danh sách doanh nghiệp cung cấp dịch vụ vận tải');
+        }else
+            return view('errors.notlogin');
+    }
 }

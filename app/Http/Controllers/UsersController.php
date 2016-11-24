@@ -477,4 +477,27 @@ class UsersController extends Controller
         } else
             return view('errors.notlogin');
     }
+
+    public function prints($pl){
+        if (Session::has('admin')) {
+            if($pl == 'dich_vu_luu_tru') {
+                $model = Users::where('level', 'DVLT')
+                    ->get();
+                $dv = 'LƯU TRÚ';
+            }elseif($pl == 'dich_vu_van_tai'){
+                $model = Users::where('level','DVVT')
+                    ->get();
+                $dv = 'VẬN TẢI';
+            }
+
+
+
+
+            return view('reports/user/users')
+                ->with('model',$model)
+                ->with('dv',$dv)
+                ->with('pageTitle','Danh sách tài khoản truy cập');
+        } else
+            return view('errors.notlogin');
+    }
 }

@@ -12,6 +12,7 @@ Route::get('register/dich_vu_van_tai','HomeController@regdvvt');
 
 Route::post('register/dich_vu_van_tai','HomeController@regdvvtstore');
 
+
 // <editor-fold defaultstate="collapsed" desc="--Setting--">
 Route::get('cau_hinh_he_thong','GeneralConfigsController@index');
 Route::get('cau_hinh_he_thong/{id}/edit','GeneralConfigsController@edit');
@@ -39,6 +40,7 @@ Route::get('users/register/{id}/show','UsersController@registershow');
 Route::post('register/createdvlt','UsersController@registerdvlt');
 Route::post('register/createdvvt','UsersController@registerdvvt');
 Route::post('register/delete','UsersController@registerdelete');
+Route::get('users/print/pl={pl}','UsersController@prints');
 //EndUsers
 
 //DN Dịch vụ lưu trú
@@ -48,6 +50,7 @@ Route::post('dn_dichvu_luutru','DnDvLtController@store');
 Route::get('dn_dichvu_luutru/{id}/edit','DnDvLtController@edit');
 Route::patch('dn_dichvu_luutru/{id}','DnDvLtController@update');
 Route::post('dn_dichvu_luutru/delete','DnDvLtController@destroy');
+Route::get('dn_dichvu_luutru/print','DnDvLtController@prints');
 //End DN Dịch vụ lưu trú
 
 //DN Dịch vụ vận tải
@@ -57,6 +60,7 @@ Route::post('dn_dichvu_vantai','DonViDvVtController@store');
 Route::get('dn_dichvu_vantai/{id}/edit','DonViDvVtController@edit');
 Route::patch('dn_dichvu_vantai/{id}','DonViDvVtController@update');
 Route::post('dn_dichvu_vantai/delete','DonViDvVtController@destroy');
+Route::get('dn_dichvu_vantai/print','DonViDvVtController@prints');
 //End Dn Dịch vụ vận tải
 // </editor-fold>//End Setting
 

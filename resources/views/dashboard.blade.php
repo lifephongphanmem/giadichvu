@@ -72,7 +72,7 @@
                                     </div>
                                     <a class="more" href="
                                         {{(session('admin')->level == 'T')? url('/dich_vu_van_tai/dich_vu_xe_khach/xet_duyet/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')
-                                        : url('/dich_vu_van_tai/dich_vu_xe_khach/ke_khai')}}">
+                                        : url('/dich_vu_van_tai/dich_vu_xe_khach/ke_khai/'.'nam='.date('Y'))}}">
                                         Xem chi tiết <i class="m-icon-swapright m-icon-white"></i>
                                     </a>
                                 </div>
@@ -101,7 +101,7 @@
                                     </div>
                                     <a class="more" href="
                                         {{(session('admin')->level == 'T')? url('/dich_vu_van_tai/dich_vu_xe_bus/xet_duyet/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')
-                                        : url('/dich_vu_van_tai/dich_vu_xe_bus/ke_khai')}}">
+                                        : url('/dich_vu_van_tai/dich_vu_xe_bus/ke_khai/'.'nam='.date('Y'))}}">
                                         Xem chi tiết <i class="m-icon-swapright m-icon-white"></i>
                                     </a>
                                 </div>
@@ -131,7 +131,7 @@
                                     </div>
                                     <a class="more" href="
                                         {{(session('admin')->level == 'T')? url('/dich_vu_van_tai/dich_vu_xe_taxi/xet_duyet/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')
-                                        : url('/dich_vu_van_tai/dich_vu_xe_taxi/ke_khai')}}">
+                                        : url('/dich_vu_van_tai/dich_vu_xe_taxi/ke_khai/'.'nam='.date('Y'))}}">
                                         Xem chi tiết<i class="m-icon-swapright m-icon-white"></i>
                                     </a>
                                 </div>
@@ -159,7 +159,7 @@
                                     </div>
                                     <a class="more" href="
                                         {{(session('admin')->level == 'T')? url('/dich_vu_van_tai/dich_vu_cho_hang/xet_duyet/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')
-                                        : url('/dich_vu_van_tai/dich_vu_cho_hang/ke_khai')}}">
+                                        : url('/dich_vu_van_tai/dich_vu_cho_hang/ke_khai/'.'nam='.date('Y'))}}">
                                         Xem chi tiết<i class="m-icon-swapright m-icon-white"></i>
                                     </a>
                                 </div>

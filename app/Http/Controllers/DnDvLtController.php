@@ -200,4 +200,18 @@ class DnDvLtController extends Controller
         }else
             return view('errors.notlogin');
     }
+
+    public function prints(){
+        if (Session::has('admin')) {
+            $model = DnDvLt::all();
+            $dv = 'LƯU TRÚ';
+            $pl = 'DVLT';
+            return view('reports.dn.doanhnghiep')
+                ->with('dv',$dv)
+                ->with('pl',$pl)
+                ->with('model',$model)
+                ->with('pageTitle','Danh sách doanh nghiệp cung cấp dịch vụ lưu trú');
+        }else
+            return view('errors.notlogin');
+    }
 }

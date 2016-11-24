@@ -94,6 +94,8 @@
                     <div class="actions">
                         <a href="{{url('dn_dichvu_luutru/create')}}" class="btn btn-default btn-sm">
                             <i class="fa fa-plus"></i> Thêm mới </a>
+                            <a href="{{url('dn_dichvu_luutru/print')}}" class="btn btn-default btn-sm" target="_blank">
+                                <i class="fa fa-print"></i> Print </a>
                     </div>
                 </div>
                 <div class="portlet-body">
