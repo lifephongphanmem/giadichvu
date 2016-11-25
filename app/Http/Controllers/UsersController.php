@@ -500,4 +500,74 @@ class UsersController extends Controller
         } else
             return view('errors.notlogin');
     }
+
+    public function registeredit($id){
+        if (Session::has('admin')) {
+            $model = Register::findOrFail($id);
+            if ($model->pl == 'DVLT') {
+                return view('system.users.register.editdvlt')
+                    ->with('model', $model)
+                    ->with('pageTitle', 'Chỉnh sửa thông tin đăng ký tài khoản dịch vụ lưu trú');
+            } elseif ($model->pl == 'DVVT') {
+                return view('system.users.register.editdvvt')
+                    ->with('model', $model)
+                    ->with('pageTitle', 'Chỉnh sửa thông tin đăng ký tài khoản dịch vụ vận tải');
+            }
+        } else {
+            return view('errors.notlogin');
+        }
+    }
+
+    public function registerdvltupdate($id, Request $request){
+        if (Session::has('admin')) {
+            $input = $request->all();
+            $model = Register::findOrFail($id);
+            $model->tendn = $input['tendn'];
+            $model->masothue = $input['masothue'];
+            $model->diachidn = $input['diachidn'];
+            $model->teldn  = $input['teldn'];
+            $model->faxdn = $input['faxdn'];
+            $model->email = $input['email'];
+            $model->noidknopthue = $input['noidknopthue'];
+            $model->giayphepkd = $input['giayphepkd'];
+            $model->tailieu = $input['tailieu'];
+            $model->username = $input['username'];
+            $model->save();
+            return redirect('users/register/pl=dich_vu_luu_tru');
+        } else {
+            return view('errors.notlogin');
+        }
+    }
+
+    public function registerdvvtupdate($id,Request $request){
+        if (Session::has('admin')) {
+            $input = $request->all();
+            $model = Register::findOrFail($id);
+            $model->tendn = $input['tendn'];
+            $model->masothue = $input['masothue'];
+            $model->diachidn = $input['diachidn'];
+            $model->teldn  = $input['teldn'];
+            $model->faxdn = $input['faxdn'];
+            $model->email = $input['emaildn'];
+            $model->noidknopthue = $input['noidknopthue'];
+            $model->giayphepkd = $input['giayphepkd'];
+            $model->tailieu = $input['tailieu'];
+            $model->username = $input['username'];
+            $model->pl = 'DVVT';
+
+            $input['roles'] = isset($input['roles']) ? $input['roles'] : null;
+            $model->setting = json_encode($input['roles']);
+            $x = $input['roles'];
+            $model->dvxk = isset($x['dvvt']['vtxk']) ? 1 : 0;
+            $model->dvxb = isset($x['dvvt']['vtxb']) ? 1 : 0;
+            $model->dvxtx = isset($x['dvvt']['vtxtx']) ? 1 : 0;
+            $model->dvk = isset($x['dvvt']['vtch']) ? 1 : 0;
+
+            $model->save();
+
+            return redirect('users/register/pl=dich_vu_van_tai');
+        } else {
+            return view('errors.notlogin');
+        }
+    }
 }

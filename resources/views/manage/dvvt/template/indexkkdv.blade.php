@@ -4,12 +4,12 @@
         <tr>
             <th style="text-align: center" width="2%">STT</th>
             <th style="text-align: center">Ngày kê khai</th>
-            <th style="text-align: center">Áp dụng từ ngày</th>
+            <th style="text-align: center">Ngày thực hiên<br>mức giá kê khai</th>
             <th style="text-align: center">Số công văn</th>
-            <th style="text-align: center">Số công văn liền kề</th>
+            <th style="text-align: center">Số công văn <br>liền kề</th>
             <th style="text-align: center">Người chuyển</th>
             <th style="text-align: center">Trạng thái</th>
-            <th style="text-align: center">Thao tác</th>
+            <th style="text-align: center" width="25%">Thao tác</th>
         </tr>
         </thead>
         <tbody id="noidung">
@@ -19,7 +19,7 @@
                 <td style="text-align: center">{{$i++}}</td>
                 <td style="text-align: center">{{getDayVn($kk->ngaynhap)}}</td>
                 <td style="text-align: center">{{getDayVn($kk->ngayhieuluc)}}</td>
-                <td style="text-align: center">{{$kk->socv}}
+                <td style="text-align: center" class="active">{{$kk->socv}}
                     @if($kk->trangthai == 'Chờ duyệt')
                         <br>Số hồ sơ:<br><b>{{$kk->sohsnhan}}</b>
                         <br>Thời gian nhận:<br><b>{{getDayVn($kk->ngaynhan)}}</b>
@@ -50,11 +50,11 @@
                         @if($per['edit'])
                             <a href="{{url($url.'ke_khai/edit/'.$kk->id)}}" class="btn btn-default btn-xs mbs"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</a>
                         @endif
-                        @if($per['delete'])
-                            <button type="button" onclick="confirmDel('{{$kk->id}}')" class="btn btn-default btn-xs mbs" data-target="#del-modal-confirm" data-toggle="modal"><i class="fa fa-trash-o"></i>&nbsp;Xóa</button>
-                        @endif
                         @if($per['approve'])
                             <button type="button" onclick="confirmChuyen('{{$kk->id}}')" class="btn btn-default btn-xs mbs" data-target="#chuyendvvt-modal-confirm" data-toggle="modal"><i class="fa fa-share-square-o"></i>&nbsp;Chuyển</button>
+                        @endif
+                        @if($per['delete'])
+                            <button type="button" onclick="confirmDel('{{$kk->id}}')" class="btn btn-default btn-xs mbs" data-target="#del-modal-confirm" data-toggle="modal"><i class="fa fa-trash-o"></i>&nbsp;Xóa</button>
                         @endif
                     @elseif($kk->trangthai == 'Chờ nhận')
                         <!--button type="button" onclick="TTNguoiChuyen('{{$kk->ttnguoinop}}')" class="btn btn-default btn-xs mbs" data-target="#chuyendvvt-modal-confirm" data-toggle="modal"><i class="fa fa-user"></i>&nbsp;Người chuyển</button-->
@@ -63,11 +63,12 @@
                             <a href="{{url($url.'ke_khai/edit/'.$kk->id)}}" class="btn btn-default btn-xs mbs"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</a>
                         @endif
                         <button type="button" onclick="LyDoTraLai('{{$kk->lydo}}')" class="btn btn-default btn-xs mbs" data-target="#tradvvt-modal-confirm" data-toggle="modal"><i class="fa fa-list"></i>&nbsp;Lý do trả lại</button>
-                        @if($per['delete'])
-                            <button type="button" onclick="confirmDel('{{$kk->id}}')" class="btn btn-default btn-xs mbs" data-target="#del-modal-confirm" data-toggle="modal"><i class="fa fa-trash-o"></i>&nbsp;Xóa</button>
-                        @endif
+
                         @if($per['approve'])
                             <button type="button" onclick="confirmChuyen('{{$kk->id}}')" class="btn btn-default btn-xs mbs" data-target="#chuyendvvt-modal-confirm" data-toggle="modal"><i class="fa fa-share-square-o"></i>&nbsp;Chuyển</button>
+                        @endif
+                        @if($per['delete'])
+                            <button type="button" onclick="confirmDel('{{$kk->id}}')" class="btn btn-default btn-xs mbs" data-target="#del-modal-confirm" data-toggle="modal"><i class="fa fa-trash-o"></i>&nbsp;Xóa</button>
                         @endif
                     @endif
                 </td>

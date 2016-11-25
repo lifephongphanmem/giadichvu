@@ -124,7 +124,8 @@
             <div class="row" style="text-align: center">
                 <div class="col-md-12">
                     <button type="submit" class="btn green" onclick="validateForm()"><i class="fa fa-check"></i> Cập nhật</button>
-                    <button type="reset" class="btn default">Hủy</button>
+                    <button type="reset" class="btn btn-default"><i class="fa fa-refresh"></i>&nbsp;Nhập lại</button>
+                    <a href="{{url('dich_vu_van_tai/thong_tin_don_vi')}}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
                 </div>
             </div>
             {!! Form::close() !!}

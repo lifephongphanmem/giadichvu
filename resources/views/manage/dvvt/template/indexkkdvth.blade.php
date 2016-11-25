@@ -61,10 +61,10 @@
                     @foreach($model as $kk)
                         <tr>
                             <td style="text-align: center">{{$i++}}</td>
-                            <td>{{$kk->tendonvi}}</td>
+                            <td class="active">{{$kk->tendonvi}}</td>
                             <td style="text-align: center">{{getDayVn($kk->ngaynhap)}}</td>
                             <td style="text-align: center">{{getDayVn($kk->ngayhieuluc)}}</td>
-                            <td style="text-align: center">{{$kk->socv}}
+                            <td style="text-align: center" class="danger">{{$kk->socv}}
                                 @if($kk->trangthai == 'Chờ duyệt')
                                     <br>Số hồ sơ:<br><b>{{$kk->sohsnhan}}</b>
                                     <br>Thời gian nhận:<br><b>{{getDayVn($kk->ngaynhan)}}</b>

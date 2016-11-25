@@ -93,6 +93,7 @@
                         <a href="{{url('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh='.$macskd.'/create')}}" class="btn btn-default btn-sm">
                             <i class="fa fa-plus"></i> Kê khai mới </a>
                         @endif
+                        <a href="{{url('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh')}}" class="btn btn-default btn-sm"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
                     </div>
                     <div class="row">
                         <div class="col-md-2">

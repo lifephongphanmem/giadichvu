@@ -37,8 +37,12 @@ Route::get('users/lock/{id}/{pl}','UsersController@lockuser');
 Route::get('users/unlock/{id}/{pl}','UsersController@unlockuser');
 Route::get('users/register/pl={pl}','UsersController@register');
 Route::get('users/register/{id}/show','UsersController@registershow');
+Route::get('users/register/{id}/edit','UsersController@registeredit');
+Route::patch('users/register/dvlt/{id}','UsersController@registerdvltupdate');
+Route::patch('users/register/dvvt/{id}','UsersController@registerdvvtupdate');
 Route::post('register/createdvlt','UsersController@registerdvlt');
 Route::post('register/createdvvt','UsersController@registerdvvt');
+
 Route::post('register/delete','UsersController@registerdelete');
 Route::get('users/print/pl={pl}','UsersController@prints');
 //EndUsers
