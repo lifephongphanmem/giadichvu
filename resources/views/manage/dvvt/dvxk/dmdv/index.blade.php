@@ -47,24 +47,26 @@
                         <table class="table table-striped table-bordered table-hover" id="sample_3">
                             <thead>
                             <tr>
-                                <th style="width: 10%;text-align: center">Loại xe</th>
-                                <th style="width: 10%;text-align: center">Điểm xuất phát</th>
-                                <th style="width: 10%;text-align: center">Điểm đến</th>
-                                <th style="width: 20%;text-align: center">Mô tả dịch vụ</th>
-                                <th style="width: 15%;text-align: center">Quy cách chất lượng</th>
-                                <th style="width: 10%;text-align: center">Đơn vị tính</th>
-                                <th>Thao tác</th>
+                                <th style="text-align: center">STT</th>
+                                <th style="text-align: center">Loại xe</th>
+                                <th style="text-align: center">Điểm xuất phát</th>
+                                <th style="text-align: center">Điểm đến</th>
+                                <th style="text-align: center">Mô tả dịch vụ</th>
+                                <th style="text-align: center">Quy cách chất lượng</th>
+                                <th style="text-align: center">Đơn vị tính</th>
+                                <th style="text-align: center">Thao tác</th>
                             </tr>
                             </thead>
                             <tbody id="noidung">
-                            @foreach($model as $dv)
+                            @foreach($model as $key=>$dv)
                                 <tr class="odd gradeX">
+                                    <td style="text-align: center">{{$key+1}}</td>
                                     <td name="loaixe">{{$dv->loaixe}}</td>
                                     <td name="diemdau">{{$dv->diemdau}}</td>
                                     <td name="diemcuoi">{{$dv->diemcuoi}}</td>
                                     <td name="tendichvu" class="active">{{$dv->tendichvu}}</td>
                                     <td name="qccl">{{$dv->qccl}}</td>
-                                    <td name="dvt">{{$dv->dvt}}</td>
+                                    <td name="dvt" style="text-align: center">{{$dv->dvt}}</td>
                                     <td>
                                         @if($per['edit'])
                                             <button type="button" class="btn btn-default btn-xs mbs" onclick="editDVXK(this,'{{$dv->id}}')"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</button>

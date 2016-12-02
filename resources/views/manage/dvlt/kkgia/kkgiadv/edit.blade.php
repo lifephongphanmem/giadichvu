@@ -300,7 +300,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="control-label">Số công văn<<span class="require">*</span></label>
+                                <label class="control-label">Số công văn<span class="require">*</span></label>
                                 {!!Form::text('socv', null, array('id' => 'socv','class' => 'form-control required'))!!}
                             </div>
                         </div>

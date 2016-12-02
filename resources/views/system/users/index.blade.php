@@ -108,23 +108,23 @@
                             <i class="fa fa-print"></i> Print </a>
                         @endif
                     </div>
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <select class="form-control" name="phanloai" id="phanloai">
+                                    <option value="quan_ly" {{($pl == "quan_ly") ? 'selected' : ''}}>Cấp Quản lý</option>
+                                    <option value="dich_vu_luu_tru" {{($pl == "dich_vu_luu_tru") ? 'selected' : ''}}>Dịch vụ lưu trú</option>
+                                    <option value="dich_vu_van_tai" {{($pl == "dich_vu_van_tai") ? 'selected' : ''}}>Dịch vụ vận tải</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="portlet-body">
                     <div class="portlet-body">
                         <div class="table-toolbar">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <select class="form-control" name="phanloai" id="phanloai">
-                                            <option value="quan_ly" {{($pl == "quan_ly") ? 'selected' : ''}}>Cấp Quản lý</option>
-                                            <option value="dich_vu_luu_tru" {{($pl == "dich_vu_luu_tru") ? 'selected' : ''}}>Dịch vụ lưu trú</option>
-                                            <option value="dich_vu_van_tai" {{($pl == "dich_vu_van_tai") ? 'selected' : ''}}>Dịch vụ vận tải</option>
-                                        </select>
-                                    </div>
-                                </div>
 
-
-                            </div>
                         </div>
                     <table class="table table-striped table-bordered table-hover" id="sample_3">
                         <thead>
