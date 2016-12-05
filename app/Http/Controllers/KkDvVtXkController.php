@@ -520,7 +520,7 @@ class KkDvVtXkController extends Controller
                 $result['message'] .= '<tr>';
                 $result['message'] .= '<td style="text-align: center">'.($key+1).'</td>';
                 $result['message'] .= '<td name = "loaixe">'.$dv->loaixe.'</td>';
-                $result['message'] .= '<td name = "tendichvu">'.$dv->tendichvu.'</td>';
+                $result['message'] .= '<td name = "tendichvu" class="active">'.$dv->tendichvu.'</td>';
                 $result['message'] .= '<td name = "giakklk" style="text-align: right">'.number_format($dv->giakklk).'</td>';
                 $result['message'] .= '<td name = "giakk" style="text-align: right">'.number_format($dv->giakk).'</td>';
                 $result['message'] .= '<td name = "giahl" style="text-align: right">'.number_format($dv->giahl).'</td>';

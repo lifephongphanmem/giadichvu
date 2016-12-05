@@ -419,7 +419,20 @@ class KkDvVtKhacController extends Controller
             $model->giakklk = $inputs['giakklk'];
             $model->save();
             //Trả lại kết quả
-            $result['message'] = '<tbody id="noidung">';
+            $result['message'] = '<div class="row"  id="noidung">';
+            $result['message'] .= '<div class="col-md-12">';
+            $result['message'] .= '<table id="sample_3" class="table table-hover table-striped table-bordered table-advanced tablesorter">';
+            $result['message'] .= '<thead>';
+            $result['message'] .= '<tr>';
+            $result['message'] .= '<th style="text-align: center;width: 2%">STT</th>';
+            $result['message'] .= '<th style="text-align: center">Loại xe</th>';
+            $result['message'] .= '<th style="text-align: center">Mô tả dịch vụ</th>';
+            $result['message'] .= '<th style="text-align: center">Mức giá liền kề</th>';
+            $result['message'] .= '<th style="text-align: center">Mức giá kê khai</th>';
+            $result['message'] .= '<th style="text-align: center" width="20%">Thao tác</th>';
+            $result['message'] .= ' </tr>';
+            $result['message'] .= '</thead>';
+            $result['message'] .= '<tbody>';
             $DMDV = KkDvVtKhacCtDf::where('masothue', session('admin')->mahuyen)->get();
 
             $i=1;
@@ -427,16 +440,15 @@ class KkDvVtKhacController extends Controller
                 $result['message'] .= '<tr>';
                 $result['message'] .= '<td style="text-align: center;">'.$i++.'</td>';
                 $result['message'] .= '<td name = "loaixe">'.$dv->loaixe.'</td>';
-                $result['message'] .= '<td name = "tendichvu">'.$dv->tendichvu.'</td>';
-                $result['message'] .= '<td name = "giakklk">'.number_format($dv->giakklk).'</td>';
-                $result['message'] .= '<td name = "giakk">'.number_format($dv->giakk).'</td>';
+                $result['message'] .= '<td name = "tendichvu" class="active">'.$dv->tendichvu.'</td>';
+                $result['message'] .= '<td name = "giakklk" style="text-align: right">'.number_format($dv->giakklk).'</td>';
+                $result['message'] .= '<td name = "giakk" style="text-align: right">'.number_format($dv->giakk).'</td>';
                 $result['message'] .= '<td>'
                                 .'<button type="button" data-target="#modal-create" '
                                 .'data-toggle="modal" class="btn btn-default btn-xs mbs"'
                                 .'onclick="editItem(this,'.$dv->id.')"><i'
                                 .' class="fa fa-edit"></i>&nbsp;Kê khai giá'
                                 .'</button>';
-                $result['message'] .='</br>';
                 $result['message'] .='<button type="button" data-target="#modal-pagia-create"
                                     data-toggle="modal" class="btn btn-default btn-xs mbs"
                                     onclick="getpag_temp(&apos;'.$dv->madichvu.'&apos;)"><i class="fa fa-edit"></i>&nbsp;Phương án giá';
@@ -476,7 +488,20 @@ class KkDvVtKhacController extends Controller
             $model->giakklk = $inputs['giakklk'];
             $model->save();
             //Trả lại kết quả
-            $result['message'] = '<tbody id="noidung">';
+            $result['message'] = '<div class="row"  id="noidung">';
+            $result['message'] .= '<div class="col-md-12">';
+            $result['message'] .= '<table id="sample_3" class="table table-hover table-striped table-bordered table-advanced tablesorter">';
+            $result['message'] .= '<thead>';
+            $result['message'] .= '<tr>';
+            $result['message'] .= '<th style="text-align: center;width: 2%">STT</th>';
+            $result['message'] .= '<th style="text-align: center">Loại xe</th>';
+            $result['message'] .= '<th style="text-align: center">Mô tả dịch vụ</th>';
+            $result['message'] .= '<th style="text-align: center">Mức giá liền kề</th>';
+            $result['message'] .= '<th style="text-align: center">Mức giá kê khai</th>';
+            $result['message'] .= '<th style="text-align: center" width="20%">Thao tác</th>';
+            $result['message'] .= ' </tr>';
+            $result['message'] .= '</thead>';
+            $result['message'] .= '<tbody>';
             $DMDV = KkDvVtKhacCt::where('masokk', $model->masokk)->get();
 
             $i=1;
@@ -484,16 +509,15 @@ class KkDvVtKhacController extends Controller
                 $result['message'] .= '<tr>';
                 $result['message'] .= '<td style="text-align: center;">'.$i++.'</td>';
                 $result['message'] .= '<td name = "loaixe">'.$dv->loaixe.'</td>';
-                $result['message'] .= '<td name = "tendichvu">'.$dv->tendichvu.'</td>';
-                $result['message'] .= '<td name = "giakklk">'.number_format($dv->giakklk).'</td>';
-                $result['message'] .= '<td name = "giakk">'.number_format($dv->giakk).'</td>';
+                $result['message'] .= '<td name = "tendichvu" class="active">'.$dv->tendichvu.'</td>';
+                $result['message'] .= '<td name = "giakklk" style="text-align: right">'.number_format($dv->giakklk).'</td>';
+                $result['message'] .= '<td name = "giakk" style="text-align: right">'.number_format($dv->giakk).'</td>';
                 $result['message'] .= '<td>'
                     .'<button type="button" data-target="#modal-create" '
                     .'data-toggle="modal" class="btn btn-default btn-xs mbs"'
                     .'onclick="editItem(this,'.$dv->id.')"><i'
                     .' class="fa fa-edit"></i>&nbsp;Kê khai giá'
                     .'</button>';
-                $result['message'] .='</br>';
                 $result['message'] .='<button type="button" data-target="#modal-pagia-create"
                                         data-toggle="modal" class="btn btn-default btn-xs mbs"
                                         onclick="editpagia(&apos;'.$dv->madichvu.'&apos;,&apos;'.$dv->masokk.'&apos;)"><i class="fa fa-edit"></i>&nbsp;Phương án giá';

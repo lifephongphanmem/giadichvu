@@ -101,7 +101,8 @@
 @stop
 
 @section('content-dv')
-    <div class="row">
+    <h4 class="form-section" style="color: #0000ff">Thông tin chi tiết hồ sơ</h4>
+    <div class="row" id="noidung">
         <div class="col-md-12">
             <table id="sample_3" class="table table-hover table-striped table-bordered table-advanced tablesorter">
                 <thead>
@@ -113,26 +114,25 @@
                     <th style="text-align: center">Mức giá</br>vé lượt</br>kê khai</th>
                     <th style="text-align: center">Mức giá</br>vé tháng</br>liền kề</th>
                     <th style="text-align: center">Mức giá</br>vé tháng</br>kê khai</th>
-                    <th style="text-align: center;width: 15%">Thao tác</th>
+                    <th style="text-align: center;width: 20%">Thao tác</th>
                 </tr>
                 </thead>
                 <?php $i=1?>
-                <tbody id="noidung">
+                <tbody>
                 @foreach($modeldv as $dv)
                     <tr>
                         <td style="text-align: center;">{{$i++}}</td>
-                        <td name="tendichvu">{{$dv->tendichvu}}</td>
+                        <td name="tendichvu" class="active">{{$dv->tendichvu}}</td>
                         <td name="qccl">{{$dv->qccl}}</td>
-                        <td name="giakklkluot">{{number_format($dv->giakklkluot)}}</td>
-                        <td name="giakkluot">{{number_format($dv->giakkluot)}}</td>
-                        <td name="giakklkthang">{{number_format($dv->giakklkthang)}}</td>
-                        <td name="giakkthang">{{number_format($dv->giakkthang)}}</td>
+                        <td name="giakklkluot" style="text-align: right">{{number_format($dv->giakklkluot)}}</td>
+                        <td name="giakkluot" style="text-align: right">{{number_format($dv->giakkluot)}}</td>
+                        <td name="giakklkthang" style="text-align: right">{{number_format($dv->giakklkthang)}}</td>
+                        <td name="giakkthang" style="text-align: right">{{number_format($dv->giakkthang)}}</td>
                         <td>
                             <button type="button" data-target="#modal-create"
                                     data-toggle="modal" class="btn btn-default btn-xs mbs"
                                     onclick="editItem(this,'{{$dv->id}}')"><i class="fa fa-edit"></i>&nbsp;Kê khai giá
                             </button>
-                            </br>
                             <button type="button" data-target="#modal-pagia-create"
                                     data-toggle="modal" class="btn btn-default btn-xs mbs"
                                     onclick="editpagia('{{$dv->madichvu}}','{{$dv->masokk}}')"><i class="fa fa-edit"></i>&nbsp;Phương án giá
@@ -155,6 +155,7 @@
         <div class="col-md-12">
             <div class="portlet box blue">
                 <div class="portlet-body pan">
+                    <h4 class="form-section" style="color: #0000ff">Thông tin hồ sơ</h4>
                     @include('manage.dvvt.template.editkkdv')
                 </div>
             </div>
@@ -178,22 +179,24 @@
                     <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
                     <h4 id="modal-header-primary-label" class="modal-title">Kê khai giá dịch vụ</h4>
                 </div>
-                <div class="modal-body">
-                    <div class="form-horizontal" id="ttgiaph">
-                        <label class="form-control-label">Mức giá vé lượt kê khai liền kề<span class="require">*</span></label>
-                        {!!Form::text('giakklkluot', null, array('id' => 'giakklkluot','class' => 'form-control','required'=>'required','data-mask'=>'fdecimal'))!!}
-
-                        <label class="form-control-label">Mức giá vé lượt kê khai<span class="require">*</span></label>
-                        {!!Form::text('giakkluot', null, array('id' => 'giakkluot','class' => 'form-control','required'=>'required','data-mask'=>'fdecimal'))!!}
-
-                        <label class="form-control-label">Mức giá vé tháng kê khai liền kề<span class="require">*</span></label>
-                        {!!Form::text('giakklkthang', null, array('id' => 'giakklkthang','class' => 'form-control','required'=>'required','data-mask'=>'fdecimal'))!!}
-
-                        <label class="form-control-label">Mức giá vé tháng kê khai<span class="require">*</span></label>
-                        {!!Form::text('giakkthang', null, array('id' => 'giakkthang','class' => 'form-control','required'=>'required','data-mask'=>'fdecimal'))!!}
-
+                <div class="modal-body" id="ttgiaph">
+                        <div class="form-group">
+                            <label class="form-control-label">Mức giá vé lượt kê khai liền kề<span class="require">*</span></label>
+                            <input type="text" style="text-align: right" id="giakklkluot" name="giakklkluot" class="form-control" data-mask="fdecimal">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label">Mức giá vé lượt kê khai<span class="require">*</span></label>
+                            <input type="text" style="text-align: right" id="giakkluot" name="giakkluot" class="form-control" data-mask="fdecimal">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label">Mức giá vé tháng kê khai liền kề<span class="require">*</span></label>
+                            <input type="text" style="text-align: right" id="giakklkthang" name="giakklkthang" class="form-control" data-mask="fdecimal">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label">Mức giá vé tháng kê khai<span class="require">*</span></label>
+                            <input type="text" style="text-align: right" id="giakkthang" name="giakkthang" class="form-control" data-mask="fdecimal">
+                        </div>
                         <input type="hidden" id="iddv" name="iddv"/>
-                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>
@@ -246,6 +249,9 @@
                     if (data.status == 'success') {
                         $('#noidung').replaceWith(data.message);
                         InputMask();
+                        jQuery(document).ready(function() {
+                            TableManaged.init();
+                        });
                     }
                 },
                 error: function(message){

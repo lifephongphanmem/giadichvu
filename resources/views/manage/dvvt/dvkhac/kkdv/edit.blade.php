@@ -101,35 +101,34 @@
 @stop
 
 @section('content-dv')
-    <div class="row">
+    <div class="row"  id="noidung">
         <div class="col-md-12">
             <table id="sample_3" class="table table-hover table-striped table-bordered table-advanced tablesorter">
                 <thead>
                 <tr>
                     <th style="text-align: center;width: 2%">STT</th>
-                        <th>Loại xe</th>
-                        <th>Mô tả dịch vụ</th>
-                        <th>Mức giá liền kề</th>
-                        <th>Mức giá kê khai</th>
-                        <th>Thao tác</th>
-                    </tr>
-                    </thead>
-                    <tbody id="noidung">
+                    <th style="text-align: center">Loại xe</th>
+                    <th style="text-align: center">Mô tả dịch vụ</th>
+                    <th style="text-align: center">Mức giá liền kề</th>
+                    <th style="text-align: center">Mức giá kê khai</th>
+                    <th style="text-align: center" width="20%">Thao tác</th>
+                </tr>
+                </thead>
+                    <tbody>
                     <?php $i=1?>
                     @foreach($modeldv as $dv)
                         <tr>
                             <td style="text-align: center;">{{$i++}}</td>
                             <td name="loaixe">{{$dv->loaixe}}</td>
-                            <td name="tendichvu">{{$dv->tendichvu}}</td>
-                            <td name="giakklk">{{number_format($dv->giakklk)}}</td>
-                            <td name="giakk">{{number_format($dv->giakk)}}</td>
+                            <td name="tendichvu" class="active">{{$dv->tendichvu}}</td>
+                            <td name="giakklk" style="text-align: right">{{number_format($dv->giakklk)}}</td>
+                            <td name="giakk" style="text-align: right">{{number_format($dv->giakk)}}</td>
                             <td>
                                 <button type="button" data-target="#modal-create"
                                         data-toggle="modal" class="btn btn-default btn-xs mbs"
                                         onclick="editItem(this,'{{$dv->id}}','{{$dv->masokk}}')"><i
                                             class="fa fa-edit"></i>&nbsp;Kê khai giá
                                 </button>
-                                </br>
                                 <button type="button" data-target="#modal-pagia-create"
                                         data-toggle="modal" class="btn btn-default btn-xs mbs"
                                         onclick="editpagia('{{$dv->madichvu}}','{{$dv->masokk}}')"><i class="fa fa-edit"></i>&nbsp;Phương án giá
@@ -187,17 +186,18 @@
                     <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
                     <h4 id="modal-header-primary-label" class="modal-title">Kê khai giá dịch vụ</h4>
                 </div>
-                <div class="modal-body">
-                    <div class="form-horizontal" id="ttgiaph">
-                        <label class="form-control-label">Mức giá kê khai liền kề<span class="require">*</span></label>
-                        {!!Form::text('giakklk', null, array('id' => 'giakklk','class' => 'form-control','required'=>'required','data-mask'=>'fdecimal'))!!}
-
-                        <label class="form-control-label">Mức giá kê khai<span class="require">*</span></label>
-                        {!!Form::text('giakk', null, array('id' => 'giakk','class' => 'form-control','required'=>'required','data-mask'=>'fdecimal'))!!}
-
-                        <input type="hidden" id="iddv" name="iddv"/>
-                        <input type="hidden" id="makk" name="makk"/>
+                <div class="modal-body" id="ttgiaph">
+                    <div class="form-group">
+                        <label class="form-control-label"><b>Mức giá kê khai liền kề</b><span class="require">*</span></label>
+                        <input type="text" style="text-align: right" id="giakklk" name="giakklk" class="form-control" data-mask="fdecimal">
                     </div>
+                    <div class="form-group">
+                        <label class="form-control-label"><b>Mức giá kê khai</b><span class="require">*</span></label>
+                        <input type="text" style="text-align: right" id="giakk" name="giakk" class="form-control" data-mask="fdecimal">
+                    </div>
+
+                    <input type="hidden" id="iddv" name="iddv"/>
+                    <input type="hidden" id="makk" name="makk"/>
                 </div>
                 <div class="modal-footer">
                     <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>
@@ -234,6 +234,9 @@
                     if (data.status == 'success') {
                         $('#noidung').replaceWith(data.message);
                         InputMask();
+                        jQuery(document).ready(function() {
+                            TableManaged.init();
+                        });
                     }
                 },
                 error: function(message){

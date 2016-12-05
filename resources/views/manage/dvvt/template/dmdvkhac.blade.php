@@ -1,10 +1,13 @@
-<label class="form-control-label">Điểm xuất phát</label>
+<div class="form-group">
+<label class="form-control-label"><b>Điểm xuất phát</b></label>
 {!!Form::text('diemdau', null, array('id' => 'diemdau','class' => 'form-control'))!!}
-
-<label class="form-control-label">Điểm cuối</label>
+</div>
+<div class="form-group">
+<label class="form-control-label"><b>Điểm cuối</b></label>
 {!!Form::text('diemcuoi', null, array('id' => 'diemcuoi','class' => 'form-control'))!!}
-
-<label class="form-control-label">Loại xe<span class="require">*</span></label>
+</div>
+<div class="form-group">
+<label class="form-control-label"><b>Loại xe</b><span class="require">*</span></label>
 {!! Form::select('loaixe',[
     'Xe tải 5 tạ' => 'Xe tải 5 tạ',
     'Xe tải 1,25 tấn' => 'Xe tải 1,25 tấn',
@@ -19,5 +22,5 @@
     'Chuyển phát hàng' => 'Chuyển phát hàng',
     'Loại xe khác' => 'Loại xe khác'
     ], null, ['id' => 'loaixe','class' => 'form-control','required'=>'required']) !!}
-
+</div>
 @include('manage.dvvt.template.dmdv')

@@ -37,7 +37,7 @@
                 <div class="portlet-title">
                     <div class="actions">
                         @if($per['create'])
-                            <button type="button" id="_btnThemDV" class="bbtn btn-default btn-sm" onclick="addDVXK()" ><i class="fa fa-plus"></i>&nbsp;Thêm mới</button>
+                            <button type="button" id="_btnThemDV" class="btn btn-default btn-sm" onclick="addDVXK()" ><i class="fa fa-plus"></i>&nbsp;Thêm mới</button>
                         @endif
                     </div>
                 </div>
@@ -47,25 +47,27 @@
                             <table id="sample_3" class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                 <thead>
                                     <tr>
-                                        <th style="width: 10%">Điểm xuất phát</th>
-                                        <th style="width: 10%">Điểm đến</th>
-                                        <th style="width: 20%">Mô tả dịch vụ</th>
-                                        <th style="width: 15%">Quy cách chất lượng</th>
-                                        <th style="width: 10%">Đơn vị tính lượt</th>
-                                        <th style="width: 10%">Đơn vị tính tháng</th>
-                                        <th style="width: 15%">Ghi chú</th>
-                                        <th style="width: 10%">Thao tác</th>
+                                        <th style="text-align: center" width="2%">STT</th>
+                                        <th style="text-align: center">Điểm xuất phát</th>
+                                        <th style="text-align: center">Điểm đến</th>
+                                        <th style="text-align: center">Mô tả dịch vụ</th>
+                                        <th style="text-align: center">Quy cách chất lượng</th>
+                                        <th style="text-align: center">Đơn vị tính lượt</th>
+                                        <th style="text-align: center">Đơn vị tính tháng</th>
+                                        <th style="text-align: center">Ghi chú</th>
+                                        <th style="text-align: center" width="20%">Thao tác</th>
                                     </tr>
                                 </thead>
                                 <tbody id="noidung">
-                                    @foreach($model as $dv)
+                                    @foreach($model as $key=>$dv)
                                         <tr>
+                                            <td style="text-align: center">{{$key+1}}</td>
                                             <td name="diemdau">{{$dv->diemdau}}</td>
                                             <td name="diemcuoi">{{$dv->diemcuoi}}</td>
-                                            <td name="tendichvu">{{$dv->tendichvu}}</td>
+                                            <td name="tendichvu" class="active">{{$dv->tendichvu}}</td>
                                             <td name="qccl">{{$dv->qccl}}</td>
-                                            <td name="dvtluot">{{$dv->dvtluot}}</td>
-                                            <td name="dvtthang">{{$dv->dvtthang}}</td>
+                                            <td name="dvtluot" style="text-align: center">{{$dv->dvtluot}}</td>
+                                            <td name="dvtthang" style="text-align: center"> {{$dv->dvtthang}}</td>
                                             <td name="ghichu">{{$dv->ghichu}}</td>
                                             <td>
                                                 @if($per['edit'])

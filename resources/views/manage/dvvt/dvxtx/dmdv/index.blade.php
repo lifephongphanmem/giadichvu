@@ -56,21 +56,23 @@
                         <table id="sample_3" class="table table-hover table-striped table-bordered table-advanced tablesorter">
                             <thead>
                                 <tr>
-                                    <th style="width: 10%">Loại xe</th>
-                                    <th style="width: 25%">Mô tả dịch vụ</th>
-                                    <th style="width: 20%">Quy cách chất lượng</th>
-                                    <th style="width: 10%">Đơn vị tính</th>
-                                    <th style="width: 25%">Ghi chú</th>
-                                    <th style="width: 10%">Thao tác</th>
+                                    <th style="text-align: center" width="2%">STT</th>
+                                    <th style="text-align: center">Loại xe</th>
+                                    <th style="text-align: center">Mô tả dịch vụ</th>
+                                    <th style="text-align: center">Quy cách chất lượng</th>
+                                    <th style="text-align: center">Đơn vị tính</th>
+                                    <th style="text-align: center">Ghi chú</th>
+                                    <th style="text-align: center;width: 15%">Thao tác</th>
                                 </tr>
                             </thead>
                             <tbody id="noidung">
-                            @foreach($model as $dv)
+                            @foreach($model as $key=>$dv)
                                 <tr>
+                                    <td style="text-align: center">{{$key+1}}</td>
                                     <td name="loaixe">{{$dv->loaixe}}</td>
-                                    <td name="tendichvu">{{$dv->tendichvu}}</td>
+                                    <td name="tendichvu" class="active">{{$dv->tendichvu}}</td>
                                     <td name="qccl">{{$dv->qccl}}</td>
-                                    <td name="dvt">{{$dv->dvt}}</td>
+                                    <td name="dvt" style="text-align: center">{{$dv->dvt}}</td>
                                     <td name="ghichu">{{$dv->ghichu}}</td>
                                     <td>
                                         @if($per['edit'])
