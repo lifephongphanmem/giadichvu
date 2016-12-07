@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class TtCsKdDvLt extends Model
 {
     protected $table = 'ttcskddvlt';
-    protected $filltable = [
+    protected $fillable = [
         'id',
         'maloaip',
         'loaip',

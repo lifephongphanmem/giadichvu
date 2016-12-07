@@ -17,57 +17,7 @@
             </div>
             <div class="modal-body">
                 <div class="form-horizontal" id="pag">
-                    <div class="form-group">
-                        <label for="sanluong" class="col-md-6 control-label">Sản lượng tính giá</label>
-                        <div class="col-md-6">
-                            <input type="text" id="sanluong" name="sanluong" class="form-control" data-mask="fdecimal">
-                        </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label for="cpnguyenlieutt" class="col-md-6 control-label">Chi phí nguyên liệu trực tiếp</label>
-                        <div class="col-md-6">
-                            <input type="text" id="cpnguyenlieutt" name="cpnguyenlieutt" class="form-control" data-mask="fdecimal">
-                        </div>
-
-                        <label for="cpcongnhantt" class="col-md-6 control-label">Chi phí nhân công trực tiếp</label>
-                        <div class="col-md-6">
-                            <input type="text" id="cpcongnhantt" name="cpcongnhantt" class="form-control" data-mask="fdecimal">
-                        </div>
-
-                        <label for="cpkhauhaott" class="col-md-6 control-label">Chi phí khấu hao máy móc trực tiếp</label>
-                        <div class="col-md-6">
-                            <input type="text" id="cpkhauhaott" name="cpkhauhaott" class="form-control" data-mask="fdecimal">
-                        </div>
-
-                        <label for="cpsanxuatdt" class="col-md-6 control-label">Chi phí sản xuất, kinh doanh theo đặc thù</label>
-                        <div class="col-md-6">
-                            <input type="text" id="cpsanxuatdt" name="cpsanxuatdt" class="form-control" data-mask="fdecimal">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="cpsanxuatc" class="col-md-6 control-label">Chi phí sản xuất chung</label>
-                        <div class="col-md-6">
-                            <input type="text" id="cpsanxuatc" name="cpsanxuatc" class="form-control" data-mask="fdecimal">
-                        </div>
-
-                        <label for="cptaichinh" class="col-md-6 control-label">Chi phí tài chính</label>
-                        <div class="col-md-6">
-                            <input type="text" id="cptaichinh" name="cptaichinh" class="form-control" data-mask="fdecimal">
-                        </div>
-
-                        <label for="cpbanhang" class="col-md-6 control-label">Chi phí bán hàng</label>
-                        <div class="col-md-6">
-                            <input type="text" id="cpbanhang" name="cpbanhang" class="form-control" data-mask="fdecimal">
-                        </div>
-
-                        <label for="cpquanly" class="col-md-6 control-label">Chi phí quản lý</label>
-                        <div class="col-md-6">
-                            <input type="text" id="cpquanly" name="cpquanly" class="form-control" data-mask="fdecimal">
-                        </div>
-                    </div>
-                    <input type="hidden" id="idpag" name="idpag"/>
                 </div>
             </div>
             <div class="modal-footer">

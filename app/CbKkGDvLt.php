@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class CbKkGDvLt extends Model
 {
     protected $table = 'cbkkgdvlt';
-    protected $filltable = [
+    protected $fillable = [
         'id',
         'mahs',
         'macskd',
@@ -24,5 +24,6 @@ class CbKkGDvLt extends Model
         'lydo',
         'trangthai',
         'idkk'
+
     ];
 }

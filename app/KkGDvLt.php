@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class KkGDvLt extends Model
 {
     protected $table = 'kkgdvlt';
-    protected $filltable = [
+    protected $fillable = [
         'id',
         'mahs',
         'macskd',

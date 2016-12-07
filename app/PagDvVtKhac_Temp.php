@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class PagDvVtKhac_Temp extends Model
 {
     protected $table = 'pagdvvtkhac_temp';
-    protected $fillabel = [
+    protected $fillable = [
         'id',
         'masothue',
         'masokk',
