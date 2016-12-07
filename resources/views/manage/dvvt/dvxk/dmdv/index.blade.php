@@ -89,22 +89,25 @@
     </div>
 
     <!--Modal thông tin dịch vụ vận tải xe khách-->
-    <div id="dvxk-modal-confirm" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header modal-header-primary">
-                        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                        <h4 id="modal-header-primary-label" class="modal-title">Thông tin dịch vụ vận tải xe khách</h4>
-                    </div>
-                    <div class="modal-body">
-                        @include('manage.dvvt.template.dmdvxk')
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>
-                        <button type="submit" id="submit" name="submit" value="submit" class="btn btn-primary" onclick="confirmDVXK()">Đồng ý</button>
-                    </div>
+
+    <div class="modal fade bs-modal-lg" id="dvxk-modal-confirm" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Thông tin dịch vụ vận tải xe khách</h4>
+                </div>
+                <div class="modal-body">
+                    @include('manage.dvvt.template.dmdvxk')
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>
+                    <button type="submit" id="submit" name="submit" value="submit" class="btn btn-primary" onclick="confirmDVXK()">Đồng ý</button>
                 </div>
             </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
     </div>
 
     <script>
