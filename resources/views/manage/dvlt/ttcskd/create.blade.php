@@ -162,6 +162,15 @@
                         </div>
                         <!--/span-->
                     </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Trang chủ<span class="require">*</span></label>
+                                <input type="text" id="link" name="link" class="form-control">
+                            </div>
+                        </div>
+
+                    </div>
 
                     {!! Form::close() !!}
                     <!--/row-->

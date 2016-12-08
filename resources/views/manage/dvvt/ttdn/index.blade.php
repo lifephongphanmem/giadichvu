@@ -121,6 +121,15 @@
                         </tr>
                         <tr>
                             <td style="width:15%">
+                                <b>Trang chủ</b>
+                            </td>
+                            <td style="width:35%">
+                                <span class="text-muted"><a href="http://{{$model->link}}" target="_blank">{{$model->link}}</a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:15%">
                                 <b>Cung cấp dịch vụ</b>
                             </td>
                             <td style="width:35%">

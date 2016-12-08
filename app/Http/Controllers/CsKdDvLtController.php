@@ -316,6 +316,7 @@ class CsKdDvLtController extends Controller
             $model->diachikd = $insert['diachikd'];
             $model->telkd = $insert['telkd'];
             $model->toado = getAddMap($insert['diachikd']);
+            $model->link = $insert['link'];
             if($model->save())
                 $this->StorePh($ma);
 
@@ -628,6 +629,7 @@ class CsKdDvLtController extends Controller
             $model->diachikd = $input['diachikd'];
             $model->telkd = $input['telkd'];
             $model->toado = getAddMap($input['diachikd']);
+            $model->link = $input['link'];
             $model->save();
 
             return redirect('ttcskd_dich_vu_luu_tru');

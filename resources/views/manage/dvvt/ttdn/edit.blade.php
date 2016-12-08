@@ -99,7 +99,13 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Trang chủ<span class="require">*</span></label>
+                                    {!!Form::text('link', null, array('id' => 'link','class' => 'form-control'))!!}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Cung cấp dịch vụ</label>
                                     <div class="input-group">

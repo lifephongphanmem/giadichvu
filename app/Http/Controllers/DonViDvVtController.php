@@ -177,6 +177,7 @@ class DonViDvVtController extends Controller
             $input['roles'] = isset($upd['roles']) ? $upd['roles'] : null;
             $model->setting = json_encode($upd['roles']);
             $model->toado = getAddMap($upd['diachi']);
+            $model->link = $upd['link'];
             $model->save();
             return redirect('dich_vu_van_tai/thong_tin_don_vi');
         } else

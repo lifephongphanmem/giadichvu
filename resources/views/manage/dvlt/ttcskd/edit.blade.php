@@ -168,6 +168,15 @@
                         </div>
                         <!--/span-->
                     </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Trang chủ<span class="require">*</span></label>
+                                {!!Form::text('link', null, array('id' => 'link','class' => 'form-control'))!!}
+                            </div>
+                        </div>
+
+                    </div>
                     {!! Form::close() !!}
                     <!--/row-->
                     <h4 class="form-section" style="color: #0000ff">Thông tin phòng nghỉ- quy cách- chất lượng</h4>
