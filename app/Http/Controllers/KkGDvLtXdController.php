@@ -45,7 +45,7 @@ class KkGDvLtXdController extends Controller
     }
     public function getTTCSKD($cskds,$array){
         foreach($cskds as $cskd){
-            if($cskd->masothue == $array->masothue){
+            if($cskd->masothue == $array->masothue && $cskd->macskd == $array->macskd){
                 $array->tencskd = $cskd->tencskd;
             }
         }
