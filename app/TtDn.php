@@ -16,8 +16,6 @@ class TtDn extends Model
         'fax',
         'email',
         'diadanh',
-        'chucdanh',
-        'nguoiky',
         'noidknopthue',
         'setting',
         'dvxk',

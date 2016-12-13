@@ -56,7 +56,7 @@ class DnDvLtController extends Controller
             $model->nguoiky = $insert['nguoiky'];
             $model->diadanh = $insert['diadanh'];
             $model->tailieu = $insert['tailieu'];
-            $model->giayphepkd = $insert['giayphepkd'];
+            $model->giayphepkd = $update['giayphepkd'];
             $model->trangthai = 'Kích hoạt';
             //$model->email = $insert['email'];
             if($model->save()){
@@ -194,8 +194,8 @@ class DnDvLtController extends Controller
                 ->delete();
             $model = new TtDn();
             $model->diachidn = $update['diachidn'];
-            $model->teldn = $update['teldn'];
-            $model->faxdn = $update['faxdn'];
+            $model->tel = $update['teldn'];
+            $model->fax = $update['faxdn'];
             $model->noidknopthue= $update['noidknopthue'];
             $model->chucdanhky = $update['chucdanhky'];
             $model->nguoiky = $update['nguoiky'];

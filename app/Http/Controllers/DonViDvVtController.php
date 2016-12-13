@@ -183,8 +183,8 @@ class DonViDvVtController extends Controller
             $model->masothue = session('admin')->mahuyen;
 
             $model->diachidn = $upd['diachi'];
-            $model->teldn = $upd['dienthoai'];
-            $model->faxdn = $upd['fax'];
+            $model->tel = $upd['dienthoai'];
+            $model->fax = $upd['fax'];
             $model->noidknopthue = $upd['dknopthue'];
             $model->giayphepkd = $upd['giayphepkd'];
             $model->chucdanhky = $upd['chucdanh'];
