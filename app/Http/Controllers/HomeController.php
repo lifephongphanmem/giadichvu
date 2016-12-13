@@ -103,7 +103,7 @@ class HomeController extends Controller
 
         $model->tendn = $input['tendn'];
         $model->masothue = $input['masothue'];
-        $model->diachidn = $input['diachidn'];
+        $model->diachi = $input['diachidn'];
         $model->tel = $input['teldn'];
         $model->fax = $input['faxdn'];
         $model->email = $input['emaildn'];
