@@ -193,7 +193,7 @@ class DnDvLtController extends Controller
             $check = TtDn::where('masothue',session('admin')->mahuyen)
                 ->delete();
             $model = new TtDn();
-            $model->diachidn = $update['diachidn'];
+            $model->diachi = $update['diachidn'];
             $model->tel = $update['teldn'];
             $model->fax = $update['faxdn'];
             $model->noidknopthue= $update['noidknopthue'];
