@@ -112,7 +112,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">Số hồ sơ đã nhận dịch vụ vận tải</label>
+                                        <label class="control-label">Thông tin liên lạc</label>
                                         <textarea id="ttlh" class="form-control" name="ttlh" cols="10" rows="5"
                                                   placeholder="Thông tin, số điện thoại liên lạc với các bộ phận">{{$model->ttlh}}</textarea>
                                     </div>
