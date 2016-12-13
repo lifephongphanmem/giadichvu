@@ -393,10 +393,10 @@ class UsersController extends Controller
             $modeldn = new DnDvLt();
             $modeldn->tendn = $model->tendn;
             $modeldn->masothue = $model->masothue;
-            $modeldn->teldn = $model->teldn;
-            $modeldn->faxdn = $model->faxdn;
+            $modeldn->teldn = $model->tel;
+            $modeldn->faxdn = $model->fax;
             $modeldn->email = $model->email;
-            $modeldn->diachidn = $model->diachidn;
+            $modeldn->diachidn = $model->diachi;
             $modeldn->trangthai = 'Kích hoạt';
             $modeldn->noidknopthue = $model->noidknopthue;
             $modeldn->tailieu = $model->tailieu;

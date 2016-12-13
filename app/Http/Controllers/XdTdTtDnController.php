@@ -66,9 +66,9 @@ class XdTdTtDnController extends Controller
             if($modeltttd->pl == 'DVLT') {
                 $model = DnDvLt::where('masothue', $modeltttd->masothue)
                     ->first();
-                $model->diachidn = $modeltttd->diachidn;
-                $model->teldn = $modeltttd->teldn;
-                $model->faxdn = $modeltttd->faxdn;
+                $model->diachidn = $modeltttd->diachi;
+                $model->teldn = $modeltttd->tel;
+                $model->faxdn = $modeltttd->fax;
                 $model->noidknopthue = $modeltttd->noidknopthue;
                 $model->chucdanhky = $modeltttd->chucdanhky;
                 $model->nguoiky = $modeltttd->nguoiky;
@@ -81,10 +81,10 @@ class XdTdTtDnController extends Controller
             }else{
                 $model = DonViDvVt::where('masothue', $modeltttd->masothue)
                     ->first();
-                $model->diachi =  $modeltttd->diachidn;
-                $model->dienthoai = $modeltttd->teldn;
+                $model->diachi =  $modeltttd->diachi;
+                $model->dienthoai = $modeltttd->tel;
                 $model->giayphepkd = $modeltttd->giayphepkd;
-                $model->fax= $modeltttd->faxdn;
+                $model->fax= $modeltttd->fax;
                 $model->email = '';
                 $model->diadanh = $modeltttd->diadanh;
                 $model->chucdanh = $modeltttd->chucdanhky;
