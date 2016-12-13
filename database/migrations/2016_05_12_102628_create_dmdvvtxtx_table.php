@@ -13,7 +13,7 @@ class CreateDmdvvtxtxTable extends Migration
     public function up()
     {
         Schema::create('dmdvvtxtx', function (Blueprint $table) {
-            $table->increments('id')->nullable();
+            $table->increments('id');
             $table->string('masothue')->nullable();
             $table->string('madichvu')->nullable();
             $table->string('loaixe')->nullable();
