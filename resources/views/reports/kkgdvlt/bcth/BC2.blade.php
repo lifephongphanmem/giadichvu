@@ -76,8 +76,24 @@
                     <th style="text-align: left">{{$ctkk->sohieu}}</th>
                     <th style="text-align: right">{{number_format($ctkk->mucgialk)}}</th>
                     <th style="text-align: right">{{number_format($ctkk->mucgiakk)}}</th>
-                    <th style="text-align: right"></th>
-                    <th style="text-align: right"></th>
+                    <th style="text-align: right">
+                        <?php
+                        if($ctkk->mucgialk>0)
+                            if($ctkk->mucgialk>$ctkk->mucgiakk)
+                                echo '-'.number_format($ctkk->mucgialk-$ctkk->mucgiakk);
+                            else
+                                echo number_format($ctkk->mucgiakk-$ctkk->mucgialk);
+                        ?>
+                    </th>
+                    <th style="text-align: right">
+                        <?php
+                        if($ctkk->mucgialk>0)
+                            if($ctkk->mucgialk>$ctkk->mucgiakk)
+                                echo '-'.round(($ctkk->mucgialk-$ctkk->mucgiakk)/$ctkk->mucgialk * 100, 2) . '%';
+                            else
+                                echo round(($ctkk->mucgiakk-$ctkk->mucgialk)/$ctkk->mucgiakk*100,2) . '%';
+                        ?>
+                    </th>
                 </tr>
             @endif
         @endforeach

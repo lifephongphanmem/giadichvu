@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DnDvLt;
+use App\TtDn;
 use App\Users;
 use Illuminate\Http\Request;
 
@@ -54,7 +55,8 @@ class DnDvLtController extends Controller
             $model->chucdanhky = $insert['chucdanhky'];
             $model->nguoiky = $insert['nguoiky'];
             $model->diadanh = $insert['diadanh'];
-            //$model->tailieu = $insert['tailieu'];
+            $model->tailieu = $insert['tailieu'];
+            $model->giayphepkd = $insert['giayphepkd'];
             $model->trangthai = 'Kích hoạt';
             //$model->email = $insert['email'];
             if($model->save()){
@@ -110,7 +112,8 @@ class DnDvLtController extends Controller
             $model->chucdanhky = $update['chucdanhky'];
             $model->nguoiky = $update['nguoiky'];
             $model->diadanh = $update['diadanh'];
-            //$model->tailieu = $update['tailieu'];
+            $model->tailieu = $update['tailieu'];
+            $model->giayphepkd = $update['giayphepkd'];
             //$model->email = $update['email'];
             $model->save();
 
@@ -159,9 +162,12 @@ class DnDvLtController extends Controller
         if (Session::has('admin')) {
             $model = DnDvLt::where('masothue',session('admin')->mahuyen)
                 ->first();
+            $modeltttd = TtDn::where('masothue',session('admin')->mahuyen)
+                ->first();
 
             return view('manage.dvlt.ttdn.index')
                 ->with('model',$model)
+                ->with('modeltttd',$modeltttd)
                 ->with('pageTitle','Danh sách doanh nghiệp cung cấp dịch vụ lưu trú');
 
         }else
@@ -184,7 +190,9 @@ class DnDvLtController extends Controller
     public function ttdnupdate(Request $request,$id){
         if (Session::has('admin')) {
             $update = $request->all();
-            $model = DnDvLt::findOrFail($id);
+            $check = TtDn::where('masothue',session('admin')->mahuyen)
+                ->delete();
+            $model = new TtDn();
             $model->diachidn = $update['diachidn'];
             $model->teldn = $update['teldn'];
             $model->faxdn = $update['faxdn'];
@@ -192,8 +200,17 @@ class DnDvLtController extends Controller
             $model->chucdanhky = $update['chucdanhky'];
             $model->nguoiky = $update['nguoiky'];
             $model->diadanh = $update['diadanh'];
-            //$model->tailieu = $update['tailieu'];
-            //$model->email = $update['email'];
+            $model->masothue = session('admin')->mahuyen;
+            $model->tendn = session('admin')->name;
+            $model->giayphepkd = $update['giayphepkd'];
+            $model->tailieu = $update['tailieu'];
+            $model->email = '';
+            $model->setting = '';
+            $model->dvxk = 0;
+            $model->dvxb = 0;
+            $model->dvxtx = 0;
+            $model->dvk = 0;
+            $model->pl = 'DVLT';
             $model->save();
 
             return redirect('ttdn_dich_vu_luu_tru');

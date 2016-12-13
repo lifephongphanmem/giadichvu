@@ -20,6 +20,7 @@ class DnDvLt extends Model
         'nguoiky',
         'diadanh',
         'trangthai',
-        'tailieu'
+        'tailieu',
+        'giayphepkd'
     ];
 }

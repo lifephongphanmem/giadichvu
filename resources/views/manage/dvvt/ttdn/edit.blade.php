@@ -79,8 +79,8 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="control-label">Địa danh<span class="require">*</span></label>
-                                    {!!Form::text('diadanh', null, array('id' => 'diadanh','class' => 'form-control'))!!}
+                                    <label class="control-label">Link chia sẻ giấy phép đăng ký kinh doanh<span class="require">*</span></label>
+                                    {!!Form::text('tailieu', null, array('id' => 'tailieu','class' => 'form-control'))!!}
                                 </div>
                             </div>
                         </div>
@@ -105,6 +105,15 @@
                                     {!!Form::text('link', null, array('id' => 'link','class' => 'form-control'))!!}
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Địa danh<span class="require">*</span></label>
+                                    {!!Form::text('diadanh', null, array('id' => 'diadanh','class' => 'form-control'))!!}
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Cung cấp dịch vụ</label>

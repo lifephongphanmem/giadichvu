@@ -19,7 +19,7 @@
 
 @section('content')
     <h3 class="page-title">
-        Thông tin doanh nghiệp cung cấp <small>dịch vụ vận tải</small>
+        Thông tin thay đổi doanh nghiệp cung cấp <small>dịch vụ vận tải</small>
     </h3>
     <div class="row">
         <div class="col-md-12">
@@ -29,10 +29,10 @@
                     <div class="caption">
                     </div>
                     <div class="actions">
-                        <a href="{{url('dich_vu_van_tai/thong_tin_don_vi/'.$model->id.'/edit')}}" class="btn btn-default btn-sm">
-                            <i class="fa fa-edit"></i> Thay đổi thông tin </a>
-                        <!--a href="" class="btn btn-default btn-sm">
-                            <i class="fa fa-print"></i> Print </a-->
+                        <a href="{{url('xetduyet_thaydoi_thongtindoanhnghiep/'.$modeltttd->id.'/duyet')}}" class="btn btn-default btn-sm">
+                            <i class="fa fa-check"></i> Đồng ý thay đổi thông tin </a>
+                        <a href="{{url('xetduyet_thaydoi_thongtindoanhnghiep/phanloai=dich_vu_van_tai')}}" class="btn btn-default btn-sm">
+                            <i class="fa fa-reply"></i> Quay lại</a>
                     </div>
                 </div>
                 <div class="portlet-body">

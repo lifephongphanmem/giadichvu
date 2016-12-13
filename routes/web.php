@@ -17,6 +17,9 @@ Route::post('register/dich_vu_van_tai','HomeController@regdvvtstore');
 Route::get('cau_hinh_he_thong','GeneralConfigsController@index');
 Route::get('cau_hinh_he_thong/{id}/edit','GeneralConfigsController@edit');
 Route::patch('cau_hinh_he_thong/{id}','GeneralConfigsController@update');
+Route::get('xetduyet_thaydoi_thongtindoanhnghiep/phanloai={pl}','XdTdTtDnController@index');
+Route::get('xetduyet_thaydoi_thongtindoanhnghiep/{id}/show','XdTdTtDnController@show');
+Route::get('xetduyet_thaydoi_thongtindoanhnghiep/{id}/duyet','XdTdTtDnController@duyet');
 
 //Users
 Route::get('login','UsersController@login');

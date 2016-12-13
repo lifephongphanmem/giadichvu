@@ -22,6 +22,7 @@ class CreateDndvltTable extends Migration
             $table->string('faxdn')->nullable();
             $table->string('email')->nullable();
             $table->string('noidknopthue')->nullable();
+            $table->string('giayphepkd')->nullable();
             $table->string('chucdanhky')->nullable();
             $table->string('nguoiky')->nullable();
             $table->string('diadanh')->nullable();

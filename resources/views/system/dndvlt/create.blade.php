@@ -78,6 +78,20 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label class="control-label">Giấy phép đăng ký kinh doanh<span class="require">*</span></label>
+                                        <input type="text" class="form-control" name="giayphepkd" id="giayphepkd">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Link chia sẻ giấy phép đăng ký kinh doanh<span class="require">*</span></label>
+                                        <input type="text" class="form-control" name="tailieu" id="tailieu">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
                                         <label class="control-label">Chức danh người ký</label>
                                         <input type="text" class="form-control required" name="chucdanhky" id="chucdanhky">
                                     </div>

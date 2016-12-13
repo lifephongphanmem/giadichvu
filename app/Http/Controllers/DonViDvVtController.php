@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DonViDvVt;
+use App\TtDn;
 use App\Users;
 use Illuminate\Http\Request;
 
@@ -140,9 +141,18 @@ class DonViDvVtController extends Controller
             $model = DonViDvVt::where('masothue',session('admin')->mahuyen)
                 ->first();
             $setting = $model->setting;
+
+            $modeltttd = TtDn::where('masothue',session('admin')->mahuyen)
+                ->first();
+            if(isset($modeltttd))
+                $settingtttd = $modeltttd->setting;
+            else
+                $settingtttd = '';
             return view('manage.dvvt.ttdn.index')
                 ->with('model',$model)
                 ->with('setting',json_decode($setting))
+                ->with('modeltttd',$modeltttd)
+                ->with('settingtttd',json_decode($settingtttd))
                 ->with('pageTitle','Thông tin doanh nghiệp cung cấp dịch vụ vận tải');
         }else
             return view('errors.notlogin');
@@ -165,19 +175,33 @@ class DonViDvVtController extends Controller
     {
         if (Session::has('admin')) {
             $upd = $request->all();
-            $model = DonViDvVt::findOrFail($id);
-            $model->diachi = $upd['diachi'];
-            $model->dienthoai = $upd['dienthoai'];
-            $model->fax = $upd['fax'];
-            $model->dknopthue = $upd['dknopthue'];
+            $check = TtDn::where('masothue',session('admin')->mahuyen)
+                ->delete();
+            //$model = DonViDvVt::findOrFail($id);
+            $model = new TtDn();
+            $model->tendn = session('admin')->name;
+            $model->masothue = session('admin')->mahuyen;
+
+            $model->diachidn = $upd['diachi'];
+            $model->teldn = $upd['dienthoai'];
+            $model->faxdn = $upd['fax'];
+            $model->noidknopthue = $upd['dknopthue'];
             $model->giayphepkd = $upd['giayphepkd'];
-            $model->chucdanh = $upd['chucdanh'];
+            $model->chucdanhky = $upd['chucdanh'];
             $model->nguoiky = $upd['nguoiky'];
             $model->diadanh = $upd['diadanh'];
+            $model->tailieu = $upd['tailieu'];
             $input['roles'] = isset($upd['roles']) ? $upd['roles'] : null;
             $model->setting = json_encode($upd['roles']);
             $model->toado = getAddMap($upd['diachi']);
             $model->link = $upd['link'];
+            $model->pl = 'DVVT';
+            $model->email = '';
+            $x = $input['roles'];
+            $model->dvxk = isset($x['dvvt']['vtxk']) ? 1 : 0;
+            $model->dvxb = isset($x['dvvt']['vtxb']) ? 1 : 0;
+            $model->dvxtx = isset($x['dvvt']['vtxtx']) ? 1 : 0;
+            $model->dvk = isset($x['dvvt']['vtch']) ? 1 : 0;
             $model->save();
             return redirect('dich_vu_van_tai/thong_tin_don_vi');
         } else

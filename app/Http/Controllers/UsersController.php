@@ -400,6 +400,7 @@ class UsersController extends Controller
             $modeldn->trangthai = 'Kích hoạt';
             $modeldn->noidknopthue = $model->noidknopthue;
             $modeldn->tailieu = $model->tailieu;
+            $modeldn->giayphepkd = $model->giayphepkd;
             if($modeldn->save()){
                 $modeluser = new Users();
                 $modeluser->name = $model->tendn;

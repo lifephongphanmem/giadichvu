@@ -26,12 +26,10 @@
                     <div class="caption">
                     </div>
                     <div class="actions">
-                        @if(can('dvlt','edit'))
-                            <a href="{{url('ttdn_dich_vu_luu_tru/'.$model->id.'/edit')}}" class="btn btn-default btn-sm">
-                                <i class="fa fa-edit"></i> Thay đổi thông tin </a>
-                        @endif
-                        <!--a href="" class="btn btn-default btn-sm">
-                            <i class="fa fa-print"></i> Print </a-->
+                        <a href="{{url('xetduyet_thaydoi_thongtindoanhnghiep/'.$modeltttd->id.'/duyet')}}" class="btn btn-default btn-sm">
+                            <i class="fa fa-check"></i> Đồng ý thay đổi thông tin </a>
+                        <a href="{{url('xetduyet_thaydoi_thongtindoanhnghiep/phanloai=dich_vu_luu_tru')}}" class="btn btn-default btn-sm">
+                            <i class="fa fa-reply"></i> Quay lại</a>
                     </div>
                 </div>
                 <div class="portlet-body">
@@ -144,7 +142,6 @@
                             </tbody>
                         </table>
                     </div>
-                        @if(isset($modeltttd))
                         <div class="col-md-6">
                             <table id="user" class="table table-bordered table-striped">
                                 <tbody>
@@ -253,7 +250,6 @@
                                 </tbody>
                             </table>
                         </div>
-                        @endif
                     </div>
                 </div>
             </div>

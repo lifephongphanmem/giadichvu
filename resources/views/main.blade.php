@@ -444,6 +444,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         <span class="arrow "></span>
                     </a>
                     <ul class="sub-menu">
+                        <li><a href="{{url('xetduyet_thaydoi_thongtindoanhnghiep/phanloai=dich_vu_luu_tru')}}">Xét duyệt thay đổi thông tin doanh nghiệp</a> </li>
                         <li><a href="{{url('dn_dichvu_luutru')}}">DN dịch vụ lưu trú</a> </li>
                         <li><a href="{{url('dn_dichvu_vantai')}}">DN dịch vụ vận tải</a></li>
                         <li><a href="{{url('users/pl=quan_ly')}}"> Quản lý tài khoản</a></li>
