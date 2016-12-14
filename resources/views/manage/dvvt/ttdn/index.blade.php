@@ -205,7 +205,7 @@
                                         <b>Địa chỉ trụ sở chính</b>
                                     </td>
                                     <td style="width:35%">
-                                <span class="text-muted">{{$modeltttd->diachidn}}
+                                <span class="text-muted">{{$modeltttd->diachi}}
                                 </span>
                                     </td>
                                 </tr>
@@ -214,7 +214,7 @@
                                         <b>Điện thoại trụ sở chính</b>
                                     </td>
                                     <td style="width:35%">
-                                <span class="text-muted">{{$modeltttd->teldn}}
+                                <span class="text-muted">{{$modeltttd->tel}}
                                 </span>
                                     </td>
                                 </tr>
@@ -223,7 +223,7 @@
                                         <b>Số fax trụ sở chính</b>
                                     </td>
                                     <td style="width:35%">
-                                <span class="text-muted">{{$modeltttd->faxdn}}
+                                <span class="text-muted">{{$modeltttd->fax}}
                                 </span>
                                     </td>
                                 </tr>
