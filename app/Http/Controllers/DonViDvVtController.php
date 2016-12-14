@@ -48,6 +48,7 @@ class DonViDvVtController extends Controller
             $model->chucdanh = $insert['chucdanh'];
             $model->nguoiky = $insert['nguoiky'];
             $model->diadanh = $insert['diadanh'];
+            $model->tailieu = $insert['tailieu'];
 
             $insert['roles'] = isset($insert['roles']) ? $insert['roles'] : null;
             $model->setting = json_encode($insert['roles']);
@@ -107,6 +108,7 @@ class DonViDvVtController extends Controller
             $model->chucdanh = $input['chucdanh'];
             $model->nguoiky = $input['nguoiky'];
             $model->diadanh = $input['diadanh'];
+            $model->tailieu = $input['tailieu'];
 
             $input['roles'] = isset($input['roles']) ? $input['roles'] : null;
             $model->setting = json_encode($input['roles']);

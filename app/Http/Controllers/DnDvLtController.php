@@ -56,7 +56,7 @@ class DnDvLtController extends Controller
             $model->nguoiky = $insert['nguoiky'];
             $model->diadanh = $insert['diadanh'];
             $model->tailieu = $insert['tailieu'];
-            $model->giayphepkd = $update['giayphepkd'];
+            $model->giayphepkd = $insert['giayphepkd'];
             $model->trangthai = 'Kích hoạt';
             //$model->email = $insert['email'];
             if($model->save()){

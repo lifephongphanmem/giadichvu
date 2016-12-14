@@ -49,16 +49,17 @@
                             </div>
 
                         </div>
-                        <div class="form-actions">
-                            <div class="form-group text-center">
-                                <button type="submit" onclick="validatePassword();" class="btn btn-primary">Cập nhật</button>
-                                <button type="button" class="btn default">Hủyu</button>
-                            </div>
-                        </div>
-                    {!! Form::close() !!}
+
+
                     <!-- END FORM-->
                 </div>
             </div>
+            <div style="text-align: center">
+                <button type="submit" onclick="validatePassword();" class="btn btn-primary">Cập nhật</button>
+                <button type="reset" class="btn btn-default"><i class="fa fa-refresh"></i>&nbsp;Nhập lại</button>
+                <a href="{{url('')}}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
+            </div>
+            {!! Form::close() !!}
             <!-- END VALIDATION STATES-->
         </div>
     </div>

@@ -26,7 +26,7 @@
 @section('content')
 
     <h3 class="page-title">
-        Quản lý <small>&nbsp;tài khoản</small> {{$setting}}
+        Quản lý phân quyền chức năng cho<small>&nbsp;tài khoản</small>
     </h3>
     <!-- END PAGE HEADER-->
     <div class="row">
@@ -440,27 +440,26 @@
 
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12" style="text-align: center">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Cập nhật</button>
-                            <?php
-                                if($model->level == 'T')
-                                    $pl = 'quan_ly';
-                                elseif($model->level == 'DVLT')
-                                    $pl= 'dich_vu_luu_tru';
-                                elseif($model->level == 'DVVT')
-                                    $pl= 'dich_vu_van_tai';
 
-                            ?>
-                        <a href="{{url('users/pl='.$pl)}}" class="btn green"><i class="fa fa-mail-reply"></i>&nbsp;Quay lại</a>
-                        </div>
-                    </div>
                 </div>
-
-                <!-- END EXAMPLE TABLE PORTLET-->
-                {!! Form::hidden('id', $model->id)!!}
-                {!! Form::close() !!}
             </div>
+            <div style="text-align: center">
+            <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Cập nhật</button>
+            <button type="reset" class="btn btn-default"><i class="fa fa-refresh"></i>&nbsp;Nhập lại</button>
+            <?php
+            if($model->level == 'T')
+                $pl = 'quan_ly';
+            elseif($model->level == 'DVLT')
+                $pl= 'dich_vu_luu_tru';
+            elseif($model->level == 'DVVT')
+                $pl= 'dich_vu_van_tai';
+            ?>
+            <a href="{{url('users/pl='.$pl)}}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
+        </div>
+        {!! Form::close() !!}
+        <!-- END EXAMPLE TABLE PORTLET-->
+        {!! Form::hidden('id', $model->id)!!}
+        {!! Form::close() !!}
         </div>
 
         <!-- BEGIN DASHBOARD STATS -->

@@ -414,7 +414,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     @endif
                 @endif
 
-                @if(session('admin')->level == 'T')
+                @if(session('admin')->level == 'T' && session('admin')->sadmin != 'sa' )
                 <li>
                     <a href="">
                         <i class="fa fa-file-o fa-fw"></i>

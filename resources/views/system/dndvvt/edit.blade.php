@@ -82,10 +82,11 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">Địa danh<span class="require">*</span></label>
-                                        {!!Form::text('diadanh', null, array('id' => 'diadanh','class' => 'form-control'))!!}
+                                        <label class="control-label">Link chia sẻ giấy phép đăng ký kinh doanh<span class="require">*</span></label>
+                                        <input type="text" class="form-control" name="tailieu" id="tailieu">
                                     </div>
                                 </div>
+
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
@@ -102,7 +103,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Cung cấp dịch vụ</label>
                                         <div class="input-group">
@@ -119,16 +120,22 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Địa danh<span class="require">*</span></label>
+                                        {!!Form::text('diadanh', null, array('id' => 'diadanh','class' => 'form-control'))!!}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     <!-- END FORM-->
                 </div>
             </div>
-            <div class="row" style="text-align: center">
-                <div class="col-md-12">
-                    <button type="submit" class="btn green" onclick="validateForm()"><i class="fa fa-check"></i> Cập nhật</button>
-                    <button type="reset" class="btn default">Hủy</button>
-                </div>
+
+            <div style="text-align: center">
+                <button type="submit" class="btn green" onclick="validateForm()"><i class="fa fa-check"></i> Cập nhật</button>
+                <button type="reset" class="btn btn-default"><i class="fa fa-refresh"></i>&nbsp;Nhập lại</button>
+                <a href="{{url('dn_dichvu_vantai')}}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
             </div>
             {!! Form::close() !!}
             <!-- END VALIDATION STATES-->

@@ -129,11 +129,11 @@
                     <!-- END FORM-->
                 </div>
             </div>
-            <div class="row" style="text-align: center">
-                <div class="cod-md-12">
-                    <button type="submit" class="btn green" onclick="validateForm()"><i class="fa fa-check"></i> Hoàn thành</button>
-                    <button type="reset" class="btn default"> Hủy</button>
-                </div>
+
+            <div style="text-align: center">
+                <button type="submit" class="btn green" onclick="validateForm()"><i class="fa fa-check"></i> Hoàn thành</button>
+                <button type="reset" class="btn btn-default"><i class="fa fa-refresh"></i>&nbsp;Nhập lại</button>
+                <a href="{{url('dn_dichvu_luutru')}}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
             </div>
             {!! Form::close() !!}
             <!-- END VALIDATION STATES-->

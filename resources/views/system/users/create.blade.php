@@ -95,9 +95,11 @@
                             </div>
 
                         </div>
-                        <div class="form-actions">
+
+                        <div style="text-align: center">
                             <button type="submit" class="btn green" onclick="validateForm()"><i class="fa fa-check"></i> Cập nhật</button>
-                            <button type="reset" class="btn default">Hủy</button>
+                            <button type="reset" class="btn btn-default"><i class="fa fa-refresh"></i>&nbsp;Nhập lại</button>
+                            <a href="{{url('users/pl='.$pl)}}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
                         </div>
                     {!! Form::close() !!}
                     <!-- END FORM-->
