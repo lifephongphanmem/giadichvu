@@ -422,16 +422,33 @@ License: You must have a valid license purchased only from themeforest(the above
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub-menu">
-                        <li><a href="{{url('reports/dich_vu_luu_tru')}}">Dịch vụ lưu trú</a></li>
-                        <li>
-                            <a href="">Dịch vụ vận tải<span class="arrow"></span> </a>
-                            <ul class="sub-menu">
-                                <li><a href="{{url('/bao_cao/dich_vu_xe_khach')}}">Vận tải xe khách</a></li>
-                                <li><a href="{{url('/bao_cao/dich_vu_xe_bus')}}">Vận tải xe buýt</a></li>
-                                <li><a href="{{url('/bao_cao/dich_vu_xe_taxi')}}">Vận tải xe taxi</a></li>
-                                <li><a href="{{url('/bao_cao/dich_vu_cho_hang')}}">Vận tải chở hàng</a></li>
-                            </ul>
-                        </li>
+                        @if(canGeneral('dvlt','dvlt'))
+                            @if(can('dvlt','index') || can('kkdvlt','index'))
+                                <li><a href="{{url('reports/dich_vu_luu_tru')}}">Dịch vụ lưu trú</a></li>
+                            @endif
+                        @endif
+                        @if(canGeneral('dvvt','vtxk') || canGeneral('dvvt','vtxb') || canGeneral('dvvt','vtxtx') || canGeneral('dvvt','vtch'))
+                            @if(can('kkdvvtxk','index') || can('kkdvvtxb','index')|| can('kkdvvtxtx','index')
+                                || can('kkdvvtch','index'))
+                                <li>
+                                    <a href="">Dịch vụ vận tải<span class="arrow"></span> </a>
+                                    <ul class="sub-menu">
+                                        @if(can('kkdvvtxk','index'))
+                                            <li><a href="{{url('/bao_cao/dich_vu_xe_khach')}}">Vận tải xe khách</a></li>
+                                        @endif
+                                        @if(can('kkdvvtxb','index'))
+                                            <li><a href="{{url('/bao_cao/dich_vu_xe_bus')}}">Vận tải xe buýt</a></li>
+                                        @endif
+                                        @if(can('kkdvvtxtx','index'))
+                                            <li><a href="{{url('/bao_cao/dich_vu_xe_taxi')}}">Vận tải xe taxi</a></li>
+                                        @endif
+                                        @if(can('kkdvvtch','index'))
+                                            <li><a href="{{url('/bao_cao/dich_vu_cho_hang')}}">Vận tải chở hàng</a></li>
+                                        @endif
+                                    </ul>
+                                </li>
+                            @endif
+                        @endif
 
                         </ul>
                     </li>

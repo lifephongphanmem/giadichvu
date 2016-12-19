@@ -37,6 +37,7 @@
                 <div class="portlet-title">
                     <div class="caption" style="color: #000000">
                         Tên tài khoản: {{$model->name .' ( Tài khoản truy cập: '. $model->username. ')' }}
+                        <input type="hidden" name="id" id="id" value="{{$model->id}}">
                     </div>
                     <div class="actions">
                     </div>

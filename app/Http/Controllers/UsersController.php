@@ -295,15 +295,17 @@ class UsersController extends Controller
     {
         if (Session::has('admin')) {
             $update = $request->all();
-            $id = $request['id'];
+
+            $id = $update['id'];
 
             $model = Users::findOrFail($id);
             //dd($model);
             if (isset($model)) {
-
                 $update['roles'] = isset($update['roles']) ? $update['roles'] : null;
+
                 $model->permission = json_encode($update['roles']);
                 $model->save();
+
                 if ($model->level == 'T')
                     $pl = 'quan_ly';
                 elseif ($model->level == 'DVLT')
