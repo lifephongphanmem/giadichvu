@@ -28,7 +28,7 @@
 
 @section('content')
     <h3 class="page-title">
-        Thông tin danh mục dịch vụ<small>&nbsp;chở hàng</small>
+        Thông tin danh mục dịch vụ<small>&nbsp;khác</small>
     </h3>
     <div class="row">
         <div class="col-md-12">

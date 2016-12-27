@@ -57,7 +57,7 @@
 
 @section('content')
     <h3 class="page-title">
-        Thông tin kê khai giá dịch vụ vận tải<small> chở hàng</small>
+        Thông tin kê khai giá dịch vụ vận tải<small> khác</small>
     </h3>
     @include('manage.dvvt.template.indexkkdvth')
     @include('manage.dvvt.template.modal-chuyen')

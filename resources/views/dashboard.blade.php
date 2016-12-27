@@ -148,7 +148,7 @@
                                     <div class="details">
                                         <div class="number"></div>
                                         <div class="desc">
-                                            Giá vận tải chở hàng<?php
+                                            Giá vận tải khác<?php
                                             $modelk = \App\KkDvVtKhac::where('trangthai','Chờ nhận')
                                                     ->whereMonth('ngaychuyen', date('m'))
                                                     ->whereYear('ngaychuyen', date('Y'))

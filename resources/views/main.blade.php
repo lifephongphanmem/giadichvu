@@ -391,7 +391,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     @if(can('dvvtch','index') || can('kkdvvtch','index'))
                                         @if(canshow('dvvt','vtch'))
                                             <li>
-                                                <a href="">Dịch vụ vận tải chở hàng<span class="arrow"></span> </a>
+                                                <a href="">Dịch vụ vận tải khác<span class="arrow"></span> </a>
                                                 <ul class="sub-menu">
                                                     @if(can('dvvtch','index'))
                                                         <li><a href="{{url('/dich_vu_van_tai/dich_vu_cho_hang/danh_muc')}}">Danh mục dịch vụ</a></li>
@@ -443,7 +443,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                             <li><a href="{{url('/bao_cao/dich_vu_xe_taxi')}}">Vận tải xe taxi</a></li>
                                         @endif
                                         @if(can('kkdvvtch','index'))
-                                            <li><a href="{{url('/bao_cao/dich_vu_cho_hang')}}">Vận tải chở hàng</a></li>
+                                            <li><a href="{{url('/bao_cao/dich_vu_cho_hang')}}">Vận tải khác</a></li>
                                         @endif
                                     </ul>
                                 </li>

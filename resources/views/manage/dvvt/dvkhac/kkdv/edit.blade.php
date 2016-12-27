@@ -144,7 +144,7 @@
 
 @section('content')
     <h3 class="page-title">
-        Kê khai giá dịch vụ vận tải chở hàng<small> chỉnh sửa</small>
+        Kê khai giá dịch vụ vận tải khác<small> chỉnh sửa</small>
     </h3>
     <div class="row">
         {!! Form::open(['url'=>$url.'ke_khai/update/'.$model->id, 'id' => 'create-kkdvxtx','class'=>'horizontal-form form-validate','method'=>'patch']) !!}

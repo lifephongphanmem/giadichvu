@@ -28,7 +28,7 @@
 @stop
 
 @section('content')
-    <h3>Kê khai giá dịch vụ vận tải<small> chở hàng</small></h3>
+    <h3>Kê khai giá dịch vụ vận tải<small> khác</small></h3>
     <div class="row">
         <div class="col-md-12">
             <div class="portlet box">
