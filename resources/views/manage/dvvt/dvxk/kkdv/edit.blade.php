@@ -108,7 +108,7 @@
                 <thead>
                 <tr>
                     <th style="text-align: center" width="2%">STT</th>
-                    <th style="text-align: center"Loại xe</th>
+                    <th style="text-align: center">Loại xe</th>
                     <th style="text-align: center">Mô tả dịch vụ</th>
                     <th style="text-align: center">Mức giá liền kề</th>
                     <th style="text-align: center">Mức giá kê khai</th>

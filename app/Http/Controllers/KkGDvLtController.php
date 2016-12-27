@@ -156,7 +156,7 @@ class KkGDvLtController extends Controller
             $model->socv = $input['socv'];
             $model->ngayhieuluc = $input['ngayhieuluc'];
             $model->socvlk = $input['socvlk'];
-            $model->ngaycvlk = $input['ngaycvlk'];
+            $model->ngaycvlk = $input['ngaycvlk']==''?NULL:$input['ngaycvlk'];
             $model->ghichu = $input['ghichu'];
             $model->save();
             return redirect('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh='.$macskd.'&nam='.date('Y'));
