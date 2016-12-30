@@ -57,7 +57,7 @@
 
 @section('content')
     <h3 class="page-title">
-        Thông tin kê khai giá dịch vụ vận tải<small> xe buýt</small>
+        Thông tin giá vận tải hành khách bằng xe buýt<small> theo tuyến cố định</small>
     </h3>
     @include('manage.dvvt.template.indexkkdvth')
     @include('manage.dvvt.template.modal-chuyen')

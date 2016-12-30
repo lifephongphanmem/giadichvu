@@ -31,7 +31,7 @@ class DmDvVtXbController extends Controller
                 ->with('url','/dich_vu_van_tai/dich_vu_xe_bus/')
                 ->with('per',$per)
                 ->with('model',$model)
-                ->with('pageTitle','Danh mục dịch vụ vận tải');
+                ->with('pageTitle','Danh mục vận tải hành khách bằng xe buýt theo tuyến cố định');
 
         }else
             return view('errors.notlogin');

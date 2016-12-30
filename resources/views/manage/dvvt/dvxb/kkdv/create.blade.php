@@ -76,7 +76,7 @@
 
 @section('content')
     <h3 class="page-title">
-        Kê khai giá dịch vụ vận tải xe bus<small> thêm mới</small>
+        Kê khai giá vận tải hành khách bằng xe buýttheo tuyến cố định<small> thêm mới</small>
     </h3>
     <div class="row">
         {!! Form::open(['url'=>$url.'ke_khai/store', 'id' => 'create-kkdvxb','class'=>'horizontal-form form-validate','method'=>'patch']) !!}

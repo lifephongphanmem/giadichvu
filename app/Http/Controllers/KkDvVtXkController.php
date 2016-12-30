@@ -47,7 +47,7 @@ class KkDvVtXkController extends Controller
                 ->with('per',$per)
                 ->with('nam',$nam)
                 ->with('url','/dich_vu_van_tai/dich_vu_xe_khach/')
-                ->with('pageTitle','Kê khai giá dịch vụ vận tải');
+                ->with('pageTitle','Kê khai giá vận tải hành khách bằng xe ô tô theo tuyến cố định');
         }else
             return view('errors.notlogin');
     }
@@ -95,7 +95,7 @@ class KkDvVtXkController extends Controller
                 ->with('pl',$pl)
                 ->with('per',$per)
                 ->with('url','/dich_vu_van_tai/dich_vu_xe_khach/')
-                ->with('pageTitle','Xét duyệt kê khai giá dịch vụ vận tải');
+                ->with('pageTitle','Xét duyệt kê khai giá vận tải hành khách bằng xe ô tô theo tuyến cố định');
         }else
             return view('errors.notlogin');
     }
@@ -151,7 +151,7 @@ class KkDvVtXkController extends Controller
 
             $model=KkDvVtXkCtDf::where('masothue', session('admin')->mahuyen)->get();
             return view('manage.dvvt.dvxk.kkdv.create')
-                ->with('pageTitle','Kê khai mới giá dịch vụ vận tải')
+                ->with('pageTitle','Kê khai mới giá vận tải hành khách bằng xe ô tô theo tuyến cố định')
                 ->with('socvlk',$solk)
                 ->with('ngaycvlk',$ngaylk)
                 ->with('url','/dich_vu_van_tai/dich_vu_xe_khach/')
@@ -216,7 +216,7 @@ class KkDvVtXkController extends Controller
                 ->with('model',$model)
                 ->with('modeldv',$modeldv)
                 ->with('url','/dich_vu_van_tai/dich_vu_xe_khach/')
-                ->with('pageTitle','Chỉnh sửa kê khai giá dịch vụ vận tải');
+                ->with('pageTitle','Chỉnh sửa kê khai giá vận tải hành khách bằng xe ô tô theo tuyến cố định');
         }else
             return view('errors.notlogin');
     }

@@ -73,7 +73,7 @@
 
 @section('content')
     <h3 class="page-title">
-        Kê khai giá dịch vụ vận tải xe khách<small> thêm mới</small>
+        Kê khai giá vận tải hành khách bằng xe ôtô theo tuyến cố định<small> thêm mới</small>
     </h3>
     <div class="row">
         {!! Form::open(['url'=>$url.'ke_khai/store', 'id' => 'create-kkdvxk','class'=>'horizontal-form form-validate','method'=>'patch']) !!}

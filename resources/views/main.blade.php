@@ -331,7 +331,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     @if(can('dvvtxk','index') || can('kkdvvtxk','index'))
                                         @if(canshow('dvvt','vtxk'))
                                             <li>
-                                                <a href="">Dịch vụ vận tải xe khách<span class="arrow"></span> </a>
+                                                <a href="">Vận tải hành khách bằng xe ôtô theo tuyến cố định<span class="arrow"></span> </a>
                                                 <ul class="sub-menu">
                                                     @if(can('dvvtxk','index'))
                                                     <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_khach/danh_muc')}}">Danh mục dịch vụ</a></li>
@@ -351,7 +351,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     @if( can('dvvtxb','index') || can('kkdvvtxb','index'))
                                         @if(canshow('dvvt','vtxb'))
                                             <li>
-                                                <a href="">Dịch vụ vận tải xe buýt<span class="arrow"></span> </a>
+                                                <a href="">Vận tải hành khách bằng xe buýt theo tuyến cố định<span class="arrow"></span> </a>
                                                 <ul class="sub-menu">
                                                     @if(can('dvvtxb','index'))
                                                         <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_bus/danh_muc')}}">Danh mục dịch vụ</a></li>
@@ -371,7 +371,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     @if(can('dvvtxtx','index') || can('kkdvvtxtx','index'))
                                         @if(canshow('dvvt','vtxtx'))
                                             <li>
-                                                <a href="">Dịch vụ vận tải xe taxi<span class="arrow"></span> </a>
+                                                <a href="">Vận tải hành khách bằng xe taxi<span class="arrow"></span> </a>
                                                 <ul class="sub-menu">
                                                     @if(can('dvvtxtx','index'))
                                                     <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_taxi/danh_muc')}}">Danh mục dịch vụ</a></li>

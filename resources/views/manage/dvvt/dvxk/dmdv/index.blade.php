@@ -28,7 +28,7 @@
 
 @section('content')
     <h3 class="page-title">
-        Thông tin danh mục dịch vụ<small>&nbsp;xe khách</small>
+        Vận tải hành khách bằng xe ôtô<small> theo tuyến cố định</small>
     </h3>
 
     <div class="row">

@@ -30,7 +30,7 @@ class DmDvVtXtxController extends Controller
                 ->with('url','/dich_vu_van_tai/dich_vu_xe_taxi/')
                 ->with('model',$model)
                 ->with('per',$per)
-                ->with('pageTitle','Danh mục dịch vụ vận tải');
+                ->with('pageTitle','Danh mục vận tải hành khách bằng xe taxi');
 
         }else
             return view('errors.notlogin');

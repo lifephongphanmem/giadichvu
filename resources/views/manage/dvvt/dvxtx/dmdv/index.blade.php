@@ -37,7 +37,7 @@
 
 @section('content')
     <h3 class="page-title">
-        Thông tin danh mục dịch vụ<small>&nbsp;xe taxi</small>
+        Vận tải hành khách bằng<small>&nbsp;xe taxi</small>
     </h3>
 
     <div class="row">

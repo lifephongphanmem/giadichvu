@@ -35,7 +35,7 @@
 
 @section('content')
     <h3 class="page-title">
-        Tìm kiếm thông tin kê khai giá dịch vụ vận tải<small> xe khách</small>
+        Tìm kiếm thông tin vận tải hành khách bằng xe ôtô<small> theo tuyến cố định</small>
     </h3>
     @include('manage.dvvt.template.search')
 @stop
