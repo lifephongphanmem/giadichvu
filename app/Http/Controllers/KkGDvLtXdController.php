@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\CbKkGDvLt;
 use App\CsKdDvLt;
+use App\DmDvQl;
 use App\GeneralConfigs;
 use App\KkGDvLt;
 use Illuminate\Http\Request;
@@ -18,12 +19,21 @@ class KkGDvLtXdController extends Controller
         if (Session::has('admin')) {
             if($pl=='cho_nhan') {
                 $trangthai = 'Chờ nhận';
-                $model = KkGDvLt::where('trangthai', $trangthai)
-                    ->whereMonth('ngaychuyen', $thang)
-                    ->whereYear('ngaychuyen', $nam)
-                    ->get();
+                if(session('admin')->level == 'T'  & session('admin')->sadmin == 'ssa') {
+                    $model = KkGDvLt::where('trangthai', $trangthai)
+                        ->whereMonth('ngaychuyen', $thang)
+                        ->whereYear('ngaychuyen', $nam)
+                        ->get();
+                }else{
+                    $model = KkGDvLt::where('trangthai', $trangthai)
+                        ->where('cqcq',session('admin')->cqcq)
+                        ->whereMonth('ngaychuyen', $thang)
+                        ->whereYear('ngaychuyen', $nam)
+                        ->get();
+                }
             }
             elseif($pl == 'cong_bo') {
+
                 $trangthai = 'Công bố';
                 $model = CbKkGDvLt::whereMonth('ngaynhan',$thang)
                     ->whereYear('ngaynhan', $nam)
@@ -34,6 +44,7 @@ class KkGDvLtXdController extends Controller
             foreach($model as $ttkk){
                 $this->getTTCSKD($modelcskd,$ttkk);
             }
+
             return view('manage.dvlt.kkgia.xetduyet.index')
                 ->with('model',$model)
                 ->with('nam',$nam)
@@ -83,14 +94,18 @@ class KkGDvLtXdController extends Controller
 
         if(isset($inputs['id'])){
 
-            $model = GeneralConfigs::first();
-            $stt = $model->sodvlt + 1;
+            $modelhs = KkGDvLt::where('id',$inputs['id'])
+                ->first();
+            $model = DmDvQl::where('maqhns',$modelhs->cqcq)
+                ->first();
+
+            $stt = $model->sohsnhan + 1;
             $ngay = Carbon::now()->toDateString();
 
             $result['message'] = '<div class="modal-body" id="ttnhanhs">';
             $result['message'] .= '<div class="form-group">';
             $result['message'] .= '<label><b>Số hồ sơ nhận</b></label>';
-            $result['message'] .= '<input type="text" style="text-align: right" id="sohsnhan" name="sohsnhan" class="form-control" data-mask="fdecimal" value="'.$stt.'" autofocus>';
+            $result['message'] .= '<input type="text" style="text-align: center" id="sohsnhan" name="sohsnhan" class="form-control" data-mask="fdecimal" value="'.$stt.'" autofocus>';
             $result['message'] .= '</div>';
             $result['message'] .= '<div class="form-group">';
             $result['message'] .= '<label><b>Ngày nhận hồ sơ</b></label>';
@@ -99,9 +114,6 @@ class KkGDvLtXdController extends Controller
             $result['message'] .= '</div>';
             $result['message'] .= '<input type="hidden" id="idnhanhs" name="idnhanhs" value="'.$inputs['id'].'">';
             $result['status'] = 'success';
-
-
-
         }
         die(json_encode($result));
     }
@@ -117,9 +129,13 @@ class KkGDvLtXdController extends Controller
 
             if($model->save()){
                 $this->congbo($id);
-                $general = GeneralConfigs::first();
-                $general->sodvlt = $input['sohsnhan'];
-                $general->save();
+                $nhanhs = DmDvQl::where('maqhns',$model->cqcq)
+                    ->first();
+                $nhanhs->sohsnhan = $input['sohsnhan'];
+                $nhanhs->save();
+                //$general = GeneralConfigs::first();
+                //$general->sodvlt = $input['sohsnhan'];
+                //$general->save();
             }
             return redirect('xet_duyet_ke_khai_dich_vu_luu_tru/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan');
         }else

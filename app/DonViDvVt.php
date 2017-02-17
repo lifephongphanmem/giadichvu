@@ -29,6 +29,7 @@ class DonViDvVt extends Model
         'ghichu',
         'trangthai',
         'tailieu',
-        'link'
+        'link',
+        'cqcq'
     ];
 }

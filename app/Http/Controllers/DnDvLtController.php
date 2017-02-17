@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DmDvQl;
 use App\DnDvLt;
 use App\TtDn;
 use App\Users;
@@ -160,15 +161,28 @@ class DnDvLtController extends Controller
 
     public function ttdn(){
         if (Session::has('admin')) {
-            $model = DnDvLt::where('masothue',session('admin')->mahuyen)
-                ->first();
-            $modeltttd = TtDn::where('masothue',session('admin')->mahuyen)
-                ->first();
+            if(session('admin')->level == 'T' || session('admin')->level == 'H'){
+                if(session('admin')->sadmin == 'ssa')
+                    $model = DnDvLt::all();
+                else
+                    $model = DnDvLt::where('cqcq',session('admin')->cqcq)
+                        ->get();
+                return view('manage.dvlt.ttdn.ql.index')
+                    ->with('model',$model)
+                    ->with('pageTitle','Thông tin doanh nghiệp cung cấp dịch vụ lưu trú');
 
-            return view('manage.dvlt.ttdn.index')
-                ->with('model',$model)
-                ->with('modeltttd',$modeltttd)
-                ->with('pageTitle','Danh sách doanh nghiệp cung cấp dịch vụ lưu trú');
+
+            }else{
+                $model = DnDvLt::where('masothue',session('admin')->mahuyen)
+                    ->first();
+                $modeltttd = TtDn::where('masothue',session('admin')->mahuyen)
+                    ->first();
+
+                return view('manage.dvlt.ttdn.index')
+                    ->with('model',$model)
+                    ->with('modeltttd',$modeltttd)
+                    ->with('pageTitle','Danh sách doanh nghiệp cung cấp dịch vụ lưu trú');
+            }
 
         }else
             return view('errors.notlogin');
@@ -179,8 +193,12 @@ class DnDvLtController extends Controller
 
             $model = DnDvLt::findOrFail($id);
 
+            $ttcqcq = DmDvQl::where('plql','TC')
+                ->get();
+
             return view('manage.dvlt.ttdn.edit')
                 ->with('model',$model)
+                ->with('ttcqcq',$ttcqcq)
                 ->with('pageTitle','Thông tin doanh nghiệp cung cấp dịch vụ lưu trú chỉnh sửa');
 
         }else
@@ -192,26 +210,42 @@ class DnDvLtController extends Controller
             $update = $request->all();
             $check = TtDn::where('masothue',session('admin')->mahuyen)
                 ->delete();
-            $model = new TtDn();
-            $model->diachi = $update['diachidn'];
-            $model->tel = $update['teldn'];
-            $model->fax = $update['faxdn'];
-            $model->noidknopthue= $update['noidknopthue'];
-            $model->chucdanhky = $update['chucdanhky'];
-            $model->nguoiky = $update['nguoiky'];
-            $model->diadanh = $update['diadanh'];
-            $model->masothue = session('admin')->mahuyen;
-            $model->tendn = session('admin')->name;
-            $model->giayphepkd = $update['giayphepkd'];
-            $model->tailieu = $update['tailieu'];
-            $model->email = '';
-            $model->setting = '';
-            $model->dvxk = 0;
-            $model->dvxb = 0;
-            $model->dvxtx = 0;
-            $model->dvk = 0;
-            $model->pl = 'DVLT';
-            $model->save();
+            if(session('admin')->level == 'T' || session('admin')->level == 'H'){
+                $model = DnDvLt::findOrFail($id);
+                $model->diachidn = $update['diachidn'];
+                $model->teldn = $update['teldn'];
+                $model->faxdn = $update['diachidn'];
+                $model->noidknopthue = $update['noidknopthue'];
+                $model->giayphepkd = $update['giayphepkd'];
+                $model->chucdanhky = $update['chucdanhky'];
+                $model->nguoiky = $update['nguoiky'];
+                $model->diadanh = $update['diadanh'];
+                $model->cqcq = $update['cqcq'];
+                $model->save();
+
+                return redirect('ttdn_dich_vu_luu_tru');
+            }else {
+                $model = new TtDn();
+                $model->diachi = $update['diachidn'];
+                $model->tel = $update['teldn'];
+                $model->fax = $update['faxdn'];
+                $model->noidknopthue = $update['noidknopthue'];
+                $model->chucdanhky = $update['chucdanhky'];
+                $model->nguoiky = $update['nguoiky'];
+                $model->diadanh = $update['diadanh'];
+                $model->masothue = session('admin')->mahuyen;
+                $model->tendn = session('admin')->name;
+                $model->giayphepkd = $update['giayphepkd'];
+                $model->tailieu = $update['tailieu'];
+                $model->email = '';
+                $model->setting = '';
+                $model->dvxk = 0;
+                $model->dvxb = 0;
+                $model->dvxtx = 0;
+                $model->dvk = 0;
+                $model->pl = 'DVLT';
+                $model->save();
+            }
 
             return redirect('ttdn_dich_vu_luu_tru');
         }else

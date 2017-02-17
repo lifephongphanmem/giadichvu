@@ -38,6 +38,8 @@ class CreateRegisterTable extends Migration
             $table->string('username')->nullable();
             $table->string('password')->nullable();
             $table->string('pl')->nullable();
+            $table->text('lydo');
+            $table->string('cqcq')->nullable();
             $table->timestamps();
         });
     }

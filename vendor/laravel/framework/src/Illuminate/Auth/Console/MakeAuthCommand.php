@@ -29,7 +29,7 @@ class MakeAuthCommand extends Command
      * @var array
      */
     protected $views = [
-        'auth/login.stub' => 'auth/login.blade.php',
+        'auth/login.stub' => 'auth/index.blade.php',
         'auth/register.stub' => 'auth/register.blade.php',
         'auth/passwords/email.stub' => 'auth/passwords/email.blade.php',
         'auth/passwords/reset.stub' => 'auth/passwords/reset.blade.php',

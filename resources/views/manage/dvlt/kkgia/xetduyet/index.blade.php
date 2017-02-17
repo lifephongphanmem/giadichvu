@@ -218,14 +218,14 @@
             <div class="form-group">
                 <select name="namhs" id="namhs" class="form-control">
                     @if ($nam_start = intval(date('Y')) - 5 ) @endif
-                    @if ($nam_stop = intval(date('Y')) ) @endif
+                    @if ($nam_stop = intval(date('Y')) + 1 ) @endif
                     @for($i = $nam_start; $i <= $nam_stop; $i++)
                         <option value="{{$i}}" {{$i == $nam ? 'selected' : ''}}>Năm {{$i}}</option>
                     @endfor
                 </select>
             </div>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-4">
             <div class="form-group">
                 <select name="pl" id="pl" class="form-control">
                     <option value="cho_nhan" {{$pl == 'cho_nhan' ? 'selected' : ''}}>Hồ sơ kê khai giá dịch vụ đang chờ nhận</option>
@@ -233,6 +233,7 @@
                 </select>
             </div>
         </div>
+
     </div>
 
 

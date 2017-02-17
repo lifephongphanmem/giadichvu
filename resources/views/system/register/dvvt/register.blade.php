@@ -139,7 +139,17 @@ License: You must have a valid license purchased only from themeforest(the above
             <!--/span-->
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <select class="form-control" name="cqcq" id="cqcq" required>
+                        <option value="">--Chọn đơn vị quản lý--</option>
+                        @foreach($model as $tt)
+                            <option value="{{$tt->maqhns}}">{{$tt->tendv}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
                 <div class="form-group">
                     <div class="input-icon">
                         <i class="fa fa-file-pdf-o"></i>
@@ -325,6 +335,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 giayphepkd:"required",
                 tailieu:"required",
                 username:"required",
+                cqcq:"required",
                 rpassword:{
                     equalTo: "#password"
                 }
@@ -339,6 +350,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 tailieu: "Bạn cần chia sẻ giấy chứng nhận đăng ký kinh doanh!!!",
                 username:"Nhập username đăng ký!!!",
                 password :" Nhập mật khẩu!!!",
+                cqcq:"Nhập thông tin cơ quan quản lý",
                 rpassword :" Nhập lại mật khẩu không chính xác!!!!"
             }
         });

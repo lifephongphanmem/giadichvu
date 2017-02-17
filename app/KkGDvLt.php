@@ -22,6 +22,8 @@ class KkGDvLt extends Model
         'ghichu',
         'ngaychuyen',
         'lydo',
-        'trangthai'
+        'trangthai',
+        'cqcq',
+        'dvt'
     ];
 }

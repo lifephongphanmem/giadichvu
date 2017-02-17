@@ -30,6 +30,8 @@ class CreateKkgdvltTable extends Migration
             $table->dateTime('ngaychuyen')->nullable();
             $table->text('lydo')->nullable();
             $table->string('trangthai')->nullable();
+            $table->string('cqcq')->nullable();
+            $table->string('dvt')->nullable();
             $table->timestamps();
         });
     }

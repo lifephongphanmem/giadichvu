@@ -10,7 +10,8 @@ class GeneralConfigs extends Model
     protected $fillable = [
         'id',
         'maqhns',
-        'tendonvi',
+        'tendonvilt',
+        'tendonvivt',
         'diachi',
         'teldv',
         'thutruong',
@@ -19,7 +20,8 @@ class GeneralConfigs extends Model
         'namhethong',
         'sodvlt',
         'sodvvt',
-        'ttlh',
+        'ttlhlt',
+        'ttlhlt',
         'setting'
 
     ];

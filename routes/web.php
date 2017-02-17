@@ -11,6 +11,9 @@ Route::post('register/dich_vu_luu_tru','HomeController@regdvltstore');
 Route::get('register/dich_vu_van_tai','HomeController@regdvvt');
 
 Route::post('register/dich_vu_van_tai','HomeController@regdvvtstore');
+Route::get('forgot_password','HomeController@forgotpassword');
+Route::post('forgot_password','HomeController@forgotpasswordw');
+Route::get('register/tra_lai','HomeController@regdverror');
 
 
 // <editor-fold defaultstate="collapsed" desc="--Setting--">
@@ -26,6 +29,8 @@ Route::get('login','UsersController@login');
 Route::post('signin','UsersController@signin');
 Route::get('/change-password','UsersController@cp');
 Route::post('/change-password','UsersController@cpw');
+Route::get('/user_setting','UsersController@settinguser');
+Route::post('/user_setting','UsersController@settinguserw');
 Route::get('/checkpass','UsersController@checkpass');
 Route::get('/checkuser','UsersController@checkuser');
 Route::get('/checkmasothue','UsersController@checkmasothue');
@@ -38,6 +43,7 @@ Route::post('users/phan-quyen','UsersController@uppermission');
 Route::post('users/delete','UsersController@destroy');
 Route::get('users/lock/{id}/{pl}','UsersController@lockuser');
 Route::get('users/unlock/{id}/{pl}','UsersController@unlockuser');
+
 Route::get('users/register/pl={pl}','UsersController@register');
 Route::get('users/register/{id}/show','UsersController@registershow');
 Route::get('users/register/{id}/edit','UsersController@registeredit');
@@ -45,6 +51,7 @@ Route::patch('users/register/dvlt/{id}','UsersController@registerdvltupdate');
 Route::patch('users/register/dvvt/{id}','UsersController@registerdvvtupdate');
 Route::post('register/createdvlt','UsersController@registerdvlt');
 Route::post('register/createdvvt','UsersController@registerdvvt');
+Route::post('users/register/tralai','UsersController@tralaidktk');
 
 Route::post('register/delete','UsersController@registerdelete');
 Route::get('users/print/pl={pl}','UsersController@prints');
@@ -69,13 +76,24 @@ Route::patch('dn_dichvu_vantai/{id}','DonViDvVtController@update');
 Route::post('dn_dichvu_vantai/delete','DonViDvVtController@destroy');
 Route::get('dn_dichvu_vantai/print','DonViDvVtController@prints');
 //End Dn Dịch vụ vận tải
+
+//DS Đơn vị quản lý
+Route::resource('danh_muc_don_vi_quan_ly','DmDvQlController');
+Route::get('/checkmaqhns','DmDvQlController@checkmaqhns');
+Route::get('checktaikhoan','DmDvQlController@checktaikhoan');
+Route::get('/checkuser','DmDvQlController@checkmaqhns');
+Route::post('danh_muc_don_vi_quan_ly/delete','DmDvQlController@delete');
+//End DS đơn vị quản lý
 // </editor-fold>//End Setting
 
 // <editor-fold defaultstate="collapsed" desc="--Báo cáo--">
 //Reports
     //Dịch vụ lưu trú
 Route::get('reports/dich_vu_luu_tru', function() {
+    $model = \App\DmDvQl::where('plql','TC')
+        ->get();
     return view('reports.kkgdvlt.bcth.index')
+        ->with('model',$model)
         ->with('pageTitle', 'Báo cáo tổng hợp dịch vụ lưu trú');
 });
 Route::post('reports/dich_vu_luu_tru/BC1','ReportsController@dvltbc1');
@@ -97,6 +115,10 @@ Route::patch('ttdn_dich_vu_luu_tru/{id}','DnDvLtController@ttdnupdate');
 //Thông tin CSKD
 Route::get('ttcskd_dich_vu_luu_tru','CsKdDvLtController@index');
 Route::get('ttcskd_dich_vu_luu_tru/create','CsKdDvLtController@create');
+    /*Form quản lý*/
+Route::get('ttcskd_dich_vu_luu_tru/masothue={masothue}','CsKdDvLtController@showcskd');
+Route::get('ttcskd_dich_vu_luu_tru/masothue={masothue}/create','CsKdDvLtController@createcskd');
+
     //Ajax ttphong create
 Route::get('ttphong/store','CsKdDvLtController@ttphongstore');
 Route::get('ttphong/edit','CsKdDvLtController@ttphongedit');

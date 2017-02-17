@@ -28,6 +28,7 @@ class CreateDndvltTable extends Migration
             $table->string('diadanh')->nullable();
             $table->string('trangthai')->nullable();
             $table->string('tailieu')->nullable();
+            $table->string('cqcq')->nullable();
             $table->timestamps();
         });
     }

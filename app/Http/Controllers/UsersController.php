@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DmDvQl;
 use App\DnDvLt;
 use App\DnDvLtReg;
 use App\DonViDvVt;
@@ -41,6 +42,7 @@ class UsersController extends Controller
                     $ttuser->dvvtcc = $dvvt;
                 }
                 Session::put('admin', $ttuser);
+
                 return redirect('')
                     ->with('pageTitle', 'Tổng quan');
             } else
@@ -150,17 +152,23 @@ class UsersController extends Controller
                 $level = 'DVLT';
             elseif ($pl == 'dich_vu_van_tai')
                 $level = 'DVVT';
-
-            $model = Users::where('level', $level)
-                ->orderBy('id')
-                ->get();
+            if(session('admin')->sadmin == 'ssa') {
+                $model = Users::where('level', $level)
+                    ->orderBy('id')
+                    ->get();
+            }else{
+                $model = Users::where('level', $level)
+                    ->where('cqcq',session('admin')->cqcq)
+                    ->orderBy('id')
+                    ->get();
+            }
             $index_unset = 0;
-            foreach ($model as $user) {
+            /*foreach ($model as $user) {
                 if ($user->sadmin == 'ssa' || $user->sadmin == 'sa') {
                     unset($model[$index_unset]);
                 }
                 $index_unset++;
-            }
+            }*/
 
             return view('system.users.index')
                 ->with('model', $model)
@@ -203,8 +211,17 @@ class UsersController extends Controller
     {
         if (Session::has('admin')) {
             $model = Users::findOrFail($id);
+            if($model->level == 'DVLT')
+                $modeldvql = DmDvQl::where('plql','TC')
+                    ->get();
+            elseif($model->level == 'DVVT')
+                $modeldvql = DmDvQl::where('plql','VT')
+                    ->get();
+            else
+                $modeldvql = DmDvQl::all();
             return view('system.users.edit')
                 ->with('model', $model)
+                ->with('modeldvql',$modeldvql)
                 ->with('pageTitle', 'Chỉnh sửa thông tin tài khoản');
 
         } else {
@@ -354,13 +371,31 @@ class UsersController extends Controller
 
     public function register($pl){
         if (Session::has('admin')) {
+            $cqcq = session('admin')->cqcq;
             if($pl == 'dich_vu_luu_tru'){
-                $model = Register::where('pl','DVLT')
-                    ->get();
+                if(session('admin')->sadmin == 'ssa'){
+                    $model = Register::where('pl','DVLT')
+                        ->where('trangthai','Chờ duyệt')
+                        ->get();
+                }else {
+                    $model = Register::where('pl', 'DVLT')
+                        ->where('cqcq', $cqcq)
+                        ->where('trangthai','Chờ duyệt')
+                        ->get();
+                }
             }elseif($pl== 'dich_vu_van_tai'){
-                $model = Register::where('pl','DVVT')
-                    ->get();
+                if(session('admin')->sadmin == 'ssa') {
+                    $model = Register::where('pl', 'DVVT')
+                        ->where('trangthai','Chờ duyệt')
+                        ->get();
+                }else{
+                    $model = Register::where('pl', 'DVVT')
+                        ->where('cqcq', $cqcq)
+                        ->where('trangthai','Chờ duyệt')
+                        ->get();
+                }
             }
+
             return view('system.users.register.index')
                 ->with('model',$model)
                 ->with('pl',$pl)
@@ -373,13 +408,20 @@ class UsersController extends Controller
     public function registershow($id){
         if (Session::has('admin')) {
             $model = Register::findOrFail($id);
+
             if($model->pl == 'DVLT'){
+                $cqcq = DmDvQl::where('plql','TC')
+                    ->get();
                 return view('system.users.register.dvlt')
                     ->with('model',$model)
+                    ->with('cqcq',$cqcq)
                     ->with('pageTitle','Thông tin đăng ký tài khoản dịch vụ lưu trú');
             }elseif($model->pl == 'DVVT'){
+                $cqcq = DmDvQl::where('plql','VT')
+                    ->get();
                 return view('system.users.register.dvvt')
                     ->with('model',$model)
+                    ->with('cqcq',$cqcq)
                     ->with('pageTitle','Thông tin đăng ký tài khoản dịch vụ vận tải');
             }
         }else
@@ -403,6 +445,7 @@ class UsersController extends Controller
             $modeldn->noidknopthue = $model->noidknopthue;
             $modeldn->tailieu = $model->tailieu;
             $modeldn->giayphepkd = $model->giayphepkd;
+            $modeldn->cqcq = $model->cqcq;
             if($modeldn->save()){
                 $modeluser = new Users();
                 $modeluser->name = $model->tendn;
@@ -413,6 +456,7 @@ class UsersController extends Controller
                 $modeluser->status = 'Kích hoạt';
                 $modeluser->mahuyen = $model->masothue;
                 $modeluser->level = 'DVLT';
+                $modeluser->cqcq = $model->cqcq;
                 $modeluser->save();
             }
             $delete = Register::findOrFail($id)->delete();
@@ -444,6 +488,7 @@ class UsersController extends Controller
             $modeldn->dvk = $model->dvk;
             $modeldn->toado = $model->diachi!= '' ? getAddMap($model->diachi) : '';
             $modeldn->trangthai = 'Kích hoạt';
+            $modeldn->cqcq = $model->cqcq;
 
             if($modeldn->save()){
                 $modeluser = new Users();
@@ -455,6 +500,7 @@ class UsersController extends Controller
                 $modeluser->status = 'Kích hoạt';
                 $modeluser->mahuyen = $model->masothue;
                 $modeluser->level = 'DVVT';
+                $modeluser->cqcq = $model->cqcq;
                 $modeluser->save();
             }
             $delete = Register::findOrFail($id)->delete();
@@ -492,10 +538,6 @@ class UsersController extends Controller
                     ->get();
                 $dv = 'VẬN TẢI';
             }
-
-
-
-
             return view('reports/user/users')
                 ->with('model',$model)
                 ->with('dv',$dv)
@@ -508,12 +550,18 @@ class UsersController extends Controller
         if (Session::has('admin')) {
             $model = Register::findOrFail($id);
             if ($model->pl == 'DVLT') {
+                $cqcq = DmDvQl::where('plql','TC')
+                    ->get();
                 return view('system.users.register.editdvlt')
                     ->with('model', $model)
+                    ->with('cqcq',$cqcq)
                     ->with('pageTitle', 'Chỉnh sửa thông tin đăng ký tài khoản dịch vụ lưu trú');
             } elseif ($model->pl == 'DVVT') {
+                $cqcq = DmDvQl::where('plql','VT')
+                    ->get();
                 return view('system.users.register.editdvvt')
                     ->with('model', $model)
+                    ->with('cqcq',$cqcq)
                     ->with('pageTitle', 'Chỉnh sửa thông tin đăng ký tài khoản dịch vụ vận tải');
             }
         } else {
@@ -527,14 +575,15 @@ class UsersController extends Controller
             $model = Register::findOrFail($id);
             $model->tendn = $input['tendn'];
             $model->masothue = $input['masothue'];
-            $model->diachidn = $input['diachidn'];
-            $model->teldn  = $input['teldn'];
-            $model->faxdn = $input['faxdn'];
+            $model->diachi= $input['diachidn'];
+            $model->tel  = $input['teldn'];
+            $model->fax = $input['faxdn'];
             $model->email = $input['email'];
             $model->noidknopthue = $input['noidknopthue'];
             $model->giayphepkd = $input['giayphepkd'];
             $model->tailieu = $input['tailieu'];
             $model->username = $input['username'];
+            $model->cqcq = $input['cqcq'];
             $model->save();
             return redirect('users/register/pl=dich_vu_luu_tru');
         } else {
@@ -548,9 +597,9 @@ class UsersController extends Controller
             $model = Register::findOrFail($id);
             $model->tendn = $input['tendn'];
             $model->masothue = $input['masothue'];
-            $model->diachidn = $input['diachidn'];
-            $model->teldn  = $input['teldn'];
-            $model->faxdn = $input['faxdn'];
+            $model->diachi = $input['diachidn'];
+            $model->tel  = $input['teldn'];
+            $model->fax = $input['faxdn'];
             $model->email = $input['emaildn'];
             $model->noidknopthue = $input['noidknopthue'];
             $model->giayphepkd = $input['giayphepkd'];
@@ -565,12 +614,68 @@ class UsersController extends Controller
             $model->dvxb = isset($x['dvvt']['vtxb']) ? 1 : 0;
             $model->dvxtx = isset($x['dvvt']['vtxtx']) ? 1 : 0;
             $model->dvk = isset($x['dvvt']['vtch']) ? 1 : 0;
-
+            $model->cqcq = $input['cqcq'];
             $model->save();
 
             return redirect('users/register/pl=dich_vu_van_tai');
         } else {
             return view('errors.notlogin');
+        }
+    }
+
+    public function tralaidktk(Request $request){
+        if (Session::has('admin')) {
+            $input = $request->all();
+            $id = $input['idtralai'];
+            $model = Register::findOrFail($id);
+
+            if ($input['lydo'] != '') {
+                $model->lydo = $input['lydo'];
+                $model->trangthai = 'Bị trả lại';
+                $model->save();
+            }
+
+            if ($model->pl == 'DVLT') {
+                $pl = 'dich_vu_luu_tru';
+            } elseif ($model->pl == 'DVVT') {
+                $pl = 'dich_vu_van_tai';
+            }
+
+            return redirect('users/register/pl='.$pl);
+        } else {
+            return view('errors.notlogin');
+        }
+    }
+
+    public function settinguser(){
+        if (Session::has('admin')) {
+
+            return view('system.users.usersetting')
+                ->with('pageTitle', 'Thông tin tài khoản');
+
+        } else
+            return view('errors.notlogin');
+
+    }
+
+    public function settinguserw(Request $request){
+        $update = $request->all();
+
+        $username = session('admin')->username;
+
+        $password = session('admin')->password;
+
+        $currentPassword = $update['current-password'];
+
+        if (md5($currentPassword) == $password) {
+            $ttuser = Users::where('username', $username)->first();
+            $ttuser->emailxt = $update['emailxt'];
+            $ttuser->question = $update['question'];
+            $ttuser->answer = $update['answer'];
+            $ttuser->save();
+            return redirect('');
+        } else {
+            dd('Mật khẩu cũ không đúng???');
         }
     }
 }

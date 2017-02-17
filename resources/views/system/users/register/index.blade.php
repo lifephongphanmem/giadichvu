@@ -22,6 +22,20 @@
         function getId(id){
             document.getElementById("iddelete").value=id;
         }
+
+        function confirmTraLai(id) {
+            document.getElementById("idtralai").value =id;
+        }
+        function ClickTraLai(){
+            if($('#lydo').val() != ''){
+                toastr.success("Thông tin đăng ký đã được trả lại!", "Thành công!");
+                $('#frm_tralai').submit();
+            }else{
+                toastr.error("Bạn cần nhập lý do trả lại hồ sơ", "Lỗi!!!");
+            }
+
+        }
+        
         $(function(){
 
             $('#phanloai').change(function() {
@@ -33,6 +47,7 @@
             });
 
 
+
         })
         function ClickDelete(){
             $('#frm_delete').submit();
@@ -41,9 +56,16 @@
 @stop
 
 @section('content')
-
+    <?php
+    if($pl == 'dich_vu_luu_tru')
+        $dv = 'dịch vụ lưu trú';
+    elseif($pl == 'dich_vu_van_tai')
+        $dv = 'dịch vụ vận tải';
+    else
+        $dv='';
+    ?>
     <h3 class="page-title">
-        Quản lý thông tin tài khoản<small>&nbsp;đăng ký</small>
+        Quản lý thông tin tài khoản đăng ký<small>&nbsp;{{$dv}}</small>
     </h3>
     <!-- END PAGE HEADER-->
     <div class="row">
@@ -53,18 +75,6 @@
                 <div class="portlet-body">
                     <div class="portlet-body">
                         <div class="table-toolbar">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <select class="form-control" name="phanloai" id="phanloai">
-                                            <option value="dich_vu_luu_tru" {{($pl == "dich_vu_luu_tru") ? 'selected' : ''}}>Dịch vụ lưu trú</option>
-                                            <option value="dich_vu_van_tai" {{($pl == "dich_vu_van_tai") ? 'selected' : ''}}>Dịch vụ vận tải</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-
-                            </div>
                         </div>
                     <table class="table table-striped table-bordered table-hover" id="sample_3">
                         <thead>
@@ -72,10 +82,8 @@
                             <th style="text-align: center" width="2%">STT</th>
                             <th style="text-align: center">Tên doanh nghiệp</th>
                             <th style="text-align: center">Mã số thuế</th>
-                            <th style="text-align: center">Số điện thoai</th>
-                            <th style="text-align: center">Số fax</th>
-                            <th style="text-align: center">Địa chỉ</th>
-                            <th style="text-align: center" width="25%">Thao tác</th>
+                            <th style="text-align: center" width="5%">Trạng thái</th>
+                            <th style="text-align: center" width="30%">Thao tác</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -84,12 +92,12 @@
                                 <td style="text-align: center">{{$key + 1}}</td>
                                 <td class="active" >{{$tt->tendn}}</td>
                                 <td>{{$tt->masothue}}</td>
-                                <td>{{$tt->teldn}}</td>
-                                <td>{{$tt->faxdn}}</td>
-                                <td>{{$tt->diachidn}}</td>
+                                <td align="center"><span class="badge badge-danger">{{$tt->trangthai}}</span></td>
                                 <td>
                                     <a href="{{url('users/register/'.$tt->id.'/show')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Xem chi tiết</a>
                                     <a href="{{url('users/register/'.$tt->id.'/edit')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</a>
+                                    <button type="button" onclick="confirmTraLai({{$tt->id}})" class="btn btn-default btn-xs mbs" data-target="#tralai-modal" data-toggle="modal"><i class="fa fa-reply"></i>&nbsp;
+                                        Trả lại</button>
                                     <button type="button" onclick="getId('{{$tt->id}}')" class="btn btn-default btn-xs mbs" data-target="#delete-modal" data-toggle="modal"><i class="fa fa-trash-o"></i>&nbsp;
                                         Xóa</button>
                                 </td>
@@ -109,7 +117,36 @@
     <!-- END DASHBOARD STATS -->
 
     <div class="clearfix"></div>
-    <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <!--Model chuyển-->
+    <div class="modal fade" id="tralai-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                {!! Form::open(['url'=>'users/register/tralai','id' => 'frm_tralai'])!!}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Đồng ý trả lại đăng ký tài khoản?</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label><b>Lý do</b></label>
+                        <textarea id="lydo" class="form-control" name="lydo" cols="30" rows="5"></textarea></div>
+                </div>
+                <input type="hidden" name="idtralai" id="idtralai">
+                <input type="hidden" name="pl" id="pl">
+                <div class="modal-footer">
+                    <button type="button" class="btn default" data-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn blue" onclick="ClickTraLai()">Đồng ý</button>
+
+                </div>
+                {!! Form::close() !!}
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+
+        <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 {!! Form::open(['url'=>'register/delete','id' => 'frm_delete'])!!}

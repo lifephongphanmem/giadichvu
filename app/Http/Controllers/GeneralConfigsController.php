@@ -39,15 +39,15 @@ class GeneralConfigsController extends Controller
         if (Session::has('admin')) {
             $update = $request->all();
             $model = GeneralConfigs::findOrFail($id);
-            $model->diachi = $update['diachi'];
-            $model->thutruong = $update['thutruong'];
-            $model->ketoan = $update['ketoan'];
-            $model->nguoilapbieu =$update['nguoilapbieu'];
-            $model->sodvlt = $update['sodvlt'];
-            $model->sodvvt = $update['sodvvt'];
-            $model->namhethong = $update['namhethong'];
-            $model->ttlh = $update['ttlh'];
-            $model->save();
+                if(isset($update['sodvlt']))
+                    $model->sodvlt = $update['sodvlt'];
+                if(isset($update['sodvvt']))
+                    $model->sodvvt = $update['sodvvt'];
+                if(isset($update['ttlhlt']))
+                    $model->ttlhlt = $update['ttlhlt'];
+                if(isset($update['ttlhvt']))
+                    $model->ttlhvt = $update['ttlhvt'];
+                $model->save();
 
             return redirect('cau_hinh_he_thong');
 

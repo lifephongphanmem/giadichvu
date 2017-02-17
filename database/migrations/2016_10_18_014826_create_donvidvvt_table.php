@@ -36,6 +36,7 @@ class CreateDonvidvvtTable extends Migration
             $table->string('trangthai')->nullable();
             $table->string('tailieu')->nullable();
             $table->string('link')->nullable();
+            $table->string('cqcq')->nullable();
             $table->timestamps();
         });
     }

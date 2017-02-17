@@ -102,6 +102,8 @@
         </div>
         <div class="row" style="text-align: center">
             <div class="col-md-12">
+                <a href="{{url('cau_hinh_he_thong')}}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
+                <button type="reset" class="btn btn-default"><i class="fa fa-refresh"></i>&nbsp;Nhập lại</button>
                 <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Cập nhật</button>
             </div>
         </div>

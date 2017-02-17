@@ -169,6 +169,8 @@
                                 <input type="text" id="link" name="link" class="form-control">
                             </div>
                         </div>
+                        <input type="hidden" name="cqcq" id="cqcq" value="{{$ttdn->cqcq}}">
+                        <input type="hidden" name="masothue" id="masothue" value="{{$ttdn->masothue}}">
 
                     </div>
 
@@ -242,9 +244,13 @@
 
             <!-- END EXAMPLE TABLE PORTLET-->
             <div style="text-align: center">
-                <button type="submit" class="btn green" onclick="validateForm()"><i class="fa fa-check"></i> Hoàn thành</button>
+                @if(session('admin')->level == 'T' || session('admin')->level == 'H')
+                    <a href="{{url('ttcskd_dich_vu_luu_tru/masothue='.$masothue)}}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
+                @else
+                    <a href="{{url('ttcskd_dich_vu_luu_tru')}}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
+                @endif
                 <button type="reset" class="btn btn-default"><i class="fa fa-refresh"></i>&nbsp;Nhập lại</button>
-                <a href="{{url('ttcskd_dich_vu_luu_tru')}}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
+                <button type="submit" class="btn green" onclick="validateForm()"><i class="fa fa-check"></i> Hoàn thành</button>
             </div>
         </div>
 

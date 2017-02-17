@@ -125,6 +125,18 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label class="control-label">Cơ quan chủ quản</label>
+                                        <select class="form-control" id="cqcq" name="cqcq" readonly>
+                                            @foreach($cqcq as $tt)
+                                                <option value="{{$tt->maqhns}}" {{($tt->maqhns == $model->cqcq) ? 'selected' : ''}} >{{$tt->tendv}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
                                         <label class="control-label">Tài khoản truy cập<span class="require">*</span></label>
                                         <input type="text" class="form-control required" name="username" id="username" value="{{$model->username}}" readonly>
                                     </div>
@@ -137,8 +149,8 @@
             </div>
             <div class="row" style="text-align: center">
                 <div class="cod-md-12">
+                    <a href="{{url('users/register/pl=dich_vu_van_tai')}}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
                     <button type="button" class="btn green" onclick="getId('{{$model->id}}')" data-target="#create-modal" data-toggle="modal"><i class="fa fa-plus"></i> Tạo tài khoản truy cập</button>
-                    <a href="{{url('users/register/pl=dich_vu_van_tai')}}" class="btn default"> Quay lại</a>
                 </div>
             </div>
             <!-- END VALIDATION STATES-->

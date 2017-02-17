@@ -19,11 +19,21 @@ class KkGDvLtController extends Controller
 {
     public function cskd(){
         if (Session::has('admin')) {
-            $model = CsKdDvLt::where('masothue',session('admin')->mahuyen)
-                ->get();
+            if(session('admin')->level == 'T' || session('admin')->level == 'H'){
+                if(session('admin')->sadmin == 'ssa'){
+                    $model = CsKdDvLt::all();
+                }else{
+                    $model = CsKdDvLt::where('cqcq',session('admin')->cqcq)
+                        ->get();
+                }
+            }else {
+                $model = CsKdDvLt::where('masothue', session('admin')->mahuyen)
+                    ->get();
+
+            }
             return view('manage.dvlt.kkgia.ttcskd.index')
-                ->with('model',$model)
-                ->with('pageTitle','Thông tin cơ sở kinh doanh dịch vụ lưu trú');
+                ->with('model', $model)
+                ->with('pageTitle', 'Thông tin cơ sở kinh doanh dịch vụ lưu trú');
         }else
             return view('errors.notlogin');
     }
@@ -85,7 +95,6 @@ class KkGDvLtController extends Controller
             }
             $modeldsph = KkGDvLtCtDf::where('macskd',$modelcskd->macskd)
                 ->get();
-
             return view('manage.dvlt.kkgia.kkgiadv.create')
                 ->with('modelcskd',$modelcskd)
                 ->with('modelph',$modelph)//Thay thế
@@ -112,6 +121,8 @@ class KkGDvLtController extends Controller
             $model->macskd = $insert['macskd'];
             $model->masothue = session('admin')->mahuyen;
             $model->ghichu = $insert['ghichu'];
+            $model->cqcq = $insert['cqcq'];
+            $model->dvt = $insert['dvt'];
             if($model->save()){
                 $modelph = KkGDvLtCtDf::where('macskd',$insert['macskd'])
                     ->get();
@@ -158,6 +169,7 @@ class KkGDvLtController extends Controller
             $model->socvlk = $input['socvlk'];
             $model->ngaycvlk = $input['ngaycvlk']==''?NULL:$input['ngaycvlk'];
             $model->ghichu = $input['ghichu'];
+            $model->dvt = $input['dvt'];
             $model->save();
             return redirect('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh='.$macskd.'&nam='.date('Y'));
         }else

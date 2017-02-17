@@ -63,7 +63,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <div class="content">
 	<!-- BEGIN LOGIN FORM -->
 		{!! Form::open(['url'=>'/signin','id' => 'form-login', 'class'=>'form-horizontal form-validate']) !!}
-		<h3 class="form-title">Login</h3>
+		<h3 class="form-title">Đăng nhập</h3>
 		<div class="alert alert-danger display-hide">
 			<button class="close" data-close="alert"></button>
 			<span>
@@ -86,16 +86,23 @@ License: You must have a valid license purchased only from themeforest(the above
 		</div>
 		<div class="form-actions">
 			<button type="submit" class="btn blue pull-right" id="login_button" onclick="validatePassword();">
-				Login <i class="m-icon-swapright m-icon-white"></i>
+				Đăng nhập <i class="m-icon-swapright m-icon-white"></i>
 			</button>
 			<br>
 		</div>
 		{!! Form::close() !!}
+		<div class="forget-password">
+			<p>
+				Bạn quên mật khẩu truy cập? Click <a href="{{url('forgot_password')}}">
+					here </a>
+			</p>
+		</div>
 		<div class="create-account">
 			<p>
-				Bạn chưa có tài khoản?&nbsp; <a data-target="#dangky-doanhnghiep" data-toggle="modal">
+				Bạn chưa có tài khoản?&nbsp;<a data-target="#dangky-doanhnghiep" data-toggle="modal">
 					Đăng ký tài khoản </a>
 			</p>
+			<!--p>Bạn đã đăng ký tài khoản?&nbsp;<a href="{{url('register/tra_lai')}}" target="_blank">Kiểm tra tài khoản?</a> </p-->
 		</div>
 </div>
 <!-- END LOGIN -->
@@ -103,6 +110,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <div class="copyright">
 	2016 &copy; LifeSoft <a href="" >Tiện ích hơn - Hiệu quả hơn</a>
 </div>
+
 <!--Modal đăng ký-->
 <div id="dangky-doanhnghiep" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade">
 	<div class="modal-dialog">

@@ -110,6 +110,17 @@
                                         {!!Form::text('diadanh', null, array('id' => 'diadanh','class' => 'form-control required'))!!}
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Đơn vị quản lý<span class="require">*</span></label>
+                                        <select class="form-control" name="cqcq" id="cqcq" required>
+                                            <option value="">--Chọn đơn vị quản lý--</option>
+                                            @foreach($ttcqcq as $tt)
+                                                <option value="{{$tt->maqhns}}" {{($tt->maqhns == $model->cqcq) ? 'selected' : ''}}>{{$tt->tendv}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -118,9 +129,9 @@
             </div>
             <div class="row" style="text-align: center">
                 <div class="col-md-12">
-                    <button type="submit" class="btn green" onclick="validateForm()"><i class="fa fa-check"></i>&nbsp;Cập nhật</button>
-                    <button type="reset" class="btn btn-default"><i class="fa fa-refresh"></i>&nbsp;Nhập lại</button>
                     <a href="{{url('ttdn_dich_vu_luu_tru')}}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
+                    <button type="reset" class="btn btn-default"><i class="fa fa-refresh"></i>&nbsp;Nhập lại</button>
+                    <button type="submit" class="btn green" onclick="validateForm()"><i class="fa fa-check"></i>&nbsp;Cập nhật</button>
                 </div>
             </div>
             {!! Form::close() !!}

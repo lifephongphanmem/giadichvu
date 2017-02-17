@@ -41,9 +41,19 @@
             <div class="portlet box">
                 <div class="portlet-title">
                     <div class="actions">
-                        @if(can('dvlt','create'))
-                        <a href="{{url('ttcskd_dich_vu_luu_tru/create')}}" class="btn btn-default btn-sm">
-                            <i class="fa fa-plus"></i> Thêm mới </a>
+
+                        @if(session('admin')->level == 'T' || session('admin')->level == 'H')
+                            @if(can('dvlt','create'))
+                                <a href="{{url('ttcskd_dich_vu_luu_tru/masothue='.$masothue.'/create')}}" class="btn btn-default btn-sm">
+                                    <i class="fa fa-plus"></i> Thêm mới </a>
+                            @endif
+                            <a href="{{url('ttcskd_dich_vu_luu_tru')}}" class="btn btn-default btn-sm">
+                                <i class="fa fa-reply"></i> Quay lại</a>
+                        @else
+                            @if(can('dvlt','create'))
+                                <a href="{{url('ttcskd_dich_vu_luu_tru/create')}}" class="btn btn-default btn-sm">
+                                    <i class="fa fa-plus"></i> Thêm mới </a>
+                            @endif
                         @endif
                     </div>
                 </div>
@@ -65,7 +75,7 @@
                         <tr class="odd gradeX">
                             <td style="text-align: center">{{$key + 1}}</td>
                             <td class="active" >{{$tt->tencskd}}</td>
-                            <td>{{$tt->loaihang}} sao</td>
+                            <td>{{($tt->loaihang == 'K') ? 'Khác(Nhà nghỉ)' : $tt->loaihang.' sao'}}</td>
                             <td>{{$tt->telkd}}</td>
                             <td>{{$tt->diachikd}}</td>
                             <td>

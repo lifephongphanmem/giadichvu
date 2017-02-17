@@ -39,25 +39,47 @@
                 <div class="portlet-body">
                     <table id="user" class="table table-bordered table-striped">
                         <tbody>
+                        @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'satc')
                         <tr>
                             <td style="width:15%">
-                                <b>Mã quan hệ ngân sách</b>
+                                <b>Đơn vị quản lý</b>
                             </td>
                             <td style="width:35%">
-                                <span class="text-muted">{{$model->madv}}
+                                <span class="text-muted">{{$model->tendonvilt}}
                                 </span>
                             </td>
                         </tr>
                         <tr>
                             <td style="width:15%">
-                                <b>Tên đơn vị</b>
+                                <b>Thông tin liên hệ dịch vụ lưu trú</b>
                             </td>
                             <td style="width:35%">
-                                <span class="text-muted">{{$model->tendonvi}}
+                                <span class="text-muted">{{$model->ttlhlt}}
+                                </span>
+                            </td>
+                        </tr>
+                        @endif
+                        @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'savt')
+                        <tr>
+                            <td style="width:15%">
+                                <b>Đơn vị quản lý</b>
+                            </td>
+                            <td style="width:35%">
+                                <span class="text-muted">{{$model->tendonvivt}}
                                 </span>
                             </td>
                         </tr>
                         <tr>
+                            <td style="width:15%">
+                                <b>Thông tin liên hệ dịch vụ vận tải</b>
+                            </td>
+                            <td style="width:35%">
+                                <span class="text-muted">{{$model->ttlhvt}}
+                                </span>
+                            </td>
+                        </tr>
+                        @endif
+                        <!--tr>
                             <td style="width:15%">
                                 <b>Địa chỉ</b>
                             </td>
@@ -65,8 +87,8 @@
                                 <span class="text-muted">{{$model->diachi}}
                                 </span>
                             </td>
-                        </tr>
-                        <tr>
+                        </tr-->
+                        <!--tr>
                             <td style="width:15%">
                                 <b>Thủ trưởng đơn vị</b>
                             </td>
@@ -92,8 +114,8 @@
                                 <span class="text-muted">{{$model->nguoilapbieu}}
                                 </span>
                             </td>
-                        </tr>
-                        <tr>
+                        </tr-->
+                        <!--tr>
                             <td style="width:15%">
                                 <b>Số hồ sơ dịch vụ lưu trú đã nhận</b>
                             </td>
@@ -110,8 +132,8 @@
                                 <span class="text-muted">{{$model->sodvvt}}
                                 </span>
                             </td>
-                        </tr>
-                        <tr>
+                        </tr-->
+                        <!--tr>
                             <td style="width:15%">
                                 <b>Năm quản lý</b>
                             </td>
@@ -119,16 +141,9 @@
                                 <span class="text-muted">{{$model->namhethong}}
                                 </span>
                             </td>
-                        </tr>
-                        <tr>
-                            <td style="width:15%">
-                                <b>Thông tin liên hệ</b>
-                            </td>
-                            <td style="width:35%">
-                                <span class="text-muted">{{$model->ttlh}}
-                                </span>
-                            </td>
-                        </tr>
+                        </tr-->
+
+
                         </tbody>
                     </table>
                 </div>

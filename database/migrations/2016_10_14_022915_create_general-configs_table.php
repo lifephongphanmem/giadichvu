@@ -16,14 +16,16 @@ class CreateGeneralConfigsTable extends Migration
         Schema::create('general-configs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('maqhns')->nullable();
-            $table->string('tendonvi')->nullable();
+            $table->string('tendonvilt')->nullable();
+            $table->string('tendonvivt')->nullable();
             $table->string('diachi')->nullable();
             $table->string('teldv')->nullable();
             $table->string('thutruong')->nullable();
             $table->string('ketoan')->nullable();
             $table->string('nguoilapbieu')->nullable();
             $table->string('namhethong')->nullable();
-            $table->text('ttlh')->nullable();
+            $table->text('ttlhlt')->nullable();
+            $table->text('ttlhvt')->nullable();
             $table->text('sodvlt')->nullable();
             $table->text('sodvvt')->nullable();
             $table->text('setting');

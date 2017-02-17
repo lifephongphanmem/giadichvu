@@ -56,7 +56,7 @@
 </table>
 
 
-<p style="text-align: center; font-weight: bold; font-size: 16px;"><i><u>Kính gửi</u></i>: {{(getGeneralConfigs()['tendonvi'])}}</p>
+<p style="text-align: center; font-weight: bold; font-size: 16px;"><i><u>Kính gửi</u></i>: {{$modelcqcq->tendv}}</p>
 
 <p>Doanh nghiệp chúng tôi tự xây dựng và kê khai giá dịch vụ lưu trú như sau:</p>
 
@@ -136,7 +136,7 @@
 </table>
 <p style="text-align: center; font-weight: bold; font-size: 16px;">BẢNG KÊ KHAI GIÁ DỊCH VỤ LƯU TRÚ</p>
 <p style="text-align: center;">(Kèm theo công văn số {{$modelkk->socv}}  ngày {{ date("d",strtotime($modelkk->ngaynhap))}} tháng {{ date("m",strtotime($modelkk->ngaynhap))}} năm {{ date("Y",strtotime($modelkk->ngaynhap))}} của {{$modeldn->tendn}})</p>
-<p style="text-align: right; font-size: 16px;"><i>Đơn vị tính: Đồng/phòng/ngày đêm</i></p>
+<p style="text-align: right; font-size: 16px;"><i>Đơn vị tính: {{$modelkk->dvt}}</i></p>
 <table cellspacing="0" cellpadding="0" border="1" style="margin: 20px auto; border-collapse: collapse;">
     <tr>
         <th width="30%">Loại phòng/ Quy<br>cách chất lượng<br>phòng</th>
@@ -227,7 +227,7 @@
     Cơ sở kinh doanh chúng tôi cam kết thực hiện niêm yết giá và bán theo giá niêm yết.<br>
     Nếu sai cơ sở chúng tôi xin hoàn toàn chịu trách nhiệm trước pháp luật.<br>
     Khi cần quý khách có thể liên hệ theo các số điện thoại sau, nếu cơ sở chúng tôi không thực hiện đúng bảng giá đã niêm yết:<br>
-    {!! nl2br(e(getGeneralConfigs()['ttlh'])) !!}
+    {!! nl2br(e($modelcqcq->ttlh)) !!}
 </p>
 <table width="96%" border="0" cellspacing="0" cellpadding="8" style="margin:10px auto; text-align: center;">
     <tr>

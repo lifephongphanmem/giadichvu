@@ -31,6 +31,8 @@ class Register extends Model
         'giayphepkd',
         'username',
         'password',
-        'pl'
+        'pl',
+        'lydo',
+        'cqcq'
     ];
 }

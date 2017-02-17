@@ -320,6 +320,16 @@
                                 <input type="date" name="ngaycvlk" id="ngaycvlk" value="{{$model->ngaycvlk}}" class="form-control">
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Đơn vị tính<span class="require">*</span></label>
+                                <select class="form-control" name="dvt" id="dvt">
+                                    <option value="Đồng/phòng/ngày đêm" {{($model->dvt == 'Đồng/phòng/ngày đêm') ? 'selected' : ''}}>Đồng/phòng/ngày đêm</option>
+                                    <option value="Đồng/phòng/tuần" {{($model->dvt == 'Đồng/phòng/tuần') ? 'selected' : ''}}>Đồng/phòng/tuần</option>
+                                    <option value="Đồng/phòng/tháng" {{($model->dvt == 'Đồng/phòng/tháng') ? 'selected' : ''}}>Đồng/phòng/tháng</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     <input type="hidden" name="macskd" id="macskd" value="{{$model->macskd}}">
                     <input type="hidden" name="mahs" id="mahs" value="{{$model->mahs}}">
@@ -386,9 +396,10 @@
 
             <!-- END EXAMPLE TABLE PORTLET-->
             <div style="text-align: center">
-                <button type="submit" class="btn green" onclick="validateForm()"><i class="fa fa-check"></i> Cập nhật</button>
-                <button type="reset" class="btn btn-default"><i class="fa fa-refresh"></i>&nbsp;Nhập lại</button>
                 <a href="{{url('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh='.$model->macskd.'&nam='.date('Y'))}}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
+                <button type="reset" class="btn btn-default"><i class="fa fa-refresh"></i>&nbsp;Nhập lại</button>
+                <button type="submit" class="btn green" onclick="validateForm()"><i class="fa fa-check"></i> Cập nhật</button>
+
             </div>
         </div>
 

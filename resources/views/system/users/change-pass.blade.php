@@ -55,9 +55,9 @@
                 </div>
             </div>
             <div style="text-align: center">
-                <button type="submit" onclick="validatePassword();" class="btn btn-primary">Cập nhật</button>
-                <button type="reset" class="btn btn-default"><i class="fa fa-refresh"></i>&nbsp;Nhập lại</button>
                 <a href="{{url('')}}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
+                <button type="reset" class="btn btn-default"><i class="fa fa-refresh"></i>&nbsp;Nhập lại</button>
+                <button type="submit" onclick="validatePassword();" class="btn btn-primary">Cập nhật</button>
             </div>
             {!! Form::close() !!}
             <!-- END VALIDATION STATES-->

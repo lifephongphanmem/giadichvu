@@ -23,10 +23,14 @@ class CreateUsersTable extends Migration
             $table->string('status')->nullable();
             $table->string('maxa')->nullable();
             $table->string('mahuyen')->nullable();
+            $table->string('cqcq')->nullable();
             $table->string('level')->nullable();
             $table->string('sadmin')->nullable();
-            $table->string('permission')->nullable();
+            $table->text('permission')->nullable();
             $table->string('pldv')->nullable();
+            $table->string('emailxt')->nullable();
+            $table->string('question')->nullable();
+            $table->string('answer')->nullable();
             $table->timestamps();
         });
     }

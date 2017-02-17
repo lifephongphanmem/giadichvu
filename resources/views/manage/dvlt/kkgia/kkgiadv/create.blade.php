@@ -391,8 +391,20 @@
                                 <input type="date" name="ngaycvlk" id="ngaycvlk" class="form-control" value="{{isset($modelcb) ? $modelcb->ngaynhap : '' }}">
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Đơn vị tính<span class="require">*</span></label>
+                                <select class="form-control" name="dvt" id="dvt">
+                                    <option value="Đồng/phòng/ngày đêm">Đồng/phòng/ngày đêm</option>
+                                    <option value="Đồng/phòng/tuần">Đồng/phòng/tuần</option>
+                                    <option value="Đồng/phòng/tháng">Đồng/phòng/tháng</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     <input type="hidden" name="macskd" id="macskd" value="{{$modelcskd->macskd}}">
+                    <input type="text" name="masothue" id="masothue" value="{{$modelcskd->masothue}}"
+                    <input type="hidden" name="cqcq" id="cqcq" value="{{$modelcskd->cqcq}}">
                     {!! Form::close() !!}
                     <!--/row-->
                     <h4 class="form-section" style="color: #0000ff">Thông tin chi tiết hồ sơ</h4>
@@ -457,9 +469,10 @@
 
             <!-- END EXAMPLE TABLE PORTLET-->
             <div style="text-align: center">
-                <button type="submit" class="btn green" onclick="validateForm()"><i class="fa fa-check"></i> Hoàn thành</button>
-                <button type="reset" class="btn btn-default"><i class="fa fa-refresh"></i>&nbsp;Nhập lại</button>
                 <a href="{{url('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh='.$modelcskd->macskd.'&nam='.date('Y'))}}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
+                <button type="reset" class="btn btn-default"><i class="fa fa-refresh"></i>&nbsp;Nhập lại</button>
+                <button type="submit" class="btn green" onclick="validateForm()"><i class="fa fa-check"></i> Hoàn thành</button>
+
             </div>
         </div>
 

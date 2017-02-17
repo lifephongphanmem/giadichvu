@@ -68,7 +68,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Tài khoản truy cập<span class="require">*</span></label>
-                                        {!!Form::text('username', null, array('id' => 'username','class' => 'form-control required'))!!}
+                                        {!!Form::text('username', null, array('id' => 'username','class' => 'form-control required', 'readonly'=>'readonly'))!!}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -78,6 +78,23 @@
                                     </div>
                                 </div>
                             </div>
+                            @if($model->level == 'DVLT' || $model->level == 'DVVT')
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Cơ quan chủ quản<span class="require">*</span></label>
+                                        <select class="form-control required" name="cqcq" id="cqcq">
+                                            <option value="">--Chọn đơn vị chủ quản--</option>
+                                            @foreach($modeldvql as $cqql)
+                                                <option value="{{$cqql->maqhns}}" {{($cqql->maqhns == $model->cqcq) ? 'selected' : ''}}>{{$cqql->tendv}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+                            @endif
+
                         </div>
 
                     <!-- END FORM-->
@@ -85,15 +102,18 @@
             </div>
 
             <?php
-                if($model->level == 'DVLT')
+                if($model->level == 'DVLT'){
                     $pl = 'dich_vu_luu_tru';
-                else
+                }elseif($model->level == 'DVVT'){
                     $pl = 'dich_vu_van_tai';
+                }elseif($model->level == 'T' || $model->level =='H'){
+                    $pl = 'quan_ly';
+                }
             ?>
             <div style="text-align: center">
-                <button type="submit" class="btn green" onclick="validateForm()"><i class="fa fa-check"></i> Cập nhật</button>
-                <button type="reset" class="btn btn-default"><i class="fa fa-refresh"></i>&nbsp;Nhập lại</button>
                 <a href="{{url('users/pl='.$pl)}}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
+                <button type="reset" class="btn btn-default"><i class="fa fa-refresh"></i>&nbsp;Nhập lại</button>
+                <button type="submit" class="btn green" onclick="validateForm()"><i class="fa fa-check"></i> Cập nhật</button>
             </div>
             {!! Form::close() !!}
             <!-- END VALIDATION STATES-->

@@ -26,15 +26,27 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label"><b>Từ ngày</b></label>
                         <div class="col-md-6 ">
-                            <input type="date" id="ngaytu" name="ngaytu" class="form-control" value="2016-01-01">
+                            <input type="date" id="ngaytu" name="ngaytu" class="form-control" value="{{intval(date('Y')).'-01-01'}}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-4 control-label"><b>Đến ngày</b></label>
                         <div class="col-md-6 ">
-                            <input type="date" id="ngayden" name="ngayden" class="form-control" value="2016-12-31">
+                            <input type="date" id="ngayden" name="ngayden" class="form-control" value="{{intval(date('Y')).'-12-31'}}">
                         </div>
                     </div>
+                    @if(session('admin')->level == 'T')
+                    <div class="form-group">
+                        <label class="col-md-4 control-label"><b>Đơn vị</b></label>
+                        <div class="col-md-6 ">
+                            <select class="form-control" name="cqcq" id="cqcq">
+                                @foreach($model as $cqcq)
+                                    <option value="{{$cqcq->maqhns}}">{{$cqcq->tendv}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    @endif
                 </div>
             </div>
             <div class="modal-footer">
@@ -62,15 +74,27 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label"><b>Từ ngày</b></label>
                         <div class="col-md-6 ">
-                            <input type="date" id="ngaytu" name="ngaytu" class="form-control" value="2016-01-01">
+                            <input type="date" id="ngaytu" name="ngaytu" class="form-control" value="{{intval(date('Y')).'-01-01'}}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-4 control-label"><b>Đến ngày</b></label>
                         <div class="col-md-6 ">
-                            <input type="date" id="ngayden" name="ngayden" class="form-control" value="2016-12-31">
+                            <input type="date" id="ngayden" name="ngayden" class="form-control" value="{{intval(date('Y')).'-12-31'}}">
                         </div>
                     </div>
+                    @if(session('admin')->level == 'T')
+                        <div class="form-group">
+                            <label class="col-md-4 control-label"><b>Đơn vị</b></label>
+                            <div class="col-md-6 ">
+                                <select class="form-control" name="cqcq" id="cqcq">
+                                    @foreach($model as $cqcq)
+                                        <option value="{{$cqcq->maqhns}}">{{$cqcq->tendv}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
             <div class="modal-footer">

@@ -127,6 +127,19 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label class="control-label">Cơ quan chủ quản</label>
+                                        <select class="form-control" id="cqcq" name="cqcq">
+                                            @foreach($cqcq as $tt)
+                                                <option value="{{$tt->maqhns}}" {{($tt->maqhns == $model->cqcq) ? 'selected' : ''}} >{{$tt->tendv}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
                                         <label class="control-label">Tài khoản truy cập<span class="require">*</span></label>
                                         <input type="text" class="form-control required" name="username" id="username" value="{{$model->username}}">
                                     </div>
@@ -139,8 +152,9 @@
             </div>
             <div class="row" style="text-align: center">
                 <div class="cod-md-12">
+                    <a href="{{url('users/register/pl=dich_vu_van_tai')}}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
+                    <button type="reset" class="btn btn-default"><i class="fa fa-refresh"></i>&nbsp;Nhập lại</button>
                     <button type="submit" class="btn green" onclick="validateForm()"><i class="fa fa-check"></i> Cập nhật</button>
-                    <button type="reset" class="btn default">Hủy</button>
                 </div>
             </div>
             {!! Form::close() !!}

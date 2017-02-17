@@ -21,6 +21,7 @@ class DnDvLt extends Model
         'diadanh',
         'trangthai',
         'tailieu',
-        'giayphepkd'
+        'giayphepkd',
+        'cqcq'
     ];
 }

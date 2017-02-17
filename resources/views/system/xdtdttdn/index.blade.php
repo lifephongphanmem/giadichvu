@@ -41,9 +41,14 @@
 @stop
 
 @section('content')
-
+    <?php
+        if($pl == 'dich_vu_luu_tru')
+            $note = 'dich vụ lưu trú';
+        else
+            $note = 'dịch vụ vận tải';
+    ?>
     <h3 class="page-title">
-        Quản lý thay đổi thông tin <small>&nbsp;doanh nghiệp</small>
+        Quản lý thay đổi thông tin doanh nghiệp cung cấp <small>&nbsp;{{$note}}</small>
     </h3>
     <!-- END PAGE HEADER-->
     <div class="row">
@@ -53,18 +58,7 @@
                 <div class="portlet-body">
                     <div class="portlet-body">
                         <div class="table-toolbar">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <select class="form-control" name="phanloai" id="phanloai">
-                                            <option value="dich_vu_luu_tru" {{($pl == "dich_vu_luu_tru") ? 'selected' : ''}}>Dịch vụ lưu trú</option>
-                                            <option value="dich_vu_van_tai" {{($pl == "dich_vu_van_tai") ? 'selected' : ''}}>Dịch vụ vận tải</option>
-                                        </select>
-                                    </div>
-                                </div>
 
-
-                            </div>
                         </div>
                     <table class="table table-striped table-bordered table-hover" id="sample_3">
                         <thead>
