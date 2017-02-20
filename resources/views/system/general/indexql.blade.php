@@ -31,7 +31,7 @@
 @section('content')
 
     <h3 class="page-title">
-        Thông tin đơn vị<small>&nbsp;quản lý</small>
+        Cấu hình hệ thống đơn vị<small>&nbsp;quản lý</small>
     </h3>
     <!-- END PAGE HEADER-->
     <div class="row">
@@ -40,7 +40,7 @@
             <div class="portlet box">
                 <div class="portlet-title">
                     <div class="actions">
-                        <a href="{{url('danh_muc_don_vi_quan_ly/create')}}" class="btn btn-default btn-sm">
+                        <a href="{{url('cau_hinh_he_thong/create')}}" class="btn btn-default btn-sm">
                             <i class="fa fa-plus"></i> Thêm mới </a>
                             <a href="{{url('setting')}}" class="btn btn-default btn-sm">
                                 <i class="icon-settings"></i> Setting</a>
@@ -68,7 +68,7 @@
                             <td style="text-align: center">{{$tt->plql}}</td>
                             <td>{{$tt->diachi}}</td>
                             <td>
-                                <a href="{{url('danh_muc_don_vi_quan_ly/'.$tt->id.'/edit')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</a>
+                                <a href="{{url('cau_hinh_he_thong/'.$tt->id.'/edit')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</a>
                                 <button type="button" onclick="getId('{{$tt->id}}')" class="btn btn-default btn-xs mbs" data-target="#delete-modal" data-toggle="modal"><i class="fa fa-trash-o"></i>&nbsp;
                                     Xóa</button>
                             </td>

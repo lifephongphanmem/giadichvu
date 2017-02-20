@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\DmDvQl;
 use App\GeneralConfigs;
+use App\Users;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -13,20 +15,68 @@ class GeneralConfigsController extends Controller
     public function index()
     {
         if (Session::has('admin')) {
-            $model = GeneralConfigs::first();
 
-            return view('system.general.index')
-                ->with('model',$model)
-                ->with('pageTitle','Cấu hình hệ thống');
+            if(session('admin')->sadmin == 'ssa') {
+                $model = DmDvQl::all();
+                return view('system.general.indexql')
+                    ->with('model',$model)
+                    ->with('pageTitle', 'Cấu hình hệ thống');
+            }else{
+                $model = DmDvQl::where('maqhns',session('admin')->cqcq)
+                    ->first();
+                return view('system.general.index')
+                    ->with('model', $model)
+                    ->with('pageTitle', 'Cấu hình hệ thống');
+
+            }
 
         }else
             return view('errors.notlogin');
     }
+
+    public function create(){
+        if (Session::has('admin')) {
+
+            return view('system.general.create')
+                ->with('pageTitle', 'Thêm mới thông tin cấu hình hệ thống');
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function store(Request $request){
+        if (Session::has('admin')) {
+            $input = $request->all();
+
+            $model = new DmDvQl();
+            $model->tendv = $input['tendv'];
+            $model->maqhns = $input['maqhns'];
+            $model->diachi = $input['diachi'];
+            $model->plql = $input['plql'];
+            $model->level = $input['level'];
+            $model->username = $input['taikhoan'];
+            $model->password = md5($input['password']);
+            $model->sohsnhan = $input['sohsnhan'];
+            $model->ttlh = $input['ttlh'];
+            if($model->save()){
+                $modeluser = new Users();
+                $modeluser->name = $input['tendv'];
+                $modeluser->username = $input['taikhoan'];
+                $modeluser->password = md5($input['password']);
+                $modeluser->status = 'Kích hoạt';
+                $modeluser->level = $input['level'];
+                $modeluser->cqcq = $input['maqhns'];
+                $modeluser->save();
+            }
+
+            return redirect('cau_hinh_he_thong');
+        }else
+            return view('errors.notlogin');
+    }
+
     public function edit($id)
     {
         if (Session::has('admin')) {
-            $model = GeneralConfigs::findOrFail($id);
-
+            $model = DmDvQl::findOrFail($id);
             return view('system.general.edit')
                 ->with('model',$model)
                 ->with('pageTitle','Chỉnh sửa cấu hình hệ thống');
@@ -37,17 +87,18 @@ class GeneralConfigsController extends Controller
     public function update(Request $request,$id)
     {
         if (Session::has('admin')) {
-            $update = $request->all();
-            $model = GeneralConfigs::findOrFail($id);
-                if(isset($update['sodvlt']))
-                    $model->sodvlt = $update['sodvlt'];
-                if(isset($update['sodvvt']))
-                    $model->sodvvt = $update['sodvvt'];
-                if(isset($update['ttlhlt']))
-                    $model->ttlhlt = $update['ttlhlt'];
-                if(isset($update['ttlhvt']))
-                    $model->ttlhvt = $update['ttlhvt'];
-                $model->save();
+            $input = $request->all();
+            $model = DmDvQl::findOrFail($id);
+            if(session('admin')->sadmin == 'ssa'){
+                $model->maqhns = $input['maqhns'];
+                $model->tendv = $input['tendv'];
+                $model->plql = $input['plql'];
+                $model->level = $input['level'];
+            }
+            $model->diachi = $input['diachi'];
+            $model->sohsnhan = $input['sohsnhan'];
+            $model->ttlh = $input['ttlh'];
+            $model->save();
 
             return redirect('cau_hinh_he_thong');
 

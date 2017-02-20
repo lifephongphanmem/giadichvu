@@ -30,118 +30,57 @@
                             <i class="fa fa-edit"></i> Chỉnh sửa </a>
                         <!--a href="" class="btn btn-default btn-sm">
                             <i class="fa fa-print"></i> Print </a-->
-                        @if(session('admin')->sadmin == 'ssa')
-                            <a href="{{url('setting')}}" class="btn btn-default btn-sm">
-                                <i class="icon-settings"></i> Setting</a>
-                        @endif
+
                     </div>
                 </div>
                 <div class="portlet-body">
                     <table id="user" class="table table-bordered table-striped">
                         <tbody>
-                        @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'satc')
                         <tr>
                             <td style="width:15%">
                                 <b>Đơn vị quản lý</b>
                             </td>
                             <td style="width:35%">
-                                <span class="text-muted">{{$model->tendonvilt}}
+                                <span class="text-muted">{{$model->tendv}}
                                 </span>
                             </td>
                         </tr>
                         <tr>
                             <td style="width:15%">
-                                <b>Thông tin liên hệ dịch vụ lưu trú</b>
+                                <b>Mã quan hệ ngân sách</b>
                             </td>
                             <td style="width:35%">
-                                <span class="text-muted">{{$model->ttlhlt}}
-                                </span>
-                            </td>
-                        </tr>
-                        @endif
-                        @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'savt')
-                        <tr>
-                            <td style="width:15%">
-                                <b>Đơn vị quản lý</b>
-                            </td>
-                            <td style="width:35%">
-                                <span class="text-muted">{{$model->tendonvivt}}
+                                <span class="text-muted">{{$model->maqhns}}
                                 </span>
                             </td>
                         </tr>
                         <tr>
                             <td style="width:15%">
-                                <b>Thông tin liên hệ dịch vụ vận tải</b>
-                            </td>
-                            <td style="width:35%">
-                                <span class="text-muted">{{$model->ttlhvt}}
-                                </span>
-                            </td>
-                        </tr>
-                        @endif
-                        <!--tr>
-                            <td style="width:15%">
-                                <b>Địa chỉ</b>
+                                <b>Địa chỉ </b>
                             </td>
                             <td style="width:35%">
                                 <span class="text-muted">{{$model->diachi}}
                                 </span>
                             </td>
-                        </tr-->
-                        <!--tr>
+                        </tr>
+                        <tr>
                             <td style="width:15%">
-                                <b>Thủ trưởng đơn vị</b>
+                                <b>Số hồ sơ nhận </b>
                             </td>
                             <td style="width:35%">
-                                <span class="text-muted">{{$model->thutruong}}
+                                <span class="text-muted">{{$model->sohsnhan}}
                                 </span>
                             </td>
                         </tr>
                         <tr>
                             <td style="width:15%">
-                                <b>Kế toán</b>
+                                <b>Thông tin liên lạc </b>
                             </td>
                             <td style="width:35%">
-                                <span class="text-muted">{{$model->ketoan}}
+                                <span class="text-muted">{!! nl2br(e($model->ttlh)) !!}
                                 </span>
                             </td>
                         </tr>
-                        <tr>
-                            <td style="width:15%">
-                                <b>Người lập biểu</b>
-                            </td>
-                            <td style="width:35%">
-                                <span class="text-muted">{{$model->nguoilapbieu}}
-                                </span>
-                            </td>
-                        </tr-->
-                        <!--tr>
-                            <td style="width:15%">
-                                <b>Số hồ sơ dịch vụ lưu trú đã nhận</b>
-                            </td>
-                            <td style="width:35%">
-                                <span class="text-muted">{{$model->sodvlt}}
-                                </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="width:15%">
-                                <b>Số hồ sơ dịch vụ vận tải đã nhận</b>
-                            </td>
-                            <td style="width:35%">
-                                <span class="text-muted">{{$model->sodvvt}}
-                                </span>
-                            </td>
-                        </tr-->
-                        <!--tr>
-                            <td style="width:15%">
-                                <b>Năm quản lý</b>
-                            </td>
-                            <td style="width:35%">
-                                <span class="text-muted">{{$model->namhethong}}
-                                </span>
-                            </td>
-                        </tr-->
 
 
                         </tbody>

@@ -142,4 +142,5 @@
             })
         }(jQuery));
     </script>
+    @include('includes.script.create-header-scripts')
 @stop

@@ -485,9 +485,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         <span class="arrow "></span>
                     </a>
                     <ul class="sub-menu">
-                        @if(session('admin')->sadmin == 'ssa')
-                        <li><a href="{{url('danh_muc_don_vi_quan_ly')}}">Danh mục đơn vị quản lý</a> </li>
-                        @endif
+                        <!--li><a href="{{url('danh_muc_don_vi_quan_ly')}}">Danh mục đơn vị quản lý</a> </li-->
 
                         @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'satc')
                         <li><a href="{{url('dn_dichvu_luutru')}}">DN dịch vụ lưu trú</a> </li>

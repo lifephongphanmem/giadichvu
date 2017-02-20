@@ -18,6 +18,8 @@ Route::get('register/tra_lai','HomeController@regdverror');
 
 // <editor-fold defaultstate="collapsed" desc="--Setting--">
 Route::get('cau_hinh_he_thong','GeneralConfigsController@index');
+Route::get('cau_hinh_he_thong/create','GeneralConfigsController@create');
+Route::post('cau_hinh_he_thong','GeneralConfigsController@store');
 Route::get('cau_hinh_he_thong/{id}/edit','GeneralConfigsController@edit');
 Route::patch('cau_hinh_he_thong/{id}','GeneralConfigsController@update');
 Route::get('xetduyet_thaydoi_thongtindoanhnghiep/phanloai={pl}','XdTdTtDnController@index');

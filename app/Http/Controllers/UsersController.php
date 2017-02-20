@@ -163,12 +163,12 @@ class UsersController extends Controller
                     ->get();
             }
             $index_unset = 0;
-            /*foreach ($model as $user) {
-                if ($user->sadmin == 'ssa' || $user->sadmin == 'sa') {
+            foreach ($model as $user) {
+                if ($user->sadmin == 'ssa') {
                     unset($model[$index_unset]);
                 }
                 $index_unset++;
-            }*/
+            }
 
             return view('system.users.index')
                 ->with('model', $model)
