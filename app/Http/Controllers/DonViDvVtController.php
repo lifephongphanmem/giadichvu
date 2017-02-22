@@ -140,22 +140,38 @@ class DonViDvVtController extends Controller
     // <editor-fold defaultstate="collapsed" desc="--Thông tin doanh nghiệp trong menu nhập liệu--">
     public function TtDnIndex(){
         if (Session::has('admin')) {
-            $model = DonViDvVt::where('masothue',session('admin')->mahuyen)
-                ->first();
-            $setting = $model->setting;
+            if(session('admin')->level == 'T' || session('admin')->level == 'H'){
+                if(session('admin')->sadmin == 'ssa'){
+                    $model = DonViDvVt::all();
 
-            $modeltttd = TtDn::where('masothue',session('admin')->mahuyen)
-                ->first();
-            if(isset($modeltttd))
-                $settingtttd = $modeltttd->setting;
-            else
-                $settingtttd = '';
-            return view('manage.dvvt.ttdn.index')
-                ->with('model',$model)
-                ->with('setting',json_decode($setting))
-                ->with('modeltttd',$modeltttd)
-                ->with('settingtttd',json_decode($settingtttd))
-                ->with('pageTitle','Thông tin doanh nghiệp cung cấp dịch vụ vận tải');
+                }else{
+                    $model = DonViDvVt::all();//fix lại
+                }
+
+                return view('manage.dvvt.ttdn.ql.index')
+                    ->with('model',$model)
+                    ->with('pageTitle','Thông tin doanh nghiệp cung cấp dịch vụ vận tải');
+
+            }else {
+
+                $model = DonViDvVt::where('masothue', session('admin')->mahuyen)
+                    ->first();
+                $setting = $model->setting;
+
+                $modeltttd = TtDn::where('masothue', session('admin')->mahuyen)
+                    ->first();
+
+                if (isset($modeltttd))
+                    $settingtttd = $modeltttd->setting;
+                else
+                    $settingtttd = '';
+                return view('manage.dvvt.ttdn.index')
+                    ->with('model', $model)
+                    ->with('setting', json_decode($setting))
+                    ->with('modeltttd', $modeltttd)
+                    ->with('settingtttd', json_decode($settingtttd))
+                    ->with('pageTitle', 'Thông tin doanh nghiệp cung cấp dịch vụ vận tải');
+            }
         }else
             return view('errors.notlogin');
     }

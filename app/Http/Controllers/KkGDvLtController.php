@@ -95,6 +95,7 @@ class KkGDvLtController extends Controller
             }
             $modeldsph = KkGDvLtCtDf::where('macskd',$modelcskd->macskd)
                 ->get();
+            //dd($modelcskd);
             return view('manage.dvlt.kkgia.kkgiadv.create')
                 ->with('modelcskd',$modelcskd)
                 ->with('modelph',$modelph)//Thay thế
@@ -107,8 +108,10 @@ class KkGDvLtController extends Controller
 
     public function store(Request $request){
         if (Session::has('admin')) {
+
             $mahs = getdate()[0];
             $insert = $request->all();
+            //dd($insert);
             $model = new KkGDvLt();
             $model->ngaynhap = $insert['ngaynhap'];
             $model->mahs = $mahs;
@@ -119,7 +122,7 @@ class KkGDvLtController extends Controller
                 $model->ngaycvlk = $insert['ngaycvlk'];
             $model->trangthai = 'Chờ chuyển';
             $model->macskd = $insert['macskd'];
-            $model->masothue = session('admin')->mahuyen;
+            $model->masothue = $insert['masothue'];
             $model->ghichu = $insert['ghichu'];
             $model->cqcq = $insert['cqcq'];
             $model->dvt = $insert['dvt'];

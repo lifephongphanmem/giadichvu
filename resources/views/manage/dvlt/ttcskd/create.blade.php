@@ -291,7 +291,8 @@
                         loaip: $('input[name="loaip"]').val(),
                         qccl: $('textarea[name="qccl"]').val(),
                         sohieu: $('textarea[name="sohieu"]').val(),
-                        ghichu: $('textarea[name="ghichu"]').val()
+                        ghichu: $('textarea[name="ghichu"]').val(),
+                        masothue: $('input[name="masothue"]').val()
                     },
                     dataType: 'JSON',
                     success: function (data) {

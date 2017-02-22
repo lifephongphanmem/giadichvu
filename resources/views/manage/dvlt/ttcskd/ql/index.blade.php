@@ -39,10 +39,10 @@
         <div class="col-md-12">
             <!-- BEGIN EXAMPLE TABLE PORTLET-->
             <div class="portlet box">
-                <div class="portlet-title">
+                <!--div class="portlet-title">
                     <div class="actions">
                     </div>
-                </div>
+                </div-->
                 <div class="portlet-body">
                     <div class="portlet-body">
                     <table class="table table-striped table-bordered table-hover" id="sample_3">

@@ -1,4 +1,15 @@
 <?php
+Route::get('test',function(){
+    return view('manage.test.create')
+        ->with('pageTitle','Test');
+});
+Route::get('test1',function(){
+    return view('manage.test.test')
+        ->with('pageTitle','Test');
+});
+
+
+
 Route::get('/', 'HomeController@index');
 Route::get('/setting','HomeController@setting');
 Route::post('/setting','HomeController@upsetting');

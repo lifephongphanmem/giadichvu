@@ -32,7 +32,7 @@
 @section('content')
 
     <h3 class="page-title">
-        Thông tin doanh nghiệp <small>&nbsp;dịch vụ lưu trú</small>
+        Thông tin doanh nghiệp <small>&nbsp;dịch vụ vận tải</small>
     </h3>
     <!-- END PAGE HEADER-->
     <div class="row">
@@ -60,13 +60,13 @@
                         @foreach($model as $key=>$tt)
                         <tr class="odd gradeX">
                             <td style="text-align: center">{{$key + 1}}</td>
-                            <td class="active" >{{$tt->tendn}}</td>
+                            <td class="active" >{{$tt->tendonvi}}</td>
                             <td>{{$tt->masothue}}</td>
-                            <td>{{$tt->teldn}}</td>
-                            <td>{{$tt->diachidn}}</td>
+                            <td>{{$tt->dienthoai}}</td>
+                            <td>{{$tt->diachi}}</td>
                             <td>
-                                @if(can('dvlt','edit'))
-                                <a href="{{url('ttdn_dich_vu_luu_tru/'.$tt->id.'/edit')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</a>
+                                @if(can('dvvtxk','edit') || can('dvvtxb','edit') || can('dvvtxtx','edit') || can('dvvtch','edit'))
+                                <a href="{{url('dich_vu_van_tai/thong_tin_don_vi/'.$tt->id.'/edit')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</a>
                                 @endif
                             </td>
                         </tr>

@@ -103,10 +103,10 @@ class CsKdDvLtController extends Controller
             $modelttp->sohieu  =$inputs['sohieu'];
             $modelttp->ghichu = $inputs['ghichu'];
             $modelttp->maloaip = getdate()[0];
-            $modelttp->masothue = session('admin')->mahuyen;
+            $modelttp->masothue = $inputs['masothue'];
             $modelttp->save();
 
-            $model = TtPhong::where('masothue',session('admin')->mahuyen)
+            $model = TtPhong::where('masothue',$inputs['masothue'])
                 ->get();
 
 

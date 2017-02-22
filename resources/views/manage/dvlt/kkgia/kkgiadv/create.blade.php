@@ -3,6 +3,7 @@
 @section('custom-style')
     <link rel="stylesheet" type="text/css" href="{{url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{url('assets/global/plugins/select2/select2.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{url('assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css')}}"/>
 @stop
 
 
@@ -12,6 +13,10 @@
     <script type="text/javascript" src="{{url('assets/global/plugins/select2/select2.min.js')}}"></script>
     <script type="text/javascript" src="{{url('assets/global/plugins/datatables/media/js/jquery.dataTables.min.js')}}"></script>
     <script type="text/javascript" src="{{url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js')}}"></script>
+
+    <script type="text/javascript" src="{{url('assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js')}}"></script>
+    <script src="{{url('assets/admin/pages/scripts/components-pickers.js')}}"></script>
+
     <!-- END PAGE LEVEL PLUGINS -->
     <script src="{{url('assets/admin/pages/scripts/table-managed.js')}}"></script>
     <script>
@@ -94,6 +99,7 @@
             }
             //});
         }
+
         // </editor-fold>
     </script>
     <script>
@@ -354,14 +360,16 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Ngày kê khai<span class="require">*</span></label>
-                                <input type="date" name="ngaynhap" id="ngaynhap" class="form-control required" autofocus>
+                                <!--input type="date" name="ngaynhap" id="ngaynhap" class="form-control required" autofocus-->
+                                {!!Form::date('ngaynhap', \Carbon\Carbon::now(), array('id' => 'ngaynhap','class' => 'form-control required'))!!}
                             </div>
                         </div>
                         <!--/span-->
                         <div class="col-md-6">
                             <div class="form-group has-error">
                                 <label class="control-label">Ngày thực hiện mức giá kê khai<span class="require">*</span></label>
-                                <input type="date" name="ngayhieuluc" id="ngayhieuluc" class="form-control required">
+                                <!--input type="date" name="ngayhieuluc" id="ngayhieuluc" class="form-control required"-->
+                                {!!Form::date('ngayhieuluc', \Carbon\Carbon::now(), array('id' => 'ngayhieuluc','class' => 'form-control required'))!!}
                             </div>
                         </div>
                         <!--/span-->
@@ -380,6 +388,7 @@
                             <div class="form-group has-error">
                                 <label class="control-label">Số công văn liền kề</label>
                                 <input type="text" name="socvlk" id="socvlk" class="form-control" value="{{isset($modelcb) ? $modelcb->socv : '' }}">
+
                             </div>
                         </div>
                         <!--/span-->
@@ -389,6 +398,7 @@
                             <div class="form-group">
                                 <label class="control-label">Ngày nhập số công văn liền kề<span class="require">*</span></label>
                                 <input type="date" name="ngaycvlk" id="ngaycvlk" class="form-control" value="{{isset($modelcb) ? $modelcb->ngaynhap : '' }}">
+
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -403,7 +413,7 @@
                         </div>
                     </div>
                     <input type="hidden" name="macskd" id="macskd" value="{{$modelcskd->macskd}}">
-                    <input type="text" name="masothue" id="masothue" value="{{$modelcskd->masothue}}"
+                    <input type="hidden" name="masothue" id="masothue" value="{{$modelcskd->masothue}}">
                     <input type="hidden" name="cqcq" id="cqcq" value="{{$modelcskd->cqcq}}">
                     {!! Form::close() !!}
                     <!--/row-->
