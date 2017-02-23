@@ -111,15 +111,15 @@ class KkGDvLtController extends Controller
 
             $mahs = getdate()[0];
             $insert = $request->all();
-            //dd($insert);
+
             $model = new KkGDvLt();
-            $model->ngaynhap = $insert['ngaynhap'];
+            $model->ngaynhap = date('Y-m-d', strtotime(str_replace('/', '-', $insert['ngaynhap'])));
             $model->mahs = $mahs;
             $model->socv = $insert['socv'];
-            $model->ngayhieuluc = $insert['ngayhieuluc'];
+            $model->ngayhieuluc = date('Y-m-d', strtotime(str_replace('/', '-', $insert['ngayhieuluc'])));
             $model->socvlk = $insert['socvlk'];
             if($insert['ngaycvlk'] != '')
-                $model->ngaycvlk = $insert['ngaycvlk'];
+                $model->ngaycvlk = date('Y-m-d', strtotime(str_replace('/', '-', $insert['ngaycvlk'])));
             $model->trangthai = 'Chờ chuyển';
             $model->macskd = $insert['macskd'];
             $model->masothue = $insert['masothue'];
@@ -166,11 +166,12 @@ class KkGDvLtController extends Controller
             $input = $request->all();
             $model = KkGDvLt::findOrFail($id);
             $macskd = $model->macskd;
-            $model->ngaynhap = $input['ngaynhap'];
+
+            $model->ngaynhap = date('Y-m-d', strtotime(str_replace('/', '-', $input['ngaynhap'])));
             $model->socv = $input['socv'];
-            $model->ngayhieuluc = $input['ngayhieuluc'];
+            $model->ngayhieuluc = date('Y-m-d', strtotime(str_replace('/', '-', $input['ngayhieuluc'])));
             $model->socvlk = $input['socvlk'];
-            $model->ngaycvlk = $input['ngaycvlk']==''?NULL:$input['ngaycvlk'];
+            $model->ngaycvlk = $input['ngaycvlk']==''? NULL  :date('Y-m-d', strtotime(str_replace('/', '-', $input['ngaycvlk'])));;
             $model->ghichu = $input['ghichu'];
             $model->dvt = $input['dvt'];
             $model->save();
