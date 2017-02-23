@@ -131,6 +131,19 @@
                                     </div>
                                 </div>
                             </div>
+                            @if(session('admin')->level == 'T' || session('admin') == 'H')
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Đơn vị quản lý<span class="require">*</span></label>
+                                        <select class="form-control" name="cqcq" id="cqcq" required>
+                                            <option value="">--Chọn đơn vị quản lý--</option>
+                                            @foreach($ttcqcq as $tt)
+                                                <option value="{{$tt->maqhns}}" {{($tt->maqhns == $model->cqcq) ? 'selected' : ''}}>{{$tt->tendv}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                     </div>
                     <!-- END FORM-->

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DmDvQl;
 use App\DonViDvVt;
 use App\TtDn;
 use App\Users;
@@ -26,8 +27,10 @@ class DonViDvVtController extends Controller
 
     public function create(){
         if (Session::has('admin')) {
-
+            $modelpb = DmDvQl::where('plql','VT')
+                ->get();
             return view('system.dndvvt.create')
+                ->with('modelpb',$modelpb)
                 ->with('pageTitle','Thêm mới doanh nghiệp cung cấp dịch vụ vận tải');
 
         }else
@@ -62,6 +65,7 @@ class DonViDvVtController extends Controller
             //$model->tailieu =$insert['tailieu'];
             $model->trangthai = 'Kích hoạt';
             $model->email = '';
+            $model->cqcq = $insert['cqcq'];
 
             if($model->save()){
                 $modeluser = new Users();
@@ -72,6 +76,7 @@ class DonViDvVtController extends Controller
                 $modeluser->status = 'Kích hoạt';
                 $modeluser->level = 'DVVT';
                 $modeluser->mahuyen = $insert['masothue'];
+                $modeluser->cqcq = $insert['cqcq'];
                 $modeluser->save();
             }
             return redirect('dn_dichvu_vantai');
@@ -84,9 +89,13 @@ class DonViDvVtController extends Controller
 
             $model = DonViDvVt::findOrFail($id);
             $setting = $model->setting;
+            $modelpb = DmDvQl::where('plql','VT')
+                ->get();
+            //dd($model->cqcq . '-'. $modelpb);
             return view('system.dndvvt.edit')
                 ->with('model',$model)
                 ->with('setting',json_decode($setting))
+                ->with('modelpb',$modelpb)
                 ->with('pageTitle','Danh sách doanh nghiệp cung cấp dịch vụ vận tải');
 
         }else
@@ -116,6 +125,7 @@ class DonViDvVtController extends Controller
             $model->toado = getAddMap($input['diachi']);
             //$model->tailieu =$insert['tailieu'];
             $model->email = '';
+            $model->cqcq = $input['cqcq'];
             $model->save();
 
             return redirect('dn_dichvu_vantai');
@@ -145,7 +155,9 @@ class DonViDvVtController extends Controller
                     $model = DonViDvVt::all();
 
                 }else{
-                    $model = DonViDvVt::all();//fix lại
+                    $model = DonViDvVt::where('cqcq',session('admin')->cqcq)
+                        ->get();
+
                 }
 
                 return view('manage.dvvt.ttdn.ql.index')
@@ -181,9 +193,12 @@ class DonViDvVtController extends Controller
         if (Session::has('admin')) {
             $model = DonViDvVt::findOrFail($id);
             $setting = $model->setting;
+            $ttcqcq = DmDvQl::where('plql','VT')
+                ->get();
             return view('manage.dvvt.ttdn.edit')
                 ->with('model',$model)
                 ->with('setting',json_decode($setting))
+                ->with('ttcqcq',$ttcqcq)
                 ->with('pageTitle','Chỉnh sửa thông tin doanh nghiệp cung cấp dịch vụ vận tải');
         }else
             return view('errors.notlogin');
@@ -196,31 +211,61 @@ class DonViDvVtController extends Controller
             $check = TtDn::where('masothue',session('admin')->mahuyen)
                 ->delete();
             //$model = DonViDvVt::findOrFail($id);
-            $model = new TtDn();
-            $model->tendn = session('admin')->name;
-            $model->masothue = session('admin')->mahuyen;
+            if(session('admin')->level == 'T' || session('admin')->level == 'H'){
+                $model = new DonViDvVt();
+                $model->tendonvi = $upd['tendonvi'];
+                $model->masothue = $upd['masothue'];
+                $model->diachi = $upd['diachi'];
+                $model->dienthoai = $upd['dienthoai'];
+                $model->fax = $upd['fax'];
+                $model->dknopthue= $upd['dknopthue'];
+                $model->giayphepkd = $upd['giayphepkd'];
+                $model->chucdanh = $upd['chucdanh'];
+                $model->nguoiky = $upd['nguoiky'];
+                $model->diadanh = $upd['diadanh'];
+                $model->tailieu = $upd['tailieu'];
 
-            $model->diachi = $upd['diachi'];
-            $model->tel = $upd['dienthoai'];
-            $model->fax = $upd['fax'];
-            $model->noidknopthue = $upd['dknopthue'];
-            $model->giayphepkd = $upd['giayphepkd'];
-            $model->chucdanhky = $upd['chucdanh'];
-            $model->nguoiky = $upd['nguoiky'];
-            $model->diadanh = $upd['diadanh'];
-            $model->tailieu = $upd['tailieu'];
-            $input['roles'] = isset($upd['roles']) ? $upd['roles'] : null;
-            $model->setting = json_encode($upd['roles']);
-            $model->toado = getAddMap($upd['diachi']);
-            $model->link = $upd['link'];
-            $model->pl = 'DVVT';
-            $model->email = '';
-            $x = $input['roles'];
-            $model->dvxk = isset($x['dvvt']['vtxk']) ? 1 : 0;
-            $model->dvxb = isset($x['dvvt']['vtxb']) ? 1 : 0;
-            $model->dvxtx = isset($x['dvvt']['vtxtx']) ? 1 : 0;
-            $model->dvk = isset($x['dvvt']['vtch']) ? 1 : 0;
-            $model->save();
+                $insert['roles'] = isset($upd['roles']) ? $upd['roles'] : null;
+                $model->setting = json_encode($upd['roles']);
+                $x = $insert['roles'];
+                $model->dvxk = isset($x['dvvt']['vtxk']) ? 1 : 0;
+                $model->dvxb = isset($x['dvvt']['vtxb']) ? 1 : 0;
+                $model->dvxtx = isset($x['dvvt']['vtxtx']) ? 1 : 0;
+                $model->dvk = isset($x['dvvt']['vtch']) ? 1 : 0;
+
+                $model->toado = $upd['diachi']!= '' ? getAddMap($insert['diachi']) : '';
+                //$model->tailieu =$insert['tailieu'];
+                $model->trangthai = 'Kích hoạt';
+                $model->email = '';
+                $model->cqcq = $insert['cqcq'];
+                $model->save();
+            }else {
+                $model = new TtDn();
+                $model->tendn = session('admin')->name;
+                $model->masothue = session('admin')->mahuyen;
+
+                $model->diachi = $upd['diachi'];
+                $model->tel = $upd['dienthoai'];
+                $model->fax = $upd['fax'];
+                $model->noidknopthue = $upd['dknopthue'];
+                $model->giayphepkd = $upd['giayphepkd'];
+                $model->chucdanhky = $upd['chucdanh'];
+                $model->nguoiky = $upd['nguoiky'];
+                $model->diadanh = $upd['diadanh'];
+                $model->tailieu = $upd['tailieu'];
+                $input['roles'] = isset($upd['roles']) ? $upd['roles'] : null;
+                $model->setting = json_encode($upd['roles']);
+                $model->toado = getAddMap($upd['diachi']);
+                $model->link = $upd['link'];
+                $model->pl = 'DVVT';
+                $model->email = '';
+                $x = $input['roles'];
+                $model->dvxk = isset($x['dvvt']['vtxk']) ? 1 : 0;
+                $model->dvxb = isset($x['dvvt']['vtxb']) ? 1 : 0;
+                $model->dvxtx = isset($x['dvvt']['vtxtx']) ? 1 : 0;
+                $model->dvk = isset($x['dvvt']['vtch']) ? 1 : 0;
+                $model->save();
+            }
             return redirect('dich_vu_van_tai/thong_tin_don_vi');
         } else
             return view('errors.notlogin');

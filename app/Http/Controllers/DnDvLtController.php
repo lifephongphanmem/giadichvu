@@ -17,8 +17,15 @@ class DnDvLtController extends Controller
     {
         if (Session::has('admin')) {
 
-            $model = DnDvLt::where('trangthai','Kích hoạt')
-                ->get();
+            if(session('admin')->sadmin == 'ssa') {
+
+                $model = DnDvLt::where('trangthai', 'Kích hoạt')
+                    ->get();
+            }else{
+                $model = DnDvLt:: where('trangthai','Kích hoạt')
+                    ->where('cqcq',session('admin')->cqcq)
+                    ->get();
+            }
 
             return view('system.dndvlt.index')
                 ->with('model',$model)
@@ -33,7 +40,11 @@ class DnDvLtController extends Controller
     {
         if (Session::has('admin')) {
 
+            $modelpb = DmDvQl::where('plql','TC')
+                ->get();
+            //dd($modelpb);
             return view('system.dndvlt.create')
+                ->with('modelpb',$modelpb)
                 ->with('pageTitle','Thêm mới doanh nghiệp cung cấp dịch vụ lưu trú');
 
         }else
@@ -60,6 +71,7 @@ class DnDvLtController extends Controller
             $model->giayphepkd = $insert['giayphepkd'];
             $model->trangthai = 'Kích hoạt';
             //$model->email = $insert['email'];
+            $model->cqcq = $insert['cqcq'];
             if($model->save()){
                 $modeluser = new Users();
                 $modeluser->name = $insert['tendn'];
@@ -69,6 +81,7 @@ class DnDvLtController extends Controller
                 $modeluser->status = 'Kích hoạt';
                 $modeluser->level = 'DVLT';
                 $modeluser->mahuyen = $insert['masothue'];
+                $modeluser->cqcq = $insert['cqcq'];
                 $modeluser->save();
             }
             return redirect('dn_dichvu_luutru');
@@ -89,8 +102,12 @@ class DnDvLtController extends Controller
         if (Session::has('admin')) {
 
             $model = DnDvLt::findOrFail($id);
+            $modelpb = DmDvQl::where('plql','TC')
+                ->get();
+            //dd($model);
             return view('system.dndvlt.edit')
                 ->with('model',$model)
+                ->with('modelpb',$modelpb)
                 ->with('pageTitle','Chỉnh sửa thông tin doanh nghiệp');
 
         }else
@@ -115,6 +132,7 @@ class DnDvLtController extends Controller
             $model->diadanh = $update['diadanh'];
             $model->tailieu = $update['tailieu'];
             $model->giayphepkd = $update['giayphepkd'];
+            $model->cqcq = $update['cqcq'];
             //$model->email = $update['email'];
             $model->save();
 

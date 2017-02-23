@@ -110,6 +110,7 @@
                                         {!!Form::text('diadanh', null, array('id' => 'diadanh','class' => 'form-control required'))!!}
                                     </div>
                                 </div>
+                                @if(session('admin')->level == 'T' || session('admin') == 'H')
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Đơn vị quản lý<span class="require">*</span></label>
@@ -121,6 +122,7 @@
                                         </select>
                                     </div>
                                 </div>
+                                @endif
                             </div>
                         </div>
 
