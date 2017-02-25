@@ -18,13 +18,24 @@
     <!-- END PAGE LEVEL PLUGINS -->
     <script src="{{url('assets/admin/pages/scripts/table-managed.js')}}"></script>
 
-    <!--Date-->
+    <!--Date>
     <script type="text/javascript" src="{{ url('js/jquery-1.10.2.min.js') }}"></script>
     <script type="text/javascript" src="{{ url('vendors/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
     <script type="text/javascript" src="{{ url('vendors/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
     <script type="text/javascript" src="{{ url('js/main.js') }}"></script>
 
-    <!--End Date-->
+    <End Date-->
+
+    !--Date new-->
+    <script src="{{url('minhtran/jquery.min.js')}}"></script>
+    <script src="{{url('minhtran/jquery.inputmask.bundle.min.js')}}"></script>
+
+    <script>
+        $(document).ready(function(){
+            $(":input").inputmask();
+        });
+    </script>
+    <!--End date new-->
 
     <script>
         jQuery(document).ready(function() {
@@ -296,7 +307,7 @@
                             <div class="form-group">
                                 <label class="control-label">Ngày kê khai<span class="require">*</span></label>
                                 <!--input type="date" name="ngaynhap" id="ngaynhap" value="{{$model->ngaynhap}}" class="form-control required"-->
-                                {!!Form::text('ngaynhap',date('d/m/Y',  strtotime($model->ngaynhap)), array('id' => 'ngaynhap','data-date-format' => 'dd/mm/yy','placeholder' => 'dd/mm/yyyy','class' => 'datepicker-default form-control required'))!!}
+                                {!!Form::text('ngaynhap',date('d/m/Y',  strtotime($model->ngaynhap)), array('id' => 'ngaynhap','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required','autofocus'))!!}
                             </div>
                         </div>
                         <!--/span-->
@@ -304,7 +315,7 @@
                             <div class="form-group">
                                 <label class="control-label">Ngày thực hiện mức giá kê khai<span class="require">*</span></label>
                                 <!--input type="date" name="ngayhieuluc" id="ngayhieuluc" value="{{$model->ngayhieuluc}}" class="form-control required"-->
-                                {!!Form::text('ngayhieuluc',date('d/m/Y',  strtotime($model->ngayhieuluc)), array('id' => 'ngayhieuluc','data-date-format' => 'dd/mm/yy','placeholder' => 'dd/mm/yyyy','class' => 'datepicker-default form-control required'))!!}
+                                {!!Form::text('ngayhieuluc',date('d/m/Y',  strtotime($model->ngayhieuluc)), array('id' => 'ngayhieuluc','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required'))!!}
                             </div>
                         </div>
                         <!--/span-->
@@ -332,7 +343,7 @@
                             <div class="form-group">
                                 <label class="control-label">Ngày nhập số công văn liền kề<span class="require">*</span></label>
                                 <!--input type="date" name="ngaycvlk" id="ngaycvlk" value="{{$model->ngaycvlk}}" class="form-control"-->
-                                {!!Form::text('ngaycvlk',($model->ngaycvlk != '' ? date('d/m/Y',  strtotime($model->ngaycvlk)) : ''), array('id' => 'ngaycvlk','data-date-format' => 'dd/mm/yy','placeholder' => 'dd/mm/yyyy','class' => 'datepicker-default form-control required'))!!}
+                                {!!Form::text('ngaycvlk',($model->ngaycvlk != '' ? date('d/m/Y',  strtotime($model->ngaycvlk)) : ''), array('id' => 'ngaycvlk','data-inputmask'=>"'alias': 'date'",'class' => 'form-control'))!!}
                             </div>
                         </div>
                         <div class="col-md-6">

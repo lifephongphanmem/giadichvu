@@ -1,22 +1,22 @@
 @extends('main')
 
 @section('custom-style')
-    <link rel="stylesheet" type="text/css" href="{{url('assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css')}}"/>
 @stop
 
 
 @section('custom-script')
     <!-- BEGIN PAGE LEVEL PLUGINS -->
-    <script type="text/javascript" src="{{url('assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js')}}"></script>
-    <script src="{{url('assets/admin/pages/scripts/components-pickers.js')}}"></script>
+    <script src="{{url('minhtran/jquery.min.js')}}"></script>
+    <script src="{{url('minhtran/jquery.inputmask.bundle.min.js')}}"></script>
+
 
     <!-- END PAGE LEVEL PLUGINS -->
 
-<script>
-    jQuery(document).ready(function() {
-        ComponentsPickers.init();
-    });
-</script>
+    <script>
+        $(document).ready(function(){
+            $(":input").inputmask();
+        });
+    </script>
 
 @stop
 
@@ -28,7 +28,7 @@
 
     <!-- END PAGE HEADER-->
     <div class="row">
-        {!! Form::open(['url'=>'ke_khai_dich_vu_luu_tru', 'id' => 'create_kkdvlt', 'class'=>'horizontal-form']) !!}
+        {!! Form::open(['url'=>'test1', 'id' => 'create_kkdvlt', 'class'=>'horizontal-form']) !!}
         <div class="col-md-12">
             <!-- BEGIN EXAMPLE TABLE PORTLET-->
 
@@ -40,7 +40,8 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-3">Default Datepicker</label>
                                     <div class="col-md-3">
-                                        <input class="form-control form-control-inline input-medium date-picker" size="16" type="text" value=""/>
+                                        <input type="text" data-inputmask="'alias': 'date'" name="a" id="a" class="form-control">
+                                        {!!Form::text('ngayhieuluc',\Carbon\Carbon::now()->format('d/m/Y'), array('id' => 'ngayhieuluc','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required'))!!}
                                     <span class="help-block">
                                     Select date </span>
                                     </div>
@@ -56,14 +57,13 @@
 
 
 
-                </div>
+            </div>
 
 
             <!-- END EXAMPLE TABLE PORTLET-->
 
         </div>
 
-    </div>
 
     <!-- BEGIN DASHBOARD STATS -->
 
