@@ -26,6 +26,13 @@ Route::get('forgot_password','HomeController@forgotpassword');
 Route::post('forgot_password','HomeController@forgotpasswordw');
 Route::get('register/tra_lai','HomeController@regdverror');
 
+Route::get('search_register','HomeController@searchregister');
+Route::post('search_register','HomeController@checksearchregister');
+Route::get('search_register/show','HomeController@show');
+Route::post('search_register/show','HomeController@edit');
+Route::patch('register_editdvlt/id={id}','HomeController@updatedvlt');
+Route::patch('register_editdvvt/id={id}','HomeController@updatedvvt');
+
 
 // <editor-fold defaultstate="collapsed" desc="--Setting--">
 Route::get('cau_hinh_he_thong','GeneralConfigsController@index');

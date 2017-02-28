@@ -40,6 +40,7 @@ class CreateRegisterTable extends Migration
             $table->string('pl')->nullable();
             $table->text('lydo');
             $table->string('cqcq')->nullable();
+            $table->string('ma')->nullable();
             $table->timestamps();
         });
     }

@@ -33,6 +33,7 @@ class Register extends Model
         'password',
         'pl',
         'lydo',
-        'cqcq'
+        'cqcq',
+        'ma'
     ];
 }

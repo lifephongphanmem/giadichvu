@@ -75,6 +75,7 @@ class HomeController extends Controller
 
     public function regdvltstore(Request $request){
         $input = $request->all();
+        $ma = getdate()[0];
         $model = new Register();
         $model->tendn = $input['tendn'];
         $model->masothue = $input['masothue'];
@@ -96,8 +97,10 @@ class HomeController extends Controller
         $model->dvk = 0;
         $model->trangthai = 'Chờ duyệt';
         $model->lydo='';
+        $model->ma = $ma;
         $model->save();
-        return view('errors.register-success');
+        return view('system.register.view.register-success')
+            ->with('ma',$ma);
     }
 
     public function regdvvt(){
@@ -110,6 +113,7 @@ class HomeController extends Controller
 
     public function regdvvtstore(Request $request){
         $input = $request->all();
+        $ma = getdate()[0];
         $model = new Register();
 
         $model->tendn = $input['tendn'];
@@ -135,9 +139,10 @@ class HomeController extends Controller
         $model->dvk = isset($x['dvvt']['vtch']) ? 1 : 0;
         $model->trangthai = 'Chờ duyệt';
         $model->lydo='';
-
+        $model->ma = $ma;
         $model->save();
-        return view('errors.register-success');
+        return view('system.register.view.register-success')
+            ->with('ma',$ma);
     }
 
     public function regdverror(){
@@ -215,6 +220,113 @@ class HomeController extends Controller
         }else
             return view('errors.forgotpass-errors');
 
+    }
+
+    public function searchregister(){
+        return view('system.register.search.index')
+            ->with('pageTitle','Kiểm tra tài khoản!!!');
+    }
+
+    public function checksearchregister(Request $request){
+        $input = $request->all();
+
+        $check1 = Register::where('masothue',$input['masothue'])
+            ->where('pl',$input['pl'])
+            ->first();
+        if(isset($check1)){
+            if($check1->trangthai == 'Chờ duyệt'){
+                return view('system.register.view.register-choduyet');
+            }else
+                return view('system.register.view.register-tralai')
+                    ->with('lydo',$check1->lydo);
+        }else{
+            $check2 = Users::where('mahuyen',$input['masothue'])
+                ->first();
+            if(isset($check2)){
+                return view('system.register.view.register-usersuccess');
+            }else{
+                return view('system.register.view.register-nouser');
+            }
+        }
+    }
+
+    public function show(){
+        return view('system.register.search.show');
+    }
+
+    public function edit(Request $request){
+        $input = $request->all();
+        $model = Register::where('ma',$input['ma'])
+            ->first();
+        //dd($model);
+        if(isset($model)){
+            if($model->pl == 'DVLT'){
+                $cqcq = DmDvQl::where('plql','TC')
+                    ->get();
+                return view('system.register.search.dvlt.edit')
+                    ->with('cqcq',$cqcq)
+                    ->with('model',$model)
+                    ->with('pageTitle','Chỉnh sửa thông tin đăng ký tài khoản');
+            }elseif($model->pl == 'DVVT'){
+                $cqcq = DmDvQl::where('plql','VT')
+                    ->get();
+                return view('system.register.search.dvvt.edit')
+                    ->with('cqcq',$cqcq)
+                    ->with('model',$model)
+                    ->with('pageTitle','Chỉnh sửa thông tin đăng ký tài khoản');
+            }
+        }else{
+            return view('system.register.view.register-edit-errors');
+        }
+    }
+
+    public function updatedvlt(Request $request, $id){
+        $input = $request->all();
+        $model = Register::findOrFail($id);
+        $model->tendn = $input['tendn'];
+        $model->masothue = $input['masothue'];
+        $model->diachi = $input['diachidn'];
+        $model->tel = $input['teldn'];
+        $model->fax = $input['faxdn'];
+        $model->email = $input['emaildn'];
+        $model->noidknopthue = $input['noidknopthue'];
+        $model->cqcq = $input['cqcq'];
+        $model->giayphepkd = $input['giayphepkd'];
+        $model->tailieu = $input['tailieu'];
+        $model->username = $input['username'];
+        $model->password = md5($input['rpassword']);
+        $model->trangthai = 'Chờ duyệt';
+        $model->save();
+        return view('errors.register-success');
+    }
+
+    public function updatedvvt(Request $request, $id){
+        $input = $request->all();
+        $model = Register::findOrFail($id);
+
+        $model->tendn = $input['tendn'];
+        $model->masothue = $input['masothue'];
+        $model->diachi = $input['diachidn'];
+        $model->tel = $input['teldn'];
+        $model->fax = $input['faxdn'];
+        $model->email = $input['emaildn'];
+        $model->noidknopthue = $input['noidknopthue'];
+        $model->giayphepkd = $input['giayphepkd'];
+        $model->tailieu = $input['tailieu'];
+        $model->cqcq = $input['cqcq'];
+        $model->username = $input['username'];
+        $model->password = md5($input['rpassword']);
+
+        $input['roles'] = isset($input['roles']) ? $input['roles'] : null;
+        $model->setting = json_encode($input['roles']);
+        $x = $input['roles'];
+        $model->dvxk = isset($x['dvvt']['vtxk']) ? 1 : 0;
+        $model->dvxb = isset($x['dvvt']['vtxb']) ? 1 : 0;
+        $model->dvxtx = isset($x['dvvt']['vtxtx']) ? 1 : 0;
+        $model->dvk = isset($x['dvvt']['vtch']) ? 1 : 0;
+        $model->trangthai = 'Chờ duyệt';
+        $model->save();
+        return view('errors.register-success');
     }
 
 

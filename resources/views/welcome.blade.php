@@ -47,6 +47,7 @@
 </div>
 <div class="row mbxl">
     <a href="{{ url('/login') }}" class="btn btn-primary btn-lg">Đăng nhập tài khoản</a>
+    <a href="{{ url('/search_register') }}" class="btn btn-success btn-lg">Kiểm tra tài khoản</a>
     <br>
     <br>
     <br>
