@@ -66,7 +66,9 @@ License: You must have a valid license purchased only from themeforest(the above
 	<h3>Bạn không nhớ mật khẩu ?</h3>
 	<p>
 		Nhập thông tin của user để tìm lại mật khẩu!!!
+
 	</p>
+
 	<div class="form-group">
 		<div class="input-icon">
 			<i class="fa fa-user"></i>
@@ -101,6 +103,12 @@ License: You must have a valid license purchased only from themeforest(the above
 			<input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Câu trả lời!" name="answer" id="answer" required/>
 		</div>
 	</div>
+	<p class="help-block">
+                        <span class="label label-success label-sm">
+                        Help: </span>
+		<a target="_blank" href="http://helpcsdlgia.dev/data/help/tienich/forgotpass/quenmatkhau.pdf"> Hướng dẫn lấy lại mật khẩu </a>
+	</p>
+	<br>
 	<div class="form-actions">
 		<a href="{{url('login')}}" class="btn default">
 			<i class="m-icon-swapleft"></i> Quay lại </a>
@@ -108,6 +116,7 @@ License: You must have a valid license purchased only from themeforest(the above
 			Đồng ý <i class="m-icon-swapright m-icon-white"></i>
 		</button>
 	</div>
+
 	{!! Form::close() !!}
 
 </div>

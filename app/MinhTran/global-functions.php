@@ -334,4 +334,15 @@ function getPhanTram2($giatri, $thaydoi){
     }
     return round(($thaydoi/$giatri)*100,2).'%';
 }
+
+function getDateToDb($value){
+    $str =  strtotime(str_replace('/', '-', $value));
+    $kq = date('Y-m-d', strtotime(str_replace('/', '-', $str)));
+    return $kq;
+}
+
+function getMoneyToDb ($value){
+    $kq = str_replace(',','',$value);
+    return $kq;
+}
 ?>

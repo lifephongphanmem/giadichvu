@@ -174,7 +174,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     <p class="help-block">
                         <span class="label label-success label-sm">
                         Help: </span>
-                        <a target="_blank" href="https://support.google.com/mail/answer/2487407?co=GENIE.Platform%3DDesktop&hl=vi">
+                        <a target="_blank" href="http://help.csdlgia.vn/data/help/tienich/upfile/upfile.pdf">
                             Hướng dẫn cách chia sẻ giấy phép đăng ký kinh doanh </a>
                     </p>
                 </div>
