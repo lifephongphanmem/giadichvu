@@ -29,6 +29,7 @@ class ReportsController extends Controller
                 ->get();
             $modelcqcq = DmDvQl::where('maqhns',$modeldn->cqcq)
                 ->first();
+
             return view('reports.kkgdvlt.print')
                 ->with('modelkk',$modelkk)
                 ->with('modeldn',$modeldn)
@@ -63,7 +64,7 @@ class ReportsController extends Controller
                 $modelcqcq = DmDvQl::where('maqhns',session('admin')->cqcq)
                     ->first();
             }
-            //dd($model);
+            //dd($modelcqcq);
             foreach($model as $kk){
                 $modelcskd = CsKdDvLt::where('macskd',$kk->macskd)->first();
                 $kk->tencskd = $modelcskd->tencskd;
@@ -76,7 +77,7 @@ class ReportsController extends Controller
 
 
             return view('reports.kkgdvlt.bcth.BC1')
-                ->with('$modelcqcq',$modelcqcq)
+                ->with('modelcqcq',$modelcqcq)
                 ->with('input',$input)
                 ->with('model',$model)
                 ->with('pageTitle','Báo cáo thống kê các đơn vị kê khai giá trong khoảng thời gian');
