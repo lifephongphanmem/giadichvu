@@ -339,12 +339,11 @@ License: You must have a valid license purchased only from themeforest(the above
                                                 <a href="">Vận tải hành khách bằng xe ôtô theo tuyến cố định<span class="arrow"></span> </a>
                                                 <ul class="sub-menu">
                                                     @if(can('dvvtxk','index'))
-                                                    <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_khach/danh_muc')}}">Danh mục dịch vụ</a></li>
+                                                        <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_khach/danh_muc')}}">Danh mục dịch vụ</a></li>
                                                     @endif
                                                     @if(can('kkdvvtxk','index'))
-                                                        @if(session('admin')->level != 'T')
-                                                            <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_khach/ke_khai/'.'nam='.date('Y'))}}">Kê khai giá dịch vụ</a></li>
-                                                        @else
+                                                        <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_khach/ke_khai/'.'nam='.date('Y'))}}">Kê khai giá dịch vụ</a></li>
+                                                        @if(session('admin')->level =='T' || session('admin')->level =='H')
                                                             <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_khach/xet_duyet/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')}}">Hồ sơ kê khai</a></li>
                                                             <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_khach/tim_kiem/masothue=all&nam='.date('Y'))}}">Tìm kiếm thông tin kê khai</a></li>
                                                         @endif
@@ -362,9 +361,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                                         <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_bus/danh_muc')}}">Danh mục dịch vụ</a></li>
                                                     @endif
                                                     @if(can('kkdvvtxb','index'))
-                                                        @if(session('admin')->level != 'T')
-                                                            <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_bus/ke_khai/'.'nam='.date('Y'))}}">Kê khai giá dịch vụ</a></li>
-                                                        @else
+                                                        <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_bus/ke_khai/'.'nam='.date('Y'))}}">Kê khai giá dịch vụ</a></li>
+                                                        @if(session('admin')->level =='T' || session('admin')->level =='H')
                                                             <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_bus/xet_duyet/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')}}">Hồ sơ kê khai</a></li>
                                                             <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_bus/tim_kiem/masothue=all&nam='.date('Y'))}}">Tìm kiếm thông tin kê khai</a></li>
                                                         @endif
@@ -379,12 +377,11 @@ License: You must have a valid license purchased only from themeforest(the above
                                                 <a href="">Vận tải hành khách bằng xe taxi<span class="arrow"></span> </a>
                                                 <ul class="sub-menu">
                                                     @if(can('dvvtxtx','index'))
-                                                    <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_taxi/danh_muc')}}">Danh mục dịch vụ</a></li>
+                                                        <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_taxi/danh_muc')}}">Danh mục dịch vụ</a></li>
                                                     @endif
                                                     @if(can('kkdvvtxtx','index'))
-                                                        @if(session('admin')->level != 'T')
-                                                            <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_taxi/ke_khai/'.'nam='.date('Y'))}}">Kê khai giá dịch vụ</a></li>
-                                                        @else
+                                                        <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_taxi/ke_khai/'.'nam='.date('Y'))}}">Kê khai giá dịch vụ</a></li>
+                                                        @if(session('admin')->level =='T' || session('admin')->level =='H')
                                                             <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_taxi/xet_duyet/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')}}">Hồ sơ kê khai</a></li>
                                                             <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_taxi/tim_kiem/masothue=all&nam='.date('Y'))}}">Tìm kiếm thông tin kê khai</a></li>
                                                         @endif
@@ -402,9 +399,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                                         <li><a href="{{url('/dich_vu_van_tai/dich_vu_cho_hang/danh_muc')}}">Danh mục dịch vụ</a></li>
                                                     @endif
                                                     @if(can('kkdvvtch','index'))
-                                                        @if(session('admin')->level != 'T')
-                                                            <li><a href="{{url('/dich_vu_van_tai/dich_vu_cho_hang/ke_khai/'.'nam='.date('Y'))}}">Kê khai giá dịch vụ</a></li>
-                                                        @else
+                                                        <li><a href="{{url('/dich_vu_van_tai/dich_vu_cho_hang/ke_khai/'.'nam='.date('Y'))}}">Kê khai giá dịch vụ</a></li>
+                                                        @if(session('admin')->level =='T' || session('admin')->level =='H')
                                                             <li><a href="{{url('/dich_vu_van_tai/dich_vu_cho_hang/xet_duyet/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')}}">Hồ sơ kê khai</a></li>
                                                             <li><a href="{{url('/dich_vu_van_tai/dich_vu_cho_hang/tim_kiem/masothue=all&nam='.date('Y'))}}">Tìm kiếm thông tin kê khai</a></li>
                                                         @endif

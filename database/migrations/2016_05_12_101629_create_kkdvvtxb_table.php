@@ -29,6 +29,7 @@ class CreateKkdvvtxbTable extends Migration
             $table->string('trangthai')->nullable();
             $table->text('uudai')->nullable();
             $table->text('ghichu')->nullable();
+            $table->string('cqcq')->nullable();
             $table->timestamps();
         });
     }

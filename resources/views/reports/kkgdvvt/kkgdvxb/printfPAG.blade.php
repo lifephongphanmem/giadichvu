@@ -97,14 +97,14 @@
     </table>
 
 
-    <p>Kính gửi: {{(getGeneralConfigs()['tendonvi'])}}</p>
+    <p>Kính gửi: {{(getGeneralConfigs()['tendonvivt'])}}</p>
 
 
     <p>Thực hiện quy định tại Thông tư liên tịch số 152/2014/TTLT-BTC-BGTVT ngày 15 tháng 10 năm 2014  của Bộ trưởng Bộ Tài chính và Bộ trưởng Bộ Giao thông vận tải hướng dẫn thực hiện giá cước vận tải bằng xe ô tô và giá dịch vụ hỗ trợ vận tải đường bộ;</p>
 
     <p>{{$modeldonvi->tendonvi}} đã lập phương án giá dịch vụ {{$ctkk->tendichvu}}(có phương án giá kèm theo).</p>
 
-    <p>Đề nghị {{(getGeneralConfigs()['tendonvi'])}} xem xét phê duyệt giá {{$ctkk->tendichvu}} theo quy định của pháp luật./.</p>
+    <p>Đề nghị {{(getGeneralConfigs()['tendonvivt'])}} xem xét phê duyệt giá {{$ctkk->tendichvu}} theo quy định của pháp luật./.</p>
 
     <table width="96%" border="0" cellspacing="0" cellpadding="8" style="margin:20px auto; text-align: center;">
         <tr>

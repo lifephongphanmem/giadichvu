@@ -336,13 +336,15 @@ function getPhanTram2($giatri, $thaydoi){
 }
 
 function getDateToDb($value){
+    if($value==''){return null;}
     $str =  strtotime(str_replace('/', '-', $value));
-    $kq = date('Y-m-d', strtotime(str_replace('/', '-', $str)));
+    $kq = date('Y-m-d', $str);
     return $kq;
 }
 
 function getMoneyToDb ($value){
     $kq = str_replace(',','',$value);
+    $kq = str_replace('.','',$kq);
     return $kq;
 }
 ?>

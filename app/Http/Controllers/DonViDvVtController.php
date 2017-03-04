@@ -212,7 +212,7 @@ class DonViDvVtController extends Controller
                 ->delete();
             //$model = DonViDvVt::findOrFail($id);
             if(session('admin')->level == 'T' || session('admin')->level == 'H'){
-                $model = new DonViDvVt();
+                $model = DonViDvVt::findOrFail($id);
                 $model->tendonvi = $upd['tendonvi'];
                 $model->masothue = $upd['masothue'];
                 $model->diachi = $upd['diachi'];
@@ -233,11 +233,11 @@ class DonViDvVtController extends Controller
                 $model->dvxtx = isset($x['dvvt']['vtxtx']) ? 1 : 0;
                 $model->dvk = isset($x['dvvt']['vtch']) ? 1 : 0;
 
-                $model->toado = $upd['diachi']!= '' ? getAddMap($insert['diachi']) : '';
+                $model->toado = $upd['diachi']!= '' ? getAddMap($upd['diachi']) : '';
                 //$model->tailieu =$insert['tailieu'];
                 $model->trangthai = 'Kích hoạt';
                 $model->email = '';
-                $model->cqcq = $insert['cqcq'];
+                $model->cqcq = $upd['cqcq'];
                 $model->save();
             }else {
                 $model = new TtDn();

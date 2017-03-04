@@ -24,6 +24,15 @@
             TableManaged.init();
         });
     </script>
+    <!--Date new-->
+    <script src="{{url('minhtran/jquery.inputmask.bundle.min.js')}}"></script>
+
+    <script>
+        $(document).ready(function(){
+            $(":input").inputmask();
+        });
+    </script>
+    <!--End date new-->
     <script>
         // <editor-fold defaultstate="collapsed" desc="--InPutMask--">
         function InputMask() {
@@ -126,10 +135,12 @@
                             <td>
                                 <button type="button" data-target="#modal-create"
                                         data-toggle="modal" class="btn btn-default btn-xs mbs"
-                                        onclick="editItem(this,'{{$dv->id}}','{{$dv->masokk}}')"><i
+                                        onclick="editItem('{{$dv->id}}','{{$dv->masokk}}')"><i
                                             class="fa fa-edit"></i>&nbsp;Kê khai giá
                                 </button>
-                                </br>
+                                <button type="button" data-target="#modal-delete" data-toggle="modal" class="btn btn-default btn-xs mbs"
+                                        onclick="getid({{$dv->id}});" ><i class="fa fa-trash-o"></i>&nbsp;Xóa
+                                </button>
                                 <button type="button" data-target="#modal-pagia-create"
                                         data-toggle="modal" class="btn btn-default btn-xs mbs"
                                         onclick="editpagia('{{$dv->madichvu}}','{{$dv->masokk}}')"><i class="fa fa-edit"></i>&nbsp;Phương án giá
@@ -153,6 +164,8 @@
             <div class="portlet box blue">
                 <div class="portlet-body pan">
                     @include('manage.dvvt.template.editkkdv')
+                    <input type="hidden" name="masothue" id="masothue" value="{{$model->masothue}}"/>
+                    <input type="hidden" id="masokk" name="masokk" value="{{$model->masokk}}"/>
                 </div>
             </div>
             <div style="text-align: center">
@@ -180,57 +193,108 @@
     @include('manage.dvvt.template.phuongangia')
 
     <!--Modal Wide Width-->
-    <div id="modal-create" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade">
-        <div class="modal-dialog">
+    <div class="modal fade bs-modal-lg" id="modal-create" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header modal-header-primary">
-                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                    <h4 id="modal-header-primary-label" class="modal-title">Kê khai giá dịch vụ</h4>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Thêm mới thông tin dịch vụ vận tải</h4>
                 </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label class="form-control-label"><b>Mức giá kê khai liền kề</b><span class="require">*</span></label>
-                        <input type="text" style="text-align: right" id="giakklk" name="giakklk" class="form-control" data-mask="fdecimal">
+                <div class="modal-body" id="ttpthemmoi">
+                    @include('manage.dvvt.template.dmdvxtx')
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label"><b>Mức giá kê khai liền kề</b><span class="require">*</span></label>
+                                <input type="text" style="text-align: right" id="giakklk" name="giakklk" class="form-control" data-mask="fdecimal">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label"><b>Mức giá kê khai</b><span class="require">*</span></label>
+                                <input type="text" style="text-align: right" id="giakk" name="giakk" class="form-control" data-mask="fdecimal">
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label class="form-control-label"><b>Mức giá kê khai</b><span class="require">*</span></label>
-                        <input type="text" style="text-align: right" id="giakk" name="giakk" class="form-control" data-mask="fdecimal">
-                    </div>
-                        <input type="hidden" id="iddv" name="iddv"/>
-                        <input type="hidden" id="makk" name="makk"/>
+                    <input type="hidden" id="iddv" name="iddv"/>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>
-                    <button type="submit" data-dismiss="modal" class="btn btn-primary" onclick="updategia()">Đồng ý</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Thoát</button>
+                    <button type="button" class="btn btn-primary" onclick="updategia()">Bổ xung</button>
                 </div>
             </div>
+            <!-- /.modal-content -->
         </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+    <!--Modal Wide Width-->
+    <div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Đồng ý xóa thông tin dịch vụ vận tải?</h4>
+                </div>
+                <input type="hidden" id="id_del" name="id_del">
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Thoát</button>
+                    <button type="button" class="btn btn-primary" onclick="deleteRow()">Đồng ý</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
     </div>
 
     <script>
-        function editItem(e, id, makk){
-            var tr=$(e).closest('tr');
-            $('#giakklk').attr('value',tr.find('td[name=giakklk]').text());
-            $('#giakk').attr('value',tr.find('td[name=giakk]').text());
+        function editItem(id, masokk){
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                url: '{{$url}}'+'thao_tac/get_giadv',
+                type: 'GET',
+                data: {
+                    _token: CSRF_TOKEN,
+                    masokk: masokk,
+                    id: id
+                },
+                dataType: 'JSON',
+                success: function (data) {
+                    $('#giakklk').val(data.giakklk);
+                    $('#giakk').val(data.giakk);
+                    $('#loaixe').val(data.loaixe);
+                    $('#tendichvu').val(data.tendichvu);
+                    $('#qccl').val(data.qccl);
+                    $('#dvt').val(data.dvt);
+                    $('#ghichu').val(data.ghichu);
+                },
+                error: function (message) {
+                    toastr.error(message, 'Lỗi!');
+                }
+            });
             $('#iddv').attr('value',id);
-            $('#makk').attr('value',makk);
         }
 
         function updategia(){
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             $.ajax({
-                url: '{{$url}}'+'thao_tac/updategiadvct',
+                url: '{{$url}}'+'thao_tac/update_giadv',
                 type: 'GET',
                 data: {
                     _token: CSRF_TOKEN,
-                    masokk:$('#makk').val(),
-                    giakklk: $('#giakklk').val(),
-                    giakk: $('#giakk').val(),
+                    masokk:$('#masokk').val(),
+                    masothue:$('#masothue').val(),
+                    giakklk:$('#giakklk').val(),
+                    giakk:$('#giakk').val(),
+                    loaixe:$('#loaixe').val(),
+                    tendichvu:$('#tendichvu').val(),
+                    qccl: $('#qccl').val(),
+                    dvt: $('#dvt').val(),
+                    ghichu: $('#ghichu').val(),
                     id: $('#iddv').val()
                 },
                 dataType: 'JSON',
                 success: function (data) {
-                    //alert(data.message);
                     if (data.status == 'success') {
                         $('#noidung').replaceWith(data.message);
                         InputMask();
@@ -240,9 +304,52 @@
                     }
                 },
                 error: function(message){
-                    alert(message);
+                    toastr.error(message);
                 }
             });
+            $('#modal-create').modal('hide');
+        }
+
+        function clearForm(){
+            $('#giakklk').val('0');
+            $('#giakk').val('0');
+            $('#loaixe').val('');
+            $('#tendichvu').val('');
+            $('#qccl').val('');
+            $('#dvt').val('');
+            $('#ghichu').val('');
+            $('#iddv').val(0);
+        }
+
+        function deleteRow(){
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                url: '{{$url}}'+'thao_tac/del_giadv',
+                type: 'GET',
+                data: {
+                    _token: CSRF_TOKEN,
+                    masothue: $('#masothue').val(),
+                    id: $('#id_del').val()
+                },
+                dataType: 'JSON',
+                success: function (data) {
+                    if (data.status == 'success') {
+                        $('#noidung').replaceWith(data.message);
+                        InputMask();
+                        jQuery(document).ready(function() {
+                            TableManaged.init();
+                        });
+                    }
+                },
+                error: function(message){
+                    toastr.error(message,'Lỗi!');
+                }
+            });
+            $('#modal-delete').modal('hide');
+        }
+
+        function getid(id){
+            document.getElementById("id_del").value=id;
         }
     </script>
 @stop

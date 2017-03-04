@@ -30,7 +30,7 @@
     <h3 class="page-title">
         Vận tải hành khách bằng xe ôtô<small> theo tuyến cố định</small>
     </h3>
-
+    <input type="hidden" name="masothue" id="masothue" value="{{$masothue}}">
     <div class="row">
         <div class="col-md-12">
             <!-- BEGIN EXAMPLE TABLE PORTLET-->
@@ -49,8 +49,8 @@
                             <tr>
                                 <th style="text-align: center">STT</th>
                                 <th style="text-align: center">Loại xe</th>
-                                <th style="text-align: center">Điểm xuất phát</th>
-                                <th style="text-align: center">Điểm đến</th>
+                                <!--th style="text-align: center">Điểm xuất phát</th>
+                                <th style="text-align: center">Điểm đến</th-->
                                 <th style="text-align: center">Mô tả dịch vụ</th>
                                 <th style="text-align: center">Quy cách chất lượng</th>
                                 <th style="text-align: center">Đơn vị tính</th>
@@ -62,14 +62,14 @@
                                 <tr class="odd gradeX">
                                     <td style="text-align: center">{{$key+1}}</td>
                                     <td name="loaixe">{{$dv->loaixe}}</td>
-                                    <td name="diemdau">{{$dv->diemdau}}</td>
-                                    <td name="diemcuoi">{{$dv->diemcuoi}}</td>
+                                    <!--td name="diemdau">{{$dv->diemdau}}</td>
+                                    <td name="diemcuoi">{{$dv->diemcuoi}}</td-->
                                     <td name="tendichvu" class="active">{{$dv->tendichvu}}</td>
                                     <td name="qccl">{{$dv->qccl}}</td>
                                     <td name="dvt" style="text-align: center">{{$dv->dvt}}</td>
                                     <td>
                                         @if($per['edit'])
-                                            <button type="button" class="btn btn-default btn-xs mbs" onclick="editDVXK(this,'{{$dv->id}}')"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</button>
+                                            <button type="button" class="btn btn-default btn-xs mbs" onclick="editDVXK({{$dv->id}})"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</button>
                                         @endif
                                         @if($per['delete'])
                                             <button type="button" onclick="confirmDel('{{$dv->id}}')" class="btn btn-default btn-xs mbs" data-target="#del-modal-confirm" data-toggle="modal"><i class="fa fa-trash-o"></i>&nbsp;
@@ -114,21 +114,9 @@
         function confirmDVXK(){
             var valid=true;
             var message='';
-            var diemdau= $('#diemdau').val();
-            var diemcuoi= $('#diemcuoi').val();
             var tendichvu= $('#tendichvu').val();
             var dvt= $('#dvt').val();
             var loaixe= $('#loaixe').val();
-
-            if(diemdau==''){
-                valid=false;
-                message +='Điểm xuất phát không được bỏ trống \n';
-            }
-
-            if(diemcuoi==''){
-                valid=false;
-                message +='Điểm cuối không được bỏ trống \n';
-            }
 
             if(tendichvu==''){
                 valid=false;
@@ -149,12 +137,11 @@
             if(valid){
                 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                 $.ajax({
-                    url: '/dich_vu_van_tai/dich_vu_xe_khach/adddm',
+                    url: '{{$url}}'+'danh_muc/add',
                     type: 'GET',
                     data: {
                         _token: CSRF_TOKEN,
-                        diemdau: diemdau,
-                        diemcuoi: diemcuoi,
+                        masothue: $('#masothue').val(),
                         tendichvu: tendichvu,
                         qccl: $('#qccl').val(),
                         dvt: dvt,
@@ -181,15 +168,27 @@
             return valid;
         }
 
-        function editDVXK(e,id){
-            var tr = $(e).closest('tr');
-            $('#diemdau').attr('value',$(tr).find('td[name=diemdau]').text());
-            $('#loaixe').val($(tr).find('td[name=loaixe]').text());
-            $('#diemcuoi').attr('value',$(tr).find('td[name=diemcuoi]').text());
-            $('#tendichvu').attr('value',$(tr).find('td[name=tendichvu]').text());
-            $('#qccl').attr('value',$(tr).find('td[name=qccl]').text());
-            $('#dvt').attr('value',$(tr).find('td[name=dvt]').text());
-            $('#ghichu').attr('value',$(tr).find('td[name=ghichu]').text());
+        function editDVXK(id){
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                url: '{{$url}}'+'danh_muc/get',
+                type: 'GET',
+                data: {
+                    _token: CSRF_TOKEN,
+                    id: id
+                },
+                dataType: 'JSON',
+                success: function (data) {
+                    $('#loaixe').val(data.loaixe);
+                    $('#tendichvu').val(data.tendichvu);
+                    $('#qccl').val(data.qccl);
+                    $('#dvt').val(data.dvt);
+                    $('#ghichu').val(data.ghichu);
+                },
+                error: function (message) {
+                    toastr.error(message, 'Lỗi!');
+                }
+            });
             $('#iddv').attr('value',id);
             $('#dvxk-modal-confirm').modal('show');
         }
@@ -197,8 +196,6 @@
         function addDVXK(){
             $('#iddv').attr('value',0);
             $('#loaixe').attr('value','');
-            $('#diemdau').attr('value','');
-            $('#diemcuoi').attr('value','');
             $('#tendichvu').attr('value','');
             $('#qccl').attr('value','');
             $('#dvt').attr('value','');
@@ -207,9 +204,7 @@
         }
 
     </script>
-
     @include('manage.dvvt.template.modal-delete-dm')
-
 @stop
 
 

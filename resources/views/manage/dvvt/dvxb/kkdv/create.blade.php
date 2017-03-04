@@ -25,10 +25,18 @@
             TableManaged.init();
         });
     </script>
+    <!--Date new-->
+    <script src="{{url('minhtran/jquery.inputmask.bundle.min.js')}}"></script>
+
+    <script>
+        $(document).ready(function(){
+            $(":input").inputmask();
+        });
+    </script>
+    <!--End date new-->
 @stop
 
 @section('content-dv')
-    <h4 class="form-section" style="color: #0000ff">Thông tin chi tiết hồ sơ</h4>
     <div class="row" id="noidung">
         <div class="col-md-12">
             <table id="sample_3" class="table table-hover table-striped table-bordered table-advanced tablesorter">
@@ -58,8 +66,10 @@
                         <td>
                             <button type="button" data-target="#modal-create"
                                     data-toggle="modal" class="btn btn-default btn-xs mbs"
-                                    onclick="editItem(this,'{{$dv->id}}')"><i
+                                    onclick="editItem({{$dv->id}})"><i
                                         class="fa fa-edit"></i>&nbsp;Kê khai giá
+                            </button>
+                            <button type="button" data-target="#modal-delete" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="getid({{$dv->id}});" ><i class="fa fa-trash-o"></i>&nbsp;Xóa
                             </button>
                             <button type="button" data-target="#modal-pagia-create"
                                     data-toggle="modal" class="btn btn-default btn-xs mbs"
@@ -85,6 +95,9 @@
                 <div class="portlet-body">
                     <h4 class="form-section" style="color: #0000ff">Thông tin hồ sơ</h4>
                     @include('manage.dvvt.template.createkkdv')
+
+                    <input type="hidden" name="masothue" id="masothue" value="{{$masothue}}">
+                    <input type="hidden" name="cqcq" id="cqcq" value="{{$cqcq}}">
                 </div>
             </div>
             <div style="text-align: center">
@@ -113,69 +126,127 @@
 
     @include('includes.script.create-header-scripts')
     @include('manage.dvvt.template.phuongangia_temp')
-    <!--Modal Wide Width-->
 
-    <!--Modal Wide Width-->
-    <div id="modal-create" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade">
-        <div class="modal-dialog">
+    <!--Model them moi-->
+    <div class="modal fade bs-modal-lg" id="modal-create" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header modal-header-primary">
-                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                    <h4 id="modal-header-primary-label" class="modal-title">Kê khai giá dịch vụ</h4>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Thêm mới thông tin dịch vụ vận tải</h4>
                 </div>
-                <div class="modal-body" id="ttgiaph">
-                        <div class="form-group">
-                            <label class="form-control-label"><b>Mức giá vé lượt kê khai liền kề</b><span class="require">*</span></label>
-                            <input type="text" style="text-align: right" id="giakklkluot" name="giakklkluot" class="form-control" data-mask="fdecimal">
+                <div class="modal-body" id="ttpthemmoi">
+                    @include('manage.dvvt.template.dmdvxb')
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label"><b>Mức giá vé lượt kê khai liền kề</b><span class="require">*</span></label>
+                                <input type="text" style="text-align: right" id="giakklkluot" name="giakklkluot" class="form-control" data-mask="fdecimal">                                
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label class="form-control-label"><b>Mức giá vé lượt kê khai</b><span class="require">*</span></label>
-                            <input type="text" style="text-align: right" id="giakkluot" name="giakkluot" class="form-control" data-mask="fdecimal">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label"><b>Mức giá vé lượt kê khai</b><span class="require">*</span></label>
+                                <input type="text" style="text-align: right" id="giakkluot" name="giakkluot" class="form-control" data-mask="fdecimal">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label class="form-control-label"><b>Mức giá vé tháng kê khai liền kề</b><span class="require">*</span></label>
-                            <input type="text" style="text-align: right" id="giakklkthang" name="giakklkthang" class="form-control" data-mask="fdecimal">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label"><b>Mức giá vé tháng kê khai liền kề</b><span class="require">*</span></label>
+                                <input type="text" style="text-align: right" id="giakklkthang" name="giakklkthang" class="form-control" data-mask="fdecimal">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label class="form-control-label"><b>Mức giá vé tháng kê khai</b><span class="require">*</span></label>
-                            <input type="text" style="text-align: right" id="giakkthang" name="giakkthang" class="form-control" data-mask="fdecimal">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label"><b>Mức giá vé tháng kê khai</b><span class="require">*</span></label>
+                                <input type="text" style="text-align: right" id="giakkthang" name="giakkthang" class="form-control" data-mask="fdecimal">
+                            </div>
                         </div>
-                        <input type="hidden" id="iddv" name="iddv"/>
+                    </div>
+                    <input type="hidden" id="iddv" name="iddv"/>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>
-                    <button type="submit" data-dismiss="modal" class="btn btn-primary" onclick="updategia()">Đồng ý</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Thoát</button>
+                    <button type="button" class="btn btn-primary" onclick="updategia()">Bổ xung</button>
                 </div>
             </div>
+            <!-- /.modal-content -->
         </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+    <!--Modal Wide Width-->
+    <div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Đồng ý xóa thông tin dịch vụ vận tải?</h4>
+                </div>
+                <input type="hidden" id="id_del" name="id_del">
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Thoát</button>
+                    <button type="button" class="btn btn-primary" onclick="deleteRow()">Đồng ý</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
     </div>
 
     <script>
-        function editItem(e, id){
-            var tr=$(e).closest('tr');
-            $('#giakklkluot').attr('value',tr.find('td[name=giakklkluot]').text());
-            $('#giakkluot').attr('value',tr.find('td[name=giakkluot]').text());
-            $('#giakklkthang').attr('value',tr.find('td[name=giakklkthang]').text());
-            $('#giakkthang').attr('value',tr.find('td[name=giakkthang]').text());
+        function editItem(id){
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                url: '{{$url}}'+'thao_tac/get_giadv_temp',
+                type: 'GET',
+                data: {
+                    _token: CSRF_TOKEN,
+                    id: id
+                },
+                dataType: 'JSON',
+                success: function (data) {                   
+                    $('#tendichvu').val(data.tendichvu);
+                    $('#qccl').val(data.qccl);
+                    $('#dvtluot').val(data.dvtluot);
+                    $('#dvtthang').val(data.dvtthang);
+                    $('#ghichu').val(data.ghichu);
+                    $('#giakklkluot').val(data.giakklkluot);
+                    $('#giakkluot').val(data.giakkluot);
+                    $('#giakklkthang').val(data.giakklkthang);
+                    $('#giakkthang').val(data.giakkthang);
+                },
+                error: function (message) {
+                    toastr.error(message, 'Lỗi!');
+                }
+            });
             $('#iddv').attr('value',id);
         }
 
         function updategia(){
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             $.ajax({
-                url: '{{$url}}'+'thao_tac/updategiadv',
+                url: '{{$url}}'+'thao_tac/update_giadv_temp',
                 type: 'GET',
                 data: {
                     _token: CSRF_TOKEN,
-                    giakklkluot: $('#giakklkluot').val(),
-                    giakkluot: $('#giakkluot').val(),
-                    giakklkthang: $('#giakklkthang').val(),
-                    giakkthang: $('#giakkthang').val(),
-                    id: $('#iddv').val()
+                    masothue: $('#masothue').val(),                   
+                    id: $('#iddv').val(),
+                    tendichvu:$('#tendichvu').val(),
+                    qccl:$('#qccl').val(),
+                    dvtluot:$('#dvtluot').val(),
+                    dvtthang:$('#dvtthang').val(),
+                    ghichu:$('#ghichu').val(),
+                    giakklkluot:$('#giakklkluot').val(),
+                    giakkluot:$('#giakkluot').val(),
+                    giakklkthang:$('#giakklkthang').val(),
+                    giakkthang:$('#giakkthang').val()
                 },
                 dataType: 'JSON',
                 success: function (data) {
-                    //alert(data.message);
                     if (data.status == 'success') {
                         $('#noidung').replaceWith(data.message);
                         InputMask();
@@ -185,11 +256,55 @@
                     }
                 },
                 error: function(message){
-                    alert(message);
+                    toastr.error(message);
                 }
             });
+            $('#modal-create').modal('hide');
         }
 
+        function clearForm(){
+            $('#iddv').val(0);
+            $('#tendichvu').val('');
+            $('#qccl').val('');
+            $('#dvtluot').val('');
+            $('#dvtthang').val('');
+            $('#ghichu').val('');
+            $('#giakklkluot').val(0);
+            $('#giakkluot').val(0);
+            $('#giakklkthang').val(0);
+            $('#giakkthang').val(0);
+        }
+
+        function deleteRow(){
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                url: '{{$url}}'+'thao_tac/del_giadv_temp',
+                type: 'GET',
+                data: {
+                    _token: CSRF_TOKEN,
+                    masothue: $('#masothue').val(),
+                    id: $('#id_del').val()
+                },
+                dataType: 'JSON',
+                success: function (data) {
+                    if (data.status == 'success') {
+                        $('#noidung').replaceWith(data.message);
+                        InputMask();
+                        jQuery(document).ready(function() {
+                            TableManaged.init();
+                        });
+                    }
+                },
+                error: function(message){
+                    toastr.error(message,'Lỗi!');
+                }
+            });
+            $('#modal-delete').modal('hide');
+        }
+
+        function getid(id){
+            document.getElementById("id_del").value=id;
+        }
         // <editor-fold defaultstate="collapsed" desc="--InPutMask--">
         function InputMask() {
             //$(function(){

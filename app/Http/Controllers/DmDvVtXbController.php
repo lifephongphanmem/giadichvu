@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DonViDvVt;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -19,7 +20,20 @@ class DmDvVtXbController extends Controller
     public function index()
     {
         if (Session::has('admin')) {
-            $model = DmDvVtXb::where('masothue',session('admin')->mahuyen)->get();
+            if (session('admin')->level == 'T' || session('admin')->level == 'H') {
+                if(session('admin')->sadmin == 'ssa'){
+                    $model = DonViDvVt::all();
+                }else{
+                    $model = DonViDvVt::where('cqcq',session('admin')->cqcq)
+                        ->get();
+                }
+                return view('manage.dvvt.template.dsdonvi_danhmuc')
+                    ->with('model',$model)
+                    ->with('url','/dich_vu_van_tai/dich_vu_xe_bus/')
+                    ->with('pageTitle','Danh mục dịch vụ vận tải');
+            }
+            $masothue=session('admin')->mahuyen;
+            $model = DmDvVtXb::where('masothue',$masothue)->get();
             $per=array(
                 'create'=>can('dvvtxb','create'),
                 'edit' =>can('dvvtxb','edit'),
@@ -31,7 +45,30 @@ class DmDvVtXbController extends Controller
                 ->with('url','/dich_vu_van_tai/dich_vu_xe_bus/')
                 ->with('per',$per)
                 ->with('model',$model)
+                ->with('masothue',$masothue)
                 ->with('pageTitle','Danh mục vận tải hành khách bằng xe buýt theo tuyến cố định');
+
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function show($masothue)
+    {
+        if (Session::has('admin')) {
+            $model = DmDvVtXb::where('masothue',$masothue)->get();
+            $per=array(
+                'create'=>can('dvvtch','create'),
+                'edit' =>can('dvvtch','edit'),
+                'delete' =>can('dvvtch','delete'),
+                'approve'=>can('dvvtch','approve')
+            );
+
+            return view('manage.dvvt.dvxb.dmdv.index')
+                ->with('url','/dich_vu_van_tai/dich_vu_xe_bus/')
+                ->with('per',$per)
+                ->with('model',$model)
+                ->with('masothue',$masothue)
+                ->with('pageTitle','Danh mục dịch vụ vận tải');
 
         }else
             return view('errors.notlogin');
@@ -47,7 +84,7 @@ class DmDvVtXbController extends Controller
             return view('errors.notlogin');
     }
 
-    function AddDM(Request $request)
+    function add(Request $request)
     {
         $result = array(
             'status' => 'fail',
@@ -67,10 +104,10 @@ class DmDvVtXbController extends Controller
         //Thêm mới dịch vụ
         if ($inputs['id'] == 0) {
             $model = new DmDvVtXb();
-            $model->masothue = session('admin')->mahuyen;
-            $model->madichvu = 'DVXB'.session('admin')->mahuyen . getdate()[0];
-            $model->diemdau = $inputs['diemdau'];
-            $model->diemcuoi = $inputs['diemcuoi'];
+            $model->masothue = $inputs['masothue'];
+            $model->madichvu = 'DVXB'. $inputs['masothue'] . getdate()[0];
+            //$model->diemdau = $inputs['diemdau'];
+            //$model->diemcuoi = $inputs['diemcuoi'];
             $model->tendichvu = $inputs['tendichvu'];
             $model->dvtluot = $inputs['dvtluot'];
             $model->dvtthang = $inputs['dvtthang'];
@@ -80,8 +117,6 @@ class DmDvVtXbController extends Controller
         } else {
             $id=$inputs['id'];
             $model =  DmDvVtXb::findOrFail($id);
-            $model->diemdau = $inputs['diemdau'];
-            $model->diemcuoi = $inputs['diemcuoi'];
             $model->tendichvu = $inputs['tendichvu'];
             $model->dvtluot = $inputs['dvtluot'];
             $model->dvtthang = $inputs['dvtthang'];
@@ -95,5 +130,19 @@ class DmDvVtXbController extends Controller
         $result['status'] = 'success';
 
         die(json_encode($result));
+    }
+
+    function get(Request $request){
+        if(!Session::has('admin')) {
+            $result = array(
+                'status' => 'fail',
+                'message' => 'permission denied',
+            );
+            die(json_encode($result));
+        }
+
+        $inputs = $request->all();
+        $model = DmDvVtXb::find($inputs['id']);
+        die($model);
     }
 }

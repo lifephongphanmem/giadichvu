@@ -110,12 +110,12 @@
 
 <script>
     function InChiTiet(masokk){
-        var url='{{$url}}'+'in/'+ masokk;
+        var url='{{$url}}'+'in/ma_so='+ masokk;
         window.open(url,'_blank');
     }
 
     function InPAG(masokk){
-        var url='{{$url}}'+'inPAG/'+ masokk;
+        var url='{{$url}}'+'inPAG/ma_so='+ masokk;
         window.open(url,'_blank');
     }
 </script>

@@ -56,7 +56,7 @@
 </table>
 
 
-<p>Kính gửi: {{(getGeneralConfigs()['tendonvi'])}}</p>
+<p>Kính gửi: {{(getGeneralConfigs()['tendonvivt'])}}</p>
 
 <p>Thực hiện quy định tại Thông tư liên tịch số 152/2014/TTLT-BTC-BGTVT
     ngày 15 tháng 10 năm 2014 của Bộ trưởng Bộ Tài chính và Bộ trưởng

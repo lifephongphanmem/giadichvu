@@ -30,7 +30,7 @@
     <h3 class="page-title">
         Vận tải hành khách bằng xe buýt<small> theo tuyến cố định</small>
     </h3>
-
+    <input type="hidden" name="masothue" id="masothue" value="{{$masothue}}">
     <div class="row">
         <div class="col-md-12">
             <div class="portlet box">
@@ -48,22 +48,22 @@
                                 <thead>
                                     <tr>
                                         <th style="text-align: center" width="2%">STT</th>
-                                        <th style="text-align: center">Điểm xuất phát</th>
-                                        <th style="text-align: center">Điểm đến</th>
+                                        <!--th style="text-align: center">Điểm xuất phát</th>
+                                        <th style="text-align: center">Điểm đến</th-->
                                         <th style="text-align: center">Mô tả dịch vụ</th>
                                         <th style="text-align: center">Quy cách chất lượng</th>
                                         <th style="text-align: center">Đơn vị tính lượt</th>
                                         <th style="text-align: center">Đơn vị tính tháng</th>
                                         <th style="text-align: center">Ghi chú</th>
-                                        <th style="text-align: center" width="20%">Thao tác</th>
+                                        <th style="text-align: center">Thao tác</th>
                                     </tr>
                                 </thead>
                                 <tbody id="noidung">
                                     @foreach($model as $key=>$dv)
                                         <tr>
                                             <td style="text-align: center">{{$key+1}}</td>
-                                            <td name="diemdau">{{$dv->diemdau}}</td>
-                                            <td name="diemcuoi">{{$dv->diemcuoi}}</td>
+                                            <!--td name="diemdau">{{$dv->diemdau}}</td>
+                                            <td name="diemcuoi">{{$dv->diemcuoi}}</td-->
                                             <td name="tendichvu" class="active">{{$dv->tendichvu}}</td>
                                             <td name="qccl">{{$dv->qccl}}</td>
                                             <td name="dvtluot" style="text-align: center">{{$dv->dvtluot}}</td>
@@ -71,7 +71,7 @@
                                             <td name="ghichu">{{$dv->ghichu}}</td>
                                             <td>
                                                 @if($per['edit'])
-                                                    <button type="button" class="btn btn-default btn-xs mbs" onclick="editDVXK(this,'{{$dv->id}}')"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</button>
+                                                    <button type="button" class="btn btn-default btn-xs mbs" onclick="editDVXK({{$dv->id}})"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</button>
                                                 @endif
                                                 @if($per['delete'])
                                                     <button type="button" onclick="confirmDel('{{$dv->id}}')" class="btn btn-default btn-xs mbs" data-target="#del-modal-confirm" data-toggle="modal"><i class="fa fa-trash-o"></i>&nbsp;
@@ -113,24 +113,16 @@
     </div>
 
     <script>
+
         function confirmDVXK(){
             var valid=true;
             var message='';
-            var diemdau= $('#diemdau').val();
-            var diemcuoi= $('#diemcuoi').val();
+            //var diemdau= $('#diemdau').val();
+            //var diemcuoi= $('#diemcuoi').val();
             var tendichvu= $('#tendichvu').val();
             var dvtluot= $('#dvtluot').val();
             var dvtthang= $('#dvtthang').val();
 
-            if(diemdau==''){
-                valid=false;
-                message +='Điểm xuất phát không được bỏ trống \n';
-            }
-
-            if(diemcuoi==''){
-                valid=false;
-                message +='Điểm cuối không được bỏ trống \n';
-            }
 
             if(tendichvu==''){
                 valid=false;
@@ -151,14 +143,13 @@
             if(valid){
                 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                 $.ajax({
-                    url: '{{$url}}'+'adddm',
+                    url: '{{$url}}'+'danh_muc/add',
                     type: 'GET',
                     data: {
                         _token: CSRF_TOKEN,
-                        diemdau: diemdau,
-                        diemcuoi: diemcuoi,
                         tendichvu: tendichvu,
                         qccl: $('#qccl').val(),
+                        masothue: $('#masothue').val(),
                         dvtluot: dvtluot,
                         dvtthang: dvtthang,
                         ghichu: $('#ghichu').val(),
@@ -166,16 +157,14 @@
                     },
                     dataType: 'JSON',
                     success: function (data) {
-                        //alert(data.message);
                         if (data.status == 'success') {
                             location.reload();
-                            //$('#noidung').replaceWith(data.message);
                         }
                     },
                     error: function(message){
                         alert(message);
                     }
-                });//
+                });
                 $('#dvxk-modal-confirm').modal('hide');
             }else{
                 alert(message);
@@ -183,23 +172,35 @@
             return valid;
         }
 
-        function editDVXK(e,id){
-            var tr = $(e).closest('tr');
-            $('#diemdau').attr('value',$(tr).find('td[name=diemdau]').text());
-            $('#diemcuoi').attr('value',$(tr).find('td[name=diemcuoi]').text());
-            $('#tendichvu').attr('value',$(tr).find('td[name=tendichvu]').text());
-            $('#qccl').attr('value',$(tr).find('td[name=qccl]').text());
-            $('#dvtluot').attr('value',$(tr).find('td[name=dvtluot]').text());
-            $('#dvtthang').attr('value',$(tr).find('td[name=dvtthang]').text());
-            $('#ghichu').attr('value',$(tr).find('td[name=ghichu]').text());
+        function editDVXK(id){
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                url: '{{$url}}'+'danh_muc/get',
+                type: 'GET',
+                data: {
+                    _token: CSRF_TOKEN,
+                    id: id
+                },
+                dataType: 'JSON',
+                success: function (data) {
+                    $('#tendichvu').val(data.tendichvu);
+                    $('#qccl').val(data.qccl);
+                    $('#dvtluot').val(data.dvtluot);
+                    $('#dvtthang').val(data.dvtthang);
+                    $('#ghichu').val(data.ghichu);
+                },
+                error: function (message) {
+                    toastr.error(message, 'Lỗi!');
+                }
+            });
             $('#iddv').attr('value',id);
             $('#dvxk-modal-confirm').modal('show');
         }
 
         function addDVXK(){
             $('#iddv').attr('value',0);
-            $('#diemdau').attr('value','');
-            $('#diemcuoi').attr('value','');
+            //$('#diemdau').attr('value','');
+            //$('#diemcuoi').attr('value','');
             $('#tendichvu').attr('value','');
             $('#qccl').attr('value','');
             $('#dvtluot').attr('value','');

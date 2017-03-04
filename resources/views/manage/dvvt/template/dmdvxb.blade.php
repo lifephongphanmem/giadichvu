@@ -1,9 +1,9 @@
-<div class="row">
+<!--div class="row">
     <div class="col-md-6">
-    <div class="form-group">
-    <label class="form-control-label"><b>Điểm xuất phát</b><span class="require">*</span></label>
-    {!!Form::text('diemdau', null, array('id' => 'diemdau','class' => 'form-control','required'=>'required'))!!}
-    </div>
+        <div class="form-group">
+        <label class="form-control-label"><b>Điểm xuất phát</b><span class="require">*</span></label>
+        {!!Form::text('diemdau', null, array('id' => 'diemdau','class' => 'form-control','required'=>'required'))!!}
+        </div>
     </div>
     <div class="col-md-6">
         <div class="form-group">
@@ -11,7 +11,7 @@
         {!!Form::text('diemcuoi', null, array('id' => 'diemcuoi','class' => 'form-control','required'=>'required'))!!}
         </div>
     </div>
-</div>
+</div-->
 <div class="row">
     <div class="col-md-12">
         <div class="form-group">

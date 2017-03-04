@@ -35,7 +35,7 @@
                     <div class="portlet-title">
                         <div class="actions">
                             @if($per['create'])
-                                <a href="{{url($url.'ke_khai/create')}}" class="btn btn-default btn-sm"><i class="fa fa-plus"></i> Kê khai giá mới</a>
+                                <a href="{{url($url.'ke_khai/create/ma_so='.$masothue)}}" class="btn btn-default btn-sm"><i class="fa fa-plus"></i> Kê khai giá mới</a>
                             @endif
                         </div>
                         @include('manage.dvvt.template.indexkkdv_boloc')
@@ -55,12 +55,12 @@
         });
 
         function InChiTiet(masokk){
-            var url='{{$url}}'+'in/'+ masokk;
+            var url='{{$url}}'+'in/ma_so='+ masokk;
             window.open(url,'_blank');
         }
 
         function InPAG(masokk){
-            var url='{{$url}}'+'inPAG/'+ masokk;
+            var url='{{$url}}'+'inPAG/ma_so='+ masokk;
             window.open(url,'_blank');
         }
     </script>
