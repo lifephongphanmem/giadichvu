@@ -29,7 +29,7 @@
 
     <End Date-->
     <!--Date new-->
-    <script src="{{url('minhtran/jquery.min.js')}}"></script>
+    <!--script src="{{url('minhtran/jquery.min.js')}}"></script-->
     <script src="{{url('minhtran/jquery.inputmask.bundle.min.js')}}"></script>
 
     <script>

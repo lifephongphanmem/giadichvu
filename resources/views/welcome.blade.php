@@ -46,16 +46,15 @@
     <br>
 </div>
 <div class="row mbxl">
-    <a href="{{ url('/login') }}" class="btn btn-primary btn-lg">Đăng nhập tài khoản</a>
-    <a href="{{ url('/search_register') }}" class="btn btn-success btn-lg">Kiểm tra tài khoản</a>
-    <br>
-    <br>
-    <br>
+    <a href="{{ url('/login') }}" class="btn btn-primary btn-lg">Đăng nhập tài khoản</a>&nbsp;
+    <h5><i> Kiểm tra tài khoản đã đăng ký.Click</i>
+        <a href="{{ url('/search_register') }}"> here</a>
+    </h5>
 </div>
-<div class="row mtxl mbxl"></div>
-<div class="row mtxl mbxl"></div>
+<br>
+<br>
+<br>
 <hr class="mtxl mbxl">
-
 <div class="row">
     <p style="text"><b>Phát triển bởi Công ty TNHH Phát Triển Phần Mềm Cuộc Sống</b></p>
 
