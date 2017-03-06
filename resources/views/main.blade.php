@@ -341,12 +341,12 @@ License: You must have a valid license purchased only from themeforest(the above
                                                     @if(can('dvvtxk','index'))
                                                         <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_khach/danh_muc')}}">Danh mục dịch vụ</a></li>
                                                     @endif
-                                                    @if(can('kkdvvtxk','index'))
+                                                    @if(can('kkdvvtxk','create'))
                                                         <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_khach/ke_khai/'.'nam='.date('Y'))}}">Kê khai giá dịch vụ</a></li>
-                                                        @if(session('admin')->level =='T' || session('admin')->level =='H')
-                                                            <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_khach/xet_duyet/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')}}">Hồ sơ kê khai</a></li>
-                                                            <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_khach/tim_kiem/masothue=all&nam='.date('Y'))}}">Tìm kiếm thông tin kê khai</a></li>
-                                                        @endif
+                                                    @endif
+                                                    @if(session('admin')->level =='T' || session('admin')->level =='H')
+                                                        <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_khach/xet_duyet/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')}}">Hồ sơ kê khai</a></li>
+                                                        <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_khach/tim_kiem/masothue=all&nam='.date('Y'))}}">Tìm kiếm thông tin kê khai</a></li>
                                                     @endif
                                                 </ul>
                                             </li>
@@ -360,12 +360,12 @@ License: You must have a valid license purchased only from themeforest(the above
                                                     @if(can('dvvtxb','index'))
                                                         <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_bus/danh_muc')}}">Danh mục dịch vụ</a></li>
                                                     @endif
-                                                    @if(can('kkdvvtxb','index'))
+                                                    @if(can('kkdvvtxb','create'))
                                                         <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_bus/ke_khai/'.'nam='.date('Y'))}}">Kê khai giá dịch vụ</a></li>
-                                                        @if(session('admin')->level =='T' || session('admin')->level =='H')
-                                                            <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_bus/xet_duyet/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')}}">Hồ sơ kê khai</a></li>
-                                                            <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_bus/tim_kiem/masothue=all&nam='.date('Y'))}}">Tìm kiếm thông tin kê khai</a></li>
-                                                        @endif
+                                                    @endif
+                                                    @if(session('admin')->level =='T' || session('admin')->level =='H')
+                                                        <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_bus/xet_duyet/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')}}">Hồ sơ kê khai</a></li>
+                                                        <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_bus/tim_kiem/masothue=all&nam='.date('Y'))}}">Tìm kiếm thông tin kê khai</a></li>
                                                     @endif
                                                 </ul>
                                             </li>
@@ -379,12 +379,12 @@ License: You must have a valid license purchased only from themeforest(the above
                                                     @if(can('dvvtxtx','index'))
                                                         <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_taxi/danh_muc')}}">Danh mục dịch vụ</a></li>
                                                     @endif
-                                                    @if(can('kkdvvtxtx','index'))
+                                                    @if(can('kkdvvtxtx','create'))
                                                         <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_taxi/ke_khai/'.'nam='.date('Y'))}}">Kê khai giá dịch vụ</a></li>
-                                                        @if(session('admin')->level =='T' || session('admin')->level =='H')
-                                                            <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_taxi/xet_duyet/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')}}">Hồ sơ kê khai</a></li>
-                                                            <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_taxi/tim_kiem/masothue=all&nam='.date('Y'))}}">Tìm kiếm thông tin kê khai</a></li>
-                                                        @endif
+                                                    @endif
+                                                    @if(session('admin')->level =='T' || session('admin')->level =='H')
+                                                        <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_taxi/xet_duyet/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')}}">Hồ sơ kê khai</a></li>
+                                                        <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_taxi/tim_kiem/masothue=all&nam='.date('Y'))}}">Tìm kiếm thông tin kê khai</a></li>
                                                     @endif
                                                 </ul>
                                             </li>
@@ -398,12 +398,12 @@ License: You must have a valid license purchased only from themeforest(the above
                                                     @if(can('dvvtch','index'))
                                                         <li><a href="{{url('/dich_vu_van_tai/dich_vu_cho_hang/danh_muc')}}">Danh mục dịch vụ</a></li>
                                                     @endif
-                                                    @if(can('kkdvvtch','index'))
+                                                    @if(can('kkdvvtch','create'))
                                                         <li><a href="{{url('/dich_vu_van_tai/dich_vu_cho_hang/ke_khai/'.'nam='.date('Y'))}}">Kê khai giá dịch vụ</a></li>
-                                                        @if(session('admin')->level =='T' || session('admin')->level =='H')
-                                                            <li><a href="{{url('/dich_vu_van_tai/dich_vu_cho_hang/xet_duyet/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')}}">Hồ sơ kê khai</a></li>
-                                                            <li><a href="{{url('/dich_vu_van_tai/dich_vu_cho_hang/tim_kiem/masothue=all&nam='.date('Y'))}}">Tìm kiếm thông tin kê khai</a></li>
-                                                        @endif
+                                                    @endif
+                                                    @if(session('admin')->level =='T' || session('admin')->level =='H')
+                                                        <li><a href="{{url('/dich_vu_van_tai/dich_vu_cho_hang/xet_duyet/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')}}">Hồ sơ kê khai</a></li>
+                                                        <li><a href="{{url('/dich_vu_van_tai/dich_vu_cho_hang/tim_kiem/masothue=all&nam='.date('Y'))}}">Tìm kiếm thông tin kê khai</a></li>
                                                     @endif
                                                 </ul>
                                             </li>
