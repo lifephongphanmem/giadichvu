@@ -385,12 +385,32 @@ class KkDvVtXtxController extends Controller
 
             $result['message'] = 'Xét duyệt thành công.';
             $result['status'] = 'success';
+            CbKkDvVtXtx::where('masothue',$model->masothue)->delete();
 
-            $modelkk = KkDvVtXtx::findOrFail($id);
-            $modeldel = CbKkDvVtXtx::where('masothue',$modelkk->masothue)->delete();
+            $m_cb = new CbKkDvVtXtx();
+            $m_cb->masothue = $model->masothue;
+            $m_cb->masokk = $model->masokk;
+            $m_cb->socv = $model->socv;
+            $m_cb->ngaynhap = $model->ngaynhap;
+            $m_cb->socvlk = $model->socvlk;
+            $m_cb->ngaynhaplk = $model->ngaynhaplk;
+            $m_cb->ngayhieuluc = $model->ngayhieuluc;
+            $m_cb->ttnguoinop = $model->ttnguoinop;
+            $m_cb->ngaynhan = $model->ngaynhan;
+            $m_cb->sohsnhan = $model->sohsnhan;
+            $m_cb->ngaychuyen = $model->ngaychuyen;
+            $m_cb->lydo = $model->lydo;
+            $m_cb->trangthai = $model->trangthai;
+            $m_cb->uudai = $model->uudai;
+            $m_cb->ghichu = $model->ghichu;
+            $model->trangthai = 'Đang công bố';
+            $m_cb->save();
 
-            DB::statement("INSERT INTO cbkkDvVtXtx SELECT * FROM kkDvVtXtx WHERE id='".$id."'");
-            DB::statement("Update cbkkDvVtXtx set trangthai='Đang công bố' WHERE id='".$id."'");
+            //$modelkk = KkDvVtXtx::findOrFail($id);
+            //$modeldel = CbKkDvVtXtx::where('masothue',$modelkk->masothue)->delete();
+
+            //DB::statement("INSERT INTO cbkkDvVtXtx SELECT * FROM kkDvVtXtx WHERE id='".$id."'");
+            //DB::statement("Update cbkkDvVtXtx set trangthai='Đang công bố' WHERE id='".$id."'");
         }
         die(json_encode($result));
     }

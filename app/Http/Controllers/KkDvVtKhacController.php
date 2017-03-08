@@ -387,7 +387,8 @@ class KkDvVtKhacController extends Controller
 
             $result['message'] = 'Xét duyệt thành công.';
             $result['status'] = 'success';
-        
+            CbKkDvVtKhac::where('masothue',$model->masothue)->delete();
+
             $m_cb = new CbKkDvVtKhac();
             $m_cb->masothue = $model->masothue;
             $m_cb->masokk = $model->masokk;
