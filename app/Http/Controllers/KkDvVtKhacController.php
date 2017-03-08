@@ -33,7 +33,7 @@ class KkDvVtKhacController extends Controller
             $masothue=session('admin')->mahuyen;
             if(session('admin')->level == 'T' || session('admin')->level == 'H'){
                 if(session('admin')->sadmin == 'ssa'){
-                    $model = KkDvVtKhac::all();
+                    $model = DonViDvVt::all();
                 }else{
 
                     $model = DonViDvVt::where('cqcq',session('admin')->cqcq)
@@ -41,6 +41,7 @@ class KkDvVtKhacController extends Controller
                 }
                 return view('manage.dvvt.template.dsdonvi_kekhai')
                     ->with('model',$model)
+                    ->with('nam',$nam)
                     ->with('url','/dich_vu_van_tai/dich_vu_cho_hang/')
                     ->with('pageTitle','Kê khai giá dịch vụ vận tải');
             }else {
@@ -69,6 +70,33 @@ class KkDvVtKhacController extends Controller
             return view('errors.notlogin');
     }
 
+    public function show($masothue)
+    {
+        if (Session::has('admin')) {
+            $model = KkDvVtKhac::where('masothue',$masothue)
+                ->whereYear('ngaynhap', date('Y'))
+                ->orderBy('ngaynhap', 'asc')
+                ->get();
+            $tendonvi=DonViDvVt::select('tendonvi')->where('masothue',$masothue)->first()->tendonvi;
+            $per=array(
+                'create'=>can('kkdvvtch','create'),
+                'edit' =>can('kkdvvtch','edit'),
+                'delete' =>can('kkdvvtch','delete'),
+                'approve'=>can('kkdvvtch','approve')
+            );
+
+            return view('manage.dvvt.dvkhac.kkdv.index_donvi')
+                ->with('model',$model)
+                ->with('per',$per)
+                ->with('nam',date('Y'))
+                ->with('masothue',$masothue)
+                ->with('tendonvi',$tendonvi)
+                ->with('url','/dich_vu_van_tai/dich_vu_cho_hang/')
+                ->with('pageTitle','Kê khai giá dịch vụ vận tải');
+        }else
+            return view('errors.notlogin');
+    }
+
     public function getTenDV($atenDV, $array){
         foreach($atenDV as $tenDV){
             if($tenDV->masothue == $array->masothue)
@@ -81,7 +109,9 @@ class KkDvVtKhacController extends Controller
         if (Session::has('admin')) {
             if($pl == 'cho_nhan') {
                 $trangthai = 'Chờ nhận';
-                if (session('admin')->level == 'T' & session('admin')->sadmin == 'ssa') {
+                if ((session('admin')->level == 'T' & session('admin')->sadmin == 'ssa')
+                    ||(session('admin')->level == 'H' & session('admin')->sadmin == 'ssa'))
+                {
                     $model = KkDvVtKhac::where('trangthai', $trangthai)
                         ->whereMonth('ngaychuyen', $thang)
                         ->whereYear('ngaychuyen', $nam)
@@ -96,7 +126,7 @@ class KkDvVtKhacController extends Controller
             }
             else{
                 $trangthai = 'Công bố';
-                $model = KkDvVtKhac::whereMonth('ngaynhan',$thang)
+                $model = CbKkDvVtKhac::whereMonth('ngaynhan',$thang)
                     ->whereYear('ngaynhan', $nam)
                     ->get();
             }
@@ -220,7 +250,12 @@ class KkDvVtKhacController extends Controller
                 ->get()->toarray();
             PagDvVtKhac::insert($m_pag);
 
-            return redirect('/dich_vu_van_tai/dich_vu_cho_hang/ke_khai/'.'nam='.date('Y'));
+            //Nếu thêm mới là quyền T hoặc H (tài khoản quản lý) thì trở về trang show nhập đơn vị
+            if (session('admin')->level == 'T' ||session('admin')->level == 'H'|| session('admin')->sadmin == 'ssa') {
+                return redirect('/dich_vu_van_tai/dich_vu_cho_hang/ke_khai/don_vi/ma_so='.$insert['masothue']);
+            }else{
+                return redirect('/dich_vu_van_tai/dich_vu_cho_hang/ke_khai/'.'nam='.date('Y'));
+            }
         }else
             return view('errors.notlogin');
     }
@@ -265,7 +300,12 @@ class KkDvVtKhacController extends Controller
             $model->ghichu = $update['ghichu'];
             $model->uudai = $update['uudai'];
             $model->save();
-            return redirect('/dich_vu_van_tai/dich_vu_cho_hang/ke_khai/'.'nam='.date('Y'));
+            //Nếu thêm mới là quyền T hoặc H (tài khoản quản lý) thì trở về trang show nhập đơn vị
+            if (session('admin')->level == 'T' ||session('admin')->level == 'H'|| session('admin')->sadmin == 'ssa') {
+                return redirect('/dich_vu_van_tai/dich_vu_cho_hang/ke_khai/don_vi/ma_so='.$update['masothue']);
+            }else{
+                return redirect('/dich_vu_van_tai/dich_vu_cho_hang/ke_khai/'.'nam='.date('Y'));
+            }
         }else
             return view('errors.notlogin');
     }
@@ -906,7 +946,7 @@ class KkDvVtKhacController extends Controller
         $message .= '<th style="text-align: center">Mức giá liền kề</th>';
         $message .= '<th style="text-align: center">Mức giá kê khai</th>';
         $message .= '<th style="text-align: center" width="20%">Thao tác</th>';
-        $message .= ' </tr>';
+        $message .= '</tr>';
         $message .= '</thead>';
         $message .= '<tbody>';
         $i=1;
@@ -923,7 +963,7 @@ class KkDvVtKhacController extends Controller
                     .'onclick="editItem('.$dv->id.')"><i'
                     .' class="fa fa-edit"></i>&nbsp;Kê khai giá'
                     .'</button>';
-            $message .= '<button type="button" data-target="#modal-delete" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="getid('.$dv->id.');" ><i class="fa fa-trash-o"></i>&nbsp;Xóa
+        $message .= '<button type="button" data-target="#modal-delete" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="getid('.$dv->id.');" ><i class="fa fa-trash-o"></i>&nbsp;Xóa
             </button>';
         $message .='<button type="button" data-target="#modal-pagia-create"
                             data-toggle="modal" class="btn btn-default btn-xs mbs"

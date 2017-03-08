@@ -235,6 +235,8 @@ Route::group(['prefix'=>'dich_vu_van_tai'],function(){
             Route::get('updatepag_temp', 'KkDvVtKhacController@updatepag_temp');
             Route::get('getpag', 'KkDvVtKhacController@getpag');
             Route::get('updatepag', 'KkDvVtKhacController@updatepag');
+
+            Route::get('don_vi/ma_so={masothue}','KkDvVtKhacController@show');
         });
 
         Route::group(['prefix'=>'thao_tac'],function() {
@@ -290,6 +292,8 @@ Route::group(['prefix'=>'dich_vu_van_tai'],function(){
             Route::get('updatepag_temp', 'KkDvVtXbController@updatepag_temp');
             Route::get('getpag', 'KkDvVtXbController@getpag');
             Route::get('updatepag', 'KkDvVtXbController@updatepag');
+
+            Route::get('don_vi/ma_so={masothue}','KkDvVtXbController@show');
         });
 
         Route::group(['prefix'=>'thao_tac'],function() {
@@ -345,6 +349,8 @@ Route::group(['prefix'=>'dich_vu_van_tai'],function(){
             Route::get('updatepag_temp', 'KkDvVtXkController@updatepag_temp');
             Route::get('getpag', 'KkDvVtXkController@getpag');
             Route::get('updatepag', 'KkDvVtXkController@updatepag');
+
+            Route::get('don_vi/ma_so={masothue}','KkDvVtXkController@show');
         });
 
         Route::group(['prefix'=>'thao_tac'],function() {
@@ -400,6 +406,8 @@ Route::group(['prefix'=>'dich_vu_van_tai'],function(){
             Route::get('updatepag_temp', 'KkDvVtXtxController@updatepag_temp');
             Route::get('getpag', 'KkDvVtXtxController@getpag');
             Route::get('updatepag', 'KkDvVtXtxController@updatepag');
+
+            Route::get('don_vi/ma_so={masothue}','KkDvVtXtxController@show');
         });
 
         Route::group(['prefix'=>'thao_tac'],function() {

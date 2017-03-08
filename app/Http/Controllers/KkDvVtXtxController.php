@@ -32,7 +32,7 @@ class KkDvVtXtxController extends Controller
             $masothue=session('admin')->mahuyen;
             if(session('admin')->level == 'T' || session('admin')->level == 'H'){
                 if(session('admin')->sadmin == 'ssa'){
-                    $model = KkDvVtXtx::all();
+                    $model = DonViDvVt::all();
                 }else{
                     $model = DonViDvVt::where('cqcq',session('admin')->cqcq)
                         ->get();
@@ -72,6 +72,32 @@ class KkDvVtXtxController extends Controller
             return view('errors.notlogin');
     }
 
+    public function show($masothue)
+    {
+        if (Session::has('admin')) {
+            $model = KkDvVtXtx::where('masothue',$masothue)
+                ->whereYear('ngaynhap', date('Y'))
+                ->orderBy('ngaynhap', 'asc')
+                ->get();
+            $tendonvi=DonViDvVt::select('tendonvi')->where('masothue',$masothue)->first()->tendonvi;
+            $per=array(
+                'create'=>can('kkdvvtxtx','create'),
+                'edit' =>can('kkdvvtxtx','edit'),
+                'delete' =>can('kkdvvtxtx','delete'),
+                'approve'=>can('kkdvvtxtx','approve')
+            );
+            return view('manage.dvvt.dvxtx.kkdv.index_donvi')
+                ->with('model',$model)
+                ->with('per',$per)
+                ->with('nam',date('Y'))
+                ->with('masothue',$masothue)
+                ->with('tendonvi',$tendonvi)
+                ->with('url','/dich_vu_van_tai/dich_vu_xe_taxi/')
+                ->with('pageTitle','Kê khai giá vận tải hành khách bằng xe taxi');
+        }else
+            return view('errors.notlogin');
+    }
+
     public function getTenDV($atenDV, $array){
         foreach($atenDV as $tenDV){
             if($tenDV->masothue == $array->masothue)
@@ -84,7 +110,9 @@ class KkDvVtXtxController extends Controller
         if (Session::has('admin')) {
             if($pl == 'cho_nhan') {
                 $trangthai = 'Chờ nhận';
-                if (session('admin')->level == 'T' & session('admin')->sadmin == 'ssa') {
+                if ((session('admin')->level == 'T' & session('admin')->sadmin == 'ssa')
+                    ||(session('admin')->level == 'H' & session('admin')->sadmin == 'ssa'))
+                {
                     $model = KkDvVtXtx::where('trangthai', $trangthai)
                         ->whereMonth('ngaychuyen', $thang)
                         ->whereYear('ngaychuyen', $nam)
@@ -99,7 +127,7 @@ class KkDvVtXtxController extends Controller
             }
             else{
                 $trangthai = 'Công bố';
-                $model = KkDvVtXtx::whereMonth('ngaynhan',$thang)
+                $model = CbKkDvVtXtx::whereMonth('ngaynhan',$thang)
                     ->whereYear('ngaynhan', $nam)
                     ->get();
             }
@@ -222,8 +250,11 @@ class KkDvVtXtxController extends Controller
                 ->where('masothue', $insert['masothue'])
                 ->get()->toarray();
             PagDvVtXtx::insert($m_pag);
-
-            return redirect('/dich_vu_van_tai/dich_vu_xe_taxi/ke_khai/'.'nam='.date('Y'));
+            if (session('admin')->level == 'T' ||session('admin')->level == 'H'|| session('admin')->sadmin == 'ssa') {
+                return redirect('/dich_vu_van_tai/dich_vu_xe_taxi/ke_khai/don_vi/ma_so='.$insert['masothue']);
+            }else{
+                return redirect('/dich_vu_van_tai/dich_vu_xe_taxi/ke_khai/nam='.date('Y'));
+            }
         }else
             return view('errors.notlogin');
     }
@@ -268,7 +299,11 @@ class KkDvVtXtxController extends Controller
             $model->ghichu = $update['ghichu'];
             $model->uudai = $update['uudai'];
             $model->save();
-            return redirect('/dich_vu_van_tai/dich_vu_xe_taxi/ke_khai/'.'nam='.date('Y'));
+            if (session('admin')->level == 'T' ||session('admin')->level == 'H'|| session('admin')->sadmin == 'ssa') {
+                return redirect('/dich_vu_van_tai/dich_vu_xe_taxi/ke_khai/don_vi/ma_so='.$update['masothue']);
+            }else{
+                return redirect('/dich_vu_van_tai/dich_vu_xe_taxi/ke_khai/nam='.date('Y'));
+            }
         }else
             return view('errors.notlogin');
     }

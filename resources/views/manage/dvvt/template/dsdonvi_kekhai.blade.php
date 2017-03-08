@@ -65,7 +65,7 @@
                             <td>{{$tt->dienthoai}}</td>
                             <td>{{$tt->diachi}}</td>
                             <td>
-                                <a href="{{url($url.'ke_khai/create/ma_so='.$tt->masothue)}}" class="btn btn-default btn-xs mbs"><i class="fa fa-edit"></i>&nbsp;Kê khai giá</a>
+                                <a href="{{url($url.'ke_khai/don_vi/ma_so='.$tt->masothue)}}" class="btn btn-default btn-xs mbs"><i class="fa fa-edit"></i>&nbsp;Kê khai giá</a>
                             </td>
                         </tr>
                         @endforeach
