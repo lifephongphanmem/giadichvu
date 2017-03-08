@@ -106,7 +106,7 @@ License: You must have a valid license purchased only from themeforest(the above
 	<p class="help-block">
                         <span class="label label-success label-sm">
                         Help: </span>
-		<a target="_blank" href="http://helpcsdlgia.dev/data/help/tienich/forgotpass/quenmatkhau.pdf"> Hướng dẫn lấy lại mật khẩu </a>
+		<a target="_blank" href="http://help.csdlgia.vn/data/help/tienich/forgotpass/quenmatkhau.pdf"> Hướng dẫn lấy lại mật khẩu </a>
 	</p>
 	<br>
 	<div class="form-actions">
