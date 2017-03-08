@@ -15,19 +15,22 @@ class GeneralConfigsController extends Controller
     public function index()
     {
         if (Session::has('admin')) {
+            if (session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'satc' || session('admin')->sadmin == 'savt') {
+                if (session('admin')->sadmin == 'ssa') {
+                    $model = DmDvQl::all();
+                    return view('system.general.indexql')
+                        ->with('model', $model)
+                        ->with('pageTitle', 'Cấu hình hệ thống');
+                } else {
+                    $model = DmDvQl::where('maqhns', session('admin')->cqcq)
+                        ->first();
+                    return view('system.general.index')
+                        ->with('model', $model)
+                        ->with('pageTitle', 'Cấu hình hệ thống');
 
-            if(session('admin')->sadmin == 'ssa') {
-                $model = DmDvQl::all();
-                return view('system.general.indexql')
-                    ->with('model',$model)
-                    ->with('pageTitle', 'Cấu hình hệ thống');
+                }
             }else{
-                $model = DmDvQl::where('maqhns',session('admin')->cqcq)
-                    ->first();
-                return view('system.general.index')
-                    ->with('model', $model)
-                    ->with('pageTitle', 'Cấu hình hệ thống');
-
+                return view('errors.perm');
             }
 
         }else
@@ -36,9 +39,12 @@ class GeneralConfigsController extends Controller
 
     public function create(){
         if (Session::has('admin')) {
-
-            return view('system.general.create')
-                ->with('pageTitle', 'Thêm mới thông tin cấu hình hệ thống');
+            if (session('admin')->sadmin == 'ssa') {
+                return view('system.general.create')
+                    ->with('pageTitle', 'Thêm mới thông tin cấu hình hệ thống');
+            }else{
+                return view('errors.perm');
+            }
         }else
             return view('errors.notlogin');
     }
@@ -77,9 +83,17 @@ class GeneralConfigsController extends Controller
     {
         if (Session::has('admin')) {
             $model = DmDvQl::findOrFail($id);
-            return view('system.general.edit')
-                ->with('model',$model)
-                ->with('pageTitle','Chỉnh sửa cấu hình hệ thống');
+            if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'satc' || session('admin')->sadmin == 'savt') {
+                if(session('admin')->sadmin == 'ssa' || session('admin')->cqcq = $model->maqhns) {
+                    return view('system.general.edit')
+                        ->with('model', $model)
+                        ->with('pageTitle', 'Chỉnh sửa cấu hình hệ thống');
+                }else{
+                    return view('errors.noperm');
+                }
+            }else{
+                return view('errors.perm');
+            }
 
         }else
             return view('errors.notlogin');
@@ -89,16 +103,20 @@ class GeneralConfigsController extends Controller
         if (Session::has('admin')) {
             $input = $request->all();
             $model = DmDvQl::findOrFail($id);
-            if(session('admin')->sadmin == 'ssa'){
-                $model->maqhns = $input['maqhns'];
-                $model->tendv = $input['tendv'];
-                $model->plql = $input['plql'];
-                $model->level = $input['level'];
+            if(session('admin')->sadmin == 'ssa' || session('admin')->cqcq == $model->maqhns) {
+                if (session('admin')->sadmin == 'ssa') {
+                    $model->maqhns = $input['maqhns'];
+                    $model->tendv = $input['tendv'];
+                    $model->plql = $input['plql'];
+                    $model->level = $input['level'];
+                }
+                $model->diachi = $input['diachi'];
+                $model->sohsnhan = $input['sohsnhan'];
+                $model->ttlh = $input['ttlh'];
+                $model->save();
+            }else{
+                return view('errors.noperm');
             }
-            $model->diachi = $input['diachi'];
-            $model->sohsnhan = $input['sohsnhan'];
-            $model->ttlh = $input['ttlh'];
-            $model->save();
 
             return redirect('cau_hinh_he_thong');
 

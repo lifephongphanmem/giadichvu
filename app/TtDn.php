@@ -31,7 +31,8 @@ class TtDn extends Model
         'nguoiky',
         'diadanh',
         'pl',
-        'link'
+        'link',
+        'cqcq'
 
     ];
 }

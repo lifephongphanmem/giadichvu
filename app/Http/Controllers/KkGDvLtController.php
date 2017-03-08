@@ -19,89 +19,115 @@ class KkGDvLtController extends Controller
 {
     public function cskd(){
         if (Session::has('admin')) {
-            if(session('admin')->level == 'T' || session('admin')->level == 'H'){
-                if(session('admin')->sadmin == 'ssa'){
-                    $model = CsKdDvLt::all();
-                }else{
-                    $model = CsKdDvLt::where('cqcq',session('admin')->cqcq)
+            if(session('admin')->level == 'T' || session('admin')->level == 'H' || session('admin')->level == 'DVLT') {
+                if (session('admin')->level == 'T' || session('admin')->level == 'H') {
+                    if (session('admin')->sadmin == 'ssa') {
+                        $model = CsKdDvLt::all();
+                    } else {
+                        $model = CsKdDvLt::where('cqcq', session('admin')->cqcq)
+                            ->get();
+                    }
+                } else {
+                    $model = CsKdDvLt::where('masothue', session('admin')->mahuyen)
                         ->get();
-                }
-            }else {
-                $model = CsKdDvLt::where('masothue', session('admin')->mahuyen)
-                    ->get();
 
+                }
+                return view('manage.dvlt.kkgia.ttcskd.index')
+                    ->with('model', $model)
+                    ->with('pageTitle', 'Thông tin cơ sở kinh doanh dịch vụ lưu trú');
+            }else{
+                return view('errors.perm');
             }
-            return view('manage.dvlt.kkgia.ttcskd.index')
-                ->with('model', $model)
-                ->with('pageTitle', 'Thông tin cơ sở kinh doanh dịch vụ lưu trú');
         }else
             return view('errors.notlogin');
     }
 
     public function index($macskd,$nam){
         if (Session::has('admin')) {
-            $model = KkGDvLt::where('macskd',$macskd)
-                ->whereYear('ngaynhap',$nam)
-                ->orderBy('id')
-                ->get();
-            $modelcskd = CsKdDvLt::where('macskd',$macskd)
-                ->first();
-            return view('manage.dvlt.kkgia.kkgiadv.index')
-                ->with('model',$model)
-                ->with('nam',$nam)
-                ->with('macskd',$macskd)
-                ->with('modelcskd',$modelcskd)
-                ->with('pageTitle','Thông tin kê khai giá dịch vụ lưu trú');
+            if(session('admin')->level == 'T' || session('admin')->level == 'H' || session('admin')->level == 'DVLT') {
+                $model = KkGDvLt::where('macskd', $macskd)
+                    ->whereYear('ngaynhap', $nam)
+                    ->orderBy('id')
+                    ->get();
+                $modelcskd = CsKdDvLt::where('macskd', $macskd)
+                    ->first();
+
+                if(session('admin')->sadmin == 'ssa' || session('admin')->cqcq == $modelcskd->cqcq) {
+                    return view('manage.dvlt.kkgia.kkgiadv.index')
+                        ->with('model', $model)
+                        ->with('nam', $nam)
+                        ->with('macskd', $macskd)
+                        ->with('modelcskd', $modelcskd)
+                        ->with('pageTitle', 'Thông tin kê khai giá dịch vụ lưu trú');
+                }else{
+                    return view('errors.noperm');
+                }
+            }else{
+                return view('errors.perm');
+            }
         }else
             return view('errors.notlogin');
     }
 
     public function create($macskd){
         if (Session::has('admin')) {
-            $modelcskd = CsKdDvLt::where('macskd',$macskd) ->first();
-            $modelkkctdf = KkGDvLtCtDf::where('macskd',$modelcskd->macskd)
-                ->delete();
+            if(session('admin')->level == 'T' || session('admin')->level == 'H' || session('admin')->level == 'DVLT') {
+                $modelcskd = CsKdDvLt::where('macskd', $macskd)->first();
+                if(session('admin')->sadmin =='ssa' || session('admin')->cqcq == $modelcskd->cqcq) {
+                    $modelkkctdf = KkGDvLtCtDf::where('macskd', $modelcskd->macskd)
+                        ->delete();
 
-            $modelph = TtCsKdDvLt::where('macskd',$modelcskd->macskd)
-                ->get();
+                    $modelph = TtCsKdDvLt::where('macskd', $modelcskd->macskd)
+                        ->get();
+//dd($modelph);
+                    $modelcb = CbKkGDvLt::where('macskd', $modelcskd->macskd)
+                        ->first();
 
-            $modelcb = CbKkGDvLt::where('macskd',$modelcskd->macskd)
-                ->first();
 
-            if(isset($modelcb)) {
-                $modelgcb  = KkGDvLtCt::where('mahs',$modelcb->mahs)
-                    ->get();
+                    if (isset($modelcb)) {
+                        $modelgcb = KkGDvLtCt::where('mahs', $modelcb->mahs)
+                            ->get();
 
-                foreach ($modelph as $ph) {
-                    foreach ($modelgcb as $giaph) {
-                        if ($giaph->maloaip == $ph->maloaip) {
-                            $ph->gialk = $giaph->mucgiakk;
+                        foreach ($modelph as $ph) {
+                            /*foreach ($modelgcb as $giaph) {
+                                if ($giaph->maloaip == $ph->maloaip) {
+                                    $ph->gialk = $giaph->mucgiakk;
+                                }
+                            }*/
+                            $this->getGialk($modelgcb,$ph);
+
                         }
                     }
-                }
-            }
-            //dd($modelph);
 
-            foreach($modelph as $ttph){
-                $dsph = new KkGDvLtCtDf();
-                $dsph->macskd = $modelcskd->macskd;
-                $dsph->maloaip = $ttph->maloaip;
-                $dsph->loaip = $ttph->loaip;
-                $dsph->qccl = $ttph->qccl;
-                $dsph->sohieu = $ttph->sohieu;
-                $dsph->ghichu = $ttph->ghichu;
-                $dsph->mucgialk = $ttph->gialk;
-                $dsph->save();
+                    //dd($modelph);
+
+                    foreach ($modelph as $ttph) {
+                        $dsph = new KkGDvLtCtDf();
+                        $dsph->macskd = $modelcskd->macskd;
+                        $dsph->maloaip = $ttph->maloaip;
+                        $dsph->loaip = $ttph->loaip;
+                        $dsph->qccl = $ttph->qccl;
+                        $dsph->sohieu = $ttph->sohieu;
+                        $dsph->ghichu = $ttph->ghichu;
+                        $dsph->mucgialk = $ttph->gialk;
+                        $dsph->save();
+                    }
+                    $modeldsph = KkGDvLtCtDf::where('macskd', $modelcskd->macskd)
+                        ->get();
+                    //dd($modelcskd);
+                    //dd($modelph);
+                    return view('manage.dvlt.kkgia.kkgiadv.create')
+                        ->with('modelcskd', $modelcskd)
+                        ->with('modelph', $modelph)//Thay thế
+                        ->with('modeldsph', $modeldsph)
+                        ->with('modelcb', $modelcb)
+                        ->with('pageTitle', 'Kê khai giá dịch vụ lưu trú thêm mới');
+                }else{
+                    return view('errors.noperm');
+                }
+            }else{
+                return view('errors.perm');
             }
-            $modeldsph = KkGDvLtCtDf::where('macskd',$modelcskd->macskd)
-                ->get();
-            //dd($modelcskd);
-            return view('manage.dvlt.kkgia.kkgiadv.create')
-                ->with('modelcskd',$modelcskd)
-                ->with('modelph',$modelph)//Thay thế
-                ->with('modeldsph',$modeldsph)
-                ->with('modelcb',$modelcb)
-                ->with('pageTitle','Kê khai giá dịch vụ lưu trú thêm mới');
         }else
             return view('errors.notlogin');
     }
@@ -150,13 +176,21 @@ class KkGDvLtController extends Controller
 
     public function edit($id){
         if (Session::has('admin')) {
-            $model = KkGDvLt::findOrFail($id);
-            $modelct = KkGDvLtCt::where('mahs',$model->mahs)
-                ->get();
-            return view('manage.dvlt.kkgia.kkgiadv.edit')
-                ->with('model',$model)
-                ->with('modelct',$modelct)
-                ->with('pageTitle','Chỉnh sửa thông tin kê khai giá dịch vụ lưu trú');
+            if(session('admin')->level == 'T' || session('admin')->level == 'H' || session('admin')->level =='DVLT') {
+                $model = KkGDvLt::findOrFail($id);
+                if(session('admin')->sadmin == 'ssa' || session('admin')->cqcq = $model->cqcq) {
+                    $modelct = KkGDvLtCt::where('mahs', $model->mahs)
+                        ->get();
+                    return view('manage.dvlt.kkgia.kkgiadv.edit')
+                        ->with('model', $model)
+                        ->with('modelct', $modelct)
+                        ->with('pageTitle', 'Chỉnh sửa thông tin kê khai giá dịch vụ lưu trú');
+                }else{
+                    return view('errors.noperm');
+                }
+            }else{
+                return view('errors.perm');
+            }
         }else
             return view('errors.notlogin');
     }
@@ -297,6 +331,14 @@ class KkGDvLtController extends Controller
         foreach($cskds as $cskd){
             if($cskd->macskd == $array->macskd){
                 $array->tencskd = $cskd->tencskd;
+            }
+        }
+    }
+    public function getGialk($array,$phongs){
+        foreach($array as $ar){
+            if ($phongs->maloaip == $ar->maloaip) {
+                $phongs->gialk = $ar->mucgiakk;
+                break;
             }
         }
     }

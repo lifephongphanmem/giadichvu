@@ -43,6 +43,8 @@ class HomeController extends Controller
                 return view('system.general.setting')
                     ->with('setting',json_decode($setting))
                     ->with('pageTitle','Cấu hình chức năng chương trình');
+            }else{
+                return view('errors.perm');
             }
 
         }else
@@ -52,6 +54,7 @@ class HomeController extends Controller
     public function upsetting(Request $request)
     {
         if (Session::has('admin')) {
+
             $update = $request->all();
 
             $model = GeneralConfigs::first();

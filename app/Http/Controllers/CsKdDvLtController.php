@@ -15,24 +15,28 @@ class CsKdDvLtController extends Controller
 {
     public function index(){
         if (Session::has('admin')) {
-            if(session('admin')->level == 'T' || session('admin')->level == 'H') {
-                if(session('admin')->sadmin == 'ssa'){
-                    $model = DnDvLt::all();
-                }else{
-                    $model = DnDvLt::where('cqcq',session('admin')->cqcq)
+            if(session('admin')->level == 'T' || session('admin')->level == 'H' || session('admin')->level == 'DVLT') {
+                if (session('admin')->level == 'T' || session('admin')->level == 'H') {
+                    if (session('admin')->sadmin == 'ssa') {
+                        $model = DnDvLt::all();
+                    } else {
+                        $model = DnDvLt::where('cqcq', session('admin')->cqcq)
+                            ->get();
+                    }
+                    return view('manage.dvlt.ttcskd.ql.index')
+                        ->with('model', $model)
+                        ->with('pageTitle', 'Thông tin doanh nghiệp cung cấp dịch vụ lưu trú');
+
+                } else {
+                    $model = CsKdDvLt::where('masothue', session('admin')->mahuyen)
                         ->get();
+
+                    return view('manage.dvlt.ttcskd.index')
+                        ->with('model', $model)
+                        ->with('pageTitle', 'Thông tin cơ sở kinh doanh cung cấp dịch vụ lưu trú');
                 }
-                return view('manage.dvlt.ttcskd.ql.index')
-                    ->with('model',$model)
-                    ->with('pageTitle','Thông tin doanh nghiệp cung cấp dịch vụ lưu trú');
-
-            }else {
-                $model = CsKdDvLt::where('masothue', session('admin')->mahuyen)
-                    ->get();
-
-                return view('manage.dvlt.ttcskd.index')
-                    ->with('model', $model)
-                    ->with('pageTitle', 'Thông tin cơ sở kinh doanh cung cấp dịch vụ lưu trú');
+            }else{
+                return view('errors.perm');
             }
         }else
             return view('errors.notlogin');
@@ -41,26 +45,37 @@ class CsKdDvLtController extends Controller
     //Thông tin doanh nghiệp quản lý
     public function showcskd($masothue){
         if (Session::has('admin')) {
-            $model = CsKdDvLt::where('masothue', $masothue)
-                ->get();
-
-            return view('manage.dvlt.ttcskd.index')
-                ->with('masothue',$masothue)
-                ->with('model', $model)
-                ->with('pageTitle', 'Thông tin cơ sở kinh doanh cung cấp dịch vụ lưu trú');
+            if(session('admin')->level == 'T' || session('admin')->level == 'H') {
+                $model = CsKdDvLt::where('masothue', $masothue)
+                    ->get();
+                if(session('admin')->sadmin == 'ssa' || session('admin')->cqcq == $model->cqcq) {
+                    return view('manage.dvlt.ttcskd.index')
+                        ->with('masothue', $masothue)
+                        ->with('model', $model)
+                        ->with('pageTitle', 'Thông tin cơ sở kinh doanh cung cấp dịch vụ lưu trú');
+                }else{
+                    return view('errors.noperm');
+                }
+            }else{
+                return view('errors.perm');
+            }
         }else
             return view('errors.notlogin');
     }
 
     public function create(){
         if (Session::has('admin')) {
-            $model = TtPhong::where('masothue',session('admin')->mahuyen)
-                ->delete();
-            $ttdn = DnDvLt::where('masothue',session('admin')->mahuyen)
-                ->first();
-            return view('manage.dvlt.ttcskd.create')
-                ->with('ttdn',$ttdn)
-                ->with('pageTitle','Kê khai thông tin cơ sở kinh doanh cung cấp dịch vụ lưu trú');
+            if(session('admin')->level == 'DVLT') {
+                $model = TtPhong::where('masothue', session('admin')->mahuyen)
+                    ->delete();
+                $ttdn = DnDvLt::where('masothue', session('admin')->mahuyen)
+                    ->first();
+                return view('manage.dvlt.ttcskd.create')
+                    ->with('ttdn', $ttdn)
+                    ->with('pageTitle', 'Kê khai thông tin cơ sở kinh doanh cung cấp dịch vụ lưu trú');
+            }else{
+                return view('errors.perm');
+            }
 
         }else
             return view('errors.notlogin');
@@ -68,14 +83,22 @@ class CsKdDvLtController extends Controller
 
     public function createcskd($masothue){
         if (Session::has('admin')) {
-            $model = TtPhong::where('masothue',$masothue)
-                ->delete();
-            $ttdn = DnDvLt::where('masothue',$masothue)
-                ->first();
-            return view('manage.dvlt.ttcskd.create')
-                ->with('ttdn',$ttdn)
-                ->with('masothue',$masothue)
-                ->with('pageTitle','Kê khai thông tin cơ sở kinh doanh cung cấp dịch vụ lưu trú');
+            if(session('admin')->level == 'T' || session('admin')->level == 'H') {
+                $model = TtPhong::where('masothue', $masothue)
+                    ->delete();
+                $ttdn = DnDvLt::where('masothue', $masothue)
+                    ->first();
+                if(session('admin')->sadmin == 'ssa' || session('admin')->cqcq = $ttdn->cqcq) {
+                    return view('manage.dvlt.ttcskd.create')
+                        ->with('ttdn', $ttdn)
+                        ->with('masothue', $masothue)
+                        ->with('pageTitle', 'Kê khai thông tin cơ sở kinh doanh cung cấp dịch vụ lưu trú');
+                }else{
+                    return view('errors.perm');
+                }
+            }else{
+                return view('errors.perm');
+            }
 
         }else
             return view('errors.notlogin');
@@ -390,13 +413,21 @@ class CsKdDvLtController extends Controller
 
     public function edit($id){
         if (Session::has('admin')) {
-            $model = CsKdDvLt::findOrFail($id);
-            $modelttp = TtCsKdDvLt::where('macskd',$model->macskd)
-                ->get();
-            return view('manage.dvlt.ttcskd.edit')
-                ->with('model',$model)
-                ->with('modelttp',$modelttp)
-                ->with('pageTitle','Chỉnh sửa thông tin cơ sở kinh doanh dịch vụ lưu trú');
+            if(session('admin')->level == 'T' || session('admin')->level == 'H' || session('admin')->level == 'DVLT') {
+                $model = CsKdDvLt::findOrFail($id);
+                if (session('admin')->sadmin == 'ssa' || session('admin')->cqcq == $model->cqcq) {
+                    $modelttp = TtCsKdDvLt::where('macskd', $model->macskd)
+                        ->get();
+                    return view('manage.dvlt.ttcskd.edit')
+                        ->with('model', $model)
+                        ->with('modelttp', $modelttp)
+                        ->with('pageTitle', 'Chỉnh sửa thông tin cơ sở kinh doanh dịch vụ lưu trú');
+                } else {
+                    return view('errors.noperm');
+                }
+            }else{
+                return view('errors.perm');
+            }
         }else
             return view('errors.notlogin');
     }
@@ -670,20 +701,19 @@ class CsKdDvLtController extends Controller
     public function update(Request $request, $id){
         if (Session::has('admin')) {
             $input = $request->all();
-
             $model = CsKdDvLt::findOrFail($id);
-            $model->tencskd = $input['tencskd'];
-            $model->loaihang = $input['loaihang'];
-            $model->diachikd = $input['diachikd'];
-            $model->telkd = $input['telkd'];
-            $model->toado = getAddMap($input['diachikd']);
-            $model->link = $input['link'];
-            $model->save();
+                $model->tencskd = $input['tencskd'];
+                $model->loaihang = $input['loaihang'];
+                $model->diachikd = $input['diachikd'];
+                $model->telkd = $input['telkd'];
+                $model->toado = getAddMap($input['diachikd']);
+                $model->link = $input['link'];
+                $model->save();
 
-            if(session('admin')->level == 'T' || session('admin')->level == 'H')
-                return redirect('ttcskd_dich_vu_luu_tru/masothue='.$input['masothue']);
-            else
-                return redirect('ttcskd_dich_vu_luu_tru');
+                if (session('admin')->level == 'T' || session('admin')->level == 'H')
+                    return redirect('ttcskd_dich_vu_luu_tru/masothue=' . $input['masothue']);
+                else
+                    return redirect('ttcskd_dich_vu_luu_tru');
         }else
             return view('errors.notlogin');
     }

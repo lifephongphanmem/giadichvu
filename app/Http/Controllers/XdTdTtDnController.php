@@ -15,17 +15,34 @@ class XdTdTtDnController extends Controller
 {
     public function index($pl){
         if (Session::has('admin')) {
-            if($pl == 'dich_vu_luu_tru')
-                $model = TtDn::where('pl','DVLT')
-                    ->get();
-            else
-                $model = TtDn::where('pl','DVVT')
-                    ->get();
+            if(session('admin')->level == 'T' || session('admin')=='H') {
+                if ($pl == 'dich_vu_luu_tru') {
+                    if (session('admin')->sadmin == 'ssa') {
+                        $model = TtDn::where('pl', 'DVLT')
+                            ->get();
+                    } else {
+                        $model = TtDn::where('pl', 'DVLT')
+                            ->where('cqcq', session('admin')->cqcq)
+                            ->get();
+                    }
 
-            return view('system.xdtdttdn.index')
-                ->with('model',$model)
-                ->with('pl',$pl)
-                ->with('pageTitle','Xét duyệt thay đổi thông tin doanh nghiệp');
+                }else {
+                    if(session('admin')->sadmin == 'ssa'){
+                        $model = TtDn::where('pl', 'DVVT')
+                            ->get();
+                    }else{
+                        $model = TtDn::where('pl','DVVT')
+                            ->where('cqcq',session('admin')->cqcq)
+                            ->get();
+                    }
+                }
+                return view('system.xdtdttdn.index')
+                    ->with('model', $model)
+                    ->with('pl', $pl)
+                    ->with('pageTitle', 'Xét duyệt thay đổi thông tin doanh nghiệp');
+            }else{
+                return view('errors.perm');
+            }
         }else
             return view('errors.notlogin');
 
@@ -33,25 +50,29 @@ class XdTdTtDnController extends Controller
 
     public function show($id){
         if (Session::has('admin')) {
-            $modeltttd = TtDn::findOrFail($id);
-            if($modeltttd->pl == 'DVLT'){
-                $model = DnDvLt::where('masothue',$modeltttd->masothue)
-                    ->first();
-                return view('system.xdtdttdn.dvlt.show')
-                    ->with('model',$model)
-                    ->with('modeltttd',$modeltttd)
-                    ->with('pageTitle','Thông tin thay đổi doanh nghiệp');
+            if(session('admin')->level == 'T' || session('admin')->level == 'H') {
+                $modeltttd = TtDn::findOrFail($id);
+                    $setting = $model->setting;
+                    if ($modeltttd->pl == 'DVLT') {
+                        $model = DnDvLt::where('masothue', $modeltttd->masothue)
+                            ->first();
+                        return view('system.xdtdttdn.dvlt.show')
+                            ->with('model', $model)
+                            ->with('modeltttd', $modeltttd)
+                            ->with('pageTitle', 'Thông tin thay đổi doanh nghiệp');
+                    } else {
+                        $model = DonViDvVt::where('masothue', $modeltttd->masothue)
+                            ->first();
+                    $settingtttd = $modeltttd->setting;
+                    return view('system.xdtdttdn.dvvt.show')
+                        ->with('model', $model)
+                        ->with('modeltttd', $modeltttd)
+                        ->with('setting', json_decode($setting))
+                        ->with('settingtttd', json_decode($settingtttd))
+                        ->with('pageTitle', 'Thông tin thay đổi doanh nghiệp');
+                }
             }else{
-                $model = DonViDvVt::where('masothue',$modeltttd->masothue)
-                    ->first();
-                $setting = $model->setting;
-                $settingtttd = $modeltttd->setting;
-                return view('system.xdtdttdn.dvvt.show')
-                    ->with('model',$model)
-                    ->with('modeltttd',$modeltttd)
-                    ->with('setting',json_decode($setting))
-                    ->with('settingtttd',json_decode($settingtttd))
-                    ->with('pageTitle','Thông tin thay đổi doanh nghiệp');
+                return view('errors.perm');
             }
 
         }else
