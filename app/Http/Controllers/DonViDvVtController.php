@@ -263,6 +263,7 @@ class DonViDvVtController extends Controller
                 $model->trangthai = 'Kích hoạt';
                 $model->email = '';
                 $model->cqcq = $upd['cqcq'];
+
                 $model->save();
             }else {
                 $model = new TtDn();

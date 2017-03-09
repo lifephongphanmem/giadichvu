@@ -143,6 +143,8 @@
                                         </select>
                                     </div>
                                 </div>
+                            @else
+                                <input type="hidden" name="cqcq" id="cqcq" value="{{$model->cqcq}}">
                             @endif
                         </div>
                     </div>
