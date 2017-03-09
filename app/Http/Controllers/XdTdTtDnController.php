@@ -52,7 +52,7 @@ class XdTdTtDnController extends Controller
         if (Session::has('admin')) {
             if(session('admin')->level == 'T' || session('admin')->level == 'H') {
                 $modeltttd = TtDn::findOrFail($id);
-                    $setting = $model->setting;
+                    $setting = $modeltttd->setting;
                     if ($modeltttd->pl == 'DVLT') {
                         $model = DnDvLt::where('masothue', $modeltttd->masothue)
                             ->first();
@@ -63,14 +63,14 @@ class XdTdTtDnController extends Controller
                     } else {
                         $model = DonViDvVt::where('masothue', $modeltttd->masothue)
                             ->first();
-                    $settingtttd = $modeltttd->setting;
-                    return view('system.xdtdttdn.dvvt.show')
-                        ->with('model', $model)
-                        ->with('modeltttd', $modeltttd)
-                        ->with('setting', json_decode($setting))
-                        ->with('settingtttd', json_decode($settingtttd))
-                        ->with('pageTitle', 'Thông tin thay đổi doanh nghiệp');
-                }
+                        $settingtttd = $modeltttd->setting;
+                        return view('system.xdtdttdn.dvvt.show')
+                            ->with('model', $model)
+                            ->with('modeltttd', $modeltttd)
+                            ->with('setting', json_decode($setting))
+                            ->with('settingtttd', json_decode($settingtttd))
+                            ->with('pageTitle', 'Thông tin thay đổi doanh nghiệp');
+                    }
             }else{
                 return view('errors.perm');
             }
@@ -99,7 +99,7 @@ class XdTdTtDnController extends Controller
                 $model->save();
                 $modeltttd->delete();
                 return redirect('xetduyet_thaydoi_thongtindoanhnghiep/phanloai=dich_vu_luu_tru');
-            }else{
+            }elseif($modeltttd->pl == 'DVVT'){
                 $model = DonViDvVt::where('masothue', $modeltttd->masothue)
                     ->first();
                 $model->diachi =  $modeltttd->diachi;
