@@ -508,10 +508,10 @@ class UsersController extends Controller
                 $modeldn = new DonViDvVt();
                 $modeldn->tendonvi = $model->tendn;
                 $modeldn->masothue = $model->masothue;
-                $modeldn->dienthoai = $model->teldn;
-                $modeldn->fax = $model->faxdn;
+                $modeldn->dienthoai = $model->tel;
+                $modeldn->fax = $model->fax;
                 $modeldn->email = $model->email;
-                $modeldn->diachi = $model->diachidn;
+                $modeldn->diachi = $model->diachi;
                 $modeldn->dknopthue = $model->noidknopthue;
                 $modeldn->tailieu = $model->tailieu;
                 $modeldn->giayphepkd = $model->giayphepkd;
