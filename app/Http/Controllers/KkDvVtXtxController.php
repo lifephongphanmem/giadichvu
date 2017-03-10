@@ -164,6 +164,7 @@ class KkDvVtXtxController extends Controller
     public function create($masothue)
     {
         if (Session::has('admin')) {
+
             KkDvVtXtxCtDf::where('masothue', $masothue)->delete();
             PagDvVtXtx_Temp::where('masothue', $masothue)->delete();
             //$sql=" INSERT INTO thamdinhgia (masothue,diemdau,diemcuoi,madichvu,loaixe,tendichvu,qccl,dvt) SELECT masothue,diemdau,diemcuoi,madichvu,loaixe,tendichvu,qccl,dvt FROM dmDvVtXtx where masothue='". session('admin')->mahuyen."'";
@@ -181,6 +182,8 @@ class KkDvVtXtxController extends Controller
                 $masokk = $modelCB->masokk;
             }
             $mdDV=DmDvVtXtx::where('masothue',$masothue)->get();
+            $modeldn = DonViDvVt::where('masothue',$masothue)->first();
+            //dd($modeldn);
             foreach($mdDV as $dv){
                 $mdkk = new KkDvVtXtxCtDf();
                 $mdkk->masothue = $masothue;
@@ -202,13 +205,14 @@ class KkDvVtXtxController extends Controller
                 $m_pag->save();
             }
 
-            $model=KkDvVtXtxCtDf::where('masothue', session('admin')->mahuyen)->get();
+            $model=KkDvVtXtxCtDf::where('masothue', $masothue)->get();
+            //dd($model);
             return view('manage.dvvt.dvxtx.kkdv.create')
                 ->with('pageTitle','Kê khai mới giá vận tải hành khách bằng xe taxi')
                 ->with('socvlk',$solk)
                 ->with('ngaycvlk',$ngaylk)
                 ->with('masothue',$masothue)
-                ->with('cqcq',session('admin')->cqcq)
+                ->with('cqcq',$modeldn->cqcq)
                 ->with('url','/dich_vu_van_tai/dich_vu_xe_taxi/')
                 ->with('model',$model);
         }else

@@ -401,7 +401,7 @@ class CsKdDvLtController extends Controller
             ->get();
         foreach($modelph as $ph){
             $model = new TtCsKdDvLt();
-            $model->maloaip = getdate()[0];
+            $model->maloaip = $ph->maloaip;
             $model->loaip = $ph->loaip;
             $model->qccl = $ph->qccl;
             $model->sohieu = $ph->sohieu;
