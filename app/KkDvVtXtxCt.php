@@ -16,7 +16,13 @@ class KkDvVtXtxCt extends Model
         'qccl',
         'dvt',
         'giakk',
+        'trenkm',
+        'giakkden',
+        'giakktl',
         'giakklk',
+        'trenkmlk',
+        'giakklkden',
+        'giakklktl',
         'giahl',
         'ghichu',
         'thuevat'

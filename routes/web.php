@@ -386,6 +386,9 @@ Route::group(['prefix'=>'dich_vu_van_tai'],function(){
     });
     // </editor-fold>
 
+
+
+
     // <editor-fold defaultstate="collapsed" desc="--Dịch vụ vận tải xe taxi--">
     Route::group(['prefix'=>'dich_vu_xe_taxi'],function(){
         Route::group(['prefix'=>'danh_muc'],function(){
@@ -397,7 +400,7 @@ Route::group(['prefix'=>'dich_vu_van_tai'],function(){
         });
 
         Route::group(['prefix'=>'ke_khai'],function(){
-            Route::get('/nam={nam}','KkDvVtXtxController@index');
+            Route::get('nam={nam}','KkDvVtXtxController@index');
             Route::get('edit/{id}','KkDvVtXtxController@edit');
             Route::get('create/ma_so={masothue}','KkDvVtXtxController@create');
             Route::patch('store','KkDvVtXtxController@store');
@@ -442,8 +445,39 @@ Route::group(['prefix'=>'dich_vu_van_tai'],function(){
         Route::get('inPAG/ma_so={masokk}','KkDvVtXtxController@printPAG');
     });
     // </editor-fold>
-});
 
+});
+//Dịch vụ xe taxi mới
+
+Route::get('/ke_khai_dich_vu_van_tai/xe_taxi','KkGiaDvVtTaxiController@index');
+Route::get('/ke_khai_dich_vu_van_tai/xe_taxi/masothue={masothue}&nam={nam}','KkGiaDvVtTaxiController@kekhaigia');
+Route::get('/ke_khai_dich_vu_van_tai/xe_taxi/nam={nam}','KkGiaDvVtTaxiController@kekhaigiadv');
+Route::get('/ke_khai_dich_vu_van_tai/xe_taxi/masothue={masothue}/create','KkGiaDvVtTaxiController@create');
+Route::post('/ke_khai_dich_vu_van_tai/xe_taxi','KkGiaDvVtTaxiController@store');
+Route::get('/ke_khai_dich_vu_van_tai/xe_taxi/{id}/edit','KkGiaDvVtTaxiController@edit');
+Route::patch('/ke_khai_dich_vu_van_tai/xe_taxi/{id}','KkGiaDvVtTaxiController@update');
+Route::post('/ke_khai_dich_vu_van_tai/xe_taxi/delete','KkGiaDvVtTaxiController@delete');
+Route::post('/ke_khai_dich_vu_van_tai/xe_taxi/chuyen','KkGiaDvVtTaxiController@chuyen');
+Route::get('ke_khai_dich_vu_van_tai/xe_taxi//report_ke_khai/{masokk}','KkGiaDvVtTaxiController@show');
+    //Ajax create
+Route::get('/kkgiadvvtxtx/storedv','KkGiaDvVtTaxiCtDfController@storedv');
+Route::get('/kkgiadvvtxtx/editdv','KkGiaDvVtTaxiCtDfController@editdv');
+Route::get('/kkgiadvvtxtx/updatedv','KkGiaDvVtTaxiCtDfController@updatedv');
+Route::get('/kkgiadvvtxtx/kkgiadv','KkGiaDvVtTaxiCtDfController@kkgiadv');
+Route::get('/kkgiadvvtxtx/upkkgiadv','KkGiaDvVtTaxiCtDfController@upkkgiadv');
+Route::get('/kkgiadvvtxtx/deldv','KkGiaDvVtTaxiCtDfController@delkkgiadv');
+    //end ajax create
+    //Ajax edit
+Route::get('/kkgiadvvtxtx/boxungdv','KkGiaDvVtTaxiCtController@storedv');
+Route::get('/kkgiadvvtxtx/chinhsuadv','KkGiaDvVtTaxiCtController@editdv');
+Route::get('/kkgiadvvtxtx/capnhatdv','KkGiaDvVtTaxiCtController@updatedv');
+Route::get('/kkgiadvvtxtx/kkgiadvedit','KkGiaDvVtTaxiCtController@kkgiadv');
+Route::get('/kkgiadvvtxtx/capnhatkkgiadv','KkGiaDvVtTaxiCtController@upkkgiadv');
+Route::get('/kkgiadvvtxtx/xoadv','KkGiaDvVtTaxiCtController@delkkgiadv');
+    //end ajax edit
+
+
+//End Dịch vụ xe taxi mới
     //Báo cáo dịch vụ vận tải
 Route::group(['prefix'=>'bao_cao'],function(){
     //Xe khách
@@ -475,6 +509,8 @@ Route::group(['prefix'=>'bao_cao'],function(){
     });
     //
 });
+
+
     //End Dịch vụ vận tải
 // </editor-fold>//End Manage
 

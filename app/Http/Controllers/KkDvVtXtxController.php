@@ -195,7 +195,11 @@ class KkDvVtXtxController extends Controller
                 $mdCT = KkDvVtXtxCt::select('giakk')->where('masokk', $masokk)->where('madichvu', $dv->madichvu)->first();
 
                 $mdkk->giakklk = count($mdCT)>0 ? $mdCT->giakk : 0;
+                $mdkk->giakklkden = count($mdCT)>0 ? $mdCT->giakkden : 0;
+                $mdkk->giakklktl = count($mdCT)>0 ? $mdCT->giakktl : 0;
                 $mdkk->giakk =0;
+                $mdkk->giakkden =0;
+                $mdkk->giakktl =0;
                 $mdkk->save();
 
                 //Phương án giá

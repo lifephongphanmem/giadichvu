@@ -21,7 +21,13 @@ class CreateKkdvvtxtxctTable extends Migration
             $table->string('qccl')->nullable();
             $table->string('dvt')->nullable();
             $table->double('giakk')->nullable();
+            $table->string('trenkmlk')->nullable();
+            $table->double('giakkden')->nullable();//Them
+            $table->double('giakktl')->nullable();//Them
             $table->double('giakklk')->nullable();
+            $table->string('trenkm')->nullable();
+            $table->double('giakklkden')->nullable();//Them
+            $table->double('giakklktl')->nullable();//Them
             $table->string('ghichu')->nullable();
             $table->string('thuevat')->nullable();
             $table->timestamps();

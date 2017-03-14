@@ -380,7 +380,13 @@ License: You must have a valid license purchased only from themeforest(the above
                                                         <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_taxi/danh_muc')}}">Danh mục dịch vụ</a></li>
                                                     @endif
                                                     @if(can('kkdvvtxtx','create'))
-                                                        <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_taxi/ke_khai/'.'nam='.date('Y'))}}">Kê khai giá dịch vụ</a></li>
+                                                        <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_taxi/ke_khai/nam='.date('Y'))}}">Kê khai giá dịch vụ</a></li>
+                                                        @if(session('admin')->level == 'T' || session('admin')->level == 'H')
+                                                            <li><a href="{{url('ke_khai_dich_vu_van_tai/xe_taxi')}}">Kê khai giá dịch vụ taxi</a></li>
+                                                        @else
+                                                            <li><a href="{{url('/ke_khai_dich_vu_van_tai/xe_taxi/nam='.date('Y'))}}">Kê khai giá dịch vụ taxi</a></li>
+                                                        @endif
+
                                                     @endif
                                                     @if(session('admin')->level =='T' || session('admin')->level =='H')
                                                         <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_taxi/xet_duyet/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')}}">Hồ sơ kê khai</a></li>

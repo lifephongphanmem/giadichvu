@@ -48,6 +48,7 @@
                         <th style="text-align: center">Mức giá kê khai</th>
                         <th style="text-align: center" width="20%">Thao tác</th>
                     </tr>
+
                     </thead>
                     <tbody >
                     <?php $i=1?>
@@ -95,9 +96,9 @@
                 </div>
             </div>
             <div style="text-align: center">
-                <button type="submit" class="btn green" onclick="validateForm()"><i class="fa fa-check"></i> Hoàn thành</button>
-                <button type="reset" class="btn btn-default"><i class="fa fa-refresh"></i>&nbsp;Nhập lại</button>
                 <a href="{{url('dich_vu_van_tai/dich_vu_xe_taxi/ke_khai/nam='.date('Y'))}}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
+                <button type="reset" class="btn btn-default"><i class="fa fa-refresh"></i>&nbsp;Nhập lại</button>
+                <button type="submit" class="btn green" onclick="validateForm()"><i class="fa fa-check"></i> Hoàn thành</button>
             </div>
         </div>
         {!! Form::close() !!}
@@ -157,6 +158,43 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
+
+    <!--Kê khai giá-->
+    <div class="modal fade bs-modal-lg" id="modal-create" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Kê khai giá thông tin dịch vụ vận tải</h4>
+                </div>
+                <div class="modal-body" id="ttpthemmoi">
+                    @include('manage.dvvt.template.dmdvxtx')
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label"><b>Mức giá kê khai liền kề</b><span class="require">*</span></label>
+                                <input type="text" style="text-align: right" id="giakklk" name="giakklk" class="form-control" data-mask="fdecimal">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label"><b>Mức giá kê khai</b><span class="require">*</span></label>
+                                <input type="text" style="text-align: right" id="giakk" name="giakk" class="form-control" data-mask="fdecimal">
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" id="iddv" name="iddv"/>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Thoát</button>
+                    <button type="button" class="btn btn-primary" onclick="updategia()">Bổ xung</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!--End kê khai gia-->
 
     <!--Modal Wide Width-->
     <div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
