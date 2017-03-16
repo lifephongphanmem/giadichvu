@@ -21,7 +21,9 @@ class CreateKkdvvtxtxTable extends Migration
             $table->string('socvlk')->nullable();
             $table->date('ngaynhaplk')->nullable();
             $table->date('ngayhieuluc')->nullable();
-            $table->text('ttnguoinop')->nullable();
+            $table->string('ttnguoinop')->nullable();
+            $table->string('telnguoinop')->nullable();
+            $table->string('faxnguoinop')->nullable();
             $table->date('ngaynhan')->nullable();
             $table->string('sohsnhan')->nullable();
             $table->dateTime('ngaychuyen')->nullable();

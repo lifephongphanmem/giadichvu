@@ -132,7 +132,7 @@
                                 <td style="text-align: center">{{getDayVn($tt->ngayhieuluc)}}</td>
                                 <td style="text-align: center" class="active">{{$tt->socv}}</td>
                                 <td style="text-align: center">{{$tt->socvlk}}</td>
-                                <td style="text-align: center">{{$tt->ttnguoinop}}</td>
+                                <td style="text-align: center">{{$tt->ttnguoinop.' - '.$tt->telnguoinop.' - '. $tt->faxnguoinop}}</td>
                                     @if($tt->trangthai == "Chờ chuyển")
                                 <td align="center"><span class="badge badge-warning">{{$tt->trangthai}}</span></td>
                                 @elseif($tt->trangthai == 'Chờ duyệt')
@@ -200,7 +200,16 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label><b>Thông tin người nộp</b></label>
-                            <textarea id="ttnguoinop" class="form-control required" name="ttnguoinop" cols="30" rows="5" placeholder="Họ và tên người chuyển- Số ĐT liên lạc- Email lien lạc"></textarea></div>
+                            <input type="text" name="ttnguoinop" id="ttnguoinop" class="form-control required">
+                        </div>
+                        <div class="form-group">
+                            <label><b>Số điện thoại người nộp</b></label>
+                            <input type="tel" name="telnguoinop" id="telnguoinop" class="form-control required">
+                        </div>
+                        <div class="form-group">
+                            <label><b>Số fax người nộp</b></label>
+                            <input type="tel" name="faxnguoinop" id="faxnguoinop" class="form-control required">
+                        </div>
                     </div>
                     <input type="hidden" name="idchuyen" id="idchuyen">
                     <div class="modal-footer">

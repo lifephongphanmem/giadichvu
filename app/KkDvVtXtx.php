@@ -17,6 +17,8 @@ class KkDvVtXtx extends Model
         'ngaynhaplk',
         'ngayhieuluc',
         'ttnguoinop',
+        'telnguoinop',
+        'faxnguoinop',
         'ngaynhan',
         'sohsnhan',
         'ngaychuyen',

@@ -277,6 +277,8 @@ class KkGiaDvVtTaxiController extends Controller
             if($inputs['ttnguoinop']!='') {
                 $model->trangthai = 'Chờ nhận';
                 $model->ttnguoinop = $inputs['ttnguoinop'];
+                $model->telnguoinop = $inputs['telnguoinop'];
+                $model->faxnguoinop = $inputs['faxnguoinop'];
                 $model->ngaychuyen = Carbon::now()->toDateTimeString();
                 $model->save();
             }
@@ -303,6 +305,7 @@ class KkGiaDvVtTaxiController extends Controller
                 ->with('modeldonvi',$modeldonvi)
                 ->with('modelgia',$modelgia)
                 ->with('pageTitle','Kê khai giá dịch vụ vận tải taxi');
+
         }else
             return view('errors.notlogin');
     }
