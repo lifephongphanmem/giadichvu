@@ -88,9 +88,9 @@
     </tr>
 </table>
 
-<p>- Họ tên người nộp Biểu mẫu: {{$modelkk->nguoinop}}</p>
-<p>- Số điện thoại liên lạc: {{$modeldonvi->dienthoai}}</p>
-<p>- Số fax: {{$modelkk->fax}}</p>
+<p>- Họ tên người nộp Biểu mẫu: {{$modelkk->ttnguoinop}}</p>
+<p>- Số điện thoại liên lạc: {{$modelkk->telnguoinop}}</p>
+<p>- Số fax: {{$modelkk->faxnguoinop}}</p>
 
 <table width="96%" border="0" cellspacing="0" cellpadding="8" style="margin:100px auto; text-align: center;">
     <tr>
