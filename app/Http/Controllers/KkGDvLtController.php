@@ -178,7 +178,7 @@ class KkGDvLtController extends Controller
         if (Session::has('admin')) {
             if(session('admin')->level == 'T' || session('admin')->level == 'H' || session('admin')->level =='DVLT') {
                 $model = KkGDvLt::findOrFail($id);
-                if(session('admin')->sadmin == 'ssa' || session('admin')->cqcq = $model->cqcq) {
+                if(session('admin')->sadmin == 'ssa' || session('admin')->cqcq == $model->cqcq) {
                     $modelct = KkGDvLtCt::where('mahs', $model->mahs)
                         ->get();
                     return view('manage.dvlt.kkgia.kkgiadv.edit')

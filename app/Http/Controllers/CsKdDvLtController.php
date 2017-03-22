@@ -88,7 +88,7 @@ class CsKdDvLtController extends Controller
                     ->delete();
                 $ttdn = DnDvLt::where('masothue', $masothue)
                     ->first();
-                if(session('admin')->sadmin == 'ssa' || session('admin')->cqcq = $ttdn->cqcq) {
+                if(session('admin')->sadmin == 'ssa' || session('admin')->cqcq == $ttdn->cqcq) {
                     return view('manage.dvlt.ttcskd.create')
                         ->with('ttdn', $ttdn)
                         ->with('masothue', $masothue)

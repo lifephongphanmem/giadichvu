@@ -503,8 +503,8 @@ class UsersController extends Controller
         if (Session::has('admin')) {
             $input = $request->all();
             $id = $input['idregister'];
+            $model = Register::findOrFail($id);
             if(session('admin')->sadmin == 'ssa' || $model->cqcq == session('admin')->cqcq ) {
-                $model = Register::findOrFail($id);
                 $modeldn = new DonViDvVt();
                 $modeldn->tendonvi = $model->tendn;
                 $modeldn->masothue = $model->masothue;
