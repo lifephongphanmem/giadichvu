@@ -98,10 +98,10 @@ class KkGiaDvVtTaxiController extends Controller
         if (Session::has('admin')) {
             $modeldn = DonViDvVt::where('masothue',$masothue)
                 ->first();
-            if(session('admin')->level == 'T' || session('admin')->level == 'H' && session('admin')== 'DVVT'){
+            if(session('admin')->level == 'T' || session('admin')->level == 'H' || session('admin')->level== 'DVVT'){
                 if(session('admin')->sadmin == 'ssa'
-                    || session('admin')->level == 'T' && session('admin')->cqcq == $modeldn->cqcq
-                    || session('admin')->level == 'H' && session('admin')->cqcq == $modeldn->cqcq
+                    || (session('admin')->level == 'T' && session('admin')->cqcq == $modeldn->cqcq)
+                    || (session('admin')->level == 'H' && session('admin')->cqcq == $modeldn->cqcq)
                     || session('admin')->mahuyen == $masothue){
 
                     KkDvVtXtxCtDf::where('masothue', $masothue)->delete();
@@ -220,7 +220,7 @@ class KkGiaDvVtTaxiController extends Controller
             $masothue = $model->masothue;
             $modeldn = DonViDvVt::where('masothue',$masothue)
                 ->first();
-            if(session('admin')->level == 'T' || session('admin')->level == 'H' && session('admin')== 'DVVT'){
+            if(session('admin')->level == 'T' || session('admin')->level == 'H' || session('admin')->level== 'DVVT'){
                 if(session('admin')->sadmin == 'ssa'
                     || session('admin')->level == 'T' && session('admin')->cqcq == $modeldn->cqcq
                     || session('admin')->level == 'H' && session('admin')->cqcq == $modeldn->cqcq

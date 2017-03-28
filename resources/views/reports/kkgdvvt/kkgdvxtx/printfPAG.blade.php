@@ -238,6 +238,8 @@
                     +$pag->thuevp+$pag->suachualon+$pag->samlop+$pag->dangkiem+$pag->quanly+$pag->banhang;
             $cpbiendoi= $pag->luonglaixe+$pag->nhienlieuchinh+$pag->nhienlieuboitron+$pag->chiphibdcs;
             $cpgiathanh=$cpcodinh+$cpbiendoi;
+            //xử lý trường hợp chia cho 0
+            $pag->kmcokhach=$pag->kmcokhach==0?1:$pag->kmcokhach;
         ?>
 
                 <tr>
@@ -416,7 +418,7 @@
                     <td>VIII</td>
                     <td>Lợi nhuận dự kiến</td>
                     <td>đồng</td>
-                    <td>{{number_format($cpgiathanh-$pag->doanhthu)}}</td>
+                    <td>{{number_format($pag->doanhthu-$cpgiathanh)}}</td>
                     <td></td>
                 </tr>
         <!-- hết duyệt -->
