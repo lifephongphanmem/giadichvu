@@ -43,59 +43,11 @@ class KkGiaDvVtTaxiCtController extends Controller
             $modelkkgia->giakktl =0;
             $modelkkgia->trenkmlk = 1;
             $modelkkgia->trenkm = 1;
-            $modelkkgia->save();
+            $modelkkgia->save();         
 
-            $model = KkDvVtXtxCt::where('masokk',$inputs['masokk'])
-                ->get();
-
-            $result['message'] = '<div class="row" id="dsts">';
-            $result['message'] .= '<div class="col-md-12">';
-            $result['message'] .= '<table class="table table-striped table-bordered table-hover" id="sample_3">';
-            $result['message'] .= '<thead>';
-            $result['message'] .= '<tr>';
-            $result['message'] .= '<th style="text-align: center" width="2%">STT</th>';
-            $result['message'] .= '<th style="text-align: center" width="15%">Tên cung ứng<br> dịch vụ</th>';
-            $result['message'] .= '<th style="text-align: center" width="15%">Quy cách<br> chất lượng</th>';
-            $result['message'] .= '<th style="text-align: center" width="5%">Đơn vị<br> tính</th>';
-            $result['message'] .= '<th style="text-align: center">Giá <br>mở cửa<br>liền kề</th>';
-            $result['message'] .= '<th style="text-align: center">Giá km <br>tiếp theo <br>đến km 30<br>liền kề</th>';
-            $result['message'] .= '<th style="text-align: center">Giá từ <br>km 31<br> trở lên<br>liền kề</th>';
-            $result['message'] .= '<th style="text-align: center">Giá <br>mở cửa<br>kê khai</th>';
-            $result['message'] .= '<th style="text-align: center">Giá km <br>tiếp theo <br>đến km 30<br>kê khai</th>';
-            $result['message'] .= '<th style="text-align: center">Giá từ <br>km 31 <br>trở lên<br>kê khai</th>';
-            $result['message'] .= '<th style="text-align: center">Thao tác</th>';
-            $result['message'] .= '</tr>';
-            $result['message'] .= '</thead>';
-
-
-            $result['message'] .= '<tbody>';
-            if(count($model) > 0){
-                foreach($model as $key=>$tt){
-                    $result['message'] .= '<tr id="'.$tt->id.'">';
-                    $result['message'] .= '<td style="text-align: center">'.($key +1).'</td>';
-                    $result['message'] .= '<td class="active">'.$tt->tendichvu.'</td>';
-                    $result['message'] .= '<td>'.$tt->qccl.'</td>';
-                    $result['message'] .= '<td style="text-align: center">'.$tt->dvt.'</td>';
-                    $result['message'] .= '<td style="text-align: right">'.number_format($tt->giakklk).'/'.$tt->trenkmlk.'km</td>';
-                    $result['message'] .= '<td style="text-align: right">'.number_format($tt->giakklkden).'</td>';
-                    $result['message'] .= '<td style="text-align: right">'.number_format($tt->giakklktl).'</td>';
-                    $result['message'] .= '<td style="text-align: right">'.number_format($tt->giakk).'/'.$tt->trenkm.'km</td>';
-                    $result['message'] .= '<td style="text-align: right">'.number_format($tt->giakkden).'</td>';
-                    $result['message'] .= '<td style="text-align: right">'.number_format($tt->giakktl).'</td>';
-                    $result['message'] .= '<td>'.
-                        '<button type="button" data-target="#modal-kkgia" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="kkgia('.$tt->id.')"><i class="fa fa-edit"></i>&nbsp;Kê khai giá</button>'.
-                        '<button type="button" data-target="#modal-edit" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="editTtPh('.$tt->id.')"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa thông tin</button>'.
-                        '<button type="button" data-target="#modal-delete" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="getid('.$tt->id.')" ><i class="fa fa-trash-o"></i>&nbsp;Xóa</button>'
-
-                        .'</td>';
-                    $result['message'] .= '</tr>';
-                }
-                $result['message'] .= '</tbody>';
-                $result['message'] .= '</table>';
-                $result['message'] .= '</div>';
-                $result['message'] .= '</div>';
-                $result['status'] = 'success';
-            }
+            $result['message'] =$this->return_html(KkDvVtXtxCt::where('masokk',$inputs['masokk'])->get());
+            $result['status'] = 'success';
+            
         }
         die(json_encode($result));
     }
@@ -186,57 +138,8 @@ class KkGiaDvVtTaxiCtController extends Controller
             $modelkkgia->ghichu = $inputs['ghichu'];
             $modelkkgia->save();
 
-            $model = KkDvVtXtxCt::where('masokk',$inputs['masokk'])
-                ->get();
-
-            $result['message'] = '<div class="row" id="dsts">';
-            $result['message'] .= '<div class="col-md-12">';
-            $result['message'] .= '<table class="table table-striped table-bordered table-hover" id="sample_3">';
-            $result['message'] .= '<thead>';
-            $result['message'] .= '<tr>';
-            $result['message'] .= '<th style="text-align: center" width="2%">STT</th>';
-            $result['message'] .= '<th style="text-align: center" width="15%">Tên cung ứng<br> dịch vụ</th>';
-            $result['message'] .= '<th style="text-align: center" width="15%">Quy cách<br> chất lượng</th>';
-            $result['message'] .= '<th style="text-align: center" width="5%">Đơn vị<br> tính</th>';
-            $result['message'] .= '<th style="text-align: center">Giá <br>mở cửa<br>liền kề</th>';
-            $result['message'] .= '<th style="text-align: center">Giá km <br>tiếp theo <br>đến km 30<br>liền kề</th>';
-            $result['message'] .= '<th style="text-align: center">Giá từ <br>km 31<br> trở lên<br>liền kề</th>';
-            $result['message'] .= '<th style="text-align: center">Giá <br>mở cửa<br>kê khai</th>';
-            $result['message'] .= '<th style="text-align: center">Giá km <br>tiếp theo <br>đến km 30<br>kê khai</th>';
-            $result['message'] .= '<th style="text-align: center">Giá từ <br>km 31 <br>trở lên<br>kê khai</th>';
-            $result['message'] .= '<th style="text-align: center">Thao tác</th>';
-            $result['message'] .= '</tr>';
-            $result['message'] .= '</thead>';
-
-
-            $result['message'] .= '<tbody>';
-            if(count($model) > 0){
-                foreach($model as $key=>$tt){
-                    $result['message'] .= '<tr id="'.$tt->id.'">';
-                    $result['message'] .= '<td style="text-align: center">'.($key +1).'</td>';
-                    $result['message'] .= '<td class="active">'.$tt->tendichvu.'</td>';
-                    $result['message'] .= '<td>'.$tt->qccl.'</td>';
-                    $result['message'] .= '<td style="text-align: center">'.$tt->dvt.'</td>';
-                    $result['message'] .= '<td style="text-align: right">'.number_format($tt->giakklk).'/'.$tt->trenkmlk.'km</td>';
-                    $result['message'] .= '<td style="text-align: right">'.number_format($tt->giakklkden).'</td>';
-                    $result['message'] .= '<td style="text-align: right">'.number_format($tt->giakklktl).'</td>';
-                    $result['message'] .= '<td style="text-align: right">'.number_format($tt->giakk).'/'.$tt->trenkm.'km</td>';
-                    $result['message'] .= '<td style="text-align: right">'.number_format($tt->giakkden).'</td>';
-                    $result['message'] .= '<td style="text-align: right">'.number_format($tt->giakktl).'</td>';
-                    $result['message'] .= '<td>'.
-                        '<button type="button" data-target="#modal-kkgia" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="kkgia('.$tt->id.')"><i class="fa fa-edit"></i>&nbsp;Kê khai giá</button>'.
-                        '<button type="button" data-target="#modal-edit" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="editTtPh('.$tt->id.')"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa thông tin</button>'.
-                        '<button type="button" data-target="#modal-delete" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="getid('.$tt->id.')" ><i class="fa fa-trash-o"></i>&nbsp;Xóa</button>'
-
-                        .'</td>';
-                    $result['message'] .= '</tr>';
-                }
-                $result['message'] .= '</tbody>';
-                $result['message'] .= '</table>';
-                $result['message'] .= '</div>';
-                $result['message'] .= '</div>';
-                $result['status'] = 'success';
-            }
+            $result['message'] =$this->return_html(KkDvVtXtxCt::where('masokk',$inputs['masokk'])->get());
+            $result['status'] = 'success';            
         }
         die(json_encode($result));
     }
@@ -327,8 +230,6 @@ class KkGiaDvVtTaxiCtController extends Controller
             $result['message'] .= '</div>';
             $result['message'] .= '<input type="hidden" id="idkkgia" name="idkkgia" value="'.$model->id.'">';
             $result['status'] = 'success';
-
-
         }
         die(json_encode($result));
     }
@@ -377,60 +278,10 @@ class KkGiaDvVtTaxiCtController extends Controller
             $modelkkgia->trenkm = $inputs['trenkm'];
             $modelkkgia->giakkden = $inputs['giakkden'];
             $modelkkgia->giakktl = $inputs['giakktl'];
-
             $modelkkgia->save();
 
-            $model = KkDvVtXtxCt::where('masokk',$inputs['masokk'])
-                ->get();
-
-            $result['message'] = '<div class="row" id="dsts">';
-            $result['message'] .= '<div class="col-md-12">';
-            $result['message'] .= '<table class="table table-striped table-bordered table-hover" id="sample_3">';
-            $result['message'] .= '<thead>';
-            $result['message'] .= '<tr>';
-            $result['message'] .= '<th style="text-align: center" width="2%">STT</th>';
-            $result['message'] .= '<th style="text-align: center" width="15%">Tên cung ứng<br> dịch vụ</th>';
-            $result['message'] .= '<th style="text-align: center" width="15%">Quy cách<br> chất lượng</th>';
-            $result['message'] .= '<th style="text-align: center" width="5%">Đơn vị<br> tính</th>';
-            $result['message'] .= '<th style="text-align: center">Giá <br>mở cửa<br>liền kề</th>';
-            $result['message'] .= '<th style="text-align: center">Giá km <br>tiếp theo <br>đến km 30<br>liền kề</th>';
-            $result['message'] .= '<th style="text-align: center">Giá từ <br>km 31<br> trở lên<br>liền kề</th>';
-            $result['message'] .= '<th style="text-align: center">Giá <br>mở cửa<br>kê khai</th>';
-            $result['message'] .= '<th style="text-align: center">Giá km <br>tiếp theo <br>đến km 30<br>kê khai</th>';
-            $result['message'] .= '<th style="text-align: center">Giá từ <br>km 31 <br>trở lên<br>kê khai</th>';
-            $result['message'] .= '<th style="text-align: center">Thao tác</th>';
-            $result['message'] .= '</tr>';
-            $result['message'] .= '</thead>';
-
-
-            $result['message'] .= '<tbody>';
-            if(count($model) > 0){
-                foreach($model as $key=>$tt){
-                    $result['message'] .= '<tr id="'.$tt->id.'">';
-                    $result['message'] .= '<td style="text-align: center">'.($key +1).'</td>';
-                    $result['message'] .= '<td class="active">'.$tt->tendichvu.'</td>';
-                    $result['message'] .= '<td>'.$tt->qccl.'</td>';
-                    $result['message'] .= '<td style="text-align: center">'.$tt->dvt.'</td>';
-                    $result['message'] .= '<td style="text-align: right">'.number_format($tt->giakklk).'/'.$tt->trenkmlk.'km</td>';
-                    $result['message'] .= '<td style="text-align: right">'.number_format($tt->giakklkden).'</td>';
-                    $result['message'] .= '<td style="text-align: right">'.number_format($tt->giakklktl).'</td>';
-                    $result['message'] .= '<td style="text-align: right">'.number_format($tt->giakk).'/'.$tt->trenkm.'km</td>';
-                    $result['message'] .= '<td style="text-align: right">'.number_format($tt->giakkden).'</td>';
-                    $result['message'] .= '<td style="text-align: right">'.number_format($tt->giakktl).'</td>';
-                    $result['message'] .= '<td>'.
-                        '<button type="button" data-target="#modal-kkgia" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="kkgia('.$tt->id.')"><i class="fa fa-edit"></i>&nbsp;Kê khai giá</button>'.
-                        '<button type="button" data-target="#modal-edit" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="editTtPh('.$tt->id.')"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa thông tin</button>'.
-                        '<button type="button" data-target="#modal-delete" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="getid('.$tt->id.')" ><i class="fa fa-trash-o"></i>&nbsp;Xóa</button>'
-
-                        .'</td>';
-                    $result['message'] .= '</tr>';
-                }
-                $result['message'] .= '</tbody>';
-                $result['message'] .= '</table>';
-                $result['message'] .= '</div>';
-                $result['message'] .= '</div>';
-                $result['status'] = 'success';
-            }
+            $result['message'] =$this->return_html(KkDvVtXtxCt::where('masokk',$inputs['masokk'])->get());
+            $result['status'] = 'success';            
         }
         die(json_encode($result));
     }
@@ -454,58 +305,115 @@ class KkGiaDvVtTaxiCtController extends Controller
             $modelkkgia = KkDvVtXtxCt::where('id',$inputs['id'])->first();
             $modelkkgia->delete();
 
-            $model = KkDvVtXtxCt::where('masokk',$inputs['masokk'])
-                ->get();
 
-            $result['message'] = '<div class="row" id="dsts">';
-            $result['message'] .= '<div class="col-md-12">';
-            $result['message'] .= '<table class="table table-striped table-bordered table-hover" id="sample_3">';
-            $result['message'] .= '<thead>';
-            $result['message'] .= '<tr>';
-            $result['message'] .= '<th style="text-align: center" width="2%">STT</th>';
-            $result['message'] .= '<th style="text-align: center" width="15%">Tên cung ứng<br> dịch vụ</th>';
-            $result['message'] .= '<th style="text-align: center" width="15%">Quy cách<br> chất lượng</th>';
-            $result['message'] .= '<th style="text-align: center" width="5%">Đơn vị<br> tính</th>';
-            $result['message'] .= '<th style="text-align: center">Giá <br>mở cửa<br>liền kề</th>';
-            $result['message'] .= '<th style="text-align: center">Giá km <br>tiếp theo <br>đến km 30<br>liền kề</th>';
-            $result['message'] .= '<th style="text-align: center">Giá từ <br>km 31<br> trở lên<br>liền kề</th>';
-            $result['message'] .= '<th style="text-align: center">Giá <br>mở cửa<br>kê khai</th>';
-            $result['message'] .= '<th style="text-align: center">Giá km <br>tiếp theo <br>đến km 30<br>kê khai</th>';
-            $result['message'] .= '<th style="text-align: center">Giá từ <br>km 31 <br>trở lên<br>kê khai</th>';
-            $result['message'] .= '<th style="text-align: center">Thao tác</th>';
-            $result['message'] .= '</tr>';
-            $result['message'] .= '</thead>';
-
-
-            $result['message'] .= '<tbody>';
-            if(count($model) > 0){
-                foreach($model as $key=>$tt){
-                    $result['message'] .= '<tr id="'.$tt->id.'">';
-                    $result['message'] .= '<td style="text-align: center">'.($key +1).'</td>';
-                    $result['message'] .= '<td class="active">'.$tt->tendichvu.'</td>';
-                    $result['message'] .= '<td>'.$tt->qccl.'</td>';
-                    $result['message'] .= '<td style="text-align: center">'.$tt->dvt.'</td>';
-                    $result['message'] .= '<td style="text-align: right">'.number_format($tt->giakklk).'/'.$tt->trenkmlk.'km</td>';
-                    $result['message'] .= '<td style="text-align: right">'.number_format($tt->giakklkden).'</td>';
-                    $result['message'] .= '<td style="text-align: right">'.number_format($tt->giakklktl).'</td>';
-                    $result['message'] .= '<td style="text-align: right">'.number_format($tt->giakk).'/'.$tt->trenkm.'km</td>';
-                    $result['message'] .= '<td style="text-align: right">'.number_format($tt->giakkden).'</td>';
-                    $result['message'] .= '<td style="text-align: right">'.number_format($tt->giakktl).'</td>';
-                    $result['message'] .= '<td>'.
-                        '<button type="button" data-target="#modal-kkgia" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="kkgia('.$tt->id.')"><i class="fa fa-edit"></i>&nbsp;Kê khai giá</button>'.
-                        '<button type="button" data-target="#modal-edit" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="editTtPh('.$tt->id.')"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa thông tin</button>'.
-                        '<button type="button" data-target="#modal-delete" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="getid('.$tt->id.')" ><i class="fa fa-trash-o"></i>&nbsp;Xóa</button>'
-
-                        .'</td>';
-                    $result['message'] .= '</tr>';
-                }
-                $result['message'] .= '</tbody>';
-                $result['message'] .= '</table>';
-                $result['message'] .= '</div>';
-                $result['message'] .= '</div>';
-                $result['status'] = 'success';
-            }
+            $result['message'] =$this->return_html(KkDvVtXtxCt::where('masokk',$inputs['masokk'])->get());
+            $result['status'] = 'success';            
         }
         die(json_encode($result));
+    }
+
+    function return_html($chitiet)
+    {
+        $message = '<div class="row" id="dsts">';
+        $message .= '<div class="col-md-12">';
+        $message .= '<table class="table table-striped table-bordered table-hover" id="sample_3">';
+        $message .= '<thead>';
+        $message .= '<tr>';
+        $message .= '<th style="text-align: center" width="2%">STT</th>';
+        $message .= '<th style="text-align: center" width="15%">Tên cung ứng<br> dịch vụ</th>';
+        $message .= '<th style="text-align: center" width="15%">Quy cách<br> chất lượng</th>';
+        $message .= '<th style="text-align: center" width="5%">Đơn vị<br> tính</th>';
+        $message .= '<th style="text-align: center">Giá <br>mở cửa<br>liền kề</th>';
+        $message .= '<th style="text-align: center">Giá km <br>tiếp theo <br>đến km 30<br>liền kề</th>';
+        $message .= '<th style="text-align: center">Giá từ <br>km 31<br> trở lên<br>liền kề</th>';
+        $message .= '<th style="text-align: center">Giá <br>mở cửa<br>kê khai</th>';
+        $message .= '<th style="text-align: center">Giá km <br>tiếp theo <br>đến km 30<br>kê khai</th>';
+        $message .= '<th style="text-align: center">Giá từ <br>km 31 <br>trở lên<br>kê khai</th>';
+        $message .= '<th style="text-align: center">Thao tác</th>';
+        $message .= '</tr>';
+        $message .= '</thead>';
+
+        $message .= '<tbody>';
+        if (count($chitiet) > 0) {
+            foreach ($chitiet as $key => $tt) {
+                $message .= '<tr id="' . $tt->id . '">';
+                $message .= '<td style="text-align: center">' . ($key + 1) . '</td>';
+                $message .= '<td class="active">' . $tt->tendichvu . '</td>';
+                $message .= '<td>' . $tt->qccl . '</td>';
+                $message .= '<td style="text-align: center">' . $tt->dvt . '</td>';
+                $message .= '<td style="text-align: right">' . number_format($tt->giakklk) . '/' . $tt->trenkmlk . 'km</td>';
+                $message .= '<td style="text-align: right">' . number_format($tt->giakklkden) . '</td>';
+                $message .= '<td style="text-align: right">' . number_format($tt->giakklktl) . '</td>';
+                $message .= '<td style="text-align: right">' . number_format($tt->giakk) . '/' . $tt->trenkm . 'km</td>';
+                $message .= '<td style="text-align: right">' . number_format($tt->giakkden) . '</td>';
+                $message .= '<td style="text-align: right">' . number_format($tt->giakktl) . '</td>';
+                $message .= '<td>' .
+                    '<button type="button" data-target="#modal-kkgia" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="kkgia(' . $tt->id . ')"><i class="fa fa-edit"></i>&nbsp;Kê khai giá</button>' .
+                    '<button type="button" data-target="#modal-edit" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="editTtPh(' . $tt->id . ')"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa thông tin</button>' .
+                    '<button type="button" data-target="#modal-pagia" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="get_pag(&apos;'.$tt->madichvu.'&apos;)"><i class="fa fa-edit"></i>&nbsp;Phương án giá</button>'.
+                    '<button type="button" data-target="#modal-delete" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="getid(' . $tt->id . ')" ><i class="fa fa-trash-o"></i>&nbsp;Xóa</button>'
+                    . '</td>';
+                $message .= '</tr>';
+            }
+        }
+        $message .= '</tbody>';
+        $message .= '</table>';
+        $message .= '</div>';
+        $message .= '</div>';
+        return $message;
+    }
+
+    function get_pag(Request $request){
+        if(!Session::has('admin')) {
+            $result = array(
+                'status' => 'fail',
+                'message' => 'permission denied',
+            );
+            die(json_encode($result));
+        }
+
+        $inputs = $request->all();
+        $model = KkDvVtXtxCt::where('madichvu',$inputs['madichvu'])
+            ->where('masokk',$inputs['masokk'])->first();
+        die($model);
+    }
+
+    function update_pag(Request $request){
+        if(!Session::has('admin')) {
+            $result = array(
+                'status' => 'fail',
+                'message' => 'permission denied',
+            );
+            die(json_encode($result));
+        }
+
+        $inputs = $request->all();
+        $model = KkDvVtXtxCt::where('madichvu',$inputs['madichvu'])
+            ->where('masokk',$inputs['masokk'])->first();
+        $a=array('nguyengia'=>getDbl($inputs['nguyengia']),
+            'tongkm'=>getDbl($inputs['tongkm']),
+            'kmcokhach'=>getDbl($inputs['kmcokhach']),
+            'khauhao'=>getDbl($inputs['khauhao']),
+            'baohiem'=>getDbl($inputs['baohiem']),
+            'baohiempt'=>getDbl($inputs['baohiempt']),
+            'baohiemtnds'=>getDbl($inputs['baohiemtnds']),
+            'lainganhang'=>getDbl($inputs['lainganhang']),
+            'thuevp'=>getDbl($inputs['thuevp']),
+            'suachualon'=>getDbl($inputs['suachualon']),
+            'samlop'=>getDbl($inputs['samlop']),
+            'dangkiem'=>getDbl($inputs['dangkiem']),
+            'quanly'=>getDbl($inputs['quanly']),
+            'banhang'=>getDbl($inputs['banhang']),
+            'luonglaixe'=>getDbl($inputs['luonglaixe']),
+            'nhienlieuchinh'=>getDbl($inputs['nhienlieuchinh']),
+            'nhienlieuboitron'=>getDbl($inputs['nhienlieuboitron']),
+            'chiphibdcs'=>getDbl($inputs['chiphibdcs']),
+            'giakekhai'=>getDbl($inputs['giakekhai']),
+            'doanhthu'=>getDbl($inputs['doanhthu'])
+        );
+        $model->pag = json_encode($a);
+        $model->ghichu_pag = $inputs['ghichu_pag'];
+        $model->save();
+        die($model);
     }
 }

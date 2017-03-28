@@ -69,6 +69,10 @@
             })
         }
 
+        function InPAG(masokk){
+            var url='/dich_vu_van_tai/dich_vu_xe_taxi/inPAG/ma_so='+ masokk;
+            window.open(url,'_blank');
+        }
 
     </script>
 @stop
@@ -97,20 +101,19 @@
 
                 </div>
                 <div class="portlet-body">
-                    <div class="portlet-body">
-                        <div class="row">
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <select name="namhs" id="namhs" class="form-control">
-                                        @if ($nam_start = intval(date('Y')) - 5 ) @endif
-                                        @if ($nam_stop = intval(date('Y')) + 1 ) @endif
-                                        @for($i = $nam_start; $i <= $nam_stop; $i++)
-                                            <option value="{{$i}}" {{$i == $nam ? 'selected' : ''}}>Năm {{$i}}</option>
-                                        @endfor
-                                    </select>
-                                </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <select name="namhs" id="namhs" class="form-control">
+                                    @if ($nam_start = intval(date('Y')) - 5 ) @endif
+                                    @if ($nam_stop = intval(date('Y')) + 1 ) @endif
+                                    @for($i = $nam_start; $i <= $nam_stop; $i++)
+                                        <option value="{{$i}}" {{$i == $nam ? 'selected' : ''}}>Năm {{$i}}</option>
+                                    @endfor
+                                </select>
                             </div>
                         </div>
+                    </div>
                     <table class="table table-striped table-bordered table-hover" id="sample_3">
                         <thead>
                         <tr>
@@ -154,16 +157,17 @@
                                     </td>
                                 @endif
                                 <td>
-                                    <a href="{{url('ke_khai_dich_vu_van_tai/xe_taxi//report_ke_khai/'.$tt->masokk)}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Xem chi tiết</a>
+                                    <a href="{{url('ke_khai_dich_vu_van_tai/xe_taxi/report_ke_khai/'.$tt->masokk)}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Xem chi tiết</a>
+                                    <button type="button" onclick="InPAG('{{$tt->masokk}}')" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Phương án giá</button>
                                     @if($tt->trangthai == 'Chờ chuyển' || $tt->trangthai == 'Bị trả lại')
-                                        @if(can('kkdvlt','edit'))
+                                        @if(can('kkdvvtxtx','create'))
                                         <a href="{{url('ke_khai_dich_vu_van_tai/xe_taxi/'.$tt->id.'/edit')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</a>
                                         @endif
-                                        @if(can('kkdvlt','delete'))
+                                        @if(can('kkdvvtxtx','delete'))
                                         <button type="button" onclick="getId('{{$tt->id}}')" class="btn btn-default btn-xs mbs" data-target="#delete-modal" data-toggle="modal"><i class="fa fa-trash-o"></i>&nbsp;
                                             Xóa</button>
                                         @endif
-                                        @if(can('kkdvlt','approve'))
+                                        @if(can('kkdvvtxtx','approve'))
                                         <button type="button" onclick="confirmChuyen('{{$tt->id}}')" class="btn btn-default btn-xs mbs" data-target="#chuyen-modal" data-toggle="modal"><i class="fa fa-share-square-o"></i>&nbsp;
                                             Chuyển</button>
                                         @endif

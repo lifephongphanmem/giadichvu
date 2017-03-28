@@ -25,6 +25,8 @@ class KkDvVtXtxCt extends Model
         'giakklktl',
         'giahl',
         'ghichu',
-        'thuevat'
+        'thuevat',
+        'pag',
+        'ghichu_pag'
     ];
 }

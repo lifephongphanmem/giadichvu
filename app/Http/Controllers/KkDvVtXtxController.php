@@ -36,12 +36,6 @@ class KkDvVtXtxController extends Controller
                 }else{
                     $model = DonViDvVt::where('cqcq',session('admin')->cqcq)
                         ->get();
-                    /*
-                    $model = KkDvVtXtx::where('cqcq',session('admin')->cqcq)
-                        ->whereYear('ngaynhap', $nam)
-                        ->orderBy('ngaynhap', 'asc')
-                        ->get();
-                    */
                 }
                 return view('manage.dvvt.template.dsdonvi_kekhai')
                     ->with('model',$model)
@@ -145,7 +139,7 @@ class KkDvVtXtxController extends Controller
                 'approve'=>can('kkdvvtxtx','approve')
             );
 
-            return view('manage.dvvt.dvxk.xetduyet.index')
+            return view('manage.dvvt.dvxtx.xetduyet.index')
                 ->with('model',$model)
                 ->with('thang',$thang)
                 ->with('nam',$nam)

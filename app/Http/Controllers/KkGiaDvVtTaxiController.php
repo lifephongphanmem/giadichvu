@@ -138,13 +138,30 @@ class KkGiaDvVtTaxiController extends Controller
                         $mdkk->trenkm = 1;
                         $mdkk->giakkden =0;
                         $mdkk->giakktl =0;
-                        $mdkk->save();
 
-                        //Phương án giá
-                        $m_pag=new PagDvVtXtx_Temp();
-                        $m_pag->masothue = $masothue;
-                        $m_pag->madichvu = $dv->madichvu;
-                        $m_pag->save();
+                        $a=array('nguyengia'=>0,
+                                'tongkm'=>0,
+                                'kmcokhach'=>0,
+                                'khauhao'=>0,
+                                'baohiem'=>0,
+                                'baohiempt'=>0,
+                                'baohiemtnds'=>0,
+                                'lainganhang'=>0,
+                                'thuevp'=>0,
+                                'suachualon'=>0,
+                                'samlop'=>0,
+                                'dangkiem'=>0,
+                                'quanly'=>0,
+                                'banhang'=>0,
+                                'luonglaixe'=>0,
+                                'nhienlieuchinh'=>0,
+                                'nhienlieuboitron'=>0,
+                                'chiphibdcs'=>0,
+                                'giakekhai'=>0,
+                                'doanhthu'=>0
+                        );
+                        $mdkk->pag = json_encode($a);
+                        $mdkk->save();
                     }
                     $model=KkDvVtXtxCtDf::where('masothue', $masothue)->get();
 
@@ -183,7 +200,7 @@ class KkGiaDvVtTaxiController extends Controller
             $model->save();
             //Chi tiết kê khai
             $m_kkdf=KkDvVtXtxCtDf::select('madichvu','loaixe','tendichvu','qccl','dvt','giakk','trenkm','giakkden','giakktl',
-                'giakklk','trenkmlk','giakklkden','giakklktl',DB::raw("'".$makk."' as masokk"))
+                'giakklk','trenkmlk','giakklkden','giakklktl',DB::raw("'".$makk."' as masokk"),'pag','ghichu_pag')
                 ->where('masothue', $insert['masothue'])
                 ->get()->toarray();
             KkDvVtXtxCt::insert($m_kkdf);

@@ -31,6 +31,8 @@ class CreateKkdvvtxtxctdfTable extends Migration
             $table->double('giakklktl')->nullable();//Them
             $table->string('ghichu')->nullable();
             $table->string('thuevat')->nullable();
+            $table->text('pag')->nullable();
+            $table->text('ghichu_pag')->nullable();
             $table->timestamps();
         });
     }

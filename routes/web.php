@@ -386,9 +386,6 @@ Route::group(['prefix'=>'dich_vu_van_tai'],function(){
     });
     // </editor-fold>
 
-
-
-
     // <editor-fold defaultstate="collapsed" desc="--Dịch vụ vận tải xe taxi--">
     Route::group(['prefix'=>'dich_vu_xe_taxi'],function(){
         Route::group(['prefix'=>'danh_muc'],function(){
@@ -458,7 +455,7 @@ Route::get('/ke_khai_dich_vu_van_tai/xe_taxi/{id}/edit','KkGiaDvVtTaxiController
 Route::patch('/ke_khai_dich_vu_van_tai/xe_taxi/{id}','KkGiaDvVtTaxiController@update');
 Route::post('/ke_khai_dich_vu_van_tai/xe_taxi/delete','KkGiaDvVtTaxiController@delete');
 Route::post('/ke_khai_dich_vu_van_tai/xe_taxi/chuyen','KkGiaDvVtTaxiController@chuyen');
-Route::get('ke_khai_dich_vu_van_tai/xe_taxi//report_ke_khai/{masokk}','KkGiaDvVtTaxiController@show');
+Route::get('ke_khai_dich_vu_van_tai/xe_taxi/report_ke_khai/{masokk}','KkGiaDvVtTaxiController@show');
     //Ajax create
 Route::get('/kkgiadvvtxtx/storedv','KkGiaDvVtTaxiCtDfController@storedv');
 Route::get('/kkgiadvvtxtx/editdv','KkGiaDvVtTaxiCtDfController@editdv');
@@ -466,6 +463,8 @@ Route::get('/kkgiadvvtxtx/updatedv','KkGiaDvVtTaxiCtDfController@updatedv');
 Route::get('/kkgiadvvtxtx/kkgiadv','KkGiaDvVtTaxiCtDfController@kkgiadv');
 Route::get('/kkgiadvvtxtx/upkkgiadv','KkGiaDvVtTaxiCtDfController@upkkgiadv');
 Route::get('/kkgiadvvtxtx/deldv','KkGiaDvVtTaxiCtDfController@delkkgiadv');
+Route::get('/kkgiadvvtxtx/get_pag_temp','KkGiaDvVtTaxiCtDfController@get_pag');
+Route::get('/kkgiadvvtxtx/update_pag_temp','KkGiaDvVtTaxiCtDfController@update_pag');
     //end ajax create
     //Ajax edit
 Route::get('/kkgiadvvtxtx/boxungdv','KkGiaDvVtTaxiCtController@storedv');
@@ -474,6 +473,8 @@ Route::get('/kkgiadvvtxtx/capnhatdv','KkGiaDvVtTaxiCtController@updatedv');
 Route::get('/kkgiadvvtxtx/kkgiadvedit','KkGiaDvVtTaxiCtController@kkgiadv');
 Route::get('/kkgiadvvtxtx/capnhatkkgiadv','KkGiaDvVtTaxiCtController@upkkgiadv');
 Route::get('/kkgiadvvtxtx/xoadv','KkGiaDvVtTaxiCtController@delkkgiadv');
+Route::get('/kkgiadvvtxtx/get_pag','KkGiaDvVtTaxiCtController@get_pag');
+Route::get('/kkgiadvvtxtx/update_pag','KkGiaDvVtTaxiCtController@update_pag');
     //end ajax edit
 
 
