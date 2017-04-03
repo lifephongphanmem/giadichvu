@@ -44,9 +44,9 @@
                     <th style="text-align: center" width="2%">STT</th>
                     <th style="text-align: center">Loại xe</th>
                     <th style="text-align: center">Mô tả dịch vụ</th>
-                    <th style="text-align: center">Mức giá liền kề</th>
-                    <th style="text-align: center">Mức giá kê khai</th>
-                    <th style="text-align: center">Mức giá hành lý</br> vượt quy định</th>
+                    <th style="text-align: center">Giá liền kề</th>
+                    <th style="text-align: center">Giá kê khai</th>
+                    <th style="text-align: center">Giá hành lý</br>vượt quy định</th>
                     <th style="text-align: center" width="20%">Thao tác</th>
                 </tr>
                 </thead>
@@ -62,14 +62,20 @@
                         <td>
                             <button type="button" data-target="#modal-create"
                                     data-toggle="modal" class="btn btn-default btn-xs mbs"
-                                    onclick="editItem({{$dv->id}})"><i
-                                        class="fa fa-edit"></i>&nbsp;Kê khai giá
+                                    onclick="get_kkgia({{$dv->id}})"><i class="fa fa-edit"></i>&nbsp;Kê khai giá
                             </button>
-                            <button type="button" data-target="#modal-delete" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="getid({{$dv->id}});" ><i class="fa fa-trash-o"></i>&nbsp;Xóa
-                            </button>
+
                             <button type="button" data-target="#modal-pagia-create"
                                     data-toggle="modal" class="btn btn-default btn-xs mbs"
-                                    onclick="getpag_temp('{{$dv->madichvu}}')"><i class="fa fa-edit"></i>&nbsp;Phương án giá
+                                    onclick="editpagia('{{$dv->madichvu}}')"><i class="fa fa-edit"></i>&nbsp;Phương án giá
+                            </button>
+
+                            <button type="button" data-target="#modal-dichvu"
+                                    data-toggle="modal" class="btn btn-default btn-xs mbs"
+                                    onclick="get_dichvu({{$dv->id}})"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa thông tin
+                            </button>
+
+                            <button type="button" data-target="#modal-delete" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="getid({{$dv->id}});" ><i class="fa fa-trash-o"></i>&nbsp;Xóa
                             </button>
                         </td>
                     </tr>
@@ -122,25 +128,48 @@
     @include('includes.script.create-header-scripts')
     @include('manage.dvvt.template.phuongangia_temp')
 
-    <!--Model them moi-->
-    <div class="modal fade bs-modal-lg" id="modal-create" tabindex="-1" role="dialog" aria-hidden="true">
+    <!--Modal Wide Width-->
+    <div class="modal fade bs-modal-lg" id="modal-dichvu" tabindex="-1" aria-labelledby="myModalLabel" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Thông tin dịch vụ vận tải</h4>
+                </div>
+                <div class="modal-body">
+                    @include('manage.dvvt.template.dmdvxk')
+                    <input type="hidden" id="iddv" name="iddv"/>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Thoát</button>
+                    <button type="button" class="btn btn-primary" onclick="update_dichvu()">Cập nhật</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+    <!--Model them moi-->
+    <div class="modal fade bs-modal" id="modal-create" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                     <h4 class="modal-title">Thêm mới thông tin dịch vụ vận tải</h4>
                 </div>
                 <div class="modal-body" id="ttpthemmoi">
-                    @include('manage.dvvt.template.dmdvxk')
-
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label class="form-control-label"><b>Mức giá kê khai liền kề</b><span class="require">*</span></label>
                                 <input type="text" style="text-align: right" id="giakklk" name="giakklk" class="form-control" data-mask="fdecimal">
                             </div>
                         </div>
-                        <div class="col-md-6">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label class="form-control-label"><b>Mức giá kê khai</b><span class="require">*</span></label>
                                 <input type="text" style="text-align: right" id="giakk" name="giakk" class="form-control" data-mask="fdecimal">
@@ -149,18 +178,18 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label class="form-control-label"><b>Mức giá hành lý</b><span class="require">*</span></label>
                                 <input type="text" style="text-align: right" id="giahl" name="giahl" class="form-control" data-mask="fdecimal">
                             </div>
                         </div>
                     </div>
-                    <input type="hidden" id="iddv" name="iddv"/>
+                    <input type="hidden" id="idkk" name="idkk"/>
                 </div>
                 <div class="modal-footer">
                     <button type="button" data-dismiss="modal" class="btn btn-default">Thoát</button>
-                    <button type="button" class="btn btn-primary" onclick="updategia()">Bổ xung</button>
+                    <button type="button" class="btn btn-primary" onclick="kkgia()">Bổ xung</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -188,7 +217,7 @@
     </div>
 
     <script>
-        function editItem(id){
+        function get_kkgia(id){
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             $.ajax({
                 url: '{{$url}}'+'thao_tac/get_giadv_temp',
@@ -202,6 +231,55 @@
                     $('#giakklk').val(data.giakklk);
                     $('#giahl').val(data.giahl);
                     $('#giakk').val(data.giakk);
+                },
+                error: function (message) {
+                    toastr.error(message, 'Lỗi!');
+                }
+            });
+            $('#idkk').attr('value',id);
+        }
+
+        function kkgia(){
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                url: '{{$url}}'+'thao_tac/kkgia_temp',
+                type: 'GET',
+                data: {
+                    _token: CSRF_TOKEN,
+                    masothue: $('#masothue').val(),
+                    giakklk: $('#giakklk').val(),
+                    giakk: $('#giakk').val(),
+                    giahl:$('#giahl').val(),
+                    id: $('#idkk').val()
+                },
+                dataType: 'JSON',
+                success: function (data) {
+                    if (data.status == 'success') {
+                        $('#noidung').replaceWith(data.message);
+                        InputMask();
+                        jQuery(document).ready(function() {
+                            TableManaged.init();
+                        });
+                    }
+                },
+                error: function(message){
+                    toastr.error(message);
+                }
+            });
+            $('#modal-create').modal('hide');
+        }
+
+        function get_dichvu(id){
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                url: '{{$url}}'+'thao_tac/get_giadv_temp',
+                type: 'GET',
+                data: {
+                    _token: CSRF_TOKEN,
+                    id: id
+                },
+                dataType: 'JSON',
+                success: function (data) {
                     $('#loaixe').val(data.loaixe);
                     $('#tendichvu').val(data.tendichvu);
                     $('#qccl').val(data.qccl);
@@ -215,7 +293,7 @@
             $('#iddv').attr('value',id);
         }
 
-        function updategia(){
+        function update_dichvu(){
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             $.ajax({
                 url: '{{$url}}'+'thao_tac/update_giadv_temp',
@@ -223,9 +301,6 @@
                 data: {
                     _token: CSRF_TOKEN,
                     masothue: $('#masothue').val(),
-                    giakklk: $('#giakklk').val(),
-                    giakk: $('#giakk').val(),
-                    giahl:$('#giahl').val(),
                     loaixe: $('#loaixe').val(),
                     tendichvu: $('#tendichvu').val(),
                     qccl: $('#qccl').val(),
@@ -247,13 +322,10 @@
                     toastr.error(message);
                 }
             });
-            $('#modal-create').modal('hide');
+            $('#modal-dichvu').modal('hide');
         }
 
         function clearForm(){
-            $('#giakklk').val('0');
-            $('#giakk').val('0');
-            $('#giahl').val(0);
             $('#loaixe').val('');
             $('#tendichvu').val('');
             $('#qccl').val('');

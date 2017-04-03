@@ -83,7 +83,7 @@
     function update_pagia(){
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         $.ajax({
-            url: '{{$url}}'+'ke_khai/updatepag_temp',
+            url: '{{$url}}'+'thao_tac/updatepag_temp',
             type: 'GET',
             data: {
                 _token: CSRF_TOKEN,
@@ -106,10 +106,10 @@
         });
     }
 
-    function getpag_temp(madichvu){
+    function editpagia(madichvu){
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         $.ajax({
-            url: '{{$url}}'+'ke_khai/getpag_temp',
+            url: '{{$url}}'+'thao_tac/getpag_temp',
             type: 'GET',
             data: {
                 _token: CSRF_TOKEN,

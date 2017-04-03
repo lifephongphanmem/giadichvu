@@ -231,10 +231,6 @@ Route::group(['prefix'=>'dich_vu_van_tai'],function(){
             Route::get('create/ma_so={masothue}','KkDvVtKhacController@create');
             Route::patch('store','KkDvVtKhacController@store');
             Route::patch('update/{id}','KkDvVtKhacController@update');
-            Route::get('getpag_temp', 'KkDvVtKhacController@getpag_temp');
-            Route::get('updatepag_temp', 'KkDvVtKhacController@updatepag_temp');
-            Route::get('getpag', 'KkDvVtKhacController@getpag');
-            Route::get('updatepag', 'KkDvVtKhacController@updatepag');
 
             Route::get('don_vi/ma_so={masothue}','KkDvVtKhacController@show');
         });
@@ -251,6 +247,14 @@ Route::group(['prefix'=>'dich_vu_van_tai'],function(){
             Route::get('update_giadv_temp', 'KkDvVtKhacController@update_giadv_temp');
             Route::get('del_giadv_temp', 'KkDvVtKhacController@del_giadv_temp');
             Route::get('get_giadv_temp', 'KkDvVtKhacController@get_giadv_temp');
+
+            Route::get('kkgia','KkDvVtKhacController@kkgia');
+            Route::get('kkgia_temp','KkDvVtKhacController@kkgia_temp');
+
+            Route::get('getpag_temp', 'KkDvVtKhacController@getpag_temp');
+            Route::get('updatepag_temp', 'KkDvVtKhacController@updatepag_temp');
+            Route::get('getpag', 'KkDvVtKhacController@getpag');
+            Route::get('updatepag', 'KkDvVtKhacController@updatepag');
         });
 
         //Xét duyệt dịch vụ xe khách - giao diện sở -
@@ -288,10 +292,6 @@ Route::group(['prefix'=>'dich_vu_van_tai'],function(){
             Route::get('create/ma_so={masothue}','KkDvVtXbController@create');
             Route::patch('store','KkDvVtXbController@store');
             Route::patch('update/{id}','KkDvVtXbController@update');
-            Route::get('getpag_temp', 'KkDvVtXbController@getpag_temp');
-            Route::get('updatepag_temp', 'KkDvVtXbController@updatepag_temp');
-            Route::get('getpag', 'KkDvVtXbController@getpag');
-            Route::get('updatepag', 'KkDvVtXbController@updatepag');
 
             Route::get('don_vi/ma_so={masothue}','KkDvVtXbController@show');
         });
@@ -308,6 +308,15 @@ Route::group(['prefix'=>'dich_vu_van_tai'],function(){
             Route::get('update_giadv_temp', 'KkDvVtXbController@update_giadv_temp');
             Route::get('del_giadv_temp', 'KkDvVtXbController@del_giadv_temp');
             Route::get('get_giadv_temp', 'KkDvVtXbController@get_giadv_temp');
+
+            Route::get('getpag_temp', 'KkDvVtXbController@getpag_temp');
+            Route::get('updatepag_temp', 'KkDvVtXbController@updatepag_temp');
+            Route::get('getpag', 'KkDvVtXbController@getpag');
+            Route::get('updatepag', 'KkDvVtXbController@updatepag');
+
+            Route::get('kkgia','KkDvVtXbController@kkgia');
+            Route::get('kkgia_temp','KkDvVtXbController@kkgia_temp');
+
         });
 
         //Xét duyệt dịch vụ xe khách - giao diện sở -
@@ -345,10 +354,6 @@ Route::group(['prefix'=>'dich_vu_van_tai'],function(){
             Route::get('create/ma_so={masothue}','KkDvVtXkController@create');
             Route::patch('store','KkDvVtXkController@store');
             Route::patch('update/{id}','KkDvVtXkController@update');
-            Route::get('getpag_temp', 'KkDvVtXkController@getpag_temp');
-            Route::get('updatepag_temp', 'KkDvVtXkController@updatepag_temp');
-            Route::get('getpag', 'KkDvVtXkController@getpag');
-            Route::get('updatepag', 'KkDvVtXkController@updatepag');
 
             Route::get('don_vi/ma_so={masothue}','KkDvVtXkController@show');
         });
@@ -365,6 +370,14 @@ Route::group(['prefix'=>'dich_vu_van_tai'],function(){
             Route::get('update_giadv_temp', 'KkDvVtXkController@update_giadv_temp');
             Route::get('del_giadv_temp', 'KkDvVtXkController@del_giadv_temp');
             Route::get('get_giadv_temp', 'KkDvVtXkController@get_giadv_temp');
+
+            Route::get('kkgia','KkDvVtXkController@kkgia');
+            Route::get('kkgia_temp','KkDvVtXkController@kkgia_temp');
+
+            Route::get('getpag_temp', 'KkDvVtXkController@getpag_temp');
+            Route::get('updatepag_temp', 'KkDvVtXkController@updatepag_temp');
+            Route::get('getpag', 'KkDvVtXkController@getpag');
+            Route::get('updatepag', 'KkDvVtXkController@updatepag');
         });
 
         //Xét duyệt dịch vụ xe khách - giao diện sở -

@@ -813,8 +813,6 @@ class KkDvVtKhacController extends Controller
             $model->tendichvu = $inputs['tendichvu'];
             $model->qccl = $inputs['qccl'];
             $model->dvt = $inputs['dvt'];
-            $model->giakk = getDbl($inputs['giakk']);
-            $model->giakklk = getDbl($inputs['giakklk']);
             $model->save();
         }else{//Thêm mới dịch vụ
             $madichvu=getdate()[0];
@@ -825,8 +823,6 @@ class KkDvVtKhacController extends Controller
             $model->tendichvu = $inputs['tendichvu'];
             $model->qccl = $inputs['qccl'];
             $model->dvt = $inputs['dvt'];
-            $model->giakk =getDbl($inputs['giakk']);
-            $model->giakklk = getDbl($inputs['giakklk']);
             if($model->save()){
                 $m_pag=new PagDvVtKhac_Temp();
                 $m_pag->masothue = $inputs['masothue'];
@@ -861,8 +857,6 @@ class KkDvVtKhacController extends Controller
             $model->tendichvu = $inputs['tendichvu'];
             $model->qccl = $inputs['qccl'];
             $model->dvt = $inputs['dvt'];
-            $model->giakk = getDbl($inputs['giakk']);
-            $model->giakklk = getDbl($inputs['giakklk']);
             $model->save();
         }else{//Thêm mới dịch vụ
             $madichvu=getdate()[0];
@@ -873,8 +867,6 @@ class KkDvVtKhacController extends Controller
             $model->tendichvu = $inputs['tendichvu'];
             $model->qccl = $inputs['qccl'];
             $model->dvt = $inputs['dvt'];
-            $model->giakk =getDbl($inputs['giakk']);
-            $model->giakklk = getDbl($inputs['giakklk']);
             if($model->save()){
                 $m_pag=new PagDvVtKhac();
                 $m_pag->masothue = $inputs['masothue'];
@@ -934,6 +926,64 @@ class KkDvVtKhacController extends Controller
         die(json_encode($result));
     }
 
+    function kkgia(Request $request)
+    {
+        $result = array(
+            'status' => 'fail',
+            'message' => 'error',
+        );
+        if (!Session::has('admin')) {
+            $result = array(
+                'status' => 'fail',
+                'message' => 'permission denied',
+            );
+            die(json_encode($result));
+        }
+        $inputs = $request->all();
+        if (!isset($inputs['id'])) {
+            die(json_encode($result));
+        }
+
+        $model =  KkDvVtKhacCt::findOrFail($inputs['id']);
+        $model->giakk =getDbl($inputs['giakk']);
+        $model->giakklk = getDbl($inputs['giakklk']);
+        $model->save();
+
+        $result['message'] =$this->return_html(KkDvVtKhacCt::where('masokk', $model->masokk)->get());
+        $result['status'] = 'success';
+
+        die(json_encode($result));
+    }
+
+    function kkgia_temp(Request $request)
+    {
+        $result = array(
+            'status' => 'fail',
+            'message' => 'error',
+        );
+        if (!Session::has('admin')) {
+            $result = array(
+                'status' => 'fail',
+                'message' => 'permission denied',
+            );
+            die(json_encode($result));
+        }
+        $inputs = $request->all();
+        if (!isset($inputs['id'])) {
+            die(json_encode($result));
+        }
+
+        $model =  KkDvVtKhacCtDf::findOrFail($inputs['id']);
+        $model->giakk =getDbl($inputs['giakk']);
+        $model->giakklk = getDbl($inputs['giakklk']);
+        $model->save();
+
+        $result['message'] = $this->return_html(KkDvVtKhacCtDf::where('masothue', $inputs['masothue'])->get());
+        $result['status'] = 'success';
+
+        die(json_encode($result));
+    }
+
     function return_html($giadv){
         //Trả lại kết quả
         $message = '<div class="row" id="noidung">';
@@ -944,9 +994,9 @@ class KkDvVtKhacController extends Controller
         $message .= '<th style="text-align: center;width: 2%">STT</th>';
         $message .= '<th style="text-align: center">Loại xe</th>';
         $message .= '<th style="text-align: center">Mô tả dịch vụ</th>';
-        $message .= '<th style="text-align: center">Mức giá liền kề</th>';
-        $message .= '<th style="text-align: center">Mức giá kê khai</th>';
-        $message .= '<th style="text-align: center" width="20%">Thao tác</th>';
+        $message .= '<th style="text-align: center">Mức giá</br>liền kề</th>';
+        $message .= '<th style="text-align: center">Mức giá</br>kê khai</th>';
+        $message .= '<th style="text-align: center" width="25%">Thao tác</th>';
         $message .= '</tr>';
         $message .= '</thead>';
         $message .= '<tbody>';
@@ -961,14 +1011,20 @@ class KkDvVtKhacController extends Controller
         $message .= '<td>'
                     .'<button type="button" data-target="#modal-create" '
                     .'data-toggle="modal" class="btn btn-default btn-xs mbs"'
-                    .'onclick="editItem('.$dv->id.')"><i'
+                    .'onclick="get_kkgia('.$dv->id.')"><i'
                     .' class="fa fa-edit"></i>&nbsp;Kê khai giá'
                     .'</button>';
-        $message .= '<button type="button" data-target="#modal-delete" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="getid('.$dv->id.');" ><i class="fa fa-trash-o"></i>&nbsp;Xóa
-            </button>';
-        $message .='<button type="button" data-target="#modal-pagia-create"
+            $message .='<button type="button" data-target="#modal-pagia-create"
                             data-toggle="modal" class="btn btn-default btn-xs mbs"
-                            onclick="editpagia(&apos;'.$dv->madichvu.'&apos;,&apos;'.$dv->masokk.'&apos;)"><i class="fa fa-edit"></i>&nbsp;Phương án giá';
+                            onclick="editpagia(&apos;'.$dv->madichvu.'&apos;)"><i class="fa fa-edit"></i>&nbsp;Phương án giá';
+            $message .='<button type="button" data-target="#modal-dichvu"
+                                        data-toggle="modal" class="btn btn-default btn-xs mbs"
+                                        onclick="get_dichvu('.$dv->id.')"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa thông tin
+                        </button>';
+
+            $message .= '<button type="button" data-target="#modal-delete" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="getid('.$dv->id.');" ><i class="fa fa-trash-o"></i>&nbsp;Xóa
+            </button>';
+
         $message .='</button>';
         $message .= '</td >';
         $message .= '</tr >';

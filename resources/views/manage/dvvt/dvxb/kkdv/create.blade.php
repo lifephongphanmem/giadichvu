@@ -66,15 +66,23 @@
                         <td>
                             <button type="button" data-target="#modal-create"
                                     data-toggle="modal" class="btn btn-default btn-xs mbs"
-                                    onclick="editItem({{$dv->id}})"><i
+                                    onclick="get_kkgia({{$dv->id}})"><i
                                         class="fa fa-edit"></i>&nbsp;Kê khai giá
                             </button>
-                            <button type="button" data-target="#modal-delete" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="getid({{$dv->id}});" ><i class="fa fa-trash-o"></i>&nbsp;Xóa
-                            </button>
+
                             <button type="button" data-target="#modal-pagia-create"
                                     data-toggle="modal" class="btn btn-default btn-xs mbs"
-                                    onclick="getpag_temp('{{$dv->madichvu}}')"><i class="fa fa-edit"></i>&nbsp;Phương án giá
+                                    onclick="editpagia('{{$dv->madichvu}}')"><i class="fa fa-edit"></i>&nbsp;Phương án giá
                             </button>
+
+                            <button type="button" data-target="#modal-dichvu"
+                                    data-toggle="modal" class="btn btn-default btn-xs mbs"
+                                    onclick="get_dichvu({{$dv->id}})"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa thông tin
+                            </button>
+
+                            <button type="button" data-target="#modal-delete" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="getid({{$dv->id}});" ><i class="fa fa-trash-o"></i>&nbsp;Xóa
+                            </button>
+
                         </td>
                     </tr>
                 @endforeach
@@ -136,8 +144,6 @@
                     <h4 class="modal-title">Thêm mới thông tin dịch vụ vận tải</h4>
                 </div>
                 <div class="modal-body" id="ttpthemmoi">
-                    @include('manage.dvvt.template.dmdvxb')
-
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -166,11 +172,11 @@
                             </div>
                         </div>
                     </div>
-                    <input type="hidden" id="iddv" name="iddv"/>
+                    <input type="hidden" id="idkk" name="idkk"/>
                 </div>
                 <div class="modal-footer">
                     <button type="button" data-dismiss="modal" class="btn btn-default">Thoát</button>
-                    <button type="button" class="btn btn-primary" onclick="updategia()">Bổ xung</button>
+                    <button type="button" class="btn btn-primary" onclick="kkgia()">Bổ xung</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -197,8 +203,31 @@
         <!-- /.modal-dialog -->
     </div>
 
+    <!--Modal Dịch vụ-->
+    <div class="modal fade bs-modal-lg" id="modal-dichvu" tabindex="-1" aria-labelledby="myModalLabel" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Thông tin dịch vụ vận tải</h4>
+                </div>
+                <div class="modal-body">
+                    @include('manage.dvvt.template.dmdvxb')
+                    <input type="hidden" id="iddv" name="iddv"/>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Thoát</button>
+                    <button type="button" class="btn btn-primary" onclick="update_dichvu()">Cập nhật</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+
     <script>
-        function editItem(id){
+        function get_kkgia(id){
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             $.ajax({
                 url: '{{$url}}'+'thao_tac/get_giadv_temp',
@@ -208,12 +237,7 @@
                     id: id
                 },
                 dataType: 'JSON',
-                success: function (data) {                   
-                    $('#tendichvu').val(data.tendichvu);
-                    $('#qccl').val(data.qccl);
-                    $('#dvtluot').val(data.dvtluot);
-                    $('#dvtthang').val(data.dvtthang);
-                    $('#ghichu').val(data.ghichu);
+                success: function (data) {
                     $('#giakklkluot').val(data.giakklkluot);
                     $('#giakkluot').val(data.giakkluot);
                     $('#giakklkthang').val(data.giakklkthang);
@@ -223,23 +247,18 @@
                     toastr.error(message, 'Lỗi!');
                 }
             });
-            $('#iddv').attr('value',id);
+            $('#idkk').attr('value',id);
         }
 
-        function updategia(){
+        function kkgia(){
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             $.ajax({
-                url: '{{$url}}'+'thao_tac/update_giadv_temp',
+                url: '{{$url}}'+'thao_tac/kkgia_temp',
                 type: 'GET',
                 data: {
                     _token: CSRF_TOKEN,
                     masothue: $('#masothue').val(),                   
-                    id: $('#iddv').val(),
-                    tendichvu:$('#tendichvu').val(),
-                    qccl:$('#qccl').val(),
-                    dvtluot:$('#dvtluot').val(),
-                    dvtthang:$('#dvtthang').val(),
-                    ghichu:$('#ghichu').val(),
+                    id: $('#idkk').val(),
                     giakklkluot:$('#giakklkluot').val(),
                     giakkluot:$('#giakkluot').val(),
                     giakklkthang:$('#giakklkthang').val(),
@@ -262,6 +281,62 @@
             $('#modal-create').modal('hide');
         }
 
+        function get_dichvu(id){
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                url: '{{$url}}'+'thao_tac/get_giadv_temp',
+                type: 'GET',
+                data: {
+                    _token: CSRF_TOKEN,
+                    id: id
+                },
+                dataType: 'JSON',
+                success: function (data) {
+                    $('#tendichvu').val(data.tendichvu);
+                    $('#qccl').val(data.qccl);
+                    $('#dvtluot').val(data.dvtluot);
+                    $('#dvtthang').val(data.dvtthang);
+                    $('#ghichu').val(data.ghichu);
+                },
+                error: function (message) {
+                    toastr.error(message, 'Lỗi!');
+                }
+            });
+            $('#iddv').attr('value',id);
+        }
+
+        function update_dichvu(){
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                url: '{{$url}}'+'thao_tac/update_giadv_temp',
+                type: 'GET',
+                data: {
+                    _token: CSRF_TOKEN,
+                    masothue: $('#masothue').val(),
+                    id: $('#iddv').val(),
+                    tendichvu:$('#tendichvu').val(),
+                    qccl:$('#qccl').val(),
+                    dvtluot:$('#dvtluot').val(),
+                    dvtthang:$('#dvtthang').val(),
+                    ghichu:$('#ghichu').val()
+                },
+                dataType: 'JSON',
+                success: function (data) {
+                    if (data.status == 'success') {
+                        $('#noidung').replaceWith(data.message);
+                        InputMask();
+                        jQuery(document).ready(function() {
+                            TableManaged.init();
+                        });
+                    }
+                },
+                error: function(message){
+                    toastr.error(message);
+                }
+            });
+            $('#modal-dichvu').modal('hide');
+        }
+
         function clearForm(){
             $('#iddv').val(0);
             $('#tendichvu').val('');
@@ -269,10 +344,6 @@
             $('#dvtluot').val('');
             $('#dvtthang').val('');
             $('#ghichu').val('');
-            $('#giakklkluot').val(0);
-            $('#giakkluot').val(0);
-            $('#giakklkthang').val(0);
-            $('#giakkthang').val(0);
         }
 
         function deleteRow(){

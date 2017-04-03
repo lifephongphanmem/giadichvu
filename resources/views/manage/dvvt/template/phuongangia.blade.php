@@ -33,7 +33,7 @@
     function update_pagia(){
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         $.ajax({
-            url: '{{$url}}'+'ke_khai/updatepag',
+            url: '{{$url}}'+'thao_tac/updatepag',
             type: 'GET',
             data: {
                 _token: CSRF_TOKEN,
@@ -56,16 +56,16 @@
         });
     }
 
-    function editpagia(madichvu, masokk){
+    function editpagia(madichvu){
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
         $.ajax({
-            url: '{{$url}}'+'ke_khai/getpag',
+            url: '{{$url}}'+'thao_tac/getpag',
             type: 'GET',
             data: {
                 _token: CSRF_TOKEN,
                 madichvu: madichvu,
-                masokk: masokk
+                masokk: $('#masokk').val()
             },
             dataType: 'JSON',
             success: function (data) {

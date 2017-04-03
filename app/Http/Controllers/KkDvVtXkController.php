@@ -480,155 +480,6 @@ class KkDvVtXkController extends Controller
         die(json_encode($result));
     }
 
-    public function updategiadv(Request $request){
-        $result = array(
-            'status' => 'fail',
-            'message' => 'error',
-        );
-        if(!Session::has('admin')) {
-            $result = array(
-                'status' => 'fail',
-                'message' => 'permission denied',
-            );
-            die(json_encode($result));
-        }
-        $inputs = $request->all();
-
-        if(isset($inputs['id'])){
-
-            $inputs['giakk'] = str_replace(',','',$inputs['giakk']);
-            $inputs['giakk'] = str_replace('.','',$inputs['giakk']);
-            $inputs['giakklk'] = str_replace(',','',$inputs['giakklk']);
-            $inputs['giakklk'] = str_replace('.','',$inputs['giakklk']);
-            $inputs['giahl'] = str_replace(',','',$inputs['giahl']);
-            $inputs['giahl'] = str_replace('.','',$inputs['giahl']);
-
-            $model = KkDvVtXkCtDf::findOrFail($inputs['id']);
-            $model->giakk = $inputs['giakk'];
-            $model->giakklk = $inputs['giakklk'];
-            $model->giahl = $inputs['giahl'];
-            $model->save();
-            //Trả lại kết quả
-
-            $result['message'] =  '<div class="row" id="noidung">';
-            $result['message'] .= '<div class="col-md-12">';
-            $result['message'] .='<table id="sample_3" class="table table-hover table-striped table-bordered table-advanced tablesorter">';
-            $result['message'] .= '<thead>';
-            $result['message'] .= '<tr>';
-            $result['message'] .= '<th style="text-align: center" width="2%">STT</th>';
-            $result['message'] .= '<th style="text-align: center">Loại xe</th>';
-            $result['message'] .= '<th style="text-align: center">Mô tả dịch vụ</th>';
-            $result['message'] .= '<th style="text-align: center">Mức giá liền kề</th>';
-            $result['message'] .= '<th style="text-align: center">Mức giá kê khai</th>';
-            $result['message'] .= '<th style="text-align: center">Mức giá hành lý</br> vượt quy định</th>';
-            $result['message'] .= '<th style="text-align: center" width="20%">Thao tác</th>';
-            $result['message'] .= '</tr>';
-            $result['message'] .= '</thead>';
-            $result['message'] .= '<tbody >';
-
-            $DMDV = KkDvVtXkCtDf::where('masothue', session('admin')->mahuyen)->get();
-
-                foreach($DMDV as $key=>$dv) {
-                    $result['message'] .= '<tr>';
-                    $result['message'] .= '<td style="text-align: center">'.($key+1).'</td>';
-                    $result['message'] .= '<td name = "loaixe">'.$dv->loaixe.'</td>';
-                    $result['message'] .= '<td name = "tendichvu" class="active">'.$dv->tendichvu.'</td>';
-                    $result['message'] .= '<td name = "giakklk" style="text-align: right">'.number_format($dv->giakklk).'</td>';
-                    $result['message'] .= '<td name = "giakk" style="text-align: right">'.number_format($dv->giakk).'</td>';
-                    $result['message'] .= '<td name = "giahl" style="text-align: right">'.number_format($dv->giahl).'</td>';
-                    $result['message'] .= '<td>'
-                                    .'<button type="button" data-target="#modal-create" '
-                                    .'data-toggle="modal" class="btn btn-default btn-xs mbs"'
-                                    .'onclick="editItem(this,'.$dv->id.')"><i'
-                                    .' class="fa fa-edit"></i>&nbsp;Kê khai giá'
-                                    .'</button>';
-                    //$result['message'] .='</br>';
-                    $result['message'] .='<button type="button" data-target="#modal-pagia-create"
-                                        data-toggle="modal" class="btn btn-default btn-xs mbs"
-                                        onclick="getpag_temp(&apos;'.$dv->madichvu.'&apos;)"><i class="fa fa-edit"></i>&nbsp;Phương án giá';
-                    $result['message'] .='</button>';
-
-                    $result['message'] .= '</td >';
-                    $result['message'] .= '</tr >';
-           }
-            $result['message'] .= '</tbody>';
-            $result['status'] = 'success';
-        }
-
-        die(json_encode($result));
-    }
-
-    public function updategiadvct(Request $request){
-        $result = array(
-            'status' => 'fail',
-            'message' => 'error',
-        );
-        if(!Session::has('admin')) {
-            $result = array(
-                'status' => 'fail',
-                'message' => 'permission denied',
-            );
-            die(json_encode($result));
-        }
-        $inputs = $request->all();
-
-        if(isset($inputs['id'])){
-
-            $inputs['giakk'] = getDbl($inputs['giakk']);
-            $inputs['giakklk'] = getDbl($inputs['giakklk']);
-            $inputs['giahl'] = getDbl($inputs['giahl']);
-
-            $model = KkDvVtXkCt::findOrFail($inputs['id']);
-            $model->giakk = $inputs['giakk'];
-            $model->giakklk = $inputs['giakklk'];
-            $model->giahl = $inputs['giahl'];
-            $model->save();
-            //Trả lại kết quả
-            $result['message'] =  '<div class="row" id="noidung">';
-            $result['message'] .= '<div class="col-md-12">';
-            $result['message'] .='<table id="sample_3" class="table table-hover table-striped table-bordered table-advanced tablesorter">';
-            $result['message'] .= '<thead>';
-            $result['message'] .= '<tr>';
-            $result['message'] .= '<th style="text-align: center" width="2%">STT</th>';
-            $result['message'] .= '<th style="text-align: center">Loại xe</th>';
-            $result['message'] .= '<th style="text-align: center">Mô tả dịch vụ</th>';
-            $result['message'] .= '<th style="text-align: center">Mức giá liền kề</th>';
-            $result['message'] .= '<th style="text-align: center">Mức giá kê khai</th>';
-            $result['message'] .= '<th style="text-align: center">Mức giá hành lý</br> vượt quy định</th>';
-            $result['message'] .= '<th style="text-align: center" width="20%">Thao tác</th>';
-            $result['message'] .= '</tr>';
-            $result['message'] .= '</thead>';
-            $result['message'] .= '<tbody >';
-            $DMDV = KkDvVtXkCt::where('masokk', $model->masokk)->get();
-
-            foreach($DMDV as $key=>$dv) {
-                $result['message'] .= '<tr>';
-                $result['message'] .= '<td style="text-align: center">'.($key+1).'</td>';
-                $result['message'] .= '<td name = "loaixe">'.$dv->loaixe.'</td>';
-                $result['message'] .= '<td name = "tendichvu" class="active">'.$dv->tendichvu.'</td>';
-                $result['message'] .= '<td name = "giakklk" style="text-align: right">'.number_format($dv->giakklk).'</td>';
-                $result['message'] .= '<td name = "giakk" style="text-align: right">'.number_format($dv->giakk).'</td>';
-                $result['message'] .= '<td name = "giahl" style="text-align: right">'.number_format($dv->giahl).'</td>';
-                $result['message'] .= '<td>'
-                    .'<button type="button" data-target="#modal-create" '
-                    .'data-toggle="modal" class="btn btn-default btn-xs mbs"'
-                    .'onclick="editItem(this,'.$dv->id.')"><i'
-                    .' class="fa fa-edit"></i>&nbsp;Kê khai giá'
-                    .'</button>';
-                $result['message'] .='<button type="button" data-target="#modal-pagia-create"
-                                        data-toggle="modal" class="btn btn-default btn-xs mbs"
-                                        onclick="editpagia(&apos;'.$dv->madichvu.'&apos;,&apos;'.$dv->masokk.'&apos;)"><i class="fa fa-edit"></i>&nbsp;Phương án giá';
-                $result['message'] .='</button>';
-                $result['message'] .= '</td >';
-                $result['message'] .= '</tr >';
-            }
-            $result['message'] .= '</tbody>';
-            $result['status'] = 'success';
-        }
-
-        die(json_encode($result));
-    }
-
     public function search($masothue,$nam){
         if (Session::has('admin')) {
             $m_dv=DonViDvVt::select('masothue','tendonvi')->get();
@@ -1003,9 +854,6 @@ class KkDvVtXkController extends Controller
             $model->tendichvu = $inputs['tendichvu'];
             $model->qccl = $inputs['qccl'];
             $model->dvt = $inputs['dvt'];
-            $model->giakk = getDbl($inputs['giakk']);
-            $model->giakklk = getDbl($inputs['giakklk']);
-            $model->giahl = getDbl($inputs['giahl']);
             $model->save();
         }else{//Thêm mới dịch vụ
             $madichvu=getdate()[0];
@@ -1016,9 +864,6 @@ class KkDvVtXkController extends Controller
             $model->tendichvu = $inputs['tendichvu'];
             $model->qccl = $inputs['qccl'];
             $model->dvt = $inputs['dvt'];
-            $model->giakk =getDbl($inputs['giakk']);
-            $model->giakklk = getDbl($inputs['giakklk']);
-            $model->giahl = getDbl($inputs['giahl']);
             if($model->save()){
                 $m_pag=new PagDvVtXk_Temp();
                 $m_pag->masothue = $inputs['masothue'];
@@ -1053,9 +898,6 @@ class KkDvVtXkController extends Controller
             $model->tendichvu = $inputs['tendichvu'];
             $model->qccl = $inputs['qccl'];
             $model->dvt = $inputs['dvt'];
-            $model->giakk = getDbl($inputs['giakk']);
-            $model->giakklk = getDbl($inputs['giakklk']);
-            $model->giahl = getDbl($inputs['giahl']);
             $model->save();
         }else{//Thêm mới dịch vụ
             $madichvu=getdate()[0];
@@ -1066,9 +908,6 @@ class KkDvVtXkController extends Controller
             $model->tendichvu = $inputs['tendichvu'];
             $model->qccl = $inputs['qccl'];
             $model->dvt = $inputs['dvt'];
-            $model->giakk =getDbl($inputs['giakk']);
-            $model->giakklk = getDbl($inputs['giakklk']);
-            $model->giahl = getDbl($inputs['giahl']);
             if($model->save()){
                 $m_pag=new PagDvVtXk();
                 $m_pag->masothue = $inputs['masothue'];
@@ -1128,6 +967,66 @@ class KkDvVtXkController extends Controller
         die(json_encode($result));
     }
 
+    function kkgia(Request $request)
+    {
+        $result = array(
+            'status' => 'fail',
+            'message' => 'error',
+        );
+        if (!Session::has('admin')) {
+            $result = array(
+                'status' => 'fail',
+                'message' => 'permission denied',
+            );
+            die(json_encode($result));
+        }
+        $inputs = $request->all();
+        if (!isset($inputs['id'])) {
+            die(json_encode($result));
+        }
+
+        $model =  KkDvVtXkCt::findOrFail($inputs['id']);
+        $model->giakk = getDbl($inputs['giakk']);
+        $model->giakklk = getDbl($inputs['giakklk']);
+        $model->giahl = getDbl($inputs['giahl']);
+        $model->save();
+
+        $result['message'] =$this->return_html(KkDvVtXkCt::where('masokk', $model->masokk)->get());
+        $result['status'] = 'success';
+
+        die(json_encode($result));
+    }
+
+    function kkgia_temp(Request $request)
+    {
+        $result = array(
+            'status' => 'fail',
+            'message' => 'error',
+        );
+        if (!Session::has('admin')) {
+            $result = array(
+                'status' => 'fail',
+                'message' => 'permission denied',
+            );
+            die(json_encode($result));
+        }
+        $inputs = $request->all();
+        if (!isset($inputs['id'])) {
+            die(json_encode($result));
+        }
+
+        $model =  KkDvVtXkCtDf::findOrFail($inputs['id']);
+        $model->giakk = getDbl($inputs['giakk']);
+        $model->giakklk = getDbl($inputs['giakklk']);
+        $model->giahl = getDbl($inputs['giahl']);
+        $model->save();
+
+        $result['message'] = $this->return_html(KkDvVtXkCtDf::where('masothue', $inputs['masothue'])->get());
+        $result['status'] = 'success';
+
+        die(json_encode($result));
+    }
+
     function return_html($giadv){
         //Trả lại kết quả
         $message =  '<div class="row" id="noidung">';
@@ -1138,10 +1037,10 @@ class KkDvVtXkController extends Controller
         $message .= '<th style="text-align: center" width="2%">STT</th>';
         $message .= '<th style="text-align: center">Loại xe</th>';
         $message .= '<th style="text-align: center">Mô tả dịch vụ</th>';
-        $message .= '<th style="text-align: center">Mức giá liền kề</th>';
-        $message .= '<th style="text-align: center">Mức giá kê khai</th>';
-        $message .= '<th style="text-align: center">Mức giá hành lý</br> vượt quy định</th>';
-        $message .= '<th style="text-align: center" width="20%">Thao tác</th>';
+        $message .= '<th style="text-align: center">Giá liền kề</th>';
+        $message .= '<th style="text-align: center">Giá kê khai</th>';
+        $message .= '<th style="text-align: center">Giá hành lý</br>vượt quy định</th>';
+        $message .= '<th style="text-align: center" width="25%">Thao tác</th>';
         $message .= '</tr>';
         $message .= '</thead>';
         $message .= '<tbody >';
@@ -1157,20 +1056,24 @@ class KkDvVtXkController extends Controller
             $message .= '<td>'
                 .'<button type="button" data-target="#modal-create" '
                 .'data-toggle="modal" class="btn btn-default btn-xs mbs"'
-                .'onclick="editItem('.$dv->id.')"><i'
+                .'onclick="get_kkgia('.$dv->id.')"><i'
                 .' class="fa fa-edit"></i>&nbsp;Kê khai giá'
                 .'</button>';
-            $message .= '<button type="button" data-target="#modal-delete" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="getid('.$dv->id.');" ><i class="fa fa-trash-o"></i>&nbsp;Xóa
-            </button>';
             $message .='<button type="button" data-target="#modal-pagia-create"
+                            data-toggle="modal" class="btn btn-default btn-xs mbs"
+                            onclick="editpagia(&apos;'.$dv->madichvu.'&apos;)"><i class="fa fa-edit"></i>&nbsp;Phương án giá';
+            $message .='<button type="button" data-target="#modal-dichvu"
                                         data-toggle="modal" class="btn btn-default btn-xs mbs"
-                                        onclick="editpagia(&apos;'.$dv->madichvu.'&apos;,&apos;'.$dv->masokk.'&apos;)"><i class="fa fa-edit"></i>&nbsp;Phương án giá';
+                                        onclick="get_dichvu('.$dv->id.')"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa thông tin
+                        </button>';
+            $message .= '<button type="button" data-target="#modal-delete" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="getid('.$dv->id.');" ><i class="fa fa-trash-o"></i>&nbsp;Xóa
+                    </button>';
+
             $message .='</button>';
             $message .= '</td >';
             $message .= '</tr >';
         }
         $message .= '</tbody>';
-        
         return $message;
     }
 }

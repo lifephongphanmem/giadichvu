@@ -48,16 +48,15 @@
         <button type="button" data-target="#modal-create" data-toggle="modal" class="btn btn-default" onclick="clearForm()"><i class="fa fa-plus"></i>&nbsp;Kê khai bổ dịch vụ</button>
     </div>
 </div-->
-<h4 class="form-section" style="color: #0000ff">Thông tin chi tiết hồ sơ</h4>
-
 <div class="row">
-    <div class="col-md-12">
-        <div class="form-group">
-            <button type="button" data-target="#modal-create" data-toggle="modal" class="btn btn-success btn-xs" onclick="clearForm()"><i class="fa fa-plus"></i>&nbsp;Kê khai bổ xung dịch vụ</button>
-            &nbsp;
-        </div>
+    <div class="col-md-6">
+        <h4 class="form-section" style="color: #0000ff">Thông tin chi tiết hồ sơ</h4>
+    </div>
+    <div class="col-md-6 text-right">
+        <button type="button" data-target="#modal-dichvu" data-toggle="modal" class="btn btn-default" onclick="clearForm()"><i class="fa fa-plus"></i>&nbsp;Kê khai bổ dịch vụ</button>
     </div>
 </div>
+
 @yield('content-dv')
 
 <div class="row">

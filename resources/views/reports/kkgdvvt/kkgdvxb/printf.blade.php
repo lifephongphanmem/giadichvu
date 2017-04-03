@@ -173,6 +173,7 @@
 <p>5. Các yếu tố chi phí cấu thành giá (đối với kê khai lần đầu); phân tích nguyên nhân, nêu rõ biến động của các yếu tố hình thành giá tác động làm tăng hoặc giảm giá (đối với kê khai lại).</p>
 <p>{!! nl2br(e($modelkk->ghichu)) !!}</p>
 <p>6. Các trường hợp ưu đãi, giảm giá; điều kiện áp dụng giá (nếu có).</p>
+<p>{!! nl2br(e($modelkk->uudai)) !!}</p>
 <table width="96%" border="0" cellspacing="0" cellpadding="8" style="margin:20px auto; text-align: center;">
     <tr>
         <td style="text-align: left;" width="60%">
