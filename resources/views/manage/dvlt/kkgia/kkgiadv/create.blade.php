@@ -488,7 +488,7 @@
                             <div class="form-group"><label for="selGender" class="control-label">Thông tin kê khai</label>
                                 <div>
                                         <textarea id="ghichu" class="form-control" name="ghichu" cols="30" rows="5"
-                                                  placeholder="-Phụ thu, Thuế VAT"></textarea>
+                                                  placeholder="-Phụ thu, Thuế VAT">{{isset($modelcb) ? $modelcb->ghichu : '' }}</textarea>
                                 </div>
                             </div>
                         </div>
