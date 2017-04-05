@@ -41,6 +41,7 @@ class HomeController extends Controller
                 $setting = $model->setting;
 
                 return view('system.general.setting')
+                    ->with('model',$model)
                     ->with('setting',json_decode($setting))
                     ->with('pageTitle','Cấu hình chức năng chương trình');
             }else{
@@ -61,6 +62,7 @@ class HomeController extends Controller
 
             $update['roles'] = isset($update['roles']) ? $update['roles'] : null;
             $model->setting = json_encode($update['roles']);
+            $model->urlwebcb = $update['urlwebcb'];
             $model->save();
 
             return redirect('cau_hinh_he_thong');

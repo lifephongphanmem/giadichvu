@@ -22,7 +22,8 @@ class GeneralConfigs extends Model
         'sodvvt',
         'ttlhlt',
         'ttlhlt',
-        'setting'
+        'setting',
+        'urlwebcb'
 
     ];
 }

@@ -28,7 +28,8 @@ class CreateGeneralConfigsTable extends Migration
             $table->text('ttlhvt')->nullable();
             $table->text('sodvlt')->nullable();
             $table->text('sodvvt')->nullable();
-            $table->text('setting');
+            $table->text('setting')->nullale();;
+            $table->text('urlwebcb')->nullale();
             $table->timestamps();
         });
     }

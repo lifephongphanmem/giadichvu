@@ -30,9 +30,19 @@
     </h3>
     <!-- END PAGE HEADER-->
     <div class="row">
+
         <div class="col-md-12">
+
             <!-- BEGIN EXAMPLE TABLE PORTLET-->
             {!! Form::open(['url' => 'setting'])!!}
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="control-label">Url trang công bố<span class="require">*</span></label>
+                        {!!Form::text('urlwebcb', $model->urlwebcb, array('id' => 'urlwebcb','class' => 'form-control','autofocus'))!!}
+                    </div>
+                </div>
+            </div>
             <div class="portlet box blue">
 
                 <div class="portlet-body">
