@@ -147,18 +147,19 @@ class UsersController extends Controller
     {
         if (Session::has('admin')) {
             if (session('admin')->level == 'T' || session('admin')->level == 'H') {
+
                 if ($pl == 'quan_ly')
-                    $level = 'T';
+                    $level = array('T','H');
                 elseif ($pl == 'dich_vu_luu_tru')
-                    $level = 'DVLT';
+                    $level = array('DVLT');
                 elseif ($pl == 'dich_vu_van_tai')
-                    $level = 'DVVT';
+                    $level = array('DVVT');
                 if (session('admin')->sadmin == 'ssa') {
-                    $model = Users::where('level', $level)
+                    $model = Users::wherein('level', $level)
                         ->orderBy('id')
                         ->get();
-                }elseif(session('admin')->sadmin == 'savt' && $pl == 'dich_vu_van_tai' || session('admin')->sadmin == 'satc' && $pl == 'dich_vu_luu_tru') {
-                    $model = Users::where('level', $level)
+                }elseif((session('admin')->sadmin == 'savt' && $pl == 'dich_vu_van_tai') || (session('admin')->sadmin == 'satc' && $pl == 'dich_vu_luu_tru')) {
+                    $model = Users::wherein('level', $level)
                         ->where('cqcq', session('admin')->cqcq)
                         ->orderBy('id')
                         ->get();
@@ -340,7 +341,7 @@ class UsersController extends Controller
                 $model->permission = json_encode($update['roles']);
                 $model->save();
 
-                if ($model->level == 'T')
+                if ($model->level == 'T' || $model->level == 'H')
                     $pl = 'quan_ly';
                 elseif ($model->level == 'DVLT')
                     $pl = 'dich_vu_luu_tru';

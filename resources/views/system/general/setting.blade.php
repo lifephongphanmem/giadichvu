@@ -46,7 +46,6 @@
             <div class="portlet box blue">
 
                 <div class="portlet-body">
-                    <div class="portlet-body">
                         <div class="table-toolbar">
                         </div>
                         <div class="row">

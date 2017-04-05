@@ -510,7 +510,7 @@
             </div>
             <div style="text-align: center">
             <?php
-            if($model->level == 'T')
+            if($model->level == 'T'||$model->level == 'H')
                 $pl = 'quan_ly';
             elseif($model->level == 'DVLT')
                 $pl= 'dich_vu_luu_tru';

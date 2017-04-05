@@ -197,7 +197,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     $model = \App\GeneralConfigs::first();
                     $url = $model->urlwebcb;
                 ?>
-                @if($url != '' || $url != 'null')
+                @if($url != '' && $url != 'null')
                 <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
                     <a href="{{$url}}" target="_blank" class="dropdown-toggle">
                         <i class="fa fa-cloud"></i>

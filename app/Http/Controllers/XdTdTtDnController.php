@@ -15,7 +15,7 @@ class XdTdTtDnController extends Controller
 {
     public function index($pl){
         if (Session::has('admin')) {
-            if(session('admin')->level == 'T' || session('admin')=='H') {
+            if(session('admin')->level == 'T' || session('admin')->level=='H') {
                 if ($pl == 'dich_vu_luu_tru') {
                     if (session('admin')->sadmin == 'ssa') {
                         $model = TtDn::where('pl', 'DVLT')
