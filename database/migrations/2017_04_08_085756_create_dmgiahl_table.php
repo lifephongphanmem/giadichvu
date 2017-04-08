@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateKkdvvtxkctTable extends Migration
+class CreateDmgiahlTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,22 +13,14 @@ class CreateKkdvvtxkctTable extends Migration
      */
     public function up()
     {
-        Schema::create('kkdvvtxkct', function (Blueprint $table) {
+        Schema::create('dmgiahl', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('masokk')->nullable();
+            $table->string('masothue')->nullable();
             $table->string('madichvu')->nullable();
-            $table->string('loaixe')->nullable();
-            $table->string('diemdau')->nullable();
-            $table->string('diemcuoi')->nullable();
             $table->string('tendichvu')->nullable();
-            $table->double('sokm')->nullable();//mới
             $table->string('qccl')->nullable();
             $table->string('dvt')->nullable();
-            $table->double('giakk')->nullable();
-            $table->double('giakklk')->nullable();
-            $table->double('giahl')->nullable();
             $table->string('ghichu')->nullable();
-            $table->string('thuevat')->nullable();
             $table->timestamps();
         });
     }
@@ -39,6 +32,6 @@ class CreateKkdvvtxkctTable extends Migration
      */
     public function down()
     {
-        Schema::drop('kkdvvtxkct');
+        Schema::dropIfExists('dmgiahl');
     }
 }

@@ -28,7 +28,7 @@
 
 @section('content')
     <h3 class="page-title">
-        Vận tải hành khách bằng xe ôtô<small> theo tuyến cố định</small>
+        Vận tải hành khách bằng xe ôtô<small> giá hàng lý vượt quy định</small>
     </h3>
     <input type="hidden" name="masothue" id="masothue" value="{{$masothue}}">
     <div class="row">
@@ -48,11 +48,7 @@
                             <thead>
                             <tr>
                                 <th style="text-align: center">STT</th>
-                                <th style="text-align: center">Loại xe</th>
-                                <!--th style="text-align: center">Điểm xuất phát</th>
-                                <th style="text-align: center">Điểm đến</th-->
                                 <th style="text-align: center">Mô tả dịch vụ</th>
-                                <th style="text-align: center">Số km</th>
                                 <th style="text-align: center">Quy cách chất lượng</th>
                                 <th style="text-align: center">Đơn vị tính</th>
                                 <th style="text-align: center">Thao tác</th>
@@ -62,13 +58,9 @@
                             @foreach($model as $key=>$dv)
                                 <tr class="odd gradeX">
                                     <td style="text-align: center">{{$key+1}}</td>
-                                    <td>{{$dv->loaixe}}</td>
-                                    <!--td name="diemdau">{{$dv->diemdau}}</td>
-                                    <td name="diemcuoi">{{$dv->diemcuoi}}</td-->
-                                    <td class="active">{{$dv->tendichvu}}</td>
-                                    <td>{{$dv->sokm}}</td>
-                                    <td>{{$dv->qccl}}</td>
-                                    <td style="text-align: center">{{$dv->dvt}}</td>
+                                    <td name="tendichvu" class="active">{{$dv->tendichvu}}</td>
+                                    <td name="qccl">{{$dv->qccl}}</td>
+                                    <td name="dvt" style="text-align: center">{{$dv->dvt}}</td>
                                     <td>
                                         @if($per['edit'])
                                             <button type="button" class="btn btn-default btn-xs mbs" onclick="editDVXK({{$dv->id}})"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</button>
@@ -97,10 +89,10 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Thông tin dịch vụ vận tải xe khách</h4>
+                    <h4 class="modal-title">Thông tin giá hàng lý</h4>
                 </div>
                 <div class="modal-body">
-                    @include('manage.dvvt.template.dmdvxk')
+                    @include('manage.dvvt.template.dmdv')
                 </div>
                 <div class="modal-footer">
                     <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>
@@ -118,7 +110,6 @@
             var message='';
             var tendichvu= $('#tendichvu').val();
             var dvt= $('#dvt').val();
-            var loaixe= $('#loaixe').val();
 
             if(tendichvu==''){
                 valid=false;
@@ -130,25 +121,19 @@
                 message +='Đơn vị tính không được bỏ trống \n';
             }
 
-            if(loaixe==''){
-                valid=false;
-                message +='Loại xe không được bỏ trống \n';
-            }
 
             //return false;
             if(valid){
                 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                 $.ajax({
-                    url: '{{$url}}'+'danh_muc/add',
+                    url: '{{$url}}'+'danh_muc_hl/add',
                     type: 'GET',
                     data: {
                         _token: CSRF_TOKEN,
                         masothue: $('#masothue').val(),
                         tendichvu: tendichvu,
                         qccl: $('#qccl').val(),
-                        sokm: $('#sokm').val(),
                         dvt: dvt,
-                        loaixe: loaixe,
                         ghichu: $('#ghichu').val(),
                         id: $('#iddv').val()
                     },
@@ -174,7 +159,7 @@
         function editDVXK(id){
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             $.ajax({
-                url: '{{$url}}'+'danh_muc/get',
+                url: '{{$url}}'+'danh_muc_hl/get',
                 type: 'GET',
                 data: {
                     _token: CSRF_TOKEN,
@@ -182,12 +167,10 @@
                 },
                 dataType: 'JSON',
                 success: function (data) {
-                    $('#loaixe').val(data.loaixe);
                     $('#tendichvu').val(data.tendichvu);
                     $('#qccl').val(data.qccl);
                     $('#dvt').val(data.dvt);
                     $('#ghichu').val(data.ghichu);
-                    $('#sokm').val(data.sokm);
                 },
                 error: function (message) {
                     toastr.error(message, 'Lỗi!');
@@ -199,17 +182,41 @@
 
         function addDVXK(){
             $('#iddv').attr('value',0);
-            $('#loaixe').attr('value','');
             $('#tendichvu').attr('value','');
             $('#qccl').attr('value','');
-            $('#sokm').attr('value',0);
             $('#dvt').attr('value','');
             $('#ghichu').attr('value','');
             $('#dvxk-modal-confirm').modal('show');
         }
 
     </script>
-    @include('manage.dvvt.template.modal-delete-dm')
+    <div id="del-modal-confirm" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade">
+        {!! Form::open(['url'=>$url.'danh_muc_hl/del','id' => 'frm_del','method'=>'GET'])!!}
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header modal-header-primary">
+                    <button type="button" data-dismiss="modal" aria-hidden="true"
+                            class="close">&times;</button>
+                    <h4 id="modal-header-primary-label" class="modal-title">Đồng ý xoá?</h4>
+                    <input type="hidden" name="iddel" id="iddel">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>
+                    <button type="submit" data-dismiss="modal" class="btn btn-primary" onclick="clickdel()">Đồng ý</button>
+                </div>
+            </div>
+        </div>
+        {!! Form::close() !!}
+    </div>
+    <script>
+        function confirmDel(id) {
+            document.getElementById("iddel").value=id;
+        }
+        function clickdel(){
+            $('#frm_del').submit();
+        }
+    </script>
 @stop
 
 

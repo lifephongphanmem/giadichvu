@@ -1,5 +1,5 @@
 <div id="del-modal-confirm" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade">
-    {!! Form::open(['url'=>$url.'deldm','id' => 'frm_del','method'=>'GET'])!!}
+    {!! Form::open(['url'=>$url.'danh_muc/del','id' => 'frm_del','method'=>'GET'])!!}
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header modal-header-primary">

@@ -399,11 +399,15 @@
                     <td>{{$pag->sanluong>0?number_format(($cpc+$cptt)/$pag->sanluong):number_format($cpc+$cptt)}}</td>
                     <td></td>
                 </tr>
+                <?php
+                    $giaitrinh=$pag->giaitrinh
+                ?>
             @endif
         @endforeach
         <!-- hết duyệt -->
     </table>
     <p><b>II . GIẢI TRÌNH CHI TIẾT CÁCH TÍNH CÁC KHOẢN CHI PHÍ</b> (từ mục 1 đến mục 8 bảng tổng hợp tính giá)</p>
+    <p>{!! nl2br(e($giaitrinh)) !!}</p>
     <p style="page-break-before: always">
         <!-- Hết phần 3 -->
 @endforeach

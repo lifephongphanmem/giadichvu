@@ -34,10 +34,18 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12">
         <div class="form-group">
             <label class="form-control-label"><b>Quy cách chất lượng dịch vụ</b></label>
             {!!Form::textarea('qccl', null, array('id' => 'qccl','class' => 'form-control','rows'=>'3'))!!}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label class="form-control-label"><b>Số km</b></label>
+            {!!Form::text('sokm', null, array('id' => 'sokm','class' => 'form-control'))!!}
         </div>
     </div>
     <div class="col-md-6">

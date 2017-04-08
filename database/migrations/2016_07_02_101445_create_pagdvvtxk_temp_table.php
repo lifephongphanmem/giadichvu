@@ -26,6 +26,7 @@ class CreatePagdvvtxkTempTable extends Migration
             $table->double('cptaichinh')->default(0);
             $table->double('cpbanhang')->default(0);
             $table->double('cpquanly')->default(0);
+            $table->text('giaitrinh')->nullable();
             $table->timestamps();
         });
     }

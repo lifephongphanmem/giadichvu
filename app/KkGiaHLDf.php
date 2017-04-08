@@ -4,25 +4,20 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class KkDvVtXkCtDf extends Model
+class KkGiaHLDf extends Model
 {
-    protected $table = 'kkdvvtxkctdf';
+    protected $table = 'kkgiahldf';
     protected $fillable = [
         'id',
         'masothue',
         'masokk',
-        'diemdau',
-        'diemcuoi',
         'madichvu',
-        'loaixe',
         'tendichvu',
         'qccl',
         'dvt',
-        'giakk',
-        'giakklk',
+        'giahllk',
         'giahl',
         'ghichu',
-        'thuevat',
-        'sokm'
+        'thuevat'
     ];
 }

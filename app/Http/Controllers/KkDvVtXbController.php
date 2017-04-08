@@ -249,7 +249,7 @@ class KkDvVtXbController extends Controller
                 ->get()->toarray();
             KkDvVtXbCt::insert($m_kkdf);
             //Phương án giá
-            $m_pag=PagDvVtXb_Temp::select('masothue','masokk','madichvu','sanluong','cpnguyenlieutt','cpcongnhantt','cpkhauhaott','cpsanxuatdt','cpsanxuatc','cptaichinh','cpbanhang','cpquanly',DB::raw("'".$makk."' as masokk"))
+            $m_pag=PagDvVtXb_Temp::select('masothue','masokk','madichvu','giaitrinh','sanluong','cpnguyenlieutt','cpcongnhantt','cpkhauhaott','cpsanxuatdt','cpsanxuatc','cptaichinh','cpbanhang','cpquanly',DB::raw("'".$makk."' as masokk"))
                 ->where('masothue', $insert['masothue'])
                 ->get()->toarray();
             PagDvVtXb::insert($m_pag);
@@ -649,6 +649,12 @@ class KkDvVtXbController extends Controller
         $result['message'] .= '<div style="padding-bottom: 2px" class="col-md-6">';
         $result['message'] .= '<input style="text-align: right" type="text" id="cpquanly" name="cpquanly" value="'.$model->cpquanly.'" class="form-control" data-mask="fdecimal">';
         $result['message'] .= '</div>';
+
+        $result['message'] .= '<label class="col-md-6 control-label">Giải trình chi tiết</label>';
+        $result['message'] .= '<div style="padding-bottom: 2px" class="col-md-6">';
+        $result['message'] .= ' <textarea rows="4" id="giaitrinh" name="giaitrinh" class="form-control">'.$model->giaitrinh.'</textarea>';
+        $result['message'] .= '</div>';
+
         $result['message'] .= '</div>';
         $result['message'] .= '<input type="hidden" id="idpag" name="idpag" value="'.$model->id.'"/>';
         $result['message'] .= '</div>';
@@ -682,6 +688,7 @@ class KkDvVtXbController extends Controller
         $model->cptaichinh=getDbl($inputs['cptaichinh']);
         $model->cpbanhang=getDbl($inputs['cpbanhang']);
         $model->cpquanly=getDbl($inputs['cpquanly']);
+        $model->giaitrinh=$inputs['giaitrinh'];
         $model->save();
 
         $result['message']= 'Cập nhật thành công.';
@@ -756,6 +763,12 @@ class KkDvVtXbController extends Controller
         $result['message'] .= '<div style="padding-bottom: 2px" class="col-md-6">';
         $result['message'] .= ' <input style="text-align: right" type="text" id="cpquanly" name="cpquanly" value="'.$model->cpquanly.'" class="form-control" data-mask="fdecimal">';
         $result['message'] .= '</div>';
+
+        $result['message'] .= '<label class="col-md-6 control-label">Giải trình chi tiết</label>';
+        $result['message'] .= '<div style="padding-bottom: 2px" class="col-md-6">';
+        $result['message'] .= ' <textarea rows="4" id="giaitrinh" name="giaitrinh" class="form-control">'.$model->giaitrinh.'</textarea>';
+        $result['message'] .= '</div>';
+
         $result['message'] .= '</div>';
         $result['message'] .= '<input type="hidden" id="idpag" name="idpag" value="'.$model->id.'"/>';
         $result['message'] .= '</div>';
@@ -789,6 +802,7 @@ class KkDvVtXbController extends Controller
         $model->cptaichinh=getDbl($inputs['cptaichinh']);
         $model->cpbanhang=getDbl($inputs['cpbanhang']);
         $model->cpquanly=getDbl($inputs['cpquanly']);
+        $model->giaitrinh=$inputs['giaitrinh'];
         $model->save();
 
         $result['message']= 'Cập nhật thành công.';

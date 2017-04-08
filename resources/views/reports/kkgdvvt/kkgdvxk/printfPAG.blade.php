@@ -281,6 +281,7 @@
                 <td></td>
             </tr>
         @endif
+
         @foreach($modelpag as $pag)
             @if($ctkk->madichvu==$pag->madichvu)
                 <tr style="font-weight: bold">
@@ -297,84 +298,84 @@
                 <tr style="font-weight: bold">
                     <td>B</td>
                     <td>Chi phí sản xuất, kinh doanh</td>
-                    <td></td>
+                    <td>Đồng</td>
                     <td>{{number_format($cptt+$cpc)}}</td>
                     <td></td>
                 </tr>
                 <tr style="font-weight: bold">
                     <td>I</td>
                     <td>Chi phí trực tiếp:</td>
-                    <td></td>
+                    <td>Đồng</td>
                     <td>{{number_format($cptt)}}</td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>1</td>
                     <td>Chi phí nguyên liệu, vật liệu,  công cụ, dụng cụ, nhiên liệu, năng lượng trực tiếp</td>
-                    <td></td>
+                    <td>Đồng</td>
                     <td>{{number_format($pag->cpnguyenlieutt)}}</td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>2</td>
                     <td>Chi phí nhân công trực tiếp</td>
-                    <td></td>
+                    <td>Đồng</td>
                     <td>{{number_format($pag->cpcongnhantt)}}</td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>3</td>
                     <td>Chi phí khấu hao máy móc thiết bị trực tiếp (trường hợp được trích khấu hao)</td>
-                    <td></td>
+                    <td>Đồng</td>
                     <td>{{number_format($pag->cpkhauhaott)}}</td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>4</td>
                     <td>Chi phí sản xuất, kinh doanh (chưa tính ở mục 1,2,3) theo đặc thù </td>
-                    <td></td>
+                    <td>Đồng</td>
                     <td>{{number_format($pag->cpsanxuatdt)}}</td>
                     <td></td>
                 </tr>
                 <tr style="font-weight: bold">
                     <td>II</td>
                     <td>Chi phí chung</td>
-                    <td></td>
+                    <td>Đồng</td>
                     <td>{{number_format($cpc)}}</td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>5</td>
                     <td>Chi phí sản xuất chung </td>
-                    <td></td>
-                    <td>{{number_format($cpc=$pag->cpsanxuatc)}}</td>
+                    <td>Đồng</td>
+                    <td>{{number_format($pag->cpsanxuatc)}}</td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>6</td>
                     <td>Chi phí tài chính (nếu có) </td>
-                    <td></td>
+                    <td>Đồng</td>
                     <td>{{number_format($pag->cptaichinh)}}</td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>7</td>
                     <td>Chi phí bán hàng </td>
-                    <td></td>
+                    <td>Đồng</td>
                     <td>{{number_format($pag->cpbanhang)}}</td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>8</td>
                     <td>Chi phí quản lý  </td>
-                    <td></td>
+                    <td>Đồng</td>
                     <td>{{number_format($pag->cpquanly)}}</td>
                     <td></td>
                 </tr>
                 <tr style="font-weight: bold">
                     <td></td>
                     <td>Tổng chi phí sản xuất, kinh doanh (TC)</td>
-                    <td></td>
+                    <td>Đồng</td>
                     <td>{{number_format($cpc+$cptt)}}</td>
                     <td></td>
                 </tr>
@@ -388,22 +389,27 @@
                 <tr style="font-weight: bold">
                     <td>D</td>
                     <td>Giá thành toàn bộ (TC-CP)</td>
-                    <td></td>
+                    <td>Đồng</td>
                     <td>{{number_format($cpc+$cptt)}}</td>
                     <td></td>
                 </tr>
                 <tr style="font-weight: bold">
                     <td>Đ</td>
                     <td>Giá thành toàn bộ 01 (một) đơn vị sản phẩm, dịch vụ (TC-CP)/Q</td>
-                    <td></td>
+                    <td>Đồng</td>
                     <td>{{$pag->sanluong>0?number_format(($cpc+$cptt)/$pag->sanluong):number_format($cpc+$cptt)}}</td>
                     <td></td>
                 </tr>
+                <?php
+                    $giaitrinh=$pag->giaitrinh
+                ?>
             @endif
-        @endforeach
+            @endforeach
         <!-- hết duyệt -->
     </table>
     <p><b>II . GIẢI TRÌNH CHI TIẾT CÁCH TÍNH CÁC KHOẢN CHI PHÍ</b> (từ mục 1 đến mục 8 bảng tổng hợp tính giá)</p>
+    <p>{!! nl2br(e($giaitrinh)) !!}</p>
+
     <p style="page-break-before: always">
         <!-- Hết phần 3 -->
 @endforeach

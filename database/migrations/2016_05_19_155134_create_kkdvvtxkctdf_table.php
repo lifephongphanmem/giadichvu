@@ -21,6 +21,7 @@ class CreateKkdvvtxkctdfTable extends Migration
             $table->string('diemdau')->nullable();
             $table->string('diemcuoi')->nullable();
             $table->string('tendichvu')->nullable();
+            $table->double('sokm')->nullable();//mới
             $table->string('qccl')->nullable();
             $table->string('dvt')->nullable();
             $table->double('giakk')->nullable();

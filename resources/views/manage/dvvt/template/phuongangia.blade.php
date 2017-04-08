@@ -46,6 +46,7 @@
                 cptaichinh:$('#cptaichinh').val(),
                 cpbanhang:$('#cpbanhang').val(),
                 cpquanly:$('#cpquanly').val(),
+                giaitrinh:$('#giaitrinh').val(),
                 id: $('#idpag').val()
             },
             dataType: 'JSON',

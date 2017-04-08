@@ -347,6 +347,13 @@ Route::group(['prefix'=>'dich_vu_van_tai'],function(){
             Route::get('get','DmDvVtXkController@get');
             Route::get('del','DmDvVtXkController@destroy');
         });
+        Route::group(['prefix'=>'danh_muc_hl'],function(){
+            Route::get('/ma_so={masothue}','DmGiaHLController@show');
+            Route::get('','DmGiaHLController@index');
+            Route::get('add','DmGiaHLController@add');
+            Route::get('get','DmGiaHLController@get');
+            Route::get('del','DmGiaHLController@destroy');
+        });
 
         Route::group(['prefix'=>'ke_khai'],function(){
             Route::get('/nam={nam}','KkDvVtXkController@index');
@@ -378,6 +385,15 @@ Route::group(['prefix'=>'dich_vu_van_tai'],function(){
             Route::get('updatepag_temp', 'KkDvVtXkController@updatepag_temp');
             Route::get('getpag', 'KkDvVtXkController@getpag');
             Route::get('updatepag', 'KkDvVtXkController@updatepag');
+
+            Route::get('update_giahl', 'KkDvVtXkController@update_giahl');
+            Route::get('del_giahl', 'KkDvVtXkController@del_giahl');
+            Route::get('get_giahl', 'KkDvVtXkController@get_giahl');
+
+            Route::get('update_giahl_temp', 'KkDvVtXkController@update_giahl_temp');
+            Route::get('del_giahl_temp', 'KkDvVtXkController@del_giahl_temp');
+            Route::get('get_giahl_temp', 'KkDvVtXkController@get_giahl_temp');
+
         });
 
         //Xét duyệt dịch vụ xe khách - giao diện sở -

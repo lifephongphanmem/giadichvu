@@ -154,6 +154,39 @@
         </tr>
     @endforeach
 </table>
+@if(count($model_hl)>0)
+    <p>   Giá cước vận chuyển hành lý :</p>
+    <table cellspacing="0" cellpadding="0" border="1" style="margin: 20px auto; border-collapse: collapse;">
+        <tr>
+            <th>Tên dịch vụ</th>
+            <th>Quy cách, chất lượng</th>
+            <th>Đơn vị<br>tính</th>
+            <th>Mức giá kê khai<br>hiện hành</th>
+            <th>Mức giá kê khai<br> mới hoặc kê<br>khai lại</th>
+            <th>% tăng hoặc<br>giảm giá</th>
+            <th>Ghi chú</th>
+        </tr>
+        @foreach($model_hl as $ctkk)
+            <tr>
+                <th style="text-align: left; font-weight: normal">{{$ctkk->tendichvu}}</th>
+                <th style="text-align: left; font-weight: normal">{{$ctkk->qccl}}</th>
+                <th style="text-align: left; font-weight: normal">{{$ctkk->dvt}}</th>
+                <th style="text-align: right; font-weight: normal">{{number_format($ctkk->giahllk)}}</th>
+                <th style="text-align: right; font-weight: normal">{{number_format($ctkk->giahl)}}</th>
+                <th style="text-align: center; font-weight: normal">
+                    <?php
+                    if($ctkk->giahllk>0)
+                        if($ctkk->giahllk>$ctkk->giahl)
+                            echo '-'.round(($ctkk->giahllk-$ctkk->giahl)/$ctkk->giahllk * 100, 2) . '%';
+                        else
+                            echo round(($ctkk->giahl-$ctkk->giahllk)/$ctkk->giahl*100,2) . '%';
+                    ?>
+                </th>
+                <th style="text-align: left; font-weight: normal">{!! nl2br(e($ctkk->ghichu)) !!}</th>
+            </tr>
+        @endforeach
+    </table>
+@endif
 <p>5. Các yếu tố chi phí cấu thành giá (đối với kê khai lần đầu); phân tích nguyên nhân, nêu rõ biến động của các yếu tố hình thành giá tác động làm tăng hoặc giảm giá (đối với kê khai lại).</p>
 <p>{!! nl2br(e($modelkk->ghichu)) !!}</p>
 <p>6. Các trường hợp ưu đãi, giảm giá; điều kiện áp dụng giá (nếu có).</p>

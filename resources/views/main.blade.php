@@ -346,6 +346,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                                 <ul class="sub-menu">
                                                     @if(can('dvvtxk','index'))
                                                         <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_khach/danh_muc')}}">Danh mục dịch vụ</a></li>
+                                                        <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_khach/danh_muc_hl')}}">Danh mục giá hàng lý</a></li>
                                                     @endif
                                                     @if(can('kkdvvtxk','create'))
                                                         <li><a href="{{url('/dich_vu_van_tai/dich_vu_xe_khach/ke_khai/'.'nam='.date('Y'))}}">Kê khai giá dịch vụ</a></li>
