@@ -958,6 +958,7 @@ class KkDvVtXkController extends Controller
             $model->tendichvu = $inputs['tendichvu'];
             $model->qccl = $inputs['qccl'];
             $model->dvt = $inputs['dvt'];
+            $model->ghichu = $inputs['ghichu'];
             $model->save();
         }else{//Thêm mới dịch vụ
             $madichvu=getdate()[0];
@@ -968,6 +969,7 @@ class KkDvVtXkController extends Controller
             $model->tendichvu = $inputs['tendichvu'];
             $model->qccl = $inputs['qccl'];
             $model->dvt = $inputs['dvt'];
+            $model->ghichu = $inputs['ghichu'];
             if($model->save()){
                 $m_pag=new PagDvVtXk_Temp();
                 $m_pag->masothue = $inputs['masothue'];
@@ -1002,6 +1004,7 @@ class KkDvVtXkController extends Controller
             $model->tendichvu = $inputs['tendichvu'];
             $model->qccl = $inputs['qccl'];
             $model->dvt = $inputs['dvt'];
+            $model->ghichu = $inputs['ghichu'];
             $model->save();
         }else{//Thêm mới dịch vụ
             $madichvu=getdate()[0];
@@ -1012,6 +1015,7 @@ class KkDvVtXkController extends Controller
             $model->tendichvu = $inputs['tendichvu'];
             $model->qccl = $inputs['qccl'];
             $model->dvt = $inputs['dvt'];
+            $model->ghichu = $inputs['ghichu'];
             if($model->save()){
                 $m_pag=new PagDvVtXk();
                 $m_pag->masothue = $inputs['masothue'];

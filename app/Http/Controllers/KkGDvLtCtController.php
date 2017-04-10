@@ -46,7 +46,7 @@ class KkGDvLtCtController extends Controller
             $result['message'] .= '<tr>';
             $result['message'] .= '<th width="2%" style="text-align: center">STT</th>';
             $result['message'] .= '<th style="text-align: center">Loại phòng- Quy cách chất lượng</th>';
-            $result['message'] .= '<th style="text-align: center">Số hiệu phòng</th>';
+            $result['message'] .= '<th width="30%" style="text-align: center">Số hiệu phòng</th>';
             $result['message'] .= '<th style="text-align: center">Ghi chú</th>';
             $result['message'] .= '<th style="text-align: center">Mức giá<br>liền kề</th>';
             $result['message'] .= '<th style="text-align: center">Mức giá<br>kê khai</th>';
@@ -159,7 +159,7 @@ class KkGDvLtCtController extends Controller
             $result['message'] .= '<tr>';
             $result['message'] .= '<th width="2%" style="text-align: center">STT</th>';
             $result['message'] .= '<th style="text-align: center">Loại phòng- Quy cách chất lượng</th>';
-            $result['message'] .= '<th style="text-align: center">Số hiệu phòng</th>';
+            $result['message'] .= '<th width="30%" style="text-align: center">Số hiệu phòng</th>';
             $result['message'] .= '<th style="text-align: center">Ghi chú</th>';
             $result['message'] .= '<th style="text-align: center">Mức giá<br>liền kề</th>';
             $result['message'] .= '<th style="text-align: center">Mức giá<br>kê khai</th>';
@@ -288,7 +288,7 @@ class KkGDvLtCtController extends Controller
             $result['message'] .= '<tr>';
             $result['message'] .= '<th width="2%" style="text-align: center">STT</th>';
             $result['message'] .= '<th style="text-align: center">Loại phòng- Quy cách chất lượng</th>';
-            $result['message'] .= '<th style="text-align: center">Số hiệu phòng</th>';
+            $result['message'] .= '<th width="30%" style="text-align: center">Số hiệu phòng</th>';
             $result['message'] .= '<th style="text-align: center">Ghi chú</th>';
             $result['message'] .= '<th style="text-align: center">Mức giá<br>liền kề</th>';
             $result['message'] .= '<th style="text-align: center">Mức giá<br>kê khai</th>';
@@ -356,7 +356,7 @@ class KkGDvLtCtController extends Controller
             $result['message'] .= '<tr>';
             $result['message'] .= '<th width="2%" style="text-align: center">STT</th>';
             $result['message'] .= '<th style="text-align: center">Loại phòng- Quy cách chất lượng</th>';
-            $result['message'] .= '<th style="text-align: center">Số hiệu phòng</th>';
+            $result['message'] .= '<th width="30%" style="text-align: center">Số hiệu phòng</th>';
             $result['message'] .= '<th style="text-align: center">Ghi chú</th>';
             $result['message'] .= '<th style="text-align: center">Mức giá<br>liền kề</th>';
             $result['message'] .= '<th style="text-align: center">Mức giá<br>kê khai</th>';

@@ -377,7 +377,7 @@
                                 <tr>
                                     <th style="text-align: center">STT</th>
                                     <th style="text-align: center">Loại phòng<br>Quy cách chất lượng</th>
-                                    <th style="text-align: center">Số hiệu phòng</th>
+                                    <th width="30%" style="text-align: center" >Số hiệu phòng</th>
                                     <th style="text-align: center">Ghi chú</th>
                                     <th style="text-align: center">Mức giá liền kề</th>
                                     <th style="text-align: center">Mức giá kê khai</th>
