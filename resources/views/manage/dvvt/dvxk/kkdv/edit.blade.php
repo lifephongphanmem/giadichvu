@@ -134,7 +134,7 @@
                         <td name="tendichvu" class="active">{{$dv->tendichvu}}</td>
                         <td name="giakklk" style="text-align: right">{{number_format($dv->giakklk)}}</td>
                         <td name="giakk" style="text-align: right">{{number_format($dv->giakk)}}</td>
-                        <td style="text-align: right">{{number_format($dv->ghichu)}}</td>
+                        <td style="text-align: right">{!! nl2br(e($dv->ghichu)) !!}</td>
                         <td>
                             <button type="button" data-target="#modal-create"
                                     data-toggle="modal" class="btn btn-default btn-xs mbs"
