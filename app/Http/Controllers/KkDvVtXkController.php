@@ -1253,6 +1253,7 @@ class KkDvVtXkController extends Controller
         $message .= '<th style="text-align: center">Mô tả dịch vụ</th>';
         $message .= '<th style="text-align: center">Giá liền kề</th>';
         $message .= '<th style="text-align: center">Giá kê khai</th>';
+        $message .= '<th style="text-align: center">Ghi chú</th>';
         $message .= '<th style="text-align: center" width="25%">Thao tác</th>';
         $message .= '</tr>';
         $message .= '</thead>';
@@ -1265,6 +1266,7 @@ class KkDvVtXkController extends Controller
             $message .= '<td class="active">'.$dv->tendichvu.'</td>';
             $message .= '<td style="text-align: right">'.number_format($dv->giakklk).'</td>';
             $message .= '<td style="text-align: right">'.number_format($dv->giakk).'</td>';
+            $message .= '<td>'.$dv->ghichu.'</td>';
             $message .= '<td>'
                 .'<button type="button" data-target="#modal-create" '
                 .'data-toggle="modal" class="btn btn-default btn-xs mbs"'
