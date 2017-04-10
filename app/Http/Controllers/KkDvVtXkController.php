@@ -223,7 +223,7 @@ class KkDvVtXkController extends Controller
                 $mdkk->save();
             }
 
-            $model=KkDvVtXkCtDf::where('masothue', $masothue)->get();
+            $model=KkDvVtXkCtDf::where('masothue', $masothue)->odeyby('tendichvu')->get();
             $model_hl=KkGiaHLDf::where('masothue', $masothue)->get();
             return view('manage.dvvt.dvxk.kkdv.create')
                 ->with('pageTitle','Kê khai mới giá vận tải hành khách bằng xe ô tô theo tuyến cố định')
@@ -299,7 +299,7 @@ class KkDvVtXkController extends Controller
     {
         if (Session::has('admin')) {
             $model = KkDvVtXk::findOrFail($id);
-            $modeldv=KkDvVtXkCt::where('masokk',$model->masokk)->get();
+            $modeldv=KkDvVtXkCt::where('masokk',$model->masokk)->odeyby('tendichvu')->get();
             $model_hl=KkGiaHL::where('masokk',$model->masokk)->get();
             return view('manage.dvvt.dvxk.kkdv.edit')
                 ->with('model',$model)
@@ -644,6 +644,11 @@ class KkDvVtXkController extends Controller
         $result['message'] .= '<input style="text-align: right" type="text" id="cpquanly" name="cpquanly" value="'.$model->cpquanly.'" class="form-control" data-mask="fdecimal">';
         $result['message'] .= '</div>';
 
+        $result['message'] .= '<label for="cpquanly" class="col-md-6 control-label">Lợi nhuận</label>';
+        $result['message'] .= '<div style="padding-bottom: 2px" class="col-md-6">';
+        $result['message'] .= '<input style="text-align: right" type="text" id="loinhuan" name="loinhuan" value="'.$model->loinhuan.'" class="form-control" data-mask="fdecimal">';
+        $result['message'] .= '</div>';
+
         $result['message'] .= '<label class="col-md-6 control-label">Giải trình chi tiết</label>';
         $result['message'] .= '<div style="padding-bottom: 2px" class="col-md-6">';
         $result['message'] .= ' <textarea rows="4" id="giaitrinh" name="giaitrinh" class="form-control">'.$model->giaitrinh.'</textarea>';
@@ -843,6 +848,29 @@ class KkDvVtXkController extends Controller
             $modelgia = KkDvVtXkCt::where('masokk', $masokk)->get();
             $modelpag = PagDvVtXk::where('masokk', $masokk)->get();
 
+            foreach($modelgia as $gia){
+                foreach($modelpag as $ct){
+                    if($ct->madichvu==$gia->madichvu) {
+                        $gia->sanluong = $ct->sanluong;
+                        $gia->cpnguyenlieutt = $ct->cpnguyenlieutt;
+                        $gia->cpcongnhantt = $ct->cpcongnhantt;
+                        $gia->cpkhauhaott = $ct->cpkhauhaott;
+                        $gia->cpsanxuatdt = $ct->cpsanxuatdt;
+                        $gia->cpsanxuatc = $ct->cpsanxuatc;
+                        $gia->cptaichinh = $ct->cptaichinh;
+                        $gia->cpbanhang = $ct->cpbanhang;
+                        $gia->cpquanly = $ct->cpquanly;
+                        $gia->giaitrinh = $ct->giaitrinh;
+                        $gia->cpdau = $ct->cpdau;
+                        $gia->cpmonhot = $ct->cpmonhot;
+                        $gia->cpphutung = $ct->cpphutung;
+                        $gia->loinhuan = $ct->loinhuan;
+                        $gia->cpkhac = $ct->cpkhac;
+                        break;
+                    }
+                }
+            }
+            //dd($modelgia);
             return view('reports.kkgdvvt.kkgdvxk.printfPAG')
                 ->with('modeldonvi', $modeldonvi)
                 ->with('modelkk', $modelkk)

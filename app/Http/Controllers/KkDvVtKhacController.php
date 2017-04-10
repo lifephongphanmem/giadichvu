@@ -245,7 +245,7 @@ class KkDvVtKhacController extends Controller
                 ->get()->toarray();
             KkDvVtKhacCt::insert($m_kkdf);
             //Phương án giá
-            $m_pag=PagDvVtKhac_Temp::select('masothue','masokk','madichvu','giaitrinh','sanluong','cpnguyenlieutt','cpcongnhantt','cpkhauhaott','cpsanxuatdt','cpsanxuatc','cptaichinh','cpbanhang','cpquanly',DB::raw("'".$makk."' as masokk"))
+            $m_pag=PagDvVtKhac_Temp::select('masothue','masokk','madichvu','giaitrinh','sanluong','cpnguyenlieutt','cpcongnhantt','cpkhauhaott','cpsanxuatdt','cpsanxuatc','cptaichinh','cpbanhang','cpquanly','cpdau','cpmonhot','cpphutung','cpkhac',DB::raw("'".$makk."' as masokk"))
                 ->where('masothue', $insert['masothue'])
                 ->get()->toarray();
             PagDvVtKhac::insert($m_pag);
@@ -525,55 +525,37 @@ class KkDvVtKhacController extends Controller
 
         $result['message'] = '<div class="form-horizontal" id="pag">';
         $result['message'] .= '<div class="form-group">';
-        $result['message'] .= '<label for="sanluong" class="col-md-6 control-label">Sản lượng tính giá</label>';
 
+        $result['message'] .= '<label for="sanluong" class="col-md-6 control-label">Chi phí dầu</label>';
         $result['message'] .= '<div style="padding-bottom: 2px" class="col-md-6">';
-        $result['message'] .= '<input style="text-align: right" type="text" id="sanluong" name="sanluong" value="'.$model->sanluong.'" class="form-control" data-mask="fdecimal">';
-        $result['message'] .= '</div>';
+        $result['message'] .= '<input style="text-align: right" type="text" id="cpdau" name="cpdau" value="'.$model->cpdau.'" class="form-control" data-mask="fdecimal">';
         $result['message'] .= '</div>';
 
-        $result['message'] .= '<div class="form-group">';
-        $result['message'] .= '<label for="cpnguyenlieutt" class="col-md-6 control-label">Chi phí nguyên liệu trực tiếp</label>';
+        $result['message'] .= '<label for="cpnguyenlieutt" class="col-md-6 control-label">Chi phí mỡ, nhớt</label>';
         $result['message'] .= '<div style="padding-bottom: 2px" class="col-md-6">';
-        $result['message'] .= '<input style="text-align: right" type="text" id="cpnguyenlieutt" name="cpnguyenlieutt" value="'.$model->cpnguyenlieutt.'" class="form-control" data-mask="fdecimal">';
+        $result['message'] .= '<input style="text-align: right" type="text" id="cpmonhot" name="cpmonhot" value="'.$model->cpmonhot.'" class="form-control" data-mask="fdecimal">';
         $result['message'] .= '</div>';
 
-        $result['message'] .= '<label for="cpcongnhantt" class="col-md-6 control-label">Chi phí nhân công trực tiếp</label>';
+        $result['message'] .= '<label for="cpcongnhantt" class="col-md-6 control-label">Chi phí phụ tùng</label>';
+        $result['message'] .= '<div style="padding-bottom: 2px" class="col-md-6">';
+        $result['message'] .= '<input style="text-align: right" type="text" id="cpphutung" name="cpphutung" value="'.$model->cpphutung.'" class="form-control" data-mask="fdecimal">';
+        $result['message'] .= '</div>';
+
+        $result['message'] .= '<label class="col-md-6 control-label">Chi phí lương</label>';
         $result['message'] .= '<div style="padding-bottom: 2px" class="col-md-6">';
         $result['message'] .= '<input style="text-align: right" type="text" id="cpcongnhantt" name="cpcongnhantt" value="'.$model->cpcongnhantt.'" class="form-control" data-mask="fdecimal">';
         $result['message'] .= '</div>';
 
-        $result['message'] .= '<label for="cpkhauhaott" class="col-md-6 control-label">Chi phí khấu hao máy móc trực tiếp</label>';
+        $result['message'] .= '<label for="cpkhauhaott" class="col-md-6 control-label">Chi phí khấu hao</label>';
         $result['message'] .= '<div style="padding-bottom: 2px" class="col-md-6">';
         $result['message'] .= '<input style="text-align: right" type="text" id="cpkhauhaott" name="cpkhauhaott" value="'.$model->cpkhauhaott.'" class="form-control" data-mask="fdecimal">';
         $result['message'] .= '</div>';
 
-        $result['message'] .= '<label for="cpsanxuatdt" class="col-md-6 control-label">Chi phí sản xuất, kinh doanh đặc thù</label>';
+        $result['message'] .= '<label for="cpsanxuatdt" class="col-md-6 control-label">Chi phí khác</label>';
         $result['message'] .= '<div style="padding-bottom: 2px" class="col-md-6">';
-        $result['message'] .= '<input style="text-align: right" type="text" id="cpsanxuatdt" name="cpsanxuatdt" value="'.$model->cpsanxuatdt.'" class="form-control" data-mask="fdecimal">';
-        $result['message'] .= '</div>';
+        $result['message'] .= '<input style="text-align: right" type="text" id="cpkhac" name="cpkhac" value="'.$model->cpkhac.'" class="form-control" data-mask="fdecimal">';
         $result['message'] .= '</div>';
 
-        $result['message'] .= '<div class="form-group">';
-        $result['message'] .= '<label for="cpsanxuatc" class="col-md-6 control-label">Chi phí sản xuất chung</label>';
-        $result['message'] .= '<div style="padding-bottom: 2px" class="col-md-6">';
-        $result['message'] .= '<input style="text-align: right" type="text" id="cpsanxuatc" name="cpsanxuatc" value="'.$model->cpsanxuatc.'" class="form-control" data-mask="fdecimal">';
-        $result['message'] .= '</div>';
-
-        $result['message'] .= '<label for="cptaichinh" class="col-md-6 control-label">Chi phí tài chính</label>';
-        $result['message'] .= '<div style="padding-bottom: 2px" class="col-md-6">';
-        $result['message'] .= '<input style="text-align: right" type="text" id="cptaichinh" name="cptaichinh" value="'.$model->cptaichinh.'" class="form-control" data-mask="fdecimal">';
-        $result['message'] .= '</div>';
-
-        $result['message'] .= '<label for="cpbanhang" class="col-md-6 control-label">Chi phí bán hàng</label>';
-        $result['message'] .= '<div style="padding-bottom: 2px" class="col-md-6">';
-        $result['message'] .= '<input style="text-align: right" type="text" id="cpbanhang" name="cpbanhang" value="'.$model->cpbanhang.'" class="form-control" data-mask="fdecimal">';
-        $result['message'] .= '</div>';
-
-        $result['message'] .= '<label for="cpquanly" class="col-md-6 control-label">Chi phí quản lý</label>';
-        $result['message'] .= '<div style="padding-bottom: 2px" class="col-md-6">';
-        $result['message'] .= '<input style="text-align: right" type="text" id="cpquanly" name="cpquanly" value="'.$model->cpquanly.'" class="form-control" data-mask="fdecimal">';
-        $result['message'] .= '</div>';
 
         $result['message'] .= '<label class="col-md-6 control-label">Giải trình chi tiết</label>';
         $result['message'] .= '<div style="padding-bottom: 2px" class="col-md-6">';
@@ -582,6 +564,8 @@ class KkDvVtKhacController extends Controller
 
         $result['message'] .= '</div>';
         $result['message'] .= '<input type="hidden" id="idpag" name="idpag" value="'.$model->id.'"/>';
+        $result['message'] .= '</div>';
+
         $result['message'] .= '</div>';
 
         $result['status'] = 'success';
@@ -604,15 +588,12 @@ class KkDvVtKhacController extends Controller
         $inputs = $request->all();
 
         $model = PagDvVtKhac_Temp::findOrFail($inputs['id']);
-        $model->sanluong=getDbl($inputs['sanluong']);
-        $model->cpnguyenlieutt=getDbl($inputs['cpnguyenlieutt']);
-        $model->cpcongnhantt=getDbl($inputs['cpcongnhantt']);
+        $model->cpdau=getDbl($inputs['cpdau']);
+        $model->cpmonhot=getDbl($inputs['cpmonhot']);
+        $model->cpphutung=getDbl($inputs['cpphutung']);
         $model->cpkhauhaott=getDbl($inputs['cpkhauhaott']);
-        $model->cpsanxuatdt=getDbl($inputs['cpsanxuatdt']);
-        $model->cpsanxuatc=getDbl($inputs['cpsanxuatc']);
-        $model->cptaichinh=getDbl($inputs['cptaichinh']);
-        $model->cpbanhang=getDbl($inputs['cpbanhang']);
-        $model->cpquanly=getDbl($inputs['cpquanly']);
+        $model->cpkhac=getDbl($inputs['cpkhac']);
+        $model->cpcongnhantt=getDbl($inputs['cpcongnhantt']);
         $model->giaitrinh=$inputs['giaitrinh'];
         $model->save();
 
@@ -640,54 +621,37 @@ class KkDvVtKhacController extends Controller
 
         $result['message'] = '<div class="form-horizontal" id="pag">';
         $result['message'] .= '<div class="form-group">';
-        $result['message'] .= '<label for="sanluong" class="col-md-6 control-label">Sản lượng tính giá</label>';
+
+        $result['message'] .= '<label for="sanluong" class="col-md-6 control-label">Chi phí dầu</label>';
         $result['message'] .= '<div style="padding-bottom: 2px" class="col-md-6">';
-        $result['message'] .= '<input style="text-align: right" type="text" id="sanluong" name="sanluong" value="'.$model->sanluong.'" class="form-control" data-mask="fdecimal">';
-        $result['message'] .= '</div>';
+        $result['message'] .= '<input style="text-align: right" type="text" id="cpdau" name="cpdau" value="'.$model->cpdau.'" class="form-control" data-mask="fdecimal">';
         $result['message'] .= '</div>';
 
-        $result['message'] .= '<div class="form-group">';
-        $result['message'] .= '<label for="cpnguyenlieutt" class="col-md-6 control-label">Chi phí nguyên liệu trực tiếp</label>';
+        $result['message'] .= '<label for="cpnguyenlieutt" class="col-md-6 control-label">Chi phí mỡ, nhớt</label>';
         $result['message'] .= '<div style="padding-bottom: 2px" class="col-md-6">';
-        $result['message'] .= '<input style="text-align: right" type="text" id="cpnguyenlieutt" name="cpnguyenlieutt" value="'.$model->cpnguyenlieutt.'" class="form-control" data-mask="fdecimal">';
+        $result['message'] .= '<input style="text-align: right" type="text" id="cpmonhot" name="cpmonhot" value="'.$model->cpmonhot.'" class="form-control" data-mask="fdecimal">';
         $result['message'] .= '</div>';
 
-        $result['message'] .= '<label for="cpcongnhantt" class="col-md-6 control-label">Chi phí nhân công trực tiếp</label>';
+        $result['message'] .= '<label for="cpcongnhantt" class="col-md-6 control-label">Chi phí phụ tùng</label>';
+        $result['message'] .= '<div style="padding-bottom: 2px" class="col-md-6">';
+        $result['message'] .= '<input style="text-align: right" type="text" id="cpphutung" name="cpphutung" value="'.$model->cpphutung.'" class="form-control" data-mask="fdecimal">';
+        $result['message'] .= '</div>';
+
+        $result['message'] .= '<label class="col-md-6 control-label">Chi phí lương</label>';
         $result['message'] .= '<div style="padding-bottom: 2px" class="col-md-6">';
         $result['message'] .= '<input style="text-align: right" type="text" id="cpcongnhantt" name="cpcongnhantt" value="'.$model->cpcongnhantt.'" class="form-control" data-mask="fdecimal">';
         $result['message'] .= '</div>';
 
-        $result['message'] .= '<label for="cpkhauhaott" class="col-md-6 control-label">Chi phí khấu hao máy móc trực tiếp</label>';
+        $result['message'] .= '<label for="cpkhauhaott" class="col-md-6 control-label">Chi phí khấu hao</label>';
         $result['message'] .= '<div style="padding-bottom: 2px" class="col-md-6">';
         $result['message'] .= '<input style="text-align: right" type="text" id="cpkhauhaott" name="cpkhauhaott" value="'.$model->cpkhauhaott.'" class="form-control" data-mask="fdecimal">';
         $result['message'] .= '</div>';
 
-        $result['message'] .= '<label for="cpsanxuatdt" class="col-md-6 control-label">Chi phí sản xuất, kinh doanh đặc thù</label>';
+        $result['message'] .= '<label for="cpsanxuatdt" class="col-md-6 control-label">Chi phí khác</label>';
         $result['message'] .= '<div style="padding-bottom: 2px" class="col-md-6">';
-        $result['message'] .= '<input style="text-align: right" type="text" id="cpsanxuatdt" name="cpsanxuatdt" value="'.$model->cpsanxuatdt.'" class="form-control" data-mask="fdecimal">';
-        $result['message'] .= '</div>';
+        $result['message'] .= '<input style="text-align: right" type="text" id="cpkhac" name="cpkhac" value="'.$model->cpkhac.'" class="form-control" data-mask="fdecimal">';
         $result['message'] .= '</div>';
 
-        $result['message'] .= '<div class="form-group">';
-        $result['message'] .= '<label for="cpsanxuatc" class="col-md-6 control-label">Chi phí sản xuất chung</label>';
-        $result['message'] .= '<div style="padding-bottom: 2px" class="col-md-6">';
-        $result['message'] .= '<input style="text-align: right" type="text" id="cpsanxuatc" name="cpsanxuatc" value="'.$model->cpsanxuatc.'" class="form-control" data-mask="fdecimal">';
-        $result['message'] .= '</div>';
-
-        $result['message'] .= '<label for="cptaichinh" class="col-md-6 control-label">Chi phí tài chính</label>';
-        $result['message'] .= '<div style="padding-bottom: 2px" class="col-md-6">';
-        $result['message'] .= '<input style="text-align: right" type="text" id="cptaichinh" name="cptaichinh" value="'.$model->cptaichinh.'" class="form-control" data-mask="fdecimal">';
-        $result['message'] .= '</div>';
-
-        $result['message'] .= '<label for="cpbanhang" class="col-md-6 control-label">Chi phí bán hàng</label>';
-        $result['message'] .= '<div style="padding-bottom: 2px" class="col-md-6">';
-        $result['message'] .= '<input style="text-align: right" type="text" id="cpbanhang" name="cpbanhang" value="'.$model->cpbanhang.'" class="form-control" data-mask="fdecimal">';
-        $result['message'] .= '</div>';
-
-        $result['message'] .= '<label for="cpquanly" class="col-md-6 control-label">Chi phí quản lý</label>';
-        $result['message'] .= '<div style="padding-bottom: 2px" class="col-md-6">';
-        $result['message'] .= ' <input style="text-align: right" type="text" id="cpquanly" name="cpquanly" value="'.$model->cpquanly.'" class="form-control" data-mask="fdecimal">';
-        $result['message'] .= '</div>';
 
         $result['message'] .= '<label class="col-md-6 control-label">Giải trình chi tiết</label>';
         $result['message'] .= '<div style="padding-bottom: 2px" class="col-md-6">';
@@ -696,6 +660,8 @@ class KkDvVtKhacController extends Controller
 
         $result['message'] .= '</div>';
         $result['message'] .= '<input type="hidden" id="idpag" name="idpag" value="'.$model->id.'"/>';
+        $result['message'] .= '</div>';
+
         $result['message'] .= '</div>';
 
         $result['status'] = 'success';
@@ -718,15 +684,12 @@ class KkDvVtKhacController extends Controller
         $inputs = $request->all();
 
         $model = PagDvVtKhac::findOrFail($inputs['id']);
-        $model->sanluong=getDbl($inputs['sanluong']);
-        $model->cpnguyenlieutt=getDbl($inputs['cpnguyenlieutt']);
-        $model->cpcongnhantt=getDbl($inputs['cpcongnhantt']);
+        $model->cpdau=getDbl($inputs['cpdau']);
+        $model->cpmonhot=getDbl($inputs['cpmonhot']);
+        $model->cpphutung=getDbl($inputs['cpphutung']);
         $model->cpkhauhaott=getDbl($inputs['cpkhauhaott']);
-        $model->cpsanxuatdt=getDbl($inputs['cpsanxuatdt']);
-        $model->cpsanxuatc=getDbl($inputs['cpsanxuatc']);
-        $model->cptaichinh=getDbl($inputs['cptaichinh']);
-        $model->cpbanhang=getDbl($inputs['cpbanhang']);
-        $model->cpquanly=getDbl($inputs['cpquanly']);
+        $model->cpkhac=getDbl($inputs['cpkhac']);
+        $model->cpcongnhantt=getDbl($inputs['cpcongnhantt']);
         $model->giaitrinh=$inputs['giaitrinh'];
         $model->save();
 
@@ -767,6 +730,29 @@ class KkDvVtKhacController extends Controller
             $modeldm = DmDvVtKhac::where('masothue', $modelkk->masothue)->get();
             $modelgia = KkDvVtKhacCt::where('masokk', $masokk)->get();
             $modelpag = PagDvVtKhac::where('masokk', $masokk)->get();
+
+            foreach($modelgia as $gia){
+                foreach($modelpag as $ct){
+                    if($ct->madichvu==$gia->madichvu) {
+                        $gia->sanluong = $ct->sanluong;
+                        $gia->cpnguyenlieutt = $ct->cpnguyenlieutt;
+                        $gia->cpcongnhantt = $ct->cpcongnhantt;
+                        $gia->cpkhauhaott = $ct->cpkhauhaott;
+                        $gia->cpsanxuatdt = $ct->cpsanxuatdt;
+                        $gia->cpsanxuatc = $ct->cpsanxuatc;
+                        $gia->cptaichinh = $ct->cptaichinh;
+                        $gia->cpbanhang = $ct->cpbanhang;
+                        $gia->cpquanly = $ct->cpquanly;
+                        $gia->giaitrinh = $ct->giaitrinh;
+                        $gia->cpdau = $ct->cpdau;
+                        $gia->cpmonhot = $ct->cpmonhot;
+                        $gia->cpphutung = $ct->cpphutung;
+                        $gia->loinhuan = $ct->loinhuan;
+                        $gia->cpkhac = $ct->cpkhac;
+                        break;
+                    }
+                }
+            }
 
             return view('reports.kkgdvvt.kkgdvkhac.printfPAG')
                 ->with('modeldonvi', $modeldonvi)

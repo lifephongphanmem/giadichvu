@@ -411,5 +411,72 @@
     <p style="page-break-before: always">
         <!-- Hết phần 3 -->
 @endforeach
+
+        <!-- Phần 4 -->
+<p> <b>{{$modeldonvi->tendonvi}}</b></p>
+<p> {{$modeldonvi->diachi}}</p>
+<p style="font-weight: bold; text-align: center">BẢNG KÊ CHI TIẾT CÁC YẾU TỐ CẤU THÀNH GIÁ</p>
+<table cellspacing="0" cellpadding="0" border="1" style="margin: 20px auto; border-collapse: collapse;">
+    <tr>
+        <th style="width: 5%" rowspan="2">STT</th>
+        <th rowspan="2">TÊN DỊCH VỤ CUNG ỨNG</th>
+        <th rowspan="2">QUY CÁCH CHẤT LƯỢNG</th>
+        <th rowspan="2">Đơn vị</br>tính</th>
+        <th style="text-align: center" colspan="6">CHI PHÍ CẤU THÀNH GIÁ</th>
+        <th rowspan="2">Giá chưa</br>bao gồm</br>VAT</th>
+        <th rowspan="2">Thuế VAT</br>10%</th>
+        <th rowspan="2">Tổng giá</br>thành</th>
+    </tr>
+    <tr>
+        <th>Dầu</th>
+        <th>Mỡ</br>nhớt</th>
+        <th>Phụ</br>tùng</th>
+        <th>Lương</th>
+        <th>Khấu</br>hao</th>
+        <th>Khác</th>
+    </tr>
+    <?php
+        $i=1;
+    ?>
+    @foreach($modelgia as $ctkk)
+        <?php
+            $giathanh=$ctkk->cpdau+$ctkk->cpmonhot+$ctkk->cpphutung+$ctkk->cpnhancongtt+$ctkk->cpkhauhaott+$ctkk->cpkhac;
+        ?>
+        <tr>
+            <td>{{$i++}}</td>
+            <td>{{$ctkk->tendichvu}}</td>
+            <td>{{$ctkk->qccl}}</td>
+            <td>{{$ctkk->dvt}}</td>
+            <td>{{number_format($ctkk->cpdau)}}</td>
+            <td>{{number_format($ctkk->cpmonhot)}}</td>
+            <td>{{number_format($ctkk->cpphutung)}}</td>
+            <td>{{number_format($ctkk->cpnhancongtt)}}</td>
+            <td>{{number_format($ctkk->cpkhauhaott)}}</td>
+            <td>{{number_format($ctkk->cpkhac)}}</td>
+            <td>{{number_format($giathanh)}}</td>
+            <td>{{number_format($giathanh/10)}}</td>
+            <td>{{number_format($giathanh+$giathanh/10)}}</td>
+        </tr>
+    @endforeach
+    <!-- duyệt -->
+
+            <table width="96%" border="0" cellspacing="0" cellpadding="8" style="margin:20px auto; text-align: center;">
+                <tr>
+                    <td style="text-align: left;" width="60%">
+                    </td>
+                    <td style="text-align: center; text-transform: uppercase;" width="40%">
+                        <b>{{$modeldonvi->chucdanh}}</b><br> <span style="font-style: italic; font-weight: normal; text-transform: none">(Ký tên, đóng dấu)</span>
+                    </td>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <td style="height: 100px"></td>
+                    <td><span style="text-align: center;">{{$modeldonvi->nguoiky}}</span></td>
+                </tr>
+            </table>
+
+
+</table>
+
 </body>
 </html>
