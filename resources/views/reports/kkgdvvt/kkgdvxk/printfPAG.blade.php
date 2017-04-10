@@ -382,7 +382,7 @@
                 <tr style="font-weight: bold">
                     <td>C</td>
                     <td>Chi phí phân bổ cho dịch vụ khác (nếu có) (CP)</td>
-                    <td></td>
+                    <td>Đồng</td>
                     <td>{{number_format($pag->loinhuan)}}</td>
                     <td></td>
                 </tr>
