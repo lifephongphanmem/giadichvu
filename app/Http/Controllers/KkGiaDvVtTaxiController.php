@@ -50,7 +50,7 @@ class KkGiaDvVtTaxiController extends Controller
                 $model = KkDvVtXtx::where('masothue',$masothue)
                     ->whereYear('ngaynhap', $nam)
                     ->get();
-            if(session('admin')->level == 'T' || session('admin')->level == 'H' && session('admin')== 'DVVT'){
+            if(session('admin')->level == 'T' || session('admin')->level == 'H' && session('admin')->level== 'DVVT'){
                 if(session('admin')->sadmin == 'ssa'
                     || session('admin')->level == 'T' && session('admin')->cqcq == $modeldn->cqcq
                     || session('admin')->level == 'H' && session('admin')->cqcq == $modeldn->cqcq
