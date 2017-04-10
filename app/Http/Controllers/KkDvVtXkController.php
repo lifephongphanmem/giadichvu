@@ -687,6 +687,7 @@ class KkDvVtXkController extends Controller
         $model->cptaichinh=getDbl($inputs['cptaichinh']);
         $model->cpbanhang=getDbl($inputs['cpbanhang']);
         $model->cpquanly=getDbl($inputs['cpquanly']);
+        $model->loinhuan=getDbl($inputs['loinhuan']);
         $model->giaitrinh=$inputs['giaitrinh'];
         $model->save();
 
@@ -765,6 +766,11 @@ class KkDvVtXkController extends Controller
         $result['message'] .= ' <input style="text-align: right" type="text" id="cpquanly" name="cpquanly" value="'.$model->cpquanly.'" class="form-control" data-mask="fdecimal">';
         $result['message'] .= '</div>';
 
+        $result['message'] .= '<label for="cpquanly" class="col-md-6 control-label">Lợi nhuận</label>';
+        $result['message'] .= '<div style="padding-bottom: 2px" class="col-md-6">';
+        $result['message'] .= '<input style="text-align: right" type="text" id="loinhuan" name="loinhuan" value="'.$model->loinhuan.'" class="form-control" data-mask="fdecimal">';
+        $result['message'] .= '</div>';
+
         $result['message'] .= '<label class="col-md-6 control-label">Giải trình chi tiết</label>';
         $result['message'] .= '<div style="padding-bottom: 2px" class="col-md-6">';
         $result['message'] .= ' <textarea rows="4" id="giaitrinh" name="giaitrinh" class="form-control">'.$model->giaitrinh.'</textarea>';
@@ -803,6 +809,7 @@ class KkDvVtXkController extends Controller
         $model->cptaichinh=getDbl($inputs['cptaichinh']);
         $model->cpbanhang=getDbl($inputs['cpbanhang']);
         $model->cpquanly=getDbl($inputs['cpquanly']);
+        $model->loinhuan=getDbl($inputs['loinhuan']);
         $model->giaitrinh=$inputs['giaitrinh'];
         $model->save();
 

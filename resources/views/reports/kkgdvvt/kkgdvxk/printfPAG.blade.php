@@ -383,7 +383,7 @@
                     <td>C</td>
                     <td>Chi phí phân bổ cho dịch vụ khác (nếu có) (CP)</td>
                     <td></td>
-                    <td>{{number_format(0)}}</td>
+                    <td>{{number_format($pag->loinhuan)}}</td>
                     <td></td>
                 </tr>
                 <tr style="font-weight: bold">
@@ -397,7 +397,7 @@
                     <td>Đ</td>
                     <td>Giá thành toàn bộ 01 (một) đơn vị sản phẩm, dịch vụ (TC-CP)/Q</td>
                     <td>Đồng</td>
-                    <td>{{$pag->sanluong>0?number_format(($cpc+$cptt)/$pag->sanluong):number_format($cpc+$cptt)}}</td>
+                    <td>{{$pag->sanluong>0?number_format(($cpc+$cptt+$pag->loinhuan)/$pag->sanluong):number_format($cpc+$cptt)}}</td>
                     <td></td>
                 </tr>
                 <?php
