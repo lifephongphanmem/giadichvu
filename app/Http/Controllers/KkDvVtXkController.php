@@ -223,7 +223,7 @@ class KkDvVtXkController extends Controller
                 $mdkk->save();
             }
 
-            $model=KkDvVtXkCtDf::where('masothue', $masothue)->odeyby('tendichvu')->get();
+            $model=KkDvVtXkCtDf::where('masothue', $masothue)->orderby('tendichvu')->get();
             $model_hl=KkGiaHLDf::where('masothue', $masothue)->get();
             return view('manage.dvvt.dvxk.kkdv.create')
                 ->with('pageTitle','Kê khai mới giá vận tải hành khách bằng xe ô tô theo tuyến cố định')
@@ -299,7 +299,7 @@ class KkDvVtXkController extends Controller
     {
         if (Session::has('admin')) {
             $model = KkDvVtXk::findOrFail($id);
-            $modeldv=KkDvVtXkCt::where('masokk',$model->masokk)->odeyby('tendichvu')->get();
+            $modeldv=KkDvVtXkCt::where('masokk',$model->masokk)->orderby('tendichvu')->get();
             $model_hl=KkGiaHL::where('masokk',$model->masokk)->get();
             return view('manage.dvvt.dvxk.kkdv.edit')
                 ->with('model',$model)
