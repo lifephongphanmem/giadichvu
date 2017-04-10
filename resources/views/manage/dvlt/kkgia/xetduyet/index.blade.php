@@ -287,7 +287,12 @@
                                     </td>
                                 @endif
                                 <td>
-                                    <a href="{{url('ke_khai_dich_vu_luu_tru/report_ke_khai/'.$tt->mahs)}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Xem chi tiết</a>
+
+                                    @if($tt->phanloai=='DINHKEM')<a href="{{url('/data/uploads/attack/'.$tt->filedk)}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Xem chi tiết</a>
+
+                                    @else
+                                        <a href="{{url('ke_khai_dich_vu_luu_tru/report_ke_khai/'.$tt->mahs)}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Xem chi tiết</a>
+                                    @endif
                                     @if(can('kkdvlt','approve'))
                                         @if($tt->trangthai == 'Chờ nhận')
                                             <button type="button" onclick="confirmTraLai({{$tt->id}})" class="btn btn-default btn-xs mbs" data-target="#tralai-modal" data-toggle="modal"><i class="fa fa-reply"></i>&nbsp;

@@ -161,6 +161,7 @@ Route::post('ttcskd_dich_vu_luu_tru/delete','CsKdDvLtController@destroy');
 Route::get('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh','KkGDvLtController@cskd');
 Route::get('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh={macskd}&nam={nam}','KkGDvLtController@index');
 Route::get('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh={macskd}/create','KkGDvLtController@create');
+Route::get('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh={macskd}/create_dk','KkGDvLtController@create_dk');//
     //Ajax ttphong create
 Route::get('/kkgdvlt/kkgia','KkGDvLtCtDfController@kkgia');
 Route::get('/kkgdvlt/upkkgia','KkGDvLtCtDfController@upkkgia');
@@ -170,7 +171,10 @@ Route::get('kkgdvlt/update','KkGDvLtCtDfController@updatettp');
 Route::get('kkgdvlt/delete','KkGDvLtCtDfController@destroy');
     //End Ajax ttphong create
 Route::post('ke_khai_dich_vu_luu_tru','KkGDvLtController@store');
+Route::post('ke_khai_dich_vu_luu_tru/store_dk','KkGDvLtController@store_dk');//
 Route::get('ke_khai_dich_vu_luu_tru/{id}/edit','KkGDvLtController@edit');
+Route::get('ke_khai_dich_vu_luu_tru/{id}/edit_dk','KkGDvLtController@edit_dk');//
+Route::patch('ke_khai_dich_vu_luu_tru/{id}/update_dk','KkGDvLtController@update_dk');
     //Ajax ttphong edit
 Route::get('/kkgdvlt/boxungttp','KkGDvLtCtController@boxungttp');
 Route::get('/kkgdvlt/kkgiachinhsua','KkGDvLtCtController@kkgiachinhsua');

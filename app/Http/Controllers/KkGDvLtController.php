@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 
 class KkGDvLtController extends Controller
@@ -132,6 +133,24 @@ class KkGDvLtController extends Controller
             return view('errors.notlogin');
     }
 
+    public function create_dk($macskd){
+        if (Session::has('admin')) {
+            if(session('admin')->level == 'T' || session('admin')->level == 'H' || session('admin')->level == 'DVLT') {
+                $modelcskd = CsKdDvLt::where('macskd', $macskd)->first();
+                if(session('admin')->sadmin =='ssa' || session('admin')->cqcq == $modelcskd->cqcq) {
+                    return view('manage.dvlt.kkgia.kkgiadv.create_dk')
+                        ->with('modelcskd', $modelcskd)
+                        ->with('pageTitle', 'Kê khai giá dịch vụ lưu trú thêm mới');
+                }else{
+                    return view('errors.noperm');
+                }
+            }else{
+                return view('errors.perm');
+            }
+        }else
+            return view('errors.notlogin');
+    }
+
     public function store(Request $request){
         if (Session::has('admin')) {
 
@@ -174,6 +193,37 @@ class KkGDvLtController extends Controller
             return view('errors.notlogin');
     }
 
+    public function store_dk(Request $request){
+        if (Session::has('admin')) {
+
+            $mahs = getdate()[0];
+            $insert = $request->all();
+            $file=$request->file('filedk');
+            $filename =$mahs.'_'.$file->getClientOriginalName();
+            $file->move(public_path() . '/data/uploads/attack/', $filename);
+
+            $model = new KkGDvLt();
+            $model->phanloai = 'DINHKEM';
+            $model->filedk = $filename;
+
+            $model->ngaynhap = date('Y-m-d', strtotime(str_replace('/', '-', $insert['ngaynhap'])));
+            $model->mahs = $mahs;
+            $model->socv = $insert['socv'];
+            $model->ngayhieuluc = date('Y-m-d', strtotime(str_replace('/', '-', $insert['ngayhieuluc'])));
+            $model->socvlk = $insert['socvlk'];
+            if($insert['ngaycvlk'] != '')
+                $model->ngaycvlk = date('Y-m-d', strtotime(str_replace('/', '-', $insert['ngaycvlk'])));
+            $model->trangthai = 'Chờ chuyển';
+            $model->macskd = $insert['macskd'];
+            $model->masothue = $insert['masothue'];
+            $model->cqcq = $insert['cqcq'];
+            $model->dvt = $insert['dvt'];
+            $model->save();
+            return redirect('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh='.$insert['macskd'].'&nam='.date('Y'));
+        }else
+            return view('errors.notlogin');
+    }
+
     public function edit($id){
         if (Session::has('admin')) {
             if(session('admin')->level == 'T' || session('admin')->level == 'H' || session('admin')->level =='DVLT') {
@@ -184,6 +234,25 @@ class KkGDvLtController extends Controller
                     return view('manage.dvlt.kkgia.kkgiadv.edit')
                         ->with('model', $model)
                         ->with('modelct', $modelct)
+                        ->with('pageTitle', 'Chỉnh sửa thông tin kê khai giá dịch vụ lưu trú');
+                }else{
+                    return view('errors.noperm');
+                }
+            }else{
+                return view('errors.perm');
+            }
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function edit_dk($id){
+        if (Session::has('admin')) {
+            if(session('admin')->level == 'T' || session('admin')->level == 'H' || session('admin')->level =='DVLT') {
+                $model = KkGDvLt::findOrFail($id);
+                if(session('admin')->sadmin == 'ssa' || session('admin')->cqcq == $model->cqcq) {
+
+                    return view('manage.dvlt.kkgia.kkgiadv.edit_dk')
+                        ->with('model', $model)
                         ->with('pageTitle', 'Chỉnh sửa thông tin kê khai giá dịch vụ lưu trú');
                 }else{
                     return view('errors.noperm');
@@ -207,6 +276,33 @@ class KkGDvLtController extends Controller
             $model->socvlk = $input['socvlk'];
             $model->ngaycvlk = $input['ngaycvlk']==''? NULL  :date('Y-m-d', strtotime(str_replace('/', '-', $input['ngaycvlk'])));;
             $model->ghichu = $input['ghichu'];
+            $model->dvt = $input['dvt'];
+            $model->save();
+            return redirect('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh='.$macskd.'&nam='.date('Y'));
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function update_dk(Request $request, $id){
+        if (Session::has('admin')) {
+            $input = $request->all();
+            $model = KkGDvLt::findOrFail($id);
+            $macskd = $model->macskd;
+            if(isset($request->filedk)){
+                if(file_exists(public_path() . '/data/uploads/attack/'.$model->filedk)){
+                    File::Delete(public_path() . '/data/uploads/attack/'.$model->filedk);
+                }
+                $file=$request->file('filedk');
+
+                $filename =$input['mahs'].'_'.$file->getClientOriginalName();
+                $file->move(public_path() . '/data/uploads/attack/', $filename);
+                $model->filedk=$filename;
+            }
+            $model->ngaynhap = date('Y-m-d', strtotime(str_replace('/', '-', $input['ngaynhap'])));
+            $model->socv = $input['socv'];
+            $model->ngayhieuluc = date('Y-m-d', strtotime(str_replace('/', '-', $input['ngayhieuluc'])));
+            $model->socvlk = $input['socvlk'];
+            $model->ngaycvlk = $input['ngaycvlk']==''? NULL  :date('Y-m-d', strtotime(str_replace('/', '-', $input['ngaycvlk'])));;
             $model->dvt = $input['dvt'];
             $model->save();
             return redirect('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh='.$macskd.'&nam='.date('Y'));
