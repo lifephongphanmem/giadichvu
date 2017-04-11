@@ -116,6 +116,16 @@
                             </tr>
                             <tr>
                                 <td style="width:15%">
+                                    <b>Cơ quan chủ quản</b>
+                                </td>
+                                <td style="width:35%">
+
+                                <span class="text-muted">{{$model->tencqcq}}
+                                </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:15%">
                                     <b>Chức danh người ký</b>
                                 </td>
                                 <td style="width:35%">

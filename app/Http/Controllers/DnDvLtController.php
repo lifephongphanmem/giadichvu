@@ -219,6 +219,10 @@ class DnDvLtController extends Controller
                         ->first();
                     $modeltttd = TtDn::where('masothue', session('admin')->mahuyen)
                         ->first();
+                    $model_cqcq=Users::where('cqcq', session('admin')->cqcq)->first();
+                    if(count($model_cqcq)>0){
+                        $model->tencqcq=$model_cqcq->name;
+                    }
 
                     return view('manage.dvlt.ttdn.index')
                         ->with('model', $model)
