@@ -162,6 +162,8 @@ class KkGDvLtXdController extends Controller
             $model->sohsnhan = $modelkk->sohsnhan;
             $model->ngaychuyen = $modelkk->ngaychuyen;
             $model->ttnguoinop = $modelkk->ttnguoinop;
+            $model->phanloai = $modelkk->phanloai;
+            $model->filedk = $modelkk->filedk;
             $model->idkk = $modelkk->id;
             $model->save();
         }else
