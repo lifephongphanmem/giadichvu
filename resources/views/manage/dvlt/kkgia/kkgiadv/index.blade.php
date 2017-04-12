@@ -92,6 +92,8 @@
                         @if(can('kkdvlt','create'))
                         <a href="{{url('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh='.$macskd.'/create')}}" class="btn btn-default btn-sm">
                             <i class="fa fa-plus"></i> Kê khai mới </a>
+                        <a href="{{url('ke_khai_dich_vu_luu_tru/khach_san='.$macskd.'/create')}}" class="btn btn-default btn-sm">
+                            <i class="fa fa-plus"></i> Kê khai giá KS 4 5 sao </a>
                         <a href="{{url('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh='.$macskd.'/create_dk')}}" class="btn btn-default btn-sm">
                             <i class="fa fa-plus"></i> Kê khai mới (file đính kèm) </a>
                         @endif
@@ -157,21 +159,21 @@
                                     </td>
                                 @endif
                                 <td>
+
+                                    <!--a href="{{url('ke_khai_dich_vu_luu_tru/report_ke_khai/'.$tt->mahs)}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Xem chi tiết</a-->
+
                                     @if($tt->phanloai=='DINHKEM')
                                         <a href="{{url('/data/uploads/attack/'.$tt->filedk)}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Xem chi tiết</a>
+                                    @elseif($tt->phanloai == 'DT')
+                                        <a href="{{url('ke_khai_dich_vu_luu_tru/report_ke_khai/khach_san/'.$tt->mahs)}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Xem chi tiết</a>
                                     @else
                                         <a href="{{url('ke_khai_dich_vu_luu_tru/report_ke_khai/'.$tt->mahs)}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Xem chi tiết</a>
                                     @endif
 
                                     @if($tt->trangthai == 'Chờ chuyển' || $tt->trangthai == 'Bị trả lại')
                                         @if(can('kkdvlt','edit'))
-
-                                                @if($tt->phanloai=='DINHKEM')
-                                                    <a href="{{url('ke_khai_dich_vu_luu_tru/'.$tt->id.'/edit_dk')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</a>
-                                                @else
-                                                    <a href="{{url('ke_khai_dich_vu_luu_tru/'.$tt->id.'/edit')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</a>
-                                                @endif
-                                            @endif
+                                        <a href="{{url('ke_khai_dich_vu_luu_tru/'.$tt->id.'/edit')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</a>
+                                        @endif
                                         @if(can('kkdvlt','delete'))
                                         <button type="button" onclick="getId('{{$tt->id}}')" class="btn btn-default btn-xs mbs" data-target="#delete-modal" data-toggle="modal"><i class="fa fa-trash-o"></i>&nbsp;
                                             Xóa</button>

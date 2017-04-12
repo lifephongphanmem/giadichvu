@@ -41,6 +41,39 @@ class ReportsController extends Controller
         }else
             return view('errors.notlogin');
     }
+
+    public function kkgdvltks($mahs){
+        if (Session::has('admin')) {
+            //dd($id);
+            $modelkk = KkGDvLt::where('mahs',$mahs)->first();
+            //dd($modelkk);
+            $modeldn = DnDvLt::where('masothue',$modelkk->masothue)
+                ->first();
+            //dd($modeldn);
+            //dd($modelkk->masothue);
+            $modelcskd = CsKdDvLt::where('macskd',$modelkk->macskd)
+                ->first();
+            $modelkkct = KkGDvLtCt::where('mahs',$modelkk->mahs)
+                ->get();
+            $modelcqcq = DmDvQl::where('maqhns',$modeldn->cqcq)
+                ->first();
+            return view('reports.kkgdvlt.printks')
+                ->with('modelkk',$modelkk)
+                ->with('modeldn',$modeldn)
+                ->with('modelcskd',$modelcskd)
+                ->with('modelkkct',$modelkkct)
+                ->with('modelcqcq',$modelcqcq)
+                ->with('pageTitle','Kê khai giá dịch vụ lưu trú');
+
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function getttp($maloaip){
+
+
+    }
+
     public function dvltbc1(Request $request){
         if (Session::has('admin')) {
             $input = $request->all();

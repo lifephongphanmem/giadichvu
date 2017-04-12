@@ -31,6 +31,7 @@ class CreateCbkkgdvltTable extends Migration
             $table->text('lydo')->nullable();
             $table->string('trangthai')->nullable();
             $table->string('idkk')->nullable();
+            $table->string('phanloai')->nullable();
             $table->timestamps();
         });
     }

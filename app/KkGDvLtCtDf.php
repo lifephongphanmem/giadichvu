@@ -17,5 +17,7 @@ class KkGDvLtCtDf extends Model
         'ghichu',
         'mucgialk',
         'mucgiakk',
+        'tendoituong',
+        'apdung'
     ];
 }

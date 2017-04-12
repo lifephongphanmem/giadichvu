@@ -309,6 +309,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             @if(can('dvlt','index'))
                                 <li><a href="{{url('ttdn_dich_vu_luu_tru')}}">Thông tin doanh nghiệp</a></li>
                                 <li><a href="{{url('ttcskd_dich_vu_luu_tru')}}">Thông tin CSKD</a></li>
+                                <li><a href="{{url('doi_tuong_ap_dung')}}">Đối tượng áp dụng</a></li>
                             @endif
                             @if(can('kkdvlt','index'))
                                 @if(can('kkdvlt','create'))

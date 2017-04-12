@@ -24,6 +24,7 @@ class KkGDvLt extends Model
         'lydo',
         'trangthai',
         'cqcq',
-        'dvt'
+        'dvt',
+        'phanloai'
     ];
 }

@@ -313,6 +313,7 @@ class ComposerStaticInitd7de3fb6aaadd474bf447891cb3bef8d
         'CreateDmdvvtxtxTable' => __DIR__ . '/../..' . '/database/migrations/2016_05_12_102628_create_dmdvvtxtx_table.php',
         'CreateDmgiahlTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_08_085756_create_dmgiahl_table.php',
         'CreateDndvltTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_14_013710_create_dndvlt_table.php',
+        'CreateDoituongapdungdvltTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_10_204644_create_doituongapdungdvlt_table.php',
         'CreateDonvidvvtTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_18_014826_create_donvidvvt_table.php',
         'CreateGeneralConfigsTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_14_022915_create_general-configs_table.php',
         'CreateKkdvvtkhacTable' => __DIR__ . '/../..' . '/database/migrations/2016_05_12_104445_create_kkdvvtkhac_table.php',

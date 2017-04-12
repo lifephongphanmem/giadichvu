@@ -23,6 +23,8 @@ class CreateKkgdvltctdfTable extends Migration
             $table->string('ghichu')->nullable();
             $table->string('mucgialk')->nullable();
             $table->string('mucgiakk')->nullable();
+            $table->text('tendoituong')->nullable();
+            $table->text('apdung')->nullable();
             $table->timestamps();
         });
     }

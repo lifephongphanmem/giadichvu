@@ -1,14 +1,4 @@
 <?php
-Route::get('test',function(){
-    return view('manage.test.create')
-        ->with('pageTitle','Test');
-});
-Route::get('test1',function(){
-    return view('manage.test.test')
-        ->with('pageTitle','Test');
-});
-
-
 
 Route::get('/', 'HomeController@index');
 Route::get('/setting','HomeController@setting');
@@ -156,6 +146,15 @@ Route::get('ttphong/xoa','CsKdDvLtController@ttphongxoa');
     //End Ajax ttphongedit
 Route::patch('ttcskd_dich_vu_luu_tru/{id}','CsKdDvLtController@update');
 Route::post('ttcskd_dich_vu_luu_tru/delete','CsKdDvLtController@destroy');
+//Đối tượng áp dụng
+Route::get('doi_tuong_ap_dung','DoiTuongApDungDvLtController@cskd');
+Route::get('doi_tuong_ap_dung/masothue={masothue}','DoiTuongApDungDvLtController@showcskd');
+Route::get('doi_tuong_ap_dung/co_so_kinh_doanh={macskd}','DoiTuongApDungDvLtController@index');
+Route::post('doi_tuong_ap_dung','DoiTuongApDungDvLtController@store');
+Route::get('doi_tuong_ap_dung/edit','DoiTuongApDungDvLtController@edit');
+Route::post('doi_tuong_ap_dung/update','DoiTuongApDungDvLtController@update');
+Route::post('doi_tuong_ap_dung/delete','DoiTuongApDungDvLtController@delete');
+//End đối tượng áp dụng
 
 //Kê khai giá dịch vụ lưu trú
 Route::get('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh','KkGDvLtController@cskd');
@@ -188,6 +187,26 @@ Route::post('ke_khai_dich_vu_luu_tru/chuyen','KkGDvLtController@chuyen');
 Route::get('/kkgdvlt/viewlydo','KkGDvLtController@viewlydo');
 Route::post('ke_khai_dich_vu_luu_tru/delete','KkGDvLtController@destroy');
 
+        //Kê khai lưu tru KS 45 sao
+Route::get('ke_khai_dich_vu_luu_tru/khach_san={macskd}/create','KkGiaDvLt45sController@create');
+Route::post('ke_khai_dich_vu_luu_tru/khach_san','KkGiaDvLt45sController@store');
+Route::get('ke_khai_dich_vu_luu_tru/khach_san/{id}/edit','KkGiaDvLt45sController@edit');
+Route::patch('ke_khai_dich_vu_luu_tru/khach_san/{id}','KkGiaDvLt45sController@update');
+    //Ajax create
+Route::get('/kkgdvlt45s/addttp','KkGiaDvLt45sCtDfController@addttp');
+Route::get('/kkgdvlt45s/editttp','KkGiaDvLt45sCtDfController@editttp');
+Route::get('/kkgdvlt45s/updatettp','KkGiaDvLt45sCtDfController@updatettp');
+Route::get('/kkgdvlt45s/deletettp','KkGiaDvLt45sCtDfController@delete');
+    //End Ajax create
+    //Ajax edit
+Route::get('/kkgdvlt45s/themttp','KkGiaDvLt45sCtController@addttp');
+Route::get('/kkgdvlt45s/csttp','KkGiaDvLt45sCtController@editttp');
+Route::get('/kkgdvlt45s/tdttp','KkGiaDvLt45sCtController@updatettp');
+Route::get('/kkgdvlt45s/xoattp','KkGiaDvLt45sCtController@delete');
+    //End Ajax edit
+
+        //End Kê khai lưu trú KS 45 sao
+
     //Xét duyệt kê khai
 Route::get('xet_duyet_ke_khai_dich_vu_luu_tru/thang={thang}&nam={nam}&pl={pl}','KkGDvLtXdController@index');
 Route::post('xet_duyet_ke_khai_dich_vu_luu_tru/tralai','KkGDvLtXdController@tralai');
@@ -202,6 +221,7 @@ Route::get('search_ke_khai_dich_vu_luu_tru/doanh_nghiep={masothue}&co_so_kinh_do
     //End search kê khai
     //Print Kê khai
 Route::get('ke_khai_dich_vu_luu_tru/report_ke_khai/{mahs}','ReportsController@kkgdvlt');
+Route::get('ke_khai_dich_vu_luu_tru/report_ke_khai/khach_san/{mahs}','ReportsController@kkgdvltks');
 //End kê khai giá dịch vụ lưu trú
 
 
