@@ -193,8 +193,8 @@ class KkDvVtXbController extends Controller
                 $mdCT = KkDvVtXbCt::select('giakkluot','giakkthang')->where('masokk', $masokk)->where('madichvu', $dv->madichvu)->first();
                 $mdkk->giakklkluot = count($mdCT)>0 ? $mdCT->giakkluot : 0;
                 $mdkk->giakklkthang = count($mdCT)>0 ? $mdCT->giakkthang : 0;
-                $mdkk->giakkluot =0;
-                $mdkk->giakkthang =0;
+                $mdkk->giakkluot = count($mdCT)>0 ? $mdCT->giakkluot : 0;
+                $mdkk->giakkthang = count($mdCT)>0 ? $mdCT->giakkthang : 0;
                 $mdkk->masokk = '';
                 $mdkk->save();
 

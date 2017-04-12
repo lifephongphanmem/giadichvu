@@ -136,10 +136,10 @@ class KkGiaDvVtTaxiController extends Controller
                         $mdkk->trenkmlk = count($mdCT)>0 ? $mdCT->trenkm : 1;
                         $mdkk->giakklkden = count($mdCT)>0 ? $mdCT->giakkden : 0;
                         $mdkk->giakklktl = count($mdCT)>0 ? $mdCT->giakktl : 0;
-                        $mdkk->giakk =0;
-                        $mdkk->trenkm = 1;
-                        $mdkk->giakkden =0;
-                        $mdkk->giakktl =0;
+                        $mdkk->giakk =count($mdCT)>0 ? $mdCT->giakk : 0;
+                        $mdkk->trenkm = count($mdCT)>0 ? $mdCT->trenkm : 1;
+                        $mdkk->giakkden =count($mdCT)>0 ? $mdCT->giakkden : 0;
+                        $mdkk->giakktl =count($mdCT)>0 ? $mdCT->giakktl : 0;
 
                         $a=array('nguyengia'=>0,
                                 'tongkm'=>0,
