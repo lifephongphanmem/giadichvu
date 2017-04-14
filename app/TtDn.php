@@ -32,7 +32,8 @@ class TtDn extends Model
         'diadanh',
         'pl',
         'link',
-        'cqcq'
+        'cqcq',
+        'lydo'
 
     ];
 }

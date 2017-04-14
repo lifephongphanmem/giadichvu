@@ -38,6 +38,7 @@ class CreateTtdnTable extends Migration
             $table->string('pl')->nullable();
             $table->string('link')->nullable();
             $table->string('cqcq')->nullable();
+            $table->string('lydo')->nullable();
             $table->timestamps();
         });
     }

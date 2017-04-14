@@ -6,7 +6,23 @@
 
 
 @section('custom-script')
+    <script>
+        function confirmTraLai(id) {
+            document.getElementById("idtralai").value = id;
+        }
+        function ClickTraLai(){
+            if($('#lydo').val() == ''){
+                toastr.error("Bạn cần nhập lý do trả lại hồ sơ", "Lỗi!!!");
+                $('#frm_tralai').submit(function (e) {
+                    e.preventDefault();
+                });
+            }else{
+                toastr.success("Hồ sơ đã thay đổi thông tin doanh nghiệp được trả lại!", "Thành công!");
+                $('#frm_tralai').unbind('submit').submit();
+            }
 
+        }
+    </script>
 @stop
 
 @section('content')
@@ -28,8 +44,8 @@
                     <div class="actions">
                         <a href="{{url('xetduyet_thaydoi_thongtindoanhnghiep/'.$modeltttd->id.'/duyet')}}" class="btn btn-default btn-sm">
                             <i class="fa fa-check"></i> Đồng ý thay đổi thông tin </a>
-                        <a href="{{url('xetduyet_thaydoi_thongtindoanhnghiep/phanloai=dich_vu_luu_tru')}}" class="btn btn-default btn-sm">
-                            <i class="fa fa-reply"></i> Quay lại</a>
+                        <button type="button" onclick="confirmTraLai({{$modeltttd->id}})" class="btn btn-default btn-xs mbs" data-target="#tralai-modal" data-toggle="modal"><i class="fa fa-reply"></i>&nbsp;
+                            Trả lại</button>
                     </div>
                 </div>
                 <div class="portlet-body">
@@ -253,6 +269,39 @@
                     </div>
                 </div>
             </div>
+            <div class="row" style="text-align: center">
+                <div class="col-md-12">
+                    <a href="{{url('xetduyet_thaydoi_thongtindoanhnghiep/phanloai=dich_vu_luu_tru')}}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
+                </div>
+            </div>
         </div>
     </div>
+
+    <!--Model tralai-->
+    <div class="modal fade" id="tralai-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                {!! Form::open(['url'=>'xetduyet_thaydoi_thongtindoanhnghiep/tralai','id' => 'frm_tralai'])!!}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Đồng ý trả lại hồ sơ thay đổi thông tin doanh nghiệp?</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label><b>Lý do</b></label>
+                        <textarea id="lydo" class="form-control" name="lydo" cols="30" rows="5"></textarea></div>
+                </div>
+                <input type="hidden" name="idtralai" id="idtralai">
+                <div class="modal-footer">
+                    <button type="button" class="btn default" data-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn blue" onclick="ClickTraLai()">Đồng ý</button>
+
+                </div>
+                {!! Form::close() !!}
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
 @stop

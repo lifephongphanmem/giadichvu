@@ -12,8 +12,6 @@
 @stop
 
 @section('content')
-
-
     <h3 class="page-title">
         Thông tin doanh nghiệp cung cấp dịch vụ lưu trú<small> chỉnh sửa</small>
     </h3>
@@ -28,10 +26,11 @@
                 </div-->
                 <div class="portlet-body form">
                     <!-- BEGIN FORM-->
-                    {!! Form::model($model, ['method' => 'PATCH', 'url'=>'ttdn_dich_vu_luu_tru/'. $model->id, 'class'=>'horizontal-form','id'=>'update_tttaikhoan']) !!}
+                    {!! Form::model($model, ['method' => 'PATCH', 'url'=>'ttdn_dich_vu_luu_tru/df/'. $model->id, 'class'=>'horizontal-form','id'=>'update_tttaikhoan']) !!}
                         <meta name="csrf-token" content="{{ csrf_token() }}" />
                         <div class="form-body">
                             <div class="row">
+                                <!--/span-->
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Mã số thuế</label>
@@ -45,20 +44,18 @@
                                     </div>
                                 </div>
                                 <!--/span-->
-
-                                <!--/span-->
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Số điện thoại trụ sở chính</label>
-                                        {!!Form::text('teldn', null, array('id' => 'teldn','class' => 'form-control','autofocus'))!!}
+                                        {!!Form::text('tel', null, array('id' => 'tel','class' => 'form-control','autofocus'))!!}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Số fax trụ sở chính</label>
-                                        {!!Form::text('faxdn', null, array('id' => 'faxdn','class' => 'form-control'))!!}
+                                        {!!Form::text('fax', null, array('id' => 'fax','class' => 'form-control'))!!}
                                     </div>
                                 </div>
                             </div>
@@ -66,7 +63,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Địa chỉ trụ sở<span class="require">*</span></label>
-                                        {!!Form::text('diachidn', null, array('id' => 'diachidn','class' => 'form-control required'))!!}
+                                        {!!Form::text('diachi', null, array('id' => 'diachi','class' => 'form-control required'))!!}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -125,10 +122,10 @@
                                 </div>
                                 @else
                                     <input type="hidden" name="cqcq" id="cqcq" value="{{$model->cqcq}}">
-                                    <input type="hidden" name="masothue" id="masothue" value="{{$model->masothue}}">
                                 @endif
                             </div>
                         </div>
+
 
                     <!-- END FORM-->
                 </div>

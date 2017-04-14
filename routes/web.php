@@ -33,6 +33,7 @@ Route::patch('cau_hinh_he_thong/{id}','GeneralConfigsController@update');
 Route::get('xetduyet_thaydoi_thongtindoanhnghiep/phanloai={pl}','XdTdTtDnController@index');
 Route::get('xetduyet_thaydoi_thongtindoanhnghiep/{id}/show','XdTdTtDnController@show');
 Route::get('xetduyet_thaydoi_thongtindoanhnghiep/{id}/duyet','XdTdTtDnController@duyet');
+Route::post('xetduyet_thaydoi_thongtindoanhnghiep/tralai','XdTdTtDnController@tralai');
 
 //Users
 Route::get('login','UsersController@login');
@@ -120,7 +121,9 @@ Route::post('reports/dich_vu_luu_tru/BC2','ReportsController@dvltbc2');
 //Thông tin doanh nghiệp
 Route::get('ttdn_dich_vu_luu_tru','DnDvLtController@ttdn');
 Route::get('ttdn_dich_vu_luu_tru/{id}/edit','DnDvLtController@ttdnedit');
+Route::get('ttdn_dich_vu_luu_tru/{id}/chinhsua','DnDvLtController@ttdnchinhsua');
 Route::patch('ttdn_dich_vu_luu_tru/{id}','DnDvLtController@ttdnupdate');
+Route::patch('ttdn_dich_vu_luu_tru/df/{id}','DnDvLtController@ttdncapnhat');
 //End Thông tin doanh nghiệp
 //Thông tin CSKD
 Route::get('ttcskd_dich_vu_luu_tru','CsKdDvLtController@index');
@@ -235,7 +238,9 @@ Route::group(['prefix'=>'dich_vu_van_tai'],function(){
     Route::group(['prefix'=>'thong_tin_don_vi'],function(){
         Route::get('', 'DonViDvVtController@TtDnIndex');
         Route::get('{id}/edit', 'DonViDvVtController@TtDnedit');
+        Route::get('{id}/chinhsua','DonViDvVtController@ttdnchinhsua');
         Route::patch('{id}/update', 'DonViDvVtController@TtDnupdate');
+        Route::patch('{id}/capnhat', 'DonViDvVtController@ttdncapnhat');
     });
     //End Thông tin đơn vị
 

@@ -19,20 +19,24 @@ class XdTdTtDnController extends Controller
                 if ($pl == 'dich_vu_luu_tru') {
                     if (session('admin')->sadmin == 'ssa') {
                         $model = TtDn::where('pl', 'DVLT')
+                            ->where('trangthai','Chờ duyệt')
                             ->get();
                     } else {
                         $model = TtDn::where('pl', 'DVLT')
                             ->where('cqcq', session('admin')->cqcq)
+                            ->where('trangthai','Chờ duyệt')
                             ->get();
                     }
 
                 }else {
                     if(session('admin')->sadmin == 'ssa'){
                         $model = TtDn::where('pl', 'DVVT')
+                            ->where('trangthai','Chờ duyệt')
                             ->get();
                     }else{
                         $model = TtDn::where('pl','DVVT')
                             ->where('cqcq',session('admin')->cqcq)
+                            ->where('trangthai','Chờ duyệt')
                             ->get();
                     }
                 }
@@ -87,6 +91,7 @@ class XdTdTtDnController extends Controller
             if($modeltttd->pl == 'DVLT') {
                 $model = DnDvLt::where('masothue', $modeltttd->masothue)
                     ->first();
+                $model->tendn = $modeltttd->tendn;
                 $model->diachidn = $modeltttd->diachi;
                 $model->teldn = $modeltttd->tel;
                 $model->faxdn = $modeltttd->fax;
@@ -102,6 +107,7 @@ class XdTdTtDnController extends Controller
             }elseif($modeltttd->pl == 'DVVT'){
                 $model = DonViDvVt::where('masothue', $modeltttd->masothue)
                     ->first();
+                $model->tendonvi = $modeltttd->tendn;
                 $model->diachi =  $modeltttd->diachi;
                 $model->dienthoai = $modeltttd->tel;
                 $model->giayphepkd = $modeltttd->giayphepkd;
@@ -126,6 +132,23 @@ class XdTdTtDnController extends Controller
         }else
             return view('errors.notlogin');
 
+    }
+
+    public function tralai(Request $request){
+        if (Session::has('admin')) {
+            $input = $request->all();
+            $model = TtDn::where('id',$input['idtralai'])->first();
+            $model->lydo = $input['lydo'];
+            $model->trangthai = 'Bị trả lại';
+            $model->save();
+            if($model->pl == 'DVLT') {
+                return redirect('xetduyet_thaydoi_thongtindoanhnghiep/phanloai=dich_vu_luu_tru');
+            }elseif($model->pl == 'DVVT') {
+                return redirect('xetduyet_thaydoi_thongtindoanhnghiep/phanloai=dich_vu_van_tai');
+            }
+
+        }else
+            return view('errors.notlogin');
     }
 
 }

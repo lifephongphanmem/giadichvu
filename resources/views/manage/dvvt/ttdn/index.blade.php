@@ -29,10 +29,14 @@
                     <div class="caption">
                     </div>
                     <div class="actions">
-                        <a href="{{url('dich_vu_van_tai/thong_tin_don_vi/'.$model->id.'/edit')}}" class="btn btn-default btn-sm">
-                            <i class="fa fa-edit"></i> Thay đổi thông tin </a>
-                        <!--a href="" class="btn btn-default btn-sm">
-                            <i class="fa fa-print"></i> Print </a-->
+                        @if(!isset($modeltttd))
+                            <a href="{{url('dich_vu_van_tai/thong_tin_don_vi/'.$model->id.'/edit')}}" class="btn btn-default btn-sm">
+                                <i class="fa fa-edit"></i> Thay đổi thông tin </a>
+                        @elseif($modeltttd->trangthai == 'Bị trả lại')
+                            <a href="{{url('dich_vu_van_tai/thong_tin_don_vi/'.$modeltttd->id.'/chinhsua')}}" class="btn btn-default btn-sm">
+                                <i class="fa fa-edit"></i> Chỉnh sửa thông tin </a>
+                        @endif
+
                     </div>
                 </div>
                 <div class="portlet-body">
@@ -316,7 +320,18 @@
                         </div>
                         @endif
                     </div>
+                    @if(isset($modeltttd))
+                        @if($modeltttd->trangthai == 'Bị trả lại')
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h5>Hồ sơ bị trả lại</h5>
+                                    <p>Lý do: {{$modeltttd->lydo}}</p>
+                                </div>
+                            </div>
+                        @endif
+                    @endif
                 </div>
+
             </div>
         </div>
     </div>

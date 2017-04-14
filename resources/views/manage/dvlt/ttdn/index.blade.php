@@ -27,8 +27,13 @@
                     </div>
                     <div class="actions">
                         @if(can('dvlt','edit'))
+                            @if(!isset($modeltttd))
                             <a href="{{url('ttdn_dich_vu_luu_tru/'.$model->id.'/edit')}}" class="btn btn-default btn-sm">
                                 <i class="fa fa-edit"></i> Thay đổi thông tin </a>
+                            @elseif($modeltttd->trangthai == 'Bị trả lại')
+                                <a href="{{url('ttdn_dich_vu_luu_tru/'.$modeltttd->id.'/chinhsua')}}" class="btn btn-default btn-sm">
+                                    <i class="fa fa-edit"></i> Chỉnh sửa thông tin </a>
+                            @endif
                         @endif
                         <!--a href="" class="btn btn-default btn-sm">
                             <i class="fa fa-print"></i> Print </a-->
@@ -235,6 +240,15 @@
                                 </tr>
                                 <tr>
                                     <td style="width:15%">
+                                        <b>Cơ quan chủ quản</b>
+                                    </td>
+                                    <td style="width:35%">
+                                <span class="text-muted">{{$modeltttd->tencqcq}}
+                                </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:15%">
                                         <b>Chức danh người ký</b>
                                     </td>
                                     <td style="width:35%">
@@ -265,6 +279,16 @@
                         </div>
                         @endif
                     </div>
+                    @if(isset($modeltttd))
+                    @if($modeltttd->trangthai == 'Bị trả lại')
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5>Hồ sơ bị trả lại</h5>
+                            <p>Lý do: {{$modeltttd->lydo}}</p>
+                        </div>
+                    </div>
+                    @endif
+                    @endif
                 </div>
             </div>
         </div>

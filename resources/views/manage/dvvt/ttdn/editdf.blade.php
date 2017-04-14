@@ -23,7 +23,7 @@
                 </div-->
                 <div class="portlet-body form">
                     <!-- BEGIN FORM-->
-                    {!! Form::model($model, ['method' => 'PATCH', 'url'=>'dich_vu_van_tai/thong_tin_don_vi/'. $model->id.'/update', 'class'=>'horizontal-form','id'=>'update_ttdndvvt']) !!}
+                    {!! Form::model($model, ['method' => 'PATCH', 'url'=>'dich_vu_van_tai/thong_tin_don_vi/'. $model->id.'/capnhat', 'class'=>'horizontal-form','id'=>'update_ttdndvvt']) !!}
                     <meta name="csrf-token" content="{{ csrf_token() }}" />
                     <div class="form-body">
                         <div class="row">
@@ -36,7 +36,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">Tên doanh nghiệp<span class="require">*</span></label>
-                                    {!!Form::text('tendonvi', null, array('id' => 'tendonvi','class' => 'form-control required'))!!}
+                                    {!!Form::text('tendn', null, array('id' => 'tendn','class' => 'form-control required'))!!}
                                 </div>
                             </div>
                             <!--/span-->
@@ -47,7 +47,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">Số điện thoại trụ sở chính</label>
-                                    {!!Form::text('dienthoai', null, array('id' => 'dienthoai','class' => 'form-control'))!!}
+                                    {!!Form::text('tel', null, array('id' => 'dienthoai','class' => 'form-control'))!!}
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -67,7 +67,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">Nơi đăng ký nộp thuế<span class="require">*</span></label>
-                                    {!!Form::text('dknopthue', null, array('id' => 'dknopthue','class' => 'form-control'))!!}
+                                    {!!Form::text('noidknopthue', null, array('id' => 'dknopthue','class' => 'form-control'))!!}
                                 </div>
                             </div>
                         </div>
@@ -89,7 +89,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">Chức danh người ký<span class="require">*</span></label>
-                                    {!!Form::text('chucdanh', null, array('id' => 'chucdanh','class' => 'form-control required'))!!}
+                                    {!!Form::text('chucdanhky', null, array('id' => 'chucdanh','class' => 'form-control required'))!!}
                                 </div>
                             </div>
                             <div class="col-md-6">
