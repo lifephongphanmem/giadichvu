@@ -8,7 +8,13 @@ use App\DnDvLtReg;
 use App\DonViDvVt;
 use App\DonViDvVtReg;
 use App\GeneralConfigs;
+use App\KkDvVtKhac;
+use App\KkDvVtXb;
+use App\KkDvVtXk;
+use App\KkDvVtXtx;
+use App\KkGDvLt;
 use App\Register;
+use App\TtDn;
 use App\Users;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
@@ -24,9 +30,154 @@ class HomeController extends Controller
         if (Session::has('admin')) {
             if(session('admin')->sadmin == 'satc' || session('admin')->sadmin == 'savt')
                 return redirect('cau_hinh_he_thong');
-            else
+            else{
+                if(session('admin')->sadmin == 'ssa'){
+                    $cnttdndvlt = TtDn::where('pl','DVLT')
+                        ->where('trangthai','Chờ duyệt')
+                        ->count();
+                    $btlttdndvlt = TtDn::where('pl','DVLT')
+                        ->where('trangthai','Bị trả lại')
+                        ->count();
+                    $cnkkgdvlt = KkGDvLt::where('trangthai','Chờ nhận')
+                        ->count();
+                    $btlkkgdvlt = KkGDvLt::where('trangthai','Chờ nhận')
+                        ->count();
+                    $cnttdndvvt = TtDn::where('pl','DVVT')
+                        ->where('trangthai','Chờ duyệt')
+                        ->count();
+                    $btlttdndvvt = TtDn::where('pl','DVVT')
+                        ->where('trangthai','Bị trả lại')
+                        ->count();
+                    $cnkkgvtxk = KkDvVtXk::where('trangthai','Chờ nhận')
+                        ->count();
+                    $btlkkgvtxk = KkDvVtXk::where('trangthai','Bị trả lại')
+                        ->count();
+                    $cnkkgvtxb = KkDvVtXb::where('trangthai','Chờ nhận')
+                        ->count();
+                    $btlkkgvtxb = KkDvVtXb::where('trangthai','Bị trả lại')
+                        ->count();
+                    $cnkkgvtxtx = KkDvVtXtx::where('trangthai','Chờ nhận')
+                        ->count();
+                    $btlkkgvtxtx = KkDvVtXtx::where('trangthai','Bị trả lại')
+                        ->count();
+                    $cnkkgvtkhac = KkDvVtKhac::where('trangthai','Chờ nhận')
+                        ->count();
+                    $btlkkgvtkhac = KkDvVtKhac::where('trangthai','Bị trả lại')
+                        ->count();
+                }elseif(session('admin')->level == 'T' || session('admin') == 'H'){
+                    $cnttdndvlt = TtDn::where('pl','DVLT')
+                        ->where('trangthai','Chờ duyệt')
+                        ->where('cqcq',session('admin')->cqcq)
+                        ->count();
+                    $btlttdndvlt = TtDn::where('pl','DVLT')
+                        ->where('trangthai','Bị trả lại')
+                        ->where('cqcq',session('admin')->cqcq)
+                        ->count();
+                    $cnkkgdvlt = KkGDvLt::where('trangthai','Chờ nhận')
+                        ->where('cqcq',session('admin')->cqcq)
+                        ->count();
+                    $btlkkgdvlt = KkGDvLt::where('trangthai','Chờ nhận')
+                        ->where('cqcq',session('admin')->cqcq)
+                        ->count();
+                    $cnttdndvvt = TtDn::where('pl','DVVT')
+                        ->where('trangthai','Chờ duyệt')
+                        ->where('cqcq',session('admin')->cqcq)
+                        ->count();
+                    $btlttdndvvt = TtDn::where('pl','DVVT')
+                        ->where('trangthai','Bị trả lại')
+                        ->where('cqcq',session('admin')->cqcq)
+                        ->count();
+                    $cnkkgvtxk = KkDvVtXk::where('trangthai','Chờ nhận')
+                        ->where('cqcq',session('admin')->cqcq)
+                        ->count();
+                    $btlkkgvtxk = KkDvVtXk::where('trangthai','Chờ nhận')
+                        ->where('cqcq',session('admin')->cqcq)
+                        ->count();
+                    $cnkkgvtxb = KkDvVtXb::where('trangthai','Chờ nhận')
+                        ->where('cqcq',session('admin')->cqcq)
+                        ->count();
+                    $btlkkgvtxb = KkDvVtXb::where('trangthai','Bị trả lại')
+                        ->where('cqcq',session('admin')->cqcq)
+                        ->count();
+                    $cnkkgvtxtx = KkDvVtXtx::where('trangthai','Chờ nhận')
+                        ->where('cqcq',session('admin')->cqcq)
+                        ->count();
+                    $btlkkgvtxtx = KkDvVtXtx::where('trangthai','Bị trả lại')
+                        ->where('cqcq',session('admin')->cqcq)
+                        ->count();
+                    $cnkkgvtkhac = KkDvVtKhac::where('trangthai','Chờ nhận')
+                        ->where('cqcq',session('admin')->cqcq)
+                        ->count();
+                    $btlkkgvtkhac = KkDvVtKhac::where('trangthai','Bị trả lại')
+                        ->where('cqcq',session('admin')->cqcq)
+                        ->count();
+                }else{
+                    $cnttdndvlt = TtDn::where('pl','DVLT')
+                        ->where('trangthai','Chờ duyệt')
+                        ->where('masothue',session('admin')->mahuyen)
+                        ->count();
+                    $btlttdndvlt = TtDn::where('pl','DVLT')
+                        ->where('trangthai','Bị trả lại')
+                        ->where('masothue',session('admin')->mahuyen)
+                        ->count();
+                    $cnkkgdvlt = KkGDvLt::where('trangthai','Chờ nhận')
+                        ->where('masothue',session('admin')->mahuyen)
+                        ->count();
+                    $btlkkgdvlt = KkGDvLt::where('trangthai','Chờ nhận')
+                        ->where('masothue',session('admin')->mahuyen)
+                        ->count();
+                    $cnttdndvvt = TtDn::where('pl','DVVT')
+                        ->where('trangthai','Chờ duyệt')
+                        ->where('masothue',session('admin')->mahuyen)
+                        ->count();
+                    $btlttdndvvt = TtDn::where('pl','DVVT')
+                        ->where('trangthai','Bị trả lại')
+                        ->where('masothue',session('admin')->mahuyen)
+                        ->count();
+                    $cnkkgvtxk = KkDvVtXk::where('trangthai','Chờ nhận')
+                        ->where('masothue',session('admin')->mahuyen)
+                        ->count();
+                    $btlkkgvtxk = KkDvVtXk::where('trangthai','Chờ nhận')
+                        ->where('masothue',session('admin')->mahuyen)
+                        ->count();
+                    $cnkkgvtxb = KkDvVtXb::where('trangthai','Chờ nhận')
+                        ->where('masothue',session('admin')->mahuyen)
+                        ->count();
+                    $btlkkgvtxb = KkDvVtXb::where('trangthai','Bị trả lại')
+                        ->where('masothue',session('admin')->mahuyen)
+                        ->count();
+                    $cnkkgvtxtx = KkDvVtXtx::where('trangthai','Chờ nhận')
+                        ->where('masothue',session('admin')->mahuyen)
+                        ->count();
+                    $btlkkgvtxtx = KkDvVtXtx::where('trangthai','Bị trả lại')
+                        ->where('masothue',session('admin')->mahuyen)
+                        ->count();
+                    $cnkkgvtkhac = KkDvVtKhac::where('trangthai','Chờ nhận')
+                        ->where('masothue',session('admin')->mahuyen)
+                        ->count();
+                    $btlkkgvtkhac = KkDvVtKhac::where('trangthai','Bị trả lại')
+                        ->where('masothue',session('admin')->mahuyen)
+                        ->count();
+                }
+                $array = '';
+                $array['cnttdndvlt'] = $cnttdndvlt;
+                $array['btlttdndvlt'] = $btlttdndvlt;
+                $array['cnkkgdvlt'] = $cnkkgdvlt;
+                $array['cnttdndvvt'] = $cnttdndvvt;
+                $array['btlkkgdvlt'] = $btlkkgdvlt;
+                $array['btlttdndvvt'] = $btlttdndvvt;
+                $array['cnkkgvtxk'] = $cnkkgvtxk;
+                $array['btlkkgvtxk'] = $btlkkgvtxk;
+                $array['cnkkgvtxb'] = $cnkkgvtxb;
+                $array['btlkkgvtxb'] = $btlkkgvtxb;
+                $array['cnkkgvtxtx'] = $cnkkgvtxtx;
+                $array['btlkkgvtxtx'] = $btlkkgvtxtx;
+                $array['cnkkgvtkhac'] = $cnkkgvtkhac;
+                $array['btlkkgvtkhac'] = $btlkkgvtkhac;
                 return view('dashboard')
+                    ->with('sl',$array)
                     ->with('pageTitle','Tổng quan');
+            }
         }else
             return view('welcome');
 
