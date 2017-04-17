@@ -1,5 +1,7 @@
 <?php
 
+Route::get('/test', 'HomeController@test');
+
 Route::get('/', 'HomeController@index');
 Route::get('/setting','HomeController@setting');
 Route::post('/setting','HomeController@upsetting');
