@@ -27,6 +27,7 @@ class DmGiaHLController extends Controller
                     $model = DonViDvVt::where('cqcq',session('admin')->cqcq)
                         ->get();
                 }
+
                 return view('manage.dvvt.template.dsdonvi_danhmuc')
                     ->with('model',$model)
                     ->with('url','/dich_vu_van_tai/dich_vu_xe_khach/')
@@ -34,6 +35,7 @@ class DmGiaHLController extends Controller
             }
 
             $masothue=session('admin')->mahuyen;
+
             $model = DmGiaHL::where('masothue',$masothue)->get();
             $per=array(
                 'create'=>can('dvvtxk','create'),
