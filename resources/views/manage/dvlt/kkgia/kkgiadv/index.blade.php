@@ -94,8 +94,8 @@
                             <i class="fa fa-plus"></i> Kê khai mới </a>
                         <a href="{{url('ke_khai_dich_vu_luu_tru/khach_san='.$macskd.'/create')}}" class="btn btn-default btn-sm">
                             <i class="fa fa-plus"></i> Kê khai giá KS 4 5 sao </a>
-                        <a href="{{url('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh='.$macskd.'/create_dk')}}" class="btn btn-default btn-sm">
-                            <i class="fa fa-plus"></i> Kê khai mới (file đính kèm) </a>
+                        <!--a href="{{url('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh='.$macskd.'/create_dk')}}" class="btn btn-default btn-sm">
+                            <i class="fa fa-plus"></i> Kê khai mới (file đính kèm) </a-->
                         @endif
                         <a href="{{url('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh')}}" class="btn btn-default btn-sm"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
                     </div>

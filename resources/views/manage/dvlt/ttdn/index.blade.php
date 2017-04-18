@@ -283,7 +283,7 @@
                     @if($modeltttd->trangthai == 'Bị trả lại')
                     <div class="row">
                         <div class="col-md-12">
-                            <h5>Hồ sơ bị trả lại</h5>
+                           <h3 style="font-weight: bold; color: #ff0000">Hồ sơ bị trả lại</h3>
                             <p>Lý do: {{$modeltttd->lydo}}</p>
                         </div>
                     </div>
