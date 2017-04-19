@@ -4,6 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>{{$pageTitle}}</title>
+    <link rel="shortcut icon" href="{{ url('images/LIFESOFT.png')}}" type="image/x-icon">
     <style type="text/css">
         body {
             font: normal 14px/16px time, serif;
@@ -108,8 +109,8 @@
 <table width="96%" border="0" cellspacing="0" cellpadding="8" style="margin:100px auto; text-align: center;">
 
     <tr>
-        <td style="text-align: left;" width="40%">
-        <td style="text-align: center;">
+        <td style="text-align: left;" width="30%">
+        <td style="text-align: center;" width="40%">
             Cơ quan tiếp nhận biểu mẫu kê khai giá<br>
             ghi nhận ngày nộp biểu mẫu kê khai giá<br>
             <table  cellspacing="0" cellpadding="0" border="1" style="margin: 20px auto; border-collapse: collapse;">
@@ -120,7 +121,7 @@
                     @if($modelkk->sohsnhan != '')
                         <td style="text-align: left;">
                             <b>Số:</b> {{$modelkk->sohsnhan}}<br>
-                            <b>Ngày nhận hồ sơ:</b> {{getDateTime($modelkk->ngaychuyen)}}
+                            <b>Ngày nhận hồ sơ:</b> {{getDateTime($modelkk->ngaychuyen)}}<br>
                             <b>Ngày duyệt hồ sơ:</b> {{getDayVn($modelkk->ngaynhan)}}
                         </td>
                     @endif
@@ -128,7 +129,7 @@
             </table>
 
         </td>
-        <td style="text-align: left;" width="40%">
+        <td style="text-align: left;" width="30%">
     </tr>
 </table>
 
@@ -190,10 +191,9 @@
     </tr>
 </table>
 <table width="96%" border="0" cellspacing="0" cellpadding="8" style="margin:100px auto; text-align: center;">
-
     <tr>
-        <td style="text-align: left;" width="40%">
-        <td style="text-align: center;">
+        <td style="text-align: left;" width="30%">
+        <td style="text-align: center;" width="40%">
             Cơ quan tiếp nhận biểu mẫu kê khai giá<br>
             ghi nhận ngày nộp biểu mẫu kê khai giá<br>
             <table  cellspacing="0" cellpadding="0" border="1" style="margin: 20px auto; border-collapse: collapse;">
@@ -204,15 +204,14 @@
                     @if($modelkk->sohsnhan != '')
                         <td style="text-align: left;">
                             <b>Số:</b> {{$modelkk->sohsnhan}}<br>
-                            <b>Ngày nhận hồ sơ:</b> {{getDateTime($modelkk->ngaychuyen)}}
+                            <b>Ngày nhận hồ sơ:</b> {{getDateTime($modelkk->ngaychuyen)}}<br>
                             <b>Ngày duyệt hồ sơ:</b> {{getDayVn($modelkk->ngaynhan)}}
                         </td>
                     @endif
                 </tr>
             </table>
-
         </td>
-        <td style="text-align: left;" width="40%">
+        <td style="text-align: left;" width="30%">
     </tr>
 </table>
 <p style="page-break-before: always">
@@ -257,10 +256,25 @@
 </p>
 <table width="96%" border="0" cellspacing="0" cellpadding="8" style="margin:10px auto; text-align: center;">
     <tr>
-        <td style="text-align: left;" width="30%">
-
+        <td style="text-align: center;" width="40%">
+            Cơ quan tiếp nhận biểu mẫu kê khai giá<br>
+            ghi nhận ngày nộp biểu mẫu kê khai giá<br>
+            <table  cellspacing="0" cellpadding="0" border="1" style="margin: 20px auto; border-collapse: collapse;">
+                <tr>
+                    <td><b>{{$modelcqcq->tendv}}</b></td>
+                </tr>
+                <tr>
+                    @if($modelkk->sohsnhan != '')
+                        <td style="text-align: left;">
+                            <b>Số:</b> {{$modelkk->sohsnhan}}<br>
+                            <b>Ngày nhận hồ sơ:</b> {{getDateTime($modelkk->ngaychuyen)}}<br>
+                            <b>Ngày duyệt hồ sơ:</b> {{getDayVn($modelkk->ngaynhan)}}
+                        </td>
+                    @endif
+                </tr>
+            </table>
         </td>
-        <td style="text-align: center; text-transform: uppercase;" width="70%">
+        <td style="text-align: center; text-transform: uppercase;" width="60%">
             <b>{{$modeldn->chucdanhky}}</b><br>
             <br>
             <br>
@@ -270,7 +284,6 @@
             <b style="text-transform: uppercase;">{{$modeldn->nguoiky}}</b>
         </td>
     </tr>
-<br><br><br><br>
 </table>
 </body>
 </html>

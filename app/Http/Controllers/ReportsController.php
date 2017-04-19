@@ -36,7 +36,7 @@ class ReportsController extends Controller
                 ->with('modelcskd',$modelcskd)
                 ->with('modelkkct',$modelkkct)
                 ->with('modelcqcq',$modelcqcq)
-                ->with('pageTitle','Kê khai giá dịch vụ lưu trú');
+                ->with('pageTitle','Biểu mẫu kê khai giá dịch vụ lưu trú');
 
         }else
             return view('errors.notlogin');
