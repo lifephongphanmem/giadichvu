@@ -219,7 +219,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <button type="button" id="capnhatts" name="capnhatts" class="btn btn-primary">Bổ xung</button>
+                                <button type="button" id="capnhatts" name="capnhatts" class="btn btn-primary">Bổ sung</button>
                                 &nbsp;
                             </div>
                         </div>

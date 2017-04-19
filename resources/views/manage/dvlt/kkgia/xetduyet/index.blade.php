@@ -162,7 +162,8 @@
 
         function confirmNhanHsedit(mahs){
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-            //alert(id);
+            //alert(mahs);
+
             $.ajax({
                 url: '/xdkkgiadvlt/nhanhsedit',
                 type: 'GET',
@@ -377,7 +378,7 @@
                 {!! Form::open(['url'=>'xet_duyet_ke_khai_dich_vu_luu_tru/nhanhsedit','id' => 'frm_nhanhsedit'])!!}
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Thông tin nhận hồ sơ?</h4>
+                    <h4 class="modal-title">Chỉnh sửa thông tin nhận hồ sơ?</h4>
                 </div>
                 <div class="modal-body" id="ttnhanhsedit">
                 </div>

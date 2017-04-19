@@ -485,8 +485,4 @@ class HomeController extends Controller
         return view('errors.register-success');
     }
 
-    function test(){
-        //dd('ok');
-        return view('test');
-    }
 }

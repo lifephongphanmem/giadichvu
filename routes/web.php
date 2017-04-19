@@ -1,7 +1,5 @@
 <?php
-
-Route::get('/test', 'HomeController@test');
-
+// <editor-fold defaultstate="collapsed" desc="--Hệ thống-Đăng ký--">
 Route::get('/', 'HomeController@index');
 Route::get('/setting','HomeController@setting');
 Route::post('/setting','HomeController@upsetting');
@@ -24,7 +22,7 @@ Route::get('search_register/show','HomeController@show');
 Route::post('search_register/show','HomeController@edit');
 Route::patch('register_editdvlt/id={id}','HomeController@updatedvlt');
 Route::patch('register_editdvvt/id={id}','HomeController@updatedvvt');
-
+// </editor-fold>//End Hệ thống- Đăng ký
 
 // <editor-fold defaultstate="collapsed" desc="--Setting--">
 Route::get('cau_hinh_he_thong','GeneralConfigsController@index');

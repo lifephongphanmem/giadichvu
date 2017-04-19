@@ -99,7 +99,6 @@ class KkGDvLtController extends Controller
 
                         }
                     }
-
                     //dd($modelph);
 
                     foreach ($modelph as $ttph) {
@@ -156,7 +155,6 @@ class KkGDvLtController extends Controller
 
             $mahs = getdate()[0];
             $insert = $request->all();
-
             $model = new KkGDvLt();
             $model->ngaynhap = date('Y-m-d', strtotime(str_replace('/', '-', $insert['ngaynhap'])));
             $model->mahs = $mahs;

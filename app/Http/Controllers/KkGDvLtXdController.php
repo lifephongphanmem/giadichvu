@@ -35,8 +35,9 @@ class KkGDvLtXdController extends Controller
             elseif($pl == 'cong_bo') {
 
                 $trangthai = 'Công bố';
-                $model = CbKkGDvLt::whereMonth('ngaynhan',$thang)
+                $model = KkGDvLt::whereMonth('ngaynhan',$thang)
                     ->whereYear('ngaynhan', $nam)
+                    ->where('trangthai','Duyệt')
                     ->get();
             }
 
@@ -108,11 +109,16 @@ class KkGDvLtXdController extends Controller
             $result['message'] .= '<input type="text" style="text-align: center" id="sohsnhan" name="sohsnhan" class="form-control" data-mask="fdecimal" value="'.$stt.'" autofocus>';
             $result['message'] .= '</div>';
             $result['message'] .= '<div class="form-group">';
-            $result['message'] .= '<label><b>Ngày nhận hồ sơ</b></label>';
+            $result['message'] .= '<label><b>Ngày duyệt hồ sơ</b></label>';
             $result['message'] .= '<input type="date" style="text-align: center" id="ngaynhan" name="ngaynhan" class="form-control"  value="'.$ngay.'">';
             $result['message'] .= '</div>';
+            $result['message'] .= '<div class="form-group">';
+            $result['message'] .= '<label><b>Ngày hiệu lực</b></label>';
+            $result['message'] .= '<input type="date" style="text-align: center" id="ngayhieuluc" name="ngayhieuluc" class="form-control"  value="'.$modelhs->ngayhieuluc.'">';
             $result['message'] .= '</div>';
             $result['message'] .= '<input type="hidden" id="idnhanhs" name="idnhanhs" value="'.$inputs['id'].'">';
+            $result['message'] .= '</div>';
+
             $result['status'] = 'success';
         }
         die(json_encode($result));
@@ -126,6 +132,7 @@ class KkGDvLtXdController extends Controller
             $model->trangthai = "Duyệt";
             $model->ngaynhan = $input['ngaynhan'];
             $model->sohsnhan = $input['sohsnhan'];
+            $model->ngayhieuluc = $input['ngayhieuluc'];
 
             if($model->save()){
                 $this->congbo($id);
@@ -190,20 +197,22 @@ class KkGDvLtXdController extends Controller
             $model = KkGDvLt::where('mahs',$inputs['mahs'])
                 ->first();
 
-            $sohsnhan = $model->sohsnhan;
-            $ngaynhan = $model->ngaynhan;
-
-            $result['message'] = '<div class="modal-body" id="ttnhanhs">';
+            $result['message'] = '<div class="modal-body" id="ttnhanhsedit">';
             $result['message'] .= '<div class="form-group">';
             $result['message'] .= '<label><b>Số hồ sơ nhận</b></label>';
-            $result['message'] .= '<input type="text" style="text-align: right" id="sohsnhan" name="sohsnhan" class="form-control" data-mask="fdecimal" value="'.$sohsnhan.'" autofocus>';
+            $result['message'] .= '<input type="text" style="text-align: center" id="sohsnhanedit" name="sohsnhanedit" class="form-control" data-mask="fdecimal" value="'.$model->sohsnhan.'" autofocus>';
             $result['message'] .= '</div>';
             $result['message'] .= '<div class="form-group">';
             $result['message'] .= '<label><b>Ngày nhận hồ sơ</b></label>';
-            $result['message'] .= '<input type="date" style="text-align: center" id="ngaynhan" name="ngaynhan" class="form-control"  value="'.$ngaynhan.'">';
+            $result['message'] .= '<input type="date" style="text-align: center" id="ngaynhanedit" name="ngaynhanedit" class="form-control"  value="'.$model->ngaynhan.'">';
             $result['message'] .= '</div>';
+            $result['message'] .= '<div class="form-group">';
+            $result['message'] .= '<label><b>Ngày hiệu lực</b></label>';
+            $result['message'] .= '<input type="date" style="text-align: center" id="ngayhieulucedit" name="ngayhieulucedit" class="form-control"  value="'.$model->ngayhieuluc.'">';
             $result['message'] .= '</div>';
-            $result['message'] .= '<input type="hidden" id="mahs" name="mahs" value="'.$inputs['mahs'].'">';
+            $result['message'] .= '<input type="hidden" id="mahsedit" name="mahsedit" value="'.$inputs['mahs'].'">';
+            $result['message'] .= '</div>';
+
             $result['status'] = 'success';
         }
         die(json_encode($result));
@@ -212,14 +221,16 @@ class KkGDvLtXdController extends Controller
     public function updatettnhs(Request $request){
         if (Session::has('admin')) {
             $input = $request->all();
-            $model = KkGDvLt::where('mahs',$input['mahs'])->first();
-            $model->ngaynhan = $input['ngaynhan'];
-            $model->sohsnhan = $input['sohsnhan'];
+            $model = KkGDvLt::where('mahs',$input['mahsedit'])->first();
+            $model->ngaynhan = $input['ngaynhanedit'];
+            $model->sohsnhan = $input['sohsnhanedit'];
+            $model->ngayhieuluc = $input['ngayhieulucedit'];
             if($model->save()){
-                $modelcb = CbKkGDvLt::where('mahs',$input['mahs'])
+                $modelcb = CbKkGDvLt::where('mahs',$input['mahsedit'])
                     ->first();
-                $modelcb->ngaynhan = $input['ngaynhan'];
-                $modelcb->sohsnhan = $input['sohsnhan'];
+                $modelcb->ngaynhan = $input['ngaynhanedit'];
+                $modelcb->sohsnhan = $input['sohsnhanedit'];
+                $modelcb->ngayhieuluc = $input['ngayhieulucedit'];
                 $modelcb->save();
             }
             return redirect('xet_duyet_ke_khai_dich_vu_luu_tru/'.'thang='.date('m').'&nam='.date('Y').'&pl=cong_bo');
