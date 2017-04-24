@@ -282,6 +282,30 @@
                 }
             })
         }
+        function checkngay(){
+            document.getElementById("ngaychange").value = $('input[name="ngayhieuluc"]').val();
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                url: '/ajax/checkngay',
+                type: 'GET',
+                data: {
+                    _token: CSRF_TOKEN,
+                    ngaynhap: $('input[name="ngaynhap"]').val(),
+                    ngayhieuluc: $('input[name="ngayhieuluc"]').val()
+                },
+                dataType: 'JSON',
+                success: function (data) {
+                    if (data.status == 'success') {
+                        toastr.success("Ngày hiệu lực có thể sử dụng được", "Thành công!");
+                        $('input[name="ngayhieuluc"]').val() = $('input[name="ngaychange"]').val();
+                    }else {
+                        toastr.error("Bạn cần kiểm tra lại ngày có hiệu lực!", "Lỗi!");
+                        $('input[name="ngayhieuluc"]').val('');
+                    }
+                }
+            })
+
+        }
 
     </script>
 
@@ -299,7 +323,7 @@
         <div class="col-md-12">
             <!-- BEGIN EXAMPLE TABLE PORTLET-->
             <div class="portlet box blue">
-
+                <input type="hidden" name="ngaychange" id="ngaychange">
                 <div class="portlet-body">
                     <h4 class="form-section" style="color: #0000ff">Thông tin hồ sơ</h4>
                     <div class="row">
@@ -315,7 +339,7 @@
                             <div class="form-group">
                                 <label class="control-label">Ngày thực hiện mức giá kê khai<span class="require">*</span></label>
                                 <!--input type="date" name="ngayhieuluc" id="ngayhieuluc" value="{{$model->ngayhieuluc}}" class="form-control required"-->
-                                {!!Form::text('ngayhieuluc',date('d/m/Y',  strtotime($model->ngayhieuluc)), array('id' => 'ngayhieuluc','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required'))!!}
+                                {!!Form::text('ngayhieuluc',date('d/m/Y',  strtotime($model->ngayhieuluc)), array('id' => 'ngayhieuluc','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required','onchange'=>"checkngay()"))!!}
                             </div>
                         </div>
                         <!--/span-->
@@ -350,6 +374,7 @@
                             <div class="form-group">
                                 <label class="control-label">Đơn vị tính<span class="require">*</span></label>
                                 <select class="form-control" name="dvt" id="dvt">
+                                    <option value="no" {{($model->dvt == 'no') ? 'selected' : ''}}>--Chọn đơn vị tính--</option>
                                     <option value="Đồng/phòng/ngày đêm" {{($model->dvt == 'Đồng/phòng/ngày đêm') ? 'selected' : ''}}>Đồng/phòng/ngày đêm</option>
                                     <option value="Đồng/phòng/tuần" {{($model->dvt == 'Đồng/phòng/tuần') ? 'selected' : ''}}>Đồng/phòng/tuần</option>
                                     <option value="Đồng/phòng/tháng" {{($model->dvt == 'Đồng/phòng/tháng') ? 'selected' : ''}}>Đồng/phòng/tháng</option>

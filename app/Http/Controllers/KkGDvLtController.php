@@ -9,6 +9,7 @@ use App\KkGDvLt;
 use App\KkGDvLtCt;
 use App\KkGDvLtCtDf;
 use App\TtCsKdDvLt;
+use Faker\Provider\tr_TR\DateTime;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -116,11 +117,20 @@ class KkGDvLtController extends Controller
                         ->get();
                     //dd($modelcskd);
                     //dd($modelph);
+                    $ngaynhap = date('d/m/Y');
+                    $ngayhieuluc  =  date('d/m/Y',mktime(0, 0, 0, date("m")  , date("d")+3, date("Y")));
+
+
+
+
+
                     return view('manage.dvlt.kkgia.kkgiadv.create')
                         ->with('modelcskd', $modelcskd)
                         ->with('modelph', $modelph)//Thay thế
                         ->with('modeldsph', $modeldsph)
                         ->with('modelcb', $modelcb)
+                        ->with('ngaynhap',$ngaynhap)
+                        ->with('ngayhieuluc',$ngayhieuluc)
                         ->with('pageTitle', 'Kê khai giá dịch vụ lưu trú thêm mới');
                 }else{
                     return view('errors.noperm');

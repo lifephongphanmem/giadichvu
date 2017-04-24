@@ -172,6 +172,30 @@
             })
 
         }
+        function checkngay(){
+            document.getElementById("ngaychange").value = $('input[name="ngayhieuluc"]').val();
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                url: '/ajax/checkngay',
+                type: 'GET',
+                data: {
+                    _token: CSRF_TOKEN,
+                    ngaynhap: $('input[name="ngaynhap"]').val(),
+                    ngayhieuluc: $('input[name="ngayhieuluc"]').val()
+
+                },
+                dataType: 'JSON',
+                success: function (data) {
+                    if (data.status == 'success') {
+                        toastr.success("Ngày hiệu lực có thể sử dụng được", "Thành công!");
+                        $('#ngayhieuluc').val() = $('#ngaychange').val();
+                    }else
+                        toastr.error("Bạn cần kiểm tra lại ngày có hiệu lực!", "Lỗi!");
+                        $('input[name="ngayhieuluc"]').val('');
+                }
+            })
+
+        }
         function clearForm(){
             $('#loaipcreate').val('');
             $('#qcclcreate').val('');
@@ -283,10 +307,7 @@
 
         }
 
-        function checkngay(){
-            var startDate = Date.parse("01/12/2011").getTime();
-            alert(startDate);
-        }
+
     </script>
     <script>
         function InputMask() {
@@ -377,7 +398,7 @@
         <div class="col-md-12">
             <!-- BEGIN EXAMPLE TABLE PORTLET-->
             <div class="portlet box blue">
-
+                <input type="hidden" name="ngaychange" id="ngaychange">
                 <div class="portlet-body">
                     <h4 class="form-section" style="color: #0000ff">Thông tin hồ sơ</h4>
                     <div class="row">
@@ -385,7 +406,7 @@
                             <div class="form-group">
                                 <label class="control-label">Ngày kê khai<span class="require">*</span></label>
                                 <!--input type="date" name="ngaynhap" id="ngaynhap" class="form-control required" autofocus-->
-                                {!!Form::text('ngaynhap',\Carbon\Carbon::now()->format('d/m/Y'), array('id' => 'ngaynhap','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required','autofocus'))!!}
+                                {!!Form::text('ngaynhap',$ngaynhap, array('id' => 'ngaynhap','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required'))!!}
                             </div>
                         </div>
                         <!--/span-->
@@ -393,7 +414,7 @@
                             <div class="form-group has-error">
                                 <label class="control-label">Ngày thực hiện mức giá kê khai<span class="require">*</span></label>
                                 <!--input type="date" name="ngayhieuluc" id="ngayhieuluc" class="form-control required"-->
-                                {!!Form::text('ngayhieuluc',null, array('id' => 'ngayhieuluc','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required','onchange'=>"checkngay()"))!!}
+                                {!!Form::text('ngayhieuluc',$ngayhieuluc, array('id' => 'ngayhieuluc','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required','onchange'=>"checkngay()"))!!}
                             </div>
                         </div>
                         <!--/span-->
@@ -404,7 +425,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Số công văn<span class="require">*</span></label>
-                                <input type="text" name="socv" id="socv" class="form-control required">
+                                <input type="text" name="socv" id="socv" class="form-control required" autofocus>
                             </div>
                         </div>
                         <!--/span-->
@@ -430,6 +451,7 @@
                             <div class="form-group">
                                 <label class="control-label">Đơn vị tính<span class="require">*</span></label>
                                 <select class="form-control" name="dvt" id="dvt">
+                                    <option value="no">--Chọn đơn vị tính--</option>
                                     <option value="Đồng/phòng/ngày đêm">Đồng/phòng/ngày đêm</option>
                                     <option value="Đồng/phòng/tuần">Đồng/phòng/tuần</option>
                                     <option value="Đồng/phòng/tháng">Đồng/phòng/tháng</option>
