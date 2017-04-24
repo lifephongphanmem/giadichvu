@@ -1,6 +1,8 @@
 <?php
 Route::get('/ajax/checkngay','AjaxController@checkngay');
 
+Route::get('/test', 'MailController@test_mail');
+
 // <editor-fold defaultstate="collapsed" desc="--Hệ thống-Đăng ký--">
 Route::get('/', 'HomeController@index');
 Route::get('/setting','HomeController@setting');
