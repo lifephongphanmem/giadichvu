@@ -79,6 +79,12 @@
                                         <label class="control-label">Giấy phép đăng ký kinh doanh<span class="require">*</span></label>
                                         {!!Form::text('giayphepkd', null, array('id' => 'giayphepkd','class' => 'form-control required'))!!}
                                     </div>
+                                    <p class="help-block">
+                                        <span class="label label-success label-sm">
+                                        Help: &nbsp;</span>
+                                        <a target="_blank" href="http://help.csdlgia.vn/data/help/tienich/upfile/upfile.pdf">
+                                            Hướng dẫn cách chia sẻ giấy phép đăng ký kinh doanh </a>
+                                    </p>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">

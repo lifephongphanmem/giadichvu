@@ -70,33 +70,33 @@ class DnDvLtController extends Controller
 
             $insert = $request-> all();
             $model = new DnDvLt();
-                $model->tendn = $insert['tendn'];
-                $model->masothue = $insert['masothue'];
-                $model->diachidn = $insert['diachidn'];
-                $model->teldn = $insert['teldn'];
-                $model->faxdn = $insert['faxdn'];
-                $model->noidknopthue = $insert['noidknopthue'];
-                $model->chucdanhky = $insert['chucdanhky'];
-                $model->nguoiky = $insert['nguoiky'];
-                $model->diadanh = $insert['diadanh'];
-                $model->tailieu = $insert['tailieu'];
-                $model->giayphepkd = $insert['giayphepkd'];
-                $model->trangthai = 'Kích hoạt';
-                //$model->email = $insert['email'];
-                $model->cqcq = $insert['cqcq'];
-                if ($model->save()) {
-                    $modeluser = new Users();
-                    $modeluser->name = $insert['tendn'];
-                    $modeluser->phone = $insert['teldn'];
-                    $modeluser->username = $insert['username'];
-                    $modeluser->password = md5($insert['password']);
-                    $modeluser->status = 'Kích hoạt';
-                    $modeluser->level = 'DVLT';
-                    $modeluser->mahuyen = $insert['masothue'];
-                    $modeluser->cqcq = $insert['cqcq'];
-                    $modeluser->save();
-                }
-                return redirect('dn_dichvu_luutru');
+            $model->tendn = $insert['tendn'];
+            $model->masothue = $insert['masothue'];
+            $model->diachidn = $insert['diachidn'];
+            $model->teldn = $insert['teldn'];
+            $model->faxdn = $insert['faxdn'];
+            $model->noidknopthue = $insert['noidknopthue'];
+            $model->chucdanhky = $insert['chucdanhky'];
+            $model->nguoiky = $insert['nguoiky'];
+            $model->diadanh = $insert['diadanh'];
+            $model->tailieu = $insert['tailieu'];
+            $model->giayphepkd = $insert['giayphepkd'];
+            $model->trangthai = 'Kích hoạt';
+            $model->email = $insert['email'];
+            $model->cqcq = $insert['cqcq'];
+            if ($model->save()) {
+                $modeluser = new Users();
+                $modeluser->name = $insert['tendn'];
+                $modeluser->phone = $insert['teldn'];
+                $modeluser->username = $insert['username'];
+                $modeluser->password = md5($insert['password']);
+                $modeluser->status = 'Kích hoạt';
+                $modeluser->level = 'DVLT';
+                $modeluser->mahuyen = $insert['masothue'];
+                $modeluser->cqcq = $insert['cqcq'];
+                $modeluser->save();
+            }
+            return redirect('dn_dichvu_luutru');
 
         }else
             return view('errors.notlogin');
@@ -154,7 +154,7 @@ class DnDvLtController extends Controller
                 $model->tailieu = $update['tailieu'];
                 $model->giayphepkd = $update['giayphepkd'];
                 $model->cqcq = $update['cqcq'];
-                //$model->email = $update['email'];
+                $model->email = $update['email'];
                 $model->save();
 
                 return redirect('dn_dichvu_luutru');
@@ -309,7 +309,8 @@ class DnDvLtController extends Controller
                 $model->pl = 'DVLT';
                 $model->trangthai = 'Chờ duyệt';
                 $model->cqcq = $update['cqcq'];
-                if($model->save()){
+                $model->save();
+                /*if($model->save()){
                     $tencqcq = DmDvQl::where('maqhns',session('admin')->cqcq)->first();
                     $data=[];
                     $data['tendn'] = $update['tendn'];
@@ -322,7 +323,7 @@ class DnDvLtController extends Controller
                             ->subject('Thông báo thông tin thay đổi thông tin doanh nghiệp');
                         $message->from('qlgiakhanhhoa@gmail.com','Phần mềm CSDL giá');
                     });
-                };
+                };*/
             }
 
             return redirect('ttdn_dich_vu_luu_tru');

@@ -49,6 +49,16 @@
                             </tr>
                             <tr>
                                 <td style="width:15%">
+                                    <b>Cơ quan chủ quản</b>
+                                </td>
+                                <td style="width:35%">
+
+                                <span class="text-muted"><b>{{$model->tencqcq}}</b>
+                                </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:15%">
                                     <b>Tên doanh nghiệp</b>
                                 </td>
                                 <td style="width:35%">
@@ -119,16 +129,7 @@
                                 </span>
                                 </td>
                             </tr>
-                            <tr>
-                                <td style="width:15%">
-                                    <b>Cơ quan chủ quản</b>
-                                </td>
-                                <td style="width:35%">
 
-                                <span class="text-muted">{{$model->tencqcq}}
-                                </span>
-                                </td>
-                            </tr>
                             <tr>
                                 <td style="width:15%">
                                     <b>Chức danh người ký</b>
@@ -165,6 +166,15 @@
                                 <tbody>
                                 <tr>
                                     <td colspan="2" style="text-align: center;color: #5b9bd1"><b>Thông tin thay đổi</b></td>
+                                </tr>
+                                <tr>
+                                    <td style="width:15%">
+                                        <b>Cơ quan chủ quản</b>
+                                    </td>
+                                    <td style="width:35%">
+                                <span class="text-muted"><b>{{$modeltttd->tencqcq}}</b>
+                                </span>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td style="width:15%">
@@ -238,15 +248,7 @@
                                 </span>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td style="width:15%">
-                                        <b>Cơ quan chủ quản</b>
-                                    </td>
-                                    <td style="width:35%">
-                                <span class="text-muted">{{$modeltttd->tencqcq}}
-                                </span>
-                                    </td>
-                                </tr>
+
                                 <tr>
                                     <td style="width:15%">
                                         <b>Chức danh người ký</b>

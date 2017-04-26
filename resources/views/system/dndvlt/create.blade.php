@@ -62,10 +62,19 @@
                                 <!--/span-->
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="control-label">Địa chỉ trụ sở</label>
                                         <input type="text" class="form-control" name="diachidn" id="diachidn">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Email quản lý</label>
+                                        <input type="text" class="form-control" name="email" id="email">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
