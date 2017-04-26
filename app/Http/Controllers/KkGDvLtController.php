@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\CbKkGDvLt;
 use App\CsKdDvLt;
+use App\DmDvQl;
 use App\DnDvLt;
 use App\KkGDvLt;
 use App\KkGDvLtCt;
@@ -16,6 +17,7 @@ use Carbon\Carbon;
 use App\Http\Requests;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Mail;
 
 class KkGDvLtController extends Controller
 {
@@ -342,6 +344,23 @@ class KkGDvLtController extends Controller
                 $model->trangthai = 'Chờ nhận';
                 $model->ngaychuyen = $tgchuyen;
                 $model->save();
+                /*if($model->save()){
+                    $tencqcq = DmDvQl::where('maqhns',$model->cqcq)->first();
+                    $dn = DnDvLt::where('masothue',$model->masothue)->first();
+                    $data=[];
+                    $data['tendn'] = $dn->tendn;
+                    $data['masothue'] = $model->masothue;
+                    $data['tg'] = $tgchuyen;
+                    $data['tencqcq'] = $tencqcq->tendv;
+                    $data['ttnguoinop'] = $input['ttnguoinop'];
+                    $a = $dn->email;
+                    $b = $dn->tendn;
+                    Mail::send('mail.kkgia',$data, function ($message) use($a,$b) {
+                        $message->to($a,$b )
+                            ->subject('Thông báo nhận hồ sơ kê khai giá dịch vụ');
+                        $message->from('qlgiakhanhhoa@gmail.com','Phần mềm CSDL giá');
+                    });
+                };*/
             }
             $macskd = $model->macskd;
 

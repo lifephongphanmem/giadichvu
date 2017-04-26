@@ -38,6 +38,7 @@ Route::get('xetduyet_thaydoi_thongtindoanhnghiep/phanloai={pl}','XdTdTtDnControl
 Route::get('xetduyet_thaydoi_thongtindoanhnghiep/{id}/show','XdTdTtDnController@show');
 Route::get('xetduyet_thaydoi_thongtindoanhnghiep/{id}/duyet','XdTdTtDnController@duyet');
 Route::post('xetduyet_thaydoi_thongtindoanhnghiep/tralai','XdTdTtDnController@tralai');
+Route::post('xetduyet_thaydoi_thongtindoanhnghiep/delete','XdTdTtDnController@del');
 
 //Users
 Route::get('login','UsersController@login');

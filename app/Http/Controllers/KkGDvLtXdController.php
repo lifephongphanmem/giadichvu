@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\CbKkGDvLt;
 use App\CsKdDvLt;
 use App\DmDvQl;
+use App\DnDvLt;
 use App\GeneralConfigs;
 use App\KkGDvLt;
 use Illuminate\Http\Request;
@@ -12,6 +13,7 @@ use Carbon\Carbon;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Mail;
 
 class KkGDvLtXdController extends Controller
 {
@@ -71,7 +73,23 @@ class KkGDvLtXdController extends Controller
             if($input['lydo'] != '') {
                 $model->lydo = $input['lydo'];
                 $model->trangthai = 'Bị trả lại';
-                $model->save();
+                if($model->save()){
+                    $tencqcq = DmDvQl::where('maqhns',$model->cqcq)->first();
+                    $dn = DnDvLt::where('masothue',$model->masothue)->first();
+                    $data=[];
+                    $data['tendn'] = $dn->tendn;
+                    $data['masothue'] = $model->masothue;
+                    $data['tg'] = Carbon::now()->toDateTimeString();
+                    $data['tencqcq'] = $tencqcq->tendv;
+                    $data['lydo'] = $input['lydo'];
+                    $a = $dn->email;
+                    $b = $dn->tendn;
+                    Mail::send('mail.replykkgia',$data, function ($message) use($a,$b) {
+                        $message->to($a,$b )
+                            ->subject('Thông báo trả lại hồ sơ kê khai giá dịch vụ');
+                        $message->from('qlgiakhanhhoa@gmail.com','Phần mềm CSDL giá');
+                    });
+                }
             }
             return redirect('xet_duyet_ke_khai_dich_vu_luu_tru/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan');
         }else
@@ -140,6 +158,25 @@ class KkGDvLtXdController extends Controller
                     ->first();
                 $nhanhs->sohsnhan = $input['sohsnhan'];
                 $nhanhs->save();
+
+                $tencqcq = DmDvQl::where('maqhns',$model->cqcq)->first();
+                $dn = DnDvLt::where('masothue',$model->masothue)->first();
+                $data=[];
+                $data['tendn'] = $dn->tendn;
+                $data['tg'] = Carbon::now()->toDateTimeString();
+                $data['tencqcq'] = $tencqcq->tendv;
+                $data['ngaykk'] = $model->ngaynhap;
+                $data['ngayapdung'] = $input['ngayhieuluc'];;
+                $data['socv'] = $model->socv;
+                $data['ngaynhan'] = $input['ngaynhan'];
+                $data['sohsnhan'] = $input['sohsnhan'];
+                $a = $dn->email;
+                $b = $dn->tendn;
+                Mail::send('mail.successkkgia',$data, function ($message) use($a,$b) {
+                    $message->to($a,$b )
+                        ->subject('Thông báo xét duyệt hồ sơ kê khai giá dịch vụ');
+                    $message->from('qlgiakhanhhoa@gmail.com','Phần mềm CSDL giá');
+                });
                 //$general = GeneralConfigs::first();
                 //$general->sodvlt = $input['sohsnhan'];
                 //$general->save();

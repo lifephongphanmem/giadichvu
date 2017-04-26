@@ -9,11 +9,13 @@ use App\DonViDvVt;
 use App\DonViDvVtReg;
 use App\Register;
 use App\Users;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Mail;
 
 class UsersController extends Controller
 {
@@ -490,6 +492,20 @@ class UsersController extends Controller
                     $modeluser->cqcq = $model->cqcq;
                     $modeluser->save();
                 }
+                $tencqcq = DmDvQl::where('maqhns',$model->cqcq)->first();
+                $data=[];
+                $data['tendn'] = $model->tendn;
+                $data['tg'] = Carbon::now()->toDateTimeString();
+                $data['tencqcq'] = $tencqcq->tendv;
+                $data['masothue'] = $model->masothue;
+                $data['username'] = $model->username;
+                $a = $model->email;
+                $b  =  $model->tendn;
+                Mail::send('mail.successregister',$data, function ($message) use($a,$b) {
+                    $message->to($a,$b )
+                        ->subject('Thông báo thông tin đăng ký đã được xét duyệt');
+                    $message->from('qlgiakhanhhoa@gmail.com','Phần mềm CSDL giá');
+                });
                 $delete = Register::findOrFail($id)->delete();
                 return redirect('users/register/pl=dich_vu_luu_tru');
             }else{
@@ -538,6 +554,21 @@ class UsersController extends Controller
                     $modeluser->cqcq = $model->cqcq;
                     $modeluser->save();
                 }
+
+                $tencqcq = DmDvQl::where('maqhns',$model->cqcq)->first();
+                $data=[];
+                $data['tendn'] = $model->tendn;
+                $data['tg'] = Carbon::now()->toDateTimeString();
+                $data['tencqcq'] = $tencqcq->tendv;
+                $data['masothue'] = $model->masothue;
+                $data['username'] = $model->username;
+                $a = $model->email;
+                $b  =  $model->tendn;
+                Mail::send('mail.successregister',$data, function ($message) use($a,$b) {
+                    $message->to($a,$b )
+                        ->subject('Thông báo thông tin đăng ký đã được xét duyệt');
+                    $message->from('qlgiakhanhhoa@gmail.com','Phần mềm CSDL giá');
+                });
                 $delete = Register::findOrFail($id)->delete();
                 return redirect('users/register/pl=dich_vu_van_tai');
             }else{
@@ -670,7 +701,24 @@ class UsersController extends Controller
             if ($input['lydo'] != '') {
                 $model->lydo = $input['lydo'];
                 $model->trangthai = 'Bị trả lại';
-                $model->save();
+                if($model->save()){
+                    $tencqcq = DmDvQl::where('maqhns',$model->cqcq)->first();
+                    $data=[];
+                    $data['tendn'] = $model->tendn;
+                    $data['tg'] = Carbon::now()->toDateTimeString();
+                    $data['tencqcq'] = $tencqcq->tendv;
+                    $data['masothue'] = $model->masothue;
+                    $data['user'] = $model->username;
+                    $data['madk'] = $model->ma;
+                    $data['lydo'] = $input['lydo'];
+                    $a = $model->email;
+                    $b  =  $model->tendn;
+                    Mail::send('mail.replyregister',$data, function ($message) use($a,$b) {
+                        $message->to($a,$b )
+                            ->subject('Thông báo trả lại thông tin đăng ký ');
+                        $message->from('qlgiakhanhhoa@gmail.com','Phần mềm CSDL giá');
+                    });
+                }
             }
 
             if ($model->pl == 'DVLT') {

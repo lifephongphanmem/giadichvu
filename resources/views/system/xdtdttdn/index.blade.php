@@ -101,12 +101,12 @@
     <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                {!! Form::open(['url'=>'register/delete','id' => 'frm_delete'])!!}
+                {!! Form::open(['url'=>'xetduyet_thaydoi_thongtindoanhnghiep/delete','id' => 'frm_delete'])!!}
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                     <h4 class="modal-title">Đồng ý xóa?</h4>
                 </div>
-                <input type="hidden" name="iddelete" id="iddelete">
+                <input type="text" name="iddelete" id="iddelete">
                 <div class="modal-footer">
                     <button type="submit" class="btn blue" onclick="ClickDelete()">Đồng ý</button>
                     <button type="button" class="btn default" data-dismiss="modal">Hủy</button>

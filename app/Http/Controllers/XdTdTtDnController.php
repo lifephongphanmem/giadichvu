@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\DmDvQl;
 use App\DnDvLt;
 use App\DonViDvVt;
 use App\TtDn;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Mail;
 
 class XdTdTtDnController extends Controller
 {
@@ -101,7 +104,20 @@ class XdTdTtDnController extends Controller
                 $model->diadanh = $modeltttd->diadanh;
                 $model->tailieu = $modeltttd->tailieu;
                 $model->giayphepkd = $modeltttd->giayphepkd;
-                $model->save();
+                if($model->save()){
+                    $tencqcq = DmDvQl::where('maqhns',$model->cqcq)->first();
+                    $data=[];
+                    $data['tendn'] = $model->tendn;
+                    $data['tg'] = Carbon::now()->toDateTimeString();
+                    $data['tencqcq'] = $tencqcq->tendv;
+                    $a = $model->email;
+                    $b = $model->tendn;
+                    Mail::send('mail.successchangettdn',$data, function ($message) use($a,$b) {
+                        $message->to($a,$b )
+                            ->subject('Thông báo duyệt thay đổi thông tin doanh nghiệp');
+                        $message->from('qlgiakhanhhoa@gmail.com','Phần mềm CSDL giá');
+                    });
+                };
                 $modeltttd->delete();
                 return redirect('xetduyet_thaydoi_thongtindoanhnghiep/phanloai=dich_vu_luu_tru');
             }elseif($modeltttd->pl == 'DVVT'){
@@ -140,13 +156,43 @@ class XdTdTtDnController extends Controller
             $model = TtDn::where('id',$input['idtralai'])->first();
             $model->lydo = $input['lydo'];
             $model->trangthai = 'Bị trả lại';
-            $model->save();
+            if($model->save()){
+                $tencqcq = DmDvQl::where('maqhns',$model->cqcq)->first();
+                $dn = DnDvLt::where('masothue',$model->masothue)->first();
+                $data=[];
+                $data['tendn'] = $dn->tendn;
+                $data['tg'] = Carbon::now()->toDateTimeString();
+                $data['tencqcq'] = $tencqcq->tendv;
+                $data['lydo'] = $input['lydo'];
+                $a = $dn->email;
+                $b = $dn->tendn;
+                Mail::send('mail.replychangettdn',$data, function ($message) use($a,$b) {
+                    $message->to($a,$b )
+                        ->subject('Thông báo không xét duyệt thay đổi thông tin doanh nghiệp');
+                    $message->from('qlgiakhanhhoa@gmail.com','Phần mềm CSDL giá');
+                });
+            };
             if($model->pl == 'DVLT') {
                 return redirect('xetduyet_thaydoi_thongtindoanhnghiep/phanloai=dich_vu_luu_tru');
             }elseif($model->pl == 'DVVT') {
                 return redirect('xetduyet_thaydoi_thongtindoanhnghiep/phanloai=dich_vu_van_tai');
             }
 
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function del(Request $request){
+        if (Session::has('admin')) {
+            $input = $request->all();
+            $model = TtDn::where('id',$input['iddelete'])->first();
+            $pl = $model->pl;
+            $model->delete();
+            if($pl == 'DVLT') {
+                return redirect('xetduyet_thaydoi_thongtindoanhnghiep/phanloai=dich_vu_luu_tru');
+            }elseif($pl == 'DVVT') {
+                return redirect('xetduyet_thaydoi_thongtindoanhnghiep/phanloai=dich_vu_van_tai');
+            }
         }else
             return view('errors.notlogin');
     }

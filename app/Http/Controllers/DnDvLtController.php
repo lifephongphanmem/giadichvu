@@ -6,10 +6,12 @@ use App\DmDvQl;
 use App\DnDvLt;
 use App\TtDn;
 use App\Users;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Mail;
 
 class DnDvLtController extends Controller
 {
@@ -307,7 +309,20 @@ class DnDvLtController extends Controller
                 $model->pl = 'DVLT';
                 $model->trangthai = 'Chờ duyệt';
                 $model->cqcq = $update['cqcq'];
-                $model->save();
+                if($model->save()){
+                    $tencqcq = DmDvQl::where('maqhns',session('admin')->cqcq)->first();
+                    $data=[];
+                    $data['tendn'] = $update['tendn'];
+                    $data['tg'] = Carbon::now()->toDateTimeString();
+                    $data['tencqcq'] = $tencqcq->tendv;
+                    $a = session('admin')->email;
+                    $b = $update['tendn'];
+                    Mail::send('mail.changettdn',$data, function ($message) use($a,$b) {
+                        $message->to($a,$b )
+                            ->subject('Thông báo thông tin thay đổi thông tin doanh nghiệp');
+                        $message->from('qlgiakhanhhoa@gmail.com','Phần mềm CSDL giá');
+                    });
+                };
             }
 
             return redirect('ttdn_dich_vu_luu_tru');
@@ -362,7 +377,20 @@ class DnDvLtController extends Controller
             $model->dvk = 0;
             $model->pl = 'DVLT';
             $model->trangthai = 'Chờ duyệt';
-            $model->save();
+            if($model->save()){
+                $tencqcq = DmDvQl::where('maqhns',session('admin')->cqcq)->first();
+                $data=[];
+                $data['tendn'] = $input['tendn'];
+                $data['tg'] = Carbon::now()->toDateTimeString();
+                $data['tencqcq'] = $tencqcq->tendv;
+                $a = session('admin')->email;
+                $b = $input['tendn'];
+                Mail::send('mail.changettdn',$data, function ($message) use($a,$b) {
+                    $message->to($a,$b )
+                        ->subject('Thông báo thông tin thay đổi thông tin doanh nghiệp');
+                    $message->from('qlgiakhanhhoa@gmail.com','Phần mềm CSDL giá');
+                });
+            };
 
             return redirect('ttdn_dich_vu_luu_tru');
         }else

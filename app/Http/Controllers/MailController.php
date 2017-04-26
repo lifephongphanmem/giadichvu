@@ -12,10 +12,10 @@ class MailController extends Controller
 {
     function test_mail(){
         //dd(config('mail'));
-        $data=['name'=>'STC khanh hoa'];
-        Mail::send(['name'=>'CSDL Giá'],$data, function($message){
+        $data=['tencqcq'=>'Sở tài chính KH', 'tendn' => 'Công ty TNHH phát triển pm cuộc sống','tg'=>'14:24, 24/04/2017', 'nd' =>'Đã nhận thông tin đăng ký tài khoản','tieude'=>'Đăng ký mail'];
+        Mail::send('mail.mail',$data, function($message){
             $message->to('minhtranlife@gmail.com','Minh Tran')
-                ->subject('test gửi mail - 123');
+                ->subject('Kết quả');
             $message->from('qlgiakhanhhoa@gmail.com','Phần mềm CSDL giá');
         });
         echo 'ok';

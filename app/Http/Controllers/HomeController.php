@@ -16,11 +16,13 @@ use App\KkGDvLt;
 use App\Register;
 use App\TtDn;
 use App\Users;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -254,7 +256,23 @@ class HomeController extends Controller
         $model->trangthai = 'Chờ duyệt';
         $model->lydo='';
         $model->ma = $ma;
-        $model->save();
+        if($model->save()){
+            $tencqcq = DmDvQl::where('maqhns',$input['cqcq'])->first();
+            $data=[];
+            $data['tendn'] = $input['tendn'];
+            $data['tg'] = Carbon::now()->toDateTimeString();
+            $data['tencqcq'] = $tencqcq->tendv;
+            $data['masothue'] = $input['masothue'];
+            $data['user'] = $input['username'];
+            $data['madk'] = $ma;
+            $a = $input['emaildn'];
+            $b  =  $input['tendn'];
+            Mail::send('mail.register',$data, function ($message) use($a,$b) {
+                $message->to($a,$b )
+                    ->subject('Thông báo đăng ký tài khoản');
+                $message->from('qlgiakhanhhoa@gmail.com','Phần mềm CSDL giá');
+            });
+        }
         return view('system.register.view.register-success')
             ->with('ma',$ma);
     }

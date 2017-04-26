@@ -113,20 +113,22 @@
         <td style="text-align: center;" width="40%">
             Cơ quan tiếp nhận biểu mẫu kê khai giá<br>
             ghi nhận ngày nộp biểu mẫu kê khai giá<br>
-            <table  cellspacing="0" cellpadding="0" border="1" style="margin: 20px auto; border-collapse: collapse;">
-                <tr>
-                    <td><b>{{$modelcqcq->tendv}}</b></td>
-                </tr>
-                <tr>
-                    @if($modelkk->sohsnhan != '')
+            @if($modelkk->sohsnhan != '')
+                <table  cellspacing="0" cellpadding="0" border="1" style="margin: 20px auto; border-collapse: collapse;">
+                    <tr>
+                        <td><b>{{$modelcqcq->tendv}}</b></td>
+                    </tr>
+                    <tr>
+
                         <td style="text-align: left;">
                             <b>Số:</b> {{$modelkk->sohsnhan}}<br>
                             <b>Ngày nhận hồ sơ:</b> {{getDateTime($modelkk->ngaychuyen)}}<br>
                             <b>Ngày duyệt hồ sơ:</b> {{getDayVn($modelkk->ngaynhan)}}
                         </td>
-                    @endif
-                </tr>
-            </table>
+
+                    </tr>
+                </table>
+            @endif
 
         </td>
         <td style="text-align: left;" width="30%">
@@ -196,20 +198,22 @@
         <td style="text-align: center;" width="40%">
             Cơ quan tiếp nhận biểu mẫu kê khai giá<br>
             ghi nhận ngày nộp biểu mẫu kê khai giá<br>
-            <table  cellspacing="0" cellpadding="0" border="1" style="margin: 20px auto; border-collapse: collapse;">
-                <tr>
-                    <td><b>{{$modelcqcq->tendv}}</b></td>
-                </tr>
-                <tr>
-                    @if($modelkk->sohsnhan != '')
+            @if($modelkk->sohsnhan != '')
+                <table  cellspacing="0" cellpadding="0" border="1" style="margin: 20px auto; border-collapse: collapse;">
+                    <tr>
+                        <td><b>{{$modelcqcq->tendv}}</b></td>
+                    </tr>
+                    <tr>
+
                         <td style="text-align: left;">
                             <b>Số:</b> {{$modelkk->sohsnhan}}<br>
                             <b>Ngày nhận hồ sơ:</b> {{getDateTime($modelkk->ngaychuyen)}}<br>
                             <b>Ngày duyệt hồ sơ:</b> {{getDayVn($modelkk->ngaynhan)}}
                         </td>
-                    @endif
-                </tr>
-            </table>
+
+                    </tr>
+                </table>
+            @endif
         </td>
         <td style="text-align: left;" width="30%">
     </tr>
@@ -259,20 +263,22 @@
         <td style="text-align: center;" width="40%">
             Cơ quan tiếp nhận biểu mẫu kê khai giá<br>
             ghi nhận ngày nộp biểu mẫu kê khai giá<br>
+            @if($modelkk->sohsnhan != '')
             <table  cellspacing="0" cellpadding="0" border="1" style="margin: 20px auto; border-collapse: collapse;">
                 <tr>
                     <td><b>{{$modelcqcq->tendv}}</b></td>
                 </tr>
                 <tr>
-                    @if($modelkk->sohsnhan != '')
+
                         <td style="text-align: left;">
                             <b>Số:</b> {{$modelkk->sohsnhan}}<br>
                             <b>Ngày nhận hồ sơ:</b> {{getDateTime($modelkk->ngaychuyen)}}<br>
                             <b>Ngày duyệt hồ sơ:</b> {{getDayVn($modelkk->ngaynhan)}}
                         </td>
-                    @endif
+
                 </tr>
             </table>
+            @endif
         </td>
         <td style="text-align: center; text-transform: uppercase;" width="60%">
             <b>{{$modeldn->chucdanhky}}</b><br>
