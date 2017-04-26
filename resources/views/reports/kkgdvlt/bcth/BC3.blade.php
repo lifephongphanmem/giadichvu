@@ -49,6 +49,7 @@
 <p style="text-align: center; font-weight: bold; font-size: 16px;">BÁO CÁO THỐNG KÊ CÁC ĐƠN VỊ KÊ KHAI GIÁ</p>
 <p style="text-align: center; font-weight: bold;">Từ ngày: {{getDayVn($input['ngaytu'])}} đến ngày {{getDayVn($input['ngayden'])}} </p>
 <p style="text-align: center; font-weight: bold;">Loại hạng: {{$input['loaihang']=='all'?'Tất cả':$input['loaihang'].' sao'}}</p>
+<p style="text-align: center; font-weight: bold;">Tên đơn vị: {{$m_donvi->tendn}}</p>
 
 <table cellspacing="0" cellpadding="0" border="1" style="margin: 20px auto; border-collapse: collapse;">
     <tr>
@@ -62,29 +63,20 @@
         <th>Ngày thực hiện<br> mức giá kê khai</th>
         <th>Trạng thái hồ sơ</th>
     </tr>
-    @foreach($m_cqcq as $cskd)
-        <?php $model_kk=$model->where('cqcq',$cskd->maqhns) ?>
-        @if(count($model_kk)>0)
-            <tr>
-                <th style="text-align: left" colspan="9">
-                    {{$cskd->tendv.': '. count($model_kk).' hồ sơ.'}}
-                </th>
-            </tr>
-            <?php $i=1;?>
-            @foreach($model_kk as $key => $ttkk)
-                <tr>
-                    <th style="text-align: center">{{$i++}}</th>
-                    <th style="text-align: left">{{$ttkk->tencskd}}</th>
-                    <th style="text-align: center">{{$ttkk->loaihang}} sao</th>
-                    <th style="text-align: left">{{$ttkk->diachikd}}</th>
-                    <th style="text-align: center">{{$ttkk->telkd}}</th>
-                    <th style="text-align: center">{{$ttkk->socv}}</th>
-                    <th style="text-align: center">{{getDayVn($ttkk->ngaynhap)}}</th>
-                    <th style="text-align: center">{{getDayVn($ttkk->ngayhieuluc)}}</th>
-                    <th style="text-align: center">{{$ttkk->trangthai}}</th>
-                </tr>
-            @endforeach
-        @endif
+
+    <?php $i=1;?>
+    @foreach($model as $key => $ttkk)
+        <tr>
+            <th style="text-align: center">{{$i++}}</th>
+            <th style="text-align: left">{{$ttkk->tencskd}}</th>
+            <th style="text-align: center">{{$ttkk->loaihang}} sao</th>
+            <th style="text-align: left">{{$ttkk->diachikd}}</th>
+            <th style="text-align: center">{{$ttkk->telkd}}</th>
+            <th style="text-align: center">{{$ttkk->socv}}</th>
+            <th style="text-align: center">{{getDayVn($ttkk->ngaynhap)}}</th>
+            <th style="text-align: center">{{getDayVn($ttkk->ngayhieuluc)}}</th>
+            <th style="text-align: center">{{$ttkk->trangthai}}</th>
+        </tr>
     @endforeach
     <tr>
         <th style="text-align: left" colspan="9">

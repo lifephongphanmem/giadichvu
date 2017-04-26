@@ -105,15 +105,11 @@ Route::post('danh_muc_don_vi_quan_ly/delete','DmDvQlController@delete');
 // <editor-fold defaultstate="collapsed" desc="--Báo cáo--">
 //Reports
     //Dịch vụ lưu trú
-Route::get('reports/dich_vu_luu_tru', function() {
-    $model = \App\DmDvQl::where('plql','TC')
-        ->get();
-    return view('reports.kkgdvlt.bcth.index')
-        ->with('model',$model)
-        ->with('pageTitle', 'Báo cáo tổng hợp dịch vụ lưu trú');
-});
+Route::get('reports/dich_vu_luu_tru','ReportsController@index');
 Route::post('reports/dich_vu_luu_tru/BC1','ReportsController@dvltbc1');
 Route::post('reports/dich_vu_luu_tru/BC2','ReportsController@dvltbc2');
+Route::post('reports/dich_vu_luu_tru/BC3','ReportsController@dvltbc3');
+Route::post('reports/dich_vu_luu_tru/BC4','ReportsController@dvltbc4');
     //End Dịch vụ lưu trú
     //Dịch vụ vận tải
     //End Dịch vụ vận tải

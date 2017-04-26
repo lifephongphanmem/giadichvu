@@ -1,12 +1,12 @@
 @extends('main')
 
 @section('custom-style')
-
+    <link rel="stylesheet" type="text/css" href="{{url('assets/global/plugins/select2/select2.css')}}"/>
 @stop
 
 
 @section('custom-script')
-
+    <script type="text/javascript" src="{{url('assets/global/plugins/select2/select2.min.js')}}"></script>
 @stop
 
 @section('content')
@@ -26,8 +26,10 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <ol>
-                                <li><a data-target="#BC1-thoai-confirm" data-toggle="modal">Báo cáo thống kê các đơn vị kê khai giá trong khoảng thời gian</a></li>
-                                <li><a data-target="#BC2-thoai-confirm" data-toggle="modal">Báo cáo thống kê chi tiết đơn vị kê khai giá trong khoảng thời gian</a></li>
+                                <li><a data-target="#BC1-thoai-confirm" data-toggle="modal">Báo cáo tổng hợp hồ sơ kê khai giá (theo đơn vị chủ quản)</a></li>
+                                <li><a data-target="#BC2-thoai-confirm" data-toggle="modal">Báo cáo chi tiết hồ sơ kê khai giá (theo đơn vị chủ quản)</a></li>
+                                <li><a data-target="#BC3-thoai-confirm" data-toggle="modal">Báo cáo tổng hợp hồ sơ kê khai giá (theo đơn vị kê khai)</a></li>
+                                <li><a data-target="#BC4-thoai-confirm" data-toggle="modal">Báo cáo chi tiết hồ sơ kê khai giá (theo đơn vị kê khai)</a></li>
                             </ol>
                         </div>
                     </div>

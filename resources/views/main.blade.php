@@ -451,7 +451,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 </li>
                 @endif
 
-                @if(session('admin')->level == 'T' && session('admin')->sadmin != 'satc' && session('admin')->sadmin != 'savt')
+                @if(session('admin')->level == 'T' || session('admin')->level == 'H' || session('admin')->sadmin != 'satc' || session('admin')->sadmin != 'savt')
                 <li>
                     <a href="">
                         <i class="fa fa-file-o fa-fw"></i>
