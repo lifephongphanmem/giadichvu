@@ -28,8 +28,6 @@
             text-transform: uppercase;
             font-weight: bold;
 
-        }
-
         @media print {
             .in{
                 display: none !important;
@@ -37,6 +35,7 @@
         }
     </style>
 </head>
+
 <div class="in" style="margin-left: 20px;">
     <input type="submit" onclick=" window.print()" value="In báo cáo"  />
 </div>
@@ -65,7 +64,7 @@
 <table width="96%" border="0" cellspacing="0" cellpadding="8" style="margin:0 auto 20px; text-align: center;">
     <tr>
         <td colspan="9" style="text-align: center; font-weight: bold; font-size: 16px;">
-            BÁO CÁO THỐNG KÊ CÁC ĐƠN VỊ KÊ KHAI GIÁ
+            BÁO CÁO KẾT QUẢ GIẢI QUYẾT HỒ SƠ
         </td>
     </tr>
     <tr>
@@ -76,6 +75,19 @@
     <tr>
         <td colspan="9" style="text-align: center; font-weight: bold;">
             Loại hạng: {{$input['loaihang']=='all'?'Tất cả':$input['loaihang'].' sao'}}
+        </td>
+    </tr>
+    <tr>
+        <td colspan="9" style="text-align: center; font-weight: bold;">
+            Phân loại hồ sơ: <?php
+                if($input['trangthai']=='all'){
+                    echo 'Tất cả';
+                }elseif($input['trangthai']=='Chờ duyệt'){
+                    echo 'Hồ sơ kê khai giá dịch vụ đang chờ nhận';
+                }else{
+                    echo 'Hồ sơ kê khai giá dịch vụ đã công bố';
+                }
+            ?>
         </td>
     </tr>
 </table>

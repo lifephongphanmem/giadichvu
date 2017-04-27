@@ -110,6 +110,13 @@ Route::post('reports/dich_vu_luu_tru/BC1','ReportsController@dvltbc1');
 Route::post('reports/dich_vu_luu_tru/BC2','ReportsController@dvltbc2');
 Route::post('reports/dich_vu_luu_tru/BC3','ReportsController@dvltbc3');
 Route::post('reports/dich_vu_luu_tru/BC4','ReportsController@dvltbc4');
+Route::post('reports/dich_vu_luu_tru/BC5','ReportsController@dvltbc5');
+
+Route::post('reports/dich_vu_luu_tru/BC1_excel','ReportsController@dvltbc1_excel');
+Route::post('reports/dich_vu_luu_tru/BC2_excel','ReportsController@dvltbc2_excel');
+Route::post('reports/dich_vu_luu_tru/BC3_excel','ReportsController@dvltbc3_excel');
+Route::post('reports/dich_vu_luu_tru/BC4_excel','ReportsController@dvltbc4_excel');
+Route::post('reports/dich_vu_luu_tru/BC5_excel','ReportsController@dvltbc5_excel');
     //End Dịch vụ lưu trú
     //Dịch vụ vận tải
     //End Dịch vụ vận tải

@@ -8,6 +8,8 @@ use App\DnDvLt;
 use App\KkGDvLt;
 use App\KkGDvLtCt;
 use Illuminate\Http\Request;
+//use Maatwebsite\Excel;
+use Maatwebsite\Excel\Facades\Excel;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Session;
@@ -27,6 +29,33 @@ class ReportsController extends Controller
                 ->with('model',$model)
                 ->with('model_donvi',$model_donvi)
                 ->with('pageTitle', 'Báo cáo tổng hợp dịch vụ lưu trú');
+
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function kkgdvlt($mahs){
+        if (Session::has('admin')) {
+            //dd($id);
+            $modelkk = KkGDvLt::where('mahs',$mahs)->first();
+            //dd($modelkk);
+            $modeldn = DnDvLt::where('masothue',$modelkk->masothue)
+                ->first();
+            //dd($modeldn);
+            //dd($modelkk->masothue);
+            $modelcskd = CsKdDvLt::where('macskd',$modelkk->macskd)
+                ->first();
+            $modelkkct = KkGDvLtCt::where('mahs',$modelkk->mahs)
+                ->get();
+            $modelcqcq = DmDvQl::where('maqhns',$modeldn->cqcq)
+                ->first();
+            return view('reports.kkgdvlt.print')
+                ->with('modelkk',$modelkk)
+                ->with('modeldn',$modeldn)
+                ->with('modelcskd',$modelcskd)
+                ->with('modelkkct',$modelkkct)
+                ->with('modelcqcq',$modelcqcq)
+                ->with('pageTitle','Kê khai giá dịch vụ lưu trú');
 
         }else
             return view('errors.notlogin');
@@ -88,6 +117,51 @@ class ReportsController extends Controller
                 ->with('model',$model)
                 ->with('m_cqcq',$m_cqcq)
                 ->with('pageTitle','Báo cáo thống kê các đơn vị kê khai giá trong khoảng thời gian');
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function dvltbc1_excel(Request $request){
+        if (Session::has('admin')) {
+            $input = $request->all();
+            if(session('admin')->level == 'T'){
+                if($input['cqcq']=='all') {
+                    $m_cqcq = DmDvQl::where('plql','TC')->get();
+                    $modelcqcq = DmDvQl::where('maqhns',session('admin')->cqcq)->first();
+                } else {
+                    $m_cqcq = DmDvQl::where('maqhns',$input['cqcq'])->get();
+                    $modelcqcq = DmDvQl::where('maqhns',$input['cqcq'])->first();
+                }
+            }else{
+                $m_cqcq = DmDvQl::where('maqhns',session('admin')->cqcq)->get();
+                $modelcqcq = DmDvQl::where('maqhns',session('admin')->cqcq)->first();
+            }
+
+            $model=$this->get_KKG_TH($input);
+            Excel::create('BaoCao1',function($excel) use($modelcqcq,$input,$model,$m_cqcq){
+                $excel->sheet('New sheet', function($sheet) use($modelcqcq,$input,$model,$m_cqcq){
+                    $sheet->loadView('reports.kkgdvlt.bcth.BC1')
+                        ->with('modelcqcq',$modelcqcq)
+                        ->with('input',$input)
+                        ->with('model',$model)
+                        ->with('m_cqcq',$m_cqcq)
+                        ->with('pageTitle','Báo cáo thống kê');
+                    //$sheet->setPageMargin(0.25);
+                    $sheet->setAutoSize(false);
+                    $sheet->setFontFamily('Tahoma');
+                    $sheet->setFontBold(false);
+
+                    $sheet->setWidth('C', 10);
+                    $sheet->setWidth('D', 30);
+                    $sheet->setWidth('E', 15);
+                    $sheet->setWidth('F', 15);
+                    $sheet->setWidth('G', 15);
+                    $sheet->setWidth('H', 15);
+                    $sheet->setWidth('I', 15);
+                    //$sheet->setColumnFormat(array('D' => '#,##0.00'));
+                });
+            })->download('xls');
+
         }else
             return view('errors.notlogin');
     }
@@ -158,6 +232,52 @@ class ReportsController extends Controller
             return view('errors.notlogin');
     }
 
+    public function dvltbc2_excel(Request $request){
+        if (Session::has('admin')) {
+            $input = $request->all();
+            //dd($input);
+            if(session('admin')->level == 'T'){
+                if($input['cqcq']=='all') {
+                    $m_cqcq = DmDvQl::where('plql','TC')->get();
+                    $modelcqcq = DmDvQl::where('maqhns',session('admin')->cqcq)->first();
+                } else {
+                    $m_cqcq = DmDvQl::where('maqhns',$input['cqcq'])->get();
+                    $modelcqcq = DmDvQl::where('maqhns',$input['cqcq'])->first();
+                }
+            }else{
+                $m_cqcq = DmDvQl::where('maqhns',session('admin')->cqcq)->get();
+                $modelcqcq = DmDvQl::where('maqhns',session('admin')->cqcq)->first();
+            }
+            $model=$this->get_KKG_TH($input);
+
+            $mahss = '';
+            foreach($model as $kk){
+                $mahss = $mahss.$kk->mahs.',';
+            }
+            $modelctkk = KkGDvLtCt::whereIn('mahs',explode(',',$mahss))->get();
+
+            Excel::create('BaoCao2',function($excel) use($modelcqcq,$input,$model,$m_cqcq,$modelctkk){
+                $excel->sheet('New sheet', function($sheet) use($modelcqcq,$input,$model,$m_cqcq,$modelctkk){
+                    $sheet->loadView('reports.kkgdvlt.bcth.BC2')
+                        ->with('modelcqcq',$modelcqcq)
+                        ->with('input',$input)
+                        ->with('model',$model)
+                        ->with('m_cqcq',$m_cqcq)
+                        ->with('modelctkk',$modelctkk)
+                        ->with('pageTitle','Báo cáo');
+                    //$sheet->setPageMargin(0.25);
+                    $sheet->setAutoSize(false);
+                    $sheet->setFontFamily('Tahoma');
+                    $sheet->setFontBold(false);
+
+                    //$sheet->setColumnFormat(array('D' => '#,##0.00'));
+                });
+            })->download('xls');
+
+        }else
+            return view('errors.notlogin');
+    }
+
     public function dvltbc3(Request $request){
         if (Session::has('admin')) {
             $input = $request->all();
@@ -171,6 +291,33 @@ class ReportsController extends Controller
                 ->with('model',$model)
                 ->with('m_donvi',$m_donvi)
                 ->with('pageTitle','Báo cáo tổng hợp hồ sơ kê khai giá');
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function dvltbc3_excel(Request $request){
+        if (Session::has('admin')) {
+            $input = $request->all();
+            $modelcqcq = DmDvQl::where('maqhns',session('admin')->cqcq)->first();
+            $m_donvi = DnDvLt::where('masothue',$input['masothue'])->first();
+            $model=$this->get_KKG_CT($input);
+
+            Excel::create('BaoCao3',function($excel) use($modelcqcq,$input,$model,$m_donvi){
+                $excel->sheet('New sheet', function($sheet) use($modelcqcq,$input,$model,$m_donvi){
+                    $sheet->loadView('reports.kkgdvlt.bcth.BC3')
+                        ->with('modelcqcq',$modelcqcq)
+                        ->with('input',$input)
+                        ->with('model',$model)
+                        ->with('m_donvi',$m_donvi)
+                        ->with('pageTitle','Báo cáo');
+                    //$sheet->setPageMargin(0.25);
+                    $sheet->setAutoSize(false);
+                    $sheet->setFontFamily('Tahoma');
+                    $sheet->setFontBold(false);
+
+                    //$sheet->setColumnFormat(array('D' => '#,##0.00'));
+                });
+            })->download('xls');
         }else
             return view('errors.notlogin');
     }
@@ -196,6 +343,124 @@ class ReportsController extends Controller
                 ->with('modelctkk',$modelctkk)
                 ->with('m_donvi',$m_donvi)
                 ->with('pageTitle','Báo cáo chi tiết hồ sơ kê khai giá');
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function dvltbc4_excel(Request $request){
+        if (Session::has('admin')) {
+            $input = $request->all();
+
+            $modelcqcq = DmDvQl::where('maqhns',session('admin')->cqcq)->first();
+            $m_donvi = DnDvLt::where('masothue',$input['masothue'])->first();
+            $model=$this->get_KKG_CT($input);
+
+            $mahss = '';
+            foreach($model as $kk){
+                $mahss = $mahss.$kk->mahs.',';
+            }
+            $modelctkk = KkGDvLtCt::whereIn('mahs',explode(',',$mahss))->get();
+
+            Excel::create('BaoCao4',function($excel) use($modelcqcq,$input,$model,$m_donvi,$modelctkk){
+                $excel->sheet('New sheet', function($sheet) use($modelcqcq,$input,$model,$m_donvi,$modelctkk){
+                    $sheet->loadView('reports.kkgdvlt.bcth.BC4')
+                        ->with('modelcqcq',$modelcqcq)
+                        ->with('input',$input)
+                        ->with('model',$model)
+                        ->with('modelctkk',$modelctkk)
+                        ->with('m_donvi',$m_donvi)
+                        ->with('pageTitle','Báo cáo');
+                    //$sheet->setPageMargin(0.25);
+                    $sheet->setAutoSize(false);
+                    $sheet->setFontFamily('Tahoma');
+                    $sheet->setFontBold(false);
+
+                    //$sheet->setColumnFormat(array('D' => '#,##0.00'));
+                });
+            })->download('xls');
+
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function dvltbc5(Request $request){
+        if (Session::has('admin')) {
+            $input = $request->all();
+            if(session('admin')->level == 'T'){
+                if($input['cqcq']=='all') {
+                    $m_cqcq = DmDvQl::where('plql','TC')->get();
+                    $modelcqcq = DmDvQl::where('maqhns',session('admin')->cqcq)->first();
+                } else {
+                    $m_cqcq = DmDvQl::where('maqhns',$input['cqcq'])->get();
+                    $modelcqcq = DmDvQl::where('maqhns',$input['cqcq'])->first();
+                }
+            }else{
+                $m_cqcq = DmDvQl::where('maqhns',session('admin')->cqcq)->get();
+                $modelcqcq = DmDvQl::where('maqhns',session('admin')->cqcq)->first();
+            }
+
+            $model=$this->get_KKG_TH($input);
+
+            if($input['trangthai']!='all'){
+                $model=$model->where('trangthai', $input['trangthai']);
+            }
+
+            return view('reports.kkgdvlt.bcth.BC5')
+                ->with('modelcqcq',$modelcqcq)
+                ->with('input',$input)
+                ->with('model',$model)
+                ->with('m_cqcq',$m_cqcq)
+                ->with('pageTitle','Báo cáo thống kê các đơn vị kê khai giá trong khoảng thời gian');
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function dvltbc5_excel(Request $request){
+        if (Session::has('admin')) {
+            $input = $request->all();
+            if(session('admin')->level == 'T'){
+                if($input['cqcq']=='all') {
+                    $m_cqcq = DmDvQl::where('plql','TC')->get();
+                    $modelcqcq = DmDvQl::where('maqhns',session('admin')->cqcq)->first();
+                } else {
+                    $m_cqcq = DmDvQl::where('maqhns',$input['cqcq'])->get();
+                    $modelcqcq = DmDvQl::where('maqhns',$input['cqcq'])->first();
+                }
+            }else{
+                $m_cqcq = DmDvQl::where('maqhns',session('admin')->cqcq)->get();
+                $modelcqcq = DmDvQl::where('maqhns',session('admin')->cqcq)->first();
+            }
+
+            $model=$this->get_KKG_TH($input);
+
+            if($input['trangthai']!='all'){
+                $model=$model->where('trangthai', $input['trangthai']);
+            }
+
+            Excel::create('BaoCao5',function($excel) use($modelcqcq,$input,$model,$m_cqcq){
+                $excel->sheet('New sheet', function($sheet) use($modelcqcq,$input,$model,$m_cqcq){
+                    $sheet->loadView('reports.kkgdvlt.bcth.BC5')
+                        ->with('modelcqcq',$modelcqcq)
+                        ->with('input',$input)
+                        ->with('model',$model)
+                        ->with('m_cqcq',$m_cqcq)
+                        ->with('pageTitle','Báo cáo thống kê');
+                    //$sheet->setPageMargin(0.25);
+                    $sheet->setAutoSize(false);
+                    $sheet->setFontFamily('Tahoma');
+                    $sheet->setFontBold(false);
+
+                    $sheet->setWidth('C', 10);
+                    $sheet->setWidth('D', 30);
+                    $sheet->setWidth('E', 15);
+                    $sheet->setWidth('F', 15);
+                    $sheet->setWidth('G', 15);
+                    $sheet->setWidth('H', 15);
+                    $sheet->setWidth('I', 15);
+                    //$sheet->setColumnFormat(array('D' => '#,##0.00'));
+                });
+            })->download('xls');
+
         }else
             return view('errors.notlogin');
     }

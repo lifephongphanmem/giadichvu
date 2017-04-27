@@ -28,27 +28,61 @@
             text-transform: uppercase;
             font-weight: bold;
 
+        @media print {
+            .in{
+                display: none !important;
+            }
         }
     </style>
 </head>
+
+<div class="in" style="margin-left: 20px;">
+    <input type="submit" onclick=" window.print()" value="In báo cáo"  />
+</div>
+
 <body style="font:normal 14px Times, serif;">
 
 <table width="96%" border="0" cellspacing="0" cellpadding="8" style="margin:0 auto 20px; text-align: center;">
     <tr>
-        <td width="40%" style="text-transform: uppercase;">
-            <b>{{(isset($modelcqcq)? $modelcqcq->tendv : '')}}</b><br>
-            --------<br>
+        <td colspan="2" style="text-transform: uppercase;">
+            <b>{{(isset($modelcqcq)? $modelcqcq->tendv : '')}}</b>
         </td>
-        <td>
+        <td colspan="6">
             <b>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</b><br>
-            <b><i><u>Độc lập - Tự do - Hạnh phúc</u></i></b><br>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" style="text-transform: uppercase;">
+            --------
+        </td>
+        <td colspan="6">
+            <b><i><u>Độc lập - Tự do - Hạnh phúc</u></i></b>
         </td>
     </tr>
 </table>
 
-<p style="text-align: center; font-weight: bold; font-size: 16px;">BÁO CÁO THỐNG KÊ CHI TIẾT ĐƠN VỊ KÊ KHAI GIÁ</p>
-<p style="text-align: center; font-weight: bold;">Từ ngày: {{getDayVn($input['ngaytu'])}} đến ngày {{getDayVn($input['ngayden'])}} </p>
-<p style="text-align: center; font-weight: bold;">Tên đơn vị: {{$m_donvi->tendn}}</p>
+<table width="96%" border="0" cellspacing="0" cellpadding="8" style="margin:0 auto 20px; text-align: center;">
+    <tr>
+        <td colspan="8" style="text-align: center; font-weight: bold; font-size: 16px;">
+            BÁO CÁO THỐNG KÊ CHI TIẾT ĐƠN VỊ KÊ KHAI GIÁ
+        </td>
+    </tr>
+    <tr>
+        <td colspan="8" style="text-align: center; font-weight: bold;">
+            Từ ngày: {{getDayVn($input['ngaytu'])}} đến ngày {{getDayVn($input['ngayden'])}}
+        </td>
+    </tr>
+    <tr>
+        <td colspan="8" style="text-align: center; font-weight: bold;">
+            Loại hạng: {{$input['loaihang']=='all'?'Tất cả':$input['loaihang'].' sao'}}
+        </td>
+    </tr>
+    <tr>
+        <td colspan="8" style="text-align: center; font-weight: bold;">
+            Tên đơn vị: {{$m_donvi->tendn}}
+        </td>
+    </tr>
+</table>
 
 <table cellspacing="0" cellpadding="0" border="1" style="margin: 20px auto; border-collapse: collapse;">
     <tr>
