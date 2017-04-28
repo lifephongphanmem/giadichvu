@@ -38,7 +38,27 @@
         }
 
         function confirmChuyen(id) {
-            document.getElementById("idchuyen").value =id;
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            //alert(id);
+            $.ajax({
+                url: '/kkgdvlt/checkngay',
+                type: 'GET',
+                data: {
+                    _token: CSRF_TOKEN,
+                    id: id
+                },
+                dataType: 'JSON',
+                success: function (data) {
+                    if(data.status != 'success') {
+                        toastr.error("Ngày thực hiện mức giá kê khai không thể sử dụng được! Bạn cần chỉnh sửa lại thông tin trước khi chuyển", "Lỗi!!!");
+                        $('#chuyen-modal').modal("hide");
+                    }else{
+                        document.getElementById("idchuyen").value =id;
+                    }
+                }
+            })
+
+
         }
         function ClickChuyen(){
             if($('#ttnguoinop').val() != ''){

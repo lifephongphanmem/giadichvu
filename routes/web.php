@@ -2,6 +2,8 @@
 Route::get('/ajax/checkngay','AjaxController@checkngay');
 
 Route::get('/test', 'MailController@test_mail');
+Route::get('/testday','MailController@testday');
+Route::post('/testday','MailController@testdaysm');
 
 // <editor-fold defaultstate="collapsed" desc="--Hệ thống-Đăng ký--">
 Route::get('/', 'HomeController@index');
@@ -196,6 +198,7 @@ Route::get('/kkgdvlt/xoattp','KkGDvLtCtController@xoattp');
 Route::patch('ke_khai_dich_vu_luu_tru/{id}','KkGDvLtController@update');
 Route::post('ke_khai_dich_vu_luu_tru/chuyen','KkGDvLtController@chuyen');
 Route::get('/kkgdvlt/viewlydo','KkGDvLtController@viewlydo');
+Route::get('/kkgdvlt/checkngay','KkGDvLtController@checkngay');
 Route::post('ke_khai_dich_vu_luu_tru/delete','KkGDvLtController@destroy');
 
         //Kê khai lưu tru KS 45 sao

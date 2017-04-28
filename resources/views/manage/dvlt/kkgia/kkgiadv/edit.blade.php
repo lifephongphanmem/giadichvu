@@ -306,6 +306,10 @@
             })
 
         }
+        function clearngayhieuluc(){
+            $('input[name="ngayhieuluc"]').val('');
+        }
+
 
     </script>
 
@@ -331,7 +335,7 @@
                             <div class="form-group">
                                 <label class="control-label">Ngày kê khai<span class="require">*</span></label>
                                 <!--input type="date" name="ngaynhap" id="ngaynhap" value="{{$model->ngaynhap}}" class="form-control required"-->
-                                {!!Form::text('ngaynhap',date('d/m/Y',  strtotime($model->ngaynhap)), array('id' => 'ngaynhap','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required','autofocus'))!!}
+                                {!!Form::text('ngaynhap',date('d/m/Y',  strtotime($model->ngaynhap)), array('id' => 'ngaynhap','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required','autofocus','onchange'=>"clearngayhieuluc()"))!!}
                             </div>
                         </div>
                         <!--/span-->

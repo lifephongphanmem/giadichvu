@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 //use Illuminate\Contracts\Mail;
@@ -28,5 +29,31 @@ class MailController extends Controller
         });
         echo 'Basics Email was sent!';
 */
+    }
+
+    public  function testday(){
+        return view('manage.test.test')
+            ->with('pageTitle','Test');
+    }
+
+    public function testdaysm(Request $request){
+        $inputs = $request->all();
+        $ngaynhap = date('Y-m-d', strtotime(str_replace('/', '-', $inputs['ngaynhap'])));
+        $ngayapdung = date('Y-m-d', strtotime(str_replace('/', '-', $inputs['ngayapdung'])));
+        $timestamp = strtotime($ngayapdung);
+        $day = date("D", $timestamp);
+
+        $ss = strtotime(date("Y-m-d", strtotime($ngayapdung)) . " -3 day");
+        $ss = strftime("%Y-%m-%d", $ss);
+dd($ss);
+
+
+        /*$gio = date('H:i',strtotime(Carbon::now()->toDateTimeString()));
+        $df = '8:00';
+        dd($day = date("D", strtotime(Carbon::now()->toDateTimeString())));
+        if($df > $gio){
+            dd($gio);
+        }else
+            dd($df.'<'.$gio. '--triển thôi');*/
     }
 }

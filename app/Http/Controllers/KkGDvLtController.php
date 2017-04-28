@@ -120,11 +120,14 @@ class KkGDvLtController extends Controller
                     //dd($modelcskd);
                     //dd($modelph);
                     $ngaynhap = date('d/m/Y');
-                    $ngayhieuluc  =  date('d/m/Y',mktime(0, 0, 0, date("m")  , date("d")+3, date("Y")));
-
-
-
-
+                    $dayngaynhap = date('D');
+                    if($dayngaynhap == 'Thu'){
+                        $$ngayhieuluc  =  date('d/m/Y',mktime(0, 0, 0, date("m")  , date("d")+5, date("Y")));
+                    }elseif($dayngaynhap == 'Fri' || $dayngaynhap = 'Sat') {
+                        $ngayhieuluc  =  date('d/m/Y',mktime(0, 0, 0, date("m")  , date("d")+4, date("Y")));
+                    }else {
+                        $dayngaynhap  =  date('d/m/Y',mktime(0, 0, 0, date("m")  , date("d")+3, date("Y")));
+                    }
 
                     return view('manage.dvlt.kkgia.kkgiadv.create')
                         ->with('modelcskd', $modelcskd)
@@ -394,6 +397,45 @@ class KkGDvLtController extends Controller
             //$result['message'] .= '</div>';
             $result['status'] = 'success';
 
+        }
+        die(json_encode($result));
+    }
+    public function checkngay(Request $request){
+        $result = array(
+            'status' => 'fail',
+            'message' => 'error',
+        );
+        if(!Session::has('admin')) {
+            $result = array(
+                'status' => 'fail',
+                'message' => 'permission denied',
+            );
+            die(json_encode($result));
+        }
+        //dd($request);
+        $inputs = $request->all();
+
+        if(isset($inputs['id'])){
+            $model = KkGDvLt::where('id',$inputs['id'])
+                ->first();
+            $ngayapdung = $model->ngayhieuluc;
+            $ngaychuyen = Carbon::now()->toDateTimeString();
+
+            $day = date("D",  strtotime($ngaychuyen));
+
+            if($day == 'Thu'){
+                $ss = strtotime(date("Y-m-d", strtotime($ngaychuyen)) . " +5 day");
+                $ss = strftime("%Y-%m-%d", $ss);
+            }elseif($day == 'Fri' || $day = 'Sat') {
+                $ss = strtotime(date("Y-m-d", strtotime($ngaychuyen)) . " +4 day");
+                $ss = strftime("%Y-%m-%d", $ss);
+            }else {
+                $ss = strtotime(date("Y-m-d", strtotime($ngaychuyen)) . " +3 day");
+                $ss = strftime("%Y-%m-%d", $ss);
+            }
+            if ($ss < $ngayapdung || $ss == $ngayapdung ) {
+                $result['status'] = 'success';
+            }
         }
         die(json_encode($result));
     }

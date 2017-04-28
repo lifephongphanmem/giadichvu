@@ -28,7 +28,7 @@
 
     <!-- END PAGE HEADER-->
     <div class="row">
-        {!! Form::open(['url'=>'test1', 'id' => 'create_kkdvlt', 'class'=>'horizontal-form']) !!}
+        {!! Form::open(['url'=>'testday', 'id' => 'create_kkdvlt', 'class'=>'horizontal-form']) !!}
         <div class="col-md-12">
             <!-- BEGIN EXAMPLE TABLE PORTLET-->
 
@@ -40,10 +40,13 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-3">Default Datepicker</label>
                                     <div class="col-md-3">
-                                        <input type="text" data-inputmask="'alias': 'date'" name="a" id="a" class="form-control">
-                                        {!!Form::text('ngayhieuluc',\Carbon\Carbon::now()->format('d/m/Y'), array('id' => 'ngayhieuluc','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required'))!!}
-                                    <span class="help-block">
-                                    Select date </span>
+                                        {!!Form::text('ngaynhap',\Carbon\Carbon::now()->format('d/m/Y'), array('id' => 'ngaynhap','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required'))!!}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Default Datepicker</label>
+                                    <div class="col-md-3">
+                                        {!!Form::text('ngayapdung',null, array('id' => 'ngayapdung','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required'))!!}
                                     </div>
                                 </div>
 
@@ -51,6 +54,7 @@
 
                         <!-- END FORM-->
                     </div>
+                    <button type="submit" class="btn green"><i class="fa fa-check"></i> Hoàn thành</button>
                 <!-- END PORTLET-->
                     {!! Form::close() !!}
                     <!--/row-->
