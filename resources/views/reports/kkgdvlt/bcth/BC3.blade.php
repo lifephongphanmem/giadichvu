@@ -24,9 +24,10 @@
         p{
             padding: 5px;
         }
-        span{
+        span {
             text-transform: uppercase;
             font-weight: bold;
+        }
 
         @media print {
             .in{

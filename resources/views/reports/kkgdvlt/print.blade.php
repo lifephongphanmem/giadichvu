@@ -25,13 +25,23 @@
         p{
             padding: 5px;
         }
-        span{
+        span {
             text-transform: uppercase;
             font-weight: bold;
+        }
 
+        @media print {
+            .in{
+                display: none !important;
+            }
         }
     </style>
 </head>
+
+<div class="in" style="margin-left: 20px;">
+    <input type="submit" onclick=" window.print()" value="In kê khai"  />
+</div>
+
 <body style="font:normal 14px Times, serif;">
 
 <table width="96%" border="0" cellspacing="0" cellpadding="8" style="margin:0 auto 20px; text-align: center;">
