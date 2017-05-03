@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CbKkGDvLt;
 use App\CsKdDvLt;
 use App\DoiTuongApDungDvLt;
 use App\KkGDvLt;
@@ -26,12 +27,53 @@ class KkGiaDvLt45sController extends Controller
                         ->get();
                     $modeldtad = DoiTuongApDungDvLt::where('macskd',$macskd)
                         ->get();
-                    //dd($modelttp);
                     $modelctdf = KkGDvLtCtDf::where('macskd',$macskd)->delete();
+                    $modelcb = CbKkGDvLt::where('macskd',$macskd)
+                        ->first();
+                    //dd($modelcb);
+                    if(isset($modelcb)){
+                        $modelph = KkGDvLtCt::where('mahs',$modelcb->mahs)
+                            ->get();
+                        foreach($modelph as $ttph){
+                            $dsph = new KkGDvLtCtDf();
+                            $dsph->macskd = $ttph->macskd;
+                            $dsph->maloaip = $ttph->maloaip;
+                            $dsph->loaip = $ttph->loaip;
+                            $dsph->qccl = $ttph->qccl;
+                            $dsph->sohieu = $ttph->sohieu;
+                            $dsph->ghichu = $ttph->ghichu;
+                            $dsph->mucgialk = $ttph->mucgiakk;
+                            $dsph->mucgiakk = $ttph->mucgiakk;
+                            $dsph->tendoituong = $ttph->tendoituong;
+                            $dsph->apdung = $ttph->apdung;
+                            $dsph->ghichu = $ttph->ghichu;
+                            $dsph->save();
+                        }
+                    }
+
+                    $modelttdv = KkGDvLtCtDf::where('macskd',$modelcb->macskd)
+                        ->get();
+                    //dd($modelttdv);
+                    $ngaynhap = date('d/m/Y');
+                    $dayngaynhap = date('D');
+                    if($dayngaynhap == 'Thu'){
+                        $ngayhieuluc  =  date('d/m/Y',mktime(0, 0, 0, date("m")  , date("d")+5, date("Y")));
+                    }elseif($dayngaynhap == 'Fri') {
+                        $ngayhieuluc  =  date('d/m/Y',mktime(0, 0, 0, date("m")  , date("d")+4, date("Y")));
+                    }elseif( $dayngaynhap = 'Sat'){
+                        $ngayhieuluc  =  date('d/m/Y',mktime(0, 0, 0, date("m")  , date("d")+3, date("Y")));
+                    }else {
+                        $ngayhieuluc  =  date('d/m/Y',mktime(0, 0, 0, date("m")  , date("d")+2, date("Y")));
+                    }
+
                     return view('manage.dvlt.kkgia.kkgia45s.create')
                         ->with('modelcskd',$modelcskd)
                         ->with('modelttp',$modelttp)
                         ->with('modeldtad',$modeldtad)
+                        ->with('modelttdv',$modelttdv)
+                        ->with('ngaynhap',$ngaynhap)
+                        ->with('ngayhieuluc',$ngayhieuluc)
+                        ->with('modelcb',$modelcb)
                         ->with('pageTitle', 'Kê khai giá dịch vụ lưu trú thêm mới');
                 }else{
                     return view('errors.noperm');
@@ -71,6 +113,8 @@ class KkGiaDvLt45sController extends Controller
                     $modelgiaph->loaip = $ph->loaip;
                     $modelgiaph->qccl = $ph->qccl;
                     $modelgiaph->sohieu = $ph->sohieu;
+                    $modelgiaph->tendoituong = $ph->tendoituong;
+                    $modelgiaph->apdung = $ph->apdung;
                     $modelgiaph->ghichu = $ph->ghichu;
                     $modelgiaph->macskd = $ph->macskd;
                     $modelgiaph->mucgialk = $ph->mucgialk;
@@ -90,13 +134,15 @@ class KkGiaDvLt45sController extends Controller
         if (Session::has('admin')) {
             if(session('admin')->level == 'T' || session('admin')->level == 'H' || session('admin')->level == 'DVLT') {
                     $model = KkGDvLt::findOrFail($id);
-                    $modelttp  = TtCsKdDvLt::where('macskd',$model->macskd)
+                    $modelttp  = KkGDvLtCt::where('mahs',$model->mahs)
                         ->get();
                     $modeldtad = DoiTuongApDungDvLt::where('macskd',$model->macskd)
                         ->get();
+                    $modecb = CbKkGDvLt::where('macskd',$model->macskd)->first();
 
                     return view('manage.dvlt.kkgia.kkgia45s.edit')
                         ->with('model',$model)
+                        ->with('modelcb',$modecb)
                         ->with('modeldtad',$modeldtad)
                         ->with('modelttp',$modelttp )
                         ->with('pageTitle', 'Kê khai giá dịch vụ lưu trú chỉnh sửa');

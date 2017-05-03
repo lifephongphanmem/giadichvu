@@ -37,6 +37,10 @@
             $('#frm_delete').submit();
         }
 
+        function confirmCopy(macskd){
+            document.getElementById("macskdcp").value=macskd;
+        }
+
         function confirmChuyen(id) {
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             //alert(id);
@@ -116,6 +120,10 @@
                             <i class="fa fa-plus"></i> Kê khai giá KS 4 5 sao </a>
                         <!--a href="{{url('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh='.$macskd.'/create_dk')}}" class="btn btn-default btn-sm">
                             <i class="fa fa-plus"></i> Kê khai mới (file đính kèm) </a-->
+                            @if($cp == 'yes')
+                            <button type="button" onclick="confirmCopy('{{$macskd}}')" class="btn btn-default btn-sm" data-target="#copy-modal" data-toggle="modal"><i class="fa fa-copy"></i>&nbsp;
+                                Sao chép kê khai</button>
+                            @endif
                         @endif
                         <a href="{{url('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh')}}" class="btn btn-default btn-sm"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
                     </div>
@@ -192,7 +200,11 @@
 
                                     @if($tt->trangthai == 'Chờ chuyển' || $tt->trangthai == 'Bị trả lại')
                                         @if(can('kkdvlt','edit'))
-                                        <a href="{{url('ke_khai_dich_vu_luu_tru/'.$tt->id.'/edit')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</a>
+                                            @if($tt->phanloai == 'DT')
+                                                <a href="{{url('ke_khai_dich_vu_luu_tru/khach_san/'.$tt->id.'/edit')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</a>
+                                            @else
+                                                <a href="{{url('ke_khai_dich_vu_luu_tru/'.$tt->id.'/edit')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</a>
+                                            @endif
                                         @endif
                                         @if(can('kkdvlt','delete'))
                                         <button type="button" onclick="getId('{{$tt->id}}')" class="btn btn-default btn-xs mbs" data-target="#delete-modal" data-toggle="modal"><i class="fa fa-trash-o"></i>&nbsp;
@@ -203,7 +215,7 @@
                                             Chuyển</button>
                                         @endif
                                         @if( $tt->trangthai == 'Bị trả lại')
-                                        <button type="button" data-target="#lydo-modal" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="viewLyDo({{$tt->id}});"><i class="fa fa-search"></i>&nbsp;Lý do trả lại</button>
+                                        <button type="button" data-target="#lydo-modal" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="viewLyDo({{$tt->id}})"><i class="fa fa-search"></i>&nbsp;Lý do trả lại</button>
                                         @endif
                                     @endif
 
@@ -248,6 +260,32 @@
                 <!-- /.modal-content -->
             </div>
             <!-- /.modal-dialog -->
+        </div>
+
+    <!--Model copy-->
+        <div class="modal fade" id="copy-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    {!! Form::open(['url'=>'ke_khai_dich_vu_luu_tru/copy','id' => 'frm_chuyen'])!!}
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h4 class="modal-title">Sao chép hồ sơ kê khai?</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p style="color: #000066"><u>Ghi chú</u>: Chức năng này sẽ hỗ trợ kê khai nhanh giá dịch vụ, chương trình sẽ tự động sao chép thông tin từ hồ sơ kê khai đã được duyệt
+                            và chuyển các thông tin vào màn hình kê khai mới.Các mức giá kê khai liền kề sẽ tự động lấy từ thông tin kê khai sao chép chuyển vào</p>
+                    <input type="hidden" name="macskdcp" id="macskdcp" value="">
+                    <div class="modal-footer">
+                        <button type="button" class="btn default" data-dismiss="modal">Hủy</button>
+                        <button type="submit" class="btn blue" onclick="ClickCopy()">Đồng ý</button>
+
+                    </div>
+                    {!! Form::close() !!}
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
         </div>
 
     <!--Model lý do-->

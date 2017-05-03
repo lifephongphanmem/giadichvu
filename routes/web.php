@@ -174,6 +174,7 @@ Route::get('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh','KkGDvLtController@cskd');
 Route::get('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh={macskd}&nam={nam}','KkGDvLtController@index');
 Route::get('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh={macskd}/create','KkGDvLtController@create');
 Route::get('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh={macskd}/create_dk','KkGDvLtController@create_dk');//
+Route::post('ke_khai_dich_vu_luu_tru/copy','KkGDvLtController@copy');
     //Ajax ttphong create
 Route::get('/kkgdvlt/kkgia','KkGDvLtCtDfController@kkgia');
 Route::get('/kkgdvlt/upkkgia','KkGDvLtCtDfController@upkkgia');
@@ -211,12 +212,16 @@ Route::get('/kkgdvlt45s/addttp','KkGiaDvLt45sCtDfController@addttp');
 Route::get('/kkgdvlt45s/editttp','KkGiaDvLt45sCtDfController@editttp');
 Route::get('/kkgdvlt45s/updatettp','KkGiaDvLt45sCtDfController@updatettp');
 Route::get('/kkgdvlt45s/deletettp','KkGiaDvLt45sCtDfController@delete');
+Route::get('/kkgdvlt45s/kkgia','KkGiaDvLt45sCtDfController@kkgia');
+Route::get('/kkgdvlt45s/upkkgia','KkGiaDvLt45sCtDfController@upkkgia');
     //End Ajax create
     //Ajax edit
 Route::get('/kkgdvlt45s/themttp','KkGiaDvLt45sCtController@addttp');
 Route::get('/kkgdvlt45s/csttp','KkGiaDvLt45sCtController@editttp');
 Route::get('/kkgdvlt45s/tdttp','KkGiaDvLt45sCtController@updatettp');
 Route::get('/kkgdvlt45s/xoattp','KkGiaDvLt45sCtController@delete');
+Route::get('/kkgdvlt45s/cskkgia','KkGiaDvLt45sCtController@kkgia');
+Route::get('/kkgdvlt45s/tdkkgia','KkGiaDvLt45sCtController@upkkgia');
     //End Ajax edit
 
         //End Kê khai lưu trú KS 45 sao

@@ -36,6 +36,7 @@ class KkGDvLtController extends Controller
                         ->get();
 
                 }
+
                 return view('manage.dvlt.kkgia.ttcskd.index')
                     ->with('model', $model)
                     ->with('pageTitle', 'Thông tin cơ sở kinh doanh dịch vụ lưu trú');
@@ -57,11 +58,23 @@ class KkGDvLtController extends Controller
                     ->first();
 
                 if(session('admin')->sadmin == 'ssa' || session('admin')->cqcq == $modelcskd->cqcq) {
+                    $tthscp = KkGDvLt::where('macskd', $macskd)
+                        ->whereYear('ngaynhap', $nam)
+                        ->where('trangthai','Duyệt')
+                        ->orderBy('id','desc')
+                        ->get();
+                    $cb = CbKkGDvLt::where('macskd', $macskd)->first();
+                    if(isset($cb))
+                        $cp = 'yes';
+                    else
+                        $cp = 'no';
                     return view('manage.dvlt.kkgia.kkgiadv.index')
                         ->with('model', $model)
                         ->with('nam', $nam)
                         ->with('macskd', $macskd)
                         ->with('modelcskd', $modelcskd)
+                        ->with('tthscp',$tthscp)
+                        ->with('cp',$cp)
                         ->with('pageTitle', 'Thông tin kê khai giá dịch vụ lưu trú');
                 }else{
                     return view('errors.noperm');
@@ -113,20 +126,22 @@ class KkGDvLtController extends Controller
                         $dsph->sohieu = $ttph->sohieu;
                         $dsph->ghichu = $ttph->ghichu;
                         $dsph->mucgialk = $ttph->gialk;
+                        $dsph->mucgiakk = $ttph->gialk;
                         $dsph->save();
                     }
                     $modeldsph = KkGDvLtCtDf::where('macskd', $modelcskd->macskd)
                         ->get();
-                    //dd($modelcskd);
-                    //dd($modelph);
                     $ngaynhap = date('d/m/Y');
                     $dayngaynhap = date('D');
+                    //dd($dayngaynhap);
                     if($dayngaynhap == 'Thu'){
-                        $$ngayhieuluc  =  date('d/m/Y',mktime(0, 0, 0, date("m")  , date("d")+5, date("Y")));
-                    }elseif($dayngaynhap == 'Fri' || $dayngaynhap = 'Sat') {
+                        $ngayhieuluc  =  date('d/m/Y',mktime(0, 0, 0, date("m")  , date("d")+5, date("Y")));
+                    }elseif($dayngaynhap == 'Fri') {
                         $ngayhieuluc  =  date('d/m/Y',mktime(0, 0, 0, date("m")  , date("d")+4, date("Y")));
+                    }elseif( $dayngaynhap = 'Sat'){
+                        $ngayhieuluc  =  date('d/m/Y',mktime(0, 0, 0, date("m")  , date("d")+3, date("Y")));
                     }else {
-                        $dayngaynhap  =  date('d/m/Y',mktime(0, 0, 0, date("m")  , date("d")+3, date("Y")));
+                        $ngayhieuluc  =  date('d/m/Y',mktime(0, 0, 0, date("m")  , date("d")+2, date("Y")));
                     }
 
                     return view('manage.dvlt.kkgia.kkgiadv.create')
@@ -140,6 +155,74 @@ class KkGDvLtController extends Controller
                 }else{
                     return view('errors.noperm');
                 }
+            }else{
+                return view('errors.perm');
+            }
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function copy(Request $request){
+        if (Session::has('admin')) {
+            if(session('admin')->level == 'T' || session('admin')->level == 'H' || session('admin')->level == 'DVLT') {
+                $inputs = $request->all();
+                $modelcp = CbKkGDvLt::where('macskd',$inputs['macskdcp'])
+                    ->first();
+
+                if($modelcp->phanloai !='DT'){
+                    $modelcskd = CsKdDvLt::where('macskd', $inputs['macskdcp'])->first();
+                    if(session('admin')->sadmin =='ssa' || session('admin')->cqcq == $modelcskd->cqcq) {
+                        $modelkkctdf = KkGDvLtCtDf::where('macskd', $inputs['macskdcp'])
+                            ->delete();
+                        $modelcb = KkGDvLt::where('mahs',$modelcp->mahs)->first();
+                        //dd($modelcb);
+                        $modelph = KkGDvLtCt::where('mahs',$modelcp->mahs)
+                            ->get();
+                        foreach($modelph as $ttph){
+                            $dsph = new KkGDvLtCtDf();
+                            $dsph->macskd = $ttph->macskd;
+                            $dsph->maloaip = $ttph->maloaip;
+                            $dsph->loaip = $ttph->loaip;
+                            $dsph->qccl = $ttph->qccl;
+                            $dsph->sohieu = $ttph->sohieu;
+                            $dsph->ghichu = $ttph->ghichu;
+                            $dsph->mucgialk = $ttph->mucgiakk;
+                            $dsph->mucgiakk = $ttph->mucgiakk;
+                            $dsph->save();
+                        }
+
+                        $modeldsph = KkGDvLtCtDf::where('macskd', $modelcskd->macskd)
+                            ->get();
+                        //dd($modelcskd);
+                        //dd($modelph);
+                        $ngaynhap = date('d/m/Y');
+                        $dayngaynhap = date('D');
+                        if($dayngaynhap == 'Thu'){
+                            $ngayhieuluc  =  date('d/m/Y',mktime(0, 0, 0, date("m")  , date("d")+5, date("Y")));
+                        }elseif($dayngaynhap == 'Fri') {
+                            $ngayhieuluc  =  date('d/m/Y',mktime(0, 0, 0, date("m")  , date("d")+4, date("Y")));
+                        }elseif( $dayngaynhap = 'Sat'){
+                            $ngayhieuluc  =  date('d/m/Y',mktime(0, 0, 0, date("m")  , date("d")+3, date("Y")));
+                        }else {
+                            $ngayhieuluc  =  date('d/m/Y',mktime(0, 0, 0, date("m")  , date("d")+2, date("Y")));
+                        }
+
+
+                        return view('manage.dvlt.kkgia.kkgiadv.create')
+                            ->with('modelcskd', $modelcskd)
+                            ->with('modelph', $modelph)//Thay thế
+                            ->with('modeldsph', $modeldsph)
+                            ->with('modelcb', $modelcb)
+                            ->with('ngaynhap',$ngaynhap)
+                            ->with('ngayhieuluc',$ngayhieuluc)
+                            ->with('pageTitle', 'Kê khai giá dịch vụ lưu trú thêm mới');
+                    }else{
+                        return view('errors.noperm');
+                    }
+                }else{
+
+                }
+
             }else{
                 return view('errors.perm');
             }
@@ -244,9 +327,12 @@ class KkGDvLtController extends Controller
                 if(session('admin')->sadmin == 'ssa' || session('admin')->cqcq == $model->cqcq) {
                     $modelct = KkGDvLtCt::where('mahs', $model->mahs)
                         ->get();
+                    $modelcb = CbKkGDvLt::where('macskd', $model->macskd)
+                        ->first();
                     return view('manage.dvlt.kkgia.kkgiadv.edit')
                         ->with('model', $model)
                         ->with('modelct', $modelct)
+                        ->with('modelcb',$modelcb)
                         ->with('pageTitle', 'Chỉnh sửa thông tin kê khai giá dịch vụ lưu trú');
                 }else{
                     return view('errors.noperm');
@@ -424,18 +510,18 @@ class KkGDvLtController extends Controller
             $day = date("D",  strtotime($ngaychuyen));
 
             if($day == 'Thu'){
-                $ss = strtotime(date("Y-m-d", strtotime($ngaychuyen)) . " +5 day");
-                $ss = strftime("%Y-%m-%d", $ss);
-            }elseif($day == 'Fri' || $day = 'Sat') {
-                $ss = strtotime(date("Y-m-d", strtotime($ngaychuyen)) . " +4 day");
-                $ss = strftime("%Y-%m-%d", $ss);
-            }else {
-                $ss = strtotime(date("Y-m-d", strtotime($ngaychuyen)) . " +3 day");
-                $ss = strftime("%Y-%m-%d", $ss);
+                $ngaysosanh = date('Y-m-d',mktime(0, 0, 0, date('m',strtotime($ngaychuyen))  , date('d',strtotime($ngaychuyen))+5, date('Y',strtotime($ngaychuyen))));
+            }elseif($day == 'Fri' ) {
+                $ngaysosanh = date('Y-m-d',mktime(0, 0, 0, date('m',strtotime($ngaychuyen))  , date('d',strtotime($ngaychuyen))+4, date('Y',strtotime($ngaychuyen))));
+            }elseif($day = 'Sat'){
+                $ngaysosanh = date('Y-m-d',mktime(0, 0, 0, date('m',strtotime($ngaychuyen)), date('d',strtotime($ngaychuyen))+3, date('Y',strtotime($ngaychuyen))));
+            }else{
+                $ngaysosanh = date('Y-m-d',mktime(0, 0, 0, date('m',strtotime($ngaychuyen))  , date('d',strtotime($ngaychuyen))+2, date('Y',strtotime($ngaychuyen))));
             }
-            if ($ss < $ngayapdung || $ss == $ngayapdung ) {
+            if($ngayapdung>$ngaysosanh || $ngayapdung == $ngaysosanh){
                 $result['status'] = 'success';
             }
+
         }
         die(json_encode($result));
     }

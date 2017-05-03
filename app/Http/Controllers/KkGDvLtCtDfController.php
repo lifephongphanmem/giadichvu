@@ -105,10 +105,18 @@ class KkGDvLtCtDfController extends Controller
             ($model->mucgiakk != null)? $mucgiakk = $model->mucgiakk : $mucgiakk = 0;
 
             $result['message'] = '<div class="modal-body" id="ttkkgia">';
-            $result['message'] .= '<div class="form-group">';
-            $result['message'] .= '<label><b>Mức giá kê khai liền kề</b></label>';
-            $result['message'] .= '<input type="text" style="text-align: right" id="mucgialk" name="mucgialk" class="form-control" data-mask="fdecimal" value="'.$mucgialk.'" autofocus>';
-            $result['message'] .= '</div>';
+            if($inputs['ttcb'] == 'yes') {
+                $result['message'] .= '<div class="form-group" style="display: none">';
+                $result['message'] .= '<label><b>Mức giá kê khai liền kề</b></label>';
+                $result['message'] .= '<input type="text" style="text-align: right" id="mucgialk" name="mucgialk" class="form-control" data-mask="fdecimal" value="' . $mucgialk . '" autofocus>';
+                $result['message'] .= '</div>';
+            }else {
+                $result['message'] .= '<div class="form-group">';
+                $result['message'] .= '<label><b>Mức giá kê khai liền kề</b></label>';
+                $result['message'] .= '<input type="text" style="text-align: right" id="mucgialk" name="mucgialk" class="form-control" data-mask="fdecimal" value="' . $mucgialk . '" autofocus>';
+                $result['message'] .= '</div>';
+            }
+
             $result['message'] .= '<div class="form-group">';
             $result['message'] .= '<label><b>Mức giá kê khai</b></label>';
             $result['message'] .= '<input type="text" style="text-align: right" id="mucgiakk" name="mucgiakk" class="form-control" data-mask="fdecimal" value="'.$mucgiakk.'">';
@@ -146,8 +154,8 @@ class KkGDvLtCtDfController extends Controller
             $inputs['mucgiakk'] = str_replace(',','',$inputs['mucgiakk']);
             $inputs['mucgiakk'] = str_replace('.','',$inputs['mucgiakk']);
 
-            $modelkkgia->mucgialk = $inputs['mucgialk'];
-            $modelkkgia->mucgiakk = $inputs['mucgiakk'];
+            $modelkkgia->mucgialk = $inputs['mucgialk'] != '' ? $inputs['mucgialk'] : '0';
+            $modelkkgia->mucgiakk = $inputs['mucgiakk'] != '' ? $inputs['mucgiakk'] : '0';
             $modelkkgia->save();
 
             $model = KkGDvLtCtDf::where('macskd',$modelkkgia->macskd)

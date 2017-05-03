@@ -39,21 +39,16 @@ class MailController extends Controller
     public function testdaysm(Request $request){
         $inputs = $request->all();
         $ngaynhap = date('Y-m-d', strtotime(str_replace('/', '-', $inputs['ngaynhap'])));
-        $ngayapdung = date('Y-m-d', strtotime(str_replace('/', '-', $inputs['ngayapdung'])));
-        $timestamp = strtotime($ngayapdung);
-        $day = date("D", $timestamp);
+        $ngayhieuluc = date('Y-m-d', strtotime(str_replace('/', '-', $inputs['ngayapdung'])));
 
-        $ss = strtotime(date("Y-m-d", strtotime($ngayapdung)) . " -3 day");
-        $ss = strftime("%Y-%m-%d", $ss);
-dd($ss);
+        $thungaynhap = date('D',strtotime($ngaynhap));
+
+        $ngaysosanh = date('Y-m-d',mktime(0, 0, 0, date('m',strtotime($ngaynhap))  , date('d',strtotime($ngaynhap))+3, date('Y',strtotime($ngaynhap))));
+
+        dd($ngayhieuluc>$ngaysosanh ? 'true'.$ngayhieuluc.'>'.$ngaysosanh : 'false'.$ngayhieuluc.'<'.$ngaysosanh);
 
 
-        /*$gio = date('H:i',strtotime(Carbon::now()->toDateTimeString()));
-        $df = '8:00';
-        dd($day = date("D", strtotime(Carbon::now()->toDateTimeString())));
-        if($df > $gio){
-            dd($gio);
-        }else
-            dd($df.'<'.$gio. '--triển thôi');*/
+
+
     }
 }

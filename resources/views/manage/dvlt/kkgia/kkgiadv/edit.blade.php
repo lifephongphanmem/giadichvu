@@ -162,7 +162,8 @@
                 type: 'GET',
                 data: {
                     _token: CSRF_TOKEN,
-                    id: id
+                    id: id,
+                    ttcb:  $('#ttcb').val()
                 },
                 dataType: 'JSON',
                 success: function (data) {
@@ -328,6 +329,7 @@
             <!-- BEGIN EXAMPLE TABLE PORTLET-->
             <div class="portlet box blue">
                 <input type="hidden" name="ngaychange" id="ngaychange">
+                <input type="hidden" name="ttcb" id="ttcb" value="{{isset($modelcb) ? 'yes' : 'no'}}">
                 <div class="portlet-body">
                     <h4 class="form-section" style="color: #0000ff">Thông tin hồ sơ</h4>
                     <div class="row">
@@ -360,22 +362,6 @@
                         <!--/span-->
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="control-label">Số công văn liền kề</label>
-                                {!!Form::text('socvlk', null, array('id' => 'socvlk','class' => 'form-control'))!!}
-                            </div>
-                        </div>
-                        <!--/span-->
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label">Ngày nhập số công văn liền kề<span class="require">*</span></label>
-                                <!--input type="date" name="ngaycvlk" id="ngaycvlk" value="{{$model->ngaycvlk}}" class="form-control"-->
-                                {!!Form::text('ngaycvlk',($model->ngaycvlk != '' ? date('d/m/Y',  strtotime($model->ngaycvlk)) : ''), array('id' => 'ngaycvlk','data-inputmask'=>"'alias': 'date'",'class' => 'form-control'))!!}
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
                                 <label class="control-label">Đơn vị tính<span class="require">*</span></label>
                                 <select class="form-control" name="dvt" id="dvt">
                                     <option value="no" {{($model->dvt == 'no') ? 'selected' : ''}}>--Chọn đơn vị tính--</option>
@@ -385,7 +371,42 @@
                                 </select>
                             </div>
                         </div>
+                        <!--/span-->
                     </div>
+                    @if(isset($modelcb))
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Số công văn liền kề</label>
+                                    <p style="color: #000088"><b>{{$model->socvlk}}</b></p>
+                                    {!!Form::hidden('socvlk', null, array('id' => 'socvlk','class' => 'form-control'))!!}
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Ngày nhập số công văn liền kề<span class="require">*</span></label>
+                                    <p style="color: #000088"><b>{{getDayVn($model->ngaycvlk)}}</b></p>
+                                    {!!Form::hidden('ngaycvlk',($model->ngaycvlk != '' ? date('d/m/Y',  strtotime($model->ngaycvlk)) : ''), array('id' => 'ngaycvlk','data-inputmask'=>"'alias': 'date'",'class' => 'form-control'))!!}
+                                </div>
+                            </div>
+                        </div>
+                    @else
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Số công văn liền kề</label>
+                                {!!Form::text('socvlk', null, array('id' => 'socvlk','class' => 'form-control'))!!}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Ngày nhập số công văn liền kề<span class="require">*</span></label>
+                                {!!Form::text('ngaycvlk',($model->ngaycvlk != '' ? date('d/m/Y',  strtotime($model->ngaycvlk)) : ''), array('id' => 'ngaycvlk','data-inputmask'=>"'alias': 'date'",'class' => 'form-control'))!!}
+                            </div>
+                        </div>
+                    </div>
+                    @endif
                     <input type="hidden" name="macskd" id="macskd" value="{{$model->macskd}}">
                     <input type="hidden" name="mahs" id="mahs" value="{{$model->mahs}}">
                     {!! Form::close() !!}

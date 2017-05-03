@@ -131,7 +131,8 @@
                 type: 'GET',
                 data: {
                     _token: CSRF_TOKEN,
-                    id: id
+                    id: id,
+                    ttcb:  $('#ttcb').val()
                 },
                 dataType: 'JSON',
                 success: function (data) {
@@ -393,7 +394,7 @@
 @section('content')
 
     <h3 class="page-title">
-        Thông tin kê khai hồ sơ<small>&nbsp;giá dịch vụ lưu trú</small>
+        Thông tin kê khai hồ sơ giá dịch vụ lưu trú<small>&nbsp;{{$modelcskd->tentencskd}}</small>
     </h3>
 
     <!-- END PAGE HEADER-->
@@ -403,6 +404,7 @@
             <!-- BEGIN EXAMPLE TABLE PORTLET-->
             <div class="portlet box blue">
                 <input type="hidden" name="ngaychange" id="ngaychange">
+                <input type="hidden" name="ttcb" id="ttcb" value="{{isset($modelcb) ? 'yes' : 'no'}}">
                 <div class="portlet-body">
                     <h4 class="form-section" style="color: #0000ff">Thông tin hồ sơ</h4>
                     <div class="row">
@@ -422,6 +424,7 @@
                             </div>
                         </div>
                         <!--/span-->
+
                     </div>
 
                     <!--/row-->
@@ -434,35 +437,54 @@
                         </div>
                         <!--/span-->
                         <div class="col-md-6">
-                            <div class="form-group has-error">
-                                <label class="control-label">Số công văn liền kề</label>
-                                <input type="text" name="socvlk" id="socvlk" class="form-control" value="{{isset($modelcb) ? $modelcb->socv : '' }}">
-
+                            <div class="form-group">
+                                <label class="control-label">Đơn vị tính<span class="require">*</span></label>
+                                <select class="form-control" name="dvt" id="dvt">
+                                    <option value="no" {{isset($modelcb) && $modelcb->dvt == 'no' ? 'selected' : ''}}>--Chọn đơn vị tính--</option>
+                                    <option value="Đồng/phòng/ngày đêm" {{isset($modelcb) && $modelcb->dvt == 'Đồng/phòng/ngày đêm' ? 'selected' : ''}}>Đồng/phòng/ngày đêm</option>
+                                    <option value="Đồng/phòng/tuần" {{isset($modelcb) && $modelcb->dvt == 'Đồng/phòng/tuần' ? 'selected' : ''}}>Đồng/phòng/tuần</option>
+                                    <option value="Đồng/phòng/tháng" {{isset($modelcb) && $modelcb->dvt == 'Đồng/phòng/tháng' ? 'selected' : ''}}>Đồng/phòng/tháng</option>
+                                </select>
                             </div>
                         </div>
                         <!--/span-->
                     </div>
+                    @if(isset($modelcb))
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="control-label">Ngày nhập số công văn liền kề<span class="require">*</span></label>
-                                <!--input type="date" name="ngaycvlk" id="ngaycvlk" class="form-control" value="{{isset($modelcb) ? $modelcb->ngaynhap : '' }}"-->
-                                {!!Form::text('ngaycvlk',(isset($modelcb) ? date('d/m/Y',  strtotime($modelcb->ngaynhap)) : ''), array('id' => 'ngaycvlk','data-inputmask'=>"'alias': 'date'",'class' => 'form-control'))!!}
+                                <label class="control-label">Số công văn liền kề</label>
+                                <p style="color: #000088"><b>{{$modelcb->socv}}</b></p>
+                                <input type="hidden" name="socvlk" id="socvlk" class="form-control" value="{{isset($modelcb) ? $modelcb->socv : '' }}">
 
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="control-label">Đơn vị tính<span class="require">*</span></label>
-                                <select class="form-control" name="dvt" id="dvt">
-                                    <option value="no">--Chọn đơn vị tính--</option>
-                                    <option value="Đồng/phòng/ngày đêm">Đồng/phòng/ngày đêm</option>
-                                    <option value="Đồng/phòng/tuần">Đồng/phòng/tuần</option>
-                                    <option value="Đồng/phòng/tháng">Đồng/phòng/tháng</option>
-                                </select>
+                                <label class="control-label">Ngày nhập số công văn liền kề<span class="require">*</span></label>
+                                <p style="color: #000088"><b>{{getDayVn($modelcb->ngaynhap)}}</b></p>
+                                {!!Form::hidden('ngaycvlk',(isset($modelcb) ? date('d/m/Y',  strtotime($modelcb->ngaynhap)) : ''), array('id' => 'ngaycvlk','data-inputmask'=>"'alias': 'date'",'class' => 'form-control'))!!}
                             </div>
                         </div>
                     </div>
+                    @else
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Số công văn liền kề</label>
+                                    <input type="text" name="socvlk" id="socvlk" class="form-control" value="{{isset($modelcb) ? $modelcb->socv : '' }}">
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Ngày nhập số công văn liền kề<span class="require">*</span></label>
+                                    <!--input type="date" name="ngaycvlk" id="ngaycvlk" class="form-control" value="{{isset($modelcb) ? $modelcb->ngaynhap : '' }}"-->
+                                    {!!Form::text('ngaycvlk',(isset($modelcb) ? date('d/m/Y',  strtotime($modelcb->ngaynhap)) : ''), array('id' => 'ngaycvlk','data-inputmask'=>"'alias': 'date'",'class' => 'form-control'))!!}
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                     <input type="hidden" name="macskd" id="macskd" value="{{$modelcskd->macskd}}">
                     <input type="hidden" name="masothue" id="masothue" value="{{$modelcskd->masothue}}">
                     <input type="hidden" name="cqcq" id="cqcq" value="{{$modelcskd->cqcq}}">
@@ -515,7 +537,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="form-group"><label for="selGender" class="control-label">Thông tin kê khai 1</label>
+                            <div class="form-group"><label for="selGender" class="control-label">Thông tin kê khai</label>
                                 <div>
                                         <textarea id="ghichu" class="form-control" name="ghichu" cols="30" rows="5"
                                                   placeholder="-Phụ thu, Thuế VAT">{{isset($modelcb) ? $modelcb->ghichu : '- Mức giá nêu trên đã bao gồm thuế giá GTGT' }}</textarea>

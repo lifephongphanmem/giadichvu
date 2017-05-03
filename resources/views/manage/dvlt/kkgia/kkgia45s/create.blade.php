@@ -121,6 +121,83 @@
 
     </script>
     <script>
+        function checkngay(){
+            document.getElementById("ngaychange").value = $('input[name="ngayhieuluc"]').val();
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                url: '/ajax/checkngay',
+                type: 'GET',
+                data: {
+                    _token: CSRF_TOKEN,
+                    ngaynhap: $('input[name="ngaynhap"]').val(),
+                    ngayhieuluc: $('input[name="ngayhieuluc"]').val()
+
+                },
+                dataType: 'JSON',
+                success: function (data) {
+                    if (data.status == 'success') {
+                        toastr.success("Ngày hiệu lực có thể sử dụng được", "Thành công!");
+                        $('#ngayhieuluc').val() = $('#ngaychange').val();
+                    }else
+                        toastr.error("Bạn cần kiểm tra lại ngày có hiệu lực!", "Lỗi!");
+                    $('input[name="ngayhieuluc"]').val('');
+                }
+            })
+
+        }
+        function clearngayhieuluc(){
+            $('input[name="ngayhieuluc"]').val('');
+        }
+
+        function kkgia(id){
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            //alert(id);
+            $.ajax({
+                url: '/kkgdvlt45s/kkgia',
+                type: 'GET',
+                data: {
+                    _token: CSRF_TOKEN,
+                    id: id,
+                    ttcb:  $('#ttcb').val()
+                },
+                dataType: 'JSON',
+                success: function (data) {
+                    if (data.status == 'success') {
+                        $('#ttkkgia').replaceWith(data.message);
+                        InputMask();
+                    }
+                    else
+                        toastr.error("Không thể chỉnh sửa thông tin giá phòng nghỉ!", "Lỗi!");
+                }
+            })
+        }
+        function upkkgia(){
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                url: '/kkgdvlt45s/upkkgia',
+                type: 'GET',
+                data: {
+                    _token: CSRF_TOKEN,
+                    id: $('input[name="idkkgia"]').val(),
+                    mucgialk: $('input[name="mucgialk"]').val(),
+                    mucgiakk: $('input[name="mucgiakk"]').val()
+                },
+                dataType: 'JSON',
+                success: function (data) {
+                    if (data.status == 'success') {
+                        toastr.success("Cập nhật giá phòng nghỉ thành công", "Thành công!");
+                        $('#dsts').replaceWith(data.message);
+                        jQuery(document).ready(function() {
+                            TableManaged.init();
+                        });
+                        $('#modal-kkgia').modal("hide");
+
+                    } else
+                        toastr.error("Bạn cần kiểm tra lại thông tin vừa nhập!", "Lỗi!");
+                }
+            })
+
+        }
         function clearAdd(){
             $('#apdungadd').val('');
             $('#mucgialkadd').val('0');
@@ -257,7 +334,8 @@
         <div class="col-md-12">
             <!-- BEGIN EXAMPLE TABLE PORTLET-->
             <div class="portlet box blue">
-
+                <input type="hidden" name="ngaychange" id="ngaychange">
+                <input type="hidden" name="ttcb" id="ttcb" value="{{isset($modelcb) ? 'yes' : 'no'}}">
                 <div class="portlet-body">
                     <h4 class="form-section" style="color: #0000ff">Thông tin hồ sơ</h4>
                     <div class="row">
@@ -265,7 +343,7 @@
                             <div class="form-group">
                                 <label class="control-label">Ngày kê khai<span class="require">*</span></label>
                                 <!--input type="date" name="ngaynhap" id="ngaynhap" class="form-control required" autofocus-->
-                                {!!Form::text('ngaynhap',\Carbon\Carbon::now()->format('d/m/Y'), array('id' => 'ngaynhap','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required','autofocus'))!!}
+                                {!!Form::text('ngaynhap',$ngaynhap, array('id' => 'ngaynhap','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required','onchange'=>"clearngayhieuluc()"))!!}
                             </div>
                         </div>
                         <!--/span-->
@@ -273,7 +351,7 @@
                             <div class="form-group has-error">
                                 <label class="control-label">Ngày thực hiện mức giá kê khai<span class="require">*</span></label>
                                 <!--input type="date" name="ngayhieuluc" id="ngayhieuluc" class="form-control required"-->
-                                {!!Form::text('ngayhieuluc',null, array('id' => 'ngayhieuluc','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required'))!!}
+                                {!!Form::text('ngayhieuluc',$ngayhieuluc, array('id' => 'ngayhieuluc','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required','onchange'=>"checkngay()"))!!}
                             </div>
                         </div>
                         <!--/span-->
@@ -289,24 +367,6 @@
                         </div>
                         <!--/span-->
                         <div class="col-md-6">
-                            <div class="form-group has-error">
-                                <label class="control-label">Số công văn liền kề</label>
-                                <input type="text" name="socvlk" id="socvlk" class="form-control" value="{{isset($modelcb) ? $modelcb->socv : '' }}">
-
-                            </div>
-                        </div>
-                        <!--/span-->
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label">Ngày nhập số công văn liền kề<span class="require">*</span></label>
-                                <!--input type="date" name="ngaycvlk" id="ngaycvlk" class="form-control" value="{{isset($modelcb) ? $modelcb->ngaynhap : '' }}"-->
-                                {!!Form::text('ngaycvlk',(isset($modelcb) ? date('d/m/Y',  strtotime($modelcb->ngaynhap)) : ''), array('id' => 'ngaycvlk','data-inputmask'=>"'alias': 'date'",'class' => 'form-control'))!!}
-
-                            </div>
-                        </div>
-                        <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Đơn vị tính<span class="require">*</span></label>
                                 <select class="form-control" name="dvt" id="dvt">
@@ -317,7 +377,43 @@
                                 </select>
                             </div>
                         </div>
+                        <!--/span-->
                     </div>
+                    @if(isset($modelcb))
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Số công văn liền kề</label>
+                                    <p style="color: #000088"><b>{{$modelcb->socv}}</b></p>
+                                    <input type="hidden" name="socvlk" id="socvlk" class="form-control" value="{{isset($modelcb) ? $modelcb->socv : '' }}">
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Ngày nhập số công văn liền kề<span class="require">*</span></label>
+                                    <p style="color: #000088"><b>{{getDayVn($modelcb->ngaynhap)}}</b></p>
+                                    {!!Form::hidden('ngaycvlk',(isset($modelcb) ? date('d/m/Y',  strtotime($modelcb->ngaynhap)) : ''), array('id' => 'ngaycvlk','data-inputmask'=>"'alias': 'date'",'class' => 'form-control'))!!}
+                                </div>
+                            </div>
+                        </div>
+                    @else
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Số công văn liền kề</label>
+                                <input type="text" name="socvlk" id="socvlk" class="form-control" value="{{isset($modelcb) ? $modelcb->socv : '' }}">
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Ngày nhập số công văn liền kề<span class="require">*</span></label>
+                                {!!Form::text('ngaycvlk',(isset($modelcb) ? date('d/m/Y',  strtotime($modelcb->ngaynhap)) : ''), array('id' => 'ngaycvlk','data-inputmask'=>"'alias': 'date'",'class' => 'form-control'))!!}
+                            </div>
+                        </div>
+                    </div>
+                    @endif
                     <input type="hidden" name="macskd" id="macskd" value="{{$modelcskd->macskd}}">
                     <input type="hidden" name="masothue" id="masothue" value="{{$modelcskd->masothue}}">
                     <input type="hidden" name="cqcq" id="cqcq" value="{{$modelcskd->cqcq}}">
@@ -344,6 +440,7 @@
                                     <th style="text-align: center" width="2%">STT</th>
                                     <th style="text-align: center">Loại phòng<br>Quy cách chất lượng</th>
                                     <th style="text-align: center">Đối tượng</th>
+                                    <th style="text-align: center">Áp dụng</th>
                                     <th style="text-align: center">Mức giá liền kề</th>
                                     <th style="text-align: center">Mức giá kê khai</th>
                                     <th style="text-align: center">Ghi chú</th>
@@ -351,6 +448,22 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @foreach($modelttdv as $key=>$ph)
+                                    <tr>
+                                        <td align="center">{{$key + 1}}</td>
+                                        <td class="active">{{$ph->loaip.'-'.$ph->qccl}}</td>
+                                        <td>{{$ph->tendoituong}}</td>
+                                        <td>{{$ph->apdung}}</td>
+                                        <td align="right">{{number_format($ph->mucgialk)}}</td>
+                                        <td align="right">{{number_format($ph->mucgiakk)}}</td>
+                                        <td>{{$ph->ghichu}}</td>
+                                        <td>
+                                            <button type="button" data-target="#modal-kkgia" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="kkgia({{$ph->id}});"><i class="fa fa-edit"></i>&nbsp;Kê khai giá</button>
+                                            <button type="button" data-target="#modal-edit" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="editTtPh({{$ph->id}});"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</button>
+                                            <button type="button" data-target="#modal-delete" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="getid({{$ph->id}});" ><i class="fa fa-trash-o"></i>&nbsp;Xóa</button>
+                                        </td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -435,7 +548,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <!--div class="row">
                         <div class="col-md-6">
                             <div class="form-group"><label for="selGender" class="control-label"><b>Giá liền kề</b><span class="require">*</span></label>
                                 <div><input type="text" name="mucgialkadd" id="mucgialkadd" class="form-control" data-mask="fdecimal" value="0" style="text-align: right">
@@ -447,7 +560,7 @@
                                 <div><input type="text" name="mucgiakkadd" id="mucgiakkadd" class="form-control" data-mask="fdecimal" value="0"  style="text-align: right"></div>
                             </div>
                         </div>
-                    </div>
+                    </div-->
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group"><label for="selGender" class="control-label"><b>Ghi chú</b><span class="require">*</span></label>
@@ -459,6 +572,26 @@
                 <div class="modal-footer">
                     <button type="button" data-dismiss="modal" class="btn btn-default">Thoát</button>
                     <button type="button" class="btn btn-primary" onclick="addttp()">Thêm mới</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!--Modal kê khai giá-->
+    <div class="modal fade" id="modal-kkgia" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Kê khai giá phòng nghỉ</h4>
+                </div>
+                <div class="modal-body" id="ttkkgia">
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Thoát</button>
+                    <button type="button" class="btn btn-primary" onclick="upkkgia()">Đồng ý</button>
                 </div>
             </div>
             <!-- /.modal-content -->
