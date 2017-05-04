@@ -6,6 +6,7 @@ use App\CbKkGDvLt;
 use App\CsKdDvLt;
 use App\DmDvQl;
 use App\DnDvLt;
+use App\DoiTuongApDungDvLt;
 use App\KkGDvLt;
 use App\KkGDvLtCt;
 use App\KkGDvLtCtDf;
@@ -220,7 +221,67 @@ class KkGDvLtController extends Controller
                         return view('errors.noperm');
                     }
                 }else{
+                    if(session('admin')->level == 'T' || session('admin')->level == 'H' || session('admin')->level == 'DVLT') {
+                        $modelcskd = CsKdDvLt::where('macskd', $inputs['macskdcp'])->first();
+                        if(session('admin')->sadmin =='ssa' || session('admin')->cqcq == $modelcskd->cqcq) {
+                            $modelttp = TtCsKdDvLt::where('macskd',$inputs['macskdcp'])
+                                ->get();
+                            $modeldtad = DoiTuongApDungDvLt::where('macskd',$inputs['macskdcp'])
+                                ->get();
+                            $modelctdf = KkGDvLtCtDf::where('macskd',$inputs['macskdcp'])->delete();
+                            $modelcb = CbKkGDvLt::where('macskd',$inputs['macskdcp'])
+                                ->first();
+                            //dd($modelcb);
+                            if(isset($modelcb)){
+                                $modelph = KkGDvLtCt::where('mahs',$modelcb->mahs)
+                                    ->get();
+                                foreach($modelph as $ttph){
+                                    $dsph = new KkGDvLtCtDf();
+                                    $dsph->macskd = $ttph->macskd;
+                                    $dsph->maloaip = $ttph->maloaip;
+                                    $dsph->loaip = $ttph->loaip;
+                                    $dsph->qccl = $ttph->qccl;
+                                    $dsph->sohieu = $ttph->sohieu;
+                                    $dsph->ghichu = $ttph->ghichu;
+                                    $dsph->mucgialk = $ttph->mucgiakk;
+                                    $dsph->mucgiakk = $ttph->mucgiakk;
+                                    $dsph->tendoituong = $ttph->tendoituong;
+                                    $dsph->apdung = $ttph->apdung;
+                                    $dsph->ghichu = $ttph->ghichu;
+                                    $dsph->save();
+                                }
+                            }
 
+                            $modelttdv = KkGDvLtCtDf::where('macskd',$inputs['macskdcp'])
+                                ->get();
+                            //dd($modelttdv);
+                            $ngaynhap = date('d/m/Y');
+                            $dayngaynhap = date('D');
+                            if($dayngaynhap == 'Thu'){
+                                $ngayhieuluc  =  date('d/m/Y',mktime(0, 0, 0, date("m")  , date("d")+5, date("Y")));
+                            }elseif($dayngaynhap == 'Fri') {
+                                $ngayhieuluc  =  date('d/m/Y',mktime(0, 0, 0, date("m")  , date("d")+4, date("Y")));
+                            }elseif( $dayngaynhap = 'Sat'){
+                                $ngayhieuluc  =  date('d/m/Y',mktime(0, 0, 0, date("m")  , date("d")+3, date("Y")));
+                            }else {
+                                $ngayhieuluc  =  date('d/m/Y',mktime(0, 0, 0, date("m")  , date("d")+2, date("Y")));
+                            }
+
+                            return view('manage.dvlt.kkgia.kkgia45s.create')
+                                ->with('modelcskd',$modelcskd)
+                                ->with('modelttp',$modelttp)
+                                ->with('modeldtad',$modeldtad)
+                                ->with('modelttdv',$modelttdv)
+                                ->with('ngaynhap',$ngaynhap)
+                                ->with('ngayhieuluc',$ngayhieuluc)
+                                ->with('modelcb',$modelcb)
+                                ->with('pageTitle', 'Kê khai giá dịch vụ lưu trú thêm mới');
+                        }else{
+                            return view('errors.noperm');
+                        }
+                    }else{
+                        return view('errors.perm');
+                    }
                 }
 
             }else{
