@@ -573,7 +573,7 @@ class KkGDvLtController extends Controller
                 ->first();
             $ngayapdung = $model->ngayhieuluc;
             $ngaychuyen = Carbon::now()->toDateTimeString();
-            if($model->plhs == 'GG' || $model->plhs == 'LD') {
+            if($model->plhs == 'GG') {
                 if ($ngayapdung >= date('Y-m-d',strtotime($ngaychuyen))) {
                     $result['status'] = 'success';
                 }
