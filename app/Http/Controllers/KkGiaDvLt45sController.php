@@ -51,7 +51,7 @@ class KkGiaDvLt45sController extends Controller
                         }
                     }
 
-                    $modelttdv = KkGDvLtCtDf::where('macskd',$modelcb->macskd)
+                    $modelttdv = KkGDvLtCtDf::where('macskd',$macskd)
                         ->get();
                     //dd($modelttdv);
                     $ngaynhap = date('d/m/Y');
