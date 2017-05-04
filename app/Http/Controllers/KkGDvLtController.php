@@ -493,8 +493,8 @@ class KkGDvLtController extends Controller
                 $model->ttnguoinop = $input['ttnguoinop'];
                 $model->trangthai = 'Chờ nhận';
                 $model->ngaychuyen = $tgchuyen;
-                $model->save();
-                /*if($model->save()){
+                //$model->save();
+                if($model->save()){
                     $tencqcq = DmDvQl::where('maqhns',$model->cqcq)->first();
                     $dn = DnDvLt::where('masothue',$model->masothue)->first();
                     $data=[];
@@ -510,7 +510,7 @@ class KkGDvLtController extends Controller
                             ->subject('Thông báo nhận hồ sơ kê khai giá dịch vụ');
                         $message->from('qlgiakhanhhoa@gmail.com','Phần mềm CSDL giá');
                     });
-                };*/
+                };
             }
             $macskd = $model->macskd;
 

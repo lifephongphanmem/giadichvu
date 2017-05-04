@@ -470,7 +470,23 @@ class HomeController extends Controller
         $model->username = $input['username'];
         $model->password = md5($input['rpassword']);
         $model->trangthai = 'Chờ duyệt';
-        $model->save();
+        if($model->save()){
+            $tencqcq = DmDvQl::where('maqhns',$input['cqcq'])->first();
+            $data=[];
+            $data['tendn'] = $input['tendn'];
+            $data['tg'] = Carbon::now()->toDateTimeString();
+            $data['tencqcq'] = $tencqcq->tendv;
+            $data['masothue'] = $input['masothue'];
+            $data['user'] = $input['username'];
+            $data['madk'] = $ma;
+            $a = $input['emaildn'];
+            $b  =  $input['tendn'];
+            Mail::send('mail.stlregister',$data, function ($message) use($a,$b) {
+                $message->to($a,$b )
+                    ->subject('Thông báo đăng ký tài khoản');
+                $message->from('qlgiakhanhhoa@gmail.com','Phần mềm CSDL giá');
+            });
+        }
         return view('errors.register-success');
     }
 
@@ -499,7 +515,23 @@ class HomeController extends Controller
         $model->dvxtx = isset($x['dvvt']['vtxtx']) ? 1 : 0;
         $model->dvk = isset($x['dvvt']['vtch']) ? 1 : 0;
         $model->trangthai = 'Chờ duyệt';
-        $model->save();
+        if($model->save()){
+            $tencqcq = DmDvQl::where('maqhns',$input['cqcq'])->first();
+            $data=[];
+            $data['tendn'] = $input['tendn'];
+            $data['tg'] = Carbon::now()->toDateTimeString();
+            $data['tencqcq'] = $tencqcq->tendv;
+            $data['masothue'] = $input['masothue'];
+            $data['user'] = $input['username'];
+            $data['madk'] = $ma;
+            $a = $input['emaildn'];
+            $b  =  $input['tendn'];
+            Mail::send('mail.stlregister',$data, function ($message) use($a,$b) {
+                $message->to($a,$b )
+                    ->subject('Thông báo đăng ký tài khoản');
+                $message->from('qlgiakhanhhoa@gmail.com','Phần mềm CSDL giá');
+            });
+        }
         return view('errors.register-success');
     }
 
