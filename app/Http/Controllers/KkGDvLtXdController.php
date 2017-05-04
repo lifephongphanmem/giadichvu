@@ -130,10 +130,10 @@ class KkGDvLtXdController extends Controller
             $result['message'] .= '<label><b>Ngày duyệt hồ sơ</b></label>';
             $result['message'] .= '<input type="date" style="text-align: center" id="ngaynhan" name="ngaynhan" class="form-control"  value="'.$ngay.'">';
             $result['message'] .= '</div>';
-            $result['message'] .= '<div class="form-group">';
+            /*$result['message'] .= '<div class="form-group">';
             $result['message'] .= '<label><b>Ngày hiệu lực</b></label>';
             $result['message'] .= '<input type="date" style="text-align: center" id="ngayhieuluc" name="ngayhieuluc" class="form-control"  value="'.$modelhs->ngayhieuluc.'">';
-            $result['message'] .= '</div>';
+            $result['message'] .= '</div>';*/
             $result['message'] .= '<input type="hidden" id="idnhanhs" name="idnhanhs" value="'.$inputs['id'].'">';
             $result['message'] .= '</div>';
 
@@ -150,7 +150,7 @@ class KkGDvLtXdController extends Controller
             $model->trangthai = "Duyệt";
             $model->ngaynhan = $input['ngaynhan'];
             $model->sohsnhan = $input['sohsnhan'];
-            $model->ngayhieuluc = $input['ngayhieuluc'];
+            //$model->ngayhieuluc = $input['ngayhieuluc'];
 
             if($model->save()){
                 $this->congbo($id);
@@ -243,10 +243,10 @@ class KkGDvLtXdController extends Controller
             $result['message'] .= '<label><b>Ngày nhận hồ sơ</b></label>';
             $result['message'] .= '<input type="date" style="text-align: center" id="ngaynhanedit" name="ngaynhanedit" class="form-control"  value="'.$model->ngaynhan.'">';
             $result['message'] .= '</div>';
-            $result['message'] .= '<div class="form-group">';
+            /*$result['message'] .= '<div class="form-group">';
             $result['message'] .= '<label><b>Ngày hiệu lực</b></label>';
             $result['message'] .= '<input type="date" style="text-align: center" id="ngayhieulucedit" name="ngayhieulucedit" class="form-control"  value="'.$model->ngayhieuluc.'">';
-            $result['message'] .= '</div>';
+            $result['message'] .= '</div>';*/
             $result['message'] .= '<input type="hidden" id="mahsedit" name="mahsedit" value="'.$inputs['mahs'].'">';
             $result['message'] .= '</div>';
 
@@ -267,7 +267,7 @@ class KkGDvLtXdController extends Controller
                     ->first();
                 $modelcb->ngaynhan = $input['ngaynhanedit'];
                 $modelcb->sohsnhan = $input['sohsnhanedit'];
-                $modelcb->ngayhieuluc = $input['ngayhieulucedit'];
+                //$modelcb->ngayhieuluc = $input['ngayhieulucedit'];
                 $modelcb->save();
             }
             return redirect('xet_duyet_ke_khai_dich_vu_luu_tru/'.'thang='.date('m').'&nam='.date('Y').'&pl=cong_bo');
