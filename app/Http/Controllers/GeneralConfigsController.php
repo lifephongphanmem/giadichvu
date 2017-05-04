@@ -63,6 +63,7 @@ class GeneralConfigsController extends Controller
             $model->password = md5($input['password']);
             $model->sohsnhan = $input['sohsnhan'];
             $model->ttlh = $input['ttlh'];
+            $model->email = $input['email'];
             if($model->save()){
                 $modeluser = new Users();
                 $modeluser->name = $input['tendv'];
@@ -113,6 +114,7 @@ class GeneralConfigsController extends Controller
                 $model->diachi = $input['diachi'];
                 $model->sohsnhan = $input['sohsnhan'];
                 $model->ttlh = $input['ttlh'];
+                $model->email = $input['email'];
                 $model->save();
             }else{
                 return view('errors.noperm');

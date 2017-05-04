@@ -15,7 +15,6 @@ class DmDvQlController extends Controller
     public function index(){
 
         if (Session::has('admin')) {
-
             $model = DmDvQl::all();
             return view('system.dmdvql.index')
                 ->with('model',$model)
@@ -106,6 +105,7 @@ class DmDvQlController extends Controller
             $model->plql = $input['plql'];
             $model->sohsnhan = $input['sohsnhan'];
             $model->ttlh = $input['ttlh'];
+            $model->email = $input['email'];
             $model->save();
 
             return redirect('danh_muc_don_vi_quan_ly');

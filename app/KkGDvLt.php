@@ -25,6 +25,7 @@ class KkGDvLt extends Model
         'trangthai',
         'cqcq',
         'dvt',
-        'phanloai'
+        'phanloai',
+        'plhs'
     ];
 }

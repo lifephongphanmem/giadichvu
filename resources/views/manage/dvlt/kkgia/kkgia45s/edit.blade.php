@@ -130,7 +130,8 @@
                 data: {
                     _token: CSRF_TOKEN,
                     ngaynhap: $('input[name="ngaynhap"]').val(),
-                    ngayhieuluc: $('input[name="ngayhieuluc"]').val()
+                    ngayhieuluc: $('input[name="ngayhieuluc"]').val(),
+                    plhs: $('select[name="plhs"]').val()
 
                 },
                 dataType: 'JSON',
@@ -144,6 +145,10 @@
                 }
             })
 
+        }
+        function clearngay(){
+            $('input[name="ngaynhap"]').val('');
+            $('input[name="ngayhieuluc"]').val('');
         }
         function clearngayhieuluc(){
             $('input[name="ngayhieuluc"]').val('');
@@ -338,6 +343,24 @@
                 <input type="hidden" name="ttcb" id="ttcb" value="{{isset($modelcb) ? 'yes' : 'no'}}">
                 <div class="portlet-body">
                     <h4 class="form-section" style="color: #0000ff">Thông tin hồ sơ</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Hồ sơ kê khai<span class="require">*</span></label>
+                                <!--input type="date" name="ngaynhap" id="ngaynhap" class="form-control required" autofocus-->
+                                {!! Form::select(
+                                'plhs',
+                                array(
+                                'LD' => 'Lần đầu',
+                                'GG' => 'Giảm giá',
+                                'TG' => 'Tăng giá',
+                                ),null,
+                                array('id' => 'plhs', 'class' => 'form-control','onchange'=>"clearngay()"))
+                                !!}
+                            </div>
+                        </div>
+                        <!--/span-->
+                    </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">

@@ -82,10 +82,13 @@ class KkGDvLtXdController extends Controller
                     $data['tg'] = Carbon::now()->toDateTimeString();
                     $data['tencqcq'] = $tencqcq->tendv;
                     $data['lydo'] = $input['lydo'];
-                    $a = $dn->email;
-                    $b = $dn->tendn;
-                    Mail::send('mail.replykkgia',$data, function ($message) use($a,$b) {
-                        $message->to($a,$b )
+                    $maildn = $dn->email;
+                    $tendn = $dn->tendn;
+                    $mailql = $tencqcq->email;
+                    $tenql = $tencqcq->tendv;
+                    Mail::send('mail.replykkgia',$data, function ($message) use($maildn,$tendn,$mailql,$tenql) {
+                        $message->to($maildn,$tendn)
+                            ->to($mailql,$tenql)
                             ->subject('Thông báo trả lại hồ sơ kê khai giá dịch vụ');
                         $message->from('qlgiakhanhhoa@gmail.com','Phần mềm CSDL giá');
                     });
@@ -170,10 +173,14 @@ class KkGDvLtXdController extends Controller
                 $data['socv'] = $model->socv;
                 $data['ngaynhan'] = $input['ngaynhan'];
                 $data['sohsnhan'] = $input['sohsnhan'];
-                $a = $dn->email;
-                $b = $dn->tendn;
-                Mail::send('mail.successkkgia',$data, function ($message) use($a,$b) {
-                    $message->to($a,$b )
+
+                $maildn = $dn->email;
+                $tendn = $dn->tendn;
+                $mailql = $tencqcq->email;
+                $tenql = $tencqcq->tendv;
+                Mail::send('mail.successkkgia',$data, function ($message) use($maildn,$tendn,$mailql,$tenql) {
+                    $message->toto($maildn,$tendn)
+                        ->to($mailql,$tenql)
                         ->subject('Thông báo xét duyệt hồ sơ kê khai giá dịch vụ');
                     $message->from('qlgiakhanhhoa@gmail.com','Phần mềm CSDL giá');
                 });

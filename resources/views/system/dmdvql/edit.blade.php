@@ -90,6 +90,14 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Email quản lý</label>
+                                        {!!Form::text('email', null, array('id' => 'email','class' => 'form-control required'))!!}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                     <!-- END FORM-->

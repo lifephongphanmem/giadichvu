@@ -328,6 +328,7 @@ class KkGDvLtController extends Controller
             $model->ghichu = $insert['ghichu'];
             $model->cqcq = $insert['cqcq'];
             $model->dvt = $insert['dvt'];
+            $model->plhs = $insert['plhs'];
             if($model->save()){
                 $modelph = KkGDvLtCtDf::where('macskd',$insert['macskd'])
                     ->get();
@@ -437,6 +438,7 @@ class KkGDvLtController extends Controller
             $model->ngaycvlk = $input['ngaycvlk']==''? NULL  :date('Y-m-d', strtotime(str_replace('/', '-', $input['ngaycvlk'])));;
             $model->ghichu = $input['ghichu'];
             $model->dvt = $input['dvt'];
+            $model->plhs = $input['plhs'];
             $model->save();
             return redirect('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh='.$macskd.'&nam='.date('Y'));
         }else
@@ -503,13 +505,17 @@ class KkGDvLtController extends Controller
                     $data['tg'] = $tgchuyen;
                     $data['tencqcq'] = $tencqcq->tendv;
                     $data['ttnguoinop'] = $input['ttnguoinop'];
-                    $a = $dn->email;
-                    $b = $dn->tendn;
-                    Mail::send('mail.kkgia',$data, function ($message) use($a,$b) {
-                        $message->to($a,$b )
+                    $maildn = $dn->email;
+                    $tendn = $dn->tendn;
+                    $mailql = $tencqcq->email;
+                    $tenql = $tencqcq->tendv;
+                    Mail::send('mail.kkgia',$data, function ($message) use($maildn,$tendn,$mailql,$tenql) {
+                        $message->to($maildn,$tendn)
+                            ->to($mailql,$tenql)
                             ->subject('Thông báo nhận hồ sơ kê khai giá dịch vụ');
                         $message->from('qlgiakhanhhoa@gmail.com','Phần mềm CSDL giá');
                     });
+
                 };
             }
             $macskd = $model->macskd;
@@ -567,20 +573,25 @@ class KkGDvLtController extends Controller
                 ->first();
             $ngayapdung = $model->ngayhieuluc;
             $ngaychuyen = Carbon::now()->toDateTimeString();
+            if($model->plhs == 'GG' || $model->plhs == 'LD') {
+                if ($ngayapdung >= date('Y-m-d',strtotime($ngaychuyen))) {
+                    $result['status'] = 'success';
+                }
+            }else {
+                $day = date("D", strtotime($ngaychuyen));
 
-            $day = date("D",  strtotime($ngaychuyen));
-
-            if($day == 'Thu'){
-                $ngaysosanh = date('Y-m-d',mktime(0, 0, 0, date('m',strtotime($ngaychuyen))  , date('d',strtotime($ngaychuyen))+5, date('Y',strtotime($ngaychuyen))));
-            }elseif($day == 'Fri' ) {
-                $ngaysosanh = date('Y-m-d',mktime(0, 0, 0, date('m',strtotime($ngaychuyen))  , date('d',strtotime($ngaychuyen))+4, date('Y',strtotime($ngaychuyen))));
-            }elseif($day = 'Sat'){
-                $ngaysosanh = date('Y-m-d',mktime(0, 0, 0, date('m',strtotime($ngaychuyen)), date('d',strtotime($ngaychuyen))+3, date('Y',strtotime($ngaychuyen))));
-            }else{
-                $ngaysosanh = date('Y-m-d',mktime(0, 0, 0, date('m',strtotime($ngaychuyen))  , date('d',strtotime($ngaychuyen))+2, date('Y',strtotime($ngaychuyen))));
-            }
-            if($ngayapdung>$ngaysosanh || $ngayapdung == $ngaysosanh){
-                $result['status'] = 'success';
+                if ($day == 'Thu') {
+                    $ngaysosanh = date('Y-m-d', mktime(0, 0, 0, date('m', strtotime($ngaychuyen)), date('d', strtotime($ngaychuyen)) + 5, date('Y', strtotime($ngaychuyen))));
+                } elseif ($day == 'Fri') {
+                    $ngaysosanh = date('Y-m-d', mktime(0, 0, 0, date('m', strtotime($ngaychuyen)), date('d', strtotime($ngaychuyen)) + 4, date('Y', strtotime($ngaychuyen))));
+                } elseif ($day = 'Sat') {
+                    $ngaysosanh = date('Y-m-d', mktime(0, 0, 0, date('m', strtotime($ngaychuyen)), date('d', strtotime($ngaychuyen)) + 3, date('Y', strtotime($ngaychuyen))));
+                } else {
+                    $ngaysosanh = date('Y-m-d', mktime(0, 0, 0, date('m', strtotime($ngaychuyen)), date('d', strtotime($ngaychuyen)) + 2, date('Y', strtotime($ngaychuyen))));
+                }
+                if ($ngayapdung > $ngaysosanh || $ngayapdung == $ngaysosanh) {
+                    $result['status'] = 'success';
+                }
             }
 
         }

@@ -104,6 +104,7 @@ class KkGiaDvLt45sController extends Controller
             $model->cqcq = $insert['cqcq'];
             $model->dvt = $insert['dvt'];
             $model->phanloai = 'DT';
+            $model->plhs = $insert['plhs'];
             if($model->save()){
                 $modelph = KkGDvLtCtDf::where('macskd',$insert['macskd'])
                     ->get();
@@ -167,6 +168,7 @@ class KkGiaDvLt45sController extends Controller
             $model->macskd = $insert['macskd'];
             $model->ghichu = $insert['ghichu'];
             $model->dvt = $insert['dvt'];
+            $model->plhs = $insert['plhs'];
             $model->save();
             return redirect('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh='.$insert['macskd'].'&nam='.date('Y'));
         }else

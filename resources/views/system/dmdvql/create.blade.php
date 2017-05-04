@@ -102,6 +102,14 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Username<span class="require">*</span></label>
+                                        <input type="text" class="form-control required" name="email" id="email">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     <!-- END FORM-->
                 </div>

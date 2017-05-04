@@ -34,6 +34,7 @@ class CreateKkgdvltTable extends Migration
             $table->string('dvt')->nullable();
             $table->string('filedk')->nullable();
             $table->string('phanloai')->nullable();
+            $table->string('plhs')->nullable();
             $table->timestamps();
         });
     }

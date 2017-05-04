@@ -104,7 +104,7 @@
             - Lưu.
         </td>
         <td style="text-align: center; text-transform: uppercase;" width="70%">
-            <b>{{$modeldn->chucdanhky}}</b><br>
+            <b>{{$modeldn->chucdanhky != '' ? $modeldn->chucdanhky : 'Giám đốc'}}</b><br>
             <br>
             <br>
             <br>
@@ -191,7 +191,7 @@
 
         </td>
         <td style="text-align: center;text-transform: uppercase; " width="70%">
-            <b>{{$modeldn->chucdanhky}}</b><br>
+            <b>{{$modeldn->chucdanhky != '' ? $modeldn->chucdanhky : 'Giám đốc'}}</b><br>
             <br>
             <br>
             <br>
@@ -291,7 +291,7 @@
             @endif
         </td>
         <td style="text-align: center; text-transform: uppercase;" width="60%">
-            <b>{{$modeldn->chucdanhky}}</b><br>
+            <b>{{$modeldn->chucdanhky != '' ? $modeldn->chucdanhky : 'Giám đốc'}}</b><br>
             <br>
             <br>
             <br>
