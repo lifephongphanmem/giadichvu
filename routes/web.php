@@ -176,6 +176,7 @@ Route::get('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh={macskd}&nam={nam}','KkGDvL
 Route::get('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh={macskd}/create','KkGDvLtController@create');
 Route::get('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh={macskd}/create_dk','KkGDvLtController@create_dk');//
 Route::post('ke_khai_dich_vu_luu_tru/copy','KkGDvLtController@copy');
+Route::get('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh={macskd}/copy','KkGDvLtController@saochep');
     //Ajax ttphong create
 Route::get('/kkgdvlt/kkgia','KkGDvLtCtDfController@kkgia');
 Route::get('/kkgdvlt/upkkgia','KkGDvLtCtDfController@upkkgia');
