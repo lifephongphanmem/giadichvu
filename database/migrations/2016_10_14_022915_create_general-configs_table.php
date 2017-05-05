@@ -30,6 +30,8 @@ class CreateGeneralConfigsTable extends Migration
             $table->text('sodvvt')->nullable();
             $table->text('setting')->nullale();;
             $table->text('urlwebcb')->nullale();
+            $table->double('thoihan_lt')->default(0);
+            $table->double('thoihan_vt')->default(0);
             $table->timestamps();
         });
     }

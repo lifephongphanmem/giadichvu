@@ -155,6 +155,18 @@ class KkGDvLtXdController extends Controller
             $model->sohsnhan = $input['sohsnhan'];
             //$model->ngayhieuluc = $input['ngayhieuluc'];
 
+            $ngaynhan = Carbon::parse($model->ngaynhan);
+            $ngaychuyen = Carbon::parse($model->ngaychuyen);
+            $ngay = $ngaynhan->diff($ngaychuyen)->days;
+            $thoihan_lt=getGeneralConfigs()['thoihan_lt'];
+            if($ngay<$thoihan_lt){
+                $model->thoihan='Trước thời hạn';
+            }elseif($ngay==$thoihan_lt){
+                $model->thoihan='Đúng thời hạn';
+            }else{
+                $model->thoihan='Quá thời hạn';
+            }
+
             if($model->save()){
                 $this->congbo($id);
                 $nhanhs = DmDvQl::where('maqhns',$model->cqcq)

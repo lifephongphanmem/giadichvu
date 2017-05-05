@@ -147,16 +147,27 @@
     </tr>
 
 </table>
-<table width="96%" border="0" cellspacing="0" cellpadding="8" style="margin:20px auto; text-align: center;">
+
+<table width="96%" border="0" cellspacing="0" cellpadding="8">
     <tr>
-        <td style="text-align: left;" width="30%">
+        <td style="text-align: left;" width="50%">
 
         </td>
-        <td style="text-align: center;text-transform: uppercase; " width="70%">
-            <b></b><br>
+
+        <td style="text-align: center;" width="50%">
+            <b>GIÁM ĐỐC</b></br>(Ký tên và đóng dấu)
         </td>
     </tr>
 
+    <tr>
+        <td style="text-align: left;" width="50%">
+
+        </td>
+
+        <td style="text-align: center;text-transform: uppercase; " width="50%">
+            </br></br></br></br></br>
+        </td>
+    </tr>
 </table>
 </body>
 </html>
