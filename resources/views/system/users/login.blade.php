@@ -102,7 +102,7 @@ License: You must have a valid license purchased only from themeforest(the above
 				Bạn chưa có tài khoản?&nbsp;<a data-target="#dangky-doanhnghiep" data-toggle="modal">
 					Đăng ký tài khoản </a>
 			</p>
-			<!--p>Bạn đã đăng ký tài khoản?&nbsp;<a href="{{url('register/tra_lai')}}" target="_blank">Kiểm tra tài khoản?</a> </p-->
+			<p>Hướng dẫn đăng ký tài khoản?&nbsp;<a href="http://help.csdlgia.vn/dang_ky_tai_khoan" target="_blank">Click here?</a> </p>
 		</div>
 </div>
 <!-- END LOGIN -->
