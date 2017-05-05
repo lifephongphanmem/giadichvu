@@ -81,12 +81,10 @@
     <tr>
         <td colspan="9" style="text-align: center; font-weight: bold;">
             Phân loại hồ sơ: <?php
-                if($input['trangthai']=='all'){
+                if($input['thoihan']=='all'){
                     echo 'Tất cả';
-                }elseif($input['trangthai']=='Chờ duyệt'){
-                    echo 'Hồ sơ kê khai giá dịch vụ đang chờ nhận';
                 }else{
-                    echo 'Hồ sơ kê khai giá dịch vụ đã công bố';
+                    echo $input['thoihan'];
                 }
             ?>
         </td>
@@ -104,7 +102,7 @@
         <th>Số công văn</th>
         <th>Ngày kê khai</th>
         <th>Ngày thực hiện<br> mức giá kê khai</th>
-        <th>Trạng thái hồ sơ</th>
+        <th>Thời hạn giải quyết</th>
     </tr>
     @foreach($m_cqcq as $cskd)
         <?php $model_kk=$model->where('cqcq',$cskd->maqhns) ?>
@@ -125,7 +123,7 @@
                     <th style="text-align: center">{{$ttkk->socv}}</th>
                     <th style="text-align: center">{{getDayVn($ttkk->ngaynhap)}}</th>
                     <th style="text-align: center">{{getDayVn($ttkk->ngayhieuluc)}}</th>
-                    <th style="text-align: center">{{$ttkk->trangthai}}</th>
+                    <th style="text-align: center">{{$ttkk->thoihan}}</th>
                 </tr>
             @endforeach
         @endif
@@ -136,16 +134,27 @@
         </th>
     </tr>
 </table>
-<table width="96%" border="0" cellspacing="0" cellpadding="8" style="margin:20px auto; text-align: center;">
+
+<table width="96%" border="0" cellspacing="0" cellpadding="8">
     <tr>
-        <td style="text-align: left;" width="30%">
+        <td style="text-align: left;" width="50%">
 
         </td>
-        <td style="text-align: center;text-transform: uppercase; " width="70%">
-            <b></b><br>
+
+        <td style="text-align: center;" width="50%">
+            <b>GIÁM ĐỐC</b></br>(Ký tên và đóng dấu)
         </td>
     </tr>
 
+    <tr>
+        <td style="text-align: left;" width="50%">
+
+        </td>
+
+        <td style="text-align: center;text-transform: uppercase; " width="50%">
+            </br></br></br></br></br>
+        </td>
+    </tr>
 </table>
 </body>
 </html>

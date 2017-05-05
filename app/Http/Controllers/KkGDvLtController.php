@@ -418,6 +418,7 @@ class KkGDvLtController extends Controller
             return view('errors.notlogin');
     }
 
+    //Bỏ phần đính kèm
     public function create_dk($macskd){
         if (Session::has('admin')) {
             if(session('admin')->level == 'T' || session('admin')->level == 'H' || session('admin')->level == 'DVLT') {
@@ -478,6 +479,7 @@ class KkGDvLtController extends Controller
             return view('errors.notlogin');
     }
 
+    //Bỏ phần đính kèm
     public function store_dk(Request $request){
         if (Session::has('admin')) {
 
@@ -533,6 +535,7 @@ class KkGDvLtController extends Controller
             return view('errors.notlogin');
     }
 
+    //Bỏ phần đính kèm
     public function edit_dk($id){
         if (Session::has('admin')) {
             if(session('admin')->level == 'T' || session('admin')->level == 'H' || session('admin')->level =='DVLT') {
@@ -572,6 +575,7 @@ class KkGDvLtController extends Controller
             return view('errors.notlogin');
     }
 
+    //Bỏ phần đính kèm
     public function update_dk(Request $request, $id){
         if (Session::has('admin')) {
             $input = $request->all();

@@ -7,6 +7,7 @@ use App\DmDvQl;
 use App\DnDvLt;
 use App\KkGDvLt;
 use App\KkGDvLtCt;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 //use Maatwebsite\Excel;
 use Maatwebsite\Excel\Facades\Excel;
@@ -401,10 +402,26 @@ class ReportsController extends Controller
 
             $model=$this->get_KKG_TH($input);
 
-            if($input['trangthai']!='all'){
-                $model=$model->where('trangthai', $input['trangthai']);
-            }
 
+            //1.sau này triển khai bỏ vì đã làm trong form nhập
+            foreach($model as $ct){
+                $ngaynhan = Carbon::parse($ct->ngaynhan);
+                $ngaychuyen = Carbon::parse($ct->ngaychuyen);
+                $ngay= $ngaynhan->diff($ngaychuyen)->days;
+                $thoihan_lt=getGeneralConfigs()['thoihan_lt'];
+                if($ngay<$thoihan_lt){
+                    $ct->thoihan='Trước thời hạn';
+                }elseif($ngay==$thoihan_lt){
+                    $ct->thoihan='Đúng thời hạn';
+                }else{
+                    $ct->thoihan='Quá thời hạn';
+                }
+            }
+            //end 1.sau này triển khai bỏ vì đã làm trong form nhập
+
+            if($input['thoihan']!='all'){
+                $model=$model->where('thoihan', $input['thoihan']);
+            }
             return view('reports.kkgdvlt.bcth.BC5')
                 ->with('modelcqcq',$modelcqcq)
                 ->with('input',$input)
@@ -436,6 +453,8 @@ class ReportsController extends Controller
             if($input['trangthai']!='all'){
                 $model=$model->where('trangthai', $input['trangthai']);
             }
+
+
 
             Excel::create('BaoCao5',function($excel) use($modelcqcq,$input,$model,$m_cqcq){
                 $excel->sheet('New sheet', function($sheet) use($modelcqcq,$input,$model,$m_cqcq){
@@ -552,6 +571,66 @@ class ReportsController extends Controller
                 ->where('cskddvlt.loaihang', $input['loaihang'])
                 ->orderBy('kkgdvlt.ngayhieuluc')
                 ->get();
+        }
+
+        return $model;
+    }
+
+    //dữ liệu hồ sơ giải quyết
+    function get_KKG_GQ($input){
+        if(session('admin')->level == 'T'){//Kết xuất báo cáo quyền Tỉnh
+            if($input['cqcq']=='all'&&$input['loaihang']=='all'){
+                $model = KkGDvLt::join('cskddvlt','cskddvlt.macskd','=','kkgdvlt.macskd')
+                    ->select('cskddvlt.tencskd','cskddvlt.diachikd','cskddvlt.telkd','cskddvlt.loaihang','kkgdvlt.*')
+                    ->Where('kkgdvlt.trangthai', 'Duyệt')
+                    ->whereBetween('kkgdvlt.ngaychuyen', [$input['ngaytu'], $input['ngayden']])
+                    ->orderBy('kkgdvlt.ngayhieuluc')
+                    ->get();
+            }elseif($input['cqcq']=='all'&&$input['loaihang']!='all'){
+                $model = KkGDvLt::join('cskddvlt','cskddvlt.macskd','=','kkgdvlt.macskd')
+                    ->select('cskddvlt.tencskd','cskddvlt.diachikd','cskddvlt.telkd','cskddvlt.loaihang','kkgdvlt.*')
+                    ->Where('kkgdvlt.trangthai', 'Duyệt')
+                    ->whereBetween('kkgdvlt.ngaychuyen', [$input['ngaytu'], $input['ngayden']])
+                    ->where('cskddvlt.loaihang', $input['loaihang'])
+                    ->orderBy('kkgdvlt.ngayhieuluc')
+                    ->get();
+            }elseif($input['cqcq']!='all'&&$input['loaihang']=='all'){
+                $model = KkGDvLt::join('cskddvlt','cskddvlt.macskd','=','kkgdvlt.macskd')
+                    ->select('cskddvlt.tencskd','cskddvlt.diachikd','cskddvlt.telkd','cskddvlt.loaihang','kkgdvlt.*')
+                    ->Where('kkgdvlt.trangthai', 'Duyệt')
+                    ->whereBetween('kkgdvlt.ngaychuyen', [$input['ngaytu'], $input['ngayden']])
+                    ->where('kkgdvlt.cqcq',$input['cqcq'])
+                    ->orderBy('kkgdvlt.ngayhieuluc')
+                    ->get();
+            }else{
+                $model = KkGDvLt::join('cskddvlt','cskddvlt.macskd','=','kkgdvlt.macskd')
+                    ->select('cskddvlt.tencskd','cskddvlt.diachikd','cskddvlt.telkd','cskddvlt.loaihang','kkgdvlt.*')
+                    ->Where('kkgdvlt.trangthai', 'Duyệt')
+                    ->whereBetween('kkgdvlt.ngaychuyen', [$input['ngaytu'], $input['ngayden']])
+                    ->where('kkgdvlt.cqcq',$input['cqcq'])
+                    ->where('cskddvlt.loaihang', $input['loaihang'])
+                    ->orderBy('kkgdvlt.ngayhieuluc')
+                    ->get();
+            }
+        }else{//Kết xuất báo cáo quyền Huyện
+            if($input['loaihang']=='all'){
+                $model = KkGDvLt::join('cskddvlt','cskddvlt.macskd','=','kkgdvlt.macskd')
+                    ->select('cskddvlt.tencskd','cskddvlt.diachikd','cskddvlt.telkd','cskddvlt.loaihang','kkgdvlt.*')
+                    ->Where('kkgdvlt.trangthai', 'Duyệt')
+                    ->where('kkgdvlt.cqcq',session('admin')->cqcq)
+                    ->whereBetween('kkgdvlt.ngaychuyen', [$input['ngaytu'], $input['ngayden']])
+                    ->orderBy('kkgdvlt.ngayhieuluc')
+                    ->get();
+            }else{
+                $model = KkGDvLt::join('cskddvlt','cskddvlt.macskd','=','kkgdvlt.macskd')
+                    ->select('cskddvlt.tencskd','cskddvlt.diachikd','cskddvlt.telkd','cskddvlt.loaihang','kkgdvlt.*')
+                    ->Where('kkgdvlt.trangthai', 'Duyệt')
+                    ->where('kkgdvlt.cqcq',session('admin')->cqcq)
+                    ->whereBetween('kkgdvlt.ngaychuyen', [$input['ngaytu'], $input['ngayden']])
+                    ->where('cskddvlt.loaihang', $input['loaihang'])
+                    ->orderBy('kkgdvlt.ngayhieuluc')
+                    ->get();
+            }
         }
 
         return $model;

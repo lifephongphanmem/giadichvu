@@ -367,10 +367,11 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label"><b>Phân loại hồ sơ</b></label>
                         <div class="col-md-6 ">
-                            <select id="trangthai" name="trangthai" class="form-control select2me">
+                            <select id="thoihan" name="thoihan" class="form-control select2me">
                                 <option value="all">--Tất cả--</option>
-                                <option value="Chờ duyệt">Hồ sơ kê khai giá dịch vụ đang chờ nhận</option>
-                                <option value="Duyệt">Hồ sơ kê khai giá dịch vụ đã công bố</option>
+                                <option value="Trước thời hạn">Trước thời hạn</option>
+                                <option value="Đúng thời hạn">Đúng thời hạn</option>
+                                <option value="Quá thời hạn">Quá thời hạn</option>
                             </select>
                         </div>
                     </div>
