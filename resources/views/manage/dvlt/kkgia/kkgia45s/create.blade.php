@@ -122,7 +122,6 @@
     </script>
     <script>
         function checkngay(){
-            document.getElementById("ngaychange").value = $('input[name="ngayhieuluc"]').val();
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             $.ajax({
                 url: '/ajax/checkngay',
@@ -138,16 +137,42 @@
                 success: function (data) {
                     if (data.status == 'success') {
                         toastr.success("Ngày hiệu lực có thể sử dụng được", "Thành công!");
-                        $('#ngayhieuluc').val() = $('#ngaychange').val();
-                    }else
+                    }else {
                         toastr.error("Bạn cần kiểm tra lại ngày có hiệu lực!", "Lỗi!");
-                    $('input[name="ngayhieuluc"]').val('');
+                        $('input[name="ngayhieuluc"]').val('');
+                    }
                 }
             })
 
         }
-        function clearngayhieuluc(){
-            $('input[name="ngayhieuluc"]').val('');
+        function checkngaykk(){
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                url: '/ajax/checkngaykk',
+                type: 'GET',
+                data: {
+                    _token: CSRF_TOKEN,
+                    ngaynhap: $('input[name="ngaynhap"]').val()
+
+                },
+                dataType: 'JSON',
+                success: function (data) {
+                    if (data.status == 'success') {
+                        toastr.success("Ngày kê khai có thể sử dụng được", "Thành công!");
+                    }else {
+                        toastr.error("Bạn cần kiểm tra lại ngày có kê khai, ngày kê khai không được nhỏ hơn ngày hiện tại! ", "Lỗi!");
+                        var today = new Date();
+                        var dd = today.getDate();
+                        var mm = today.getMonth()+1;//January is 0!
+                        var yyyy = today.getFullYear();
+                        if(dd<10){dd='0'+dd}
+                        if(mm<10){mm='0'+mm}
+                        $('input[name="ngaynhap"]').val(mm+'/'+dd+'/'+yyyy);
+                        $('input[name="ngayhieuluc"]').val('');
+                    }
+                }
+            })
+
         }
         function clearngay(){
             $('input[name="ngaynhap"]').val('');
@@ -366,7 +391,7 @@
                             <div class="form-group">
                                 <label class="control-label">Ngày kê khai<span class="require">*</span></label>
                                 <!--input type="date" name="ngaynhap" id="ngaynhap" class="form-control required" autofocus-->
-                                {!!Form::text('ngaynhap',$ngaynhap, array('id' => 'ngaynhap','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required','onchange'=>"clearngayhieuluc()"))!!}
+                                {!!Form::text('ngaynhap',$ngaynhap, array('id' => 'ngaynhap','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required','onchange'=>"checkngaykk()"))!!}
                             </div>
                         </div>
                         <!--/span-->

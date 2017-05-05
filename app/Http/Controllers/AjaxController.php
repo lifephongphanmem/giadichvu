@@ -51,4 +51,30 @@ class AjaxController extends Controller
         }
         die(json_encode($result));
     }
+
+    public function checkngaykk(Request $request){
+        $result = array(
+            'message' => 'error',
+            'status' => 'fail',
+        );
+        if (!Session::has('admin')) {
+            $result = array(
+                'status' => 'fail',
+            );
+            die(json_encode($result));
+        }
+        //dd($request);
+        $inputs = $request->all();
+
+        if (isset($inputs['ngaynhap'])) {
+
+            $ngaynhap = date('Y-m-d', strtotime(str_replace('/', '-', $inputs['ngaynhap'])));
+            $ngayht = date('Y-m-d');
+            if ($ngaynhap >= $ngayht) {
+                $result['status'] = 'success';
+            }
+
+        }
+        die(json_encode($result));
+    }
 }

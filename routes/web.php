@@ -1,5 +1,6 @@
 <?php
 Route::get('/ajax/checkngay','AjaxController@checkngay');
+Route::get('/ajax/checkngaykk','AjaxController@checkngaykk');
 
 Route::get('/test', 'MailController@test_mail');
 Route::get('/testday','MailController@testday');

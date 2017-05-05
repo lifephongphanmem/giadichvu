@@ -284,7 +284,6 @@
             })
         }
         function checkngay(){
-            document.getElementById("ngaychange").value = $('input[name="ngayhieuluc"]').val();
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             $.ajax({
                 url: '/ajax/checkngay',
@@ -299,7 +298,6 @@
                 success: function (data) {
                     if (data.status == 'success') {
                         toastr.success("Ngày hiệu lực có thể sử dụng được", "Thành công!");
-                        $('input[name="ngayhieuluc"]').val() = $('input[name="ngaychange"]').val();
                     }else {
                         toastr.error("Bạn cần kiểm tra lại ngày có hiệu lực!", "Lỗi!");
                         $('input[name="ngayhieuluc"]').val('');
@@ -360,7 +358,8 @@
                             <div class="form-group">
                                 <label class="control-label">Ngày kê khai<span class="require">*</span></label>
                                 <!--input type="date" name="ngaynhap" id="ngaynhap" value="{{$model->ngaynhap}}" class="form-control required"-->
-                                {!!Form::text('ngaynhap',date('d/m/Y',  strtotime($model->ngaynhap)), array('id' => 'ngaynhap','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required','autofocus','onchange'=>"clearngayhieuluc()"))!!}
+                                <p style="color: #000088"><b>{{getDayVn($model->ngaynhap)}}</b></p>
+                                {!!Form::hidden('ngaynhap',date('d/m/Y',  strtotime($model->ngaynhap)), array('id' => 'ngaynhap','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required','autofocus','onchange'=>"clearngayhieuluc()"))!!}
                             </div>
                         </div>
                         <!--/span-->
