@@ -98,11 +98,12 @@ License: You must have a valid license purchased only from themeforest(the above
 			</p>
 		</div>
 		<div class="create-account">
+			<p>Hướng dẫn đăng ký tài khoản?&nbsp;<a href="http://help.csdlgia.vn/dang_ky_tai_khoan" target="_blank">Click here?</a> </p>
 			<p>
 				Bạn chưa có tài khoản?&nbsp;<a data-target="#dangky-doanhnghiep" data-toggle="modal">
 					Đăng ký tài khoản </a>
 			</p>
-			<p>Hướng dẫn đăng ký tài khoản?&nbsp;<a href="http://help.csdlgia.vn/dang_ky_tai_khoan" target="_blank">Click here?</a> </p>
+
 		</div>
 </div>
 <!-- END LOGIN -->
