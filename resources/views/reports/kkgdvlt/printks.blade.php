@@ -249,10 +249,10 @@
 </p>
 <table width="96%" border="0" cellspacing="0" cellpadding="8" style="margin:10px auto; text-align: center;">
     <tr>
-        <td style="text-align: left;" width="30%">
+        <td style="text-align: left;" width="40%">
 
         </td>
-        <td style="text-align: center; text-transform: uppercase;" width="70%">
+        <td style="text-align: center; text-transform: uppercase;" width="60%">
             <b>{{$modeldn->chucdanhky != '' ? $modeldn->chucdanhky : 'Giám đốc'}}</b><br>
             <br>
             <br>
