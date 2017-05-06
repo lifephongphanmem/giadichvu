@@ -51,9 +51,9 @@
             @endif
             <td>
                 @if($tt->phanloai == 'DT')
-                    <a href="{{url('ke_khai_dich_vu_luu_tru/history/mahsh='.$tt->mahsh)}}" style="background-color: #eee">Xem HS tại thời điểm này</a>
+                    <a href="{{url('ke_khai_dich_vu_luu_tru/historyks/mahsh='.$tt->mahsh)}}" style="background-color: #eee">Xem HS tại thời điểm này</a>
                 @else
-                    <a href="" style="background-color: #eee">Xem HS tại thời điểm này</a>
+                    <a href="{{url('ke_khai_dich_vu_luu_tru/history/mahsh='.$tt->mahsh)}}" style="background-color: #eee">Xem HS tại thời điểm này</a>
                 @endif
             </td>
         </tr>

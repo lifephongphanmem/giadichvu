@@ -38,6 +38,8 @@
         <td><b>STT</b></td>
         <td><b>Loại phòng- quy cách chất lượng</b></td>
         <td><b>Số hiệu phòng</b></td>
+        <td><b>Đối tươpng</b></td>
+        <td><b>Áp dụng</b></td>
         <td><b>Mức giá liền kề</b></td>
         <td><b>Mức giá kê khai</b></td>
         <td><b>Ghi chú</b></td>
@@ -47,6 +49,8 @@
             <th style="text-align: center">{{$key+1}}</th>
             <th style="text-align: left">{{$tt->loaip.'-'.$tt->qccl}}</th>
             <th style="text-align: left">{{$tt->sohieu}}</th>
+            <th style="text-align: left">{{$tt->tendoituong}}</th>
+            <th style="text-align: left">{{$tt->apdung}}</th>
             <th style="text-align: right">{{number_format($tt->mucgialk)}}</th>
             <th style="text-align: right">{{number_format($tt->mucgiakk)}}</th>
             <th>{{$tt->ghichu}}</th>
