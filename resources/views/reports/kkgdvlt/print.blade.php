@@ -264,23 +264,6 @@
 <table width="96%" border="0" cellspacing="0" cellpadding="8" style="margin:10px auto; text-align: center;">
     <tr>
         <td style="text-align: center;" width="40%">
-
-            Cơ quan tiếp nhận biểu mẫu kê khai giá<br>
-            ghi nhận ngày nộp biểu mẫu kê khai giá<br>
-            @if($modelkk->sohsnhan != '')
-            <table  cellspacing="0" cellpadding="0" border="1" style="margin: 20px auto; border-collapse: collapse;">
-                <tr>
-                    <td><b>{{$modelcqcq->tendv}}</b></td>
-                </tr>
-                <tr>
-                    <td style="text-align: left;">
-                        <b>Số:</b> {{$modelkk->sohsnhan}}<br>
-                        <b>Ngày nhận hồ sơ:</b> {{getDateTime($modelkk->ngaychuyen)}}<br>
-                        <b>Ngày duyệt hồ sơ:</b> {{getDayVn($modelkk->ngaynhan)}}
-                    </td>
-                </tr>
-            </table>
-            @endif
         </td>
         <td style="text-align: center; text-transform: uppercase;" width="60%">
             <b>{{$modeldn->chucdanhky != '' ? $modeldn->chucdanhky : 'Giám đốc'}}</b><br>

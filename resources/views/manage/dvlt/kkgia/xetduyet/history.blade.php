@@ -39,7 +39,7 @@
             <td style="text-align: center">{{$tt->socv}}- {{$tt->socvlk}}</td>
             <td>{{$tt->ttnguoinop}} <br> Thời gian chuyển: <br><b>{{getDateTime($tt->ngaychuyen)}}</b></td>
             @if($tt->sohsnhan != '' && $tt->ngaynhan != '')
-            <td>Số hồ sơ nhận: {{$tt->sohsnhan}} <br> Thời gian nhận:{{getDayVn($tt->ngaynhan)}} </td>
+            <td>Số hồ sơ nhận: {{$tt->sohsnhan}} <br> Thời gian nhận:{{getDayVn($tt->created_at)}} </td>
             @else
                 <td></td>
             @endif
