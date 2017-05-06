@@ -262,7 +262,7 @@
                         @foreach($model as $key=>$tt)
                             <tr>
                                 <td style="text-align: center">{{$key+1}}</td>
-                                <td class="active">{{$tt->tencskd}}</td>
+                                <td class="active">{{$tt->tencskd}}<br>Mã kê khai:{{$tt->mahs}}</td>
                                 <td style="text-align: center">{{getDayVn($tt->ngaynhap)}}</td>
                                 <td style="text-align: center">{{getDayVn($tt->ngayhieuluc)}}</td>
                                 <td style="text-align: center" class="danger">{{$tt->socv}}</td>
@@ -307,6 +307,7 @@
                                                 Chỉnh sửa</button>
                                         @endif
                                     @endif
+                                        <a href="{{url('ke_khai_dich_vu_luu_tru/'.$tt->mahs.'/history')}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Lịch sử</a>
                                 </td>
                             </tr>
                         @endforeach

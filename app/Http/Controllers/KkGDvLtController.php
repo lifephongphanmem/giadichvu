@@ -10,6 +10,8 @@ use App\DoiTuongApDungDvLt;
 use App\KkGDvLt;
 use App\KkGDvLtCt;
 use App\KkGDvLtCtDf;
+use App\KkGDvLtCtH;
+use App\KkGDvLtH;
 use App\TtCsKdDvLt;
 use Faker\Provider\tr_TR\DateTime;
 use Illuminate\Http\Request;
@@ -560,7 +562,6 @@ class KkGDvLtController extends Controller
             $input = $request->all();
             $model = KkGDvLt::findOrFail($id);
             $macskd = $model->macskd;
-
             $model->ngaynhap = date('Y-m-d', strtotime(str_replace('/', '-', $input['ngaynhap'])));
             $model->socv = $input['socv'];
             $model->ngayhieuluc = date('Y-m-d', strtotime(str_replace('/', '-', $input['ngayhieuluc'])));
@@ -646,6 +647,47 @@ class KkGDvLtController extends Controller
                             ->subject('Thông báo nhận hồ sơ kê khai giá dịch vụ');
                         $message->from('qlgiakhanhhoa@gmail.com','Phần mềm CSDL giá');
                     });
+                    //History
+                    $mahsh = getdate()[0];
+                    $his = new KkGDvLtH();
+                    $his->mahsh = $mahsh;
+                    $his->mahs = $model->mahs;
+                    $his->macskd = $model->macskd;
+                    $his->masothue = $model->masothue;
+                    $his->ngaynhap = $model->ngaynhap;
+                    $his->socv = $model->socv;
+                    $his->socvlk = $model->socvlk;
+                    $his->ngaycvlk = $model->ngaycvlk;
+                    $his->ngayhieuluc = $model->ngayhieuluc;
+                    $his->ttnguoinop = $input['ttnguoinop'];
+                    $his->ghichu = $model->ghichu;
+                    $his->ngaychuyen = $tgchuyen;
+                    $his->cqcq = $model->cqcq;
+                    $his->dvt = $model->dvt;
+                    $his->phanloai = $model->phanloai;
+                    $his->plhs =$model->plhs;
+                    $his->action = 'Chuyển hồ sơ kê khai';
+                    if($his->save()){
+                        $hsct = KkGDvLtCt::where('mahs',$model->mahs)
+                            ->get();
+                        foreach($hsct as $ct){
+                            $hisct = new KkGDvLtCtH();
+                            $hisct->mahsh = $mahsh;
+                            $hisct->loaip = $ct->loaip;
+                            $hisct->qccl = $ct->qccl;
+                            $hisct->sohieu = $ct->sohieu;
+                            $hisct->ghichu = $ct->ghichu;
+                            $hisct->macskd = $ct->macskd;
+                            $hisct->mahs = $ct->mahs;
+                            $hisct->mucgialk = $ct->mucgialk;
+                            $hisct->mucgiakk = $ct->mucgiakk;
+                            $hisct->tendoituong = $ct->tendoituong;
+                            $hisct->apdung = $ct->apdung;
+                            $hisct->maloaip = $ct->maloaip;
+                            $hisct->save();
+                        }
+                    }
+
 
                 };
             }
