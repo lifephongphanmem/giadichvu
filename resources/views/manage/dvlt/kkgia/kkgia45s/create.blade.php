@@ -123,6 +123,7 @@
     <script>
         function checkngay(){
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            //alert($('select[name="plhs"]').val());
             $.ajax({
                 url: '/ajax/checkngay',
                 type: 'GET',

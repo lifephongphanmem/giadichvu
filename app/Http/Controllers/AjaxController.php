@@ -24,23 +24,24 @@ class AjaxController extends Controller
         $inputs = $request->all();
 
         if (isset($inputs['ngayhieuluc'])) {
-
             $ngaynhap = date('Y-m-d', strtotime(str_replace('/', '-', $inputs['ngaynhap'])));
             $ngayhieuluc = date('Y-m-d', strtotime(str_replace('/', '-', $inputs['ngayhieuluc'])));
+
             if($inputs['plhs'] == 'GG'){
-                if($ngayhieuluc >= $ngaynhap){
+                $ngaysosanh = date('Y-m-d', mktime( 0,0,0,date('m', strtotime($ngaynhap)), date('d', strtotime($ngaynhap)) + 2, date('Y', strtotime($ngaynhap))));
+                if(strtotime($ngayhieuluc) >= strtotime($ngaysosanh)){
                     $result['status'] = 'success';
                 }
             }else {
                 $thungaynhap = date('D', strtotime($ngaynhap));
                 if ($thungaynhap == 'Thu') {
-                    $ngaysosanh = date('Y-m-d', mktime( date('m', strtotime($ngaynhap)), date('d', strtotime($ngaynhap)) + 5, date('Y', strtotime($ngaynhap))));
+                    $ngaysosanh = date('Y-m-d', mktime( 0,0,0, date('m', strtotime($ngaynhap)), date('d', strtotime($ngaynhap)) + 5, date('Y', strtotime($ngaynhap))));
                 } elseif ($thungaynhap == 'Fri') {
-                    $ngaysosanh = date('Y-m-d', mktime( date('m', strtotime($ngaynhap)), date('d', strtotime($ngaynhap)) + 5, date('Y', strtotime($ngaynhap))));
+                    $ngaysosanh = date('Y-m-d', mktime( 0,0,0, date('m', strtotime($ngaynhap)), date('d', strtotime($ngaynhap)) + 5, date('Y', strtotime($ngaynhap))));
                 } elseif ($thungaynhap == 'Sat') {
-                    $ngaysosanh = date('Y-m-d', mktime( date('m', strtotime($ngaynhap)), date('d', strtotime($ngaynhap)) + 4, date('Y', strtotime($ngaynhap))));
+                    $ngaysosanh = date('Y-m-d', mktime( 0,0,0, date('m', strtotime($ngaynhap)), date('d', strtotime($ngaynhap)) + 4, date('Y', strtotime($ngaynhap))));
                 } else {
-                    $ngaysosanh = date('Y-m-d', mktime( date('m', strtotime($ngaynhap)), date('d', strtotime($ngaynhap)) + 3, date('Y', strtotime($ngaynhap))));
+                    $ngaysosanh = date('Y-m-d', mktime( 0,0,0, date('m', strtotime($ngaynhap)), date('d', strtotime($ngaynhap)) + 3, date('Y', strtotime($ngaynhap))));
                 }
 
                 if (strtotime($ngayhieuluc) >= strtotime($ngaysosanh)){
