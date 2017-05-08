@@ -98,9 +98,9 @@
             - Lưu.
         </td>
         <td style="text-align: center;" width="40%">
-            Cơ quan tiếp nhận biểu mẫu kê khai giá<br>
-            ghi nhận ngày nộp biểu mẫu kê khai giá<br>
             @if($modelkk->sohsnhan != '')
+                Cơ quan tiếp nhận biểu mẫu kê khai giá<br>
+                ghi nhận ngày nộp biểu mẫu kê khai giá<br>
                 <table  cellspacing="0" cellpadding="0" border="1" style="margin: 0px auto; border-collapse: collapse;">
                     <td><b>{{$modelcqcq->tendv}}</b></td>
                     <tr>
@@ -171,10 +171,11 @@
 @endif
 <table width="96%" border="0" cellspacing="0" cellpadding="0" style="margin:10px auto; text-align: center;">
     <tr>
-        <td style="text-align: left;" width="40%">
-            Cơ quan tiếp nhận biểu mẫu kê khai giá<br>
-            ghi nhận ngày nộp biểu mẫu kê khai giá<br>
+        <td style="text-align: center;" width="40%">
+
             @if($modelkk->sohsnhan != '')
+                Cơ quan tiếp nhận biểu mẫu kê khai giá<br>
+                ghi nhận ngày nộp biểu mẫu kê khai giá<br>
                 <table  cellspacing="0" cellpadding="0" border="1" style="margin: 20px auto; border-collapse: collapse;">
                     <tr>
                         <td><b>{{$modelcqcq->tendv}}</b></td>
