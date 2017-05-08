@@ -9,16 +9,13 @@
         body {
             font: normal 14px/16px time, serif;
         }
-
         table, p {
             width: 98%;
             margin: auto;
         }
-
         table tr td:first-child {
             text-align: center;
         }
-
         td, th {
             padding: 10px;
         }
@@ -29,7 +26,6 @@
             text-transform: uppercase;
             font-weight: bold;
         }
-
         @media print {
             .in{
                 display: none !important;
@@ -65,8 +61,6 @@
         </td>
     </tr>
 </table>
-
-
 <p style="text-align: center; font-weight: bold; font-size: 16px;"><i><u>Kính gửi</u></i>: {{$modelcqcq->tendv}}</p>
 
 <p>Doanh nghiệp chúng tôi tự xây dựng và kê khai giá dịch vụ lưu trú như sau:</p>
@@ -96,7 +90,7 @@
 
 <p>Đề nghị quý cơ quan ghi nhận ngày nộp Biểu mẫu kê khai giá của {{$modeldn->tendn}} theo quy định</p>
 
-<table width="96%" border="0" cellspacing="0" cellpadding="8" style="margin:10px auto;">
+<table width="96%" border="0" cellspacing="0" cellpadding="0" style="margin:10px auto;">
     <tr>
         <td style="text-align: left" width="20%">
             <b style="padding-top:0px;"><i>Nơi nhận:</i></b><br>
@@ -104,31 +98,12 @@
             - Lưu.
         </td>
         <td style="text-align: center;" width="40%">
-        </td>
-        <td style="text-align: center; text-transform: uppercase;" width="40%">
-            <b>{{$modeldn->chucdanhky != '' ? $modeldn->chucdanhky : 'Giám đốc'}}</b><br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <b style="text-transform: uppercase;">{{$modeldn->nguoiky}}</b>
-
-        </td>
-    </tr>
-</table>
-
-<table width="96%" border="0" cellspacing="0" cellpadding="8" style="margin:100px auto; text-align: center;">
-
-    <tr>
-        <td style="text-align: left;" width="30%">
-        <td style="text-align: center;" width="40%">
             Cơ quan tiếp nhận biểu mẫu kê khai giá<br>
             ghi nhận ngày nộp biểu mẫu kê khai giá<br>
             @if($modelkk->sohsnhan != '')
-                <table  cellspacing="0" cellpadding="0" border="1" style="margin: 20px auto; border-collapse: collapse;">
+                <table  cellspacing="0" cellpadding="0" border="1" style="margin: 0px auto; border-collapse: collapse;">
+                    <td><b>{{$modelcqcq->tendv}}</b></td>
                     <tr>
-                        <td><b>{{$modelcqcq->tendv}}</b></td>
                     </tr>
                     <tr>
                         <td style="text-align: left;">
@@ -141,7 +116,16 @@
             @endif
 
         </td>
-        <td style="text-align: left;" width="30%">
+        <td style="text-align: center; text-transform: uppercase;" width="40%">
+            <b>{{$modeldn->chucdanhky != '' ? $modeldn->chucdanhky : 'Giám đốc'}}</b>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <b style="text-transform: uppercase;">{{$modeldn->nguoiky}}</b>
+        </td>
     </tr>
 </table>
 
@@ -185,28 +169,9 @@
 @if($modelkk->socvlk=!'')
     <br>- Bảng kê khai giá gửi kèm công văn này sẽ thay thế cho bảng kê khai giá kèm theo công văn số {{$modelkk->socvlk}} ngày {{getDayVn($modelkk->ngaycvlk)}} của {{$modeldn->tendn}}</p>
 @endif
-<table width="96%" border="0" cellspacing="0" cellpadding="8" style="margin:10px auto; text-align: center;">
+<table width="96%" border="0" cellspacing="0" cellpadding="0" style="margin:10px auto; text-align: center;">
     <tr>
         <td style="text-align: left;" width="40%">
-
-        </td>
-        <td style="text-align: center;text-transform: uppercase; " width="60%">
-            <b>{{$modeldn->chucdanhky != '' ? $modeldn->chucdanhky : 'Giám đốc'}}</b><br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <b style="text-transform: uppercase;">{{$modeldn->nguoiky}}</b>
-
-        </td>
-    </tr>
-</table>
-<table width="96%" border="0" cellspacing="0" cellpadding="8" style="margin:100px auto; text-align: center;">
-
-    <tr>
-        <td style="text-align: left;" width="30%">
-        <td style="text-align: center;" width="40%">
             Cơ quan tiếp nhận biểu mẫu kê khai giá<br>
             ghi nhận ngày nộp biểu mẫu kê khai giá<br>
             @if($modelkk->sohsnhan != '')
@@ -223,9 +188,17 @@
                     </tr>
                 </table>
             @endif
+        </td>
+        <td style="text-align: center;text-transform: uppercase; " width="60%">
+            <b>{{$modeldn->chucdanhky != '' ? $modeldn->chucdanhky : 'Giám đốc'}}</b><br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <b style="text-transform: uppercase;">{{$modeldn->nguoiky}}</b>
 
         </td>
-        <td style="text-align: left;" width="30%">
     </tr>
 </table>
 
