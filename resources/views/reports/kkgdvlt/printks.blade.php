@@ -97,16 +97,15 @@
 
 <table width="96%" border="0" cellspacing="0" cellpadding="8" style="margin:10px auto;">
     <tr>
-        <td style="text-align: left" width="20%">
+        <td style="text-align: left" width="30%">
             <b style="padding-top:0px;"><i>Nơi nhận:</i></b><br>
             - Như trên:<br>
-            - Lưu.
-        </td>
-        <td style="text-align: center;" width="40%">
+            - Lưu.<br>
             @if($modelkk->sohsnhan != '')
+                <p style="text-align: center">
                 Cơ quan tiếp nhận biểu mẫu kê khai giá<br>
-                ghi nhận ngày nộp biểu mẫu kê khai giá<br>
-                <table  cellspacing="0" cellpadding="0" border="1" style="margin: 20px auto; border-collapse: collapse;">
+                ghi nhận ngày nộp biểu mẫu kê khai giá<br></p>
+                <table  cellspacing="0" cellpadding="0" border="1" style="margin-top: 5px; border-collapse: collapse;">
                     <tr>
                         <td><b>{{$modelcqcq->tendv}}</b></td>
                     </tr>
@@ -119,17 +118,18 @@
                     </tr>
                 </table>
             @endif
-
         </td>
-        <td style="text-align: center; text-transform: uppercase;" width="40%">
+
+        <td style="text-align: center; text-transform: uppercase;" width="70%" >
             <b>{{$modeldn->chucdanhky != '' ? $modeldn->chucdanhky : 'Giám đốc'}}</b><br>
             <br>
             <br>
             <br>
             <br>
             <br>
+            <br>
+            <br>
             <b style="text-transform: uppercase;">{{$modeldn->nguoiky}}</b>
-
         </td>
     </tr>
 </table>
@@ -183,7 +183,7 @@
             @if($modelkk->sohsnhan != '')
                 Cơ quan tiếp nhận biểu mẫu kê khai giá<br>
                 ghi nhận ngày nộp biểu mẫu kê khai giá<br>
-                <table  cellspacing="0" cellpadding="0" border="1" style="margin: 20px auto; border-collapse: collapse;">
+                <table  cellspacing="0" cellpadding="0" border="1" style="margin-top: 5px;; border-collapse: collapse;">
                     <tr>
                         <td><b>{{$modelcqcq->tendv}}</b></td>
                     </tr>
@@ -201,6 +201,8 @@
         </td>
         <td style="text-align: center;text-transform: uppercase; " width="60%">
             <b>{{$modeldn->chucdanhky != '' ? $modeldn->chucdanhky : 'Giám đốc'}}</b><br>
+            <br>
+            <br>
             <br>
             <br>
             <br>
@@ -262,6 +264,8 @@
         </td>
         <td style="text-align: center; text-transform: uppercase;" width="60%">
             <b>{{$modeldn->chucdanhky != '' ? $modeldn->chucdanhky : 'Giám đốc'}}</b><br>
+            <br>
+            <br>
             <br>
             <br>
             <br>
