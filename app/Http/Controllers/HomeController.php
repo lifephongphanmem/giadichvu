@@ -78,7 +78,7 @@ class HomeController extends Controller
                     $cnkkgdvlt = KkGDvLt::where('trangthai','Chờ nhận')
                         ->where('cqcq',session('admin')->cqcq)
                         ->count();
-                    $btlkkgdvlt = KkGDvLt::where('trangthai','Chờ nhận')
+                    $btlkkgdvlt = KkGDvLt::where('trangthai','Bị trả lại')
                         ->where('cqcq',session('admin')->cqcq)
                         ->count();
                     $cnttdndvvt = TtDn::where('pl','DVVT')
@@ -92,7 +92,7 @@ class HomeController extends Controller
                     $cnkkgvtxk = KkDvVtXk::where('trangthai','Chờ nhận')
                         ->where('cqcq',session('admin')->cqcq)
                         ->count();
-                    $btlkkgvtxk = KkDvVtXk::where('trangthai','Chờ nhận')
+                    $btlkkgvtxk = KkDvVtXk::where('trangthai','Bị trả lại')
                         ->where('cqcq',session('admin')->cqcq)
                         ->count();
                     $cnkkgvtxb = KkDvVtXb::where('trangthai','Chờ nhận')
@@ -125,7 +125,7 @@ class HomeController extends Controller
                     $cnkkgdvlt = KkGDvLt::where('trangthai','Chờ nhận')
                         ->where('masothue',session('admin')->mahuyen)
                         ->count();
-                    $btlkkgdvlt = KkGDvLt::where('trangthai','Chờ nhận')
+                    $btlkkgdvlt = KkGDvLt::where('trangthai','Bị trả lại')
                         ->where('masothue',session('admin')->mahuyen)
                         ->count();
                     $cnttdndvvt = TtDn::where('pl','DVVT')
@@ -139,7 +139,7 @@ class HomeController extends Controller
                     $cnkkgvtxk = KkDvVtXk::where('trangthai','Chờ nhận')
                         ->where('masothue',session('admin')->mahuyen)
                         ->count();
-                    $btlkkgvtxk = KkDvVtXk::where('trangthai','Chờ nhận')
+                    $btlkkgvtxk = KkDvVtXk::where('trangthai','Bị trả lại')
                         ->where('masothue',session('admin')->mahuyen)
                         ->count();
                     $cnkkgvtxb = KkDvVtXb::where('trangthai','Chờ nhận')
@@ -165,8 +165,8 @@ class HomeController extends Controller
                 $array['cnttdndvlt'] = $cnttdndvlt;
                 $array['btlttdndvlt'] = $btlttdndvlt;
                 $array['cnkkgdvlt'] = $cnkkgdvlt;
-                $array['cnttdndvvt'] = $cnttdndvvt;
                 $array['btlkkgdvlt'] = $btlkkgdvlt;
+                $array['cnttdndvvt'] = $cnttdndvvt;
                 $array['btlttdndvvt'] = $btlttdndvvt;
                 $array['cnkkgvtxk'] = $cnkkgvtxk;
                 $array['btlkkgvtxk'] = $btlkkgvtxk;
@@ -176,6 +176,7 @@ class HomeController extends Controller
                 $array['btlkkgvtxtx'] = $btlkkgvtxtx;
                 $array['cnkkgvtkhac'] = $cnkkgvtkhac;
                 $array['btlkkgvtkhac'] = $btlkkgvtkhac;
+                //dd($array);
                 return view('dashboard')
                     ->with('sl',$array)
                     ->with('pageTitle','Tổng quan');

@@ -216,7 +216,7 @@ class DnDvLtController extends Controller
                         ->with('pageTitle', 'Thông tin doanh nghiệp cung cấp dịch vụ lưu trú');
 
 
-                } else {
+                }else {
                     $model = DnDvLt::where('masothue', session('admin')->mahuyen)
                         ->first();
                     $modeltttd = TtDn::where('masothue', session('admin')->mahuyen)

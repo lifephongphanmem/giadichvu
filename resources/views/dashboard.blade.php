@@ -85,9 +85,9 @@
                                     <div class="number"></div>
                                     Thay đổi thông tin DN DVVT
                                     <div class="desc">
-                                        <h5>Chờ nhận: {{$sl['cnttdndvvt']}} hồ sơ</h5>
-                                        @if(session('admin')->level == 'DVVT')
-                                            <h5>Bị trả lại {{$sl['btlttdndvvt']}} hồ sơ</h5>
+                                        <h5>Chờ nhận: {{$sl['cnkkgdvlt']}} hồ sơ</h5>
+                                        @if(session('admin')->level == 'DVLT')
+                                            <h5>Bị trả lại {{$sl['btlkkgdvlt']}} hồ sơ</h5>
                                         @endif
                                     </div>
                                 </div>

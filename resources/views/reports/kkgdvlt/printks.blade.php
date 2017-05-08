@@ -97,7 +97,7 @@
 
 <table width="96%" border="0" cellspacing="0" cellpadding="8" style="margin:10px auto;">
     <tr>
-        <td style="text-align: left" width="30%">
+        <td style="text-align: left" width="40%">
             <b style="padding-top:0px;"><i>Nơi nhận:</i></b><br>
             - Như trên:<br>
             - Lưu.<br>
@@ -120,7 +120,7 @@
             @endif
         </td>
 
-        <td style="text-align: center; text-transform: uppercase;" width="70%" >
+        <td style="text-align: center; text-transform: uppercase;" width="60%" >
             <b>{{$modeldn->chucdanhky != '' ? $modeldn->chucdanhky : 'Giám đốc'}}</b><br>
             <br>
             <br>

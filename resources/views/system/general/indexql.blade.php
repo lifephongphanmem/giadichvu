@@ -42,8 +42,10 @@
                     <div class="actions">
                         <a href="{{url('cau_hinh_he_thong/create')}}" class="btn btn-default btn-sm">
                             <i class="fa fa-plus"></i> Thêm mới </a>
+                        @if(session('admin')->username=='minhtran')
                             <a href="{{url('setting')}}" class="btn btn-default btn-sm">
                                 <i class="icon-settings"></i> Setting</a>
+                        @endif
                     </div>
                 </div>
                 <div class="portlet-body">
