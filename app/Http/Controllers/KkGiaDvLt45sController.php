@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Session;
 class KkGiaDvLt45sController extends Controller
 {
     public function create($macskd){
+
         if (Session::has('admin')) {
             if(session('admin')->level == 'T' || session('admin')->level == 'H' || session('admin')->level == 'DVLT') {
                 $modelcskd = CsKdDvLt::where('macskd', $macskd)->first();
@@ -59,11 +60,11 @@ class KkGiaDvLt45sController extends Controller
                     if($dayngaynhap == 'Thu'){
                         $ngayhieuluc  =  date('d/m/Y',mktime(0, 0, 0, date("m")  , date("d")+5, date("Y")));
                     }elseif($dayngaynhap == 'Fri') {
-                        $ngayhieuluc  =  date('d/m/Y',mktime(0, 0, 0, date("m")  , date("d")+4, date("Y")));
+                        $ngayhieuluc  =  date('d/m/Y',mktime(0, 0, 0, date("m")  , date("d")+5, date("Y")));
                     }elseif( $dayngaynhap = 'Sat'){
-                        $ngayhieuluc  =  date('d/m/Y',mktime(0, 0, 0, date("m")  , date("d")+3, date("Y")));
+                        $ngayhieuluc  =  date('d/m/Y',mktime(0, 0, 0, date("m")  , date("d")+4, date("Y")));
                     }else {
-                        $ngayhieuluc  =  date('d/m/Y',mktime(0, 0, 0, date("m")  , date("d")+2, date("Y")));
+                        $ngayhieuluc  =  date('d/m/Y',mktime(0, 0, 0, date("m")  , date("d")+3, date("Y")));
                     }
 
                     return view('manage.dvlt.kkgia.kkgia45s.create')

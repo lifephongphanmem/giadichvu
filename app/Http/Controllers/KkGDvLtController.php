@@ -350,6 +350,7 @@ class KkGDvLtController extends Controller
                         return view('errors.noperm');
                     }
                 }else{
+
                     if(session('admin')->level == 'T' || session('admin')->level == 'H' || session('admin')->level == 'DVLT') {
                         $modelcskd = CsKdDvLt::where('macskd',$macskd)->first();
                         if(session('admin')->sadmin =='ssa' || session('admin')->cqcq == $modelcskd->cqcq) {
@@ -384,17 +385,19 @@ class KkGDvLtController extends Controller
                             $modelttdv = KkGDvLtCtDf::where('macskd',$macskd)
                                 ->get();
                             //dd($modelttdv);
-                            $ngaynhap = date('d/m/Y');
+                            $ngaynhap = date('Y-m-d');
                             $dayngaynhap = date('D');
                             if($dayngaynhap == 'Thu'){
-                                $ngayhieuluc  =  date('d/m/Y',mktime(0, 0, 0, date("m")  , date("d")+5, date("Y")));
+                                $ngayhieuluc  =  date('Y-m-d',mktime(0, 0, 0, date("m")  , date("d")+5, date("Y")));
                             }elseif($dayngaynhap == 'Fri') {
-                                $ngayhieuluc  =  date('d/m/Y',mktime(0, 0, 0, date("m")  , date("d")+4, date("Y")));
-                            }elseif( $dayngaynhap = 'Sat'){
-                                $ngayhieuluc  =  date('d/m/Y',mktime(0, 0, 0, date("m")  , date("d")+3, date("Y")));
+                                $ngayhieuluc  =  date('Y-m-d',mktime(0, 0, 0, date("m")  , date("d")+5, date("Y")));
+                            }elseif( $dayngaynhap == 'Sat'){
+                                $ngayhieuluc  =  date('Y-m-d',mktime(0, 0, 0, date("m")  , date("d")+4, date("Y")));
                             }else {
-                                $ngayhieuluc  =  date('d/m/Y',mktime(0, 0, 0, date("m")  , date("d")+2, date("Y")));
+                                $ngayhieuluc  =  date('Y-m-d',mktime(0, 0, 0, date("m")  , date("d")+3, date("Y")));
                             }
+                            $ngaynhap = date('d/m/Y',strtotime($ngaynhap));
+                            $ngayhieuluc =  date('d/m/Y',strtotime($ngayhieuluc));
 
                             return view('manage.dvlt.kkgia.kkgia45s.create')
                                 ->with('modelcskd',$modelcskd)

@@ -167,7 +167,7 @@
                         var yyyy = today.getFullYear();
                         if(dd<10){dd='0'+dd}
                         if(mm<10){mm='0'+mm}
-                        $('input[name="ngaynhap"]').val(mm+'/'+dd+'/'+yyyy);
+                        $('input[name="ngaynhap"]').val(dd+'/'+mm+'/'+yyyy);
                         $('input[name="ngayhieuluc"]').val('');
                     }
                 }
@@ -175,7 +175,13 @@
 
         }
         function clearngay(){
-            $('input[name="ngaynhap"]').val('');
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1;//January is 0!
+            var yyyy = today.getFullYear();
+            if(dd<10){dd='0'+dd}
+            if(mm<10){mm='0'+mm}
+            $('input[name="ngaynhap"]').val(dd+'/'+mm+'/'+yyyy);
             $('input[name="ngayhieuluc"]').val('');
         }
 

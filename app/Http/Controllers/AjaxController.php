@@ -33,18 +33,17 @@ class AjaxController extends Controller
                 }
             }else {
                 $thungaynhap = date('D', strtotime($ngaynhap));
-
                 if ($thungaynhap == 'Thu') {
-                    $ngaysosanh = date('Y-m-d', mktime(0, 0, 0, date('m', strtotime($ngaynhap)), date('d', strtotime($ngaynhap)) + 5, date('Y', strtotime($ngaynhap))));
+                    $ngaysosanh = date('Y-m-d', mktime( date('m', strtotime($ngaynhap)), date('d', strtotime($ngaynhap)) + 5, date('Y', strtotime($ngaynhap))));
                 } elseif ($thungaynhap == 'Fri') {
-                    $ngaysosanh = date('Y-m-d', mktime(0, 0, 0, date('m', strtotime($ngaynhap)), date('d', strtotime($ngaynhap)) + 4, date('Y', strtotime($ngaynhap))));
-                } elseif ($thungaynhap = 'Sat') {
-                    $ngaysosanh = date('Y-m-d', mktime(0, 0, 0, date('m', strtotime($ngaynhap)), date('d', strtotime($ngaynhap)) + 3, date('Y', strtotime($ngaynhap))));
+                    $ngaysosanh = date('Y-m-d', mktime( date('m', strtotime($ngaynhap)), date('d', strtotime($ngaynhap)) + 5, date('Y', strtotime($ngaynhap))));
+                } elseif ($thungaynhap == 'Sat') {
+                    $ngaysosanh = date('Y-m-d', mktime( date('m', strtotime($ngaynhap)), date('d', strtotime($ngaynhap)) + 4, date('Y', strtotime($ngaynhap))));
                 } else {
-                    $ngaysosanh = date('Y-m-d', mktime(0, 0, 0, date('m', strtotime($ngaynhap)), date('d', strtotime($ngaynhap)) + 2, date('Y', strtotime($ngaynhap))));
+                    $ngaysosanh = date('Y-m-d', mktime( date('m', strtotime($ngaynhap)), date('d', strtotime($ngaynhap)) + 3, date('Y', strtotime($ngaynhap))));
                 }
 
-                if ($ngayhieuluc > $ngaysosanh || $ngayhieuluc == $ngaysosanh) {
+                if (strtotime($ngayhieuluc) >= strtotime($ngaysosanh)){
                     $result['status'] = 'success';
                 }
             }
@@ -73,7 +72,6 @@ class AjaxController extends Controller
             if ($ngaynhap >= $ngayht) {
                 $result['status'] = 'success';
             }
-
         }
         die(json_encode($result));
     }
