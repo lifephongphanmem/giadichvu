@@ -156,7 +156,7 @@ class UsersController extends Controller
                     $level = array('DVLT');
                 elseif ($pl == 'dich_vu_van_tai')
                     $level = array('DVVT');
-                if (session('admin')->sadmin == 'ssa') {
+                if (session('admin')->sadmin == 'ssa' || session('admin')->sadmin =='sa') {
                     $model = Users::wherein('level', $level)
                         ->orderBy('id')
                         ->get();
@@ -191,12 +191,55 @@ class UsersController extends Controller
 
     public function create()
     {
-        //
+        if (Session::has('admin')) {
+            if (session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'sa') {
+
+                $modeldvql = DmDvQl::all();
+                return view('system.users.create')
+                    ->with('modeldvql', $modeldvql)
+                    ->with('pageTitle', 'Chỉnh sửa thông tin tài khoản');
+            }else{
+                return view('errors.perm');
+            }
+
+        } else {
+            return view('errors.notlogin');
+        }
     }
 
     public function store(Request $request)
     {
-        //
+        if (Session::has('admin')) {
+            if (session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'sa') {
+                $inputs = $request->all();
+                $modelcqcq = DmDvQl::where('maqhns',$inputs['cqcq'])->first();
+                if($modelcqcq->plql == 'TC' && $inputs['sadmin'] == 'qtht'){
+                    $sadmin ='salt';
+                }elseif($modelcqcq->plql == 'VT' && $inputs['sadmin'] == 'qtht'){
+                    $sadmin = 'savt';
+                }else{
+                    $sadmin = '';
+                }
+                $model = new  Users();
+                $model->cqcq = $inputs['cqcq'];
+                $model->name = $inputs['name'];
+                $model->status = 'Kích hoạt';
+                $model->level = $modelcqcq->level;
+                $model->username = $inputs['username'];
+                $model->password = md5($inputs['password']);
+                $model->phone = $inputs['phone'];
+                if($sadmin !='')
+                    $model->sadmin = $sadmin;
+                $model->save();
+                return redirect('users/pl=quan_ly');
+
+            }else{
+                return view('errors.perm');
+            }
+
+        } else {
+            return view('errors.notlogin');
+        }
     }
 
     /**
@@ -220,8 +263,8 @@ class UsersController extends Controller
     {
         if (Session::has('admin')) {
             $model = Users::findOrFail($id);
-            if (session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'satc' || session('admin')->sadmin == 'savt') {
-                if (session('admin')->sadmin == 'ssa' || session('admin')->cqcq == $model->cqcq) {
+            if (session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'satc' || session('admin')->sadmin == 'savt' || session('admin')->sadmin == 'sa') {
+                if (session('admin')->sadmin == 'ssa' || session('admin')->cqcq == $model->cqcq || session('admin')->sadmin == 'sa') {
                     if ($model->level == 'DVLT')
                         $modeldvql = DmDvQl::where('plql', 'TC')
                             ->get();

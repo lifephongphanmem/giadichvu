@@ -62,6 +62,9 @@ Route::post('users/phan-quyen','UsersController@uppermission');
 Route::post('users/delete','UsersController@destroy');
 Route::get('users/lock/{id}/{pl}','UsersController@lockuser');
 Route::get('users/unlock/{id}/{pl}','UsersController@unlockuser');
+Route::get('users/create','UsersController@create');
+Route::post('users','UsersController@store');
+
 
 Route::get('users/register/pl={pl}','UsersController@register');
 Route::get('users/register/{id}/show','UsersController@registershow');

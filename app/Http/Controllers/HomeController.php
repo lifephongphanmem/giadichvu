@@ -30,7 +30,7 @@ class HomeController extends Controller
     public function index()
     {
         if (Session::has('admin')) {
-            if(session('admin')->sadmin == 'satc' || session('admin')->sadmin == 'savt')
+            if(session('admin')->sadmin == 'satc' || session('admin')->sadmin == 'savt' ||session('admin')->sadmin == 'sa' )
                 return redirect('cau_hinh_he_thong');
             else{
                 if(session('admin')->sadmin == 'ssa'){

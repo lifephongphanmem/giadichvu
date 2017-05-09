@@ -15,8 +15,8 @@ class GeneralConfigsController extends Controller
     public function index()
     {
         if (Session::has('admin')) {
-            if (session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'satc' || session('admin')->sadmin == 'savt') {
-                if (session('admin')->sadmin == 'ssa') {
+            if (session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'satc' || session('admin')->sadmin == 'savt' || session('admin')->sadmin == 'sa') {
+                if (session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'sa') {
                     $model = DmDvQl::all();
                     return view('system.general.indexql')
                         ->with('model', $model)
@@ -39,7 +39,7 @@ class GeneralConfigsController extends Controller
 
     public function create(){
         if (Session::has('admin')) {
-            if (session('admin')->sadmin == 'ssa') {
+            if (session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'sa') {
                 return view('system.general.create')
                     ->with('pageTitle', 'Thêm mới thông tin cấu hình hệ thống');
             }else{

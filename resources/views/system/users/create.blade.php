@@ -34,6 +34,29 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label class="control-label">Đơn vị trực thuộc</label>
+                                        <select class="form-control select2me required" id="cqcq" name="cqcq">
+                                            <option value="">--Chọn đơn vị--</option>
+                                            @foreach($modeldvql as $ttpb)
+                                                <option value="{{$ttpb->maqhns}}">{{$ttpb->tendv}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Phân loại</label>
+                                        <select class="form-control" id="sadmin" name="sadmin">
+                                            <option value="ql">Quản lý</option>
+                                            <option value="qtht">Quản trị hệ thống</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
                                         <label class="control-label">Tên tài khoản<span class="require">*</span></label>
                                         <input type="text" class="form-control required" name="name" id="name" autofocus>
                                     </div>
@@ -47,7 +70,7 @@
                                 </div>
                                 <!--/span-->
                             </div>
-                            <div class="row">
+                            <!--div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Email</label>
@@ -63,20 +86,7 @@
                                         </select>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label">Đơn vị trục thuộc</label>
-                                        <select class="form-control select2me required" id="mahuyen" name="mahuyen">
-                                            <option value="">--Chọn đơn vị--</option>
-                                            @foreach($modelpb as $ttpb)
-                                                <option value="{{$ttpb->ma}}">{{$ttpb->ten}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
+                            </div-->
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -96,15 +106,16 @@
 
                         </div>
 
-                        <div style="text-align: center">
-                            <button type="submit" class="btn green" onclick="validateForm()"><i class="fa fa-check"></i> Cập nhật</button>
-                            <button type="reset" class="btn btn-default"><i class="fa fa-refresh"></i>&nbsp;Nhập lại</button>
-                            <a href="{{url('users/pl='.$pl)}}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
-                        </div>
-                    {!! Form::close() !!}
                     <!-- END FORM-->
                 </div>
+
             </div>
+            <div style="text-align: center">
+                <a href="{{url('users/pl=quan_ly')}}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
+                <button type="reset" class="btn btn-default"><i class="fa fa-refresh"></i>&nbsp;Nhập lại</button>
+                <button type="submit" class="btn green" onclick="validateForm()"><i class="fa fa-check"></i> Cập nhật</button>
+            </div>
+            {!! Form::close() !!}
             <!-- END VALIDATION STATES-->
         </div>
     </div>
@@ -134,7 +145,7 @@
                 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                 $.ajax({
                     type: 'GET',
-                    url: '/checkuser',
+                    url: '/checktaikhoan',
                     data: {
                         _token: CSRF_TOKEN,
                         user:$(this).val()

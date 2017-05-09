@@ -297,7 +297,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         <span class="selected"></span>
                     </a>
                 </li>
-                @if(session('admin')->sadmin != 'satc' && session('admin')->sadmin != 'savt')
+                @if(session('admin')->sadmin != 'satc' && session('admin')->sadmin != 'savt' && session('admin')->sadmin != 'sa')
                     @if(canGeneral('dvlt','dvlt'))
                         @if(can('dvlt','index') || can('kkdvlt','index'))
                     <li>
@@ -451,7 +451,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 </li>
                 @endif
 
-                @if((session('admin')->level == 'T' || session('admin')->level == 'H') && session('admin')->sadmin != 'satc' && session('admin')->sadmin != 'savt')
+                @if((session('admin')->level == 'T' || session('admin')->level == 'H') && session('admin')->sadmin != 'satc' && session('admin')->sadmin != 'savt' && session('admin')->sadmin != 'sa')
                 <li>
                     <a href="">
                         <i class="fa fa-file-o fa-fw"></i>
@@ -489,7 +489,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         </ul>
                     </li>
                 @endif
-                @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'satc' || session('admin')->sadmin == 'savt' )
+                @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'satc' || session('admin')->sadmin == 'savt' || session('admin')->sadmin == 'sa')
                 <li>
                     <a href="">
                         <i class="icon-settings"></i>
@@ -506,7 +506,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         <li><a href="{{url('dn_dichvu_vantai')}}">DN dịch vụ vận tải</a></li>
                         @endif
 
-                        @if(session('admin')->sadmin == 'ssa')
+                        @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'sa')
                             <li><a href="{{url('users/pl=quan_ly')}}"> Quản lý tài khoản</a></li>
                         @elseif(session('admin')->sadmin == 'satc')
                             <li><a href="{{url('users/pl=dich_vu_luu_tru')}}"> Quản lý tài khoản</a></li>
@@ -523,9 +523,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             <li><a href="{{url('users/register/pl=dich_vu_van_tai')}}"> Tài khoản đăng ký DVVT</a></li>
                         @endif
 
-                        @if(session('admin')->level == 'T' || session('admin')->level == 'H')
                             <li><a href="{{url('cau_hinh_he_thong')}}">Cấu hình hệ thống</a></li>
-                        @endif
                     </ul>
                 </li>
                 @endif

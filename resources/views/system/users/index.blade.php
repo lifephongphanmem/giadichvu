@@ -105,7 +105,8 @@
                     <div class="caption">
                     </div>
                     <div class="actions">
-
+                        <a href="{{url('users/create')}}" class="btn btn-default btn-sm">
+                            <i class="fa fa-plus"></i> Thêm mới </a>
                         <button id="btnMultiLockUser" type="button" onclick="multiLock()" class="btn btn-default btn-sm" data-target="#lockuser-modal-confirm" data-toggle="modal"><i class="fa fa-lock"></i>&nbsp;
                             Khóa</button>
                         <button id="btnMultiUnLockUser" type="button" onclick="multiUnLock()" class="btn btn-default btn-sm" data-target="#unlockuser-modal-confirm" data-toggle="modal"><i class="fa fa-unlock"></i>&nbsp;
@@ -146,7 +147,7 @@
                             <th style="text-align: center">Tên tài khoản</th>
                             <th style="text-align: center">Username</th>
                             <th style="text-align: center">Tel</th>
-                            <th style="text-align: center">Email</th>
+                            <th style="text-align: center">Level</th>
                             <th style="text-align: center" width="5%">Trạng thái</th>
                             <th style="text-align: center" width="25%">Thao tác</th>
                         </tr>
@@ -161,7 +162,7 @@
                             <td>{{$tt->name}}</td>
                             <td class="active">{{$tt->username}}</td>
                             <td>{{$tt->phone}}</td>
-                            <td>{{$tt->email}}</td>
+                            <td style="text-align: center">{{$tt->level}}</td>
                             <td style="text-align: center">
                                 @if($tt->status == 'Kích hoạt')
                                     <span class="label label-sm label-success">{{$tt->status}}</span>
