@@ -510,47 +510,53 @@ class UsersController extends Controller
             $id = $input['idregister'];
             $model = Register::findOrFail($id);
             if(session('admin')->sadmin == 'ssa' || $model->cqcq == session('admin')->cqcq ) {
-                $modeldn = new DnDvLt();
-                $modeldn->tendn = $model->tendn;
-                $modeldn->masothue = $model->masothue;
-                $modeldn->teldn = $model->tel;
-                $modeldn->faxdn = $model->fax;
-                $modeldn->email = $model->email;
-                $modeldn->diachidn = $model->diachi;
-                $modeldn->trangthai = 'Kích hoạt';
-                $modeldn->noidknopthue = $model->noidknopthue;
-                $modeldn->tailieu = $model->tailieu;
-                $modeldn->giayphepkd = $model->giayphepkd;
-                $modeldn->cqcq = $model->cqcq;
-                if ($modeldn->save()) {
-                    $modeluser = new Users();
-                    $modeluser->name = $model->tendn;
-                    $modeluser->username = $model->username;
-                    $modeluser->password = $model->password;
-                    $modeluser->phone = $model->teldn;
-                    $modeluser->email = $model->email;
-                    $modeluser->status = 'Kích hoạt';
-                    $modeluser->mahuyen = $model->masothue;
-                    $modeluser->level = 'DVLT';
-                    $modeluser->cqcq = $model->cqcq;
-                    $modeluser->save();
+                $check = DnDvLt::where('masothue',$model->masothue)->first();
+                if(count($check)>0){
+                    return view('errors.notcrregisterlt');
+                }else {
+                    $modeldn = new DnDvLt();
+                    $modeldn->tendn = $model->tendn;
+                    $modeldn->masothue = $model->masothue;
+                    $modeldn->teldn = $model->tel;
+                    $modeldn->faxdn = $model->fax;
+                    $modeldn->email = $model->email;
+                    $modeldn->diachidn = $model->diachi;
+                    $modeldn->trangthai = 'Kích hoạt';
+                    $modeldn->noidknopthue = $model->noidknopthue;
+                    $modeldn->tailieu = $model->tailieu;
+                    $modeldn->giayphepkd = $model->giayphepkd;
+                    $modeldn->cqcq = $model->cqcq;
+                    if ($modeldn->save()) {
+                        $modeluser = new Users();
+                        $modeluser->name = $model->tendn;
+                        $modeluser->username = $model->username;
+                        $modeluser->password = $model->password;
+                        $modeluser->phone = $model->teldn;
+                        $modeluser->email = $model->email;
+                        $modeluser->status = 'Kích hoạt';
+                        $modeluser->mahuyen = $model->masothue;
+                        $modeluser->level = 'DVLT';
+                        $modeluser->cqcq = $model->cqcq;
+                        $modeluser->save();
+                    }
+                    $tencqcq = DmDvQl::where('maqhns', $model->cqcq)->first();
+                    $data = [];
+                    $data['tendn'] = $model->tendn;
+                    $data['tg'] = Carbon::now()->toDateTimeString();
+                    $data['tencqcq'] = $tencqcq->tendv;
+                    $data['masothue'] = $model->masothue;
+                    $data['username'] = $model->username;
+                    $a = $model->email;
+                    $b = $model->tendn;
+                    Mail::send('mail.successregister', $data, function ($message) use ($a, $b) {
+                        $message->to($a, $b)
+                            ->subject('Thông báo thông tin đăng ký đã được xét duyệt');
+                        $message->from('qlgiakhanhhoa@gmail.com', 'Phần mềm CSDL giá');
+                    });
+                    $delete = Register::findOrFail($id)->delete();
+                    return redirect('users/register/pl=dich_vu_luu_tru');
                 }
-                $tencqcq = DmDvQl::where('maqhns',$model->cqcq)->first();
-                $data=[];
-                $data['tendn'] = $model->tendn;
-                $data['tg'] = Carbon::now()->toDateTimeString();
-                $data['tencqcq'] = $tencqcq->tendv;
-                $data['masothue'] = $model->masothue;
-                $data['username'] = $model->username;
-                $a = $model->email;
-                $b  =  $model->tendn;
-                Mail::send('mail.successregister',$data, function ($message) use($a,$b) {
-                    $message->to($a,$b )
-                        ->subject('Thông báo thông tin đăng ký đã được xét duyệt');
-                    $message->from('qlgiakhanhhoa@gmail.com','Phần mềm CSDL giá');
-                });
-                $delete = Register::findOrFail($id)->delete();
-                return redirect('users/register/pl=dich_vu_luu_tru');
+
             }else{
                 return view('errors.noperm');
             }
