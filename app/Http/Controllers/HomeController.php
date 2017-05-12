@@ -275,10 +275,13 @@ class HomeController extends Controller
                     $data['masothue'] = $input['masothue'];
                     $data['user'] = $input['username'];
                     $data['madk'] = $ma;
-                    $a = $input['emaildn'];
-                    $b = $input['tendn'];
-                    Mail::send('mail.register', $data, function ($message) use ($a, $b) {
-                        $message->to($a, $b)
+                    $maildn = $input['emaildn'];
+                    $tendn = $input['tendn'];
+                    $mailql = $tencqcq->email;
+                    $tenql = $tencqcq->tendv;
+                    Mail::send('mail.register', $data, function ($message) use ($maildn,$tendn,$mailql,$tenql) {
+                        $message->to($maildn,$tendn)
+                            ->to($mailql,$tenql)
                             ->subject('Thông báo đăng ký tài khoản');
                         $message->from('qlgiakhanhhoa@gmail.com', 'Phần mềm CSDL giá');
                     });
@@ -491,10 +494,13 @@ class HomeController extends Controller
             $data['masothue'] = $input['masothue'];
             $data['user'] = $input['username'];
             $data['madk'] = $ma;
-            $a = $input['emaildn'];
-            $b  =  $input['tendn'];
-            Mail::send('mail.stlregister',$data, function ($message) use($a,$b) {
-                $message->to($a,$b )
+            $maildn = $input['emaildn'];
+            $tendn  =  $input['tendn'];
+            $mailql = $tencqcq->email;
+            $tenql = $tencqcq->tendv;
+            Mail::send('mail.stlregister',$data, function ($message) use($maildn,$tendn,$mailql,$tenql) {
+                $message->to($maildn,$tendn)
+                    ->to($mailql,$tenql)
                     ->subject('Thông báo đăng ký tài khoản');
                 $message->from('qlgiakhanhhoa@gmail.com','Phần mềm CSDL giá');
             });

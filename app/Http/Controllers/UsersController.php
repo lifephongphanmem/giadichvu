@@ -228,6 +228,7 @@ class UsersController extends Controller
                 $model->username = $inputs['username'];
                 $model->password = md5($inputs['password']);
                 $model->phone = $inputs['phone'];
+                $model->ttnguoitao = session('admin')->name.'('.session('admin')->username.')'. getDateTime(Carbon::now()->toDateTimeString());
                 if($sadmin !='')
                     $model->sadmin = $sadmin;
                 $model->save();
@@ -537,6 +538,7 @@ class UsersController extends Controller
                         $modeluser->mahuyen = $model->masothue;
                         $modeluser->level = 'DVLT';
                         $modeluser->cqcq = $model->cqcq;
+                        $modeluser->ttnguoitao = session('admin')->name.'('.session('admin')->username.')'. getDateTime(Carbon::now()->toDateTimeString());
                         $modeluser->save();
                     }
                     $tencqcq = DmDvQl::where('maqhns', $model->cqcq)->first();
@@ -546,10 +548,13 @@ class UsersController extends Controller
                     $data['tencqcq'] = $tencqcq->tendv;
                     $data['masothue'] = $model->masothue;
                     $data['username'] = $model->username;
-                    $a = $model->email;
-                    $b = $model->tendn;
-                    Mail::send('mail.successregister', $data, function ($message) use ($a, $b) {
-                        $message->to($a, $b)
+                    $maildn = $model->email;
+                    $tendn = $model->tendn;
+                    $mailql = $tencqcq->email;
+                    $tenql = $tencqcq->tendv;
+                    Mail::send('mail.successregister', $data, function ($message) use ($maildn,$tendn,$mailql,$tenql) {
+                        $message->to($maildn,$tendn)
+                            ->to($mailql,$tenql)
                             ->subject('Thông báo thông tin đăng ký đã được xét duyệt');
                         $message->from('qlgiakhanhhoa@gmail.com', 'Phần mềm CSDL giá');
                     });

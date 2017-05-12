@@ -146,7 +146,6 @@
                             <th style="text-align: center" width="2%">STT</th>
                             <th style="text-align: center">Tên tài khoản</th>
                             <th style="text-align: center">Username</th>
-                            <th style="text-align: center">Tel</th>
                             <th style="text-align: center">Level</th>
                             <th style="text-align: center" width="5%">Trạng thái</th>
                             <th style="text-align: center" width="25%">Thao tác</th>
@@ -161,18 +160,18 @@
                             <td style="text-align: center">{{$key + 1}}</td>
                             <td>{{$tt->name}}</td>
                             <td class="active">{{$tt->username}}</td>
-                            <td>{{$tt->phone}}</td>
                             <td style="text-align: center">{{$tt->level}}</td>
                             <td style="text-align: center">
                                 @if($tt->status == 'Kích hoạt')
-                                    <span class="label label-sm label-success">{{$tt->status}}</span>
+                                    <span class="label label-sm label-success">{{$tt->status}}</span><br>
+                                    {{$tt->ttnguoitao}}
                                 @else
                                     <span class="label label-sm label-danger">{{$tt->status}}</span>
                                 @endif
                             </td>
                             <td>
                                 <a href="{{url('users/'.$tt->id.'/edit')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</a>
-                                @if($tt->sadmin != 'satc' && $tt->sadmin != 'savt')
+                                @if($tt->sadmin != 'satc' && $tt->sadmin != 'savt' && $tt->sadmin != 'sa')
                                     <a href="{{url('users/'.$tt->id.'/phan-quyen')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-cogs"></i>&nbsp;Phân quyền</a>
                                 @endif
                                 <button type="button" onclick="getId('{{$tt->id}}')" class="btn btn-default btn-xs mbs" data-target="#delete-modal" data-toggle="modal"><i class="fa fa-trash-o"></i>&nbsp;

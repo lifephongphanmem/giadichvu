@@ -23,6 +23,7 @@ class Users extends Model
         'pldv',
         'emailxt',
         'question',
-        'answer'
+        'answer',
+        'ttnguoitao'
     ];
 }

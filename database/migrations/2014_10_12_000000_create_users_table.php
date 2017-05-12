@@ -31,6 +31,7 @@ class CreateUsersTable extends Migration
             $table->string('emailxt')->nullable();
             $table->string('question')->nullable();
             $table->string('answer')->nullable();
+            $table->string('ttnguoitao')->nullable();
             $table->timestamps();
         });
     }
