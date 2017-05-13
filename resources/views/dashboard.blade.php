@@ -74,7 +74,7 @@
                     </div>
                     @endif
                 @endif
-                @if(canGeneral('dvlt','dvlt'))
+                @if(canGeneral('dvvt','dvvt'))
                     @if(can('dvvtxk','index') || can('dvvtxb','index') || can('dvvtxtx','index') || can('dvvtch','index')  )
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <div class="dashboard-stat purple-plum">

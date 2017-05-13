@@ -3,77 +3,105 @@ function getPermissionDefault($level) {
     $roles = array();
 
     $roles['T'] = array(
+        'dvlt' => array(
+            'index' => 1,
+            'create' => 0,
+            'edit' => 0,
+            'delete' => 0,
+            'approve'=> 1
+        ),
+        'dvvt' => array(
+            'index' => 1,
+            'create' => 0,
+            'edit' => 0,
+            'delete' => 0,
+            'approve'=> 1
+        ),
         'kkdvlt' => array(
             'index' => 1,
             'create' => 0,
             'edit' => 0,
             'delete' => 0,
-            'approve'=> 0
+            'approve'=> 1
         ),
         'kkdvvtxk' => array(
             'index' => 1,
             'create' => 0,
             'edit' => 0,
             'delete' => 0,
-            'approve'=> 0
+            'approve'=> 1
         ),
         'kkdvvtxb' => array(
             'index' => 1,
             'create' => 0,
             'edit' => 0,
             'delete' => 0,
-            'approve'=> 0
+            'approve'=> 1
         ),
         'kkdvvtxtx' => array(
             'index' => 1,
             'create' => 0,
             'edit' => 0,
             'delete' => 0,
-            'approve'=> 0
+            'approve'=> 1
         ),
         'kkdvvtch' => array(
             'index' => 1,
             'create' => 0,
             'edit' => 0,
             'delete' => 0,
-            'approve'=> 0
+            'approve'=> 1
         ),
     );
     $roles['H'] = array(
+        'dvlt' => array(
+            'index' => 1,
+            'create' => 0,
+            'edit' => 0,
+            'delete' => 0,
+            'approve'=> 1
+        ),
+        'dvvt' => array(
+            'index' => 1,
+            'create' => 0,
+            'edit' => 0,
+            'delete' => 0,
+            'approve'=> 1
+        ),
         'kkdvlt' => array(
             'index' => 1,
             'create' => 0,
             'edit' => 0,
             'delete' => 0,
-            'approve'=> 0
+            'approve'=> 1
         ),
         'kkdvvtxk' => array(
             'index' => 1,
             'create' => 0,
             'edit' => 0,
             'delete' => 0,
-            'approve'=> 0
+            'approve'=> 1
         ),
         'kkdvvtxb' => array(
             'index' => 1,
             'create' => 0,
             'edit' => 0,
             'delete' => 0,
-            'approve'=> 0
+            'approve'=> 1
         ),
         'kkdvvtxtx' => array(
             'index' => 1,
             'create' => 0,
             'edit' => 0,
             'delete' => 0,
-            'approve'=> 0
+            'approve'=> 1
         ),
         'kkdvvtch' => array(
             'index' => 1,
             'create' => 0,
             'edit' => 0,
             'delete' => 0,
-            'approve'=> 0
+            'approve'=> 1
         ),
     );
     $roles['DVLT'] = array(
