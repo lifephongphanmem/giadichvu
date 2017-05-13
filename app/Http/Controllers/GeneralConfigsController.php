@@ -64,6 +64,7 @@ class GeneralConfigsController extends Controller
             $model->sohsnhan = $input['sohsnhan'];
             $model->ttlh = $input['ttlh'];
             $model->email = $input['email'];
+            $model->emailqt = $input['emailqt'];
             if($model->save()){
                 $modeluser = new Users();
                 $modeluser->name = $input['tendv'];
@@ -115,6 +116,7 @@ class GeneralConfigsController extends Controller
                 $model->sohsnhan = $input['sohsnhan'];
                 $model->ttlh = $input['ttlh'];
                 $model->email = $input['email'];
+                $model->emailqt = $input['emailqt'];
                 $model->save();
             }else{
                 return view('errors.noperm');
