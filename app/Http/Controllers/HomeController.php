@@ -277,7 +277,7 @@ class HomeController extends Controller
                     $data['madk'] = $ma;
                     $maildn = $input['emaildn'];
                     $tendn = $input['tendn'];
-                    $mailql = $tencqcq->email;
+                    $mailql = $tencqcq->emailqt;
                     $tenql = $tencqcq->tendv;
                     Mail::send('mail.register', $data, function ($message) use ($maildn,$tendn,$mailql,$tenql) {
                         $message->to($maildn,$tendn)
@@ -496,7 +496,7 @@ class HomeController extends Controller
             $data['madk'] = $ma;
             $maildn = $input['emaildn'];
             $tendn  =  $input['tendn'];
-            $mailql = $tencqcq->email;
+            $mailql = $tencqcq->emailqt;
             $tenql = $tencqcq->tendv;
             Mail::send('mail.stlregister',$data, function ($message) use($maildn,$tendn,$mailql,$tenql) {
                 $message->to($maildn,$tendn)

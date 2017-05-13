@@ -105,8 +105,14 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">Username<span class="require">*</span></label>
+                                        <label class="control-label">Email quản lý<span class="require">*</span></label>
                                         <input type="text" class="form-control required" name="email" id="email">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Email quản trị<span class="require">*</span></label>
+                                        <input type="text" class="form-control required" name="emailqt" id="emailqt">
                                     </div>
                                 </div>
                             </div>

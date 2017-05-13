@@ -46,6 +46,8 @@ class DmDvQlController extends Controller
             $model->password = md5($input['password']);
             $model->sohsnhan = $input['sohsnhan'];
             $model->ttlh = $input['ttlh'];
+            $model->email = $input['email'];
+            $model->emailqt = $input['emailqt'];
             if($model->save()){
                 $modeluser = new Users();
                 $modeluser->name = $input['tendv'];
@@ -106,6 +108,7 @@ class DmDvQlController extends Controller
             $model->sohsnhan = $input['sohsnhan'];
             $model->ttlh = $input['ttlh'];
             $model->email = $input['email'];
+            $model->emailqt = $input['emailqt'];
             $model->save();
 
             return redirect('danh_muc_don_vi_quan_ly');

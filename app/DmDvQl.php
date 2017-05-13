@@ -18,6 +18,7 @@ class DmDvQl extends Model
         'password',
         'sohsnhan',
         'ttlh',
-        'email'
+        'email',
+        'emailqt'
     ];
 }

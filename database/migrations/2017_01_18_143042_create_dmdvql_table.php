@@ -25,6 +25,7 @@ class CreateDmdvqlTable extends Migration
             $table->text('sohsnhan')->nullable();
             $table->text('ttlh')->nullable();
             $table->string('email')->nullalbe();
+            $table->string('emailqt')->nullalbe();
             $table->timestamps();
         });
     }
