@@ -10,7 +10,28 @@ function getPermissionDefault($level) {
             'delete' => 0,
             'approve'=> 1
         ),
-        'dvvt' => array(
+        'dvvtxk' => array(
+            'index' => 1,
+            'create' => 0,
+            'edit' => 0,
+            'delete' => 0,
+            'approve'=> 1
+        ),
+        'dvvtxb' => array(
+            'index' => 1,
+            'create' => 0,
+            'edit' => 0,
+            'delete' => 0,
+            'approve'=> 1
+        ),
+        'dvvtxtx' => array(
+            'index' => 1,
+            'create' => 0,
+            'edit' => 0,
+            'delete' => 0,
+            'approve'=> 1
+        ),
+        'dvvtch' => array(
             'index' => 1,
             'create' => 0,
             'edit' => 0,
@@ -61,7 +82,28 @@ function getPermissionDefault($level) {
             'delete' => 0,
             'approve'=> 1
         ),
-        'dvvt' => array(
+        'dvvtxk' => array(
+            'index' => 1,
+            'create' => 0,
+            'edit' => 0,
+            'delete' => 0,
+            'approve'=> 1
+        ),
+        'dvvtxb' => array(
+            'index' => 1,
+            'create' => 0,
+            'edit' => 0,
+            'delete' => 0,
+            'approve'=> 1
+        ),
+        'dvvtxtx' => array(
+            'index' => 1,
+            'create' => 0,
+            'edit' => 0,
+            'delete' => 0,
+            'approve'=> 1
+        ),
+        'dvvtch' => array(
             'index' => 1,
             'create' => 0,
             'edit' => 0,
