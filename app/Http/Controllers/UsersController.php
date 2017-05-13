@@ -560,13 +560,13 @@ class UsersController extends Controller
                             $message->from('qlgiakhanhhoa@gmail.com', 'Phần mềm CSDL giá');
                         });
                     }
-                    if($mailql != '') {
+                    /*if($mailql != '') {
                         Mail::send('mail.successregister', $data, function ($message) use ($mailql,$tenql) {
                             $message->to($mailql,$tenql)
                                 ->subject('Thông báo thông tin đăng ký đã được xét duyệt');
                             $message->from('qlgiakhanhhoa@gmail.com', 'Phần mềm CSDL giá');
                         });
-                    }
+                    }*/
                     $delete = Register::findOrFail($id)->delete();
                     return redirect('users/register/pl=dich_vu_luu_tru');
                 }
