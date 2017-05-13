@@ -550,23 +550,23 @@ class UsersController extends Controller
                     $data['username'] = $model->username;
                     $maildn = $model->email;
                     $tendn = $model->tendn;
-                    $mailql = $tencqcq->email;
+                    $mailql = $tencqcq->emailqt;
                     $tenql = $tencqcq->tendv;
 
-                    if($maildn!=''){
+                    /*if($maildn!=''){
                         Mail::send('mail.successregister', $data, function ($message) use ($maildn,$tendn) {
                             $message->to($maildn,$tendn)
                                 ->subject('Thông báo thông tin đăng ký đã được xét duyệt');
                             $message->from('qlgiakhanhhoa@gmail.com', 'Phần mềm CSDL giá');
                         });
-                    }
-                    /*if($mailql != '') {
+                    }*/
+                    if($mailql != '') {
                         Mail::send('mail.successregister', $data, function ($message) use ($mailql,$tenql) {
                             $message->to($mailql,$tenql)
                                 ->subject('Thông báo thông tin đăng ký đã được xét duyệt');
                             $message->from('qlgiakhanhhoa@gmail.com', 'Phần mềm CSDL giá');
                         });
-                    }*/
+                    }
                     $delete = Register::findOrFail($id)->delete();
                     return redirect('users/register/pl=dich_vu_luu_tru');
                 }
