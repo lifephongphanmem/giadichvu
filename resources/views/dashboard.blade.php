@@ -74,134 +74,132 @@
                     </div>
                     @endif
                 @endif
-                @if(canGeneral('dvvt','dvvt'))
-                    @if(can('dvvtxk','index') || can('dvvtxb','index') || can('dvvtxtx','index') || can('dvvtch','index')  )
+                @if(can('dvvtxk','index') || can('dvvtxb','index') || can('dvvtxtx','index') || can('dvvtch','index')  )
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div class="dashboard-stat purple-plum">
+                            <div class="visual">
+                                <i class="fa fa-car"></i>
+                            </div>
+                            <div class="details">
+                                <div class="number"></div>
+                                Thay đổi thông tin DN DVVT
+                                <div class="desc">
+                                    <h5>Chờ nhận: {{$sl['cnkkgdvlt']}} hồ sơ</h5>
+                                    @if(session('admin')->level == 'DVLT')
+                                        <h5>Bị trả lại {{$sl['btlkkgdvlt']}} hồ sơ</h5>
+                                    @endif
+                                </div>
+                            </div>
+                            <a class="more" href="
+                                    {{(session('admin')->level == 'T' || session('admin')->level == 'H')? url('xetduyet_thaydoi_thongtindoanhnghiep/phanloai=dich_vu_van_tai')
+                                    : url('dich_vu_van_tai/thong_tin_don_vi')}}">
+                                Xem chi tiết <i class="m-icon-swapright m-icon-white"></i>
+                            </a>
+                        </div>
+                    </div>
+                @endif
+                @if(can('kkdvvtxk','index'))
+                    @if(canshow('dvvt','vtxk'))
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <div class="dashboard-stat purple-plum">
+                            <div class="dashboard-stat blue-madison">
                                 <div class="visual">
                                     <i class="fa fa-car"></i>
                                 </div>
                                 <div class="details">
                                     <div class="number"></div>
-                                    Thay đổi thông tin DN DVVT
+                                    Kê khai giá vận tải xe khách
                                     <div class="desc">
-                                        <h5>Chờ nhận: {{$sl['cnkkgdvlt']}} hồ sơ</h5>
-                                        @if(session('admin')->level == 'DVLT')
-                                            <h5>Bị trả lại {{$sl['btlkkgdvlt']}} hồ sơ</h5>
+                                        <h5>Chờ nhận: {{$sl['cnkkgvtxk']}} hồ sơ</h5>
+                                        @if(session('admin')->level == 'DVVT')
+                                            <h5>Bị trả lại {{$sl['btlkkgvtxk']}} hồ sơ</h5>
                                         @endif
                                     </div>
                                 </div>
                                 <a class="more" href="
-                                        {{(session('admin')->level == 'T' || session('admin')->level == 'H')? url('xetduyet_thaydoi_thongtindoanhnghiep/phanloai=dich_vu_van_tai')
-                                        : url('dich_vu_van_tai/thong_tin_don_vi')}}">
+                                    {{(session('admin')->level == 'T' || session('admin')->level == 'H')? url('/dich_vu_van_tai/dich_vu_xe_khach/xet_duyet/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')
+                                    : url('/dich_vu_van_tai/dich_vu_xe_khach/ke_khai/'.'nam='.date('Y'))}}">
                                     Xem chi tiết <i class="m-icon-swapright m-icon-white"></i>
                                 </a>
                             </div>
                         </div>
                     @endif
-                    @if(can('kkdvvtxk','index'))
-                        @if(canshow('dvvt','vtxk'))
-                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                <div class="dashboard-stat blue-madison">
-                                    <div class="visual">
-                                        <i class="fa fa-car"></i>
-                                    </div>
-                                    <div class="details">
-                                        <div class="number"></div>
-                                        Kê khai giá vận tải xe khách
-                                        <div class="desc">
-                                            <h5>Chờ nhận: {{$sl['cnkkgvtxk']}} hồ sơ</h5>
-                                            @if(session('admin')->level == 'DVVT')
-                                                <h5>Bị trả lại {{$sl['btlkkgvtxk']}} hồ sơ</h5>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <a class="more" href="
-                                        {{(session('admin')->level == 'T' || session('admin')->level == 'H')? url('/dich_vu_van_tai/dich_vu_xe_khach/xet_duyet/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')
-                                        : url('/dich_vu_van_tai/dich_vu_xe_khach/ke_khai/'.'nam='.date('Y'))}}">
-                                        Xem chi tiết <i class="m-icon-swapright m-icon-white"></i>
-                                    </a>
+                @endif
+                @if(can('kkdvvtxb','index'))
+                    @if(canshow('dvvt','vtxb'))
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="dashboard-stat red-intense">
+                                <div class="visual">
+                                    <i class="fa fa-car"></i>
                                 </div>
+                                <div class="details">
+                                    <div class="number"></div>
+                                    Kê khai giá vận tải xe buýt
+                                    <div class="desc">
+                                        <h5>Chờ nhận: {{$sl['cnkkgvtxb']}} hồ sơ</h5>
+                                        @if(session('admin')->level == 'DVVT')
+                                            <h5>Bị trả lại {{$sl['btlkkgvtxb']}} hồ sơ</h5>
+                                        @endif
+                                    </div>
+                                </div>
+                                <a class="more" href="
+                                    {{(session('admin')->level == 'T' || session('admin')->level == 'H')? url('/dich_vu_van_tai/dich_vu_xe_bus/xet_duyet/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')
+                                    : url('/dich_vu_van_tai/dich_vu_xe_bus/ke_khai/'.'nam='.date('Y'))}}">
+                                    Xem chi tiết <i class="m-icon-swapright m-icon-white"></i>
+                                </a>
                             </div>
-                        @endif
+                        </div>
                     @endif
-                    @if(can('kkdvvtxb','index'))
-                        @if(canshow('dvvt','vtxb'))
-                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                <div class="dashboard-stat red-intense">
-                                    <div class="visual">
-                                        <i class="fa fa-car"></i>
-                                    </div>
-                                    <div class="details">
-                                        <div class="number"></div>
-                                        Kê khai giá vận tải xe buýt
-                                        <div class="desc">
-                                            <h5>Chờ nhận: {{$sl['cnkkgvtxb']}} hồ sơ</h5>
-                                            @if(session('admin')->level == 'DVVT')
-                                                <h5>Bị trả lại {{$sl['btlkkgvtxb']}} hồ sơ</h5>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <a class="more" href="
-                                        {{(session('admin')->level == 'T' || session('admin')->level == 'H')? url('/dich_vu_van_tai/dich_vu_xe_bus/xet_duyet/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')
-                                        : url('/dich_vu_van_tai/dich_vu_xe_bus/ke_khai/'.'nam='.date('Y'))}}">
-                                        Xem chi tiết <i class="m-icon-swapright m-icon-white"></i>
-                                    </a>
+                @endif
+                @if(can('kkdvvtxtx','index'))
+                    @if(canshow('dvvt','vtxtx'))
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="dashboard-stat purple-plum">
+                                <div class="visual">
+                                    <i class="fa fa-taxi"></i>
                                 </div>
+                                <div class="details">
+                                    <div class="number"></div>
+                                    Kê khai giá vận tải xe taxi
+                                    <div class="desc">
+                                        <h5>Chờ nhận {{$sl['cnkkgvtxtx']}} hồ sơ</h5>
+                                        @if(session('admin')->level == 'DVVT')
+                                            <h5>Bị trả lại {{$sl['btlkkgvtxtx']}} hồ sơ</h5>
+                                        @endif
+                                    </div>
+                                </div>
+                                <a class="more" href="
+                                    {{(session('admin')->level == 'T' || session('admin')->level == 'H')? url('/dich_vu_van_tai/dich_vu_xe_taxi/xet_duyet/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')
+                                    : url('/dich_vu_van_tai/dich_vu_xe_taxi/ke_khai/'.'nam='.date('Y'))}}">
+                                    Xem chi tiết<i class="m-icon-swapright m-icon-white"></i>
+                                </a>
                             </div>
-                        @endif
+                        </div>
                     @endif
-                    @if(can('kkdvvtxtx','index'))
-                        @if(canshow('dvvt','vtxtx'))
-                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                <div class="dashboard-stat purple-plum">
-                                    <div class="visual">
-                                        <i class="fa fa-taxi"></i>
-                                    </div>
-                                    <div class="details">
-                                        <div class="number"></div>
-                                        Kê khai giá vận tải xe taxi
-                                        <div class="desc">
-                                            <h5>Chờ nhận {{$sl['cnkkgvtxtx']}} hồ sơ</h5>
-                                            @if(session('admin')->level == 'DVVT')
-                                                <h5>Bị trả lại {{$sl['btlkkgvtxtx']}} hồ sơ</h5>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <a class="more" href="
-                                        {{(session('admin')->level == 'T' || session('admin')->level == 'H')? url('/dich_vu_van_tai/dich_vu_xe_taxi/xet_duyet/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')
-                                        : url('/dich_vu_van_tai/dich_vu_xe_taxi/ke_khai/'.'nam='.date('Y'))}}">
-                                        Xem chi tiết<i class="m-icon-swapright m-icon-white"></i>
-                                    </a>
+                @endif
+                @if(can('kkdvvtch','index'))
+                    @if(canshow('dvvt','vtch'))
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="dashboard-stat blue-madison">
+                                <div class="visual">
+                                    <i class="fa fa-truck"></i>
                                 </div>
-                            </div>
-                        @endif
-                    @endif
-                    @if(can('kkdvvtch','index'))
-                        @if(canshow('dvvt','vtch'))
-                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                <div class="dashboard-stat blue-madison">
-                                    <div class="visual">
-                                        <i class="fa fa-truck"></i>
+                                <div class="details">
+                                    <div class="number"></div>
+                                    Kê khai giá vận tải khác
+                                    <div class="desc">
+                                        <h5>Chờ nhận: {{$sl['cnkkgvtkhac']}} hồ sơ</h5>
+                                        @if(session('admin')->level == 'DVVT')
+                                            <h5>Bị trả lại {{$sl['btlkkgvtkhac']}} hồ sơ</h5>
+                                        @endif
                                     </div>
-                                    <div class="details">
-                                        <div class="number"></div>
-                                        Kê khai giá vận tải khác
-                                        <div class="desc">
-                                            <h5>Chờ nhận: {{$sl['cnkkgvtkhac']}} hồ sơ</h5>
-                                            @if(session('admin')->level == 'DVVT')
-                                                <h5>Bị trả lại {{$sl['btlkkgvtkhac']}} hồ sơ</h5>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <a class="more" href="
-                                        {{(session('admin')->level == 'T' || session('admin')->level == 'H')? url('/dich_vu_van_tai/dich_vu_cho_hang/xet_duyet/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')
-                                        : url('/dich_vu_van_tai/dich_vu_cho_hang/ke_khai/'.'nam='.date('Y'))}}">
-                                        Xem chi tiết<i class="m-icon-swapright m-icon-white"></i>
-                                    </a>
                                 </div>
+                                <a class="more" href="
+                                    {{(session('admin')->level == 'T' || session('admin')->level == 'H')? url('/dich_vu_van_tai/dich_vu_cho_hang/xet_duyet/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')
+                                    : url('/dich_vu_van_tai/dich_vu_cho_hang/ke_khai/'.'nam='.date('Y'))}}">
+                                    Xem chi tiết<i class="m-icon-swapright m-icon-white"></i>
+                                </a>
                             </div>
-                        @endif
+                        </div>
                     @endif
                 @endif
             </div>

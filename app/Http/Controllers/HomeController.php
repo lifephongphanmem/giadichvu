@@ -34,6 +34,9 @@ class HomeController extends Controller
                 return redirect('cau_hinh_he_thong');
             else{
                 if(session('admin')->sadmin == 'ssa'){
+
+                    //dd(session('admin')->permission);
+                    //dd(canGeneral('dvvt','dvvt'));
                     $cnttdndvlt = TtDn::where('pl','DVLT')
                         ->where('trangthai','Chờ duyệt')
                         ->count();
