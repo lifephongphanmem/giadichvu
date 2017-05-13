@@ -236,6 +236,7 @@ class HomeController extends Controller
     }
 
     public function regdvltstore(Request $request){
+        $input = $request->all();
         $check = DnDvLt::where('masothue',$input['masothue'])
             ->first();
         if(count($check)>0) {
@@ -245,7 +246,7 @@ class HomeController extends Controller
             if(count($checkuser)>0){
                 return view('errors.register-errors');
             }else {
-                $input = $request->all();
+
                 $ma = getdate()[0];
                 $model = new Register();
                 $model->tendn = $input['tendn'];
@@ -282,20 +283,14 @@ class HomeController extends Controller
                     $tendn = $input['tendn'];
                     $mailql = $tencqcq->emailqt;
                     $tenql = $tencqcq->tendv;
-                    if($maildn!=''){
-                        Mail::send('mail.register', $data, function ($message) use ($maildn,$tendn) {
+
+                        Mail::send('mail.register', $data, function ($message) use ($maildn,$tendn,$mailql, $tenql) {
                             $message->to($maildn,$tendn)
+                                ->to($mailql, $tenql)
                                 ->subject('Thông báo đăng ký tài khoản');
                             $message->from('qlgiakhanhhoa@gmail.com', 'Phần mềm CSDL giá');
                         });
-                    }
-                    if($mailql != '') {
-                        Mail::send('mail.register', $data, function ($message) use ($mailql, $tenql) {
-                            $message->to($mailql, $tenql)
-                                ->subject('Thông báo đăng ký tài khoản');
-                            $message->from('qlgiakhanhhoa@gmail.com', 'Phần mềm CSDL giá');
-                        });
-                    }
+
                 }
                 return view('system.register.view.register-success')
                     ->with('ma', $ma);
