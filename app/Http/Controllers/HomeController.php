@@ -282,12 +282,20 @@ class HomeController extends Controller
                     $tendn = $input['tendn'];
                     $mailql = $tencqcq->emailqt;
                     $tenql = $tencqcq->tendv;
-                    Mail::send('mail.register', $data, function ($message) use ($maildn,$tendn,$mailql,$tenql) {
-                        $message->to($maildn,$tendn)
-                            ->to($mailql,$tenql)
-                            ->subject('Thông báo đăng ký tài khoản');
-                        $message->from('qlgiakhanhhoa@gmail.com', 'Phần mềm CSDL giá');
-                    });
+                    if($maildn!=''){
+                        Mail::send('mail.register', $data, function ($message) use ($maildn,$tendn) {
+                            $message->to($maildn,$tendn)
+                                ->subject('Thông báo đăng ký tài khoản');
+                            $message->from('qlgiakhanhhoa@gmail.com', 'Phần mềm CSDL giá');
+                        });
+                    }
+                    if($mailql != '') {
+                        Mail::send('mail.register', $data, function ($message) use ($mailql, $tenql) {
+                            $message->to($mailql, $tenql)
+                                ->subject('Thông báo đăng ký tài khoản');
+                            $message->from('qlgiakhanhhoa@gmail.com', 'Phần mềm CSDL giá');
+                        });
+                    }
                 }
                 return view('system.register.view.register-success')
                     ->with('ma', $ma);
