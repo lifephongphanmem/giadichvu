@@ -130,7 +130,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 <div class="form-group">
                     <div class="input-icon">
                         <i class="fa fa-envelope"></i>
-                        <input class="form-control required" type="text" placeholder="Email" name="emaildn" id="emaildn">
+                        <input class="form-control required" type="email" placeholder="Email" name="emaildn" id="emaildn">
                     </div>
                 </div>
             </div>
