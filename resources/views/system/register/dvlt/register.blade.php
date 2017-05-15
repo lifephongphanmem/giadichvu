@@ -208,7 +208,7 @@ License: You must have a valid license purchased only from themeforest(the above
             </div>
         </div>
         <div class="form-group" style="text-align: center">
-            <div class="g-recaptcha" data-sitekey="6LejXCEUAAAAAPlaJR3o6L3M052T0ukLLwM01KR4" id="captcha" name="captcha"></div>
+            <div class="g-recaptcha" data-sitekey="{{env('NOCAPTCHA_SITEKEY')}}" id="captcha" name="captcha"></div>
         </div>
         <div class="form-actions">
             <button id="register-back-btn" type="button" class="btn"><a href="{{url('login')}}">
