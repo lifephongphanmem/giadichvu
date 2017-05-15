@@ -45,6 +45,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- END THEME STYLES -->
     <!--link rel="shortcut icon" href="favicon.ico"/-->
     <link rel="shortcut icon" href="{{ url('images/LIFESOFT.png')}}" type="image/x-icon">
+    <script src='https://www.google.com/recaptcha/api.js'></script>
     <style>
         option:first {
             color: #999;
@@ -206,6 +207,9 @@ License: You must have a valid license purchased only from themeforest(the above
                 </div>
             </div>
         </div>
+        <div class="form-group" style="text-align: center">
+            <div class="g-recaptcha" data-sitekey="6LejXCEUAAAAAPlaJR3o6L3M052T0ukLLwM01KR4" id="captcha" name="captcha"></div>
+        </div>
         <div class="form-actions">
             <button id="register-back-btn" type="button" class="btn"><a href="{{url('login')}}">
                 <i class="m-icon-swapleft"></i> Quay lại </a> </button>
@@ -319,6 +323,7 @@ License: You must have a valid license purchased only from themeforest(the above
     function validate(){
         var validator = $("#form-register").validate({
             rules: {
+                captcha: "required",
                 tendn: "required",
                 masothue:"required",
                 diachidn:"required",
@@ -333,6 +338,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 }
             },
             messages: {
+                captcha: "Tích vào đây!!!",
                 tendn: "Nhập thông tin về doanh nghiệp!!!",
                 masothue: "Nhập thông tin mã số thuế!!!",
                 diachidn: "Nhập thông tin địa chỉ!!!",
@@ -346,6 +352,8 @@ License: You must have a valid license purchased only from themeforest(the above
             }
         });
     }
+
+
 
 </script>
 </body>

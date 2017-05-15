@@ -237,65 +237,68 @@ class HomeController extends Controller
 
     public function regdvltstore(Request $request){
         $input = $request->all();
-        $check = DnDvLt::where('masothue',$input['masothue'])
-            ->first();
-        if(count($check)>0) {
-            return view('errors.register-errors');
-        }else{
-            $checkuser = User::where('username',$input['username'])->first();
-            if(count($checkuser)>0){
+        if($input['g-recaptcha-response'] != '') {
+            $check = DnDvLt::where('masothue', $input['masothue'])
+                ->first();
+            if (count($check) > 0) {
                 return view('errors.register-errors');
-            }else {
+            } else {
+                $checkuser = User::where('username', $input['username'])->first();
+                if (count($checkuser) > 0) {
+                    return view('errors.register-errors');
+                } else {
 
-                $ma = getdate()[0];
-                $model = new Register();
-                $model->tendn = $input['tendn'];
-                $model->masothue = $input['masothue'];
-                $model->diachi = $input['diachidn'];
-                $model->tel = $input['teldn'];
-                $model->fax = $input['faxdn'];
-                $model->email = $input['emaildn'];
-                $model->noidknopthue = $input['noidknopthue'];
-                $model->cqcq = $input['cqcq'];
-                $model->giayphepkd = $input['giayphepkd'];
-                $model->tailieu = $input['tailieu'];
-                $model->username = $input['username'];
-                $model->password = md5($input['rpassword']);
-                $model->pl = 'DVLT';
-                $model->setting = '';
-                $model->dvxk = 0;
-                $model->dvxb = 0;
-                $model->dvxtx = 0;
-                $model->dvk = 0;
-                $model->trangthai = 'Chờ duyệt';
-                $model->lydo = '';
-                $model->ma = $ma;
-                if ($model->save()) {
-                    $tencqcq = DmDvQl::where('maqhns', $input['cqcq'])->first();
-                    $data = [];
-                    $data['tendn'] = $input['tendn'];
-                    $data['tg'] = Carbon::now()->toDateTimeString();
-                    $data['tencqcq'] = $tencqcq->tendv;
-                    $data['masothue'] = $input['masothue'];
-                    $data['user'] = $input['username'];
-                    $data['madk'] = $ma;
-                    $maildn = $input['emaildn'];
-                    $tendn = $input['tendn'];
-                    $mailql = $tencqcq->emailqt;
-                    $tenql = $tencqcq->tendv;
+                    $ma = getdate()[0];
+                    $model = new Register();
+                    $model->tendn = $input['tendn'];
+                    $model->masothue = $input['masothue'];
+                    $model->diachi = $input['diachidn'];
+                    $model->tel = $input['teldn'];
+                    $model->fax = $input['faxdn'];
+                    $model->email = $input['emaildn'];
+                    $model->noidknopthue = $input['noidknopthue'];
+                    $model->cqcq = $input['cqcq'];
+                    $model->giayphepkd = $input['giayphepkd'];
+                    $model->tailieu = $input['tailieu'];
+                    $model->username = $input['username'];
+                    $model->password = md5($input['rpassword']);
+                    $model->pl = 'DVLT';
+                    $model->setting = '';
+                    $model->dvxk = 0;
+                    $model->dvxb = 0;
+                    $model->dvxtx = 0;
+                    $model->dvk = 0;
+                    $model->trangthai = 'Chờ duyệt';
+                    $model->lydo = '';
+                    $model->ma = $ma;
+                    if ($model->save()) {
+                        $tencqcq = DmDvQl::where('maqhns', $input['cqcq'])->first();
+                        $data = [];
+                        $data['tendn'] = $input['tendn'];
+                        $data['tg'] = Carbon::now()->toDateTimeString();
+                        $data['tencqcq'] = $tencqcq->tendv;
+                        $data['masothue'] = $input['masothue'];
+                        $data['user'] = $input['username'];
+                        $data['madk'] = $ma;
+                        $maildn = $input['emaildn'];
+                        $tendn = $input['tendn'];
+                        $mailql = $tencqcq->emailqt;
+                        $tenql = $tencqcq->tendv;
 
-                        Mail::send('mail.register', $data, function ($message) use ($maildn,$tendn,$mailql, $tenql) {
-                            $message->to($maildn,$tendn)
+                        Mail::send('mail.register', $data, function ($message) use ($maildn, $tendn, $mailql, $tenql) {
+                            $message->to($maildn, $tendn)
                                 ->to($mailql, $tenql)
                                 ->subject('Thông báo đăng ký tài khoản');
                             $message->from('qlgiakhanhhoa@gmail.com', 'Phần mềm CSDL giá');
                         });
 
+                    }
+                    return view('system.register.view.register-success')
+                        ->with('ma', $ma);
                 }
-                return view('system.register.view.register-success')
-                    ->with('ma', $ma);
             }
-        }
+        }else
+            return view('errors.register-errors');
     }
 
     public function regdvvt(){

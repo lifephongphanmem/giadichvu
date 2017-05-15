@@ -18,6 +18,7 @@
 </head>
 <body id="error-page" class="animated bounceInLeft">
 <div id="error-page-content"><h1>Lỗi</h1><h2>Đăng ký không thành công</h2>
+    <p>Bạn chưa nhập thông tin bảo mật! Bạn cần kiểm tra lại!!!</p>
     <p>Thông tin đăng ký đã có! Bạn cần kiểm tra lại!!!</p>
     <p>Liên hệ với quản trị hệ thống để biết thêm chi tiết</p>
     <p><a href='{{ url('/') }}'>Bấm vào đây</a> để quay lại trang chủ.</p></div>
