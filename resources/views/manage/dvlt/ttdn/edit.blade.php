@@ -35,7 +35,8 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Mã số thuế</label>
-                                        {!!Form::text('masothue', null, array('id' => 'masothue','class' => 'form-control','readonly'))!!}
+                                        <p style="color: #000088"><b>{{$model->masothue}}</b></p>
+                                        {!!Form::hidden('masothue', null, array('id' => 'masothue','class' => 'form-control'))!!}
                                     </div>
                                 </div>
                                 <div class="col-md-6">

@@ -309,21 +309,24 @@ class DnDvLtController extends Controller
                 $model->pl = 'DVLT';
                 $model->trangthai = 'Chờ duyệt';
                 $model->cqcq = $update['cqcq'];
-                $model->save();
-                /*if($model->save()){
+                if($model->save()){
+                    $dn = DnDvLt::where('masothue',$update['masothue'])->first();
                     $tencqcq = DmDvQl::where('maqhns',session('admin')->cqcq)->first();
                     $data=[];
                     $data['tendn'] = $update['tendn'];
                     $data['tg'] = Carbon::now()->toDateTimeString();
                     $data['tencqcq'] = $tencqcq->tendv;
-                    $a = session('admin')->email;
-                    $b = $update['tendn'];
-                    Mail::send('mail.changettdn',$data, function ($message) use($a,$b) {
-                        $message->to($a,$b )
+                    $maildn = $dn->email;
+                    $tendn = $input['tendn'];
+                    $mailql = $tencqcq->emailqt;
+                    $tenql = $tencqcq->tendv;
+                    Mail::send('mail.changettdn',$data, function ($message) use($maildn, $tendn, $mailql, $tenql) {
+                        $message->to($maildn, $tendn)
+                            ->to($mailql, $tenql)
                             ->subject('Thông báo thông tin thay đổi thông tin doanh nghiệp');
                         $message->from('qlgiakhanhhoa@gmail.com','Phần mềm CSDL giá');
                     });
-                };*/
+                };
             }
 
             return redirect('ttdn_dich_vu_luu_tru');
@@ -379,15 +382,19 @@ class DnDvLtController extends Controller
             $model->pl = 'DVLT';
             $model->trangthai = 'Chờ duyệt';
             if($model->save()){
+                $dn = DnDvLt::where('masothue',$model->masothue)->first();
                 $tencqcq = DmDvQl::where('maqhns',session('admin')->cqcq)->first();
                 $data=[];
                 $data['tendn'] = $input['tendn'];
                 $data['tg'] = Carbon::now()->toDateTimeString();
                 $data['tencqcq'] = $tencqcq->tendv;
-                $a = session('admin')->email;
-                $b = $input['tendn'];
-                Mail::send('mail.changettdn',$data, function ($message) use($a,$b) {
-                    $message->to($a,$b )
+                $maildn = $dn->email;
+                $tendn = $input['tendn'];
+                $mailql = $tencqcq->emailqt;
+                $tenql = $tencqcq->tendv;
+                Mail::send('mail.changettdn',$data, function ($message) use($maildn, $tendn, $mailql, $tenql) {
+                    $message->to($maildn, $tendn)
+                        ->to($mailql, $tenql)
                         ->subject('Thông báo thông tin thay đổi thông tin doanh nghiệp');
                     $message->from('qlgiakhanhhoa@gmail.com','Phần mềm CSDL giá');
                 });
