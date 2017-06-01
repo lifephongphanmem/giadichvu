@@ -527,6 +527,9 @@ class UsersController extends Controller
                     $modeldn->tailieu = $model->tailieu;
                     $modeldn->giayphepkd = $model->giayphepkd;
                     $modeldn->cqcq = $model->cqcq;
+                    $modeldn->chucdanhky = $model->chucdanh;
+                    $modeldn->nguoiky = $model->nguoiky;
+                    $modeldn->diadanh = $model->diadanh;
                     if ($modeldn->save()) {
                         $modeluser = new Users();
                         $modeluser->name = $model->tendn;
@@ -538,7 +541,7 @@ class UsersController extends Controller
                         $modeluser->mahuyen = $model->masothue;
                         $modeluser->level = 'DVLT';
                         $modeluser->cqcq = $model->cqcq;
-                        $modeluser->ttnguoitao = session('admin')->name.'('.session('admin')->username.')'. getDateTime(Carbon::now()->toDateTimeString());
+                        $modeluser->ttnguoitao = session('admin')->name.'('.session('admin')->username.') - '. getDateTime(Carbon::now()->toDateTimeString());
                         $modeluser->save();
                     }
                     $tencqcq = DmDvQl::where('maqhns', $model->cqcq)->first();
@@ -708,6 +711,9 @@ class UsersController extends Controller
             $model->tailieu = $input['tailieu'];
             $model->username = $input['username'];
             $model->cqcq = $input['cqcq'];
+            $model->chucdanh = $input['chucdanh'];
+            $model->nguoiky = $input['nguoiky'];
+            $model->diadanh = $input['diadanh'];
             $model->save();
             return redirect('users/register/pl=dich_vu_luu_tru');
         } else {

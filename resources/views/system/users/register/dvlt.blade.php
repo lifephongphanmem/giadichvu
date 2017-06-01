@@ -98,6 +98,26 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
+                                    <label class="control-label">Chức danh</label>
+                                    <input type="text" class="form-control" name="noidknopthue" id="noidknopthue" value="{{$model->chucdanh}}" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Họ tên người ký</label>
+                                    <input type="text" class="form-control required" name="chucdanhky" id="chucdanhky" value="{{$model->nguoiky}}" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Địa danh</label>
+                                    <input type="text" class="form-control required" name="chucdanhky" id="chucdanhky" value="{{$model->diadanh}}" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
                                     <label class="control-label">Cơ quan chủ quản</label>
                                     <select class="form-control" id="cqcq" name="cqcq" readonly>
                                         @foreach($cqcq as $tt)

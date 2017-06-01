@@ -263,6 +263,9 @@ class HomeController extends Controller
                     $model->username = $input['username'];
                     $model->password = md5($input['rpassword']);
                     $model->pl = 'DVLT';
+                    $model->diadanh = $input['diadanh'];
+                    $model->nguoiky = $input['nguoiky'];
+                    $model->chucdanh = $input['chucdanh'];
                     $model->setting = '';
                     $model->dvxk = 0;
                     $model->dvxb = 0;
@@ -494,6 +497,9 @@ class HomeController extends Controller
         $model->username = $input['username'];
         $model->password = md5($input['rpassword']);
         $model->trangthai = 'Chờ duyệt';
+        $model->chucdanh = $input['chucdanh'];
+        $model->nguoiky = $input['nguoiky'];
+        $model->diadanh = $input['diadanh'];
         if($model->save()){
             $tencqcq = DmDvQl::where('maqhns',$input['cqcq'])->first();
             $data=[];
@@ -502,7 +508,7 @@ class HomeController extends Controller
             $data['tencqcq'] = $tencqcq->tendv;
             $data['masothue'] = $input['masothue'];
             $data['user'] = $input['username'];
-            $data['madk'] = $ma;
+            $data['madk'] = $model->ma;
             $maildn = $input['emaildn'];
             $tendn  =  $input['tendn'];
             $mailql = $tencqcq->emailqt;

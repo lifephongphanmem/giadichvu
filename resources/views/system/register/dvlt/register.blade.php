@@ -181,6 +181,36 @@ License: You must have a valid license purchased only from themeforest(the above
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="input-icon">
+                        <i class="fa fa-font"></i>
+                        <input class="form-control required" type="text" placeholder="Chức danh người ký" name="chucdanh" id="chucdanh">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="form-group">
+                        <div class="input-icon">
+                            <i class="fa fa-font"></i>
+                            <input class="form-control required" type="text" placeholder="Họ tên người ký" name="nguoiky" id="nguoiky">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="input-icon">
+                        <i class="fa fa-font"></i>
+                        <input class="form-control required" type="text" placeholder="Địa danh" name="diadanh" id="diadanh">
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <p>Thông tin đăng nhập</p>
         <div class="form-group">
