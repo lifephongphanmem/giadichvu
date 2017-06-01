@@ -333,7 +333,7 @@
                         var yyyy = today.getFullYear();
                         if(dd<10){dd='0'+dd}
                         if(mm<10){mm='0'+mm}
-                        $('input[name="ngaynhap"]').val(mm+'/'+dd+'/'+yyyy);
+                        $('#ngaynhap').val(dd+'/'+mm+'/'+yyyy);
                         $('input[name="ngayhieuluc"]').val('');
                     }
                 }
@@ -441,7 +441,6 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Hồ sơ kê khai<span class="require">*</span></label>
-                                <!--input type="date" name="ngaynhap" id="ngaynhap" class="form-control required" autofocus-->
                                 {!! Form::select(
                                 'plhs',
                                 array(
