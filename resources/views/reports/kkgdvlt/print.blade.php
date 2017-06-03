@@ -165,7 +165,7 @@
     @endforeach
 </table>
 <p>{!! nl2br(e($modelkk->ghichu)) !!}
-@if($modelkk->socvlk=!'')
+@if($modelkk->socvlk !='')
     <br>- Bảng kê khai giá gửi kèm công văn này sẽ thay thế cho bảng kê khai giá kèm theo công văn số {{$modelkk->socvlk}} ngày {{getDayVn($modelkk->ngaycvlk)}} của {{$modeldn->tendn}}</p>
 @endif
 <table width="96%" border="0" cellspacing="0" cellpadding="0" style="margin:10px auto; text-align: center;">
