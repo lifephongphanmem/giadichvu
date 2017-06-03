@@ -136,15 +136,12 @@
                                 <label class="control-label">Loại hạng<span class="require">*</span></label>
                                 <select id="loaihang" name="loaihang" class="form-control">
                                     <option value="1" {{($model->loaihang == '1') ? 'selected' : ''}}>1 sao</option>
-                                    <option value="1.5" {{($model->loaihang == '1.5') ? 'selected' : ''}}>1.5 sao</option>
                                     <option value="2" {{($model->loaihang == '2') ? 'selected' : ''}}>2 sao</option>
-                                    <option value="2.5" {{($model->loaihang == '2.5') ? 'selected' : ''}}>2.5 sao</option>
                                     <option value="3" {{($model->loaihang == '3') ? 'selected' : ''}}>3 sao</option>
-                                    <option value="3.5" {{($model->loaihang == '3.5') ? 'selected' : ''}}>3.5 sao</option>
                                     <option value="4" {{($model->loaihang == '4') ? 'selected' : ''}}>4 sao</option>
-                                    <option value="4.5" {{($model->loaihang == '4.5') ? 'selected' : ''}}>4.5 sao</option>
                                     <option value="5" {{($model->loaihang == '5') ? 'selected' : ''}}>5 sao</option>
                                     <option value="K" {{($model->loaihang == 'K') ? 'selected' : ''}}>Khác (Nhà nghỉ)</option>
+                                    <option value="CXD" {{($model->loaihang == 'CXD') ? 'selected' : ''}}>Chưa xác định (Khách sạn chưa xác định sao)</option>
                                 </select>
                             </div>
                         </div>

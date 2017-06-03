@@ -64,6 +64,7 @@ class KkGDvLtXdController extends Controller
         foreach($cskds as $cskd){
             if($cskd->masothue == $array->masothue && $cskd->macskd == $array->macskd){
                 $array->tencskd = $cskd->tencskd;
+                $array->loaihang = $cskd->loaihang;
             }
         }
     }

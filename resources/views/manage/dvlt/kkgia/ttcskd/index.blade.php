@@ -51,7 +51,11 @@
                         <tr class="odd gradeX">
                             <td style="text-align: center">{{$key + 1}}</td>
                             <td class="active" >{{$tt->tencskd}}</td>
-                            <td>{{$tt->loaihang}} sao</td>
+                            <td>@if($tt->loaihang == 'K' ) Khác(Nhà nghỉ)
+                                @elseif ($tt->loaihang == 'CXD' ) Chưa xác định (Khách sạn chưa xác định sao)
+                                @else  {{$tt->loaihang.' sao'}}
+                                @endif
+                            </td>
                             <td>{{$tt->telkd}}</td>
                             <td>{{$tt->diachikd}}</td>
                             <td>

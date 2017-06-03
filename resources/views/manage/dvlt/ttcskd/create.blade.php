@@ -130,15 +130,12 @@
                                 <label class="control-label">Loại hạng<span class="require">*</span></label>
                                 <select id="loaihang" name="loaihang" class="form-control">
                                     <option value="1">1 sao</option>
-                                    <option value="1.5">1.5 sao</option>
                                     <option value="2">2 sao</option>
-                                    <option value="2.5">2.5 sao</option>
                                     <option value="3" selected>3 sao</option>
-                                    <option value="3.5">3.5 sao</option>
                                     <option value="4">4 sao</option>
-                                    <option value="4.5">4.5 sao</option>
                                     <option value="5">5 sao</option>
                                     <option value="K">Khác (Nhà nghỉ)</option>
+                                    <option value="CXD">Chưa xác định (Khách sạn chưa xác định sao)</option>
                                 </select>
                             </div>
                         </div>
