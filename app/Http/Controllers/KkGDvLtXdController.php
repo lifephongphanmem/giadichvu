@@ -37,12 +37,17 @@ class KkGDvLtXdController extends Controller
                         ->get();
                 }
             }
+            elseif($pl == 'duyet') {
+
+                $model = KkGDvLt::where('trangthai', 'Duyệt')
+                    ->whereMonth('ngaychuyen', $thang)
+                    ->whereYear('ngaychuyen', $nam)
+                    ->get();
+            }
             elseif($pl == 'cong_bo') {
 
-                $trangthai = 'Công bố';
-                $model = KkGDvLt::whereMonth('ngaynhan',$thang)
+                $model = CbKkGDvLt::whereMonth('ngaynhan',$thang)
                     ->whereYear('ngaynhan', $nam)
-                    ->where('trangthai','Duyệt')
                     ->get();
             }
 
