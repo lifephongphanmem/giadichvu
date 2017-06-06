@@ -75,7 +75,7 @@
 
 <p>-Tên cơ sở kinh doanh: <span>{{$modelcskd->tencskd}}</span></p>
 
-<p>-Loại hạng của cơ sở kinh doanh: {{$modelcskd->loaihang}} sao</p>
+<p>-Loại hạng của cơ sở kinh doanh: @if($modelcskd->loaihang == 'CXD') Chưa xác định (Khách sạn chưa xác định sao) @elseif($modelcskd->loaihang == 'K') Khác (Nhà nghỉ) @else  {{$modelcskd->loaihang}} sao @endif</p>
 
 <p>-Địa chỉ: {{$modelcskd->diachikd}}    -      Điện thoại: {{$modelcskd->telkd}}</p>
 
