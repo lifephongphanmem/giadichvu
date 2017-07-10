@@ -417,4 +417,10 @@ function getMoneyToDb ($value){
     $kq = str_replace('.','',$kq);
     return $kq;
 }
+
+function getRandomPassword(){
+    $bytes = random_bytes(3); // length in bytes
+    $kq = (bin2hex($bytes));
+    return $kq;
+}
 ?>

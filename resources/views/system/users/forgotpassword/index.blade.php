@@ -66,7 +66,6 @@ License: You must have a valid license purchased only from themeforest(the above
 	<h3>Bạn không nhớ mật khẩu ?</h3>
 	<p>
 		Nhập thông tin của user để tìm lại mật khẩu!!!
-
 	</p>
 
 	<div class="form-group">
@@ -76,6 +75,12 @@ License: You must have a valid license purchased only from themeforest(the above
 		</div>
 	</div>
 	<div class="form-group">
+		<div class="input-icon">
+			<i class="fa fa-envelope"></i>
+			<input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Email quản lý" name="email" id="email" required/>
+		</div>
+	</div>
+	<!--div class="form-group">
 		<div class="input-icon">
 			<i class="fa fa-envelope"></i>
 			<input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Email xác thực" name="emailxt" id="emailxt" required/>
@@ -102,7 +107,7 @@ License: You must have a valid license purchased only from themeforest(the above
 			<i class="fa fa-envelope"></i>
 			<input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Câu trả lời!" name="answer" id="answer" required/>
 		</div>
-	</div>
+	</div-->
 	<p class="help-block">
                         <span class="label label-success label-sm">
                         Help: </span>

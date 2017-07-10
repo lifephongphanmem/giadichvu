@@ -408,13 +408,25 @@ class HomeController extends Controller
     public function forgotpasswordw(Request $request){
 
         $input = $request->all();
-
         $model = Users::where('username',$input['username'])->first();
-
         if(isset($model)){
-            if($model->emailxt == $input['emailxt'] && $model->question == $input['question']  && $model->answer == $input['answer']){
-                $model->password = 'e10adc3949ba59abbe56e057f20f883e';
+            if($model->email == $input['email']){
+                $npass = getRandomPassword();
+                $model->password = md5($npass);
                 $model->save();
+
+                $data = [];
+                $data['tendn'] = $model->name;
+                $data['username'] = $model->username;
+                $data['npass'] = $npass;
+                $maildn = $model->email;
+                $tendn = $model->name;
+
+                Mail::send('mail.successnewpassword', $data, function ($message) use ($maildn,$tendn) {
+                    $message->to($maildn,$tendn)
+                        ->subject('Thông báo thay đổi mật khẩu tài khoản');
+                    $message->from('qlgiakhanhhoa@gmail.com', 'Phần mềm CSDL giá');
+                });
                 return view('errors.forgotpass-success');
             }else
                 return view('errors.forgotpass-errors');

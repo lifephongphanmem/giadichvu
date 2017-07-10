@@ -18,7 +18,7 @@
 </head>
 <body id="error-page" class="animated bounceInLeft">
 <div id="error-page-content"><h1>Thành công</h1><h2>Đã thay đổi mật khẩu</h2>
-    <p>Mật khẩu của bạn đã được đổi về mật khẩu mặc đinh! Bạn cần truy cập vào chương trình và thay đổi lại mật khẩu!!!</p>
+    <p>Mật khẩu đã được gửi về mail của bạn! Bạn cần truy cập vào chương trình và thay đổi lại mật khẩu!!!</p>
     <p><a href='{{ url('/') }}'>Bấm vào đây</a> để quay lại trang chủ.</p></div>
 <script src="{{ url('js/jquery-1.9.1.js') }}"></script>
 <script src="{{ url('js/jquery-migrate-1.2.1.min.js') }}"></script>

@@ -19,6 +19,7 @@
 <body id="error-page" class="animated bounceInLeft">
 <div id="error-page-content"><h1>Lỗi</h1>
     <h2>Tìm lại mật khẩu không thành công!!!</h2>
+    <p>Tên tài khoản và email không đúng!!!</p>
     <p>Liên hệ với quản trị hệ thống để biết thêm chi tiết</p>
     <p><a href='{{ url('/') }}'>Bấm vào đây</a> để quay lại trang chủ.</p></div>
 <script src="{{ url('js/jquery-1.9.1.js') }}"></script>
