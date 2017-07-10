@@ -92,7 +92,13 @@
                                 <td style="text-align: center">{{$key + 1}}</td>
                                 <td class="active" >{{$tt->tendn}}</td>
                                 <td>{{$tt->masothue}}</td>
-                                <td align="center"><span class="badge badge-danger">{{$tt->trangthai}}</span></td>
+                                <td align="center">
+                                    <span class="badge badge-danger">{{$tt->trangthai}}</span>
+                                    <br>
+                                    @if($tt->trangthai == 'Bị trả lại')
+                                        <u>Lý do:</u> {{$tt->lydo}}
+                                    @endif
+                                </td>
                                 <td>
                                     <a href="{{url('users/register/'.$tt->id.'/show')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Xem chi tiết</a>
                                     <a href="{{url('users/register/'.$tt->id.'/edit')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</a>
