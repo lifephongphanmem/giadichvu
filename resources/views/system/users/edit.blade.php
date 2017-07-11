@@ -38,14 +38,12 @@
                                         {!!Form::text('name', null, array('id' => 'name','class' => 'form-control required','autofocus'))!!}
                                     </div>
                                 </div>
-                                <!--/span-->
-                                <div class="col-md-6">
+                                <!--div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Điện thoại</label>
                                         {!!Form::text('phone', null, array('id' => 'phone','class' => 'form-control'))!!}
                                     </div>
                                 </div>
-                                <!--/span-->
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
@@ -53,7 +51,7 @@
                                         <label class="control-label">Email</label>
                                         {!!Form::text('email', null, array('id' => 'email','class' => 'form-control'))!!}
                                     </div>
-                                </div>
+                                </div-->
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Trạng thái</label>

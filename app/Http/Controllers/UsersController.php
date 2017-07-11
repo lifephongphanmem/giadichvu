@@ -158,12 +158,12 @@ class UsersController extends Controller
                     $level = array('DVVT');
                 if (session('admin')->sadmin == 'ssa' || session('admin')->sadmin =='sa') {
                     $model = Users::wherein('level', $level)
-                        ->orderBy('id')
+                        ->orderBy('id', 'desc')
                         ->get();
                 }elseif((session('admin')->sadmin == 'savt' && $pl == 'dich_vu_van_tai') || (session('admin')->sadmin == 'satc' && $pl == 'dich_vu_luu_tru')) {
                     $model = Users::wherein('level', $level)
                         ->where('cqcq', session('admin')->cqcq)
-                        ->orderBy('id')
+                        ->orderBy('id', 'desc')
                         ->get();
                 }else{
                     return view('errors.noperm');
@@ -311,9 +311,9 @@ class UsersController extends Controller
                 if ($input['newpass'] != '')
                     $model->password = md5($input['newpass']);
                 $model->save();
-                if ($model->pldv == 'DVLT')
+                if ($model->level == 'DVLT')
                     $pl = 'dich_vu_luu_tru';
-                elseif ($model->pldv == 'DVVT')
+                elseif ($model->level == 'DVVT')
                     $pl = 'dich_vu_van_tai';
                 else
                     $pl = 'quan_ly';

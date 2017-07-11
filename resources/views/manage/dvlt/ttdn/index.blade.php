@@ -30,9 +30,11 @@
                             @if(!isset($modeltttd))
                             <a href="{{url('ttdn_dich_vu_luu_tru/'.$model->id.'/edit')}}" class="btn btn-default btn-sm">
                                 <i class="fa fa-edit"></i> Thay đổi thông tin </a>
-                            @elseif($modeltttd->trangthai == 'Bị trả lại')
+                            @elseif($modeltttd->trangthai != 'Chờ duyệt')
                                 <a href="{{url('ttdn_dich_vu_luu_tru/'.$modeltttd->id.'/chinhsua')}}" class="btn btn-default btn-sm">
                                     <i class="fa fa-edit"></i> Chỉnh sửa thông tin </a>
+                                <a href="{{url('ttdn_dich_vu_luu_tru/'.$modeltttd->id.'/chuyen')}}" class="btn btn-default btn-sm">
+                                    <i class="fa fa-share-square-o"></i> Chuyển thông tin</a>
                             @endif
                         @endif
                         <!--a href="" class="btn btn-default btn-sm">
@@ -99,6 +101,15 @@
                                 </td>
                                 <td style="width:35%">
                                 <span class="text-muted">{{$model->faxdn}}
+                                </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:15%">
+                                    <b>Email quản lý</b>
+                                </td>
+                                <td style="width:35%">
+                                <span class="text-muted">{{$model->email}}
                                 </span>
                                 </td>
                             </tr>
@@ -218,6 +229,15 @@
                                     </td>
                                     <td style="width:35%">
                                 <span class="text-muted">{{$modeltttd->fax}}
+                                </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:15%">
+                                        <b>Email quản lý</b>
+                                    </td>
+                                    <td style="width:35%">
+                                <span class="text-muted">{{$modeltttd->email}}
                                 </span>
                                     </td>
                                 </tr>

@@ -261,8 +261,6 @@ class DnDvLtController extends Controller
             }else {
                 return view('errors.perm');
             }
-
-
         }else
             return view('errors.notlogin');
     }
@@ -276,6 +274,7 @@ class DnDvLtController extends Controller
                 $model->diachidn = $update['diachidn'];
                 $model->teldn = $update['teldn'];
                 $model->faxdn = $update['diachidn'];
+                $model->email = $update['email'];
                 $model->noidknopthue = $update['noidknopthue'];
                 $model->giayphepkd = $update['giayphepkd'];
                 $model->chucdanhky = $update['chucdanhky'];
@@ -300,35 +299,45 @@ class DnDvLtController extends Controller
                 $model->diadanh = $update['diadanh'];
                 $model->giayphepkd = $update['giayphepkd'];
                 $model->tailieu = $update['tailieu'];
-                $model->email = '';
+                $model->email = $update['email'];
                 $model->setting = '';
                 $model->dvxk = 0;
                 $model->dvxb = 0;
                 $model->dvxtx = 0;
                 $model->dvk = 0;
                 $model->pl = 'DVLT';
-                $model->trangthai = 'Chờ duyệt';
+                $model->trangthai = 'Chờ chuyển';
                 $model->cqcq = $update['cqcq'];
-                if($model->save()){
-                    $dn = DnDvLt::where('masothue',$update['masothue'])->first();
-                    $tencqcq = DmDvQl::where('maqhns',session('admin')->cqcq)->first();
-                    $data=[];
-                    $data['tendn'] = $update['tendn'];
-                    $data['tg'] = Carbon::now()->toDateTimeString();
-                    $data['tencqcq'] = $tencqcq->tendv;
-                    $maildn = $dn->email;
-                    $tendn = $update['tendn'];
-                    $mailql = $tencqcq->emailqt;
-                    $tenql = $tencqcq->tendv;
-                    Mail::send('mail.changettdn',$data, function ($message) use($maildn, $tendn, $mailql, $tenql) {
-                        $message->to($maildn, $tendn)
-                            ->to($mailql, $tenql)
-                            ->subject('Thông báo thông tin thay đổi thông tin doanh nghiệp');
-                        $message->from('qlgiakhanhhoa@gmail.com','Phần mềm CSDL giá');
-                    });
-                };
+                $model->save();
             }
 
+            return redirect('ttdn_dich_vu_luu_tru');
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function ttdnchuyen($id){
+        if (Session::has('admin')) {
+            $model = TtDn::find($id);
+            $model->trangthai = 'Chờ duyệt';
+            if($model->save()) {
+                $dn = DnDvLt::where('masothue', $model->masothue)->first();
+                $tencqcq = DmDvQl::where('maqhns', $dn->cqcq)->first();
+                $data = [];
+                $data['tendn'] = $dn->tendn;
+                $data['tg'] = Carbon::now()->toDateTimeString();
+                $data['tencqcq'] = $tencqcq->tendv;
+                $maildn = $dn->email;
+                $tendn = $dn->tendn;
+                $mailql = $tencqcq->emailqt;
+                $tenql = $tencqcq->tendv;
+                Mail::send('mail.changettdn', $data, function ($message) use ($maildn, $tendn, $mailql, $tenql) {
+                    $message->to($maildn, $tendn)
+                        ->to($mailql, $tenql)
+                        ->subject('Thông báo thông tin thay đổi thông tin doanh nghiệp');
+                    $message->from('qlgiakhanhhoa@gmail.com', 'Phần mềm CSDL giá');
+                });
+            }
             return redirect('ttdn_dich_vu_luu_tru');
         }else
             return view('errors.notlogin');
@@ -367,38 +376,21 @@ class DnDvLtController extends Controller
             $model->diachi = $input['diachi'];
             $model->tel = $input['tel'];
             $model->fax = $input['fax'];
+            $model->email = $input['email'];
             $model->noidknopthue = $input['noidknopthue'];
             $model->chucdanhky = $input['chucdanhky'];
             $model->nguoiky = $input['nguoiky'];
             $model->diadanh = $input['diadanh'];
             $model->giayphepkd = $input['giayphepkd'];
             $model->tailieu = $input['tailieu'];
-            $model->email = '';
             $model->setting = '';
             $model->dvxk = 0;
             $model->dvxb = 0;
             $model->dvxtx = 0;
             $model->dvk = 0;
             $model->pl = 'DVLT';
-            $model->trangthai = 'Chờ duyệt';
-            if($model->save()){
-                $dn = DnDvLt::where('masothue',$model->masothue)->first();
-                $tencqcq = DmDvQl::where('maqhns',session('admin')->cqcq)->first();
-                $data=[];
-                $data['tendn'] = $input['tendn'];
-                $data['tg'] = Carbon::now()->toDateTimeString();
-                $data['tencqcq'] = $tencqcq->tendv;
-                $maildn = $dn->email;
-                $tendn = $input['tendn'];
-                $mailql = $tencqcq->emailqt;
-                $tenql = $tencqcq->tendv;
-                Mail::send('mail.changettdn',$data, function ($message) use($maildn, $tendn, $mailql, $tenql) {
-                    $message->to($maildn, $tendn)
-                        ->to($mailql, $tenql)
-                        ->subject('Thông báo thông tin thay đổi thông tin doanh nghiệp');
-                    $message->from('qlgiakhanhhoa@gmail.com','Phần mềm CSDL giá');
-                });
-            };
+            $model->trangthai = 'Chờ chuyển';
+            $model->save();
 
             return redirect('ttdn_dich_vu_luu_tru');
         }else

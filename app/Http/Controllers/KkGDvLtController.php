@@ -696,12 +696,9 @@ class KkGDvLtController extends Controller
                             $hisct->save();
                         }
                     }
-
-
                 };
             }
             $macskd = $model->macskd;
-
 
             return redirect('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh='.$macskd.'&nam='.date('Y'));
         }else

@@ -98,6 +98,7 @@ class XdTdTtDnController extends Controller
                 $model->diachidn = $modeltttd->diachi;
                 $model->teldn = $modeltttd->tel;
                 $model->faxdn = $modeltttd->fax;
+                $model->email = $modeltttd->email;
                 $model->noidknopthue = $modeltttd->noidknopthue;
                 $model->chucdanhky = $modeltttd->chucdanhky;
                 $model->nguoiky = $modeltttd->nguoiky;

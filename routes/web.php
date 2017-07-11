@@ -138,6 +138,7 @@ Route::get('ttdn_dich_vu_luu_tru/{id}/edit','DnDvLtController@ttdnedit');
 Route::get('ttdn_dich_vu_luu_tru/{id}/chinhsua','DnDvLtController@ttdnchinhsua');
 Route::patch('ttdn_dich_vu_luu_tru/{id}','DnDvLtController@ttdnupdate');
 Route::patch('ttdn_dich_vu_luu_tru/df/{id}','DnDvLtController@ttdncapnhat');
+Route::get('ttdn_dich_vu_luu_tru/{id}/chuyen','DnDvLtController@ttdnchuyen');
 //End Thông tin doanh nghiệp
 //Thông tin CSKD
 Route::get('ttcskd_dich_vu_luu_tru','CsKdDvLtController@index');

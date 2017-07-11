@@ -118,25 +118,33 @@
                                         {!!Form::text('diadanh', null, array('id' => 'diadanh','class' => 'form-control required'))!!}
                                     </div>
                                 </div>
-                                @if(session('admin')->level == 'T' || session('admin') == 'H')
+
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">Đơn vị quản lý<span class="require">*</span></label>
-                                        <select class="form-control" name="cqcq" id="cqcq" required>
-                                            <option value="">--Chọn đơn vị quản lý--</option>
-                                            @foreach($ttcqcq as $tt)
-                                                <option value="{{$tt->maqhns}}" {{($tt->maqhns == $model->cqcq) ? 'selected' : ''}}>{{$tt->tendv}}</option>
-                                            @endforeach
-                                        </select>
+                                        <label class="control-label">Email quản lý<span class="require">*</span></label>
+                                        {!!Form::email('email',null, array('id' => 'email','class' => 'form-control required'))!!}
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
+                                @if(session('admin')->level == 'T' || session('admin') == 'H')
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Đơn vị quản lý<span class="require">*</span></label>
+                                            <select class="form-control" name="cqcq" id="cqcq" required>
+                                                <option value="">--Chọn đơn vị quản lý--</option>
+                                                @foreach($ttcqcq as $tt)
+                                                    <option value="{{$tt->maqhns}}" {{($tt->maqhns == $model->cqcq) ? 'selected' : ''}}>{{$tt->tendv}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
                                 @else
                                     <input type="hidden" name="cqcq" id="cqcq" value="{{$model->cqcq}}">
                                     <input type="hidden" name="masothue" id="masothue" value="{{$model->masothue}}">
                                 @endif
                             </div>
                         </div>
-
                     <!-- END FORM-->
                 </div>
             </div>

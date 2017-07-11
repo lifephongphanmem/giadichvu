@@ -103,6 +103,15 @@
                             </tr>
                             <tr>
                                 <td style="width:15%">
+                                    <b>Email quản lý</b>
+                                </td>
+                                <td style="width:35%">
+                                <span class="text-muted">{{$model->email}}
+                                </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:15%">
                                     <b>Nơi đăng ký nộp thuế</b>
                                 </td>
                                 <td style="width:35%">
@@ -206,6 +215,15 @@
                                     </td>
                                     <td style="width:35%">
                                 <span class="text-muted">{{$modeltttd->fax}}
+                                </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:15%">
+                                        <b>Email quản lý</b>
+                                    </td>
+                                    <td style="width:35%">
+                                <span class="text-muted">{{$modeltttd->email}}
                                 </span>
                                     </td>
                                 </tr>
