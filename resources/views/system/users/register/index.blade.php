@@ -90,7 +90,7 @@
                         @foreach($model as $key=>$tt)
                             <tr class="odd gradeX">
                                 <td style="text-align: center">{{$key + 1}}</td>
-                                <td class="active" >{{$tt->tendn}}</td>
+                                <td class="active" ><b style="color: blue;">{{$tt->tendn}}</b><br><u>Ngày đăng ký:</u>&nbsp;{{getDateTime($tt->created_at)}}</td>
                                 <td>{{$tt->masothue}}</td>
                                 <td align="center">
                                     <span class="badge badge-danger">{{$tt->trangthai}}</span>

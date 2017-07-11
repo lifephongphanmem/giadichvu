@@ -440,21 +440,24 @@ class UsersController extends Controller
                 if ($pl == 'dich_vu_luu_tru' && session('admin')->sadmin == 'satc' || $pl == 'dich_vu_luu_tru' && session('admin')->sadmin == 'ssa') {
                     if (session('admin')->sadmin == 'ssa') {
                         $model = Register::where('pl', 'DVLT')
-
+                            ->orderBy('id', 'desc')
                             ->get();
                     } else {
                         $model = Register::where('pl', 'DVLT')
                             ->where('cqcq', $cqcq)
+                            ->orderBy('id', 'desc')
                             ->get();
                     }
                 } elseif ($pl == 'dich_vu_van_tai' && session('admin')->sadmin == 'savt' || $pl == 'dich_vu_van_tai' && session('admin')->sadmin == 'ssa') {
                     if (session('admin')->sadmin == 'ssa') {
                         $model = Register::where('pl', 'DVVT')
                             ->where('trangthai', 'Chờ duyệt')
+                            ->orderBy('id', 'desc')
                             ->get();
                     } else {
                         $model = Register::where('pl', 'DVVT')
                             ->where('cqcq', $cqcq)
+                            ->orderBy('id', 'desc')
                             ->where('trangthai', 'Chờ duyệt')
                             ->get();
                     }
