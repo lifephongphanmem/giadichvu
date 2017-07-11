@@ -317,7 +317,7 @@ class DnDvLtController extends Controller
                     $data['tg'] = Carbon::now()->toDateTimeString();
                     $data['tencqcq'] = $tencqcq->tendv;
                     $maildn = $dn->email;
-                    $tendn = $input['tendn'];
+                    $tendn = $update['tendn'];
                     $mailql = $tencqcq->emailqt;
                     $tenql = $tencqcq->tendv;
                     Mail::send('mail.changettdn',$data, function ($message) use($maildn, $tendn, $mailql, $tenql) {
