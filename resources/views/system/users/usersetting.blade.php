@@ -38,10 +38,10 @@
                             <div class="form-group">
                                 <label for="current-password" class="col-sm-5 control-label">Email xác thực<span class="require">*</span></label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" name="emailxt" id="emailxt">
+                                    <input type="text" class="form-control" name="emailxt" id="emailxt" value="{{session('admin')->email}}">
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <!--div class="form-group">
                                 <label for="newpassword" class="col-sm-5 control-label">Câu hỏi bí mật <span class="require">*</span></label>
                                 <div class="col-sm-4">
                                     {!! Form::select(
@@ -61,7 +61,7 @@
                                 <div class="col-sm-4">
                                     {!!Form::password('answer', array('id' => 'answer','class' => 'form-control required'))!!}
                                 </div>
-                            </div>
+                            </div-->
 
                         </div>
 

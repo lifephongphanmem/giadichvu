@@ -304,8 +304,8 @@ class UsersController extends Controller
             $model = Users::findOrFail($id);
             if(session('admin')->sadmin == 'ssa' || $model->cqcq == session('admin')->cqcq) {
                 $model->name = $input['name'];
-                $model->phone = $input['phone'];
-                $model->email = $input['email'];
+                //$model->phone = $input['phone'];
+                //$model->email = $input['email'];
                 $model->status = $input['status'];
                 $model->username = $input['username'];
                 if ($input['newpass'] != '')
@@ -798,7 +798,6 @@ class UsersController extends Controller
 
     public function settinguser(){
         if (Session::has('admin')) {
-
             return view('system.users.usersetting')
                 ->with('pageTitle', 'Thông tin tài khoản');
 
@@ -818,11 +817,10 @@ class UsersController extends Controller
 
         if (md5($currentPassword) == $password) {
             $ttuser = Users::where('username', $username)->first();
-            $ttuser->emailxt = $update['emailxt'];
-            $ttuser->question = $update['question'];
-            $ttuser->answer = $update['answer'];
+            $ttuser->email = $update['emailxt'];
             $ttuser->save();
-            return redirect('');
+            Session::flush();
+            return redirect('/login');
         } else {
             dd('Mật khẩu cũ không đúng???');
         }
