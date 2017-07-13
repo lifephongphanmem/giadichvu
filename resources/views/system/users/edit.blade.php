@@ -92,6 +92,14 @@
 
                             </div>
                             @endif
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Email</label>
+                                        {!!Form::text('email', null, array('id' => 'email','class' => 'form-control'))!!}
+                                    </div>
+                                </div>
+                            </div>
 
                         </div>
 

@@ -305,7 +305,7 @@ class UsersController extends Controller
             if(session('admin')->sadmin == 'ssa' || $model->cqcq == session('admin')->cqcq) {
                 $model->name = $input['name'];
                 //$model->phone = $input['phone'];
-                //$model->email = $input['email'];
+                $model->email = $input['email'];
                 $model->status = $input['status'];
                 $model->username = $input['username'];
                 if ($input['newpass'] != '')
