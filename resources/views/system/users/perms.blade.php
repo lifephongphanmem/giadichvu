@@ -112,7 +112,7 @@
                                         </tr>
                                         <tr>
                                             <td><input type="checkbox" {{ (isset($permission->kkdvlt->approve) && $permission->kkdvlt->approve == 1) ? 'checked' : '' }} value="1" name="roles[kkdvlt][approve]"/></td>
-                                            <td>{{($model->level == 'T') ? 'Xét duyệt' : 'Chuyển'}}</td>
+                                            <td>{{($model->level == 'T' || $model->level == 'H') ? 'Xét duyệt' : 'Chuyển'}}</td>
                                         </tr>
                                         </tbody>
                                     </table>
