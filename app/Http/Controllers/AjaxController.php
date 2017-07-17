@@ -29,7 +29,7 @@ class AjaxController extends Controller
 
             if($inputs['plhs'] == 'GG'){
                 $ngaysosanh = date('Y-m-d', mktime( 0,0,0,date('m', strtotime($ngaynhap)), date('d', strtotime($ngaynhap)) + 2, date('Y', strtotime($ngaynhap))));
-                if(strtotime($ngayhieuluc) >= strtotime($ngaysosanh)){
+                if($ngayhieuluc >= $ngaysosanh){
                     $result['status'] = 'success';
                 }
             }else {
@@ -44,7 +44,7 @@ class AjaxController extends Controller
                     $ngaysosanh = date('Y-m-d', mktime( 0,0,0, date('m', strtotime($ngaynhap)), date('d', strtotime($ngaynhap)) + 3, date('Y', strtotime($ngaynhap))));
                 }
 
-                if (strtotime($ngayhieuluc) >= strtotime($ngaysosanh)){
+                if ($ngayhieuluc >= $ngaysosanh){
                     $result['status'] = 'success';
                 }
             }
