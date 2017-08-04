@@ -93,7 +93,7 @@
         <th>Địa chỉ</th>
         <th>Số điện thoại</th>
         <th>Số công văn</th>
-        <th>Ngày kê khai</th>
+        <th>Ngày nhận hồ sơ</th>
         <th>Ngày thực hiện<br> mức giá kê khai</th>
         <th>Trạng thái hồ sơ</th>
     </tr>
@@ -107,7 +107,7 @@
             <th style="text-align: left">{{$ttkk->diachikd}}</th>
             <th style="text-align: center">{{$ttkk->telkd}}</th>
             <th style="text-align: center">{{$ttkk->socv}}</th>
-            <th style="text-align: center">{{getDayVn($ttkk->ngaynhap)}}</th>
+            <th style="text-align: center">{{getDayVn($ttkk->ngaynhan)}}</th>
             <th style="text-align: center">{{getDayVn($ttkk->ngayhieuluc)}}</th>
             <th style="text-align: center">{{$ttkk->trangthai}}</th>
         </tr>
