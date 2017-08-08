@@ -568,7 +568,7 @@ class HomeController extends Controller
             $data['tencqcq'] = $tencqcq->tendv;
             $data['masothue'] = $input['masothue'];
             $data['user'] = $input['username'];
-            $data['madk'] = $ma;
+            $data['madk'] = $model->ma;
             $a = $input['emaildn'];
             $b  =  $input['tendn'];
             Mail::send('mail.stlregister',$data, function ($message) use($a,$b) {
