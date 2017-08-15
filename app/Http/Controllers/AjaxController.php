@@ -28,8 +28,8 @@ class AjaxController extends Controller
             $ngayhieuluc = date('Y-m-d', strtotime(str_replace('/', '-', $inputs['ngayhieuluc'])));
 
             if($inputs['plhs'] == 'GG'){
-                $ngaysosanh = date('Y-m-d', mktime( 0,0,0,date('m', strtotime($ngaynhap)), date('d', strtotime($ngaynhap)) + 2, date('Y', strtotime($ngaynhap))));
-                if($ngayhieuluc >= $ngaysosanh){
+                if($ngaynhap <=$ngayhieuluc ) {
+                    //dd($ngaynhap<$ngayhieuluc);
                     $result['status'] = 'success';
                 }
             }else {
