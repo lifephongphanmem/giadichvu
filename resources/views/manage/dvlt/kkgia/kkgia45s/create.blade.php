@@ -429,6 +429,9 @@
                                     <option value="Đồng/phòng/ngày đêm">Đồng/phòng/ngày đêm</option>
                                     <option value="Đồng/phòng/tuần">Đồng/phòng/tuần</option>
                                     <option value="Đồng/phòng/tháng">Đồng/phòng/tháng</option>
+                                    <option value="Đồng/căn hộ/ngày đêm">Đồng/căn hộ/ngày đêm</option>
+                                    <option value="Đồng/căn hộ/tuần">Đồng/căn hộ/tuần</option>
+                                    <option value="Đồng/căn hộ/tháng">Đồng/căn hộ/tháng</option>
                                 </select>
                             </div>
                         </div>

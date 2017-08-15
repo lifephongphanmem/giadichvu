@@ -397,6 +397,9 @@
                                     <option value="Đồng/phòng/ngày đêm" {{($model->dvt == 'Đồng/phòng/ngày đêm') ? 'selected' : ''}}>Đồng/phòng/ngày đêm</option>
                                     <option value="Đồng/phòng/tuần" {{($model->dvt == 'Đồng/phòng/tuần') ? 'selected' : ''}}>Đồng/phòng/tuần</option>
                                     <option value="Đồng/phòng/tháng" {{($model->dvt == 'Đồng/phòng/tháng') ? 'selected' : ''}}>Đồng/phòng/tháng</option>
+                                    <option value="Đồng/căn hộ/ngày đêm" {{($model->dvt == 'Đồng/căn hộ/ngày đêm') ? 'selected' : ''}}>Đồng/căn hộ/ngày đêm</option>
+                                    <option value="Đồng/căn hộ/tuần" {{($model->dvt == 'Đồng/căn hộ/tuần') ? 'selected' : ''}}>Đồng/căn hộ/tuần</option>
+                                    <option value="Đồng/căn hộ/tháng" {{($model->dvt == 'Đồng/căn hộ/tháng') ? 'selected' : ''}}>Đồng/căn hộ/tháng</option>
                                 </select>
                             </div>
                         </div>
