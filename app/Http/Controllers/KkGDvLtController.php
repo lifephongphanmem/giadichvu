@@ -753,9 +753,9 @@ class KkGDvLtController extends Controller
             $ngayapdung = $model->ngayhieuluc;
             $ngaychuyen = Carbon::now()->toDateTimeString();
             if($model->plhs == 'GG') {
-                if ($ngayapdung >= date('Y-m-d',strtotime($ngaychuyen))) {
+                //if ($ngayapdung >= date('Y-m-d',strtotime($ngaychuyen))) {
                     $result['status'] = 'success';
-                }
+                //}
             }else {
                 $day = date("D", strtotime($ngaychuyen));
 
