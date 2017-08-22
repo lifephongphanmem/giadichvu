@@ -313,6 +313,11 @@
                                             <button type="button" onclick="confirmNhanHsedit({{$tt->mahs}})" class="btn btn-default btn-xs mbs" data-target="#nhanhsedit-modal" data-toggle="modal"><i class="fa fa-edit"></i>&nbsp;
                                                 Chỉnh sửa</button>
                                         @endif
+                                        @if($tt->phanloai == 'DT')
+                                            <a href="{{url('ke_khai_dich_vu_luu_tru/khach_san/'.$tt->id.'/edit')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</a>
+                                        @else
+                                            <a href="{{url('ke_khai_dich_vu_luu_tru/'.$tt->id.'/edit')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</a>
+                                        @endif
                                     @endif
                                         <a href="{{url('ke_khai_dich_vu_luu_tru/'.$tt->mahs.'/history')}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Lịch sử</a>
                                 </td>
