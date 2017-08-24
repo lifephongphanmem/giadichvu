@@ -243,6 +243,8 @@ Route::post('xet_duyet_ke_khai_dich_vu_luu_tru/nhanhsedit','KkGDvLtXdController@
 Route::get('ke_khai_dich_vu_luu_tru/{mahs}/history', 'KkGDvLtXdController@history');
 Route::get('ke_khai_dich_vu_luu_tru/history/mahsh={mahsh}', 'KkGDvLtXdController@showhis');
 Route::get('ke_khai_dich_vu_luu_tru/historyks/mahsh={mahsh}', 'KkGDvLtXdController@showhis45s');
+
+Route::get('ke_khai_dich_vu_luu_tru/{macskd}/hsdakk', 'KkGDvLtXdController@hsdakk');
     //End xét duyệt kê khai
     //Search kê khai
 Route::get('search_ke_khai_dich_vu_luu_tru','KkGDvLtController@search');

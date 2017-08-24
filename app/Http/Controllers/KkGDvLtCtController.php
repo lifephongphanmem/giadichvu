@@ -106,17 +106,17 @@ class KkGDvLtCtController extends Controller
 
             $result['message'] = '<div class="modal-body" id="ttkkgia">';
 
-            if($inputs['ttcb'] == 'yes') {
+            //if($inputs['ttcb'] == 'yes') {
                 $result['message'] .= '<div class="form-group" style="display: none">';
                 $result['message'] .= '<label><b>Mức giá kê khai liền kề</b></label>';
                 $result['message'] .= '<input type="text" style="text-align: right" id="mucgialk" name="mucgialk" class="form-control" data-mask="fdecimal" value="' . $mucgialk . '" autofocus>';
                 $result['message'] .= '</div>';
-            }else {
+            //}else {
                 $result['message'] .= '<div class="form-group">';
                 $result['message'] .= '<label><b>Mức giá kê khai liền kề</b></label>';
                 $result['message'] .= '<input type="text" style="text-align: right" id="mucgialk" name="mucgialk" class="form-control" data-mask="fdecimal" value="' . $mucgialk . '" autofocus>';
                 $result['message'] .= '</div>';
-            }
+            //}
 
             $result['message'] .= '<div class="form-group">';
             $result['message'] .= '<label><b>Mức giá kê khai</b></label>';

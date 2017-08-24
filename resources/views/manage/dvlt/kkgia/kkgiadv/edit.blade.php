@@ -403,16 +403,16 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">Số công văn liền kề</label>
-                                    <p style="color: #000088"><b>{{$model->socvlk}}</b></p>
-                                    {!!Form::hidden('socvlk', null, array('id' => 'socvlk','class' => 'form-control'))!!}
+                                    <!--p style="color: #000088"><b>{{$model->socvlk}}</b></p-->
+                                    {!!Form::text('socvlk', null, array('id' => 'socvlk','class' => 'form-control'))!!}
 
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">Ngày nhập số công văn liền kề<span class="require">*</span></label>
-                                    <p style="color: #000088"><b>{{getDayVn($model->ngaycvlk)}}</b></p>
-                                    {!!Form::hidden('ngaycvlk',($model->ngaycvlk != '' ? date('d/m/Y',  strtotime($model->ngaycvlk)) : ''), array('id' => 'ngaycvlk','data-inputmask'=>"'alias': 'date'",'class' => 'form-control'))!!}
+                                    <!--p style="color: #000088"><b>{{getDayVn($model->ngaycvlk)}}</b></p-->
+                                    {!!Form::text('ngaycvlk',($model->ngaycvlk != '' ? date('d/m/Y',  strtotime($model->ngaycvlk)) : ''), array('id' => 'ngaycvlk','data-inputmask'=>"'alias': 'date'",'class' => 'form-control'))!!}
                                 </div>
                             </div>
                         </div>

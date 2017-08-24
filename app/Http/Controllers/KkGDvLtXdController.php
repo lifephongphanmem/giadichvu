@@ -436,4 +436,23 @@ class KkGDvLtXdController extends Controller
 
     }
 
+    public function hsdakk($macskd){
+        if (Session::has('admin')) {
+
+            $modelcskd = CsKdDvLt::where('macskd',$macskd)->first();
+            $modeldn = DnDvLt::where('masothue',$modelcskd->masothue)->first();
+
+            $model = KkGDvLt::where('macskd',$macskd)
+                ->where('trangthai','Duyệt')
+                ->orderBy('id', 'desc')
+                ->get();
+            return view('manage.dvlt.kkgia.xetduyet.hsdakk')
+                ->with('pageTitle','Thông tin hồ sơ đa kê khai')
+                ->with('model',$model)
+                ->with('modeldn',$modeldn)
+                ->with('modelcskd',$modelcskd);
+        }else
+            return view('errors.notlogin');
+    }
+
 }
