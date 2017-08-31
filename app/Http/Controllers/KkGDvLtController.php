@@ -705,6 +705,65 @@ class KkGDvLtController extends Controller
             return view('errors.notlogin');
     }
 
+    public function chuyenhscham(Request $request){
+        if (Session::has('admin')) {
+            $tgchuyen = Carbon::now()->toDateTimeString();
+            $input = $request->all();
+            $id = $input['idchuyenhscham'];
+            $model = KkGDvLt::findOrFail($id);
+            $model->ttnguoinop = 'Kỹ thuật viên';
+            $model->trangthai = 'Chờ nhận';
+            $model->ngaychuyen = $tgchuyen;
+            //$model->save();
+            if($model->save()){
+                //History
+                $mahsh = getdate()[0];
+                $his = new KkGDvLtH();
+                $his->mahsh = $mahsh;
+                $his->mahs = $model->mahs;
+                $his->macskd = $model->macskd;
+                $his->masothue = $model->masothue;
+                $his->ngaynhap = $model->ngaynhap;
+                $his->socv = $model->socv;
+                $his->socvlk = $model->socvlk;
+                $his->ngaycvlk = $model->ngaycvlk;
+                $his->ngayhieuluc = $model->ngayhieuluc;
+                $his->ttnguoinop = 'Kỹ thuật viên';
+                $his->ghichu = $model->ghichu;
+                $his->ngaychuyen = $tgchuyen;
+                $his->cqcq = $model->cqcq;
+                $his->dvt = $model->dvt;
+                $his->phanloai = $model->phanloai;
+                $his->plhs =$model->plhs;
+                $his->action = 'Chuyển hồ sơ kê khai(Kỹ thuật viên chuyển do đơn vị nộp kê khai chậm)';
+                if($his->save()){
+                    $hsct = KkGDvLtCt::where('mahs',$model->mahs)
+                        ->get();
+                    foreach($hsct as $ct){
+                        $hisct = new KkGDvLtCtH();
+                        $hisct->mahsh = $mahsh;
+                        $hisct->loaip = $ct->loaip;
+                        $hisct->qccl = $ct->qccl;
+                        $hisct->sohieu = $ct->sohieu;
+                        $hisct->ghichu = $ct->ghichu;
+                        $hisct->macskd = $ct->macskd;
+                        $hisct->mahs = $ct->mahs;
+                        $hisct->mucgialk = $ct->mucgialk;
+                        $hisct->mucgiakk = $ct->mucgiakk;
+                        $hisct->tendoituong = $ct->tendoituong;
+                        $hisct->apdung = $ct->apdung;
+                        $hisct->maloaip = $ct->maloaip;
+                        $hisct->save();
+                    }
+                }
+            };
+            $macskd = $model->macskd;
+
+            return redirect('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh='.$macskd.'&nam='.date('Y'));
+        }else
+            return view('errors.notlogin');
+    }
+
     public function viewlydo(Request $request){
         $result = array(
             'status' => 'fail',

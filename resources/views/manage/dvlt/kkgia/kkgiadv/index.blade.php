@@ -64,6 +64,14 @@
 
 
         }
+        function confirmChuyenHSCham(id){
+            document.getElementById("idchuyenhscham").value=id;
+        }
+
+        function ClickChuyenHsCham(){
+            $('#frm_chuyenhscham').submit();
+        }
+
         function ClickChuyen(){
             if($('#ttnguoinop').val() != ''){
                 toastr.success("Hồ sơ đã được chuyển!", "Thành công!");
@@ -218,6 +226,10 @@
                                         @if(can('kkdvlt','approve'))
                                         <button type="button" onclick="confirmChuyen('{{$tt->id}}')" class="btn btn-default btn-xs mbs" data-target="#chuyen-modal" data-toggle="modal"><i class="fa fa-share-square-o"></i>&nbsp;
                                             Chuyển</button>
+                                            @if(session('admin')->sadmin == 'ssa')
+                                                <button type="button" onclick="confirmChuyenHSCham('{{$tt->id}}')" class="btn btn-default btn-xs mbs" data-target="#chuyenhscham-modal" data-toggle="modal"><i class="fa fa-share-square-o"></i>&nbsp;
+                                                    Chuyển HS chậm</button>
+                                            @endif
                                         @endif
                                         @if( $tt->trangthai == 'Bị trả lại')
                                         <button type="button" data-target="#lydo-modal" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="viewLyDo({{$tt->id}})"><i class="fa fa-search"></i>&nbsp;Lý do trả lại</button>
@@ -258,6 +270,28 @@
                     <div class="modal-footer">
                         <button type="button" class="btn default" data-dismiss="modal">Hủy</button>
                         <button type="submit" class="btn blue" onclick="ClickChuyen()">Đồng ý</button>
+
+                    </div>
+                    {!! Form::close() !!}
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+
+    <!--Model chuyển hs chậm-->
+        <div class="modal fade" id="chuyenhscham-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    {!! Form::open(['url'=>'ke_khai_dich_vu_luu_tru/chuyenhscham','id' => 'frm_chuyenhscham'])!!}
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h4 class="modal-title">Đồng ý chuyển hồ sơ bị chậm?</h4>
+                    </div>
+                    <input type="hidden" name="idchuyenhscham" id="idchuyenhscham">
+                    <div class="modal-footer">
+                        <button type="button" class="btn default" data-dismiss="modal">Hủy</button>
+                        <button type="submit" class="btn blue" onclick="ClickChuyenHsCham()">Đồng ý</button>
 
                     </div>
                     {!! Form::close() !!}

@@ -205,6 +205,7 @@ Route::get('/kkgdvlt/xoattp','KkGDvLtCtController@xoattp');
     //End Ajax ttphong edit
 Route::patch('ke_khai_dich_vu_luu_tru/{id}','KkGDvLtController@update');
 Route::post('ke_khai_dich_vu_luu_tru/chuyen','KkGDvLtController@chuyen');
+Route::post('ke_khai_dich_vu_luu_tru/chuyenhscham','KkGDvLtController@chuyenhscham');
 Route::get('/kkgdvlt/viewlydo','KkGDvLtController@viewlydo');
 Route::get('/kkgdvlt/checkngay','KkGDvLtController@checkngay');
 Route::post('ke_khai_dich_vu_luu_tru/delete','KkGDvLtController@destroy');
