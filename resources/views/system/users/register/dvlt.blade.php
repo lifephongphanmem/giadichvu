@@ -141,6 +141,16 @@
                             </div>
 
                         </div>
+                        <div class="row">
+                            @if(session('admin')->sadmin == 'ssa')
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Mã đăng ký<span class="require">*</span></label>
+                                    <input type="text" class="form-control required" name="username" id="username" value="{{$model->ma}}" readonly>
+                                </div>
+                            </div>
+
+                        </div>
             </div>
             <!-- END FORM-->
         </div>
