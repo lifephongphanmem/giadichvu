@@ -149,6 +149,7 @@
                                     <input type="text" class="form-control required" name="username" id="username" value="{{$model->ma}}" readonly>
                                 </div>
                             </div>
+                                @endif
 
                         </div>
             </div>
