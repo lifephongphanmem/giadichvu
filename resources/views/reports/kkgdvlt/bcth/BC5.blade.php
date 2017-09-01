@@ -100,8 +100,10 @@
         <th>Địa chỉ</th>
         <th>Số điện thoại</th>
         <th>Số công văn</th>
+        <th>Ngày chuyển</th>
         <th>Ngày nhận hồ sơ</th>
         <th>Ngày thực hiện<br> mức giá kê khai</th>
+        <th>Ngày duyệt</th>
         <th>Thời hạn giải quyết</th>
     </tr>
     @foreach($m_cqcq as $cskd)
@@ -121,6 +123,7 @@
                     <th style="text-align: left">{{$ttkk->diachikd}}</th>
                     <th style="text-align: center">{{$ttkk->telkd}}</th>
                     <th style="text-align: center">{{$ttkk->socv}}</th>
+                    <th style="text-align: center">{{getDateTime($ttkk->ngaychuyen)}}</th>
                     <th style="text-align: center">{{getDayVn($ttkk->ngaynhan)}}</th>
                     <th style="text-align: center">{{getDayVn($ttkk->ngayhieuluc)}}</th>
                     <th style="text-align: center">{{$ttkk->thoihan}}</th>

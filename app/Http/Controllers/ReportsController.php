@@ -493,7 +493,7 @@ class ReportsController extends Controller
                     ->where('kkgdvlt.trangthai', 'Chờ duyệt')
                     ->OrWhere('kkgdvlt.trangthai', 'Duyệt')
                     ->whereBetween('kkgdvlt.ngaychuyen', [$input['ngaytu'], $input['ngayden']])
-                    ->orderBy('kkgdvlt.ngayhieuluc')
+                    ->orderBy('kkgdvlt.ngaychuyen')
                     ->get();
             }elseif($input['cqcq']=='all'&&$input['loaihang']!='all'){
                 $model = KkGDvLt::join('cskddvlt','cskddvlt.macskd','=','kkgdvlt.macskd')
@@ -502,7 +502,7 @@ class ReportsController extends Controller
                     ->OrWhere('kkgdvlt.trangthai', 'Duyệt')
                     ->whereBetween('kkgdvlt.ngaychuyen', [$input['ngaytu'], $input['ngayden']])
                     ->where('cskddvlt.loaihang', $input['loaihang'])
-                    ->orderBy('kkgdvlt.ngayhieuluc')
+                    ->orderBy('kkgdvlt.ngaychuyen')
                     ->get();
             }elseif($input['cqcq']!='all'&&$input['loaihang']=='all'){
                 $model = KkGDvLt::join('cskddvlt','cskddvlt.macskd','=','kkgdvlt.macskd')
@@ -511,7 +511,7 @@ class ReportsController extends Controller
                     ->OrWhere('kkgdvlt.trangthai', 'Duyệt')
                     ->whereBetween('kkgdvlt.ngaychuyen', [$input['ngaytu'], $input['ngayden']])
                     ->where('kkgdvlt.cqcq',$input['cqcq'])
-                    ->orderBy('kkgdvlt.ngayhieuluc')
+                    ->orderBy('kkgdvlt.ngaychuyen')
                     ->get();
             }else{
                 $model = KkGDvLt::join('cskddvlt','cskddvlt.macskd','=','kkgdvlt.macskd')
@@ -521,7 +521,7 @@ class ReportsController extends Controller
                     ->whereBetween('kkgdvlt.ngaychuyen', [$input['ngaytu'], $input['ngayden']])
                     ->where('kkgdvlt.cqcq',$input['cqcq'])
                     ->where('cskddvlt.loaihang', $input['loaihang'])
-                    ->orderBy('kkgdvlt.ngayhieuluc')
+                    ->orderBy('kkgdvlt.ngaychuyen')
                     ->get();
             }
         }else{//Kết xuất báo cáo quyền Huyện
@@ -532,7 +532,7 @@ class ReportsController extends Controller
                     ->OrWhere('kkgdvlt.trangthai', 'Duyệt')
                     ->where('kkgdvlt.cqcq',session('admin')->cqcq)
                     ->whereBetween('kkgdvlt.ngaychuyen', [$input['ngaytu'], $input['ngayden']])
-                    ->orderBy('kkgdvlt.ngayhieuluc')
+                    ->orderBy('kkgdvlt.ngaychuyen')
                     ->get();
             }else{
                 $model = KkGDvLt::join('cskddvlt','cskddvlt.macskd','=','kkgdvlt.macskd')
@@ -542,7 +542,7 @@ class ReportsController extends Controller
                     ->where('kkgdvlt.cqcq',session('admin')->cqcq)
                     ->whereBetween('kkgdvlt.ngaychuyen', [$input['ngaytu'], $input['ngayden']])
                     ->where('cskddvlt.loaihang', $input['loaihang'])
-                    ->orderBy('kkgdvlt.ngayhieuluc')
+                    ->orderBy('kkgdvlt.ngaychuyen')
                     ->get();
             }
         }
@@ -559,7 +559,7 @@ class ReportsController extends Controller
                 ->OrWhere('kkgdvlt.trangthai', 'Duyệt')
                 ->where('kkgdvlt.masothue',$input['masothue'])
                 ->whereBetween('kkgdvlt.ngaychuyen', [$input['ngaytu'], $input['ngayden']])
-                ->orderBy('kkgdvlt.ngayhieuluc')
+                ->orderBy('kkgdvlt.ngaychuyen')
                 ->get();
         }else{
             $model = KkGDvLt::join('cskddvlt','cskddvlt.macskd','=','kkgdvlt.macskd')
@@ -569,7 +569,7 @@ class ReportsController extends Controller
                 ->where('kkgdvlt.masothue',$input['masothue'])
                 ->whereBetween('kkgdvlt.ngaychuyen', [$input['ngaytu'], $input['ngayden']])
                 ->where('cskddvlt.loaihang', $input['loaihang'])
-                ->orderBy('kkgdvlt.ngayhieuluc')
+                ->orderBy('kkgdvlt.ngaychuyen')
                 ->get();
         }
 
@@ -584,7 +584,7 @@ class ReportsController extends Controller
                     ->select('cskddvlt.tencskd','cskddvlt.diachikd','cskddvlt.telkd','cskddvlt.loaihang','kkgdvlt.*')
                     ->Where('kkgdvlt.trangthai', 'Duyệt')
                     ->whereBetween('kkgdvlt.ngaychuyen', [$input['ngaytu'], $input['ngayden']])
-                    ->orderBy('kkgdvlt.ngayhieuluc')
+                    ->orderBy('kkgdvlt.ngaychuyen')
                     ->get();
             }elseif($input['cqcq']=='all'&&$input['loaihang']!='all'){
                 $model = KkGDvLt::join('cskddvlt','cskddvlt.macskd','=','kkgdvlt.macskd')
@@ -592,7 +592,7 @@ class ReportsController extends Controller
                     ->Where('kkgdvlt.trangthai', 'Duyệt')
                     ->whereBetween('kkgdvlt.ngaychuyen', [$input['ngaytu'], $input['ngayden']])
                     ->where('cskddvlt.loaihang', $input['loaihang'])
-                    ->orderBy('kkgdvlt.ngayhieuluc')
+                    ->orderBy('kkgdvlt.ngaychuyen')
                     ->get();
             }elseif($input['cqcq']!='all'&&$input['loaihang']=='all'){
                 $model = KkGDvLt::join('cskddvlt','cskddvlt.macskd','=','kkgdvlt.macskd')
@@ -600,7 +600,7 @@ class ReportsController extends Controller
                     ->Where('kkgdvlt.trangthai', 'Duyệt')
                     ->whereBetween('kkgdvlt.ngaychuyen', [$input['ngaytu'], $input['ngayden']])
                     ->where('kkgdvlt.cqcq',$input['cqcq'])
-                    ->orderBy('kkgdvlt.ngayhieuluc')
+                    ->orderBy('kkgdvlt.ngaychuyen')
                     ->get();
             }else{
                 $model = KkGDvLt::join('cskddvlt','cskddvlt.macskd','=','kkgdvlt.macskd')
@@ -609,7 +609,7 @@ class ReportsController extends Controller
                     ->whereBetween('kkgdvlt.ngaychuyen', [$input['ngaytu'], $input['ngayden']])
                     ->where('kkgdvlt.cqcq',$input['cqcq'])
                     ->where('cskddvlt.loaihang', $input['loaihang'])
-                    ->orderBy('kkgdvlt.ngayhieuluc')
+                    ->orderBy('kkgdvlt.ngaychuyen')
                     ->get();
             }
         }else{//Kết xuất báo cáo quyền Huyện
@@ -619,7 +619,7 @@ class ReportsController extends Controller
                     ->Where('kkgdvlt.trangthai', 'Duyệt')
                     ->where('kkgdvlt.cqcq',session('admin')->cqcq)
                     ->whereBetween('kkgdvlt.ngaychuyen', [$input['ngaytu'], $input['ngayden']])
-                    ->orderBy('kkgdvlt.ngayhieuluc')
+                    ->orderBy('kkgdvlt.ngaychuyen')
                     ->get();
             }else{
                 $model = KkGDvLt::join('cskddvlt','cskddvlt.macskd','=','kkgdvlt.macskd')
@@ -628,7 +628,7 @@ class ReportsController extends Controller
                     ->where('kkgdvlt.cqcq',session('admin')->cqcq)
                     ->whereBetween('kkgdvlt.ngaychuyen', [$input['ngaytu'], $input['ngayden']])
                     ->where('cskddvlt.loaihang', $input['loaihang'])
-                    ->orderBy('kkgdvlt.ngayhieuluc')
+                    ->orderBy('kkgdvlt.ngaychuyen')
                     ->get();
             }
         }

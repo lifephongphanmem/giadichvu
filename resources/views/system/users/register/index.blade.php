@@ -101,11 +101,13 @@
                                 </td>
                                 <td>
                                     <a href="{{url('users/register/'.$tt->id.'/show')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Xem chi tiết</a>
+                                    @if($tt->trangthai != 'Bị trả lại')
                                     <a href="{{url('users/register/'.$tt->id.'/edit')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</a>
                                     <button type="button" onclick="confirmTraLai({{$tt->id}})" class="btn btn-default btn-xs mbs" data-target="#tralai-modal" data-toggle="modal"><i class="fa fa-reply"></i>&nbsp;
                                         Trả lại</button>
                                     <button type="button" onclick="getId('{{$tt->id}}')" class="btn btn-default btn-xs mbs" data-target="#delete-modal" data-toggle="modal"><i class="fa fa-trash-o"></i>&nbsp;
                                         Xóa</button>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
