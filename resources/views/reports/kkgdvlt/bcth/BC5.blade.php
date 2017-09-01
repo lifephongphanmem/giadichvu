@@ -103,7 +103,6 @@
         <th>Ngày chuyển</th>
         <th>Ngày nhận hồ sơ</th>
         <th>Ngày thực hiện<br> mức giá kê khai</th>
-        <th>Ngày duyệt</th>
         <th>Thời hạn giải quyết</th>
     </tr>
     @foreach($m_cqcq as $cskd)
