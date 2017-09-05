@@ -100,7 +100,7 @@
     @foreach($model as $cskd)
         <tr>
             <th style="text-align: left" colspan="8">
-                {{$cskd->tencskd}}-Loại hạng {{$cskd->loaihang}}-ngày gửi kê khai giá {{getDayVn($cskd->ngaynhan)}}- ngày thực hiện mức giá kê khai {{getDayVn($cskd->ngayhieuluc)}}
+                {{$cskd->tencskd}}-Loại hạng {{$cskd->loaihang}}-ngày gửi kê khai giá {{getDayVn($cskd->ngaychuyen)}}- ngày thực hiện mức giá kê khai {{getDayVn($cskd->ngayhieuluc)}}
                 -Ngày trả kết quả {{getDayVn($cskd->ngaynhan)}}- Trạng thái hồ sơ {{$cskd->trangthai}}
             </th>
         </tr>
