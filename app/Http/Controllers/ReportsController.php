@@ -282,8 +282,9 @@ class ReportsController extends Controller
     public function dvltbc3(Request $request){
         if (Session::has('admin')) {
             $input = $request->all();
-            $modelcqcq = DmDvQl::where('maqhns',session('admin')->cqcq)->first();
+
             $m_donvi = DnDvLt::where('masothue',$input['masothue'])->first();
+            $modelcqcq = DmDvQl::where('maqhns',$m_donvi->cqcq)->first();
             $model=$this->get_KKG_CT($input);
 
             return view('reports.kkgdvlt.bcth.BC3')
@@ -299,8 +300,8 @@ class ReportsController extends Controller
     public function dvltbc3_excel(Request $request){
         if (Session::has('admin')) {
             $input = $request->all();
-            $modelcqcq = DmDvQl::where('maqhns',session('admin')->cqcq)->first();
             $m_donvi = DnDvLt::where('masothue',$input['masothue'])->first();
+            $modelcqcq = DmDvQl::where('maqhns',$m_donvi->cqcq)->first();
             $model=$this->get_KKG_CT($input);
 
             Excel::create('BaoCao3',function($excel) use($modelcqcq,$input,$model,$m_donvi){
@@ -327,8 +328,8 @@ class ReportsController extends Controller
         if (Session::has('admin')) {
             $input = $request->all();
 
-            $modelcqcq = DmDvQl::where('maqhns',session('admin')->cqcq)->first();
             $m_donvi = DnDvLt::where('masothue',$input['masothue'])->first();
+            $modelcqcq = DmDvQl::where('maqhns',$m_donvi->cqcq)->first();
             $model=$this->get_KKG_CT($input);
 
             $mahss = '';

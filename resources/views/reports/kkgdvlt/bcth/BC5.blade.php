@@ -100,8 +100,8 @@
         <th>Địa chỉ</th>
         <th>Số điện thoại</th>
         <th>Số công văn</th>
-        <th>Ngày chuyển</th>
-        <th>Ngày nhận hồ sơ</th>
+        <th>Ngày gửi kê khai giá</th>
+        <th>Ngày trả kết quả</th>
         <th>Ngày thực hiện<br> mức giá kê khai</th>
         <th>Thời hạn giải quyết</th>
     </tr>

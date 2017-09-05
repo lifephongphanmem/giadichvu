@@ -93,7 +93,8 @@
         <th>Địa chỉ</th>
         <th>Số điện thoại</th>
         <th>Số công văn</th>
-        <th>Ngày nhận hồ sơ</th>
+        <th>Ngày gửi kê khai giá</th>
+        <th>Ngày trả kết quả</th>
         <th>Ngày thực hiện<br> mức giá kê khai</th>
         <th>Trạng thái hồ sơ</th>
     </tr>
@@ -107,13 +108,14 @@
             <th style="text-align: left">{{$ttkk->diachikd}}</th>
             <th style="text-align: center">{{$ttkk->telkd}}</th>
             <th style="text-align: center">{{$ttkk->socv}}</th>
+            <th style="text-align: center">{{getDateTime($ttkk->ngaychuyen)}}</th>
             <th style="text-align: center">{{getDayVn($ttkk->ngaynhan)}}</th>
             <th style="text-align: center">{{getDayVn($ttkk->ngayhieuluc)}}</th>
             <th style="text-align: center">{{$ttkk->trangthai}}</th>
         </tr>
     @endforeach
     <tr>
-        <th style="text-align: left" colspan="9">
+        <th style="text-align: left" colspan="10">
             {{'Tổng cộng: '. count($model).' hồ sơ.'}}
         </th>
     </tr>
