@@ -488,12 +488,14 @@
                                 <label class="control-label">Đơn vị tính<span class="require">*</span></label>
                                 <select class="form-control" name="dvt" id="dvt">
                                     <option value="no" {{isset($modelcb) && $modelcb->dvt == 'no' ? 'selected' : ''}}>--Chọn đơn vị tính--</option>
+                                    <option value="Đồng/giường/ngày đêm" {{isset($modelcb) && $modelcb->dvt == 'Đồng/giường/ngày đêm' ? 'selected' : ''}}>Đồng/giường/ngày đêm</option>
                                     <option value="Đồng/phòng/ngày đêm" {{isset($modelcb) && $modelcb->dvt == 'Đồng/phòng/ngày đêm' ? 'selected' : ''}}>Đồng/phòng/ngày đêm</option>
                                     <option value="Đồng/phòng/tuần" {{isset($modelcb) && $modelcb->dvt == 'Đồng/phòng/tuần' ? 'selected' : ''}}>Đồng/phòng/tuần</option>
                                     <option value="Đồng/phòng/tháng" {{isset($modelcb) && $modelcb->dvt == 'Đồng/phòng/tháng' ? 'selected' : ''}}>Đồng/phòng/tháng</option>
                                     <option value="Đồng/căn hộ/ngày đêm" {{isset($modelcb) && $modelcb->dvt == 'Đồng/căn hộ/ngày đêm' ? 'selected' : ''}}>Đồng/căn hộ/ngày đêm</option>
                                     <option value="Đồng/căn hộ/tuần" {{isset($modelcb) && $modelcb->dvt == 'Đồng/căn hộ/tuần' ? 'selected' : ''}}>Đồng/căn hộ/tuần</option>
                                     <option value="Đồng/căn hộ/tháng" {{isset($modelcb) && $modelcb->dvt == 'Đồng/căn hộ/tháng' ? 'selected' : ''}}>Đồng/căn hộ/tháng</option>
+
                                 </select>
                             </div>
                         </div>

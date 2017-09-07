@@ -387,6 +387,7 @@
                                 <label class="control-label">Đơn vị tính<span class="require">*</span></label>
                                 <select class="form-control" name="dvt" id="dvt">
                                     <option value="no" {{($model->dvt == 'no') ? 'selected' : ''}}>--Chọn đơn vị tính--</option>
+                                    <option value="Đồng/giường/ngày đêm" {{isset($modelcb) && $modelcb->dvt == 'Đồng/giường/ngày đêm' ? 'selected' : ''}}>Đồng/giường/ngày đêm</option>
                                     <option value="Đồng/phòng/ngày đêm" {{($model->dvt == 'Đồng/phòng/ngày đêm') ? 'selected' : ''}}>Đồng/phòng/ngày đêm</option>
                                     <option value="Đồng/phòng/tuần" {{($model->dvt == 'Đồng/phòng/tuần') ? 'selected' : ''}}>Đồng/phòng/tuần</option>
                                     <option value="Đồng/phòng/tháng" {{($model->dvt == 'Đồng/phòng/tháng') ? 'selected' : ''}}>Đồng/phòng/tháng</option>
