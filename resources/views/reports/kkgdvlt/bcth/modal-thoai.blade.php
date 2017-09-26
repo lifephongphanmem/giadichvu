@@ -459,7 +459,7 @@
                             </div>
                         </div>
                     @endif
-                    <div class="form-group">
+                    <!--div class="form-group">
                         <label class="col-md-4 control-label"><b>Phân loại</b></label>
                         <div class="col-md-6 ">
                             <select id="phanloai" name="phanloai" class="form-control select2me">
@@ -468,7 +468,7 @@
                                 <option value="DKK">Đã kê khai</option>
                             </select>
                         </div>
-                    </div>
+                    </div-->
                 </div>
             </div>
             <div class="modal-footer">
