@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CbKkGDvLt;
 use App\CsKdDvLt;
 use App\DmDvQl;
 use App\DnDvLt;
@@ -633,6 +634,50 @@ class ReportsController extends Controller
                     ->get();
             }
         }
+
+        return $model;
+    }
+
+    public function dvltbc6(Request $request){
+        if (Session::has('admin')) {
+            $inputs = $request->all();
+            $modelcqcq = DmDvQl::where('maqhns',$inputs['cqcq'])->first();
+            $model=$this->getvalBc6($inputs);
+
+            return view('reports.kkgdvlt.bcth.BC6')
+                ->with('modelcqcq',$modelcqcq)
+                ->with('inputs',$inputs)
+                ->with('model',$model)
+                ->with('pageTitle','Báo cáo đơn vị kê khai giá dịch vụ lưu trú');
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function getvalBc6($inputs){
+        /*if($inputs['phanloai'] == 'DKK'){
+            $model = KkGDvLt::where('trangthai','Duyệt')
+                ->where('ngayduyet',[$inputs['ngaytu'],$inputs['ngayden']])
+                ->where('')
+
+        }elseif($inputs['phanloai'] == 'CKK'){
+
+        }else{*/
+            $model = CsKdDvLt::where('cqcq',$inputs['cqcq'])->get();
+            foreach($model as $ttks){
+                $modelkk = KkGDvLt::where('trangthai','Duyệt')
+                    ->whereBetween('ngaynhan',[$inputs['ngaytu'],$inputs['ngayden']])
+                    ->where('masothue',$ttks->masothue)
+                    ->count();
+                $modelkkmn = CbKkGDvLt::whereBetween('ngaynhan',[$inputs['ngaytu'],$inputs['ngayden']])
+                    ->where('masothue',$ttks->masothue)
+                    ->first();
+                $ttks->lankk = $modelkk;
+                if($modelkk == 0)
+                    $ttks->kklc = 'Chưa kê khai';
+                else
+                    $ttks->kklc = $modelkkmn['socv'].', ngày hiệu lực: '. getDayVn($modelkkmn['ngayhieuluc']);
+            }
+        //}
 
         return $model;
     }

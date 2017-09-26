@@ -44,6 +44,10 @@
         $('#frm_bc5').attr('action',url);
         $('#frm_bc5').submit();
     }
+    function ClickBC6(url){
+        $('#frm_bc6').attr('action',url);
+        $('#frm_bc6').submit();
+    }
 </script>
 
 <!--Modal Thoại BC1-->
@@ -396,6 +400,80 @@
                 <button type="submit" data-dismiss="modal" class="btn btn-success" onclick="ClickBC5('/reports/dich_vu_luu_tru/BC5')">Đồng ý</button>
                 <button type="submit" data-dismiss="modal" class="btn btn-primary" onclick="ClickBC5_excel('/reports/dich_vu_luu_tru/BC5_excel')">Xuất Excel</button>
                 <!--button type="submit" data-dismiss="modal" class="btn btn-primary" onclick="ClickPL1Excel('/reports/tt55-2011-BTC/PL1Excel')">Xuất Excel</button-->
+            </div>
+            {!! Form::close() !!}
+        </div>
+    </div>
+    </form>
+</div>
+<!--Modal Thoại BC6-->
+<div id="BC6-thoai-confirm" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade">
+    <div class="modal-dialog">
+        {!! Form::open(['url'=>'/reports/dich_vu_luu_tru/BC6','target'=>'_blank' , 'id' => 'frm_bc6', 'class'=>'form-horizontal form-validate']) !!}
+        <div class="modal-content">
+            <div class="modal-header modal-header-primary">
+                <button type="button" data-dismiss="modal" aria-hidden="true"
+                        class="close">&times;</button>
+                <h4 id="modal-header-primary-label" class="modal-title">Báo cáo đơn vị kê khai giá dịch vụ lưu trú</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label"><b>Từ ngày</b></label>
+                        <div class="col-md-6 ">
+                            <input type="date" id="ngaytu" name="ngaytu" class="form-control" value="{{intval(date('Y')).'-01-01'}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label"><b>Đến ngày</b></label>
+                        <div class="col-md-6 ">
+                            <input type="date" id="ngayden" name="ngayden" class="form-control" value="{{intval(date('Y')).'-12-31'}}">
+                        </div>
+                    </div>
+
+                    <!--div class="form-group">
+                        <label class="col-md-4 control-label"><b>Loại hạng</b></label>
+                        <div class="col-md-6 ">
+                            <select id="loaihang" name="loaihang" class="form-control select2me">
+                                <option value="all">--Tất cả--</option>
+                                <option value="1">1 sao</option>
+                                <option value="2">2 sao</option>
+                                <option value="3">3 sao</option>
+                                <option value="4">4 sao</option>
+                                <option value="5">5 sao</option>
+                                <option value="K">Khác (Nhà nghỉ)</option>
+                                <option value="CXD">Chưa xác định (Khách sạn chưa xác định sao)</option>
+                            </select>
+                        </div>
+                    </div-->
+
+                    @if(session('admin')->level == 'T')
+                        <div class="form-group">
+                            <label class="col-md-4 control-label"><b>Đơn vị chủ quản</b></label>
+                            <div class="col-md-6 ">
+                                <select class="form-control select2me" name="cqcq" id="cqcq">
+                                    @foreach($model as $cqcq)
+                                        <option value="{{$cqcq->maqhns}}">{{$cqcq->tendv}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    @endif
+                    <div class="form-group">
+                        <label class="col-md-4 control-label"><b>Phân loại</b></label>
+                        <div class="col-md-6 ">
+                            <select id="phanloai" name="phanloai" class="form-control select2me">
+                                <option value="all">--Tất cả--</option>
+                                <option value="CKK">Chưa kê khai</option>
+                                <option value="DKK">Đã kê khai</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>
+                <button type="submit" data-dismiss="modal" class="btn btn-success" onclick="ClickBC6('/reports/dich_vu_luu_tru/BC6')">Đồng ý</button>
             </div>
             {!! Form::close() !!}
         </div>

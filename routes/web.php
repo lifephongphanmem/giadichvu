@@ -117,6 +117,7 @@ Route::post('reports/dich_vu_luu_tru/BC2','ReportsController@dvltbc2');
 Route::post('reports/dich_vu_luu_tru/BC3','ReportsController@dvltbc3');
 Route::post('reports/dich_vu_luu_tru/BC4','ReportsController@dvltbc4');
 Route::post('reports/dich_vu_luu_tru/BC5','ReportsController@dvltbc5');
+Route::post('reports/dich_vu_luu_tru/BC6','ReportsController@dvltbc6');
 
 Route::post('reports/dich_vu_luu_tru/BC1_excel','ReportsController@dvltbc1_excel');
 Route::post('reports/dich_vu_luu_tru/BC2_excel','ReportsController@dvltbc2_excel');
@@ -218,6 +219,7 @@ Route::patch('ke_khai_dich_vu_luu_tru/khach_san/{id}','KkGiaDvLt45sController@up
     //Ajax create
 Route::get('/kkgdvlt45s/addttp','KkGiaDvLt45sCtDfController@addttp');
 Route::get('/kkgdvlt45s/editttp','KkGiaDvLt45sCtDfController@editttp');
+Route::get('/kkgdvlt45s/updatettp','KkGiaDvLt45sCtDfController@updatettp');
 Route::get('/kkgdvlt45s/updatettp','KkGiaDvLt45sCtDfController@updatettp');
 Route::get('/kkgdvlt45s/deletettp','KkGiaDvLt45sCtDfController@delete');
 Route::get('/kkgdvlt45s/kkgia','KkGiaDvLt45sCtDfController@kkgia');
