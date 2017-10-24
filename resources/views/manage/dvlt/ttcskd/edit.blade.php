@@ -245,7 +245,7 @@
                                         <td>{{$ttphong->ghichu}}</td>
                                         <td>
                                             <button type="button" data-target="#modal-wide-width" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="editItem({{$ttphong->id}})"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</button>
-                                            <button type="button" data-target="#modal-delete-ts" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="getid({{$ttphong->id}});"><i class="fa fa-trash-o"></i>&nbsp;Xóa</button>
+                                            <!--button type="button" data-target="#modal-delete-ts" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="getid({{$ttphong->id}});"><i class="fa fa-trash-o"></i>&nbsp;Xóa</button-->
                                         </td>
                                     </tr>
                                 @endforeach

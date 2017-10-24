@@ -26,6 +26,7 @@ class KkGiaDvLt45sController extends Controller
                 if(session('admin')->sadmin =='ssa' || session('admin')->cqcq == $modelcskd->cqcq) {
                     $modelttp = TtCsKdDvLt::where('macskd',$macskd)
                         ->get();
+
                     $modeldtad = DoiTuongApDungDvLt::where('macskd',$macskd)
                         ->get();
                     $modelctdf = KkGDvLtCtDf::where('macskd',$macskd)->delete();
@@ -138,7 +139,9 @@ class KkGiaDvLt45sController extends Controller
         if (Session::has('admin')) {
             if(session('admin')->level == 'T' || session('admin')->level == 'H' || session('admin')->level == 'DVLT') {
                     $model = KkGDvLt::findOrFail($id);
-                    $modelttp  = KkGDvLtCt::where('mahs',$model->mahs)
+                    //$modelttp  = KkGDvLtCt::where('mahs',$model->mahs)
+                        //->get();
+                    $modelttp = TtCsKdDvLt::where('macskd',$model->macskd)
                         ->get();
                     $modeldtad = DoiTuongApDungDvLt::where('macskd',$model->macskd)
                         ->get();
