@@ -66,10 +66,10 @@ class KkGiaDvLt45sCtDfController extends Controller
             $result['message'] .= '<th style="text-align: center">Loại phòng- <br>Quy cách chất lượng</th>';
             $result['message'] .= '<th style="text-align: center">Đối tượng</th>';
             $result['message'] .= '<th style="text-align: center">Áp dụng</th>';
-            $result['message'] .= '<th style="text-align: center" width="10%">Mức giá<br>liền kề</th>';
-            $result['message'] .= '<th style="text-align: center" with="10%">Mức giá<br>kê khai</th>';
+            $result['message'] .= '<th style="text-align: center" width="5%">Mức giá<br>liền kề</th>';
+            $result['message'] .= '<th style="text-align: center" with="5%">Mức giá<br>kê khai</th>';
             $result['message'] .= '<th style="text-align: center">Ghi chú</th>';
-            $result['message'] .= '<th style="text-align: center" width="20%">Thao tác</th>';
+            $result['message'] .= '<th style="text-align: center" width="10%">Thao tác</th>';
             $result['message'] .= '</tr>';
             $result['message'] .= '</thead>';
 
@@ -191,10 +191,10 @@ class KkGiaDvLt45sCtDfController extends Controller
             $result['message'] .= '<th style="text-align: center">Loại phòng- Quy cách chất lượng</th>';
             $result['message'] .= '<th style="text-align: center">Đối tượng</th>';
             $result['message'] .= '<th style="text-align: center">Áp dụng</th>';
-            $result['message'] .= '<th style="text-align: center">Mức giá<br>liền kề</th>';
-            $result['message'] .= '<th style="text-align: center">Mức giá<br>kê khai</th>';
+            $result['message'] .= '<th style="text-align: center;width: 5%">Mức giá<br>liền kề</th>';
+            $result['message'] .= '<th style="text-align: center;width: 5%">Mức giá<br>kê khai</th>';
             $result['message'] .= '<th style="text-align: center">Ghi chú</th>';
-            $result['message'] .= '<th style="text-align: center" width="20%">Thao tác</th>';
+            $result['message'] .= '<th style="text-align: center" width="10%">Thao tác</th>';
             $result['message'] .= '</tr>';
             $result['message'] .= '</thead>';
 
@@ -255,7 +255,7 @@ class KkGiaDvLt45sCtDfController extends Controller
             $result['message'] .= '<div class="row">';
             $result['message'] .= '<div class="col-md-12">';
             $result['message'] .= '<div class="form-group"><label for="selGender" class="control-label"><b>Loại phòng</b><span class="require">*</span></label>';
-            $result['message'] .= '<div><select id="loaipedit" class="form-control" name="loaipedit">';
+            $result['message'] .= '<div><select id="loaipedit" class="form-control" name="loaipedit" readonly>';
             foreach($modelttp as $ttp){
                 if($ttp->maloaip == $model->maloaip)
                     $result['message'] .= '<option value="'.$ttp->maloaip.'" selected>'.$ttp->loaip.'</option>';
@@ -267,18 +267,18 @@ class KkGiaDvLt45sCtDfController extends Controller
             $result['message'] .= '</div>';
             $result['message'] .= '</div>';
 
-            /*$result['message'] .= '<div class="row">';
-            $result['message'] .= '<div class="col-md-6">';
+            $result['message'] .= '<div class="row">';
+            /*$result['message'] .= '<div class="col-md-6">';
             $result['message'] .= '<div class="form-group"><label for="selGender" class="control-label"><b>Quy cách chất lượng</b><span class="require">*</span></label>';
             $result['message'] .= '<div><textarea id="qccledit" class="form-control" name="qccledit" cols="30" rows="3">'.$model->qccl.'</textarea></div>';
             $result['message'] .= '</div>';
-            $result['message'] .= '</div>';
-            $result['message'] .= '<div class="col-md-6">';
-            $result['message'] .= '<div class="form-group"><label for="selGender" class="control-label"><b>Số hiệu phòng</b><span class="require">*</span></label>';
-            $result['message'] .= '<div><textarea id="sohieuedit" class="form-control" name="sohieuedit" cols="30" rows="3">'.$model->sohieu.'</textarea></div>';
-            $result['message'] .= '</div>';
-            $result['message'] .= '</div>';
             $result['message'] .= '</div>';*/
+            $result['message'] .= '<div class="col-md-12">';
+            $result['message'] .= '<div class="form-group"><label for="selGender" class="control-label"><b>Số hiệu phòng</b><span class="require">*</span></label>';
+            $result['message'] .= '<div><textarea id="sohieuedit" class="form-control" name="sohieuedit" cols="30" rows="4">'.$model->sohieu.'</textarea></div>';
+            $result['message'] .= '</div>';
+            $result['message'] .= '</div>';
+            $result['message'] .= '</div>';
 
             $result['message'] .= '<div class="row">';
             $result['message'] .= '<div class="col-md-12">';
@@ -298,7 +298,7 @@ class KkGiaDvLt45sCtDfController extends Controller
             $result['message'] .= '<div class="row">';
             $result['message'] .= '<div class="col-md-12">';
             $result['message'] .= '<div class="form-group"><label for="selGender" class="control-label"><b>Áp dụng</b><span class="require">*</span></label>';
-            $result['message'] .= '<div><textarea id="apdungedit" class="form-control" name="apdungedit" cols="30" rows="3">'.$model->apdung.'</textarea></div>';
+            $result['message'] .= '<div><textarea id="apdungedit" class="form-control" name="apdungedit" cols="30" rows="2">'.$model->apdung.'</textarea></div>';
             $result['message'] .= '</div>';
             $result['message'] .= '</div>';
             $result['message'] .= '</div>';
@@ -362,7 +362,7 @@ class KkGiaDvLt45sCtDfController extends Controller
             $modelkkgia->maloaip = $inputs['loaip'];
             $modelkkgia->loaip = $modelttp->loaip;
             //$modelkkgia->qccl = $inputs['qccl'];
-            //$modelkkgia->sohieu = $inputs['sohieu'];
+            $modelkkgia->sohieu = $inputs['sohieu'];
             $modelkkgia->tendoituong = $inputs['tendoituong'];
             $modelkkgia->apdung = $inputs['apdung'];
             //$modelkkgia->mucgialk = $inputs['mucgialk']!= '' ? $inputs['mucgialk'] : '0';
@@ -382,10 +382,10 @@ class KkGiaDvLt45sCtDfController extends Controller
             $result['message'] .= '<th style="text-align: center">Loại phòng- <br>Quy cách chất lượng</th>';
             $result['message'] .= '<th style="text-align: center">Đối tượng</th>';
             $result['message'] .= '<th style="text-align: center">Áp dụng</th>';
-            $result['message'] .= '<th style="text-align: center" width="10%">Mức giá<br>liền kề</th>';
-            $result['message'] .= '<th style="text-align: center" with="10%">Mức giá<br>kê khai</th>';
+            $result['message'] .= '<th style="text-align: center" width="5%">Mức giá<br>liền kề</th>';
+            $result['message'] .= '<th style="text-align: center" with="5%">Mức giá<br>kê khai</th>';
             $result['message'] .= '<th style="text-align: center">Ghi chú</th>';
-            $result['message'] .= '<th style="text-align: center" width="20%">Thao tác</th>';
+            $result['message'] .= '<th style="text-align: center" width="10%">Thao tác</th>';
             $result['message'] .= '</tr>';
             $result['message'] .= '</thead>';
 
@@ -452,10 +452,10 @@ class KkGiaDvLt45sCtDfController extends Controller
             $result['message'] .= '<th style="text-align: center">Loại phòng- <br>Quy cách chất lượng</th>';
             $result['message'] .= '<th style="text-align: center">Đối tượng</th>';
             $result['message'] .= '<th style="text-align: center">Áp dụng</th>';
-            $result['message'] .= '<th style="text-align: center" width="10%">Mức giá<br>liền kề</th>';
-            $result['message'] .= '<th style="text-align: center" with="10%">Mức giá<br>kê khai</th>';
+            $result['message'] .= '<th style="text-align: center" width="5%">Mức giá<br>liền kề</th>';
+            $result['message'] .= '<th style="text-align: center" with="5%">Mức giá<br>kê khai</th>';
             $result['message'] .= '<th style="text-align: center">Ghi chú</th>';
-            $result['message'] .= '<th style="text-align: center" width="20%">Thao tác</th>';
+            $result['message'] .= '<th style="text-align: center" width="10%">Thao tác</th>';
             $result['message'] .= '</tr>';
             $result['message'] .= '</thead>';
             $result['message'] .= '<tbody>';

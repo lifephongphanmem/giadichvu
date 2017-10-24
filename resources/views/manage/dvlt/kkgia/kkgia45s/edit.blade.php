@@ -467,10 +467,10 @@
                                     <th style="text-align: center">Loại phòng<br>Quy cách chất lượng</th>
                                     <th style="text-align: center">Đối tượng</th>
                                     <th style="text-align: center">Áp dụng</th>
-                                    <th style="text-align: center">Mức giá liền kề</th>
-                                    <th style="text-align: center">Mức giá kê khai</th>
+                                    <th style="text-align: center;width: 5%;">Mức giá<br> liền kề</th>
+                                    <th style="text-align: center; width: 5%">Mức giá <br>kê khai</th>
                                     <th style="text-align: center">Ghi chú</th>
-                                    <th style="text-align: center">Thao tác</th>
+                                    <th style="text-align: center; width: 10%">Thao tác</th>
                                 </tr>
                                 </thead>
                                 <tbody>
