@@ -139,9 +139,9 @@ class KkGiaDvLt45sController extends Controller
         if (Session::has('admin')) {
             if(session('admin')->level == 'T' || session('admin')->level == 'H' || session('admin')->level == 'DVLT') {
                     $model = KkGDvLt::findOrFail($id);
-                    //$modelttp  = KkGDvLtCt::where('mahs',$model->mahs)
-                        //->get();
-                    $modelttp = TtCsKdDvLt::where('macskd',$model->macskd)
+                    $modelttp  = KkGDvLtCt::where('mahs',$model->mahs)
+                        ->get();
+                    $modelloaip = TtCsKdDvLt::where('macskd',$model->macskd)
                         ->get();
                     $modeldtad = DoiTuongApDungDvLt::where('macskd',$model->macskd)
                         ->get();
@@ -152,6 +152,7 @@ class KkGiaDvLt45sController extends Controller
                         ->with('modelcb',$modecb)
                         ->with('modeldtad',$modeldtad)
                         ->with('modelttp',$modelttp )
+                        ->with('modelloaip',$modelloaip)
                         ->with('pageTitle', 'Kê khai giá dịch vụ lưu trú chỉnh sửa');
 
             }else{

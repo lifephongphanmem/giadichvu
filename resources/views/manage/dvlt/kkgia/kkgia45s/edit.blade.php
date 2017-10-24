@@ -566,7 +566,7 @@
                             <div class="form-group"><label for="selGender" class="control-label"><b>Loại phòng</b><span class="require">*</span></label>
                                 <div>
                                     <select id="maloaipadd" name="maloaipadd" class="form-control">
-                                        @foreach($modelttp as $ttp)
+                                        @foreach($modelloaip as $ttp)
                                             <option value="{{$ttp->maloaip}}">{{$ttp->loaip}}</option>
                                         @endforeach
                                     </select>
