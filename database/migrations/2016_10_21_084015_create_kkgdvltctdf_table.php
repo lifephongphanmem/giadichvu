@@ -20,7 +20,7 @@ class CreateKkgdvltctdfTable extends Migration
             $table->string('loaip')->nullable();
             $table->text('qccl')->nullable();
             $table->text('sohieu')->nullable();
-            $table->string('ghichu')->nullable();
+            $table->text('ghichu')->nullable();
             $table->string('mucgialk')->nullable();
             $table->string('mucgiakk')->nullable();
             $table->text('tendoituong')->nullable();
