@@ -148,7 +148,7 @@ class KkGiaDvLt45sCtController extends Controller
             $result['message'] .= '</div>';*/
             $result['message'] .= '<div class="col-md-12">';
             $result['message'] .= '<div class="form-group"><label for="selGender" class="control-label"><b>Số hiệu phòng</b><span class="require">*</span></label>';
-            $result['message'] .= '<div><textarea id="sohieuedit" class="form-control" name="sohieuedit" cols="30" rows="4" readonly>'.$model->sohieu.'</textarea></div>';
+            $result['message'] .= '<div><textarea id="sohieuedit" class="form-control" name="sohieuedit" cols="30" rows="4">'.$model->sohieu.'</textarea></div>';
             $result['message'] .= '</div>';
             $result['message'] .= '</div>';
             $result['message'] .= '</div>';
@@ -235,7 +235,7 @@ class KkGiaDvLt45sCtController extends Controller
             //$modelkkgia->maloaip = $inputs['loaip'];
             //$modelkkgia->loaip = $modelttp->loaip;
             //$modelkkgia->qccl = $inputs['qccl'];
-            //$modelkkgia->sohieu = $inputs['sohieu'];
+            $modelkkgia->sohieu = $inputs['sohieu'];
             $modelkkgia->ghichu = $inputs['ghichu'];
             $modelkkgia->tendoituong = $inputs['tendoituong'];
             $modelkkgia->apdung = $inputs['apdung'];
