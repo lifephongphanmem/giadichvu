@@ -343,7 +343,7 @@
                 dataType: 'JSON',
                 success: function (data) {
                     //if(data.status == 'success') {
-                    toastr.success("Bạn đã xóa thông tin kê khai giá phòng nghỉ thành công!", "Thành công!");
+                    toastr.success("Bạn đã chỉnh sửa thông tin kê khai giá phòng nghỉ thành công!", "Thành công!");
                     $('#dsts').replaceWith(data.message);
                     jQuery(document).ready(function() {
                         TableManaged.init();
