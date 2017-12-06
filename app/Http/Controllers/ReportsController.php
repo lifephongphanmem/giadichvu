@@ -452,8 +452,11 @@ class ReportsController extends Controller
 
             $model=$this->get_KKG_TH($input);
 
-            if($input['trangthai']!='all'){
+            /*if($input['trangthai']!='all'){
                 $model=$model->where('trangthai', $input['trangthai']);
+            }*/
+            if($input['thoihan']!='all'){
+                $model=$model->where('thoihan', $input['thoihan']);
             }
 
 
