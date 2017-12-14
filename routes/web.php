@@ -238,6 +238,7 @@ Route::get('/kkgdvlt45s/tdkkgia','KkGiaDvLt45sCtController@upkkgia');
 
     //Xét duyệt kê khai
 Route::get('xet_duyet_ke_khai_dich_vu_luu_tru/thang={thang}&nam={nam}&pl={pl}','KkGDvLtXdController@index');
+Route::get('xdkkgiadvlt/tralai','KkGDvLtXdController@gettttralai');
 Route::post('xet_duyet_ke_khai_dich_vu_luu_tru/tralai','KkGDvLtXdController@tralai');
 Route::get('/xdkkgiadvlt/nhanhs','KkGDvLtXdController@getTTnHs');
 Route::post('xet_duyet_ke_khai_dich_vu_luu_tru/nhanhs','KkGDvLtXdController@nhanhs');

@@ -524,4 +524,36 @@ class KkGDvLtXdController extends Controller
         die(json_encode($result));
     }
 
+    public function gettttralai(Request $request){
+        $result = array(
+            'status' => 'fail',
+            'message' => 'error',
+        );
+        if(!Session::has('admin')) {
+            $result = array(
+                'status' => 'fail',
+                'message' => 'permission denied',
+            );
+            die(json_encode($result));
+        }
+        //dd($request);
+        $inputs = $request->all();
+
+        if(isset($inputs['id'])){
+
+            $modelhs = KkGDvLt::where('id',$inputs['id'])
+                ->first();
+            $modelcskd = CsKdDvLt::where('macskd',$modelhs->macskd)->first();
+
+            $result['message'] = '<div class="form-group" id="tttralai"> ';
+            $result['message'] .= '<label style="color: blue"><b>'.$modelcskd->tencskd.'</b> kê khai giá dịch vụ lưu trú số công văn <b>'.$modelhs->socv.'</b> ngày áp dụng <b>'.getDayVn($modelhs->ngayhieuluc).'</b></b></label>';
+            $result['message'] .= '<label style="color: blue">Mã hồ sơ kê khai: <b>'.$modelhs->mahs.'</b></label>';
+            $result['message'] .= '<input type="hidden" id="idtralai" name="idtralai" value="'.$inputs['id'].'">';
+            $result['message'] .= '</div>';
+
+            $result['status'] = 'success';
+        }
+        die(json_encode($result));
+    }
+
 }

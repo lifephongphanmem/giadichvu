@@ -124,14 +124,32 @@
 
         });
         function confirmTraLai(id) {
-            document.getElementById("idtralai").value =id;
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            //alert(id);
+            $.ajax({
+                url: '/xdkkgiadvlt/tralai',
+                type: 'GET',
+                data: {
+                    _token: CSRF_TOKEN,
+                    id: id
+                },
+                dataType: 'JSON',
+                success: function (data) {
+                    if (data.status == 'success') {
+                        $('#tttralai').replaceWith(data.message);
+                    }
+                }
+            })
         }
         function ClickTraLai(){
             if($('#lydo').val() != ''){
                 toastr.success("Hồ sơ đã được trả lại!", "Thành công!");
-                $('#frm_tralai').submit();
+                $("#frm_tralai").unbind('submit').submit();
             }else{
                 toastr.error("Bạn cần nhập lý do trả lại hồ sơ", "Lỗi!!!");
+                $("#frm_tralai").submit(function (e) {
+                    e.preventDefault();
+                });
             }
 
         }
@@ -369,11 +387,13 @@
                         <h4 class="modal-title">Đồng ý trả lại hồ sơ?</h4>
                     </div>
                     <div class="modal-body">
+                        <div class="form-group" id="tttralai">
+                            </div>
                         <div class="form-group">
-                            <label><b>Lý do</b></label>
-                            <textarea id="lydo" class="form-control" name="lydo" cols="30" rows="5"></textarea></div>
+                            <label><b>Lý do trả lại</b></label>
+                            <textarea id="lydo" class="form-control" name="lydo" cols="30" rows="8"></textarea></div>
                     </div>
-                    <input type="hidden" name="idtralai" id="idtralai">
+
                     <div class="modal-footer">
                         <button type="button" class="btn default" data-dismiss="modal">Hủy</button>
                         <button type="submit" class="btn blue" onclick="ClickTraLai()">Đồng ý</button>
