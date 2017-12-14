@@ -55,7 +55,6 @@ class KkGDvLtXdController extends Controller
             foreach($model as $ttkk){
                 $this->getTTCSKD($modelcskd,$ttkk);
             }
-
             return view('manage.dvlt.kkgia.xetduyet.index')
                 ->with('model',$model)
                 ->with('nam',$nam)
@@ -170,11 +169,15 @@ class KkGDvLtXdController extends Controller
                 ->first();
             $model = DmDvQl::where('maqhns',$modelhs->cqcq)
                 ->first();
+            $modelcskd = CsKdDvLt::where('macskd',$modelhs->macskd)->first();
 
             $stt = $model->sohsnhan + 1;
             $ngay = Carbon::now()->toDateString();
 
             $result['message'] = '<div class="modal-body" id="ttnhanhs">';
+            $result['message'] .= '<div class="form-group">';
+            $result['message'] .= '<label style="color: blue"><b>'.$modelcskd->tencskd.'</b> kê khai giá dịch vụ lưu trú số công văn <b>'.$modelhs->socv.'</b> ngày áp dụng <b>'.getDayVn($modelhs->ngayhieuluc).'</b></b></label>';
+            $result['message'] .= '</div>';
             $result['message'] .= '<div class="form-group">';
             $result['message'] .= '<label><b>Số hồ sơ nhận</b></label>';
             $result['message'] .= '<input type="text" style="text-align: center" id="sohsnhan" name="sohsnhan" class="form-control" data-mask="fdecimal" value="'.$stt.'" autofocus>';
@@ -453,6 +456,72 @@ class KkGDvLtXdController extends Controller
                 ->with('modelcskd',$modelcskd);
         }else
             return view('errors.notlogin');
+    }
+
+    public function huyduyet(Request $request){
+        if (Session::has('admin')) {
+            $inputs = $request->all();
+            $mahs = $inputs['mahshuyduyet'];
+            $model = KkGDvLt::where('mahs',$mahs)->first();
+            $model->trangthai = 'Chờ nhận';
+            if($model->save()){
+                $modelcb = CbKkGDvLt::where('mahs',$mahs)->delete();
+                $mahsh = getdate()[0];
+                $his = new KkGDvLtH();
+                $his->mahsh = $mahsh;
+                $his->mahs = $model->mahs;
+                $his->macskd = $model->macskd;
+                $his->masothue = $model->masothue;
+                $his->ngaynhap = $model->ngaynhap;
+                $his->socv = $model->socv;
+                $his->socvlk = $model->socvlk;
+                $his->ngaycvlk = $model->ngaycvlk;
+                $his->ngayhieuluc = $model->ngayhieuluc;
+                $his->ttnguoinop = $model->ttnguoinop;
+                $his->ghichu = $model->ghichu;
+                $his->ngaychuyen = $model->ngaychuyen;
+                $his->cqcq = $model->cqcq;
+                $his->dvt = $model->dvt;
+                $his->phanloai = $model->phanloai;
+                $his->plhs =$model->plhs;
+                $his->action = 'Huỷ duyệt hồ sơ';
+                $his->save();
+            }
+            return redirect('xet_duyet_ke_khai_dich_vu_luu_tru/'.'thang='.date('m',strtotime($model->ngaychuyen)).'&nam='.date('Y',strtotime($model->ngaychuyen)).'&pl=cho_nhan');
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function gettthuyduyet(Request $request){
+        $result = array(
+            'status' => 'fail',
+            'message' => 'error',
+        );
+        if(!Session::has('admin')) {
+            $result = array(
+                'status' => 'fail',
+                'message' => 'permission denied',
+            );
+            die(json_encode($result));
+        }
+        //dd($request);
+        $inputs = $request->all();
+
+        if(isset($inputs['mahs'])){
+
+            $modelhs = KkGDvLt::where('mahs',$inputs['mahs'])
+                ->first();
+            $modelcskd = CsKdDvLt::where('macskd',$modelhs->macskd)->first();
+
+            $result['message'] = '<div class="form-group" id="tthuyduyet"> ';
+            $result['message'] .= '<label style="color: blue"><b>'.$modelcskd->tencskd.'</b> kê khai giá dịch vụ lưu trú số công văn <b>'.$modelhs->socv.'</b> ngày áp dụng <b>'.getDayVn($modelhs->ngayhieuluc).'</b></b></label>';
+            $result['message'] .= '<label style="color: blue">Mã hồ sơ kê khai: <b>'.$inputs['mahs'].'</b></label>';
+            $result['message'] .= '<input type="hidden" id="mahshuyduyet" name="mahshuyduyet" value="'.$inputs['mahs'].'">';
+            $result['message'] .= '</div>';
+
+            $result['status'] = 'success';
+        }
+        die(json_encode($result));
     }
 
 }

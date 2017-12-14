@@ -46,14 +46,18 @@
             @if($tt->action == 'Trả lại hồ sơ')
                 <td>{{$tt->action}}<br>Thời gian trả hồ sơ: <b>{{getDateTime($tt->created_at)}}</b><br>
                     Lý do trả lại: <br>{{$tt->lydo}}</td>
+            @elseif($tt->action == 'Huỷ duyệt hồ sơ')
+                <td>{{$tt->action}}<br>Thời gian huỷ duyệt hồ sơ: <b>{{getDateTime($tt->created_at)}}</b>
             @else
                 <td>{{$tt->action}}<b>
             @endif
             <td>
-                @if($tt->phanloai == 'DT')
-                    <a href="{{url('ke_khai_dich_vu_luu_tru/historyks/mahsh='.$tt->mahsh)}}" style="background-color: #eee">Xem HS tại thời điểm này</a>
-                @else
-                    <a href="{{url('ke_khai_dich_vu_luu_tru/history/mahsh='.$tt->mahsh)}}" style="background-color: #eee">Xem HS tại thời điểm này</a>
+                @if($tt->action != 'Huỷ duyệt hồ sơ')
+                    @if($tt->phanloai == 'DT')
+                        <a href="{{url('ke_khai_dich_vu_luu_tru/historyks/mahsh='.$tt->mahsh)}}" style="background-color: #eee">Xem HS tại thời điểm này</a>
+                    @else
+                        <a href="{{url('ke_khai_dich_vu_luu_tru/history/mahsh='.$tt->mahsh)}}" style="background-color: #eee">Xem HS tại thời điểm này</a>
+                    @endif
                 @endif
             </td>
         </tr>

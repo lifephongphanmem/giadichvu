@@ -187,6 +187,29 @@
             $('#frm_nhanhsedit').submit();
         }
 
+        function confirmHuyduyet(mahs){
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            //alert(mahs);
+
+            $.ajax({
+                url: '/xdkkgiadvlt/tthuyduyet',
+                type: 'GET',
+                data: {
+                    _token: CSRF_TOKEN,
+                    mahs: mahs
+                },
+                dataType: 'JSON',
+                success: function (data) {
+                    if (data.status == 'success') {
+                        $('#tthuyduyet').replaceWith(data.message);
+                    }
+                }
+            })
+        }
+        function ClickHuyDuyet(){
+            $('#frm_huyduyet').submit();
+        }
+
     </script>
 @stop
 
@@ -310,10 +333,11 @@
                                                 Nhận hồ sơ</button>
                                                 <a href="{{url('ke_khai_dich_vu_luu_tru/'.$tt->macskd.'/hsdakk')}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Thông tin hồ sơ đã kê khai</a>
 
-                                        @endif
-                                        @if($pl=='cong_bo' || $pl= 'duyet')
+                                        @else
                                             <button type="button" onclick="confirmNhanHsedit({{$tt->mahs}})" class="btn btn-default btn-xs mbs" data-target="#nhanhsedit-modal" data-toggle="modal"><i class="fa fa-edit"></i>&nbsp;
                                                 Chỉnh sửa TT nhận</button>
+                                            <button type="button" onclick="confirmHuyduyet({{$tt->mahs}})" class="btn btn-default btn-xs mbs" data-target="#huyduyet-modal" data-toggle="modal"><i class="fa fa-stop"></i>&nbsp;
+                                                Huỷ duyệt HS</button>
                                         @endif
 
                                     @endif
@@ -405,6 +429,32 @@
             <!-- /.modal-content -->
         </div>
         <!-- /.modal-dialog -->
+    </div>
+    <!--Model huỷ duyệt-->
+    <div class="modal fade" id="huyduyet-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                {!! Form::open(['url'=>'xet_duyet_ke_khai_dich_vu_luu_tru/huyduyet','id' => 'frm_huyduyet'])!!}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Đồng ý huỷ duyệt hồ sơ?</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label style="color: blue"><b>Hồ sơ sẽ chuyển về trạng thái chờ xét duyệt, hồ sơ lưu bên trang công bố sẽ bị xoá bỏ. Đồng thời trong lịch sử hồ sơ sẽ lưu lại vết hồ sơ bị huỷ duyệt</b></label>
+                    </div>
+                    <div class="form-group" id="tthuyduyet">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn default" data-dismiss="modal">Hủy</button>
+                        <button type="submit" class="btn blue" onclick="ClickHuyDuyet()">Đồng ý</button>
+                    </div>
+                    {!! Form::close() !!}
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
     </div>
 
     @include('includes.script.create-header-scripts')
