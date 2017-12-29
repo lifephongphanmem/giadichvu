@@ -13,6 +13,7 @@ use App\KkGDvLtCtDf;
 use App\KkGDvLtCtH;
 use App\KkGDvLtH;
 use App\TtCsKdDvLt;
+use App\TtNgayNghiLe;
 use Faker\Provider\tr_TR\DateTime;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -571,7 +572,7 @@ class KkGDvLtController extends Controller
             $input = $request->all();
             $model = KkGDvLt::findOrFail($id);
             $macskd = $model->macskd;
-            $model->ngaynhap = date('Y-m-d', strtotime(str_replace('/', '-', $input['ngaynhap'])));
+            //$model->ngaynhap = date('Y-m-d', strtotime(str_replace('/', '-', $input['ngaynhap'])));
             $model->socv = $input['socv'];
             $model->ngayhieuluc = date('Y-m-d', strtotime(str_replace('/', '-', $input['ngayhieuluc'])));
             $model->socvlk = $input['socvlk'];
@@ -794,7 +795,7 @@ class KkGDvLtController extends Controller
     public function checkngay(Request $request){
         $result = array(
             'status' => 'fail',
-            'message' => 'error',
+            'message' => '"Ngày thực hiện mức giá kê khai không thể sử dụng được! Bạn cần chỉnh sửa lại thông tin trước khi chuyển", "Lỗi!!!"',
         );
         if(!Session::has('admin')) {
             $result = array(
@@ -816,24 +817,66 @@ class KkGDvLtController extends Controller
                     $result['status'] = 'success';
                 }
             }else {
-                $day = date("D", strtotime($ngaychuyen));
+                $model = TtNgayNghiLe::where('ngaytu','<=',$ngayapdung)
+                    ->where('ngayden','>=',$ngayapdung)->first();
+                if(count($model)>0){
+                    $ngaynghi = $model->songaynghi;
+                    $day = date("D", strtotime($ngaychuyen));
 
-                if ($day == 'Thu') {
-                    $ngaysosanh = date('Y-m-d', mktime(0, 0, 0, date('m', strtotime($ngaychuyen)), date('d', strtotime($ngaychuyen)) + 5, date('Y', strtotime($ngaychuyen))));
-                } elseif ($day == 'Fri') {
-                    $ngaysosanh = date('Y-m-d', mktime(0, 0, 0, date('m', strtotime($ngaychuyen)), date('d', strtotime($ngaychuyen)) + 5, date('Y', strtotime($ngaychuyen))));
-                } elseif ($day == 'Sat') {
-                    $ngaysosanh = date('Y-m-d', mktime(0, 0, 0, date('m', strtotime($ngaychuyen)), date('d', strtotime($ngaychuyen)) + 4, date('Y', strtotime($ngaychuyen))));
-                } else {
-                    $ngaysosanh = date('Y-m-d', mktime(0, 0, 0, date('m', strtotime($ngaychuyen)), date('d', strtotime($ngaychuyen)) + 3, date('Y', strtotime($ngaychuyen))));
-                }
-                if ($ngayapdung >= $ngaysosanh) {
-                    $result['status'] = 'success';
+                    if ($day == 'Thu') {
+                        $ngaysosanh = date('Y-m-d', mktime(0, 0, 0, date('m', strtotime($ngaychuyen)), date('d', strtotime($ngaychuyen)) + 5 + $ngaynghi, date('Y', strtotime($ngaychuyen))));
+                    } elseif ($day == 'Fri') {
+                        $ngaysosanh = date('Y-m-d', mktime(0, 0, 0, date('m', strtotime($ngaychuyen)), date('d', strtotime($ngaychuyen)) + 5 + $ngaynghi, date('Y', strtotime($ngaychuyen))));
+                    } elseif ($day == 'Sat') {
+                        $ngaysosanh = date('Y-m-d', mktime(0, 0, 0, date('m', strtotime($ngaychuyen)), date('d', strtotime($ngaychuyen)) + 4 + $ngaynghi, date('Y', strtotime($ngaychuyen))));
+                    } else {
+                        $ngaysosanh = date('Y-m-d', mktime(0, 0, 0, date('m', strtotime($ngaychuyen)), date('d', strtotime($ngaychuyen)) + 3 + $ngaynghi, date('Y', strtotime($ngaychuyen))));
+                    }
+                    if ($ngayapdung >= $ngaysosanh) {
+                        $result['status'] = 'success';
+                    }
+                }else {
+                    $day = date("D", strtotime($ngaychuyen));
+
+                    if ($day == 'Thu') {
+                        $ngaysosanh = date('Y-m-d', mktime(0, 0, 0, date('m', strtotime($ngaychuyen)), date('d', strtotime($ngaychuyen)) + 5, date('Y', strtotime($ngaychuyen))));
+                    } elseif ($day == 'Fri') {
+                        $ngaysosanh = date('Y-m-d', mktime(0, 0, 0, date('m', strtotime($ngaychuyen)), date('d', strtotime($ngaychuyen)) + 5, date('Y', strtotime($ngaychuyen))));
+                    } elseif ($day == 'Sat') {
+                        $ngaysosanh = date('Y-m-d', mktime(0, 0, 0, date('m', strtotime($ngaychuyen)), date('d', strtotime($ngaychuyen)) + 4, date('Y', strtotime($ngaychuyen))));
+                    } else {
+                        $ngaysosanh = date('Y-m-d', mktime(0, 0, 0, date('m', strtotime($ngaychuyen)), date('d', strtotime($ngaychuyen)) + 3, date('Y', strtotime($ngaychuyen))));
+                    }
+                    if ($ngayapdung >= $ngaysosanh) {
+                        $result['status'] = 'success';
+                    }
                 }
             }
 
         }
         die(json_encode($result));
+    }
+
+    public function checkgial1($mahs){
+        $model = KkGDvLtCt::where('mahs',$mahs)->get();
+        foreach($model as $tt){
+            if($tt->mucgiakk > $tt->mucgialk)
+               $check = '1'; //sai dk
+            if($tt->mucgiakk = $tt->mucgialk) {
+                if ($check = '1')
+                    $check = '1';
+                else
+                    $check = '2';
+            }
+            if($tt->mucgiakk < $tt->mucgialk) {
+                if ($check = '1')
+                    $check = '1';
+                else
+                    $check = '2';
+            }
+
+        }
+
     }
 
     public function search(){

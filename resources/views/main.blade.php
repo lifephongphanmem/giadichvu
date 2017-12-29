@@ -469,6 +469,13 @@ License: You must have a valid license purchased only from themeforest(the above
                         @endif
                         </ul>
                     </li>
+                    <li>
+                        <a href="{{url('thongtinngaynghile')}}">
+                            <i class="fa fa-file-o fa-fw"></i>
+                            <span class="title">Thông tin ngày nghỉ lễ</span>
+                            <span class="arrow"></span>
+                        </a>
+                    </li>
                 @endif
                 @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'satc' || session('admin')->sadmin == 'savt' || session('admin')->sadmin == 'sa')
                 <li>

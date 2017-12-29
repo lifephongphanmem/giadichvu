@@ -23,8 +23,7 @@
 
             $('#namhs').change(function() {
                 var namhs = $('#namhs').val();
-                var macskd = $('#macskd').val();
-                var url = '/ke_khai_dich_vu_luu_tru/co_so_kinh_doanh='+macskd+'&nam='+namhs;
+                var url = '/thongtinngaynghile?&nam='+namhs;
 
                 window.location.href = url;
             });
@@ -37,82 +36,14 @@
             $('#frm_delete').submit();
         }
 
-        function confirmCopy(macskd){
-            document.getElementById("macskdcp").value=macskd;
-        }
-
-        function confirmChuyen(id) {
-            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-            //alert(id);
-            $.ajax({
-                url: '/kkgdvlt/checkngay',
-                type: 'GET',
-                data: {
-                    _token: CSRF_TOKEN,
-                    id: id
-                },
-                dataType: 'JSON',
-                success: function (data) {
-                    if(data.status != 'success') {
-                        toastr.error(data.message);
-                        $('#chuyen-modal').modal("hide");
-                    }else{
-                        document.getElementById("idchuyen").value =id;
-                    }
-                }
-            })
-
-
-        }
-        function confirmChuyenHSCham(id){
-            document.getElementById("idchuyenhscham").value=id;
-        }
-
-        function ClickChuyenHsCham(){
-            $('#frm_chuyenhscham').submit();
-        }
-
-        function ClickChuyen(){
-            if($('#ttnguoinop').val() != ''){
-                toastr.success("Hồ sơ đã được chuyển!", "Thành công!");
-                $('#frm_chuyen').submit();
-            }else{
-                toastr.error("Bạn cần nhập thông tin người chuyển", "Lỗi!!!");
-            }
-
-        }
-
-        function viewLyDo(id) {
-            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-            //alert(id);
-            $.ajax({
-                url: '/kkgdvlt/viewlydo',
-                type: 'GET',
-                data: {
-                    _token: CSRF_TOKEN,
-                    id: id
-                },
-                dataType: 'JSON',
-                success: function (data) {
-                    if(data.status == 'success') {
-                        $('#lydo').replaceWith(data.message);
-                    }
-                }
-            })
-        }
-
-
     </script>
 @stop
 
 @section('content')
 
     <h3 class="page-title">
-        Thông tin kê khai giá<small>&nbsp;dịch vụ lưu trú</small> - Cơ sở kinh doanh <small>{{$modelcskd->tencskd}}</small>
+        Thông tin<small>&nbsp;ngày nghỉ lễ</small>
     </h3>
-    <input type="hidden" name="macskd" id="macskd" value="{{$macskd}}">
-
-
 
     <!-- END PAGE HEADER-->
     <div class="row">
@@ -121,23 +52,7 @@
             <div class="portlet box">
                 <div class="portlet-title">
                     <div class="actions">
-                        @if(can('kkdvlt','create'))
-                            <!--a href="{{url('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh='.$macskd.'/create_dk')}}" class="btn btn-default btn-sm">
-                            <i class="fa fa-plus"></i> Kê khai mới (file đính kèm) </a-->
-                            @if($cp == 'yes')
-                            <!--button type="button" onclick="confirmCopy('{{$macskd}}')" class="btn btn-default btn-sm" data-target="#copy-modal" data-toggle="modal"><i class="fa fa-plus"></i>&nbsp;
-                                Kê khai giá dịch vụ</button-->
-
-                            <a href="{{url('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh='.$macskd.'/copy')}}" class="btn btn-default btn-sm">
-                                <i class="fa fa-plus"></i> Kê khai giá dịch vụ </a>
-                            @else
-                                <a href="{{url('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh='.$macskd.'/create')}}" class="btn btn-default btn-sm">
-                                    <i class="fa fa-plus"></i> Kê khai mới </a>
-                                <a href="{{url('ke_khai_dich_vu_luu_tru/khach_san='.$macskd.'/create')}}" class="btn btn-default btn-sm">
-                                    <i class="fa fa-plus"></i> Kê khai giá KS 4 5 sao </a>
-
-                            @endif
-                        @endif
+                        <a href="{{url('ke_khai_dich_vu_luu_tru/khach_san='.'/create')}}" class="btn btn-default btn-sm"></a>
                         <a href="{{url('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh')}}" class="btn btn-default btn-sm"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
                     </div>
 
@@ -161,12 +76,10 @@
                         <thead>
                         <tr>
                             <th style="text-align: center" width="2%">STT</th>
-                            <th style="text-align: center">Ngày kê khai</th>
-                            <th style="text-align: center">Ngày thực hiện<br>mức giá kê khai</th>
-                            <th style="text-align: center">Số công văn</th>
-                            <th style="text-align: center">Số công văn<br> liền kề</th>
-                            <th style="text-align: center">Người chuyển</th>
-                            <th style="text-align: center">Trạng thái</th>
+                            <th style="text-align: center">Mô tả</th>
+                            <th style="text-align: center">Áp dụng từ ngày</th>
+                            <th style="text-align: center">Áp dụng đến ngày</th>
+                            <th style="text-align: center">Số ngày nghỉ</th>
                             <th style="text-align: center" width="25%">Thao tác</th>
                         </tr>
                         </thead>
@@ -174,42 +87,14 @@
                         @foreach($model as $key=>$tt)
                             <tr>
                                 <td style="text-align: center">{{$key+1}}</td>
-                                <td style="text-align: center">{{getDayVn($tt->ngaynhap)}}</td>
-                                <td style="text-align: center">{{getDayVn($tt->ngayhieuluc)}}</td>
-                                <td style="text-align: center" class="active">{{$tt->socv}}</td>
-                                <td style="text-align: center">{{$tt->socvlk}}</td>
-                                <td style="text-align: center">{{$tt->ttnguoinop}}</td>
-                                    @if($tt->trangthai == "Chờ chuyển")
-                                <td align="center"><span class="badge badge-warning">{{$tt->trangthai}}</span></td>
-                                @elseif($tt->trangthai == 'Chờ duyệt')
-                                    <td align="center"><span class="badge badge-blue">{{$tt->trangthai}}</span>
-                                        <br>Thời gian chuyển:<br><b>{{getDateTime($tt->ngaychuyen)}}</b>
-                                    </td>
-                                @elseif($tt->trangthai == 'Chờ nhận')
-                                    <td align="center"><span class="badge badge-warning">{{$tt->trangthai}}</span>
-                                        <br>Thời gian chuyển:<br><b>{{getDateTime($tt->ngaychuyen)}}</b>
-                                    </td>
-                                @elseif($tt->trangthai == 'Bị trả lại')
-                                    <td align="center">
-                                        <span class="badge badge-danger">{{$tt->trangthai}}</span><br>&nbsp;
-                                    </td>
-                                @else
-                                    <td align="center">
-                                        <span class="badge badge-success">{{$tt->trangthai}}</span>
-                                        <br>Thời gian chuyển:<br><b>{{getDateTime($tt->ngaychuyen)}}</b>
-                                    </td>
-                                @endif
+                                <td>{{$tt->mota}}</td>
+                                <td>{{getDayVn($tt->ngaytu)}}</td>
+                                <td>{{getDayVn($tt->ngayden)}}</td>
+                                <td>{{$tt->songaynghi}}</td>
                                 <td>
 
                                     <!--a href="{{url('ke_khai_dich_vu_luu_tru/report_ke_khai/'.$tt->mahs)}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Xem chi tiết</a-->
 
-                                    @if($tt->phanloai=='DINHKEM')
-                                        <a href="{{url('/data/uploads/attack/'.$tt->filedk)}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Xem chi tiết</a>
-                                    @elseif($tt->phanloai == 'DT')
-                                        <a href="{{url('ke_khai_dich_vu_luu_tru/report_ke_khai/khach_san/'.$tt->mahs)}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Xem chi tiết</a>
-                                    @else
-                                        <a href="{{url('ke_khai_dich_vu_luu_tru/report_ke_khai/'.$tt->mahs)}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Xem chi tiết</a>
-                                    @endif
 
                                     @if($tt->trangthai == 'Chờ chuyển' || $tt->trangthai == 'Bị trả lại')
                                         @if(can('kkdvlt','edit'))
@@ -369,7 +254,5 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
-
-
 
 @stop

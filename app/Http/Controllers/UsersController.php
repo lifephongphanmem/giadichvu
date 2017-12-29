@@ -28,11 +28,24 @@ class UsersController extends Controller
     public function signin(Request $request)
     {
         $input = $request->all();
-        $check = Users::where('username', $input['username'])->count();
+        /*$partten = "/^[A-Za-z0-9_\.]{6,32}@([a-zA-Z0-9]{2,12})(\.[a-zA-Z]{2,12})+$/";
+        $subject = $input['username'];
+        if(preg_match($partten ,$subject, $matchs))
+           $check = Users::where('email', $input['username'])
+                ->first();
+        else*/
+            $check = Users::where('username', $input['username'])
+                ->count();
         if ($check == 0)
             return view('errors.invalid-user');
-        else
-            $ttuser = Users::where('username', $input['username'])->first();
+        else{
+            //if(!preg_match($partten ,$subject, $matchs))
+                $ttuser = Users::where('username', $input['username'])->first();
+           // else
+                //$ttuser = Users::where('email', $input['username'])->first();
+        }
+
+
 
 
         if (md5($input['password']) == $ttuser->password) {

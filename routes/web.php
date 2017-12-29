@@ -607,5 +607,6 @@ Route::group(['prefix'=>'bao_cao'],function(){
     //End Dịch vụ vận tải
 // </editor-fold>//End Manage
 
+Route::resource('thongtinngaynghile','TtNgayNghiLeController');
 
 
