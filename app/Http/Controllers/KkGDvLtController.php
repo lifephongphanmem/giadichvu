@@ -817,10 +817,10 @@ class KkGDvLtController extends Controller
                     $result['status'] = 'success';
                 }
             }else {
-                $model = TtNgayNghiLe::where('ngaytu','<=',$ngayapdung)
-                    ->where('ngayden','>=',$ngayapdung)->first();
-                if(count($model)>0){
-                    $ngaynghi = $model->songaynghi;
+                $modelchecknn = TtNgayNghiLe::where('ngaytu','<=',$ngaychuyen)
+                    ->where('ngayden','>=',$ngaychuyen)->first();
+                if(count($modelchecknn)>0){
+                    $ngaynghi = $modelchecknn->songaynghi;
                     $day = date("D", strtotime($ngaychuyen));
 
                     if ($day == 'Thu') {
