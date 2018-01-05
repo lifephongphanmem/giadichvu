@@ -109,7 +109,7 @@
         <?php $model_kk=$model->where('cqcq',$cskd->maqhns) ?>
         @if(count($model_kk)>0)
             <tr>
-                <th style="text-align: left" colspan="9">
+                <th style="text-align: left" colspan="10">
                     {{$cskd->tendv.': '. count($model_kk).' hồ sơ.'}}
                 </th>
             </tr>
