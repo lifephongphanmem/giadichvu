@@ -408,16 +408,16 @@ class ReportsController extends Controller
 
             //1.sau này triển khai bỏ vì đã làm trong form nhập
             foreach($model as $ct){
+                $ngaynhan = Carbon::parse($ct->ngaynhan);
+                $ngaychuyen = Carbon::parse($ct->ngaychuyen);
+                $ngay= $ngaynhan->diff($ngaychuyen)->days;
                 $modelchecknn = TtNgayNghiLe::where('ngaytu','<=',$ngaychuyen)
-                ->where('ngayden','>=',$ngaychuyen)->first();
+                    ->where('ngayden','>=',$ngaychuyen)->first();
                 if(count($modelchecknn)>0){
                     $thoihan_lt= getGeneralConfigs()['thoihan_lt'] + $modelchecknn->songaynghi;
                 }else{
                     $thoihan_lt= getGeneralConfigs()['thoihan_lt'];
                 }
-                $ngaynhan = Carbon::parse($ct->ngaynhan);
-                $ngaychuyen = Carbon::parse($ct->ngaychuyen);
-                $ngay= $ngaynhan->diff($ngaychuyen)->days;
 
                 if($ngay<$thoihan_lt){
                     $ct->thoihan='Trước thời hạn';
