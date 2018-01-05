@@ -9,8 +9,8 @@ class TtNgayNghiLe extends Model
     protected $table = 'ttngaynghile';
     protected $fillable = [
         'id',
-        'tungay',
-        'denngay',
+        'ngaytu',
+        'ngayden',
         'mota',
         'songaynghi'
     ];

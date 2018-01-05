@@ -8,6 +8,7 @@ use App\DmDvQl;
 use App\DnDvLt;
 use App\KkGDvLt;
 use App\KkGDvLtCt;
+use App\TtNgayNghiLe;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 //use Maatwebsite\Excel;
@@ -407,10 +408,17 @@ class ReportsController extends Controller
 
             //1.sau này triển khai bỏ vì đã làm trong form nhập
             foreach($model as $ct){
+                $modelchecknn = TtNgayNghiLe::where('ngaytu','<=',$ngaychuyen)
+                ->where('ngayden','>=',$ngaychuyen)->first();
+                if(count($modelchecknn)>0){
+                    $thoihan_lt= getGeneralConfigs()['thoihan_lt'] + $modelchecknn->songaynghi;
+                }else{
+                    $thoihan_lt= getGeneralConfigs()['thoihan_lt'];
+                }
                 $ngaynhan = Carbon::parse($ct->ngaynhan);
                 $ngaychuyen = Carbon::parse($ct->ngaychuyen);
                 $ngay= $ngaynhan->diff($ngaychuyen)->days;
-                $thoihan_lt=getGeneralConfigs()['thoihan_lt'];
+
                 if($ngay<$thoihan_lt){
                     $ct->thoihan='Trước thời hạn';
                 }elseif($ngay==$thoihan_lt){

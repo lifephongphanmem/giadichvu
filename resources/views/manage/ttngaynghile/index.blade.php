@@ -15,6 +15,16 @@
     <script type="text/javascript" src="{{url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js')}}"></script>
     <!-- END PAGE LEVEL PLUGINS -->
     <script src="{{url('assets/admin/pages/scripts/table-managed.js')}}"></script>
+    <!--Date new-->
+    <!--script src="{{url('minhtran/jquery.min.js')}}"></script-->
+    <script src="{{url('minhtran/jquery.inputmask.bundle.min.js')}}"></script>
+
+    <script>
+        $(document).ready(function(){
+            $(":input").inputmask();
+        });
+    </script>
+    <!--End date new-->
     <script>
         jQuery(document).ready(function() {
             TableManaged.init();
@@ -35,6 +45,32 @@
         function ClickDelete(){
             $('#frm_delete').submit();
         }
+        function ClickCreate(){
+            var str = '';
+            var ok = true;
+
+            if($('#mota').val()==''){
+                str += ' - Mô tả<br>';
+                ok = false;
+            }
+            if($('#tungay').val()==''){
+                str += ' - Từ ngày<br>';
+                ok = false;
+            }
+            if($('#denngay').val()==''){
+                str += '  - Đến ngày <br>';
+                ok = false;
+            }
+            if ( ok == false){
+                toastr.error("Thông tin không được để trống <br>" + str , "Lỗi!");
+                $("#frm_create").submit(function (e) {
+                    e.preventDefault();
+                });
+            }
+            else{
+                $("#frm_create").unbind('submit').submit();
+            }
+        }
 
     </script>
 @stop
@@ -52,8 +88,7 @@
             <div class="portlet box">
                 <div class="portlet-title">
                     <div class="actions">
-                        <a href="{{url('ke_khai_dich_vu_luu_tru/khach_san='.'/create')}}" class="btn btn-default btn-sm"></a>
-                        <a href="{{url('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh')}}" class="btn btn-default btn-sm"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
+                        <button type="button" class="btn btn-default btn-sm" data-target="#create-modal" data-toggle="modal"><i class="fa fa-plus"></i>&nbsp;Thêm mới</button>
                     </div>
 
                 </div>
@@ -93,33 +128,11 @@
                                 <td>{{$tt->songaynghi}}</td>
                                 <td>
 
-                                    <!--a href="{{url('ke_khai_dich_vu_luu_tru/report_ke_khai/'.$tt->mahs)}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Xem chi tiết</a-->
 
+                                <a href="{{url('ke_khai_dich_vu_luu_tru/khach_san/'.$tt->id.'/edit')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</a>
 
-                                    @if($tt->trangthai == 'Chờ chuyển' || $tt->trangthai == 'Bị trả lại')
-                                        @if(can('kkdvlt','edit'))
-                                            @if($tt->phanloai == 'DT')
-                                                <a href="{{url('ke_khai_dich_vu_luu_tru/khach_san/'.$tt->id.'/edit')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</a>
-                                            @else
-                                                <a href="{{url('ke_khai_dich_vu_luu_tru/'.$tt->id.'/edit')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</a>
-                                            @endif
-                                        @endif
-                                        @if(can('kkdvlt','delete'))
-                                        <button type="button" onclick="getId('{{$tt->id}}')" class="btn btn-default btn-xs mbs" data-target="#delete-modal" data-toggle="modal"><i class="fa fa-trash-o"></i>&nbsp;
-                                            Xóa</button>
-                                        @endif
-                                        @if(can('kkdvlt','approve'))
-                                        <button type="button" onclick="confirmChuyen('{{$tt->id}}')" class="btn btn-default btn-xs mbs" data-target="#chuyen-modal" data-toggle="modal"><i class="fa fa-share-square-o"></i>&nbsp;
-                                            Chuyển</button>
-                                            @if(session('admin')->sadmin == 'ssa')
-                                                <button type="button" onclick="confirmChuyenHSCham('{{$tt->id}}')" class="btn btn-default btn-xs mbs" data-target="#chuyenhscham-modal" data-toggle="modal"><i class="fa fa-share-square-o"></i>&nbsp;
-                                                    Chuyển HS chậm</button>
-                                            @endif
-                                        @endif
-                                        @if( $tt->trangthai == 'Bị trả lại')
-                                        <button type="button" data-target="#lydo-modal" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="viewLyDo({{$tt->id}})"><i class="fa fa-search"></i>&nbsp;Lý do trả lại</button>
-                                        @endif
-                                    @endif
+                                <button type="button" onclick="getId('{{$tt->id}}')" class="btn btn-default btn-xs mbs" data-target="#delete-modal" data-toggle="modal"><i class="fa fa-trash-o"></i>&nbsp;
+                                    Xóa</button>
 
                                 </td>
                             </tr>
@@ -137,31 +150,58 @@
 
     <!-- END DASHBOARD STATS -->
     <div class="clearfix"></div>
-    <!--Model chuyển-->
-        <div class="modal fade" id="chuyen-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <!--Model create-->
+        <div id="create-modal" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade">
             <div class="modal-dialog">
+                {!! Form::open(['url'=>'thongtinngaynghile','id' => 'frm_create'])!!}
                 <div class="modal-content">
-                    {!! Form::open(['url'=>'ke_khai_dich_vu_luu_tru/chuyen','id' => 'frm_chuyen'])!!}
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                        <h4 class="modal-title">Đồng ý chuyển hồ sơ?</h4>
+                    <div class="modal-header modal-header-primary">
+                        <button type="button" data-dismiss="modal" aria-hidden="true"
+                                class="close">&times;</button>
+                        <h4 id="modal-header-primary-label" class="modal-title">Thêm mới thông tin ngày nghỉ</h4>
                     </div>
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label><b>Thông tin người nộp</b></label>
-                            <textarea id="ttnguoinop" class="form-control required" name="ttnguoinop" cols="30" rows="5" placeholder="Họ và tên người chuyển- Số ĐT liên lạc- Email lien lạc"></textarea></div>
-                    </div>
-                    <input type="hidden" name="idchuyen" id="idchuyen">
-                    <div class="modal-footer">
-                        <button type="button" class="btn default" data-dismiss="modal">Hủy</button>
-                        <button type="submit" class="btn blue" onclick="ClickChuyen()">Đồng ý</button>
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label"><b>Mô tả</b></label>
+                                <div class="col-md-9 ">
+                                    {!!Form::text('mota',null, array('id' => 'mota','class' => 'form-control required'))!!}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label"><b>Từ ngày</b></label>
+                                <div class="col-md-9">
+                                    {!!Form::text('ngaytu',null, array('id' => 'tungay','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required'))!!}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label"><b>Đến ngày</b></label>
+                                <div class="col-md-9 ">
+                                    {!!Form::text('ngayden',null, array('id' => 'denngay','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required'))!!}
+                                </div>
+                            </div>
 
+                            <div class="form-group">
+                                <label class="col-md-3 control-label"><b>Số ngày nghỉ</b></label>
+                                <div class="col-md-9 ">
+                                    <select id="songaynghi" name="songaynghi" class="form-control">
+                                        @if ($songay_start = '1' ) @endif
+                                        @if ($songay_stop = '10') @endif
+                                        @for($i = $songay_start; $i <= $songay_stop; $i++)
+                                            <option value="{{$i}}">{{$i}}</option>
+                                        @endfor
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>
+                        <button type="submit" data-dismiss="modal" class="btn btn-success" onclick="ClickCreate()">Đồng ý</button>
                     </div>
                     {!! Form::close() !!}
                 </div>
-                <!-- /.modal-content -->
             </div>
-            <!-- /.modal-dialog -->
         </div>
 
     <!--Model chuyển hs chậm-->
@@ -185,54 +225,6 @@
             </div>
             <!-- /.modal-dialog -->
         </div>
-
-    <!--Model copy-->
-        <div class="modal fade" id="copy-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    {!! Form::open(['url'=>'ke_khai_dich_vu_luu_tru/copy','id' => 'frm_chuyen'])!!}
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                        <h4 class="modal-title">Sao chép hồ sơ kê khai?</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p style="color: #000066"><u>Ghi chú</u>: Chức năng này sẽ hỗ trợ kê khai nhanh giá dịch vụ, chương trình sẽ tự động sao chép thông tin từ hồ sơ kê khai đã được duyệt
-                            và chuyển các thông tin vào màn hình kê khai mới.Các mức giá kê khai liền kề sẽ tự động lấy từ thông tin kê khai sao chép chuyển vào</p>
-                    <input type="hidden" name="macskdcp" id="macskdcp" value="">
-                    <div class="modal-footer">
-                        <button type="button" class="btn default" data-dismiss="modal">Hủy</button>
-                        <button type="submit" class="btn blue" onclick="ClickCopy()">Đồng ý</button>
-
-                    </div>
-                    {!! Form::close() !!}
-                    </div>
-                    <!-- /.modal-content -->
-                </div>
-                <!-- /.modal-dialog -->
-            </div>
-        </div>
-
-    <!--Model lý do-->
-    <div class="modal fade" id="lydo-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title"><b>Lý do trả lại hồ sơ?</b></h4>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <textarea id="lydo" class="form-control" name="lydo" cols="30" rows="5"></textarea></div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn default" data-dismiss="modal">Hủy</button>
-                </div>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
-
         <!--Modal delete-->
     <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">

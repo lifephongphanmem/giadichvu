@@ -11,7 +11,6 @@ class TtNgayNghiLeController extends Controller
 {
     public function index(Request $request){
         if (Session::has('admin')) {
-
             $inputs = $request->all();
             $inputs['nam'] = isset($inputs['nam']) ? $inputs['nam'] : date('Y');
             $model = TtNgayNghiLe::whereYear('ngaytu', $inputs['nam'])->get();
@@ -19,6 +18,18 @@ class TtNgayNghiLeController extends Controller
                 ->with('model',$model)
                 ->with('nam',$inputs['nam'])
                 ->with('pageTitle','Thông tin ngày nghỉ lễ');
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function store(Request $request){
+        if (Session::has('admin')) {
+            $inputs = $request->all();
+            $inputs['ngaytu'] = getDateToDb($inputs['ngaytu']);
+            $inputs['ngayden'] = getDateToDb($inputs['ngayden']);
+            $model = new TtNgayNghiLe();
+            $model->create($inputs);
+            return redirect('thongtinngaynghile');
         }else
             return view('errors.notlogin');
     }
