@@ -131,7 +131,7 @@
         @endif
     @endforeach
     <tr>
-        <th style="text-align: left" colspan="9">
+        <th style="text-align: left" colspan="10">
             {{'Tổng cộng: '. count($model).' hồ sơ.'}}
         </th>
     </tr>
