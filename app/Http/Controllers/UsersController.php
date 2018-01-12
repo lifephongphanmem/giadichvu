@@ -158,22 +158,30 @@ class UsersController extends Controller
         }
     }
 
-    public function index($pl)
+    public function index(Request $request)
     {
         if (Session::has('admin')) {
             if (session('admin')->level == 'T' || session('admin')->level == 'H') {
+                $inputs = $request->all();
+                if (session('admin')->sadmin == 'ssa' || session('admin')->sadmin =='sa')
+                    $inputs['phanloai'] = isset($inputs['phanloai']) ? $inputs['phanloai'] : 'QL';
+                elseif(session('admin')->sadmin == 'savt')
+                    $inputs['phanloai'] = isset($inputs['phanloai']) ? $inputs['phanloai'] : 'DVVT';
+                elseif(session('admin')->sadmin == 'satc')
+                    $inputs['phanloai'] = isset($inputs['phanloai']) ? $inputs['phanloai'] : 'DVLT';
 
-                if ($pl == 'quan_ly')
+                if ($inputs['phanloai'] == 'QL')
                     $level = array('T','H');
-                elseif ($pl == 'dich_vu_luu_tru')
+                elseif ($inputs['phanloai'] == 'DVLT')
                     $level = array('DVLT');
-                elseif ($pl == 'dich_vu_van_tai')
+                elseif ($inputs['phanloai'] == 'DVVT')
                     $level = array('DVVT');
+
                 if (session('admin')->sadmin == 'ssa' || session('admin')->sadmin =='sa') {
                     $model = Users::wherein('level', $level)
                         ->orderBy('id', 'desc')
                         ->get();
-                }elseif((session('admin')->sadmin == 'savt' && $pl == 'dich_vu_van_tai') || (session('admin')->sadmin == 'satc' && $pl == 'dich_vu_luu_tru')) {
+                }elseif((session('admin')->sadmin == 'savt') || (session('admin')->sadmin == 'satc')) {
                     $model = Users::wherein('level', $level)
                         ->where('cqcq', session('admin')->cqcq)
                         ->orderBy('id', 'desc')
@@ -191,7 +199,7 @@ class UsersController extends Controller
 
                 return view('system.users.index')
                     ->with('model', $model)
-                    ->with('pl', $pl)
+                    ->with('pl', $inputs['phanloai'])
                     ->with('pageTitle', 'Danh sách tài khoản');
             }else{
                 return view('errors.perm');
@@ -245,7 +253,7 @@ class UsersController extends Controller
                 if($sadmin !='')
                     $model->sadmin = $sadmin;
                 $model->save();
-                return redirect('users/pl=quan_ly');
+                return redirect('users');
 
             }else{
                 return view('errors.perm');
@@ -331,7 +339,7 @@ class UsersController extends Controller
                 else
                     $pl = 'quan_ly';
 
-                return redirect('users/pl=' . $pl);
+                return redirect('users');
             }else
                 return view('errors.noperm');
 
@@ -355,7 +363,7 @@ class UsersController extends Controller
 
             $model->delete();
 
-            return redirect('users/pl=' . $pl);
+            return redirect('users');
 
         } else
             return view('errors.notlogin');
@@ -406,7 +414,7 @@ class UsersController extends Controller
                     $pl = 'dich_vu_luu_tru';
                 elseif ($model->level == 'DVVT')
                     $pl = 'dich_vu_van_tai';
-                return redirect('users/pl=' . $pl);
+                return redirect('users');
 
             } else
                 dd('Tài khoản không tồn tại');
@@ -426,7 +434,7 @@ class UsersController extends Controller
                 $model->save();
             }
         }
-        return redirect('users/pl='.$pl);
+        return redirect('users');
 
     }
 
@@ -442,7 +450,7 @@ class UsersController extends Controller
                 $model->save();
             }
         }
-        return redirect('users/pl='.$pl);
+        return redirect('users');
 
     }
 

@@ -85,7 +85,7 @@ class GeneralConfigsController extends Controller
     {
         if (Session::has('admin')) {
             $model = DmDvQl::findOrFail($id);
-            if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'satc' || session('admin')->sadmin == 'savt') {
+            if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'satc' || session('admin')->sadmin == 'savt' || session('admin')->sadmin == 'sact') {
                 if(session('admin')->sadmin == 'ssa' || session('admin')->cqcq == $model->maqhns) {
                     return view('system.general.edit')
                         ->with('model', $model)

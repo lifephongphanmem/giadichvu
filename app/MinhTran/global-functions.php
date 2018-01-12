@@ -38,6 +38,13 @@ function getPermissionDefault($level) {
             'delete' => 0,
             'approve'=> 1
         ),
+        'giasua' => array(
+            'index' => 1,
+            'create' => 0,
+            'edit' => 0,
+            'delete' => 0,
+            'approve'=> 1
+        ),
         'kkdvlt' => array(
             'index' => 1,
             'create' => 0,
@@ -67,6 +74,13 @@ function getPermissionDefault($level) {
             'approve'=> 1
         ),
         'kkdvvtch' => array(
+            'index' => 1,
+            'create' => 0,
+            'edit' => 0,
+            'delete' => 0,
+            'approve'=> 1
+        ),
+        'kkgiasua' => array(
             'index' => 1,
             'create' => 0,
             'edit' => 0,
@@ -422,5 +436,18 @@ function getRandomPassword(){
     $bytes = random_bytes(3); // length in bytes
     $kq = (bin2hex($bytes));
     return $kq;
+}
+
+function getSoNnSelectOptions() {
+
+    $start = '1';
+    $stop = '10';
+    $options = array();
+
+    for ($i = $start;  $i <= $stop; $i++) {
+
+        $options[$i] = $i;
+    }
+    return $options;
 }
 ?>

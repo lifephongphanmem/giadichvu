@@ -52,6 +52,7 @@
                                         <select class="form-control" name="plql" id="plql">
                                             <option value="TC">Tài Chính</option>
                                             <option value="VT">Vận Tải</option>
+                                            <option value="CT">Công Thương</option>
                                         </select>
                                     </div>
                                 </div>

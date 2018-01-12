@@ -19,7 +19,7 @@
         jQuery(document).ready(function() {
             TableManaged.init();
         });
-        function  getSelectedCheckboxes(){
+        function getSelectedCheckboxes(){
 
             var ids = '';
             $.each($("input[name='ck_value']:checked"), function(){
@@ -60,23 +60,12 @@
             document.getElementById("iddelete").value=id;
         }
         $(function(){
-
             $('#phanloai').change(function() {
-                var pl = $('#phanloai').val();
-                var url = '/users/pl='+pl;
-
-                //var url = current_path_url;
+                var current_path_url = '/users?';
+                var pl = '&phanloai='+$('#phanloai').val();
+                var url = current_path_url+pl;
                 window.location.href = url;
             });
-            $('#dvct').change(function() {
-                var dvct = $('#dvct').val();
-                var url = '/users/pl=su-dung/dv='+dvct;
-
-                //var url = current_path_url;
-                window.location.href = url;
-            });
-
-
         })
         function ClickDelete(){
             $('#frm_delete').submit();
@@ -85,16 +74,8 @@
 @stop
 
 @section('content')
-        <?php
-            if($pl == 'dich_vu_luu_tru')
-                $dv = 'dịch vụ lưu trú';
-            elseif($pl == 'dich_vu_van_tai')
-                $dv = 'dịch vụ vận tải';
-            else
-                $dv='';
-        ?>
     <h3 class="page-title">
-        Quản lý tài khoản <small>&nbsp;{{$dv}}</small>
+        Quản lý <small>&nbsp;tài khoản</small>
     </h3>
     <!-- END PAGE HEADER-->
     <div class="row">
@@ -125,9 +106,9 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <select class="form-control" name="phanloai" id="phanloai">
-                                        <option value="quan_ly" {{($pl == "quan_ly") ? 'selected' : ''}}>Cấp Quản lý</option>
-                                        <option value="dich_vu_luu_tru" {{($pl == "dich_vu_luu_tru") ? 'selected' : ''}}>Dịch vụ lưu trú</option>
-                                        <option value="dich_vu_van_tai" {{($pl == "dich_vu_van_tai") ? 'selected' : ''}}>Dịch vụ vận tải</option>
+                                        <option value="QL" {{($pl == "QL") ? 'selected' : ''}}>Cấp Quản lý</option>
+                                        <option value="DVLT" {{($pl == "DVLT") ? 'selected' : ''}}>Dịch vụ lưu trú</option>
+                                        <option value="DVVT" {{($pl == "DVVT") ? 'selected' : ''}}>Dịch vụ vận tải</option>
                                     </select>
                                 </div>
                             </div>
@@ -135,7 +116,6 @@
                     @endif
                     <div class="portlet-body">
                         <div class="table-toolbar">
-
                         </div>
                     <table class="table table-striped table-bordered table-hover" id="sample_3">
                         <thead>

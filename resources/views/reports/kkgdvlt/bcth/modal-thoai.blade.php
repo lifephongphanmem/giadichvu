@@ -48,6 +48,10 @@
         $('#frm_bc6').attr('action',url);
         $('#frm_bc6').submit();
     }
+    function ClickBC6_excel(url){
+        $('#frm_bc6').attr('action',url);
+        $('#frm_bc6').submit();
+    }
 </script>
 
 <!--Modal Thoại BC1-->
@@ -474,6 +478,7 @@
             <div class="modal-footer">
                 <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>
                 <button type="submit" data-dismiss="modal" class="btn btn-success" onclick="ClickBC6('/reports/dich_vu_luu_tru/BC6')">Đồng ý</button>
+                <button type="submit" data-dismiss="modal" class="btn btn-primary" onclick="ClickBC6_excel('/reports/dich_vu_luu_tru/BC6_excel')">Xuất Excel</button>
             </div>
             {!! Form::close() !!}
         </div>

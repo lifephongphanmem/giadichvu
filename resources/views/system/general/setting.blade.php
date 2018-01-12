@@ -100,6 +100,26 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <div class="col-md-3">
+                                <h4 style="text-align: center">Kê khai giá sữa</h4>
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th class="table-checkbox" width="5%">
+                                            <!--input type="checkbox" class="group-checkable" data-set="#sample_3 .checkboxes"/-->
+                                        </th>
+                                        <th>Chức năng</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td><input type="checkbox" {{ (isset($setting->dvsua->dvsua) && $setting->dvsua->dvsua == 1) ? 'checked' : '' }} value="1" name="roles[dvsua][dvsua]"/></td>
+                                        <td>Kê khai giá sữa</td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
 
                         </div>
 

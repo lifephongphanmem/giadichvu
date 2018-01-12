@@ -297,7 +297,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         <span class="selected"></span>
                     </a>
                 </li>
-                @if(session('admin')->sadmin != 'satc' && session('admin')->sadmin != 'savt' && session('admin')->sadmin != 'sa')
+                @if(session('admin')->sadmin != 'satc' && session('admin')->sadmin != 'savt' && session('admin')->sadmin != 'sa' && session('admin')!='sact')
                     @if(canGeneral('dvlt','dvlt'))
                         @if(can('dvlt','index') || can('kkdvlt','index'))
                     <li>
@@ -428,6 +428,31 @@ License: You must have a valid license purchased only from themeforest(the above
                             </li>
                         @endif
                     @endif
+                    @if(canGeneral('dvsua','dvsua'))
+                        @if(can('giasua','index') || can('kkgiasua','index'))
+                            <li>
+                                <a href="">
+                                    <i class="fa fa-laptop"></i>
+                                    <span class="title">Mặt hàng sữa</span>
+                                    <span class="arrow "></span>
+                                </a>
+                                <ul class="sub-menu">
+                                    @if(can('kkgs','index'))
+                                        <li><a href="{{url('ttdn_kekhaigiasua')}}">Thông tin doanh nghiệp</a></li>
+                                        <li><a href="{{url('danhmucsua')}}">Danh mục loại sữa</a></li>
+                                        @if(can('kkgs','create'))
+                                            <li><a href="{{url('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh')}}">Kê khai dịch vụ lưu trú </a></li>
+                                        @endif
+                                        @if(session('admin')->level =='T' || session('admin')->level =='H')
+                                            <li><a href="{{url('xet_duyet_ke_khai_dich_vu_luu_tru/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')}}">Hồ sơ kê khai</a></li>
+                                            <li><a href="{{url('search_ke_khai_dich_vu_luu_tru')}}">Tìm kiếm TT kê khai</a></li>
+                                        @endif
+                                    @endif
+
+                                </ul>
+                            </li>
+                        @endif
+                    @endif
                 @endif
 
 
@@ -512,13 +537,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         <li><a href="{{url('dn_dichvu_vantai')}}">DN dịch vụ vận tải</a></li>
                         @endif
 
-                        @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'sa')
-                            <li><a href="{{url('users/pl=quan_ly')}}"> Quản lý tài khoản</a></li>
-                        @elseif(session('admin')->sadmin == 'satc')
-                            <li><a href="{{url('users/pl=dich_vu_luu_tru')}}"> Quản lý tài khoản</a></li>
-                        @elseif(session('admin')->sadmin == 'savt')
-                            <li><a href="{{url('users/pl=dich_vu_van_tai')}}"> Quản lý tài khoản</a></li>
-                        @endif
+                        <li><a href="{{url('users')}}"> Quản lý tài khoản</a></li>
 
                         @if(session('admin')->sadmin == 'satc')
                             <li><a href="{{url('users/register/pl=dich_vu_luu_tru')}}"> Tài khoản đăng ký DVLT</a></li>

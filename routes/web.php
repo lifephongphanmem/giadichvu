@@ -54,7 +54,7 @@ Route::get('/checkpass','UsersController@checkpass');
 Route::get('/checkuser','UsersController@checkuser');
 Route::get('/checkmasothue','UsersController@checkmasothue');
 Route::get('logout','UsersController@logout');
-Route::get('users/pl={pl}','UsersController@index');
+Route::get('users','UsersController@index');
 Route::get('users/{id}/edit','UsersController@edit');
 Route::patch('users/{id}','UsersController@update');
 Route::get('users/{id}/phan-quyen','UsersController@permission');
@@ -124,6 +124,7 @@ Route::post('reports/dich_vu_luu_tru/BC2_excel','ReportsController@dvltbc2_excel
 Route::post('reports/dich_vu_luu_tru/BC3_excel','ReportsController@dvltbc3_excel');
 Route::post('reports/dich_vu_luu_tru/BC4_excel','ReportsController@dvltbc4_excel');
 Route::post('reports/dich_vu_luu_tru/BC5_excel','ReportsController@dvltbc5_excel');
+Route::post('reports/dich_vu_luu_tru/BC6_excel','ReportsController@dvltbc6_excel');
     //End Dịch vụ lưu trú
     //Dịch vụ vận tải
     //End Dịch vụ vận tải
@@ -608,5 +609,7 @@ Route::group(['prefix'=>'bao_cao'],function(){
 // </editor-fold>//End Manage
 
 Route::resource('thongtinngaynghile','TtNgayNghiLeController');
+Route::post('thongtinngaynghile/delete','TtNgayNghiLeController@delete');
+Route::get('/thongtinngaynghile/show','TtNgayNghiLeController@show');
 
 

@@ -692,4 +692,36 @@ class ReportsController extends Controller
 
         return $model;
     }
+
+    public function dvltbc6_excel(Request $request){
+        if (Session::has('admin')) {
+            $inputs = $request->all();
+            $modelcqcq = DmDvQl::where('maqhns',$inputs['cqcq'])->first();
+            $model=$this->getvalBc6($inputs);
+
+            Excel::create('BaoCao6',function($excel) use($modelcqcq,$inputs,$model){
+                $excel->sheet('New sheet', function($sheet) use($modelcqcq,$inputs,$model){
+                    $sheet->loadView('reports.kkgdvlt.bcth.BC6')
+                        ->with('modelcqcq',$modelcqcq)
+                        ->with('inputs',$inputs)
+                        ->with('model',$model)
+                        ->with('pageTitle','BcDvKkGDvlt');
+                    //$sheet->setPageMargin(0.25);
+                    $sheet->setAutoSize(false);
+                    $sheet->setFontFamily('Tahoma');
+                    $sheet->setFontBold(false);
+
+                    $sheet->setWidth('C', 10);
+                    $sheet->setWidth('D', 30);
+                    $sheet->setWidth('E', 15);
+                    $sheet->setWidth('F', 15);
+                    $sheet->setWidth('G', 15);
+                    $sheet->setWidth('H', 15);
+                    $sheet->setWidth('I', 15);
+                    //$sheet->setColumnFormat(array('D' => '#,##0.00'));
+                });
+            })->download('xls');
+        }else
+            return view('errors.notlogin');
+    }
 }
