@@ -19,49 +19,12 @@
         jQuery(document).ready(function() {
             TableManaged.init();
         });
-        function getSelectedCheckboxes(){
-
-            var ids = '';
-            $.each($("input[name='ck_value']:checked"), function(){
-                ids += ($(this).attr('value')) + '-';
-            });
-            return ids = ids.substring(0, ids.length - 1);
-
-        }
-        function multiLock() {
-
-            var ids = getSelectedCheckboxes();
-            var pl = $('#phanloai').val();
-            if(ids == '') {
-                $('#btnMultiLockUser').attr('data-target', '#notid-modal-confirm');
-            }else {
-
-                $('#btnMultiLockUser').attr('data-target', '#lockuser-modal-confirm');
-                $('#frmLockUser').attr('action', "{{ url('users/lock')}}/" + ids + '/' + pl);
-            }
-
-        }
-        function multiUnLock() {
-
-            var ids = getSelectedCheckboxes();
-            var pl = $('#phanloai').val();
-            if(ids == '') {
-                $('#btnMultiUnLockUser').attr('data-target', '#notid-modal-confirm');
-            }else {
-                $('#btnMultiUnLockUser').attr('data-target', '#unlockuser-modal-confirm');
-                $('#frmUnLockUser').attr('action', "{{ url('users/unlock')}}/" + ids + '/' + pl);
-            }
-
-        }
-        function confirmDelete(id) {
-            $('#frmDelete').attr('action', "/delete/" + id);
-        }
         function getId(id){
             document.getElementById("iddelete").value=id;
         }
         $(function(){
             $('#phanloai').change(function() {
-                var current_path_url = '/users?';
+                var current_path_url = '/doanhnghiepcungcapdichvu?';
                 var pl = '&phanloai='+$('#phanloai').val();
                 var url = current_path_url+pl;
                 window.location.href = url;
@@ -74,8 +37,9 @@
 @stop
 
 @section('content')
+
     <h3 class="page-title">
-        Quản lý <small>&nbsp;tài khoản</small>
+        Thông tin doanh nghiêp cung cấp <small>&nbsp;dịch vụ</small>
     </h3>
     <!-- END PAGE HEADER-->
     <div class="row">
@@ -83,30 +47,17 @@
             <!-- BEGIN EXAMPLE TABLE PORTLET-->
             <div class="portlet box">
                 <div class="portlet-title">
-                    <div class="caption">
-                    </div>
                     <div class="actions">
-                        <a href="{{url('users/create')}}" class="btn btn-default btn-sm">
-                            <i class="fa fa-plus"></i> Thêm mới </a>
-                        <button id="btnMultiLockUser" type="button" onclick="multiLock()" class="btn btn-default btn-sm" data-target="#lockuser-modal-confirm" data-toggle="modal"><i class="fa fa-lock"></i>&nbsp;
-                            Khóa</button>
-                        <button id="btnMultiUnLockUser" type="button" onclick="multiUnLock()" class="btn btn-default btn-sm" data-target="#unlockuser-modal-confirm" data-toggle="modal"><i class="fa fa-unlock"></i>&nbsp;
-                            Mở khóa</button>
-                        @if($pl != 'quan_ly')
-                        <a href="{{url('users/print/pl='.$pl)}}" class="btn btn-default btn-sm" target="_blank">
+                        <a href="{{url('dn_dichvu_luutru/print')}}" class="btn btn-default btn-sm" target="_blank">
                             <i class="fa fa-print"></i> Print </a>
-                        @endif
                     </div>
-
                 </div>
-
                 <div class="portlet-body">
-                    @if(session('admin')->sadmin == 'ssa')
+                    <div class="portlet-body">
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <select class="form-control" name="phanloai" id="phanloai">
-                                        <option value="QL" {{($pl == "QL") ? 'selected' : ''}}>Cấp Quản lý</option>
                                         <option value="DVLT" {{($pl == "DVLT") ? 'selected' : ''}}>Dịch vụ lưu trú</option>
                                         <option value="DVVT" {{($pl == "DVVT") ? 'selected' : ''}}>Dịch vụ vận tải</option>
                                         <option value="DVGS" {{($pl == "DVGS") ? 'selected' : ''}}>Dịch vụ giá sữa</option>
@@ -114,47 +65,29 @@
                                 </div>
                             </div>
                         </div>
-                    @endif
-                    <div class="portlet-body">
-                        <div class="table-toolbar">
-                        </div>
                     <table class="table table-striped table-bordered table-hover" id="sample_3">
                         <thead>
                         <tr>
-                            <th class="table-checkbox">
-                                <input type="checkbox" class="group-checkable" data-set="#sample_3 .checkboxes"/>
-                            </th>
                             <th style="text-align: center" width="2%">STT</th>
-                            <th style="text-align: center">Tên tài khoản</th>
-                            <th style="text-align: center">Username</th>
-                            <th style="text-align: center">Level</th>
-                            <th style="text-align: center" width="5%">Trạng thái</th>
-                            <th style="text-align: center" width="25%">Thao tác</th>
+                            <th style="text-align: center">Tên doanh nghiệp</th>
+                            <th style="text-align: center">Mã số thuế</th>
+                            <th style="text-align: center">Số điện thoại<br>trụ sở</th>
+                            <th style="text-align: center">Số fax trụ sở</th>
+                            <th style="text-align: center">Địa chỉ trụ sở</th>
+                            <th style="text-align: center" width="20%">Thao tác</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($model as $key=>$tt)
                         <tr class="odd gradeX">
-                            <td>
-                                <input type="checkbox" class="checkboxes" value="{{$tt->id}}" name="ck_value" id="ck_value"/>
-                            </td>
                             <td style="text-align: center">{{$key + 1}}</td>
-                            <td>{{$tt->name}}</td>
-                            <td class="active">{{$tt->username}}</td>
-                            <td style="text-align: center">{{$tt->level}}</td>
-                            <td style="text-align: center">
-                                @if($tt->status == 'Kích hoạt')
-                                    <span class="label label-sm label-success">{{$tt->status}}</span><br>
-                                    {{$tt->ttnguoitao}}
-                                @else
-                                    <span class="label label-sm label-danger">{{$tt->status}}</span>
-                                @endif
-                            </td>
+                            <td class="active" >{{$tt->tendn}}</td>
+                            <td>{{$tt->masothue}}</td>
+                            <td>{{$tt->teldn}}</td>
+                            <td>{{$tt->faxdn}}</td>
+                            <td>{{$tt->diachidn}}</td>
                             <td>
-                                <a href="{{url('users/'.$tt->id.'/edit')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</a>
-                                @if($tt->sadmin != 'satc' && $tt->sadmin != 'savt' && $tt->sadmin != 'sa')
-                                    <a href="{{url('users/'.$tt->id.'/phan-quyen')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-cogs"></i>&nbsp;Phân quyền</a>
-                                @endif
+                                <a href="{{url('dn_dichvu_luutru/'.$tt->id.'/edit')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</a>
                                 <button type="button" onclick="getId('{{$tt->id}}')" class="btn btn-default btn-xs mbs" data-target="#delete-modal" data-toggle="modal"><i class="fa fa-trash-o"></i>&nbsp;
                                     Xóa</button>
                             </td>
@@ -175,7 +108,7 @@
         <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    {!! Form::open(['url'=>'users/delete','id' => 'frm_delete'])!!}
+                    {!! Form::open(['url'=>'dn_dichvu_luutru/delete','id' => 'frm_delete'])!!}
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                         <h4 class="modal-title">Đồng ý xóa?</h4>

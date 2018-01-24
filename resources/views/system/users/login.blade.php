@@ -126,10 +126,17 @@ License: You must have a valid license purchased only from themeforest(the above
 				<div class="form-horizontal">
 					<div class="form-group">
 						<div class="col-md-12" align="center">
+							@if(canGeneral('dvlt','dvlt'))
 							<a class="btn btn-primary" data-toggle="modal" href="{{url('register/dich_vu_luu_tru')}}">
 								Dịch vụ lưu trú </a>
+							@endif
+							@if(canGeneral('dvvt','vtxk') || canGeneral('dvvt','vtxb') || canGeneral('dvvt','vtxtx') || canGeneral('dvvt','vtch'))
 							<a class="btn btn-success" data-toggle="modal" href="{{url('register/dich_vu_van_tai')}}">
 								Dịch vụ vận tải </a>
+							@endif
+							@if(canGeneral('dvgs','dvgs'))
+							<a class="btn btn-warning" data-toggle="modal" href="{{url('dangkydichvugiasua')}}">Dịch vụ giá sữa</a>
+							@endif
 						</div>
 					</div>
 

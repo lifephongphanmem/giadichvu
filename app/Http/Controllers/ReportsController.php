@@ -76,6 +76,8 @@ class ReportsController extends Controller
             $modelcskd = CsKdDvLt::where('macskd',$modelkk->macskd)
                 ->first();
             $modelkkct = KkGDvLtCt::where('mahs',$modelkk->mahs)
+                ->orderBy('loaip', 'asc')
+                ->orderBy('id', 'asc')
                 ->get();
             $modelcqcq = DmDvQl::where('maqhns',$modeldn->cqcq)
                 ->first();

@@ -529,7 +529,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     </a>
                     <ul class="sub-menu">
                         <!--li><a href="{{url('danh_muc_don_vi_quan_ly')}}">Danh mục đơn vị quản lý</a> </li-->
-
+                        <!--li><a href="{{url('doanhnghiepcungcapdichvu')}}">Doanh nghiệp cung cấp DV</a> </li-->
                         @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'satc')
                         <li><a href="{{url('dn_dichvu_luutru')}}">DN dịch vụ lưu trú</a> </li>
                         @endif
@@ -547,6 +547,8 @@ License: You must have a valid license purchased only from themeforest(the above
                             <li><a href="{{url('users/register/pl=dich_vu_luu_tru')}}"> Tài khoản đăng ký DVLT</a></li>
                             <li><a href="{{url('users/register/pl=dich_vu_van_tai')}}"> Tài khoản đăng ký DVVT</a></li>
                         @endif
+
+                        <li><a href="{{url('quanlytaikhoandangky')}}">Tài khoản đăng ký</a> </li>
 
                             <li><a href="{{url('cau_hinh_he_thong')}}">Cấu hình hệ thống</a></li>
                     </ul>

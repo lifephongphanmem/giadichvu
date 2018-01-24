@@ -53,6 +53,7 @@
                                         <select class="form-control" name="plql" id="plql">
                                             <option value="TC" {{($model->plql == 'TC' ? 'selected' : '')}}>Tài Chính</option>
                                             <option value="VT" {{($model->plql == 'VT' ? 'selected' : '')}}>Vận Tải</option>
+                                            <option value="VT" {{($model->plql == 'CT' ? 'selected' : '')}}>Công Thương</option>
                                         </select>
                                     </div>
                                 </div>

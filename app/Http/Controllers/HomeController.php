@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DmDvQl;
+use App\DnDvGs;
 use App\DnDvLt;
 use App\DnDvLtReg;
 use App\DonViDvVt;
@@ -365,6 +366,12 @@ class HomeController extends Controller
             $modelrg = Register::where('masothue',$input['masothue'])
                 ->where('pl','DVVT')
                 ->first();
+        }elseif($input['pl']=='DVGS'){
+            $model = DnDvGs::where('masothue',$input['masothue'])
+                ->first();
+            $modelrg = Register::where('masothue',$input['masothue'])
+                ->where('pl','DVGS')
+                ->first();
         }
         if(isset($model)) {
             echo 'cancel';
@@ -378,17 +385,10 @@ class HomeController extends Controller
 
     public function checkrguser(Request $request){
         $input = $request->all();
-        if ($input['pl'] == 'DVLT') {
-            $model = User::where('username', $input['user'])
-                ->first();
-            $modelrg = Register::where('username', $input['user'])
-                ->first();
-        }elseif($input['pl']=='DVVT'){
-            $model = User::where('username', $input['user'])
-                ->first();
-            $modelrg = Register::where('username', $input['user'])
-                ->first();
-        }
+        $model = User::where('username', $input['user'])
+            ->first();
+        $modelrg = Register::where('username', $input['user'])
+            ->first();
         if(isset($model)) {
             echo 'cancel';
         }else{
@@ -578,6 +578,83 @@ class HomeController extends Controller
             });
         }
         return view('errors.register-success');
+    }
+
+    public function dangkydvgs(Request $request){
+        $model = DmDvQl::where('plql','CT')
+            ->get();
+        return view('system.register.dvgs.register')
+            ->with('model',$model)
+            ->with('pageTitle','Đăng ký dịch vụ giá sữa');
+    }
+
+    public function dangkydvgsstore(Request $request){
+        $input = $request->all();
+        if($input['g-recaptcha-response'] != '') {
+            $check = DnDvLt::where('masothue', $input['masothue'])
+                ->first();
+            if (count($check) > 0) {
+                return view('errors.register-errors');
+            } else {
+                $checkuser = User::where('username', $input['username'])->first();
+                if (count($checkuser) > 0) {
+                    return view('errors.register-errors');
+                } else {
+
+                    $ma = getdate()[0];
+                    $model = new Register();
+                    $model->tendn = $input['tendn'];
+                    $model->masothue = $input['masothue'];
+                    $model->diachi = $input['diachidn'];
+                    $model->tel = $input['teldn'];
+                    $model->fax = $input['faxdn'];
+                    $model->email = $input['emaildn'];
+                    $model->noidknopthue = $input['noidknopthue'];
+                    $model->cqcq = $input['cqcq'];
+                    $model->giayphepkd = $input['giayphepkd'];
+                    $model->tailieu = $input['tailieu'];
+                    $model->username = $input['username'];
+                    $model->password = md5($input['rpassword']);
+                    $model->pl = 'DVGS';
+                    $model->diadanh = $input['diadanh'];
+                    $model->nguoiky = $input['nguoiky'];
+                    $model->chucdanh = $input['chucdanh'];
+                    $model->setting = '';
+                    $model->dvxk = 0;
+                    $model->dvxb = 0;
+                    $model->dvxtx = 0;
+                    $model->dvk = 0;
+                    $model->trangthai = 'Chờ duyệt';
+                    $model->lydo = '';
+                    $model->ma = $ma;
+                    if ($model->save()) {
+                        $tencqcq = DmDvQl::where('maqhns', $input['cqcq'])->first();
+                        $data = [];
+                        $data['tendn'] = $input['tendn'];
+                        $data['tg'] = Carbon::now()->toDateTimeString();
+                        $data['tencqcq'] = $tencqcq->tendv;
+                        $data['masothue'] = $input['masothue'];
+                        $data['user'] = $input['username'];
+                        $data['madk'] = $ma;
+                        $maildn = $input['emaildn'];
+                        $tendn = $input['tendn'];
+                        $mailql = $tencqcq->emailqt;
+                        $tenql = $tencqcq->tendv;
+
+                        Mail::send('mail.register', $data, function ($message) use ($maildn, $tendn, $mailql, $tenql) {
+                            $message->to($maildn, $tendn)
+                                ->to($mailql, $tenql)
+                                ->subject('Thông báo đăng ký tài khoản');
+                            $message->from('qlgiakhanhhoa@gmail.com', 'Phần mềm CSDL giá');
+                        });
+
+                    }
+                    return view('system.register.view.register-success')
+                        ->with('ma', $ma);
+                }
+            }
+        }else
+            return view('errors.register-errors');
     }
 
 }

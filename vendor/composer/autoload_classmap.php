@@ -18,6 +18,7 @@ return array(
     'CreateDmdvvtxkTable' => $baseDir . '/database/migrations/2016_05_12_084832_create_dmdvvtxk_table.php',
     'CreateDmdvvtxtxTable' => $baseDir . '/database/migrations/2016_05_12_102628_create_dmdvvtxtx_table.php',
     'CreateDmgiahlTable' => $baseDir . '/database/migrations/2017_04_08_085756_create_dmgiahl_table.php',
+    'CreateDndvgsTable' => $baseDir . '/database/migrations/2018_01_17_110620_create_dndvgs_table.php',
     'CreateDndvltTable' => $baseDir . '/database/migrations/2016_10_14_013710_create_dndvlt_table.php',
     'CreateDoituongapdungdvltTable' => $baseDir . '/database/migrations/2017_04_10_204644_create_doituongapdungdvlt_table.php',
     'CreateDonvidvvtTable' => $baseDir . '/database/migrations/2016_10_18_014826_create_donvidvvt_table.php',

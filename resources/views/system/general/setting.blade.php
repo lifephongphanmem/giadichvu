@@ -113,7 +113,7 @@
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        <td><input type="checkbox" {{ (isset($setting->dvsua->dvsua) && $setting->dvsua->dvsua == 1) ? 'checked' : '' }} value="1" name="roles[dvsua][dvsua]"/></td>
+                                        <td><input type="checkbox" {{ (isset($setting->dvgs->dvgs) && $setting->dvgs->dvgs == 1) ? 'checked' : '' }} value="1" name="roles[dvgs][dvgs]"/></td>
                                         <td>Kê khai giá sữa</td>
                                     </tr>
 

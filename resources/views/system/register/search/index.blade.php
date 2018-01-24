@@ -79,6 +79,7 @@ License: You must have a valid license purchased only from themeforest(the above
 			array(
 			'DVLT' => 'Dịch vụ lưu trú',
 			'DVVT' => 'Dịch vụ vận tải',
+			'DVGS' => 'Dịch vụ giá sữa'
 			),null,
 			array( 'class' => 'form-control required'))
 			!!}

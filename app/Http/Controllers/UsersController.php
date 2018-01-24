@@ -169,6 +169,8 @@ class UsersController extends Controller
                     $inputs['phanloai'] = isset($inputs['phanloai']) ? $inputs['phanloai'] : 'DVVT';
                 elseif(session('admin')->sadmin == 'satc')
                     $inputs['phanloai'] = isset($inputs['phanloai']) ? $inputs['phanloai'] : 'DVLT';
+                elseif(session('admin')->sadmin == 'sact')
+                    $inputs['phanloai'] = isset($inputs['phanloai']) ? $inputs['phanloai'] : 'DVGS';
 
                 if ($inputs['phanloai'] == 'QL')
                     $level = array('T','H');
@@ -176,6 +178,8 @@ class UsersController extends Controller
                     $level = array('DVLT');
                 elseif ($inputs['phanloai'] == 'DVVT')
                     $level = array('DVVT');
+                elseif ($inputs['phanloai'] == 'DVGS')
+                    $level = array('DVGS');
 
                 if (session('admin')->sadmin == 'ssa' || session('admin')->sadmin =='sa') {
                     $model = Users::wherein('level', $level)
@@ -238,6 +242,8 @@ class UsersController extends Controller
                     $sadmin ='salt';
                 }elseif($modelcqcq->plql == 'VT' && $inputs['sadmin'] == 'qtht'){
                     $sadmin = 'savt';
+                }elseif($modelcqcq->plql == 'CT' && $inputs['sadmin'] == 'qtht'){
+                    $sadmin = 'sact';
                 }else{
                     $sadmin = '';
                 }
@@ -293,6 +299,9 @@ class UsersController extends Controller
                     elseif ($model->level == 'DVVT')
                         $modeldvql = DmDvQl::where('plql', 'VT')
                             ->get();
+                    elseif ($model->level == 'DVVT')
+                        $modeldvql = DmDvQl::where('plql', 'CT')
+                            ->get();
                     else
                         $modeldvql = DmDvQl::all();
                     return view('system.users.edit')
@@ -332,12 +341,6 @@ class UsersController extends Controller
                 if ($input['newpass'] != '')
                     $model->password = md5($input['newpass']);
                 $model->save();
-                if ($model->level == 'DVLT')
-                    $pl = 'dich_vu_luu_tru';
-                elseif ($model->level == 'DVVT')
-                    $pl = 'dich_vu_van_tai';
-                else
-                    $pl = 'quan_ly';
 
                 return redirect('users');
             }else
@@ -353,14 +356,6 @@ class UsersController extends Controller
         if (Session::has('admin')) {
             $id = $request->all()['iddelete'];
             $model = Users::findorFail($id);
-
-            if ($model->level == 'T')
-                $pl = 'quan_ly';
-            elseif ($model->level == 'DVLT')
-                $pl = 'dich_vu_luu_tru';
-            elseif ($model->level == 'DVVT')
-                $pl = 'dich_vu_van_tai';
-
             $model->delete();
 
             return redirect('users');
@@ -407,13 +402,6 @@ class UsersController extends Controller
 
                 $model->permission = json_encode($update['roles']);
                 $model->save();
-
-                if ($model->level == 'T' || $model->level == 'H')
-                    $pl = 'quan_ly';
-                elseif ($model->level == 'DVLT')
-                    $pl = 'dich_vu_luu_tru';
-                elseif ($model->level == 'DVVT')
-                    $pl = 'dich_vu_van_tai';
                 return redirect('users');
 
             } else
@@ -423,7 +411,7 @@ class UsersController extends Controller
             return view('errors.notlogin');
     }
 
-    public function lockuser($id,$pl)
+    public function lockuser($id)
     {
 
         $arrayid = explode('-', $id);
@@ -438,7 +426,7 @@ class UsersController extends Controller
 
     }
 
-    public function unlockuser($id,$pl)
+    public function unlockuser($id)
     {
         $arrayid = explode('-', $id);
         foreach ($arrayid as $ids) {
@@ -659,6 +647,7 @@ class UsersController extends Controller
         } else
             return view('errors.notlogin');
     }
+
 
     public function registerdelete(Request $request){
         if (Session::has('admin')) {

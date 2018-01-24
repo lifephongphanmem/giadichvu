@@ -23,12 +23,17 @@ Route::get('forgot_password','HomeController@forgotpassword');
 Route::post('forgot_password','HomeController@forgotpasswordw');
 Route::get('register/tra_lai','HomeController@regdverror');
 
+Route::get('dangkydichvugiasua','HomeController@dangkydvgs');
+Route::post('dangkydichvugiasua','HomeController@dangkydvgsstore');
+
 Route::get('search_register','HomeController@searchregister');
 Route::post('search_register','HomeController@checksearchregister');
 Route::get('search_register/show','HomeController@show');
 Route::post('search_register/show','HomeController@edit');
 Route::patch('register_editdvlt/id={id}','HomeController@updatedvlt');
 Route::patch('register_editdvvt/id={id}','HomeController@updatedvvt');
+
+
 // </editor-fold>//End Hệ thống- Đăng ký
 
 // <editor-fold defaultstate="collapsed" desc="--Setting--">
@@ -77,6 +82,8 @@ Route::post('users/register/tralai','UsersController@tralaidktk');
 
 Route::post('register/delete','UsersController@registerdelete');
 Route::get('users/print/pl={pl}','UsersController@prints');
+
+Route::resource('quanlytaikhoandangky','QlTkDkController');
 //EndUsers
 
 //DN Dịch vụ lưu trú
@@ -98,6 +105,9 @@ Route::patch('dn_dichvu_vantai/{id}','DonViDvVtController@update');
 Route::post('dn_dichvu_vantai/delete','DonViDvVtController@destroy');
 Route::get('dn_dichvu_vantai/print','DonViDvVtController@prints');
 //End Dn Dịch vụ vận tải
+
+//DN cung cấp dịch vụ
+Route::resource('doanhnghiepcungcapdichvu','DoanhNghiepCcDvController');
 
 //DS Đơn vị quản lý
 Route::resource('danh_muc_don_vi_quan_ly','DmDvQlController');
