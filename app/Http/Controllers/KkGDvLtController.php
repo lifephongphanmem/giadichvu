@@ -651,12 +651,14 @@ class KkGDvLtController extends Controller
                     $tendn = $dn->tendn;
                     $mailql = $tencqcq->email;
                     $tenql = $tencqcq->tendv;
+                    /* tam thời bỏ de tk vp
                     Mail::send('mail.kkgia',$data, function ($message) use($maildn,$tendn,$mailql,$tenql) {
                         $message->to($maildn,$tendn)
                             ->to($mailql,$tenql)
                             ->subject('Thông báo nhận hồ sơ kê khai giá dịch vụ');
                         $message->from('qlgiakhanhhoa@gmail.com','Phần mềm CSDL giá');
                     });
+                    */
                     //History
                     $mahsh = getdate()[0];
                     $his = new KkGDvLtH();
