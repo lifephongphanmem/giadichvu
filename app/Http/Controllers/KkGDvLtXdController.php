@@ -49,6 +49,11 @@ class KkGDvLtXdController extends Controller
                 $model = CbKkGDvLt::whereMonth('ngaynhan',$thang)
                     ->whereYear('ngaynhan', $nam)
                     ->get();
+            }elseif($pl='bi_tra_lai'){
+                $model = KkGDvLt::where('trangthai', 'Bị trả lại')
+                    ->whereMonth('ngaychuyen', $thang)
+                    ->whereYear('ngaychuyen', $nam)
+                    ->get();
             }
 
             $modelcskd = CsKdDvLt::all();

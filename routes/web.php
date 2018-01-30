@@ -265,7 +265,7 @@ Route::get('ke_khai_dich_vu_luu_tru/{macskd}/hsdakk', 'KkGDvLtXdController@hsdak
     //End xét duyệt kê khai
     //Search kê khai
 Route::get('search_ke_khai_dich_vu_luu_tru','KkGDvLtController@search');
-Route::get('search_ke_khai_dich_vu_luu_tru/doanh_nghiep={masothue}&co_so_kinh_doanh={macskd}&namhs={nam}','KkGDvLtController@viewsearch');
+//Route::get('search_ke_khai_dich_vu_luu_tru/doanh_nghiep={masothue}&co_so_kinh_doanh={macskd}&namhs={nam}','KkGDvLtController@viewsearch');
     //End search kê khai
     //Print Kê khai
 Route::get('ke_khai_dich_vu_luu_tru/report_ke_khai/{mahs}','ReportsController@kkgdvlt');

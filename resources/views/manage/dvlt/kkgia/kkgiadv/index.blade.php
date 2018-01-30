@@ -179,7 +179,7 @@
                                 <td style="text-align: center" class="active">{{$tt->socv}}</td>
                                 <td style="text-align: center">{{$tt->socvlk}}</td>
                                 <td style="text-align: center">{{$tt->ttnguoinop}}</td>
-                                    @if($tt->trangthai == "Chờ chuyển")
+                                @if($tt->trangthai == "Chờ chuyển")
                                 <td align="center"><span class="badge badge-warning">{{$tt->trangthai}}</span></td>
                                 @elseif($tt->trangthai == 'Chờ duyệt')
                                     <td align="center"><span class="badge badge-blue">{{$tt->trangthai}}</span>

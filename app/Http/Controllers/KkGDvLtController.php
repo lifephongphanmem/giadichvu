@@ -882,14 +882,30 @@ class KkGDvLtController extends Controller
 
     }
 
-    public function search(){
+    public function search(Request $request){
         if (Session::has('admin')) {
-            $cskd = CsKdDvLt::all();
+            $inputs = $request->all();
+            $inputs['nam'] = isset($inputs['nam']) ? $inputs['nam'] : date('Y');
+            $inputs['masothue'] = isset($inputs['masothue']) ? $inputs['masothue']: 'all';
             $dn = DnDvLt::all();
+            if($inputs['masothue'] == 'all')
+                $model = KkGDvLt::whereYear('ngaynhap',$inputs['nam'])
+                    ->get();
+            else
+                $model = KkGDvLt::whereYear('ngaynhap',$inputs['nam'])
+                    ->where('masothue',$inputs['masothue'])
+                    ->get();
+            $allcskd = CsKdDvLt::all();
+            foreach($model as $ttkk){
+                $this->getTTCSKD($allcskd,$ttkk);
+            }
+
             return view('manage.dvlt.search.index')
-                ->with('nam',date('Y'))
-                ->with('cskd',$cskd)
+                ->with('select_nam',$inputs['nam'])
                 ->with('dn',$dn)
+                ->with('selectdn',$inputs['masothue'])
+                ->with('model',$model)
+                ->with('select_masothue',$inputs['masothue'])
                 ->with('pageTitle','Tìm kiếm thông tin kê khai giá dịch vụ lưu trú');
         }else
             return view('errors.notlogin');

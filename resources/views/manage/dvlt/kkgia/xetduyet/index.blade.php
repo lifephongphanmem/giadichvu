@@ -273,6 +273,7 @@
                     <option value="cho_nhan" {{$pl == 'cho_nhan' ? 'selected' : ''}}>Hồ sơ kê khai giá dịch vụ đang chờ nhận</option>
                     <option value="duyet" {{$pl == 'duyet' ? 'selected' : ''}}>Hồ sơ kê khai giá dịch vụ đã duyệt</option>
                     <option value="cong_bo" {{$pl == 'cong_bo' ? 'selected' : ''}}>Hồ sơ kê khai giá dịch vụ đã công bố</option>
+                    <option value="bi_tra_lai" {{$pl == 'bi_tra_lai' ? 'selected' : ''}}>Hồ sơ kê khai giá dịch vụ bị trả lại</option>
                 </select>
             </div>
         </div>
@@ -344,6 +345,7 @@
                                         <a href="{{url('ke_khai_dich_vu_luu_tru/report_ke_khai/'.$tt->mahs)}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Xem chi tiết</a>
                                     @endif
                                     @if(can('kkdvlt','approve'))
+                                        @if($tt->trangthai !='Bị trả lại')
                                         @if($tt->trangthai == 'Chờ nhận')
                                             <button type="button" onclick="confirmTraLai({{$tt->id}})" class="btn btn-default btn-xs mbs" data-target="#tralai-modal" data-toggle="modal"><i class="fa fa-reply"></i>&nbsp;
                                                 Trả lại</button>
@@ -356,6 +358,7 @@
                                                 Chỉnh sửa TT nhận</button>
                                             <button type="button" onclick="confirmHuyduyet({{$tt->mahs}})" class="btn btn-default btn-xs mbs" data-target="#huyduyet-modal" data-toggle="modal"><i class="fa fa-stop"></i>&nbsp;
                                                 Huỷ duyệt HS</button>
+                                        @endif
                                         @endif
 
                                     @endif

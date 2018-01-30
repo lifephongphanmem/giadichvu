@@ -24,13 +24,13 @@
             $('#namhs').change(function() {
                 var namhs = $('#namhs').val();
                 var masothue = $('#masothue').val();
-                var url = 'search_ke_khai_dich_vu_luu_tru/doanh_nghiep='+masothue + '&co_so_kinh_doanh=all'+'&namhs='+namhs;
+                var url = 'search_ke_khai_dich_vu_luu_tru?&masothue='+ masothue +'&nam='+namhs;
                 window.location.href = url;
             });
-            $('#masothue').change(function(){
+            $('#masothue').change(function() {
                 var namhs = $('#namhs').val();
                 var masothue = $('#masothue').val();
-                var url = 'search_ke_khai_dich_vu_luu_tru/doanh_nghiep='+masothue + '&co_so_kinh_doanh=all'+'&namhs='+namhs;
+                var url = 'search_ke_khai_dich_vu_luu_tru?&masothue='+ masothue +'&nam='+namhs;
                 window.location.href = url;
             });
         });
@@ -49,7 +49,7 @@
                     @if ($nam_start = intval(date('Y')) -5 ) @endif
                     @if ($nam_stop = intval(date('Y')) ) @endif
                     @for($i = $nam_start; $i <= $nam_stop; $i++)
-                        <option value="{{$i}}" {{$i == $nam ? 'selected' : ''}}>Năm {{$i}}</option>
+                        <option value="{{$i}}" {{$i == $select_nam ? 'selected' : ''}}>Năm {{$i}}</option>
                     @endfor
                 </select>
             </div>
@@ -59,7 +59,7 @@
                 <select class="form-control select2me" id="masothue" name="masothue">
                     <option value="all">-- Nhập thông tin doanh nghiệp --</option>
                     @foreach($dn as $tt)
-                        <option value="{{$tt->masothue}}">{{$tt->tendn}}</option>
+                        <option value="{{$tt->masothue}}" {{$select_masothue == $tt->masothue ? 'selected' : '' }}>{{$tt->tendn}}</option>
                     @endforeach
                 </select>
             </div>
@@ -82,10 +82,45 @@
                             <th style="text-align: center">Ngày thực hiện<br>mức giá kê khai</th>
                             <th style="text-align: center">Số công văn</th>
                             <th style="text-align: center">Số công văn liền kề</th>
+                            <th style="text-align: center">Trạng thái</th>
                             <th style="text-align: center" width="25%">Thao tác</th>
                         </tr>
                         </thead>
                         <tbody>
+                        @foreach($model as $key=>$tt)
+                            <tr>
+                                <td style="text-align: center">{{$key+1}}</td>
+                                <td class="active">{{$tt->tencskd}}<br>Mã số thuế: {{$tt->masothue}}<br>Số hồ sơ: {{$tt->mahs}}</td>
+                                <td style="text-align: center">{{getDayVn($tt->ngaynhap)}}</td>
+                                <td style="text-align: center">{{getDayVn($tt->ngayhieuluc)}}</td>
+                                <td style="text-align: center" class="active">{{$tt->socv}}</td>
+                                <td style="text-align: center">{{$tt->socvlk}}</td>
+                                @if($tt->trangthai == "Chờ chuyển")
+                                    <td align="center"><span class="badge badge-warning">{{$tt->trangthai}}</span></td>
+                                @elseif($tt->trangthai == 'Chờ duyệt')
+                                    <td align="center"><span class="badge badge-blue">{{$tt->trangthai}}</span>
+                                        <br>Thời gian chuyển:<br><b>{{getDateTime($tt->ngaychuyen)}}</b>
+                                    </td>
+                                @elseif($tt->trangthai == 'Chờ nhận')
+                                    <td align="center"><span class="badge badge-warning">{{$tt->trangthai}}</span>
+                                        <br>Thời gian chuyển:<br><b>{{getDateTime($tt->ngaychuyen)}}</b>
+                                    </td>
+                                @elseif($tt->trangthai == 'Bị trả lại')
+                                    <td align="center">
+                                        <span class="badge badge-danger">{{$tt->trangthai}}</span><br>&nbsp;
+                                    </td>
+                                @else
+                                    <td align="center">
+                                        <span class="badge badge-success">{{$tt->trangthai}}</span>
+                                        <br>Thời gian chuyển:<br><b>{{getDateTime($tt->ngaychuyen)}}</b>
+                                    </td>
+                                @endif
+                                <td>
+                                    <a href="{{url('ke_khai_dich_vu_luu_tru/report_ke_khai/'.$tt->mahs)}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Xem chi tiết</a>
+                                    <a href="{{url('ke_khai_dich_vu_luu_tru/'.$tt->mahs.'/history')}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Lịch sử</a>
+                                </td>
+                            </tr>
+                        @endforeach
 
                         </tbody>
                     </table>
