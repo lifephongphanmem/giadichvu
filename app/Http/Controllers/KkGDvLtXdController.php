@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Mail;
 
 class KkGDvLtXdController extends Controller
 {
-    public function index($thang,$nam,$pl){
+    /*public function index($thang,$nam,$pl){
         if (Session::has('admin')) {
             if($pl=='cho_nhan') {
                 $trangthai = 'Chờ nhận';
@@ -68,7 +68,71 @@ class KkGDvLtXdController extends Controller
                 ->with('pageTitle','Thông tin cơ sở kinh doanh dịch vụ lưu trú');
         }else
             return view('errors.notlogin');
+    }*/
+    public function index(Request $request){
+        if (Session::has('admin')) {
+            $inputs = $request->all();
+            $inputs['nam'] = isset($inputs['nam']) ? $inputs['nam'] : date('Y');
+            $inputs['pl'] = isset($inputs['pl']) ? $inputs['pl'] : 'cho_nhan';
+            if($inputs['pl']=='cho_nhan') {
+                if(session('admin')->level == 'T'  && session('admin')->sadmin == 'ssa') {
+                    $model = KkGDvLt::where('trangthai', 'Chờ nhận')
+                        ->whereYear('ngaychuyen', $inputs['nam'])
+                        ->get();
+                }else{
+                    $model = KkGDvLt::where('trangthai', 'Chờ nhận')
+                        ->where('cqcq',session('admin')->cqcq)
+                        ->whereYear('ngaychuyen', $inputs['nam'])
+                        ->get();
+                }
+            }
+            elseif($inputs['pl'] == 'duyet') {
+                if(session('admin')->level == 'T'  && session('admin')->sadmin == 'ssa') {
+                    $model = KkGDvLt::where('trangthai', 'Duyệt')
+                        ->whereYear('ngaychuyen', $inputs['nam'])
+                        ->get();
+                }else{
+                    $model = KkGDvLt::where('trangthai', 'Duyệt')
+                        ->where('cqcq',session('admin')->cqcq)
+                        ->whereYear('ngaychuyen', $inputs['nam'])
+                        ->get();
+                }
+            }
+            elseif($inputs['pl'] == 'cong_bo') {
+
+                if(session('admin')->level == 'T'  && session('admin')->sadmin == 'ssa') {
+                    $model = CbKkGDvLt::whereYear('ngaychuyen', $inputs['nam'])
+                        ->get();
+                }else{
+                    $model = CbKkGDvLt::where('cqcq',session('admin')->cqcq)
+                        ->whereYear('ngaychuyen', $inputs['nam'])
+                        ->get();
+                }
+            }elseif($inputs['pl']='bi_tra_lai'){
+                if(session('admin')->level == 'T'  && session('admin')->sadmin == 'ssa') {
+                    $model = KkGDvLt::where('trangthai', 'Bị trả lại')
+                        ->whereYear('ngaychuyen', $inputs['nam'])
+                        ->get();
+                }else{
+                    $model = KkGDvLt::where('trangthai', 'Bị trả lại')
+                        ->where('cqcq',session('admin')->cqcq)
+                        ->whereYear('ngaychuyen', $inputs['nam'])
+                        ->get();
+                }
+            }
+            $modelcskd = CsKdDvLt::all();
+            foreach($model as $ttkk){
+                $this->getTTCSKD($modelcskd,$ttkk);
+            }
+            return view('manage.dvlt.kkgia.xetduyet.index')
+                ->with('model',$model)
+                ->with('nam',$inputs['nam'])
+                ->with('pl',$inputs['pl'])
+                ->with('pageTitle','Thông tin cơ sở kinh doanh dịch vụ lưu trú');
+        }else
+            return view('errors.notlogin');
     }
+
     public function getTTCSKD($cskds,$array){
         foreach($cskds as $cskd){
             if($cskd->masothue == $array->masothue && $cskd->macskd == $array->macskd){

@@ -317,7 +317,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <li><a href="{{url('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh')}}">Kê khai dịch vụ lưu trú </a></li>
                                 @endif
                                 @if(session('admin')->level =='T' || session('admin')->level =='H')
-                                    <li><a href="{{url('xet_duyet_ke_khai_dich_vu_luu_tru/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')}}">Hồ sơ kê khai</a></li>
+                                    <li><a href="{{url('xet_duyet_ke_khai_dich_vu_luu_tru')}}">Hồ sơ kê khai</a></li>
                                     <li><a href="{{url('search_ke_khai_dich_vu_luu_tru')}}">Tìm kiếm TT kê khai</a></li>
                                 @endif
                             @endif
@@ -444,7 +444,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                             <li><a href="{{url('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh')}}">Kê khai dịch vụ lưu trú </a></li>
                                         @endif
                                         @if(session('admin')->level =='T' || session('admin')->level =='H')
-                                            <li><a href="{{url('xet_duyet_ke_khai_dich_vu_luu_tru/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')}}">Hồ sơ kê khai</a></li>
+                                            <li><a href="{{url('xet_duyet_ke_khai_dich_vu_luu_tru')}}">Hồ sơ kê khai</a></li>
                                             <li><a href="{{url('search_ke_khai_dich_vu_luu_tru')}}">Tìm kiếm TT kê khai</a></li>
                                         @endif
                                     @endif

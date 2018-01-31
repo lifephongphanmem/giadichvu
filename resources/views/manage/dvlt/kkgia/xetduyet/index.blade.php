@@ -97,7 +97,7 @@
         }
         $(function(){
 
-            $('#namhs').change(function() {
+            /*$('#namhs').change(function() {
                 var namhs = $('#namhs').val();
                 var thanghs = $('#thanghs').val();
                 var pl = $('#pl').val();
@@ -118,6 +118,20 @@
                 var thanghs = $('#thanghs').val();
                 var pl = $('#pl').val();
                 var url = '/xet_duyet_ke_khai_dich_vu_luu_tru/thang='+thanghs+'&nam='+namhs+'&pl='+pl;
+
+                window.location.href = url;
+            });*/
+            $('#namhs').change(function() {
+                var namhs = $('#namhs').val();
+                var pl = $('#pl').val();
+                var url = '/xet_duyet_ke_khai_dich_vu_luu_tru?&nam='+namhs+'&pl='+pl;
+
+                window.location.href = url;
+            });
+            $('#pl').change(function() {
+                var namhs = $('#namhs').val();
+                var pl = $('#pl').val();
+                var url = '/xet_duyet_ke_khai_dich_vu_luu_tru?&nam='+namhs+'&pl='+pl;
 
                 window.location.href = url;
             });
@@ -239,25 +253,6 @@
     <div class="row">
         <div class="col-md-2">
             <div class="form-group">
-                <select name="thanghs" id="thanghs" class="form-control">
-                    <option value="01" {{$thang == '01' ? 'selected' : ''}}>Tháng 01</option>
-                    <option value="02" {{$thang == '02' ? 'selected' : ''}}>Tháng 02</option>
-                    <option value="03" {{$thang == '03' ? 'selected' : ''}}>Tháng 03</option>
-                    <option value="04" {{$thang == '04' ? 'selected' : ''}}>Tháng 04</option>
-                    <option value="05" {{$thang == '05' ? 'selected' : ''}}>Tháng 05</option>
-                    <option value="06" {{$thang == '06' ? 'selected' : ''}}>Tháng 06</option>
-                    <option value="07" {{$thang == '07' ? 'selected' : ''}}>Tháng 07</option>
-                    <option value="08" {{$thang == '08' ? 'selected' : ''}}>Tháng 08</option>
-                    <option value="09" {{$thang == '09' ? 'selected' : ''}}>Tháng 09</option>
-                    <option value="10" {{$thang == '10' ? 'selected' : ''}}>Tháng 10</option>
-                    <option value="11" {{$thang == '11' ? 'selected' : ''}}>Tháng 11</option>
-                    <option value="12" {{$thang == '12' ? 'selected' : ''}}>Tháng 12</option>
-
-                </select>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="form-group">
                 <select name="namhs" id="namhs" class="form-control">
                     @if ($nam_start = intval(date('Y')) - 5 ) @endif
                     @if ($nam_stop = intval(date('Y')) + 1 ) @endif
@@ -311,7 +306,8 @@
                                     @else
                                         {{$tt->loaihang.' sao'}}
                                     @endif
-                                    <br>Mã kê khai:{{$tt->mahs}}</td>
+                                    <br>Mã kê khai: {{$tt->mahs}}
+                                    <br>Mã số thuế: {{$tt->masothue}}</td>
                                 <td style="text-align: center">{{getDayVn($tt->ngaynhap)}}</td>
                                 <td style="text-align: center">{{getDayVn($tt->ngayhieuluc)}}</td>
                                 <td style="text-align: center" class="danger">{{$tt->socv}}</td>

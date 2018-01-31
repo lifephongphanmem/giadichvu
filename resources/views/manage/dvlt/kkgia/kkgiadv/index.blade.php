@@ -235,6 +235,13 @@
                                         <button type="button" data-target="#lydo-modal" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="viewLyDo({{$tt->id}})"><i class="fa fa-search"></i>&nbsp;Lý do trả lại</button>
                                         @endif
                                     @endif
+                                    @if(session('admin')->sadmin == 'ssa')
+                                        @if($tt->phanloai == 'DT')
+                                            <a href="{{url('ke_khai_dich_vu_luu_tru/khach_san/'.$tt->id.'/edit')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</a>
+                                        @else
+                                            <a href="{{url('ke_khai_dich_vu_luu_tru/'.$tt->id.'/edit')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</a>
+                                        @endif
+                                    @endif
 
                                 </td>
                             </tr>
