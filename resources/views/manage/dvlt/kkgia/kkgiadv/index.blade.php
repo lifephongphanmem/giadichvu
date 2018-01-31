@@ -242,6 +242,7 @@
                                             <a href="{{url('ke_khai_dich_vu_luu_tru/'.$tt->id.'/edit')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</a>
                                         @endif
                                     @endif
+                                    <a href="{{url('ke_khai_dich_vu_luu_tru/'.$tt->mahs.'/history')}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Lịch sử</a>
 
                                 </td>
                             </tr>
