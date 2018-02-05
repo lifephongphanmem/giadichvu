@@ -105,7 +105,7 @@
             <div style="text-align: center">
                 <button type="submit" class="btn green" onclick="validateForm()"><i class="fa fa-check"></i> Hoàn thành</button>
                 <button type="reset" class="btn btn-default"><i class="fa fa-refresh"></i>&nbsp;Nhập lại</button>
-                <a href="{{url('dich_vu_van_tai/dich_vu_cho_hang/ke_khai/nam='.date('Y'))}}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
+                <a href="{{url('dich_vu_van_tai/dich_vu_cho_hang/ke_khai/nam='.date('Y'))}}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp;Hủy bỏ</a>
             </div>
         </div>
         {!! Form::close() !!}

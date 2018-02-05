@@ -108,7 +108,7 @@ class DmDvVtXkController extends Controller
             $model->madichvu = 'DVXK'. $inputs['masothue'] . getdate()[0];
             //$model->diemdau = $inputs['diemdau'];
             //$model->diemcuoi = $inputs['diemcuoi'];
-            $model->sokm = $inputs['sokm'];
+            $model->sokm = getDbl($inputs['sokm']);
             $model->tendichvu = $inputs['tendichvu'];
             $model->dvt = $inputs['dvt'];
             $model->loaixe = $inputs['loaixe'];
@@ -123,7 +123,7 @@ class DmDvVtXkController extends Controller
             $model->loaixe = $inputs['loaixe'];
             $model->qccl = $inputs['qccl'];
             $model->ghichu = $inputs['ghichu'];
-            $model->sokm = $inputs['sokm'];
+            $model->sokm = getDbl($inputs['sokm']);
             $model->save();
         }
 

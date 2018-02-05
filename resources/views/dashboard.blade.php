@@ -66,7 +66,7 @@
                                 </div>
                             </div>
                             <a class="more" href="
-                                {{(session('admin')->level == 'T')? url('xet_duyet_ke_khai_dich_vu_luu_tru/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan')
+                                {{(session('admin')->level == 'T')? url('xet_duyet_ke_khai_dich_vu_luu_tru/')
                                 : url('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh')}}">
                                 Xem chi tiết <i class="m-icon-swapright m-icon-white"></i>
                             </a>

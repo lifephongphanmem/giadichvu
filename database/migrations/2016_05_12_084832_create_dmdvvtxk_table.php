@@ -23,6 +23,7 @@ class CreateDmdvvtxkTable extends Migration
             $table->string('qccl')->nullable();
             $table->string('dvt')->nullable();
             $table->string('ghichu')->nullable();
+            $table->string('sokm')->default(0);
             $table->timestamps();
         });
     }
