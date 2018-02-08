@@ -361,7 +361,7 @@ class KkGDvLtXdController extends Controller
                     }
                 }
             }
-            return redirect('xet_duyet_ke_khai_dich_vu_luu_tru/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan');
+            return redirect('xet_duyet_ke_khai_dich_vu_luu_tru/');
         }else
             return view('errors.notlogin');
     }
