@@ -23,7 +23,10 @@ class GeneralConfigs extends Model
         'ttlhlt',
         'ttlhlt',
         'setting',
-        'urlwebcb'
+        'urlwebcb',
+        'thoihan_lt',
+        'thoihan_vt',
+        'thoihan_ct'
 
     ];
 }

@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'CreateCbkkdvgsTable' => $baseDir . '/database/migrations/2018_03_16_150452_create_cbkkdvgs_table.php',
     'CreateCbkkdvvtkhacTable' => $baseDir . '/database/migrations/2016_05_20_081831_create_cbkkdvvtkhac_table.php',
     'CreateCbkkdvvtxbTable' => $baseDir . '/database/migrations/2016_05_20_081807_create_cbkkdvvtxb_table.php',
     'CreateCbkkdvvtxkTable' => $baseDir . '/database/migrations/2016_05_20_081755_create_cbkkdvvtxk_table.php',
@@ -37,6 +38,9 @@ return array(
     'CreateKkdvvtxtxTable' => $baseDir . '/database/migrations/2016_05_12_102651_create_kkdvvtxtx_table.php',
     'CreateKkdvvtxtxctTable' => $baseDir . '/database/migrations/2016_05_12_102701_create_kkdvvtxtxct_table.php',
     'CreateKkdvvtxtxctdfTable' => $baseDir . '/database/migrations/2016_05_19_155213_create_kkdvvtxtxctdf_table.php',
+    'CreateKkgdvgsTable' => $baseDir . '/database/migrations/2018_03_08_103007_create_kkgdvgs_table.php',
+    'CreateKkgdvgsctTable' => $baseDir . '/database/migrations/2018_03_13_101617_create_kkgdvgsct_table.php',
+    'CreateKkgdvgsctdfTable' => $baseDir . '/database/migrations/2018_03_12_144633_create_kkgdvgsctdf_table.php',
     'CreateKkgdvltTable' => $baseDir . '/database/migrations/2016_10_21_073706_create_kkgdvlt_table.php',
     'CreateKkgdvltctTable' => $baseDir . '/database/migrations/2016_10_21_083946_create_kkgdvltct_table.php',
     'CreateKkgdvltctdfTable' => $baseDir . '/database/migrations/2016_10_21_084015_create_kkgdvltctdf_table.php',

@@ -399,8 +399,8 @@ class DnDvLtController extends Controller
 
     public function prints(){
         if (Session::has('admin')) {
-            $model = DnDvLt::all();
-            $dv = 'LƯU TRÚ';
+            $model = DnDvLt::get();
+            $dv = 'DỊCH VỤ LƯU TRÚ';
             $pl = 'DVLT';
             return view('reports.dn.doanhnghiep')
                 ->with('dv',$dv)

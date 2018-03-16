@@ -90,7 +90,7 @@
                         @foreach($model as $key=>$tt)
                             <tr class="odd gradeX">
                                 <td style="text-align: center">{{$key + 1}}</td>
-                                <td class="active" ><b style="color: blue;">{{$tt->tendn}}</b><br><u>Ngày đăng ký:</u>&nbsp;{{getDateTime($tt->created_at)}}</td>
+                                <td class="active" ><b style="color: blue;">{{$tt->tendn}}</b><br>Ngày đăng ký:&nbsp;{{getDateTime($tt->created_at)}}<br>{{($tt->updated_at != $tt->created_at ? 'Ngày cập nhật: '.getDateTime($tt->updated_at) : '')}}</td>
                                 <td>{{$tt->masothue}}</td>
                                 <td align="center">
                                     <span class="badge badge-danger">{{$tt->trangthai}}</span>
@@ -102,7 +102,9 @@
                                 <td>
                                     <a href="{{url('users/register/'.$tt->id.'/show')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Xem chi tiết</a>
                                     @if($tt->trangthai != 'Bị trả lại')
-                                    <a href="{{url('users/register/'.$tt->id.'/edit')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</a>
+                                        @if(session('admin')->sadmin == 'ssa')
+                                        <a href="{{url('users/register/'.$tt->id.'/edit')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</a>
+                                        @endif
                                     <button type="button" onclick="confirmTraLai({{$tt->id}})" class="btn btn-default btn-xs mbs" data-target="#tralai-modal" data-toggle="modal"><i class="fa fa-reply"></i>&nbsp;
                                         Trả lại</button>
                                     <button type="button" onclick="getId('{{$tt->id}}')" class="btn btn-default btn-xs mbs" data-target="#delete-modal" data-toggle="modal"><i class="fa fa-trash-o"></i>&nbsp;

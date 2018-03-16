@@ -706,7 +706,8 @@ class CsKdDvLtController extends Controller
                 $model->loaihang = $input['loaihang'];
                 $model->diachikd = $input['diachikd'];
                 $model->telkd = $input['telkd'];
-                $model->toado = getAddMap($input['diachikd']);
+                //$model->toado = getAddMap($input['diachikd']);
+
                 $model->link = $input['link'];
                 $model->save();
 

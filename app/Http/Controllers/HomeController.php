@@ -488,6 +488,14 @@ class HomeController extends Controller
                     ->with('model',$model)
                     ->with('pageTitle','Chỉnh sửa thông tin đăng ký tài khoản');
             }
+            elseif($model->pl == 'DVGS'){
+                $cqcq = DmDvQl::where('plql','CT')
+                    ->get();
+                return view('system.register.search.dvgs.edit')
+                    ->with('cqcq',$cqcq)
+                    ->with('model',$model)
+                    ->with('pageTitle','Chỉnh sửa thông tin đăng ký tài khoản');
+            }
         }else{
             return view('system.register.view.register-edit-errors');
         }
@@ -580,7 +588,50 @@ class HomeController extends Controller
         return view('errors.register-success');
     }
 
-    public function dangkydvgs(Request $request){
+    public function updatedvgs(Request $request, $id){
+        $input = $request->all();
+        $model = Register::findOrFail($id);
+        $model->tendn = $input['tendn'];
+        $model->masothue = $input['masothue'];
+        $model->diachi = $input['diachidn'];
+        $model->tel = $input['teldn'];
+        $model->fax = $input['faxdn'];
+        $model->email = $input['emaildn'];
+        $model->noidknopthue = $input['noidknopthue'];
+        $model->cqcq = $input['cqcq'];
+        $model->giayphepkd = $input['giayphepkd'];
+        $model->tailieu = $input['tailieu'];
+        $model->username = $input['username'];
+        $model->password = md5($input['rpassword']);
+        $model->trangthai = 'Chờ duyệt';
+        $model->chucdanh = $input['chucdanh'];
+        $model->nguoiky = $input['nguoiky'];
+        $model->diadanh = $input['diadanh'];
+        if($model->save()){
+            $tencqcq = DmDvQl::where('maqhns',$input['cqcq'])->first();
+            $data=[];
+            $data['tendn'] = $input['tendn'];
+            $data['tg'] = Carbon::now()->toDateTimeString();
+            $data['tencqcq'] = $tencqcq->tendv;
+            $data['masothue'] = $input['masothue'];
+            $data['user'] = $input['username'];
+            $data['madk'] = $model->ma;
+            $maildn = $input['emaildn'];
+            $tendn  =  $input['tendn'];
+            $mailql = $tencqcq->emailqt;
+            $tenql = $tencqcq->tendv;
+            Mail::send('mail.stlregister',$data, function ($message) use($maildn,$tendn,$mailql,$tenql) {
+                $message->to($maildn,$tendn)
+                    ->to($mailql,$tenql)
+                    ->subject('Thông báo đăng ký tài khoản');
+                $message->from('qlgiakhanhhoa@gmail.com','Phần mềm CSDL giá');
+            });
+        }
+        return view('errors.register-success');
+    }
+
+
+    public function dangkydvgs(){
         $model = DmDvQl::where('plql','CT')
             ->get();
         return view('system.register.dvgs.register')

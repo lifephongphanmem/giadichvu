@@ -38,7 +38,7 @@ function getPermissionDefault($level) {
             'delete' => 0,
             'approve'=> 1
         ),
-        'giasua' => array(
+        'dvgs' => array(
             'index' => 1,
             'create' => 0,
             'edit' => 0,
@@ -80,11 +80,11 @@ function getPermissionDefault($level) {
             'delete' => 0,
             'approve'=> 1
         ),
-        'kkgiasua' => array(
+        'kkdvgs' => array(
             'index' => 1,
-            'create' => 0,
-            'edit' => 0,
-            'delete' => 0,
+            'create' => 1,
+            'edit' => 1,
+            'delete' => 1,
             'approve'=> 1
         ),
     );
@@ -124,6 +124,13 @@ function getPermissionDefault($level) {
             'delete' => 0,
             'approve'=> 1
         ),
+        'dvgs' => array(
+            'index' => 1,
+            'create' => 0,
+            'edit' => 0,
+            'delete' => 0,
+            'approve'=> 1
+        ),
         'kkdvlt' => array(
             'index' => 1,
             'create' => 0,
@@ -153,6 +160,13 @@ function getPermissionDefault($level) {
             'approve'=> 1
         ),
         'kkdvvtch' => array(
+            'index' => 1,
+            'create' => 0,
+            'edit' => 0,
+            'delete' => 0,
+            'approve'=> 1
+        ),
+        'kkdvgs' => array(
             'index' => 1,
             'create' => 0,
             'edit' => 0,
@@ -229,6 +243,21 @@ function getPermissionDefault($level) {
             'approve'=> 1
         ),
     );
+    $roles['DVGS'] = array(
+        'dvgs' => array(
+            'index' => 1,
+            'create' => 1,
+            'edit' => 1,
+            'delete' => 1,
+        ),
+        'kkdvgs' => array(
+            'index' => 1,
+            'create' => 1,
+            'edit' => 1,
+            'delete' => 1,
+            'approve'=> 1
+        ),
+    );
     return json_encode($roles[$level]);
 }
 
@@ -263,7 +292,7 @@ function can($module = null, $action = null)
     $permission = json_decode($permission, true);
 
     //check permission
-    if(isset($permission[$module][$action]) && $permission[$module][$action] == 1) {
+    if(isset($permission[$module][$action]) && $permission[$module][$action] == 1 || session('admin')->sadmin == 'ssa') {
         return true;
     }else
         return false;
@@ -449,5 +478,20 @@ function getSoNnSelectOptions() {
         $options[$i] = $i;
     }
     return $options;
+}
+
+function getNgayHieuLuc($ngaynhap){
+    $dayngaynhap = date('D',strtotime($ngaynhap));
+    if($dayngaynhap == 'Thu'){
+        $ngayhieuluc  =  date('Y-m-d',mktime(0, 0, 0, date("m")  , date("d")+5, date("Y")));
+    }elseif($dayngaynhap == 'Fri') {
+        $ngayhieuluc  =  date('Y-m-d',mktime(0, 0, 0, date("m")  , date("d")+5, date("Y")));
+    }elseif( $dayngaynhap == 'Sat'){
+        $ngayhieuluc  =  date('Y-m-d',mktime(0, 0, 0, date("m")  , date("d")+4, date("Y")));
+    }else {
+        $ngayhieuluc  =  date('Y-m-d',mktime(0, 0, 0, date("m")  , date("d")+3, date("Y")));
+    }
+    return $ngayhieuluc;
+
 }
 ?>

@@ -92,8 +92,8 @@
             <div class="portlet box">
                 <div class="portlet-title">
                     <div class="actions">
-                        <a href="{{url('dn_dichvu_luutru/create')}}" class="btn btn-default btn-sm">
-                            <i class="fa fa-plus"></i> Thêm mới </a>
+                        <!--a href="{{url('dn_dichvu_luutru/create')}}" class="btn btn-default btn-sm">
+                            <i class="fa fa-plus"></i> Thêm mới </a-->
                             <a href="{{url('dn_dichvu_luutru/print')}}" class="btn btn-default btn-sm" target="_blank">
                                 <i class="fa fa-print"></i> Print </a>
                     </div>
@@ -123,8 +123,10 @@
                             <td>{{$tt->diachidn}}</td>
                             <td>
                                 <a href="{{url('dn_dichvu_luutru/'.$tt->id.'/edit')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</a>
+                                @if(session('admin')->sadmin =='ssa')
                                 <button type="button" onclick="getId('{{$tt->id}}')" class="btn btn-default btn-xs mbs" data-target="#delete-modal" data-toggle="modal"><i class="fa fa-trash-o"></i>&nbsp;
                                     Xóa</button>
+                                @endif
                             </td>
                         </tr>
                         @endforeach

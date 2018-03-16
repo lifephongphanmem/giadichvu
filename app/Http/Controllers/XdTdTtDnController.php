@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DmDvQl;
+use App\DnDvGs;
 use App\DnDvLt;
 use App\DonViDvVt;
 use App\TtDn;
@@ -16,36 +17,32 @@ use Illuminate\Support\Facades\Mail;
 
 class XdTdTtDnController extends Controller
 {
-    public function index($pl){
+    public function index(Request $request){
         if (Session::has('admin')) {
+            $inputs = $request->all();
+            if(session('admin')->sadmin == 'ssa')
+                $pl = 'DVLT';
+            elseif(session('admin')->sadmin == 'satc')
+                $pl = 'DVLT';
+            elseif(session('admin')->sadmin = 'savt')
+                $pl = 'DVVT';
+            else
+                $pl = 'DVGS';
+            $inputs['phanloai'] = isset($inputs['phanloai'])? $inputs['phanloai'] : $pl;
             if(session('admin')->level == 'T' || session('admin')->level=='H') {
-                if ($pl == 'dich_vu_luu_tru') {
                     if (session('admin')->sadmin == 'ssa') {
-                        $model = TtDn::where('pl', 'DVLT')
+                        $model = TtDn::where('pl',$inputs['phanloai'] )
                             ->where('trangthai','Chờ duyệt')
                             ->get();
                     } else {
-                        $model = TtDn::where('pl', 'DVLT')
+                        $model = TtDn::where('pl', $inputs['phanloai'])
                             ->where('cqcq', session('admin')->cqcq)
                             ->where('trangthai','Chờ duyệt')
                             ->get();
                     }
-
-                }else {
-                    if(session('admin')->sadmin == 'ssa'){
-                        $model = TtDn::where('pl', 'DVVT')
-                            ->where('trangthai','Chờ duyệt')
-                            ->get();
-                    }else{
-                        $model = TtDn::where('pl','DVVT')
-                            ->where('cqcq',session('admin')->cqcq)
-                            ->where('trangthai','Chờ duyệt')
-                            ->get();
-                    }
-                }
                 return view('system.xdtdttdn.index')
                     ->with('model', $model)
-                    ->with('pl', $pl)
+                    ->with('phanloai', $inputs['phanloai'])
                     ->with('pageTitle', 'Xét duyệt thay đổi thông tin doanh nghiệp');
             }else{
                 return view('errors.perm');
@@ -67,7 +64,7 @@ class XdTdTtDnController extends Controller
                             ->with('model', $model)
                             ->with('modeltttd', $modeltttd)
                             ->with('pageTitle', 'Thông tin thay đổi doanh nghiệp');
-                    } else {
+                    } elseif($modeltttd->pl == 'DVVT') {
                         $model = DonViDvVt::where('masothue', $modeltttd->masothue)
                             ->first();
                         $settingtttd = $modeltttd->setting;
@@ -76,6 +73,13 @@ class XdTdTtDnController extends Controller
                             ->with('modeltttd', $modeltttd)
                             ->with('setting', json_decode($setting))
                             ->with('settingtttd', json_decode($settingtttd))
+                            ->with('pageTitle', 'Thông tin thay đổi doanh nghiệp');
+                    }else{
+                        $model = DnDvGs::where('masothue', $modeltttd->masothue)
+                            ->first();
+                        return view('system.xdtdttdn.dvgs.show')
+                            ->with('model', $model)
+                            ->with('modeltttd', $modeltttd)
                             ->with('pageTitle', 'Thông tin thay đổi doanh nghiệp');
                     }
             }else{
@@ -120,7 +124,7 @@ class XdTdTtDnController extends Controller
                     });
                 };
                 $modeltttd->delete();
-                return redirect('xetduyet_thaydoi_thongtindoanhnghiep/phanloai=dich_vu_luu_tru');
+                return redirect('xetduyet_thaydoi_ttdoanhnghiep');
             }elseif($modeltttd->pl == 'DVVT'){
                 $model = DonViDvVt::where('masothue', $modeltttd->masothue)
                     ->first();
@@ -144,8 +148,39 @@ class XdTdTtDnController extends Controller
                 $model->link = $modeltttd->link;
                 $model->save();
                 $modeltttd->delete();
-                return redirect('xetduyet_thaydoi_thongtindoanhnghiep/phanloai=dich_vu_van_tai');
+                return redirect('xetduyet_thaydoi_ttdoanhnghiep');
+            }else{
+                $model = DnDvGs::where('masothue', $modeltttd->masothue)
+                    ->first();
+                $model->tendn = $modeltttd->tendn;
+                $model->diachidn = $modeltttd->diachi;
+                $model->teldn = $modeltttd->tel;
+                $model->faxdn = $modeltttd->fax;
+                $model->email = $modeltttd->email;
+                $model->noidknopthue = $modeltttd->noidknopthue;
+                $model->chucdanhky = $modeltttd->chucdanhky;
+                $model->nguoiky = $modeltttd->nguoiky;
+                $model->diadanh = $modeltttd->diadanh;
+                $model->tailieu = $modeltttd->tailieu;
+                $model->giayphepkd = $modeltttd->giayphepkd;
+                if($model->save()){
+                    $tencqcq = DmDvQl::where('maqhns',$model->cqcq)->first();
+                    $data=[];
+                    $data['tendn'] = $model->tendn;
+                    $data['tg'] = Carbon::now()->toDateTimeString();
+                    $data['tencqcq'] = $tencqcq->tendv;
+                    $a = $model->email;
+                    $b = $model->tendn;
+                    Mail::send('mail.successchangettdn',$data, function ($message) use($a,$b) {
+                        $message->to($a,$b )
+                            ->subject('Thông báo duyệt thay đổi thông tin doanh nghiệp');
+                        $message->from('qlgiakhanhhoa@gmail.com','Phần mềm CSDL giá');
+                    });
+                };
+                $modeltttd->delete();
+                return redirect('xetduyet_thaydoi_ttdoanhnghiep');
             }
+
         }else
             return view('errors.notlogin');
 
@@ -159,7 +194,14 @@ class XdTdTtDnController extends Controller
             $model->trangthai = 'Bị trả lại';
             if($model->save()){
                 $tencqcq = DmDvQl::where('maqhns',$model->cqcq)->first();
-                $dn = DnDvLt::where('masothue',$model->masothue)->first();
+
+                if($model->pl == 'DVLT')
+                    $dn = DnDvLt::where('masothue',$model->masothue)->first();
+                elseif($model->pl == 'DVVT')
+                    $dn = DonViDvVt::where('masothue',$model->masothue)->first();
+                else
+                    $dn = DnDvGs::where('masothue',$model->masothue)->first();
+
                 $data=[];
                 $data['tendn'] = $dn->tendn;
                 $data['tg'] = Carbon::now()->toDateTimeString();
@@ -173,11 +215,7 @@ class XdTdTtDnController extends Controller
                     $message->from('qlgiakhanhhoa@gmail.com','Phần mềm CSDL giá');
                 });
             };
-            if($model->pl == 'DVLT') {
-                return redirect('xetduyet_thaydoi_thongtindoanhnghiep/phanloai=dich_vu_luu_tru');
-            }elseif($model->pl == 'DVVT') {
-                return redirect('xetduyet_thaydoi_thongtindoanhnghiep/phanloai=dich_vu_van_tai');
-            }
+            return redirect('xetduyet_thaydoi_ttdoanhnghiep');
 
         }else
             return view('errors.notlogin');
@@ -187,13 +225,8 @@ class XdTdTtDnController extends Controller
         if (Session::has('admin')) {
             $input = $request->all();
             $model = TtDn::where('id',$input['iddelete'])->first();
-            $pl = $model->pl;
             $model->delete();
-            if($pl == 'DVLT') {
-                return redirect('xetduyet_thaydoi_thongtindoanhnghiep/phanloai=dich_vu_luu_tru');
-            }elseif($pl == 'DVVT') {
-                return redirect('xetduyet_thaydoi_thongtindoanhnghiep/phanloai=dich_vu_van_tai');
-            }
+            return redirect('xetduyet_thaydoi_ttdoanhnghiep');
         }else
             return view('errors.notlogin');
     }

@@ -43,6 +43,28 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label">Thời hạn duyệt hồ sơ dvlt<span class="require">*</span></label>
+                        {!!Form::text('thoihan_lt', $model->thoihan_lt, array('id' => 'thoihan_lt','class' => 'form-control','autofocus'))!!}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label">Thời hạn duyệt hồ sơ dvvt<span class="require">*</span></label>
+                        {!!Form::text('thoihan_vt', $model->thoihan_vt, array('id' => 'thoihan_vt','class' => 'form-control','autofocus'))!!}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label">Thời hạn duyệt hồ sơ giá sữa<span class="require">*</span></label>
+                        {!!Form::text('thoihan_ct', $model->thoihan_ct, array('id' => 'thoihan_ct','class' => 'form-control','autofocus'))!!}
+                    </div>
+                </div>
+            </div>
             <div class="portlet box blue">
 
                 <div class="portlet-body">

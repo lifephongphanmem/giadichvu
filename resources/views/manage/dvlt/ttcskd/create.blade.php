@@ -110,7 +110,7 @@
 
     <!-- END PAGE HEADER-->
     <div class="row">
-        {!! Form::open(['url'=>'ttcskd_dich_vu_luu_tru', 'id' => 'create_ttcskd_dvlt', 'class'=>'horizontal-form']) !!}
+        {!! Form::open(['url'=>'ttcskd_dich_vu_luu_tru', 'id' => 'create_ttcskd_dvlt', 'class'=>'horizontal-form','files'=>true,'enctype'=>'multipart/form-data']) !!}
         <div class="col-md-12">
             <!-- BEGIN EXAMPLE TABLE PORTLET-->
             <div class="portlet box blue">
@@ -166,6 +166,12 @@
                                 <input type="text" id="link" name="link" class="form-control">
                             </div>
                         </div>
+                        <!--div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Ảnh đại diện<span class="require">*</span></label>
+                                {!!Form::file('toado',array('id'=>'toado','class' => 'passvalid','accept'=>'image/*'))!!}
+                            </div>
+                        </div-->
                         <input type="hidden" name="cqcq" id="cqcq" value="{{$ttdn->cqcq}}">
                         <input type="hidden" name="masothue" id="masothue" value="{{$ttdn->masothue}}">
 

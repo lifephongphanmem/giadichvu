@@ -503,6 +503,80 @@
                                 </table>
                             </div>
                         @endif
+                        @if(canGeneral('dvgs','dvgs'))
+                            @if($model->level == 'T' || $model->level == 'H' || $model->level == 'DVGS')
+                                <div class="col-md-3">
+                                    <h4 style="text-align: center;color: #0000ff  ">Dịch vụ giá sữa</h4>
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead class="action">
+                                        <tr>
+                                            <th class="table-checkbox" width="5%">
+                                                <!--input type="checkbox" class="group-checkable" data-set="#sample_3 .checkboxes"/-->
+                                            </th>
+                                            <th>Chức năng</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td><input type="checkbox" {{ (isset($permission->dvgs->index) && $permission->dvgs->index == 1) ? 'checked' : '' }} value="1" name="roles[dvgs][index]"/></td>
+                                            <td>Xem</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox" {{ (isset($permission->dvgs->create) && $permission->dvgs->create == 1) ? 'checked' : '' }} value="1" name="roles[dvgs][create]"/></td>
+                                            <td>Thêm mới</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox" {{ (isset($permission->dvgs->edit) && $permission->dvgs->edit == 1) ? 'checked' : '' }} value="1" name="roles[dvgs][edit]"/></td>
+                                            <td>Chỉnh sửa</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox" {{ (isset($permission->dvgs->delete) && $permission->dvgs->delete == 1) ? 'checked' : '' }} value="1" name="roles[dvgs][delete]"/></td>
+                                            <td>Xóa</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox"> </td>
+                                            <td></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-md-3">
+                                    <h4 style="text-align: center;color: #0000ff  ">Kê khai dịch vụ giá sữa</h4>
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead class="action">
+                                        <tr>
+                                            <th class="table-checkbox" width="5%">
+                                                <!--input type="checkbox" class="group-checkable" data-set="#sample_3 .checkboxes"/-->
+                                            </th>
+                                            <th>Chức năng</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td><input type="checkbox" {{ (isset($permission->kkdvgs->index) && $permission->kkdvgs->index == 1) ? 'checked' : '' }} value="1" name="roles[kkdvgs][index]"/></td>
+                                            <td>Xem</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox" {{ (isset($permission->kkdvgs->create) && $permission->kkdvgs->create == 1) ? 'checked' : '' }} value="1" name="roles[kkdvgs][create]"/></td>
+                                            <td>Thêm mới</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox" {{ (isset($permission->kkdvgs->edit) && $permission->kkdvgs->edit == 1) ? 'checked' : '' }} value="1" name="roles[kkdvgs][edit]"/></td>
+                                            <td>Chỉnh sửa</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox" {{ (isset($permission->kkdvgs->delete) && $permission->kkdvgs->delete == 1) ? 'checked' : '' }} value="1" name="roles[kkdvgs][delete]"/></td>
+                                            <td>Xóa</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox" {{ (isset($permission->kkdvgs->approve) && $permission->kkdvgs->approve == 1) ? 'checked' : '' }} value="1" name="roles[kkdvgs][approve]"/></td>
+                                            <td>{{($model->level == 'T' || $model->level == 'H') ? 'Xét duyệt' : 'Chuyển'}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            @endif
+                        @endif
                         </div>
                     </div>
 
@@ -511,13 +585,12 @@
             <div style="text-align: center">
             <?php
             if($model->level == 'T'||$model->level == 'H')
-                $pl = 'quan_ly';
-            elseif($model->level == 'DVLT')
-                $pl= 'dich_vu_luu_tru';
-            elseif($model->level == 'DVVT')
-                $pl= 'dich_vu_van_tai';
+                $pl = 'QL';
+            else
+                $pl = $model->level;
             ?>
-            <a href="{{url('users/pl='.$pl)}}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
+
+            <a href="{{url('users?&phanloai='.$pl)}}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
             <button type="reset" class="btn btn-default"><i class="fa fa-refresh"></i>&nbsp;Nhập lại</button>
             <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Cập nhật</button>
         </div>

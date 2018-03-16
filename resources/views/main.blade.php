@@ -428,8 +428,8 @@ License: You must have a valid license purchased only from themeforest(the above
                             </li>
                         @endif
                     @endif
-                    @if(canGeneral('dvsua','dvsua'))
-                        @if(can('giasua','index') || can('kkgiasua','index'))
+                    @if(canGeneral('dvgs','dvgs'))
+                        @if(can('dvgs','index') || can('kkdvgs','index'))
                             <li>
                                 <a href="">
                                     <i class="fa fa-laptop"></i>
@@ -437,15 +437,20 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <span class="arrow "></span>
                                 </a>
                                 <ul class="sub-menu">
-                                    @if(can('kkgs','index'))
-                                        <li><a href="{{url('ttdn_kekhaigiasua')}}">Thông tin doanh nghiệp</a></li>
-                                        <li><a href="{{url('danhmucsua')}}">Danh mục loại sữa</a></li>
-                                        @if(can('kkgs','create'))
-                                            <li><a href="{{url('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh')}}">Kê khai dịch vụ lưu trú </a></li>
+                                    @if(can('dvgs','index'))
+                                        @if(session('admin')->level == 'DVGS')
+                                            <li><a href="{{url('ttdn_dich_vu_gia_sua')}}">Thông tin doanh nghiệp</a></li>
+                                            @if(can('kkdvgs','index'))
+                                                <li><a href="{{url('ke_khai_gia_sua')}}">Kê khai dịch vụ giá sữa</a></li>
+                                            @endif
                                         @endif
+
                                         @if(session('admin')->level =='T' || session('admin')->level =='H')
-                                            <li><a href="{{url('xet_duyet_ke_khai_dich_vu_luu_tru')}}">Hồ sơ kê khai</a></li>
-                                            <li><a href="{{url('search_ke_khai_dich_vu_luu_tru')}}">Tìm kiếm TT kê khai</a></li>
+                                            @if(can('kkdvgs','index'))
+                                                <li><a href="{{url('thong_tin_dn_kkgsua')}}">Thông tin DN kkgiá sữa</a></li>
+                                            @endif
+                                            <li><a href="{{url('xet_duyet_ke_khai_gia_sua')}}">Hồ sơ kê khai</a></li>
+                                            <!--li><a href="{{url('search_ke_khai_dich_vu_luu_tru')}}">Tìm kiếm TT kê khai</a></li-->
                                         @endif
                                     @endif
 
@@ -504,12 +509,12 @@ License: You must have a valid license purchased only from themeforest(the above
                 @endif
                 @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'satc' || session('admin')->sadmin == 'savt' || session('admin')->sadmin == 'sa')
                 <li>
-                    <a href="">
+                    <a href="{{url('xetduyet_thaydoi_ttdoanhnghiep')}}">
                         <i class="fa fa-laptop"></i>
                         <span class="title">Thông tin DN thay đổi</span>
-                        <span class="arrow"></span>
+                        <!--span class="arrow"></span-->
                     </a>
-                    <ul class="sub-menu">
+                    <!--ul class="sub-menu">
                         @if(session('admin')->sadmin == 'ssa')
                             <li><a href="{{url('xetduyet_thaydoi_thongtindoanhnghiep/phanloai=dich_vu_luu_tru')}}">Thông tin DNDVLT thay đổi</a> </li>
                             <li><a href="{{url('xetduyet_thaydoi_thongtindoanhnghiep/phanloai=dich_vu_van_tai')}}">Thông tin DNDVVT thay đổi</a> </li>
@@ -517,9 +522,9 @@ License: You must have a valid license purchased only from themeforest(the above
                             <li><a href="{{url('xetduyet_thaydoi_thongtindoanhnghiep/phanloai=dich_vu_luu_tru')}}">Thông tin DNDVLT thay đổi</a> </li>
                         @elseif(session('admin')->sadmin == 'savt')
                             <li><a href="{{url('xetduyet_thaydoi_thongtindoanhnghiep/phanloai=dich_vu_van_tai')}}">Thông tin DNDVVT thay đổi</a> </li>
-
                         @endif
-                    </ul>
+                            <li><a href="">Thông tin doanh nghiệp thay đổi</a> </li>
+                    </ul-->
                 </li>
                 <li>
                     <a href="">
@@ -536,6 +541,9 @@ License: You must have a valid license purchased only from themeforest(the above
                         @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'savt')
                         <li><a href="{{url('dn_dichvu_vantai')}}">DN dịch vụ vận tải</a></li>
                         @endif
+                        @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'satc')
+                            <li><a href="{{url('dn_dichvu_giasua')}}">DN cung cấp sữa</a> </li>
+                        @endif
 
                         <li><a href="{{url('users')}}"> Quản lý tài khoản</a></li>
 
@@ -543,12 +551,15 @@ License: You must have a valid license purchased only from themeforest(the above
                             <li><a href="{{url('users/register/pl=dich_vu_luu_tru')}}"> Tài khoản đăng ký DVLT</a></li>
                         @elseif(session('admin')->sadmin == 'savt')
                             <li><a href="{{url('users/register/pl=dich_vu_van_tai')}}"> Tài khoản đăng ký DVVT</a></li>
+                        @elseif(session('admin')->sadmin == 'sact')
+                            <li><a href="{{url('users/register/pl=dich_vu_gia_sua')}}">Tài khoản đăng ký DVGS</a> </li>
                         @elseif(session('admin')->sadmin == 'ssa')
                             <li><a href="{{url('users/register/pl=dich_vu_luu_tru')}}"> Tài khoản đăng ký DVLT</a></li>
                             <li><a href="{{url('users/register/pl=dich_vu_van_tai')}}"> Tài khoản đăng ký DVVT</a></li>
+                            <li><a href="{{url('users/register/pl=dich_vu_gia_sua')}}">Tài khoản đăng ký DVGS</a> </li>
                         @endif
 
-                        <li><a href="{{url('quanlytaikhoandangky')}}">Tài khoản đăng ký</a> </li>
+
 
                             <li><a href="{{url('cau_hinh_he_thong')}}">Cấu hình hệ thống</a></li>
                     </ul>

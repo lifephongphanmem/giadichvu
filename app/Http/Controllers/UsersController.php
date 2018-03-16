@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DmDvQl;
+use App\DnDvGs;
 use App\DnDvLt;
 use App\DnDvLtReg;
 use App\DonViDvVt;
@@ -402,7 +403,7 @@ class UsersController extends Controller
 
                 $model->permission = json_encode($update['roles']);
                 $model->save();
-                return redirect('users');
+                return redirect('users?&phanloai='.($model->level == 'T' || $model->level == 'H')? 'QL' : $model->level);
 
             } else
                 dd('Tài khoản không tồn tại');
@@ -444,7 +445,7 @@ class UsersController extends Controller
 
     public function register($pl){
         if (Session::has('admin')) {
-            if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'satc' || session('admin')->sadmin == 'savt' ) {
+            if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'satc' || session('admin')->sadmin == 'savt' || session('admin')->sadmin == 'sact') {
                 $cqcq = session('admin')->cqcq;
                 if ($pl == 'dich_vu_luu_tru' && session('admin')->sadmin == 'satc' || $pl == 'dich_vu_luu_tru' && session('admin')->sadmin == 'ssa') {
                     if (session('admin')->sadmin == 'ssa') {
@@ -468,6 +469,17 @@ class UsersController extends Controller
                             ->where('cqcq', $cqcq)
                             ->orderBy('id', 'desc')
                             ->where('trangthai', 'Chờ duyệt')
+                            ->get();
+                    }
+                } elseif ($pl == 'dich_vu_gia_sua' && session('admin')->sadmin == 'sact' || $pl == 'dich_vu_gia_sua' && session('admin')->sadmin == 'ssa') {
+                    if (session('admin')->sadmin == 'ssa') {
+                        $model = Register::where('pl', 'DVGS')
+                            ->orderBy('id', 'desc')
+                            ->get();
+                    } else {
+                        $model = Register::where('pl', 'DVGS')
+                            ->where('cqcq', $cqcq)
+                            ->orderBy('id', 'desc')
                             ->get();
                     }
                 }else{
@@ -502,6 +514,13 @@ class UsersController extends Controller
                     $cqcq = DmDvQl::where('plql', 'VT')
                         ->get();
                     return view('system.users.register.dvvt')
+                        ->with('model', $model)
+                        ->with('cqcq', $cqcq)
+                        ->with('pageTitle', 'Thông tin đăng ký tài khoản dịch vụ vận tải');
+                } elseif ($model->pl == 'DVGS' && session('admin')->sadmin == 'ssa' || $model->pl == 'DVGS' && session('admin')->sadmin == 'sact') {
+                    $cqcq = DmDvQl::where('plql', 'CT')
+                        ->get();
+                    return view('system.users.register.dvgs')
                         ->with('model', $model)
                         ->with('cqcq', $cqcq)
                         ->with('pageTitle', 'Thông tin đăng ký tài khoản dịch vụ vận tải');
@@ -648,6 +667,67 @@ class UsersController extends Controller
             return view('errors.notlogin');
     }
 
+    public function registerdvgs(Request $request){
+        if (Session::has('admin')) {
+            $input = $request->all();
+            $id = $input['idregister'];
+            $model = Register::findOrFail($id);
+            if(session('admin')->sadmin == 'ssa' || $model->cqcq == session('admin')->cqcq ) {
+                $modeldn = new DnDvGs();
+                $modeldn->tendn = $model->tendn;
+                $modeldn->masothue = $model->masothue;
+                $modeldn->teldn = $model->tel;
+                $modeldn->faxdn = $model->fax;
+                $modeldn->email = $model->email;
+                $modeldn->diachidn = $model->diachi;
+                $modeldn->trangthai = 'Kích hoạt';
+                $modeldn->noidknopthue = $model->noidknopthue;
+                $modeldn->tailieu = $model->tailieu;
+                $modeldn->giayphepkd = $model->giayphepkd;
+                $modeldn->cqcq = $model->cqcq;
+                $modeldn->chucdanhky = $model->chucdanh;
+                $modeldn->nguoiky = $model->nguoiky;
+                $modeldn->diadanh = $model->diadanh;
+                $modeldn->toado = $model->diachi != '' ? getAddMap($model->diachi) : '';
+
+                if ($modeldn->save()) {
+                    $modeluser = new Users();
+                    $modeluser->name = $model->tendn;
+                    $modeluser->username = $model->username;
+                    $modeluser->password = $model->password;
+                    $modeluser->phone = $model->tel;
+                    $modeluser->email = $model->email;
+                    $modeluser->status = 'Kích hoạt';
+                    $modeluser->mahuyen = $model->masothue;
+                    $modeluser->level = 'DVGS';
+                    $modeluser->cqcq = $model->cqcq;
+                    $modeluser->save();
+                }
+
+                $tencqcq = DmDvQl::where('maqhns',$model->cqcq)->first();
+                $data=[];
+                $data['tendn'] = $model->tendn;
+                $data['tg'] = Carbon::now()->toDateTimeString();
+                $data['tencqcq'] = $tencqcq->tendv;
+                $data['masothue'] = $model->masothue;
+                $data['username'] = $model->username;
+                $a = $model->email;
+                $b  =  $model->tendn;
+                Mail::send('mail.successregister',$data, function ($message) use($a,$b) {
+                    $message->to($a,$b )
+                        ->subject('Thông báo thông tin đăng ký đã được xét duyệt');
+                    $message->from('qlgiakhanhhoa@gmail.com','Phần mềm CSDL giá');
+                });
+                $delete = Register::findOrFail($id)->delete();
+                return redirect('users/register/pl=dich_vu_gia_sua');
+            }else{
+                return view('errors.noperm');
+            }
+
+        } else
+            return view('errors.notlogin');
+    }
+
 
     public function registerdelete(Request $request){
         if (Session::has('admin')) {
@@ -659,6 +739,8 @@ class UsersController extends Controller
                 $dv = 'dich_vu_luu_tru';
             elseif($pl == 'DVVT')
                 $dv = 'dich_vu_van_tai';
+            elseif($pl == 'DVGS')
+                $dv = 'dich_vu_gia_sua';
             $model->delete();
 
             return redirect('users/register/pl='.$dv);
@@ -702,6 +784,13 @@ class UsersController extends Controller
                     ->with('model', $model)
                     ->with('cqcq',$cqcq)
                     ->with('pageTitle', 'Chỉnh sửa thông tin đăng ký tài khoản dịch vụ vận tải');
+            }elseif($model->pl == 'DVGS'){
+                $cqcq = DmDvQl::where('plql','CT')
+                    ->get();
+                return view('system.users.register.editdvgs')
+                    ->with('model', $model)
+                    ->with('cqcq',$cqcq)
+                    ->with('pageTitle', 'Chỉnh sửa thông tin đăng ký tài khoản dịch vụ sữa');
             }
         } else {
             return view('errors.notlogin');
@@ -798,6 +887,8 @@ class UsersController extends Controller
                 $pl = 'dich_vu_luu_tru';
             } elseif ($model->pl == 'DVVT') {
                 $pl = 'dich_vu_van_tai';
+            }elseif($model->pl == 'DVGS'){
+                $pl = 'dich_vu_gia_sua';
             }
 
             return redirect('users/register/pl='.$pl);

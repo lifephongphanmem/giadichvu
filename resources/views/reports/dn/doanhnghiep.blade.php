@@ -36,7 +36,7 @@
 <table width="96%" border="0" cellspacing="0" cellpadding="8" style="margin:0 auto 20px; text-align: center;">
     <tr>
         <td width="40%" style="text-transform: uppercase;">
-            <b>{{(getGeneralConfigs()['tendonvi'])}}</b><br>
+            <b>{{(session('admin')->sadmin == 'ssa') ? '' : getGeneralConfigs()['tendonvi']}}</b><br>
             --------<br>
         </td>
         <td>
@@ -46,7 +46,7 @@
     </tr>
 </table>
 
-<p style="text-align: center; font-weight: bold; font-size: 16px;">DANH SÁCH DOANH NGHIỆP CUNG CẤP DỊCH VỤ {{$dv}}</p>
+<p style="text-align: center; font-weight: bold; font-size: 16px;">DANH SÁCH DOANH NGHIỆP CUNG CẤP {{$dv}}</p>
 
 <table cellspacing="0" cellpadding="0" border="1" style="margin: 20px auto; border-collapse: collapse;">
     <tr>
@@ -61,11 +61,11 @@
     @foreach($model as $key => $tt)
         <tr>
             <th style="text-align: center">{{$key + 1}}</th>
-            <th style="text-align: left">{{($pl == 'DVLT')?$tt->tendn:$tt->tendonvi}}</th>
+            <th style="text-align: left">{{($pl == 'DVLT' || $pl == 'DVGS')?$tt->tendn:$tt->tendonvi}}</th>
             <th style="text-align: left">{{$tt->masothue}}</th>
-            <th style="text-align: center">{{($pl == 'DVLT')?$tt->teldn:$tt->dienthoai}}</th>
-            <th style="text-align: center">{{($pl == 'DVLT')?$tt->faxdn:$tt->fax}}</th>
-            <th style="text-align: left">{{($pl == 'DVLT')?$tt->diachidn:$tt->diachi}}</th>
+            <th style="text-align: center">{{($pl == 'DVLT' || $pl == 'DVGS')?$tt->teldn:$tt->dienthoai}}</th>
+            <th style="text-align: center">{{($pl == 'DVLT' || $pl == 'DVGS')?$tt->faxdn:$tt->fax}}</th>
+            <th style="text-align: left">{{($pl == 'DVLT' || $pl == 'DVGS')?$tt->diachidn:$tt->diachi}}</th>
             <th style="text-align: center"></th>
         </tr>
     @endforeach

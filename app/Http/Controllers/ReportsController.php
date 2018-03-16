@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\CbKkGDvLt;
 use App\CsKdDvLt;
 use App\DmDvQl;
+use App\DnDvGs;
 use App\DnDvLt;
+use App\KkGDvGs;
+use App\KkGDvGsCt;
 use App\KkGDvLt;
 use App\KkGDvLtCt;
 use App\TtNgayNghiLe;
@@ -88,6 +91,24 @@ class ReportsController extends Controller
                 ->with('modelkkct',$modelkkct)
                 ->with('modelcqcq',$modelcqcq)
                 ->with('pageTitle','Kê khai giá dịch vụ lưu trú');
+
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function kkgdgs($mahs){
+        if (Session::has('admin')) {
+            $modelkk = KkGDvGs::where('mahs',$mahs)->first();
+            $modeldn = DnDvGs::where('masothue',$modelkk->masothue)->first();
+            $modelcqcq = DmDvQl::where('maqhns',$modelkk->cqcq)->first();
+            $modelkkct = KkGDvGsCt::where('mahs',$mahs)->get();
+            //dd($modelcqcq);
+            return view('reports.kkgdvgs.print')
+                ->with('modelkk',$modelkk)
+                ->with('modeldn',$modeldn)
+                ->with('modelcqcq',$modelcqcq)
+                ->with('modelkkct',$modelkkct)
+                ->with('pageTitle','Kê khai giá mặt hàng sữa');
 
         }else
             return view('errors.notlogin');

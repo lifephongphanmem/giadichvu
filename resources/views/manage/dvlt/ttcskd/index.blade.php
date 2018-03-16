@@ -63,6 +63,7 @@
                         <thead>
                         <tr>
                             <th style="text-align: center" width="2%">STT</th>
+                            <!--th style="text-align: center" width="10%">Ảnh đại diện</th-->
                             <th style="text-align: center">Tên cơ sở kinh doanh</th>
                             <th style="text-align: center">Loại hạng</th>
                             <th style="text-align: center">Số điện thoại</th>
@@ -74,6 +75,9 @@
                         @foreach($model as $key=>$tt)
                         <tr class="odd gradeX">
                             <td style="text-align: center">{{$key + 1}}</td>
+                            <!--td align="center" style="vertical-align: middle">
+                                <img src="{{ url('images/cskddvlt/'.$tt->toado)}}" width="96%">
+                            </td-->
                             <td class="active" >{{$tt->tencskd}}</td>
                             <td>@if($tt->loaihang == 'K' ) Khác(Nhà nghỉ)
                                 @elseif ($tt->loaihang == 'CXD' ) Chưa xác định (Khách sạn chưa xác định sao)

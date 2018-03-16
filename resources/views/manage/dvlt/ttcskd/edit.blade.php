@@ -116,7 +116,7 @@
 
     <!-- END PAGE HEADER-->
     <div class="row">
-        {!! Form::model($model, ['method' => 'PATCH', 'url'=>'ttcskd_dich_vu_luu_tru/'. $model->id, 'class'=>'horizontal-form','id'=>'update_ttcskddvlt']) !!}
+        {!! Form::model($model, ['method' => 'PATCH', 'url'=>'ttcskd_dich_vu_luu_tru/'. $model->id, 'class'=>'horizontal-form','id'=>'update_ttcskddvlt','files'=>true,'enctype'=>'multipart/form-data']) !!}
         <div class="col-md-12">
             <!-- BEGIN EXAMPLE TABLE PORTLET-->
             <div class="portlet box blue">
@@ -172,10 +172,24 @@
                                 {!!Form::text('link', null, array('id' => 'link','class' => 'form-control'))!!}
                             </div>
                         </div>
+                        <!--div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Ảnh đại diện<span class="require">*</span></label>
+                                {!!Form::file('toado',array('id'=>'toado','class' => 'passvalid','accept'=>'image/*'))!!}
+                            </div>
+                        </div-->
                         <input type="hidden" name="cqcq" id="cqcq" value="{{$model->cqcq}}">
                         <input type="hidden" name="masothue" id="masothue" value="{{$model->masothue}}">
 
                     </div>
+                    <!--div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Ảnh hiện tại<span class="require">*</span></label>
+                                <img src="{{ url('images/cskddvlt/'.$model->toado)}}" width="50%">
+                            </div>
+                        </div>
+                    </div-->
                     {!! Form::close() !!}
                     <!--/row-->
                     <h4 class="form-section" style="color: #0000ff">Thông tin phòng nghỉ- quy cách- chất lượng</h4>

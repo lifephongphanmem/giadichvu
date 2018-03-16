@@ -47,7 +47,7 @@
                     <div class="caption">
                     </div>
                     <div class="actions">
-                        <a href="{{url('xetduyet_thaydoi_thongtindoanhnghiep/'.$modeltttd->id.'/duyet')}}" class="btn btn-default btn-sm">
+                        <a href="{{url('xetduyet_thaydoi_ttdoanhnghiep/'.$modeltttd->id.'/duyet')}}" class="btn btn-default btn-sm">
                             <i class="fa fa-check"></i> Đồng ý thay đổi thông tin </a>
                         <button type="button" onclick="confirmTraLai({{$modeltttd->id}})" class="btn btn-default btn-xs mbs" data-target="#tralai-modal" data-toggle="modal"><i class="fa fa-reply"></i>&nbsp;
                             Trả lại</button>
@@ -178,13 +178,13 @@
                                     <div class="input-group">
                                         <div class="icheck-inline">
                                             <label>
-                                                <input type="checkbox" {{ (isset($setting->dvvt->vtxk) && $setting->dvvt->vtxk == 1) ? 'checked' : '' }} value="1" name="roles[dvvt][vtxk]"/> Vận tải xe khách </label>
+                                                <input type="checkbox" disabled {{ (isset($setting->dvvt->vtxk) && $setting->dvvt->vtxk == 1) ? 'checked' : '' }} value="1" name="roles[dvvt][vtxk]"/> Vận tải xe khách </label>
                                             <label>
-                                                <input type="checkbox" {{ (isset($setting->dvvt->vtxb) && $setting->dvvt->vtxb == 1) ? 'checked' : '' }} value="1" name="roles[dvvt][vtxb]"/> Vận tải xe buýt </label>
+                                                <input type="checkbox" disabled {{ (isset($setting->dvvt->vtxb) && $setting->dvvt->vtxb == 1) ? 'checked' : '' }} value="1" name="roles[dvvt][vtxb]"/> Vận tải xe buýt </label>
                                             <label>
-                                                <input type="checkbox" {{ (isset($setting->dvvt->vtxtx) && $setting->dvvt->vtxtx == 1) ? 'checked' : '' }} value="1" name="roles[dvvt][vtxtx]"/> Vận tải xe taxi </label>
+                                                <input type="checkbox" disabled {{ (isset($setting->dvvt->vtxtx) && $setting->dvvt->vtxtx == 1) ? 'checked' : '' }} value="1" name="roles[dvvt][vtxtx]"/> Vận tải xe taxi </label>
                                             <label>
-                                                <input type="checkbox" {{ (isset($setting->dvvt->vtch) && $setting->dvvt->vtch == 1) ? 'checked' : '' }} value="1" name="roles[dvvt][vtch]"/> Vận tải chở hàng</label>
+                                                <input type="checkbox" disabled {{ (isset($setting->dvvt->vtch) && $setting->dvvt->vtch == 1) ? 'checked' : '' }} value="1" name="roles[dvvt][vtch]"/> Vận tải chở hàng</label>
                                         </div>
                                     </div>
                                 </span>
@@ -317,13 +317,13 @@
                                     <div class="input-group">
                                         <div class="icheck-inline">
                                             <label>
-                                                <input type="checkbox" {{ (isset($settingtttd->dvvt->vtxk) && $settingtttd->dvvt->vtxk == 1) ? 'checked' : '' }} value="1" name="roles[dvvt][vtxk]"/> Vận tải xe khách </label>
+                                                <input type="checkbox" disabled {{ (isset($settingtttd->dvvt->vtxk) && $settingtttd->dvvt->vtxk == 1) ? 'checked' : '' }} value="1" name="roles[dvvt][vtxk]"/> Vận tải xe khách </label>
                                             <label>
-                                                <input type="checkbox" {{ (isset($settingtttd->dvvt->vtxb) && $settingtttd->dvvt->vtxb == 1) ? 'checked' : '' }} value="1" name="roles[dvvt][vtxb]"/> Vận tải xe buýt </label>
+                                                <input type="checkbox" disabled {{ (isset($settingtttd->dvvt->vtxb) && $settingtttd->dvvt->vtxb == 1) ? 'checked' : '' }} value="1" name="roles[dvvt][vtxb]"/> Vận tải xe buýt </label>
                                             <label>
-                                                <input type="checkbox" {{ (isset($settingtttd->dvvt->vtxtx) && $settingtttd->dvvt->vtxtx == 1) ? 'checked' : '' }} value="1" name="roles[dvvt][vtxtx]"/> Vận tải xe taxi </label>
+                                                <input type="checkbox" disabled {{ (isset($settingtttd->dvvt->vtxtx) && $settingtttd->dvvt->vtxtx == 1) ? 'checked' : '' }} value="1" name="roles[dvvt][vtxtx]"/> Vận tải xe taxi </label>
                                             <label>
-                                                <input type="checkbox" {{ (isset($settingtttd->dvvt->vtch) && $settingtttd->dvvt->vtch == 1) ? 'checked' : '' }} value="1" name="roles[dvvt][vtch]"/> Vận tải chở hàng</label>
+                                                <input type="checkbox" disabled {{ (isset($settingtttd->dvvt->vtch) && $settingtttd->dvvt->vtch == 1) ? 'checked' : '' }} value="1" name="roles[dvvt][vtch]"/> Vận tải chở hàng</label>
                                         </div>
                                     </div>
                                 </span>
@@ -338,7 +338,7 @@
             </div>
             <div class="row" style="text-align: center">
                 <div class="col-md-12">
-                    <a href="{{url('xetduyet_thaydoi_thongtindoanhnghiep/phanloai=dich_vu_van_tai')}}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
+                    <a href="{{url('xetduyet_thaydoi_ttdoanhnghiep')}}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
                 </div>
             </div>
         </div>
@@ -348,7 +348,7 @@
     <div class="modal fade" id="tralai-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                {!! Form::open(['url'=>'xetduyet_thaydoi_thongtindoanhnghiep/tralai','id' => 'frm_tralai'])!!}
+                {!! Form::open(['url'=>'xetduyet_thaydoi_ttdoanhnghiep/tralai','id' => 'frm_tralai'])!!}
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                     <h4 class="modal-title">Đồng ý trả lại hồ sơ thay đổi thông tin doanh nghiệp?</h4>

@@ -74,7 +74,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <!--form class="register-form" action="index.html" method="post" novalidate="novalidate" style="display: block;"-->
     <div class="row">
     <div class="col-md-12">
-        <p>Thông tin doanh nghiêp cung cấp dịch vụ lưu trú</p>
+        <p>Thông tin doanh nghiêp cung cấp mặt hàng sữa</p>
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">

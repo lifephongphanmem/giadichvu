@@ -23,16 +23,12 @@
             document.getElementById("iddelete").value=id;
         }
         $(function(){
-
             $('#phanloai').change(function() {
-                var pl = $('#phanloai').val();
-                var url = '/xetduyet_thaydoi_thongtindoanhnghiep/phanloai='+pl;
-
-                //var url = current_path_url;
+                var current_path_url = '/xetduyet_thaydoi_ttdoanhnghiep?';
+                var pl = '&phanloai='+$('#phanloai').val();
+                var url = current_path_url+pl;
                 window.location.href = url;
             });
-
-
         })
         function ClickDelete(){
             $('#frm_delete').submit();
@@ -41,14 +37,8 @@
 @stop
 
 @section('content')
-    <?php
-        if($pl == 'dich_vu_luu_tru')
-            $note = 'dich vụ lưu trú';
-        else
-            $note = 'dịch vụ vận tải';
-    ?>
     <h3 class="page-title">
-        Quản lý thay đổi thông tin doanh nghiệp cung cấp <small>&nbsp;{{$note}}</small>
+        Quản lý thay đổi <small>&nbsp;thông tin doanh nghiệp</small>
     </h3>
     <!-- END PAGE HEADER-->
     <div class="row">
@@ -56,6 +46,19 @@
             <!-- BEGIN EXAMPLE TABLE PORTLET-->
             <div class="portlet box">
                 <div class="portlet-body">
+                    @if(session('admin')->sadmin == 'ssa')
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <select class="form-control" name="phanloai" id="phanloai">
+                                    <option value="DVLT" {{($phanloai == "DVLT") ? 'selected' : ''}}>Dịch vụ lưu trú</option>
+                                    <option value="DVVT" {{($phanloai == "DVVT") ? 'selected' : ''}}>Dịch vụ vận tải</option>
+                                    <option value="DVGS" {{($phanloai == "DVGS") ? 'selected' : ''}}>Mặt hàng sữa</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
                     <div class="portlet-body">
                         <div class="table-toolbar">
 
@@ -78,7 +81,7 @@
                                 <td class="active" >{{$tt->tendn}}</td>
                                 <td>{{$tt->masothue}}</td>
                                 <td>
-                                    <a href="{{url('xetduyet_thaydoi_thongtindoanhnghiep/'.$tt->id.'/show')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Xem chi tiết</a>
+                                    <a href="{{url('xetduyet_thaydoi_ttdoanhnghiep/'.$tt->id)}}" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Xem chi tiết</a>
                                     <button type="button" onclick="getId('{{$tt->id}}')" class="btn btn-default btn-xs mbs" data-target="#delete-modal" data-toggle="modal"><i class="fa fa-trash-o"></i>&nbsp;
                                         Xóa</button>
                                 </td>

@@ -333,6 +333,7 @@ class ComposerStaticInitd7de3fb6aaadd474bf447891cb3bef8d
     );
 
     public static $classMap = array (
+        'CreateCbkkdvgsTable' => __DIR__ . '/../..' . '/database/migrations/2018_03_16_150452_create_cbkkdvgs_table.php',
         'CreateCbkkdvvtkhacTable' => __DIR__ . '/../..' . '/database/migrations/2016_05_20_081831_create_cbkkdvvtkhac_table.php',
         'CreateCbkkdvvtxbTable' => __DIR__ . '/../..' . '/database/migrations/2016_05_20_081807_create_cbkkdvvtxb_table.php',
         'CreateCbkkdvvtxkTable' => __DIR__ . '/../..' . '/database/migrations/2016_05_20_081755_create_cbkkdvvtxk_table.php',
@@ -364,6 +365,9 @@ class ComposerStaticInitd7de3fb6aaadd474bf447891cb3bef8d
         'CreateKkdvvtxtxTable' => __DIR__ . '/../..' . '/database/migrations/2016_05_12_102651_create_kkdvvtxtx_table.php',
         'CreateKkdvvtxtxctTable' => __DIR__ . '/../..' . '/database/migrations/2016_05_12_102701_create_kkdvvtxtxct_table.php',
         'CreateKkdvvtxtxctdfTable' => __DIR__ . '/../..' . '/database/migrations/2016_05_19_155213_create_kkdvvtxtxctdf_table.php',
+        'CreateKkgdvgsTable' => __DIR__ . '/../..' . '/database/migrations/2018_03_08_103007_create_kkgdvgs_table.php',
+        'CreateKkgdvgsctTable' => __DIR__ . '/../..' . '/database/migrations/2018_03_13_101617_create_kkgdvgsct_table.php',
+        'CreateKkgdvgsctdfTable' => __DIR__ . '/../..' . '/database/migrations/2018_03_12_144633_create_kkgdvgsctdf_table.php',
         'CreateKkgdvltTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_21_073706_create_kkgdvlt_table.php',
         'CreateKkgdvltctTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_21_083946_create_kkgdvltct_table.php',
         'CreateKkgdvltctdfTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_21_084015_create_kkgdvltctdf_table.php',
