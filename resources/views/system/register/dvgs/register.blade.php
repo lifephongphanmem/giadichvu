@@ -335,7 +335,7 @@ License: You must have a valid license purchased only from themeforest(the above
             data: {
                 _token: CSRF_TOKEN,
                 user:$(this).val(),
-                pl: 'DVLT'
+                pl: 'DV'
             },
             success: function (respond) {
                 if(respond != 'ok'){

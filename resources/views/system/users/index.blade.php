@@ -86,13 +86,13 @@
                     <div class="caption">
                     </div>
                     <div class="actions">
-                        <a href="{{url('users/create')}}" class="btn btn-default btn-sm">
-                            <i class="fa fa-plus"></i> Thêm mới </a>
+                        <!--a href="{{url('users/create')}}" class="btn btn-default btn-sm">
+                            <i class="fa fa-plus"></i> Thêm mới </a-->
                         <button id="btnMultiLockUser" type="button" onclick="multiLock()" class="btn btn-default btn-sm" data-target="#lockuser-modal-confirm" data-toggle="modal"><i class="fa fa-lock"></i>&nbsp;
                             Khóa</button>
                         <button id="btnMultiUnLockUser" type="button" onclick="multiUnLock()" class="btn btn-default btn-sm" data-target="#unlockuser-modal-confirm" data-toggle="modal"><i class="fa fa-unlock"></i>&nbsp;
                             Mở khóa</button>
-                        @if($pl != 'quan_ly')
+                        @if($pl != 'QL')
                         <a href="{{url('users/print/pl='.$pl)}}" class="btn btn-default btn-sm" target="_blank">
                             <i class="fa fa-print"></i> Print </a>
                         @endif
@@ -101,7 +101,7 @@
                 </div>
 
                 <div class="portlet-body">
-                    @if(session('admin')->sadmin == 'ssa')
+                    @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin =='sa')
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -110,6 +110,7 @@
                                         <option value="DVLT" {{($pl == "DVLT") ? 'selected' : ''}}>Dịch vụ lưu trú</option>
                                         <option value="DVVT" {{($pl == "DVVT") ? 'selected' : ''}}>Dịch vụ vận tải</option>
                                         <option value="DVGS" {{($pl == "DVGS") ? 'selected' : ''}}>Dịch vụ giá sữa</option>
+                                        <option value="DVTACN" {{($pl == "DVTACN") ? 'selected' : ''}}>Thức ăn chăn nuôi</option>
                                     </select>
                                 </div>
                             </div>
@@ -126,9 +127,9 @@
                             </th>
                             <th style="text-align: center" width="2%">STT</th>
                             <th style="text-align: center">Tên tài khoản</th>
-                            <th style="text-align: center">Username</th>
-                            <th style="text-align: center">Level</th>
-                            <th style="text-align: center" width="5%">Trạng thái</th>
+                            <th style="text-align: center" width="10%">Username</th>
+                            <th style="text-align: center" width="5%">Level</th>
+                            <th style="text-align: center" width="20%">Trạng thái</th>
                             <th style="text-align: center" width="25%">Thao tác</th>
                         </tr>
                         </thead>
@@ -155,8 +156,10 @@
                                 @if($tt->sadmin != 'satc' && $tt->sadmin != 'savt' && $tt->sadmin != 'sa')
                                     <a href="{{url('users/'.$tt->id.'/phan-quyen')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-cogs"></i>&nbsp;Phân quyền</a>
                                 @endif
+                                @if(session('admin')->sadmin == 'ssa')
                                 <button type="button" onclick="getId('{{$tt->id}}')" class="btn btn-default btn-xs mbs" data-target="#delete-modal" data-toggle="modal"><i class="fa fa-trash-o"></i>&nbsp;
                                     Xóa</button>
+                                @endif
                             </td>
                         </tr>
                         @endforeach

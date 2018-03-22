@@ -458,6 +458,36 @@ License: You must have a valid license purchased only from themeforest(the above
                             </li>
                         @endif
                     @endif
+                    @if(canGeneral('dvtacn','dvtacn'))
+                        @if(can('dvtacn','index') || can('kkdvtacn','index'))
+                            <li>
+                                <a href="">
+                                    <i class="fa fa-laptop"></i>
+                                    <span class="title">Thức ăn chăn nuôi</span>
+                                    <span class="arrow "></span>
+                                </a>
+                                <ul class="sub-menu">
+                                    @if(can('dvtacn','index'))
+                                        @if(session('admin')->level == 'DVTACN')
+                                            <li><a href="{{url('ttdn_thuc_an_chan_nuoi')}}">Thông tin doanh nghiệp</a></li>
+                                            @if(can('kkdvtacn','index'))
+                                                <li><a href="{{url('ke_khai_thuc_an_chan_nuoi')}}">Kê khai giá thức ăn chăn nuôi</a></li>
+                                            @endif
+                                        @endif
+
+                                        @if(session('admin')->level =='T' || session('admin')->level =='H')
+                                            @if(can('kkdvtacn','index'))
+                                                <li><a href="{{url('thong_tin_dn_kktacn')}}">Thông tin DN kkgiá thức ăn chăn nuôi</a></li>
+                                            @endif
+                                            <li><a href="{{url('xd_ke_khai_thucan_channuoi')}}">Hồ sơ kê khai</a></li>
+                                            <!--li><a href="{{url('')}}">Tìm kiếm TT kê khai</a></li-->
+                                        @endif
+                                    @endif
+
+                                </ul>
+                            </li>
+                        @endif
+                    @endif
                 @endif
 
 
@@ -499,13 +529,13 @@ License: You must have a valid license purchased only from themeforest(the above
                         @endif
                         </ul>
                     </li>
-                    <li>
-                        <a href="{{url('thongtinngaynghile')}}">
-                            <i class="fa fa-file-o fa-fw"></i>
-                            <span class="title">Thông tin ngày nghỉ lễ</span>
-                            <span class="arrow"></span>
-                        </a>
-                    </li>
+                <li>
+                    <a href="{{url('thongtinngaynghile')}}">
+                        <i class="fa fa-file-o fa-fw"></i>
+                        <span class="title">Thông tin ngày nghỉ lễ</span>
+                        <span class="arrow"></span>
+                    </a>
+                </li>
                 @endif
                 @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'satc' || session('admin')->sadmin == 'savt' || session('admin')->sadmin == 'sa')
                 <li>
@@ -535,33 +565,21 @@ License: You must have a valid license purchased only from themeforest(the above
                     <ul class="sub-menu">
                         <!--li><a href="{{url('danh_muc_don_vi_quan_ly')}}">Danh mục đơn vị quản lý</a> </li-->
                         <!--li><a href="{{url('doanhnghiepcungcapdichvu')}}">Doanh nghiệp cung cấp DV</a> </li-->
-                        @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'satc')
+                        @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'sa' || session('admin')->sadmin == 'satc')
                         <li><a href="{{url('dn_dichvu_luutru')}}">DN dịch vụ lưu trú</a> </li>
                         @endif
-                        @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'savt')
+                        @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'sa' ||session('admin')->sadmin == 'savt')
                         <li><a href="{{url('dn_dichvu_vantai')}}">DN dịch vụ vận tải</a></li>
                         @endif
-                        @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'satc')
+                        @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'sa' ||session('admin')->sadmin == 'satc')
                             <li><a href="{{url('dn_dichvu_giasua')}}">DN cung cấp sữa</a> </li>
                         @endif
-
-                        <li><a href="{{url('users')}}"> Quản lý tài khoản</a></li>
-
-                        @if(session('admin')->sadmin == 'satc')
-                            <li><a href="{{url('users/register/pl=dich_vu_luu_tru')}}"> Tài khoản đăng ký DVLT</a></li>
-                        @elseif(session('admin')->sadmin == 'savt')
-                            <li><a href="{{url('users/register/pl=dich_vu_van_tai')}}"> Tài khoản đăng ký DVVT</a></li>
-                        @elseif(session('admin')->sadmin == 'sact')
-                            <li><a href="{{url('users/register/pl=dich_vu_gia_sua')}}">Tài khoản đăng ký DVGS</a> </li>
-                        @elseif(session('admin')->sadmin == 'ssa')
-                            <li><a href="{{url('users/register/pl=dich_vu_luu_tru')}}"> Tài khoản đăng ký DVLT</a></li>
-                            <li><a href="{{url('users/register/pl=dich_vu_van_tai')}}"> Tài khoản đăng ký DVVT</a></li>
-                            <li><a href="{{url('users/register/pl=dich_vu_gia_sua')}}">Tài khoản đăng ký DVGS</a> </li>
+                        @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'sa' ||session('admin')->sadmin == 'satacn')
+                            <li><a href="{{url('dn_thuc_an_chan_nuoi')}}">DN thức ăn chăn nuôi</a> </li>
                         @endif
-
-
-
-                            <li><a href="{{url('cau_hinh_he_thong')}}">Cấu hình hệ thống</a></li>
+                        <li><a href="{{url('users')}}"> Quản lý tài khoản</a></li>
+                        <li><a href="{{url('users/register')}}"> Tài khoản đăng ký</a></li>
+                        <li><a href="{{url('cau_hinh_he_thong')}}">Cấu hình hệ thống</a></li>
                     </ul>
                 </li>
                 @endif

@@ -13,7 +13,9 @@ use App\KkDvVtKhac;
 use App\KkDvVtXb;
 use App\KkDvVtXk;
 use App\KkDvVtXtx;
+use App\KkGDvGs;
 use App\KkGDvLt;
+use App\KkGDvTaCn;
 use App\Register;
 use App\TtDn;
 use App\Users;
@@ -44,6 +46,18 @@ class HomeController extends Controller
                     $btlttdndvlt = TtDn::where('pl','DVLT')
                         ->where('trangthai','Bị trả lại')
                         ->count();
+                    $cnttdndvgs = TtDn::where('pl','DVGS')
+                        ->where('trangthai','Chờ duyệt')
+                        ->count();
+                    $btlttdndvgs = TtDn::where('pl','DVGS')
+                        ->where('trangthai','Bị trả lại')
+                        ->count();
+                    $cnttdndvtacn = TtDn::where('pl','DVTACN')
+                        ->where('trangthai','Chờ duyệt')
+                        ->count();
+                    $btlttdndvtacn = TtDn::where('pl','DVTACN')
+                        ->where('trangthai','Bị trả lại')
+                        ->count();
                     $cnkkgdvlt = KkGDvLt::where('trangthai','Chờ nhận')
                         ->count();
                     $btlkkgdvlt = KkGDvLt::where('trangthai','Chờ nhận')
@@ -70,12 +84,36 @@ class HomeController extends Controller
                         ->count();
                     $btlkkgvtkhac = KkDvVtKhac::where('trangthai','Bị trả lại')
                         ->count();
+                    $cnkkgs = KkGDvGs::where('trangthai','Chờ nhận')
+                        ->count();
+                    $btlkkgs = KkGDvGs::where('trangthai','Bị trả lại')
+                        ->count();
+                    $cnkkgtacn = KkGDvTaCn::where('trangthai','Chờ nhận')
+                        ->count();
+                    $btlkkgtacn = KkGDvTaCn::where('trangthai','Bị trả lại')
+                        ->count();
                 }elseif(session('admin')->level == 'T' || session('admin') == 'H'){
                     $cnttdndvlt = TtDn::where('pl','DVLT')
                         ->where('trangthai','Chờ duyệt')
                         ->where('cqcq',session('admin')->cqcq)
                         ->count();
                     $btlttdndvlt = TtDn::where('pl','DVLT')
+                        ->where('trangthai','Bị trả lại')
+                        ->where('cqcq',session('admin')->cqcq)
+                        ->count();
+                    $cnttdndvgs = TtDn::where('pl','DVGS')
+                        ->where('trangthai','Chờ duyệt')
+                        ->where('cqcq',session('admin')->cqcq)
+                        ->count();
+                    $btlttdndvgs = TtDn::where('pl','DVGS')
+                        ->where('trangthai','Bị trả lại')
+                        ->where('cqcq',session('admin')->cqcq)
+                        ->count();
+                    $cnttdndvtacn = TtDn::where('pl','DVTACN')
+                        ->where('trangthai','Chờ duyệt')
+                        ->where('cqcq',session('admin')->cqcq)
+                        ->count();
+                    $btlttdndvtacn = TtDn::where('pl','DVTACN')
                         ->where('trangthai','Bị trả lại')
                         ->where('cqcq',session('admin')->cqcq)
                         ->count();
@@ -115,6 +153,18 @@ class HomeController extends Controller
                         ->where('cqcq',session('admin')->cqcq)
                         ->count();
                     $btlkkgvtkhac = KkDvVtKhac::where('trangthai','Bị trả lại')
+                        ->where('cqcq',session('admin')->cqcq)
+                        ->count();
+                    $cnkkgs = KkGDvGs::where('trangthai','Chờ nhận')
+                        ->where('cqcq',session('admin')->cqcq)
+                        ->count();
+                    $btlkkgs = KkGDvGs::where('trangthai','Bị trả lại')
+                        ->where('cqcq',session('admin')->cqcq)
+                        ->count();
+                    $cnkkgtacn = KkGDvTaCn::where('trangthai','Chờ nhận')
+                        ->where('cqcq',session('admin')->cqcq)
+                        ->count();
+                    $btlkkgtacn = KkGDvTaCn::where('trangthai','Bị trả lại')
                         ->where('cqcq',session('admin')->cqcq)
                         ->count();
                 }else{
@@ -126,6 +176,22 @@ class HomeController extends Controller
                         ->where('trangthai','Bị trả lại')
                         ->where('masothue',session('admin')->mahuyen)
                         ->count();
+                    $cnttdndvgs = TtDn::where('pl','DVGS')
+                        ->where('trangthai','Chờ duyệt')
+                        ->where('masothue',session('admin')->mahuyen)
+                        ->count();
+                    $btlttdndvgs = TtDn::where('pl','DVGS')
+                        ->where('trangthai','Bị trả lại')
+                        ->where('masothue',session('admin')->mahuyen)
+                        ->count();
+                    $cnttdndvtacn = TtDn::where('pl','DVTACN')
+                        ->where('trangthai','Chờ duyệt')
+                        ->where('masothue',session('admin')->mahuyen)
+                        ->count();
+                    $btlttdndvtacn = TtDn::where('pl','DVTACN')
+                        ->where('trangthai','Bị trả lại')
+                        ->where('masothue',session('admin')->mahuyen)
+                        ->count();
                     $cnkkgdvlt = KkGDvLt::where('trangthai','Chờ nhận')
                         ->where('masothue',session('admin')->mahuyen)
                         ->count();
@@ -162,6 +228,18 @@ class HomeController extends Controller
                         ->where('masothue',session('admin')->mahuyen)
                         ->count();
                     $btlkkgvtkhac = KkDvVtKhac::where('trangthai','Bị trả lại')
+                        ->where('masothue',session('admin')->mahuyen)
+                        ->count();
+                    $cnkkgs = KkGDvGs::where('trangthai','Chờ nhận')
+                        ->where('masothue',session('admin')->mahuyen)
+                        ->count();
+                    $btlkkgs = KkGDvGs::where('trangthai','Bị trả lại')
+                        ->where('masothue',session('admin')->mahuyen)
+                        ->count();
+                    $cnkkgtacn = KkGDvTaCn::where('trangthai','Chờ nhận')
+                        ->where('masothue',session('admin')->mahuyen)
+                        ->count();
+                    $btlkkgtacn = KkGDvTaCn::where('trangthai','Bị trả lại')
                         ->where('masothue',session('admin')->mahuyen)
                         ->count();
                 }
@@ -180,6 +258,14 @@ class HomeController extends Controller
                 $array['btlkkgvtxtx'] = $btlkkgvtxtx;
                 $array['cnkkgvtkhac'] = $cnkkgvtkhac;
                 $array['btlkkgvtkhac'] = $btlkkgvtkhac;
+                $array['cnkkgs'] = $cnkkgs;
+                $array['btlkkgs'] = $btlkkgs;
+                $array['cnttdndvgs'] = $cnttdndvgs;
+                $array['btlttdndvgs'] = $btlttdndvgs;
+                $array['cnttdndvtacn']= $cnttdndvtacn;
+                $array['btlttdndvtacn'] = $btlttdndvtacn;
+                $array['cnkkgtacn'] = $cnkkgtacn;
+                $array['btlkkgtacn'] = $btlkkgtacn;
                 //dd($array);
                 return view('dashboard')
                     ->with('sl',$array)
@@ -495,6 +581,13 @@ class HomeController extends Controller
                     ->with('cqcq',$cqcq)
                     ->with('model',$model)
                     ->with('pageTitle','Chỉnh sửa thông tin đăng ký tài khoản');
+            }elseif($model->pl == 'DVTACN'){
+                $cqcq = DmDvQl::where('plql','TC')
+                    ->get();
+                return view('system.register.search.dvtacn.edit')
+                    ->with('cqcq',$cqcq)
+                    ->with('model',$model)
+                    ->with('pageTitle','Chỉnh sửa thông tin đăng ký tài khoản');
             }
         }else{
             return view('system.register.view.register-edit-errors');
@@ -706,6 +799,111 @@ class HomeController extends Controller
             }
         }else
             return view('errors.register-errors');
+    }
+
+    public function dangkydvtacn(){
+        $model = DmDvQl::where('plql','TC')
+            ->get();
+        return view('system.register.dvtacn.register')
+            ->with('model',$model)
+            ->with('pageTitle','Đăng ký doanh nghiệp cung cấp thức ăn chăn nuôi');
+    }
+
+    public function dangkydvtacnstore(Request $request){
+        $input = $request->all();
+        if($input['g-recaptcha-response'] != '') {
+            $check = DnDvLt::where('masothue', $input['masothue'])
+                ->first();
+            if (count($check) > 0) {
+                return view('errors.register-errors');
+            } else {
+                $checkuser = User::where('username', $input['username'])->first();
+                if (count($checkuser) > 0) {
+                    return view('errors.register-errors');
+                } else {
+
+                    $ma = getdate()[0];
+                    $model = new Register();
+                    $model->tendn = $input['tendn'];
+                    $model->masothue = $input['masothue'];
+                    $model->diachi = $input['diachidn'];
+                    $model->tel = $input['teldn'];
+                    $model->fax = $input['faxdn'];
+                    $model->email = $input['emaildn'];
+                    $model->noidknopthue = $input['noidknopthue'];
+                    $model->cqcq = $input['cqcq'];
+                    $model->giayphepkd = $input['giayphepkd'];
+                    $model->tailieu = $input['tailieu'];
+                    $model->username = $input['username'];
+                    $model->password = md5($input['rpassword']);
+                    $model->pl = 'DVTACN';
+                    $model->diadanh = $input['diadanh'];
+                    $model->nguoiky = $input['nguoiky'];
+                    $model->chucdanh = $input['chucdanh'];
+                    $model->setting = '';
+                    $model->dvxk = 0;
+                    $model->dvxb = 0;
+                    $model->dvxtx = 0;
+                    $model->dvk = 0;
+                    $model->trangthai = 'Chờ duyệt';
+                    $model->lydo = '';
+                    $model->ma = $ma;
+                    if ($model->save()) {
+                        $tencqcq = DmDvQl::where('maqhns', $input['cqcq'])->first();
+                        $data = [];
+                        $data['tendn'] = $input['tendn'];
+                        $data['tg'] = Carbon::now()->toDateTimeString();
+                        $data['tencqcq'] = $tencqcq->tendv;
+                        $data['masothue'] = $input['masothue'];
+                        $data['user'] = $input['username'];
+                        $data['madk'] = $ma;
+                        $maildn = $input['emaildn'];
+                        $tendn = $input['tendn'];
+                        $mailql = $tencqcq->emailqt;
+                        $tenql = $tencqcq->tendv;
+
+                        Mail::send('mail.register', $data, function ($message) use ($maildn, $tendn, $mailql, $tenql) {
+                            $message->to($maildn, $tendn)
+                                ->to($mailql, $tenql)
+                                ->subject('Thông báo đăng ký tài khoản');
+                            $message->from('qlgiakhanhhoa@gmail.com', 'Phần mềm CSDL giá');
+                        });
+
+                    }
+                    return view('system.register.view.register-success')
+                        ->with('ma', $ma);
+                }
+            }
+        }else
+            return view('errors.register-errors');
+    }
+
+    public function updatedvtacn(Request $request, $id){
+        $input = $request->all();
+        $input['trangthai'] = 'Chờ duyệt';
+        $input['password'] = md5($input['password']);
+        $model = Register::findOrFail($id);
+        if($model->update($input)){
+            $tencqcq = DmDvQl::where('maqhns',$input['cqcq'])->first();
+            $data=[];
+            $data['tendn'] = $input['tendn'];
+            $data['tg'] = Carbon::now()->toDateTimeString();
+            $data['tencqcq'] = $tencqcq->tendv;
+            $data['masothue'] = $input['masothue'];
+            $data['user'] = $input['username'];
+            $data['madk'] = $model->ma;
+            $maildn = $input['emaildn'];
+            $tendn  =  $input['tendn'];
+            $mailql = $tencqcq->emailqt;
+            $tenql = $tencqcq->tendv;
+            Mail::send('mail.stlregister',$data, function ($message) use($maildn,$tendn,$mailql,$tenql) {
+                $message->to($maildn,$tendn)
+                    ->to($mailql,$tenql)
+                    ->subject('Thông báo đăng ký tài khoản');
+                $message->from('qlgiakhanhhoa@gmail.com','Phần mềm CSDL giá');
+            });
+        }
+        return view('errors.register-success');
     }
 
 }

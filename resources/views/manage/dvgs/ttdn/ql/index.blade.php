@@ -32,7 +32,7 @@
 @section('content')
 
     <h3 class="page-title">
-        Thông tin doanh nghiệp <small>&nbsp;dịch vụ lưu trú</small>
+        Thông tin doanh nghiệp <small>&nbsp;mặt hàng sữa</small>
     </h3>
     <!-- END PAGE HEADER-->
     <div class="row">

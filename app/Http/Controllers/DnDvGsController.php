@@ -88,10 +88,10 @@ class DnDvGsController extends Controller
 
     public function ttdnedit($id){
         if (Session::has('admin')) {
-            if(session('admin')->level == 'T' || session('admin')->level == 'H' || session('admin')->level == 'DVGS') {
+            if( session('admin')->level == 'DVGS') {
                 //Kiểm tra thông tin có thuộc quyền quản lý hay k
                 $model = DnDvGs::findOrFail($id);
-                if(session('admin')->sadmin == 'ssa' || session('admin')->cqcq == $model->cqcq) {
+                if(session('admin')->mahuyen == $model->masothue) {
                     $ttcqcq = DmDvQl::where('plql', 'CT')
                         ->get();
 
@@ -145,10 +145,10 @@ class DnDvGsController extends Controller
 
     public function ttdnchinhsua($id){
         if (Session::has('admin')) {
-            if(session('admin')->level == 'T' || session('admin')->level == 'H' || session('admin')->level == 'DVGS') {
+            if(session('admin')->level == 'DVGS') {
                 //Kiểm tra thông tin có thuộc quyền quản lý hay k
                 $model = TtDn::findOrFail($id);
-                if(session('admin')->sadmin == 'ssa' || session('admin')->cqcq == $model->cqcq) {
+                if(session('admin')->mahuyen == $model->masothue) {
                     $ttcqcq = DmDvQl::where('plql', 'CT')
                         ->get();
 

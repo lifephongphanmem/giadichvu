@@ -149,7 +149,7 @@
             </div>
             <div class="row" style="text-align: center">
                 <div class="cod-md-12">
-                    <a href="{{url('users/register/pl=dich_vu_van_tai')}}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
+                    <a href="{{url('users/register?&phanloai=DVVT')}}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
                     <button type="button" class="btn green" onclick="getId('{{$model->id}}')" data-target="#create-modal" data-toggle="modal"><i class="fa fa-plus"></i> Tạo tài khoản truy cập</button>
                 </div>
             </div>

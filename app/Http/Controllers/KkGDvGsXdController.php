@@ -74,7 +74,7 @@ class KkGDvGsXdController extends Controller
                     ->with('model', $model)
                     ->with('phanloai',$inputs['phanloai'])
                     ->with('nam',$inputs['nam'])
-                    ->with('pageTitle', 'Thông tin cơ sở kinh doanh dịch vụ lưu trú');
+                    ->with('pageTitle', 'Thông tin xét duyệt kê khai giá sữa');
             }else{
                 return view('errors.perm');
             }
@@ -106,7 +106,7 @@ class KkGDvGsXdController extends Controller
                     $data['masothue'] = $model->masothue;
                     $data['tg'] = Carbon::now()->toDateTimeString();
                     $data['tencqcq'] = $tencqcq->tendv;
-                    $data['lydo'] = $input['lydo'];
+                    $data['lydo'] = $inputs['lydo'];
                     $maildn = $dn->email;
                     $tendn = $dn->tendn;
                     $mailql = $tencqcq->email;

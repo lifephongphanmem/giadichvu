@@ -26,6 +26,10 @@ Route::get('register/tra_lai','HomeController@regdverror');
 Route::get('dangkydichvugiasua','HomeController@dangkydvgs');
 Route::post('dangkydichvugiasua','HomeController@dangkydvgsstore');
 
+Route::get('dangkydichvuthucanchannuoi','HomeController@dangkydvtacn');
+Route::post('dangkydichvuthucanchannuoi','HomeController@dangkydvtacnstore');
+
+
 Route::get('search_register','HomeController@searchregister');
 Route::post('search_register','HomeController@checksearchregister');
 Route::get('search_register/show','HomeController@show');
@@ -33,6 +37,7 @@ Route::post('search_register/show','HomeController@edit');
 Route::patch('register_editdvlt/id={id}','HomeController@updatedvlt');
 Route::patch('register_editdvvt/id={id}','HomeController@updatedvvt');
 Route::patch('register_editdvgs/id={id}','HomeController@updatedvgs');
+Route::patch('register_editdvtacn/id={id}','HomeController@updatedvtacn');
 
 
 // </editor-fold>//End Hệ thống- Đăng ký
@@ -76,15 +81,17 @@ Route::get('users/create','UsersController@create');
 Route::post('users','UsersController@store');
 
 
-Route::get('users/register/pl={pl}','UsersController@register');
+Route::get('users/register','UsersController@register');
 Route::get('users/register/{id}/show','UsersController@registershow');
 Route::get('users/register/{id}/edit','UsersController@registeredit');
 Route::patch('users/register/dvlt/{id}','UsersController@registerdvltupdate');
 Route::patch('users/register/dvvt/{id}','UsersController@registerdvvtupdate');
 Route::patch('users/register/dvgs/{id}','UsersController@registerdvgsupdate');
+Route::patch('users/register/dvtacn/{id}','UsersController@registerdvtacnupdate');
 Route::post('register/createdvlt','UsersController@registerdvlt');
 Route::post('register/createdvvt','UsersController@registerdvvt');
 Route::post('register/createdvgs','UsersController@registerdvgs');
+Route::post('register/createdvtacn','UsersController@registerdvtacn');
 Route::post('users/register/tralai','UsersController@tralaidktk');
 
 Route::post('register/delete','UsersController@registerdelete');
@@ -117,6 +124,10 @@ Route::get('dn_dichvu_vantai/print','DonViDvVtController@prints');
 Route::resource('dn_dichvu_giasua','DnDvGsController');
 Route::get('dn_dichvu_giasua/print','DnDvGsController@prints');
 //End DN Dịch vụ giá sữa
+
+//Dn Thức ăn chăn nuôi
+Route::resource('dn_thuc_an_chan_nuoi','DnTaCnController');
+//End Dn Thức ăn chăn nuôi
 
 //DN cung cấp dịch vụ
 Route::resource('doanhnghiepcungcapdichvu','DoanhNghiepCcDvController');
@@ -626,8 +637,6 @@ Route::group(['prefix'=>'bao_cao'],function(){
     });
     //
 });
-
-
     //End Dịch vụ vận tải
 
     //Dịch vụ giá sữa
@@ -637,7 +646,6 @@ Route::get('ttdn_dich_vu_gia_sua/{id}/chinhsua','DnDvGsController@ttdnchinhsua')
 Route::patch('ttdn_dich_vu_gia_sua/{id}','DnDvGsController@ttdnupdate');
 Route::patch('ttdn_dich_vu_gia_sua/df/{id}','DnDvGsController@ttdncapnhat');
 Route::get('ttdn_dich_vu_gia_sua/{id}/chuyen','DnDvGsController@ttdnchuyen');
-
 
 Route::get('thong_tin_dn_kkgsua','KkGDvGsController@ttdn');
 //Kê khai giá
@@ -679,6 +687,50 @@ Route::get('/xdkkgiasua/nhanhs','KkGDvGsXdController@getTTnHs');
 //End Xd Kk giá dv giá sữa
     //End dịch vụ giá sữa
 
+    //Dịch vụ thức ăn chăn nuôi
+Route::get('ttdn_thuc_an_chan_nuoi','DnTaCnController@ttdn');
+Route::get('ttdn_thuc_an_chan_nuoi/{id}/edit','DnTaCnController@ttdnedit');
+Route::get('ttdn_thuc_an_chan_nuoi/{id}/chinhsua','DnTaCnController@ttdnchinhsua');
+Route::patch('ttdn_thuc_an_chan_nuoi/{id}','DnTaCnController@ttdnupdate');
+Route::patch('ttdn_thuc_an_chan_nuoi/df/{id}','DnTaCnController@ttdncapnhat');
+Route::get('ttdn_thuc_an_chan_nuoi/{id}/chuyen','DnTaCnController@ttdnchuyen');
+
+Route::get('thong_tin_dn_kktacn','KkGDvTaCnController@ttdn');
+Route::get('ke_khai_thuc_an_chan_nuoi/report_ke_khai/{mahs}','ReportsController@kkgdvtacn');
+//Kê khai giá
+Route::resource('ke_khai_thuc_an_chan_nuoi','KkGDvTaCnController');
+Route::get('ke_khai_thuc_an_chan_nuoi/masothue={masothue}/create','KkGDvTaCnController@create');
+Route::post('ke_khai_thuc_an_chan_nuoi/delete','KkGDvTaCnController@delete');
+Route::get('kkdvtacn/checkngay','KkGDvTaCnController@checkngay');
+Route::post('ke_khai_thuc_an_chan_nuoi/chuyen','KkGDvTaCnController@chuyen');
+Route::get('kkdvtacn/viewlydo','KkGDvTaCnController@viewlydo');
+//Ajax create
+Route::get('/kkgtacn/storetthh','KkGDvTaCnCtDfController@storetthh');
+Route::get('/kkgtacn/editthh','KkGDvTaCnCtDfController@editthh');
+Route::get('/kkgtacn/updatehh','KkGDvTaCnCtDfController@updatehh');
+Route::get('/kkgtacn/deletehh','KkGDvTaCnCtDfController@deletehh');
+Route::get('/kkgtacn/kkgiahh','KkGDvTaCnCtDfController@kkgiahh');
+Route::get('kkgtacn/upkkgiahh','KkGDvTaCnCtDfController@updatekkgiahh');
+
+//End Ajax create
+//Ajax edit
+Route::get('/kkgtacnedit/storehh','KkGDvTaCnCtController@storetthh');
+Route::get('/kkgtacnedit/editthh','KkGDvTaCnCtController@editthh');
+Route::get('/kkgtacnedit/updatehh','KkGDvTaCnCtController@updatehh');
+Route::get('/kkgtacnedit/deletehh','KkGDvTaCnCtController@deletehh');
+Route::get('/kkgtacnedit/kkgiahh','KkGDvTaCnCtController@kkgiahh');
+Route::get('kkgtacnedit/upkkgiahh','KkGDvTaCnCtController@updatekkgiahh');
+//End Ajax edit
+//Xd Kk giá dv TACN
+Route::resource('xd_ke_khai_thucan_channuoi','KkGDvTaCnXdController');
+Route::post('xd_ke_khai_thucan_channuoi/tralai','KkGDvTaCnXdController@tralai');
+Route::post('xd_ke_khai_thucan_channuoi/nhanhs','KkGDvTaCnXdController@nhanhs');
+//Ajax
+Route::get('ttkktacn','KkGDvTaCnXdController@getTtKkTaCn');
+Route::get('/xdkktacn/nhanhs','KkGDvTaCnXdController@getTTnHs');
+//EndAjax
+//End Xd Kk giá dv TACN
+    //End Dịch vụ thức ăn chăn nuôi
 // </editor-fold>//End Manage
 
 Route::resource('thongtinngaynghile','TtNgayNghiLeController');

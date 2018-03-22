@@ -40,9 +40,7 @@
 
             $('#phanloai').change(function() {
                 var pl = $('#phanloai').val();
-                var url = '/users/register/pl='+pl;
-
-                //var url = current_path_url;
+                var url = '/users/register?&phanloai='+pl;
                 window.location.href = url;
             });
 
@@ -56,14 +54,6 @@
 @stop
 
 @section('content')
-    <?php
-    if($pl == 'dich_vu_luu_tru')
-        $dv = 'dịch vụ lưu trú';
-    elseif($pl == 'dich_vu_van_tai')
-        $dv = 'dịch vụ vận tải';
-    else
-        $dv='';
-    ?>
     <h3 class="page-title">
         Quản lý thông tin tài khoản đăng ký<small>&nbsp;{{$dv}}</small>
     </h3>
@@ -74,16 +64,30 @@
             <div class="portlet box">
                 <div class="portlet-body">
                     <div class="portlet-body">
+                        @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'sa')
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <select class="form-control" name="phanloai" id="phanloai">
+                                        <option value="DVLT" {{($phanloai == "DVLT") ? 'selected' : ''}}>Dịch vụ lưu trú</option>
+                                        <option value="DVVT" {{($phanloai == "DVVT") ? 'selected' : ''}}>Dịch vụ vận tải</option>
+                                        <option value="DVGS" {{($phanloai == "DVGS") ? 'selected' : ''}}>Dịch vụ giá sữa</option>
+                                        <option value="DVTACN" {{($phanloai == "DVTACN") ? 'selected' : ''}}>Dịch vụ thức ăn chăn nuôi</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        @endif
                         <div class="table-toolbar">
                         </div>
                     <table class="table table-striped table-bordered table-hover" id="sample_3">
                         <thead>
                         <tr>
                             <th style="text-align: center" width="2%">STT</th>
-                            <th style="text-align: center">Tên doanh nghiệp</th>
-                            <th style="text-align: center">Mã số thuế</th>
-                            <th style="text-align: center" width="5%">Trạng thái</th>
-                            <th style="text-align: center" width="30%">Thao tác</th>
+                            <th style="text-align: center" width="30%">Tên doanh nghiệp</th>
+                            <th style="text-align: center" width="10%">Mã số thuế</th>
+                            <th style="text-align: center">Trạng thái</th>
+                            <th style="text-align: center" width="20%">Thao tác</th>
                         </tr>
                         </thead>
                         <tbody>

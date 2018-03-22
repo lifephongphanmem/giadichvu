@@ -44,22 +44,9 @@ class KkGDvGsController extends Controller
                 $inputs['masothue'] = isset($inputs['masothue']) ? $inputs['masothue'] : '';
                 $inputs['nam'] = isset($inputs['nam']) ? $inputs['nam'] : date('Y');
                 $modeldn = DnDvGs::where('masothue', $inputs['masothue'])->first();
-                $cqcq = $modeldn->cqcq;
-                if (session('admin')->sadmin == 'ssa') {
                     $model = KkGDvGs::where('masothue', $inputs['masothue'])
                         ->whereYear('ngaynhap', $inputs['nam'])
                         ->get();
-                } else {
-                    $model = KkGDvGs::where('masothue', $inputs['masothue'])
-                        ->whereYear('ngaynhap', $inputs['nam'])
-                        ->where('cqcq', $cqcq)
-                        ->get();
-                }
-                return view('manage.dvgs.kkgia.kkgiadv.index')
-                    ->with('model', $model)
-                    ->with('modeldn', $modeldn)
-                    ->with('nam', $inputs['nam'])
-                    ->with('pageTitle', 'Kê khai giá mặt hàng sữa');
             } else {
                 $inputs['masothue'] = session('admin')->mahuyen;
                 $inputs['nam'] = isset($inputs['nam']) ? $inputs['nam'] : date('Y');
@@ -67,12 +54,12 @@ class KkGDvGsController extends Controller
                 $model = KkGDvGs::where('masothue', $inputs['masothue'])
                     ->whereYear('ngaynhap', $inputs['nam'])
                     ->get();
-                return view('manage.dvgs.kkgia.kkgiadv.index')
-                    ->with('model', $model)
-                    ->with('modeldn', $modeldn)
-                    ->with('nam', $inputs['nam'])
-                    ->with('pageTitle', 'Kê khai giá mặt hàng sữa');
             }
+            return view('manage.dvgs.kkgia.kkgiadv.index')
+                ->with('model', $model)
+                ->with('modeldn', $modeldn)
+                ->with('nam', $inputs['nam'])
+                ->with('pageTitle', 'Kê khai giá mặt hàng sữa');
 
         } else
             return view('errors.notlogin');

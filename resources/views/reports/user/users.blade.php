@@ -4,6 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>{{$pageTitle}}</title>
+    <link rel="shortcut icon" href="{{ url('images/LIFESOFT.png')}}" type="image/x-icon">
     <style type="text/css">
         body {
             font: normal 14px/16px time, serif;
@@ -63,7 +64,7 @@
             <th style="text-align: left">{{$tt->username}}</th>
             <th style="text-align: left"></th>
             <th style="text-align: center"></th>
-            <th style="text-align: center"></th>
+            <th style="text-align: center">{{$tt->email}}</th>
             <th style="text-align: center"></th>
         </tr>
     @endforeach

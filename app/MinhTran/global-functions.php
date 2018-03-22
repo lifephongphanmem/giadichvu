@@ -45,6 +45,13 @@ function getPermissionDefault($level) {
             'delete' => 0,
             'approve'=> 1
         ),
+        'dvtacn' => array(
+            'index' => 1,
+            'create' => 0,
+            'edit' => 0,
+            'delete' => 0,
+            'approve'=> 1
+        ),
         'kkdvlt' => array(
             'index' => 1,
             'create' => 0,
@@ -81,6 +88,13 @@ function getPermissionDefault($level) {
             'approve'=> 1
         ),
         'kkdvgs' => array(
+            'index' => 1,
+            'create' => 1,
+            'edit' => 1,
+            'delete' => 1,
+            'approve'=> 1
+        ),
+        'kkdvtacn' => array(
             'index' => 1,
             'create' => 1,
             'edit' => 1,
@@ -131,6 +145,13 @@ function getPermissionDefault($level) {
             'delete' => 0,
             'approve'=> 1
         ),
+        'dvtacn' => array(
+            'index' => 1,
+            'create' => 0,
+            'edit' => 0,
+            'delete' => 0,
+            'approve'=> 1
+        ),
         'kkdvlt' => array(
             'index' => 1,
             'create' => 0,
@@ -167,6 +188,14 @@ function getPermissionDefault($level) {
             'approve'=> 1
         ),
         'kkdvgs' => array(
+            'index' => 1,
+            'create' => 0,
+            'edit' => 0,
+            'delete' => 0,
+            'approve'=> 1
+        ),
+
+        'kkdvtacn' => array(
             'index' => 1,
             'create' => 0,
             'edit' => 0,
@@ -251,6 +280,22 @@ function getPermissionDefault($level) {
             'delete' => 1,
         ),
         'kkdvgs' => array(
+            'index' => 1,
+            'create' => 1,
+            'edit' => 1,
+            'delete' => 1,
+            'approve'=> 1
+        ),
+    );
+    $roles['DVTACN'] = array(
+        'dvtacn' => array(
+            'index' => 1,
+            'create' => 1,
+            'edit' => 1,
+            'delete' => 1,
+            'approve'=> 1
+        ),
+        'kkdvtacn' => array(
             'index' => 1,
             'create' => 1,
             'edit' => 1,

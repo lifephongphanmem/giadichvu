@@ -141,7 +141,7 @@
     </div>
     <div class="row" style="text-align: center">
         <div class="cod-md-12">
-            <a href="{{url('users/register/pl=dich_vu_gia_sua')}}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
+            <a href="{{url('users/register?&phanloai=DVGS')}}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
             <button type="reset" class="btn btn-default"><i class="fa fa-refresh"></i>&nbsp;Nhập lại</button>
             <button type="submit" class="btn green" onclick="validateForm()"><i class="fa fa-check"></i> Cập nhật</button>
         </div>

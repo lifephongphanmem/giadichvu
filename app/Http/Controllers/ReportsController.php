@@ -7,10 +7,13 @@ use App\CsKdDvLt;
 use App\DmDvQl;
 use App\DnDvGs;
 use App\DnDvLt;
+use App\DnTaCn;
 use App\KkGDvGs;
 use App\KkGDvGsCt;
 use App\KkGDvLt;
 use App\KkGDvLtCt;
+use App\KkGDvTaCn;
+use App\KkGDvTaCnCt;
 use App\TtNgayNghiLe;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -109,6 +112,24 @@ class ReportsController extends Controller
                 ->with('modelcqcq',$modelcqcq)
                 ->with('modelkkct',$modelkkct)
                 ->with('pageTitle','Kê khai giá mặt hàng sữa');
+
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function kkgdvtacn($mahs){
+        if (Session::has('admin')) {
+            $modelkk = KkGDvTaCn::where('mahs',$mahs)->first();
+            $modeldn = DnTaCn::where('masothue',$modelkk->masothue)->first();
+            $modelcqcq = DmDvQl::where('maqhns',$modelkk->cqcq)->first();
+            $modelkkct = KkGDvTaCnCt::where('mahs',$mahs)->get();
+            //dd($modelcqcq);
+            return view('reports.kkgdvtacn.print')
+                ->with('modelkk',$modelkk)
+                ->with('modeldn',$modeldn)
+                ->with('modelcqcq',$modelcqcq)
+                ->with('modelkkct',$modelkkct)
+                ->with('pageTitle','Kê khai giá thức ăn chăn nuôi');
 
         }else
             return view('errors.notlogin');

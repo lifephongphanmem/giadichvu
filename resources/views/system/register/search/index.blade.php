@@ -74,15 +74,20 @@ License: You must have a valid license purchased only from themeforest(the above
 	<div class="form-group">
 		<div class="input-icon">
 			<i class="fa fa-envelope"></i>
-			{!! Form::select(
-			'pl',
-			array(
-			'DVLT' => 'Dịch vụ lưu trú',
-			'DVVT' => 'Dịch vụ vận tải',
-			'DVGS' => 'Dịch vụ giá sữa'
-			),null,
-			array( 'class' => 'form-control required'))
-			!!}
+			<select class="form-control required" name="pl" id="pl">
+				@if(canGeneral('dvlt','dvlt'))
+				<option value="DVLT">Dịch vụ lưu trú</option>
+				@endif
+				@if(canGeneral('dvvt','vtxk') || canGeneral('dvvt','vtxb') || canGeneral('dvvt','vtxtx') || canGeneral('dvvt','vtch'))
+				<option value="DVVT">Dịch vụ vận tải</option>
+				@endif
+				@if(canGeneral('dvgs','dvgs'))
+				<option value="DVGS">Dịch vụ giá sữa</option>
+				@endif
+				@if(canGeneral('dvtacn','dvtacn'))
+				<option value="DVTACN">Dịch vụ thức ăn chăn nuôi</option>
+				@endif
+			</select>
 		</div>
 	</div>
 

@@ -6,6 +6,7 @@ use App\DmDvQl;
 use App\DnDvGs;
 use App\DnDvLt;
 use App\DnDvLtReg;
+use App\DnTaCn;
 use App\DonViDvVt;
 use App\DonViDvVtReg;
 use App\Register;
@@ -167,11 +168,13 @@ class UsersController extends Controller
                 if (session('admin')->sadmin == 'ssa' || session('admin')->sadmin =='sa')
                     $inputs['phanloai'] = isset($inputs['phanloai']) ? $inputs['phanloai'] : 'QL';
                 elseif(session('admin')->sadmin == 'savt')
-                    $inputs['phanloai'] = isset($inputs['phanloai']) ? $inputs['phanloai'] : 'DVVT';
+                    $inputs['phanloai'] = isset($inputs['phanloai']) ? 'DVVT' : 'DVVT';
                 elseif(session('admin')->sadmin == 'satc')
-                    $inputs['phanloai'] = isset($inputs['phanloai']) ? $inputs['phanloai'] : 'DVLT';
+                    $inputs['phanloai'] = isset($inputs['phanloai']) ? 'DVLT' : 'DVLT';
                 elseif(session('admin')->sadmin == 'sact')
-                    $inputs['phanloai'] = isset($inputs['phanloai']) ? $inputs['phanloai'] : 'DVGS';
+                    $inputs['phanloai'] = isset($inputs['phanloai']) ? 'DVGS' : 'DVGS';
+                elseif(session('admin')->sadmin == 'satacn')
+                    $inputs['phanloai'] = isset($inputs['phanloai']) ? 'DVTACN' : 'DVTACN';
 
                 if ($inputs['phanloai'] == 'QL')
                     $level = array('T','H');
@@ -181,12 +184,14 @@ class UsersController extends Controller
                     $level = array('DVVT');
                 elseif ($inputs['phanloai'] == 'DVGS')
                     $level = array('DVGS');
+                elseif ($inputs['phanloai'] == 'DVTACN')
+                    $level = array('DVTACN');
 
                 if (session('admin')->sadmin == 'ssa' || session('admin')->sadmin =='sa') {
                     $model = Users::wherein('level', $level)
                         ->orderBy('id', 'desc')
                         ->get();
-                }elseif((session('admin')->sadmin == 'savt') || (session('admin')->sadmin == 'satc')) {
+                }elseif((session('admin')->sadmin == 'savt') || (session('admin')->sadmin == 'satc' || session('admin')->sadmin == 'satacn')) {
                     $model = Users::wherein('level', $level)
                         ->where('cqcq', session('admin')->cqcq)
                         ->orderBy('id', 'desc')
@@ -303,8 +308,9 @@ class UsersController extends Controller
                     elseif ($model->level == 'DVVT')
                         $modeldvql = DmDvQl::where('plql', 'CT')
                             ->get();
-                    else
-                        $modeldvql = DmDvQl::all();
+                    elseif($model->level == 'DVTACN')
+                        $modeldvql = DmDvQl::where('plql','TC')
+                        ->get();
                     return view('system.users.edit')
                         ->with('model', $model)
                         ->with('modeldvql', $modeldvql)
@@ -342,8 +348,12 @@ class UsersController extends Controller
                 if ($input['newpass'] != '')
                     $model->password = md5($input['newpass']);
                 $model->save();
+                if($model->level == 'T'|| $model->level == 'H')
+                    $pl = 'QL';
+                else
+                    $pl=$model->level;
 
-                return redirect('users');
+                return redirect('users?&phanloai='.$pl);
             }else
                 return view('errors.noperm');
 
@@ -443,52 +453,49 @@ class UsersController extends Controller
 
     }
 
-    public function register($pl){
+    public function register(Request $request){
         if (Session::has('admin')) {
-            if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'satc' || session('admin')->sadmin == 'savt' || session('admin')->sadmin == 'sact') {
-                $cqcq = session('admin')->cqcq;
-                if ($pl == 'dich_vu_luu_tru' && session('admin')->sadmin == 'satc' || $pl == 'dich_vu_luu_tru' && session('admin')->sadmin == 'ssa') {
-                    if (session('admin')->sadmin == 'ssa') {
-                        $model = Register::where('pl', 'DVLT')
-                            ->orderBy('id', 'desc')
-                            ->get();
-                    } else {
-                        $model = Register::where('pl', 'DVLT')
-                            ->where('cqcq', $cqcq)
-                            ->orderBy('id', 'desc')
-                            ->get();
-                    }
-                } elseif ($pl == 'dich_vu_van_tai' && session('admin')->sadmin == 'savt' || $pl == 'dich_vu_van_tai' && session('admin')->sadmin == 'ssa') {
-                    if (session('admin')->sadmin == 'ssa') {
-                        $model = Register::where('pl', 'DVVT')
-                            ->where('trangthai', 'Chờ duyệt')
-                            ->orderBy('id', 'desc')
-                            ->get();
-                    } else {
-                        $model = Register::where('pl', 'DVVT')
-                            ->where('cqcq', $cqcq)
-                            ->orderBy('id', 'desc')
-                            ->where('trangthai', 'Chờ duyệt')
-                            ->get();
-                    }
-                } elseif ($pl == 'dich_vu_gia_sua' && session('admin')->sadmin == 'sact' || $pl == 'dich_vu_gia_sua' && session('admin')->sadmin == 'ssa') {
-                    if (session('admin')->sadmin == 'ssa') {
-                        $model = Register::where('pl', 'DVGS')
-                            ->orderBy('id', 'desc')
-                            ->get();
-                    } else {
-                        $model = Register::where('pl', 'DVGS')
-                            ->where('cqcq', $cqcq)
-                            ->orderBy('id', 'desc')
-                            ->get();
-                    }
+            $inputs = $request->all();
+            if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'satc' || session('admin')->sadmin == 'savt'
+                || session('admin')->sadmin == 'sact' || session('admin')->sadmin == 'sa' || session('admin')->sadmin == 'satacn') {
+
+                if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'sa') {
+                    $inputs['phanloai'] = isset($inputs['phanloai']) ? $inputs['phanloai'] : 'DVLT';
+                }elseif(session('admin')->sadmin == 'satc'){
+                    $inputs['phanloai'] = isset($inputs['phanloai']) ? 'DVLT' : 'DVLT';
+                }elseif(session('admin')->sadmin == 'savt'){
+                    $inputs['phanloai'] = isset($inputs['phanloai']) ? 'DVVT' : 'DVVT';
+                }elseif(session('admin')->sadmin == 'sact'){
+                    $inputs['phanloai'] = isset($inputs['phanloai']) ? 'DVGS' : 'DVGS';
                 }else{
-                    return view('errors.noperm');
+                    $inputs['phanloai'] = isset($inputs['phanloai']) ? 'DVTACN' : 'DVTACN';
+                }
+
+                if($inputs['phanloai'] == 'DVLT'){
+                    $dv = 'dịch vụ lưu trú';
+                }elseif($inputs['phanloai'] == 'DVVT'){
+                    $dv = 'dịch vụ vận tải';
+                }elseif($inputs['phanloai'] == 'DVGS'){
+                    $dv = 'dịch vụ giá sữa';
+                }else{
+                    $dv = 'cung cấp thức ăn chăn nuôi';
+                }
+
+                if (session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'sa') {
+                    $model = Register::where('pl', $inputs['phanloai'])
+                        ->orderBy('id', 'desc')
+                        ->get();
+                } else {
+                    $model = Register::where('pl',  $inputs['phanloai'])
+                        ->where('cqcq', session('admin')->cqcq)
+                        ->orderBy('id', 'desc')
+                        ->get();
                 }
 
                 return view('system.users.register.index')
                     ->with('model', $model)
-                    ->with('pl', $pl)
+                    ->with('phanloai', $inputs['phanloai'])
+                    ->with('dv',$dv)
                     ->with('pageTitle', 'Thông tin tài khoản đăng ký');
             }else{
                 return view('errors.perm');
@@ -523,9 +530,16 @@ class UsersController extends Controller
                     return view('system.users.register.dvgs')
                         ->with('model', $model)
                         ->with('cqcq', $cqcq)
-                        ->with('pageTitle', 'Thông tin đăng ký tài khoản dịch vụ vận tải');
-                } else {
-                    return view('errors.noperm');
+                        ->with('pageTitle', 'Thông tin đăng ký tài khoản dịch vụ giá sữa');
+                } elseif ($model->pl == 'DVTACN' && session('admin')->sadmin == 'ssa' || $model->pl == 'DVTACN' && session('admin')->sadmin == 'satacn') {
+                    $cqcq = DmDvQl::where('plql', 'TC')
+                        ->get();
+                    return view('system.users.register.dvtacn')
+                        ->with('model', $model)
+                        ->with('cqcq', $cqcq)
+                        ->with('pageTitle', 'Thông tin đăng ký tài khoản dịch vụ cung cấp thức ăn chăn nuôi');
+                }else{
+                        return view('errors.noperm');
                 }
             }else{
                 return view('errors.perm');
@@ -540,6 +554,7 @@ class UsersController extends Controller
             $input = $request->all();
             $id = $input['idregister'];
             $model = Register::findOrFail($id);
+            $pl = $model->pl;
             if(session('admin')->sadmin == 'ssa' || $model->cqcq == session('admin')->cqcq ) {
                 $check = DnDvLt::where('masothue',$model->masothue)->first();
                 if(count($check)>0){
@@ -593,7 +608,7 @@ class UsersController extends Controller
                             $message->from('qlgiakhanhhoa@gmail.com', 'Phần mềm CSDL giá');
                         });
                     $delete = Register::findOrFail($id)->delete();
-                    return redirect('users/register/pl=dich_vu_luu_tru');
+                    return redirect('users/register?&phanloai='.$pl);
                 }
 
             }else{
@@ -609,6 +624,7 @@ class UsersController extends Controller
             $input = $request->all();
             $id = $input['idregister'];
             $model = Register::findOrFail($id);
+            $pl = $model->pl;
             if(session('admin')->sadmin == 'ssa' || $model->cqcq == session('admin')->cqcq ) {
                 $modeldn = new DonViDvVt();
                 $modeldn->tendonvi = $model->tendn;
@@ -658,7 +674,7 @@ class UsersController extends Controller
                     $message->from('qlgiakhanhhoa@gmail.com','Phần mềm CSDL giá');
                 });
                 $delete = Register::findOrFail($id)->delete();
-                return redirect('users/register/pl=dich_vu_van_tai');
+                return redirect('users/register?&phanloai='.$pl);
             }else{
                 return view('errors.noperm');
             }
@@ -672,6 +688,7 @@ class UsersController extends Controller
             $input = $request->all();
             $id = $input['idregister'];
             $model = Register::findOrFail($id);
+            $pl = $model->pl;
             if(session('admin')->sadmin == 'ssa' || $model->cqcq == session('admin')->cqcq ) {
                 $modeldn = new DnDvGs();
                 $modeldn->tendn = $model->tendn;
@@ -719,7 +736,76 @@ class UsersController extends Controller
                     $message->from('qlgiakhanhhoa@gmail.com','Phần mềm CSDL giá');
                 });
                 $delete = Register::findOrFail($id)->delete();
-                return redirect('users/register/pl=dich_vu_gia_sua');
+                return redirect('users/register?&phanloai='.$pl);
+            }else{
+                return view('errors.noperm');
+            }
+
+        } else
+            return view('errors.notlogin');
+    }
+    public function registerdvtacn(Request $request){
+        if (Session::has('admin')) {
+            $input = $request->all();
+            $id = $input['idregister'];
+            $model = Register::findOrFail($id);
+            $pl = $model->pl;
+            if(session('admin')->sadmin == 'ssa' || $model->cqcq == session('admin')->cqcq ) {
+                $check = DnTaCn::where('masothue',$model->masothue)->first();
+                if(count($check)>0){
+                    return view('errors.notcrregisterlt');
+                }else {
+                    $modeldn = new DnTaCn();
+                    $modeldn->tendn = $model->tendn;
+                    $modeldn->masothue = $model->masothue;
+                    $modeldn->teldn = $model->tel;
+                    $modeldn->faxdn = $model->fax;
+                    $modeldn->email = $model->email;
+                    $modeldn->diachidn = $model->diachi;
+                    $modeldn->trangthai = 'Kích hoạt';
+                    $modeldn->noidknopthue = $model->noidknopthue;
+                    $modeldn->tailieu = $model->tailieu;
+                    $modeldn->giayphepkd = $model->giayphepkd;
+                    $modeldn->cqcq = $model->cqcq;
+                    $modeldn->chucdanhky = $model->chucdanh;
+                    $modeldn->nguoiky = $model->nguoiky;
+                    $modeldn->diadanh = $model->diadanh;
+                    if ($modeldn->save()) {
+                        $modeluser = new Users();
+                        $modeluser->name = $model->tendn;
+                        $modeluser->username = $model->username;
+                        $modeluser->password = $model->password;
+                        $modeluser->phone = $model->teldn;
+                        $modeluser->email = $model->email;
+                        $modeluser->status = 'Kích hoạt';
+                        $modeluser->mahuyen = $model->masothue;
+                        $modeluser->level = 'DVTACN';
+                        $modeluser->cqcq = $model->cqcq;
+                        $modeluser->ttnguoitao = session('admin')->name.'('.session('admin')->username.') - '. getDateTime(Carbon::now()->toDateTimeString());
+                        $modeluser->save();
+                    }
+                    $tencqcq = DmDvQl::where('maqhns', $model->cqcq)->first();
+                    $data = [];
+                    $data['tendn'] = $model->tendn;
+                    $data['tg'] = Carbon::now()->toDateTimeString();
+                    $data['tencqcq'] = $tencqcq->tendv;
+                    $data['masothue'] = $model->masothue;
+                    $data['username'] = $model->username;
+                    $maildn = $model->email;
+                    $tendn = $model->tendn;
+                    $mailql = $tencqcq->emailqt;
+                    $tenql = $tencqcq->tendv;
+
+                    Mail::send('mail.successregister', $data, function ($message) use ($maildn,$tendn,$mailql,$tenql) {
+                        $message->to($maildn,$tendn)
+                            ->to($mailql,$tenql)
+                            ->subject('Thông báo thông tin đăng ký đã được xét duyệt');
+                        $message->from('qlgiakhanhhoa@gmail.com', 'Phần mềm CSDL giá');
+                    });
+                    $delete = Register::findOrFail($id)->delete();
+                    return redirect('users/register?&phanloai'.$pl);
+                }
+
             }else{
                 return view('errors.noperm');
             }
@@ -735,30 +821,25 @@ class UsersController extends Controller
             $id = $input['iddelete'];
             $model = Register::findOrFail($id);
             $pl = $model->pl;
-            if($pl == 'DVLT')
-                $dv = 'dich_vu_luu_tru';
-            elseif($pl == 'DVVT')
-                $dv = 'dich_vu_van_tai';
-            elseif($pl == 'DVGS')
-                $dv = 'dich_vu_gia_sua';
             $model->delete();
 
-            return redirect('users/register/pl='.$dv);
+            return redirect('users/register?&phanloai='.$pl);
         } else
             return view('errors.notlogin');
     }
 
     public function prints($pl){
         if (Session::has('admin')) {
-            if($pl == 'dich_vu_luu_tru') {
-                $model = Users::where('level', 'DVLT')
-                    ->get();
+            if($pl == 'DVLT')
                 $dv = 'LƯU TRÚ';
-            }elseif($pl == 'dich_vu_van_tai'){
-                $model = Users::where('level','DVVT')
-                    ->get();
+            elseif($pl == 'dich_vu_van_tai')
                 $dv = 'VẬN TẢI';
-            }
+            elseif($pl == 'DVGS')
+                $dv = 'GIÁ SỮA';
+            elseif($pl == 'DVTACN')
+                $dv = 'THỨC ĂN CHĂN NUÔI';
+            $model = Users::where('level',$pl)
+                ->get();
             return view('reports/user/users')
                 ->with('model',$model)
                 ->with('dv',$dv)
@@ -791,6 +872,13 @@ class UsersController extends Controller
                     ->with('model', $model)
                     ->with('cqcq',$cqcq)
                     ->with('pageTitle', 'Chỉnh sửa thông tin đăng ký tài khoản dịch vụ sữa');
+            }elseif($model->pl == 'DVTACN'){
+                $cqcq = DmDvQl::where('plql','TC')
+                    ->get();
+                return view('system.users.register.editdvtacn')
+                    ->with('model', $model)
+                    ->with('cqcq',$cqcq)
+                    ->with('pageTitle', 'Chỉnh sửa thông tin đăng ký tài khoản thức ăn chăn nuôi');
             }
         } else {
             return view('errors.notlogin');
@@ -816,7 +904,7 @@ class UsersController extends Controller
             $model->nguoiky = $input['nguoiky'];
             $model->diadanh = $input['diadanh'];
             $model->save();
-            return redirect('users/register/pl=dich_vu_luu_tru');
+            return redirect('users/register&?phanloai='.$model->pl);
         } else {
             return view('errors.notlogin');
         }
@@ -848,7 +936,29 @@ class UsersController extends Controller
             $model->cqcq = $input['cqcq'];
             $model->save();
 
-            return redirect('users/register/pl=dich_vu_van_tai');
+            return redirect('users/register&?phanloai='.$model->pl);
+        } else {
+            return view('errors.notlogin');
+        }
+    }
+
+    public function registerdvgsupdate($id, Request $request){
+        if (Session::has('admin')) {
+            $input = $request->all();
+            $model = Register::findOrFail($id);
+            $model->update($input);
+            return redirect('users/register?&phanloai='.$model->pl);
+        } else {
+            return view('errors.notlogin');
+        }
+    }
+
+    public function registerdvtacnupdate($id, Request $request){
+        if (Session::has('admin')) {
+            $input = $request->all();
+            $model = Register::findOrFail($id);
+            $model->update($input);
+            return redirect('users/register?&phanloai='.$model->pl);
         } else {
             return view('errors.notlogin');
         }
@@ -883,15 +993,7 @@ class UsersController extends Controller
                 }
             }
 
-            if ($model->pl == 'DVLT') {
-                $pl = 'dich_vu_luu_tru';
-            } elseif ($model->pl == 'DVVT') {
-                $pl = 'dich_vu_van_tai';
-            }elseif($model->pl == 'DVGS'){
-                $pl = 'dich_vu_gia_sua';
-            }
-
-            return redirect('users/register/pl='.$pl);
+            return redirect('users/register?&phanloai='.$model->pl);
         } else {
             return view('errors.notlogin');
         }

@@ -38,20 +38,6 @@
                                         {!!Form::text('name', null, array('id' => 'name','class' => 'form-control required','autofocus'))!!}
                                     </div>
                                 </div>
-                                <!--div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label">Điện thoại</label>
-                                        {!!Form::text('phone', null, array('id' => 'phone','class' => 'form-control'))!!}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label">Email</label>
-                                        {!!Form::text('email', null, array('id' => 'email','class' => 'form-control'))!!}
-                                    </div>
-                                </div-->
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Trạng thái</label>
@@ -76,7 +62,6 @@
                                     </div>
                                 </div>
                             </div>
-                            @if($model->level == 'DVLT' || $model->level == 'DVVT')
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -91,7 +76,6 @@
                                 </div>
 
                             </div>
-                            @endif
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -106,18 +90,8 @@
                     <!-- END FORM-->
                 </div>
             </div>
-
-            <?php
-                if($model->level == 'DVLT'){
-                    $pl = 'dich_vu_luu_tru';
-                }elseif($model->level == 'DVVT'){
-                    $pl = 'dich_vu_van_tai';
-                }elseif($model->level == 'T' || $model->level =='H'){
-                    $pl = 'quan_ly';
-                }
-            ?>
             <div style="text-align: center">
-                <a href="{{url('users/pl='.$pl)}}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
+                <a href="{{url('users?&phanloai='.$model->level)}}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
                 <button type="reset" class="btn btn-default"><i class="fa fa-refresh"></i>&nbsp;Nhập lại</button>
                 <button type="submit" class="btn green" onclick="validateForm()"><i class="fa fa-check"></i> Cập nhật</button>
             </div>

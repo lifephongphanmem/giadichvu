@@ -137,6 +137,9 @@ License: You must have a valid license purchased only from themeforest(the above
 							@if(canGeneral('dvgs','dvgs'))
 							<a class="btn btn-warning" data-toggle="modal" href="{{url('dangkydichvugiasua')}}">Dịch vụ giá sữa</a>
 							@endif
+							@if(canGeneral('dvtacn','dvtacn'))
+								<a class="btn btn-info" data-toggle="modal" href="{{url('dangkydichvuthucanchannuoi')}}">Thức ăn chăn nuôi</a>
+							@endif
 						</div>
 					</div>
 

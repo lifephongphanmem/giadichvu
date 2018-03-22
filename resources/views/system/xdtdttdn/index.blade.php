@@ -46,14 +46,15 @@
             <!-- BEGIN EXAMPLE TABLE PORTLET-->
             <div class="portlet box">
                 <div class="portlet-body">
-                    @if(session('admin')->sadmin == 'ssa')
+                    @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'sa')
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
                                 <select class="form-control" name="phanloai" id="phanloai">
                                     <option value="DVLT" {{($phanloai == "DVLT") ? 'selected' : ''}}>Dịch vụ lưu trú</option>
                                     <option value="DVVT" {{($phanloai == "DVVT") ? 'selected' : ''}}>Dịch vụ vận tải</option>
-                                    <option value="DVGS" {{($phanloai == "DVGS") ? 'selected' : ''}}>Mặt hàng sữa</option>
+                                    <option value="DVGS" {{($phanloai == "DVGS") ? 'selected' : ''}}>Dịch vụ giá sữa</option>
+                                    <option value="DVTACN" {{($phanloai == "DVTACN") ? 'selected' : ''}}>Dịch vụ thức ăn chăn nuôi</option>
                                 </select>
                             </div>
                         </div>
