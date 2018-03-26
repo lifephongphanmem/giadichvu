@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\DmDvVtXtx;
 use App\KkDvVtXtxCt;
 use App\KkDvVtXtxCtDf;
+use App\PagDvVtXtx_Temp;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -326,7 +328,9 @@ class KkGiaDvVtTaxiCtDfController extends Controller
         }
 
         $inputs = $request->all();
-        $model = KkDvVtXtxCtDf::where('madichvu',$inputs['madichvu'])->first();
+        $model_dm = DmDvVtXtx::where('madichvu',$inputs['madichvu'])->first();
+        $model = PagDvVtXtx_Temp::where('madichvu',$inputs['madichvu'])->first();
+        $model->tuyenduong = $model_dm->loaixe . " - " . $model_dm->tendichvu;
         die($model);
     }
 
@@ -340,7 +344,32 @@ class KkGiaDvVtTaxiCtDfController extends Controller
         }
 
         $inputs = $request->all();
-        $model = KkDvVtXtxCtDf::where('madichvu',$inputs['madichvu'])->first();
+        $model = PagDvVtXtx_Temp::where('madichvu',$inputs['madichvu'])->first();
+
+        $inputs['nguyengia']=getDbl($inputs['nguyengia']);
+        $inputs['tongkm']=getDbl($inputs['tongkm']);
+        $inputs['kmcokhach']=getDbl($inputs['kmcokhach']);
+        $inputs['khauhao']=getDbl($inputs['khauhao']);
+        $inputs['baohiem']=getDbl($inputs['baohiem']);
+        $inputs['baohiempt']=getDbl($inputs['baohiempt']);
+        $inputs['baohiemtnds']=getDbl($inputs['baohiemtnds']);
+        $inputs['lainganhang']=getDbl($inputs['lainganhang']);
+        $inputs['thuevp']=getDbl($inputs['thuevp']);
+        $inputs['suachualon']=getDbl($inputs['suachualon']);
+        $inputs['samlop']=getDbl($inputs['samlop']);
+        $inputs['dangkiem']=getDbl($inputs['dangkiem']);
+        $inputs['quanly']=getDbl($inputs['quanly']);
+        $inputs['banhang']=getDbl($inputs['banhang']);
+        $inputs['luonglaixe']=getDbl($inputs['luonglaixe']);
+        $inputs['nhienlieuchinh']=getDbl($inputs['nhienlieuchinh']);
+        $inputs['nhienlieuboitron']=getDbl($inputs['nhienlieuboitron']);
+        $inputs['chiphibdcs']=getDbl($inputs['chiphibdcs']);
+        //$inputs['giakekhai']=getDbl($inputs['giakekhai']);
+        //$inputs['doanhthu']=getDbl($inputs['doanhthu']);
+        $inputs['phiduongbo']=getDbl($inputs['phiduongbo']);
+        $inputs['loinhuan']=getDbl($inputs['loinhuan']);
+        $inputs['suachuatx']=getDbl($inputs['suachuatx']);
+        /*
         $a=array('nguyengia'=>getDbl($inputs['nguyengia']),
             'tongkm'=>getDbl($inputs['tongkm']),
             'kmcokhach'=>getDbl($inputs['kmcokhach']),
@@ -365,6 +394,9 @@ class KkGiaDvVtTaxiCtDfController extends Controller
         $model->pag = json_encode($a);
         $model->ghichu_pag = $inputs['ghichu_pag'];
         $model->save();
+        */
+        $model->update($inputs);
+
         die($model);
     }
 

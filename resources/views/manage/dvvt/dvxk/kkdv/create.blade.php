@@ -614,77 +614,7 @@
     </script>
 
     <!--Modal phương án giá-->
-    <div id="modal-pagia-create" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header modal-header-primary">
-                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                    <h4 id="modal-header-primary-label" class="modal-title">Kê khai phương án giá</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="form-horizontal" id="pag">
-                        <div class="form-group">
-                            <label for="sanluong" class="col-md-6 control-label">Sản lượng tính giá</label>
-                            <div class="col-md-6">
-                                <input type="text" id="sanluong" name="sanluong" class="form-control" data-mask="fdecimal" style="text-align: right">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="cpnguyenlieutt" class="col-md-6 control-label">Chi phí nguyên liệu trực tiếp</label>
-                            <div class="col-md-6">
-                                <input type="text" id="cpnguyenlieutt" name="cpnguyenlieutt" class="form-control" data-mask="fdecimal" style="text-align: right">
-                            </div>
-
-                            <label for="cpcongnhantt" class="col-md-6 control-label">Chi phí nhân công trực tiếp</label>
-                            <div class="col-md-6">
-                                <input type="text" id="cpcongnhantt" name="cpcongnhantt" class="form-control" data-mask="fdecimal" style="text-align: right">
-                            </div>
-
-                            <label for="cpkhauhaott" class="col-md-6 control-label">Chi phí khấu hao máy móc trực tiếp</label>
-                            <div class="col-md-6">
-                                <input type="text" id="cpkhauhaott" name="cpkhauhaott" class="form-control" data-mask="fdecimal" style="text-align: right">
-                            </div>
-
-                            <label for="cpsanxuatdt" class="col-md-6 control-label">Chi phí sản xuất, kinh doanh theo đặc thù</label>
-                            <div class="col-md-6">
-                                <input type="text" id="cpsanxuatdt" name="cpsanxuatdt" class="form-control" data-mask="fdecimal" style="text-align: right">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="cpsanxuatc" class="col-md-6 control-label">Chi phí sản xuất chung</label>
-                            <div class="col-md-6">
-                                <input type="text" id="cpsanxuatc" name="cpsanxuatc" class="form-control" data-mask="fdecimal" style="text-align: right">
-                            </div>
-
-                            <label for="cptaichinh" class="col-md-6 control-label">Chi phí tài chính</label>
-                            <div class="col-md-6">
-                                <input type="text" id="cptaichinh" name="cptaichinh" class="form-control" data-mask="fdecimal" style="text-align: right">
-                            </div>
-
-                            <label for="cpbanhang" class="col-md-6 control-label">Chi phí bán hàng</label>
-                            <div class="col-md-6">
-                                <input type="text" id="cpbanhang" name="cpbanhang" class="form-control" data-mask="fdecimal" style="text-align: right">
-                            </div>
-
-                            <label for="cpquanly" class="col-md-6 control-label">Chi phí quản lý</label>
-                            <div class="col-md-6">
-                                <input type="text" id="cpquanly" name="cpquanly" class="form-control" data-mask="fdecimal" style="text-align: right">
-                            </div>
-                        </div>
-                        <input type="hidden" id="idpag" name="idpag"/>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>
-                    <button type="submit" data-dismiss="modal" class="btn btn-primary" onclick="update_pagia()">Đồng ý</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--Script phương án giá-->
+    @include('manage.dvvt.dvxk.templates.phuongangia')
     <script>
         function update_pagia(){
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
@@ -725,11 +655,23 @@
                 },
                 dataType: 'JSON',
                 success: function (data) {
-                    //alert(data.message);
-                    if (data.status == 'success') {
-                        $('#pag').replaceWith(data.message);
-                        InputMask();
-                    }
+                    $('#sanluong').val(data.sanluong);
+                    $('#cpnguyenlieutt').val(data.cpnguyenlieutt);
+                    $('#cpcongnhantt').val(data.cpcongnhantt);
+                    $('#cpkhauhaott').val(data.cpkhauhaott);
+                    $('#cpsanxuatdt').val(data.cpsanxuatdt);
+                    $('#cpsanxuatc').val(data.cpsanxuatc);
+                    $('#cptaichinh').val(data.cptaichinh);
+                    $('#cpbanhang').val(data.cpbanhang);
+                    $('#cpquanly').val(data.cpquanly);
+                    $('#giaitrinh').val(data.giaitrinh);
+                    $('#loinhuan').val(data.loinhuan);
+                    $('#idpag').val(data.id);
+                    //$('#header_pag').innerHTML = "Nội dung" + data.loinhuan; khoog chạy
+                    document.getElementById("header_pag").innerHTML = "Kê khai phương án giá: " + data.tuyenduong;
+                    InputMask();
+                    tongchiphi();
+                    thuevat()
                 },
                 error: function(message){
                     alert(message);
