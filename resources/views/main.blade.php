@@ -565,17 +565,25 @@ License: You must have a valid license purchased only from themeforest(the above
                     <ul class="sub-menu">
                         <!--li><a href="{{url('danh_muc_don_vi_quan_ly')}}">Danh mục đơn vị quản lý</a> </li-->
                         <!--li><a href="{{url('doanhnghiepcungcapdichvu')}}">Doanh nghiệp cung cấp DV</a> </li-->
-                        @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'sa' || session('admin')->sadmin == 'satc')
-                        <li><a href="{{url('dn_dichvu_luutru')}}">DN dịch vụ lưu trú</a> </li>
+                        @if(canGeneral('dvlt','dvlt') )
+                            @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'sa' || session('admin')->sadmin == 'satc')
+                            <li><a href="{{url('dn_dichvu_luutru')}}">DN dịch vụ lưu trú</a> </li>
+                            @endif
                         @endif
-                        @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'sa' ||session('admin')->sadmin == 'savt')
-                        <li><a href="{{url('dn_dichvu_vantai')}}">DN dịch vụ vận tải</a></li>
+                        @if(canGeneral('dvvt','vtxk') || canGeneral('dvvt','vtxb') || canGeneral('dvvt','vtxtx') || canGeneral('dvvt','vtch'))
+                            @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'sa' ||session('admin')->sadmin == 'savt')
+                            <li><a href="{{url('dn_dichvu_vantai')}}">DN dịch vụ vận tải</a></li>
+                            @endif
                         @endif
-                        @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'sa' ||session('admin')->sadmin == 'satc')
-                            <li><a href="{{url('dn_dichvu_giasua')}}">DN cung cấp sữa</a> </li>
+                        @if(canGeneral('dvgs','dvgs'))
+                            @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'sa' ||session('admin')->sadmin == 'satc')
+                                <li><a href="{{url('dn_dichvu_giasua')}}">DN cung cấp sữa</a> </li>
+                            @endif
                         @endif
-                        @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'sa' ||session('admin')->sadmin == 'satacn')
-                            <li><a href="{{url('dn_thuc_an_chan_nuoi')}}">DN thức ăn chăn nuôi</a> </li>
+                        @if(canGeneral('dvtacn','dvtacn'))
+                            @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'sa' ||session('admin')->sadmin == 'satacn')
+                                <li><a href="{{url('dn_thuc_an_chan_nuoi')}}">DN thức ăn chăn nuôi</a> </li>
+                            @endif
                         @endif
                         <li><a href="{{url('users')}}"> Quản lý tài khoản</a></li>
                         <li><a href="{{url('users/register')}}"> Tài khoản đăng ký</a></li>

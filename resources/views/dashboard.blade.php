@@ -254,53 +254,55 @@
                         </div>
                     @endif
                 @endif
-                @if(can('dvtacn','index')  )
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <div class="dashboard-stat purple-plum">
-                            <div class="visual">
-                                <i class="fa fa-car"></i>
-                            </div>
-                            <div class="details">
-                                <div class="number"></div>
-                                Thay đổi thông tin DVTACN
-                                <div class="desc">
-                                    <h5>Chờ nhận: {{$sl['cnttdndvtacn']}} hồ sơ</h5>
-                                    @if(session('admin')->level == 'DVTACN')
-                                        <h5>Bị trả lại {{$sl['btlttdndvtacn']}} hồ sơ</h5>
-                                    @endif
+                @if(canGeneral('dvtacn','dvtacn'))
+                    @if(can('dvtacn','index')  )
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="dashboard-stat purple-plum">
+                                <div class="visual">
+                                    <i class="fa fa-car"></i>
                                 </div>
-                            </div>
-                            <a class="more" href="
-                                {{(session('admin')->level == 'T' || session('admin')->level == 'H')? url('xetduyet_thaydoi_ttdoanhnghiep?&phanloai=DVTACN')
-                                : url('ttdn_thuc_an_chan_nuoi')}}">
-                                Xem chi tiết <i class="m-icon-swapright m-icon-white"></i>
-                            </a>
-                        </div>
-                    </div>
-                @endif
-                @if(can('kkdvtacn','index'))
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <div class="dashboard-stat blue-madison">
-                            <div class="visual">
-                                <i class="fa fa-car"></i>
-                            </div>
-                            <div class="details">
-                                <div class="number"></div>
-                                Kê khai giá thức ăn chăn nuôi
-                                <div class="desc">
-                                    <h5>Chờ nhận: {{$sl['cnkkgtacn']}} hồ sơ</h5>
-                                    @if(session('admin')->level == 'DVTACN')
-                                        <h5>Bị trả lại {{$sl['btlkkgtacn']}} hồ sơ</h5>
-                                    @endif
+                                <div class="details">
+                                    <div class="number"></div>
+                                    Thay đổi thông tin DVTACN
+                                    <div class="desc">
+                                        <h5>Chờ nhận: {{$sl['cnttdndvtacn']}} hồ sơ</h5>
+                                        @if(session('admin')->level == 'DVTACN')
+                                            <h5>Bị trả lại {{$sl['btlttdndvtacn']}} hồ sơ</h5>
+                                        @endif
+                                    </div>
                                 </div>
+                                <a class="more" href="
+                                    {{(session('admin')->level == 'T' || session('admin')->level == 'H')? url('xetduyet_thaydoi_ttdoanhnghiep?&phanloai=DVTACN')
+                                    : url('ttdn_thuc_an_chan_nuoi')}}">
+                                    Xem chi tiết <i class="m-icon-swapright m-icon-white"></i>
+                                </a>
                             </div>
-                            <a class="more" href="
-                            {{(session('admin')->level == 'T' || session('admin')->level == 'H')? url('xd_ke_khai_thucan_channuoi')
-                            : url('ke_khai_thuc_an_chan_nuoi')}}">
-                                Xem chi tiết <i class="m-icon-swapright m-icon-white"></i>
-                            </a>
                         </div>
-                    </div>
+                    @endif
+                    @if(can('kkdvtacn','index'))
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="dashboard-stat blue-madison">
+                                <div class="visual">
+                                    <i class="fa fa-car"></i>
+                                </div>
+                                <div class="details">
+                                    <div class="number"></div>
+                                    Kê khai giá thức ăn chăn nuôi
+                                    <div class="desc">
+                                        <h5>Chờ nhận: {{$sl['cnkkgtacn']}} hồ sơ</h5>
+                                        @if(session('admin')->level == 'DVTACN')
+                                            <h5>Bị trả lại {{$sl['btlkkgtacn']}} hồ sơ</h5>
+                                        @endif
+                                    </div>
+                                </div>
+                                <a class="more" href="
+                                {{(session('admin')->level == 'T' || session('admin')->level == 'H')? url('xd_ke_khai_thucan_channuoi')
+                                : url('ke_khai_thuc_an_chan_nuoi')}}">
+                                    Xem chi tiết <i class="m-icon-swapright m-icon-white"></i>
+                                </a>
+                            </div>
+                        </div>
+                    @endif
                 @endif
             </div>
             <div class="clearfix">
