@@ -37,7 +37,9 @@ class CreateDonvidvvtTable extends Migration
             $table->string('tailieu')->nullable();
             $table->string('link')->nullable();
             $table->string('cqcq')->nullable();
+            $table->double('sokmtinh')->default(0);
             $table->timestamps();
+
         });
     }
 

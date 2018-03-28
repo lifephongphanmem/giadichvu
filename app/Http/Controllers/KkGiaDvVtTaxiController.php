@@ -8,6 +8,7 @@ use App\DonViDvVt;
 use App\KkDvVtXtx;
 use App\KkDvVtXtxCt;
 use App\KkDvVtXtxCtDf;
+use App\PagDvVtXtx;
 use App\PagDvVtXtx_Temp;
 use Illuminate\Http\Request;
 
@@ -140,27 +141,95 @@ class KkGiaDvVtTaxiController extends Controller
                         $mdkk->trenkm = count($mdCT)>0 ? $mdCT->trenkm : 1;
                         $mdkk->giakkden =count($mdCT)>0 ? $mdCT->giakkden : 0;
                         $mdkk->giakktl =count($mdCT)>0 ? $mdCT->giakktl : 0;
+                        $mdkk->save();
+
+                        //Phương án giá
+                        $m_pag=new PagDvVtXtx_Temp();
+                        $m_pag->masothue = $masothue;
+                        $m_pag->madichvu = $dv->madichvu;
+                        $m_pag->save();
+                    }
+                    $model=KkDvVtXtxCtDf::where('masothue', $masothue)->get();
+
+                    return view('manage.dvvt.dvxtx.kkgiadv.create')
+                        ->with('modeldn',$modeldn)
+                        ->with('model',$model)
+                        ->with('pageTitle','Kê khai giá dịch vụ vận tải xe taxi');
+                }else{
+                    return view('errors.noperm');
+                }
+            }else {
+                return view('errors.perm');
+            }
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function create_cu($masothue){ //phương án giá la mảng
+        if (Session::has('admin')) {
+            $modeldn = DonViDvVt::where('masothue',$masothue)
+                ->first();
+            if(session('admin')->level == 'T' || session('admin')->level == 'H' || session('admin')->level== 'DVVT'){
+                if(session('admin')->sadmin == 'ssa'
+                    || (session('admin')->level == 'T' && session('admin')->cqcq == $modeldn->cqcq)
+                    || (session('admin')->level == 'H' && session('admin')->cqcq == $modeldn->cqcq)
+                    || session('admin')->mahuyen == $masothue){
+
+                    KkDvVtXtxCtDf::where('masothue', $masothue)->delete();
+                    PagDvVtXtx_Temp::where('masothue', $masothue)->delete();
+
+                    $modelCB=CbKkDvVtXtx::select('socv','ngaynhap','masokk')->where('masothue', $masothue)->first();
+                    $solk=null;
+                    $ngaylk=null;
+                    $masokk=null;
+
+                    if (isset($modelCB)) {
+                        //dd($modelCB);
+                        $solk = $modelCB->socv;
+                        $ngaylk = $modelCB->ngaynhap;
+                        $masokk = $modelCB->masokk;
+                    }
+                    $mdDV=DmDvVtXtx::where('masothue',$masothue)->get();
+                    //dd($modeldn);
+                    foreach($mdDV as $dv){
+                        $mdkk = new KkDvVtXtxCtDf();
+                        $mdkk->masothue = $masothue;
+                        $mdkk->madichvu = $dv->madichvu;
+                        $mdkk->loaixe = $dv->loaixe;
+                        $mdkk->tendichvu = $dv->tendichvu;
+                        $mdkk->qccl = $dv->qccl;
+                        $mdkk->dvt = $dv->dvt;
+                        $mdCT = KkDvVtXtxCt::select('giakk')->where('masokk', $masokk)->where('madichvu', $dv->madichvu)->first();
+
+                        $mdkk->giakklk = count($mdCT)>0 ? $mdCT->giakk : 0;
+                        $mdkk->trenkmlk = count($mdCT)>0 ? $mdCT->trenkm : 1;
+                        $mdkk->giakklkden = count($mdCT)>0 ? $mdCT->giakkden : 0;
+                        $mdkk->giakklktl = count($mdCT)>0 ? $mdCT->giakktl : 0;
+                        $mdkk->giakk =count($mdCT)>0 ? $mdCT->giakk : 0;
+                        $mdkk->trenkm = count($mdCT)>0 ? $mdCT->trenkm : 1;
+                        $mdkk->giakkden =count($mdCT)>0 ? $mdCT->giakkden : 0;
+                        $mdkk->giakktl =count($mdCT)>0 ? $mdCT->giakktl : 0;
 
                         $a=array('nguyengia'=>0,
-                                'tongkm'=>0,
-                                'kmcokhach'=>0,
-                                'khauhao'=>0,
-                                'baohiem'=>0,
-                                'baohiempt'=>0,
-                                'baohiemtnds'=>0,
-                                'lainganhang'=>0,
-                                'thuevp'=>0,
-                                'suachualon'=>0,
-                                'samlop'=>0,
-                                'dangkiem'=>0,
-                                'quanly'=>0,
-                                'banhang'=>0,
-                                'luonglaixe'=>0,
-                                'nhienlieuchinh'=>0,
-                                'nhienlieuboitron'=>0,
-                                'chiphibdcs'=>0,
-                                'giakekhai'=>0,
-                                'doanhthu'=>0
+                            'tongkm'=>0,
+                            'kmcokhach'=>0,
+                            'khauhao'=>0,
+                            'baohiem'=>0,
+                            'baohiempt'=>0,
+                            'baohiemtnds'=>0,
+                            'lainganhang'=>0,
+                            'thuevp'=>0,
+                            'suachualon'=>0,
+                            'samlop'=>0,
+                            'dangkiem'=>0,
+                            'quanly'=>0,
+                            'banhang'=>0,
+                            'luonglaixe'=>0,
+                            'nhienlieuchinh'=>0,
+                            'nhienlieuboitron'=>0,
+                            'chiphibdcs'=>0,
+                            'giakekhai'=>0,
+                            'doanhthu'=>0
                         );
                         $mdkk->pag = json_encode($a);
                         $mdkk->save();
@@ -206,6 +275,13 @@ class KkGiaDvVtTaxiController extends Controller
                 ->where('masothue', $insert['masothue'])
                 ->get()->toarray();
             KkDvVtXtxCt::insert($m_kkdf);
+
+            $m_pag=PagDvVtXtx_Temp::where('masothue', $insert['masothue'])->get();
+            foreach($m_pag as $pag){
+                $pag->masokk = $makk;
+                PagDvVtXtx::create($pag->toarray());
+            }
+
 
             if (session('admin')->level == 'T' ||session('admin')->level == 'H'|| session('admin')->sadmin == 'ssa') {
                 return redirect('/ke_khai_dich_vu_van_tai/xe_taxi/masothue='.$insert['masothue'].'&nam='.date('Y'));

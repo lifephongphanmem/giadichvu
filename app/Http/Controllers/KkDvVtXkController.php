@@ -589,6 +589,26 @@ class KkDvVtXkController extends Controller
             die(json_encode($result));
         }
         $inputs = $request->all();
+        //lấy tên dịch vụ gán vào
+        $model_dm = DmDvVtXk::where('madichvu',$inputs['madichvu'])->first();
+        $model = PagDvVtXk_Temp::where('masothue',session('admin')->mahuyen)->where('madichvu',$inputs['madichvu'])->first();
+        $model->tuyenduong = $model_dm->loaixe . " - " . $model_dm->tendichvu;
+        die($model);
+    }
+
+    public function getpag_temp_cu(Request $request){
+        $result = array(
+            'status' => 'fail',
+            'message' => 'error',
+        );
+        if(!Session::has('admin')) {
+            $result = array(
+                'status' => 'fail',
+                'message' => 'permission denied',
+            );
+            die(json_encode($result));
+        }
+        $inputs = $request->all();
 
         $model = PagDvVtXk_Temp::where('masothue',session('admin')->mahuyen)->where('madichvu',$inputs['madichvu'])->first();
 
@@ -714,73 +734,9 @@ class KkDvVtXkController extends Controller
         $model = PagDvVtXk::where('masokk',$inputs['masokk'])
             ->where('madichvu',$inputs['madichvu'])
             ->first();
-        //dd($model);
-        $result['message'] = '<div class="form-horizontal" id="pag">';
-        $result['message'] .= '<div class="form-group">';
-        $result['message'] .= '<label for="sanluong" class="col-md-6 control-label">Sản lượng tính giá</label>';
-        $result['message'] .= '<div style="padding-bottom: 2px" class="col-md-6">';
-        $result['message'] .= '<input style="text-align: right" type="text" id="sanluong" name="sanluong" value="'.$model->sanluong.'" class="form-control" data-mask="fdecimal">';
-        $result['message'] .= '</div>';
-        $result['message'] .= '</div>';
-
-        $result['message'] .= '<div class="form-group">';
-        $result['message'] .= '<label for="cpnguyenlieutt" class="col-md-6 control-label">Chi phí nguyên liệu trực tiếp</label>';
-        $result['message'] .= '<div style="padding-bottom: 2px" class="col-md-6">';
-        $result['message'] .= '<input style="text-align: right" type="text" id="cpnguyenlieutt" name="cpnguyenlieutt" value="'.$model->cpnguyenlieutt.'" class="form-control" data-mask="fdecimal">';
-        $result['message'] .= '</div>';
-
-        $result['message'] .= '<label for="cpcongnhantt" class="col-md-6 control-label">Chi phí nhân công trực tiếp</label>';
-        $result['message'] .= '<div style="padding-bottom: 2px" class="col-md-6">';
-        $result['message'] .= '<input style="text-align: right" type="text" id="cpcongnhantt" name="cpcongnhantt" value="'.$model->cpcongnhantt.'" class="form-control" data-mask="fdecimal">';
-        $result['message'] .= '</div>';
-
-        $result['message'] .= '<label for="cpkhauhaott" class="col-md-6 control-label">Chi phí khấu hao máy móc trực tiếp</label>';
-        $result['message'] .= '<div style="padding-bottom: 2px" class="col-md-6">';
-        $result['message'] .= '<input style="text-align: right" type="text" id="cpkhauhaott" name="cpkhauhaott" value="'.$model->cpkhauhaott.'" class="form-control" data-mask="fdecimal">';
-        $result['message'] .= '</div>';
-
-        $result['message'] .= '<label for="cpsanxuatdt" class="col-md-6 control-label">Chi phí sản xuất, kinh doanh đặc thù</label>';
-        $result['message'] .= '<div style="padding-bottom: 2px" class="col-md-6">';
-        $result['message'] .= '<input style="text-align: right" type="text" id="cpsanxuatdt" name="cpsanxuatdt" value="'.$model->cpsanxuatdt.'" class="form-control" data-mask="fdecimal">';
-        $result['message'] .= '</div>';
-        $result['message'] .= '</div>';
-
-        $result['message'] .= '<div class="form-group">';
-        $result['message'] .= '<label for="cpsanxuatc" class="col-md-6 control-label">Chi phí sản xuất chung</label>';
-        $result['message'] .= '<div style="padding-bottom: 2px" class="col-md-6">';
-        $result['message'] .= '<input style="text-align: right" type="text" id="cpsanxuatc" name="cpsanxuatc" value="'.$model->cpsanxuatc.'" class="form-control" data-mask="fdecimal">';
-        $result['message'] .= '</div>';
-
-        $result['message'] .= '<label for="cptaichinh" class="col-md-6 control-label">Chi phí tài chính</label>';
-        $result['message'] .= '<div style="padding-bottom: 2px" class="col-md-6">';
-        $result['message'] .= '<input style="text-align: right" type="text" id="cptaichinh" name="cptaichinh" value="'.$model->cptaichinh.'" class="form-control" data-mask="fdecimal">';
-        $result['message'] .= '</div>';
-
-        $result['message'] .= '<label for="cpbanhang" class="col-md-6 control-label">Chi phí bán hàng</label>';
-        $result['message'] .= '<div style="padding-bottom: 2px" class="col-md-6">';
-        $result['message'] .= '<input style="text-align: right" type="text" id="cpbanhang" name="cpbanhang" value="'.$model->cpbanhang.'" class="form-control" data-mask="fdecimal">';
-        $result['message'] .= '</div>';
-
-        $result['message'] .= '<label for="cpquanly" class="col-md-6 control-label">Chi phí quản lý</label>';
-        $result['message'] .= '<div style="padding-bottom: 2px" class="col-md-6">';
-        $result['message'] .= ' <input style="text-align: right" type="text" id="cpquanly" name="cpquanly" value="'.$model->cpquanly.'" class="form-control" data-mask="fdecimal">';
-        $result['message'] .= '</div>';
-
-        $result['message'] .= '<label for="cpquanly" class="col-md-6 control-label">Lợi nhuận</label>';
-        $result['message'] .= '<div style="padding-bottom: 2px" class="col-md-6">';
-        $result['message'] .= '<input style="text-align: right" type="text" id="loinhuan" name="loinhuan" value="'.$model->loinhuan.'" class="form-control" data-mask="fdecimal">';
-        $result['message'] .= '</div>';
-
-        $result['message'] .= '<label class="col-md-6 control-label">Giải trình chi tiết</label>';
-        $result['message'] .= '<div style="padding-bottom: 2px" class="col-md-6">';
-        $result['message'] .= ' <textarea rows="4" id="giaitrinh" name="giaitrinh" class="form-control">'.$model->giaitrinh.'</textarea>';
-        $result['message'] .= '</div>';
-
-        $result['message'] .= '</div>';
-        $result['message'] .= '<input type="hidden" id="idpag" name="idpag" value="'.$model->id.'"/>';
-        $result['message'] .= '</div>';
-
-        $result['status'] = 'success';
+        $model_dm = DmDvVtXk::where('madichvu',$inputs['madichvu'])->first();
+        $model->tuyenduong = $model_dm->loaixe . " - " . $model_dm->tendichvu;
+        die($model);
 
         die(json_encode($result));
     }

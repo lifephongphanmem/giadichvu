@@ -20,6 +20,30 @@ class PagDvVtXtx_Temp extends Model
         'cpsanxuatc',
         'cptaichinh',
         'cpbanhang',
-        'cpquanly'
+        'cpquanly',
+
+        'nguyengia',
+        'tongkm',
+        'kmcokhach',
+        'khauhao',
+        'baohiem',
+        'baohiempt',
+        'baohiemtnds',
+        'lainganhang',
+        'thuevp',
+        'suachualon',
+        'samlop',
+        'dangkiem',
+        'quanly',
+        'banhang',
+        'luonglaixe',
+        'nhienlieuchinh',
+        'nhienlieuboitron',
+        'chiphibdcs',
+        'giakekhai',
+        'doanhthu',
+        'phiduongbo',
+        'loinhuan',
+        'suachuatx'
     ];
 }

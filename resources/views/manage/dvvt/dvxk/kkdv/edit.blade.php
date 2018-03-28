@@ -670,25 +670,7 @@
     </script>
 
     <!--Modal phương án giá-->
-    <div id="modal-pagia-create" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header modal-header-primary">
-                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                    <h4 id="modal-header-primary-label" class="modal-title">Kê khai phương án giá</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="form-horizontal" id="pag">
-
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>
-                    <button type="submit" data-dismiss="modal" class="btn btn-primary" onclick="update_pagia()">Đồng ý</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('manage.dvvt.dvxk.templates.phuongangia')
 
     <!--Script phương án giá-->
     <script>
@@ -733,11 +715,23 @@
                 },
                 dataType: 'JSON',
                 success: function (data) {
-                    //alert(data.message);
-                    if (data.status == 'success') {
-                        $('#pag').replaceWith(data.message);
-                        InputMask();
-                    }
+                    $('#sanluong').val(data.sanluong);
+                    $('#cpnguyenlieutt').val(data.cpnguyenlieutt);
+                    $('#cpcongnhantt').val(data.cpcongnhantt);
+                    $('#cpkhauhaott').val(data.cpkhauhaott);
+                    $('#cpsanxuatdt').val(data.cpsanxuatdt);
+                    $('#cpsanxuatc').val(data.cpsanxuatc);
+                    $('#cptaichinh').val(data.cptaichinh);
+                    $('#cpbanhang').val(data.cpbanhang);
+                    $('#cpquanly').val(data.cpquanly);
+                    $('#giaitrinh').val(data.giaitrinh);
+                    $('#loinhuan').val(data.loinhuan);
+                    $('#idpag').val(data.id);
+                    //$('#header_pag').innerHTML = "Nội dung" + data.loinhuan; khoog chạy
+                    document.getElementById("header_pag").innerHTML = "Kê khai phương án giá: " + data.tuyenduong;
+                    InputMask();
+                    tongchiphi();
+                    thuevat()
                 },
                 error: function(message){
                     alert(message);

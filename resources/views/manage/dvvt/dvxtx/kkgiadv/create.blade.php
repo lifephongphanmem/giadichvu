@@ -119,8 +119,6 @@
             }
             //});
         }
-
-        // </editor-fold>
     </script>
     <script>
         function kkgia(id){
@@ -292,81 +290,6 @@
         }
 
     </script>
-    <script>
-        function InputMask() {
-            //$(function(){
-            // Input Mask
-            if ($.isFunction($.fn.inputmask)) {
-                $("[data-mask]").each(function (i, el) {
-                    var $this = $(el),
-                            mask = $this.data('mask').toString(),
-                            opts = {
-                                numericInput: attrDefault($this, 'numeric', false),
-                                radixPoint: attrDefault($this, 'radixPoint', ''),
-                                rightAlignNumerics: attrDefault($this, 'numericAlign', 'left') == 'right'
-                            },
-                            placeholder = attrDefault($this, 'placeholder', ''),
-                            is_regex = attrDefault($this, 'isRegex', '');
-
-
-                    if (placeholder.length) {
-                        opts[placeholder] = placeholder;
-                    }
-
-                    switch (mask.toLowerCase()) {
-                        case "phone":
-                            mask = "(999) 999-9999";
-                            break;
-
-                        case "currency":
-                        case "rcurrency":
-
-                            var sign = attrDefault($this, 'sign', '$');
-                            ;
-
-                            mask = "999,999,999.99";
-
-                            if ($this.data('mask').toLowerCase() == 'rcurrency') {
-                                mask += ' ' + sign;
-                            }
-                            else {
-                                mask = sign + ' ' + mask;
-                            }
-
-                            opts.numericInput = true;
-                            opts.rightAlignNumerics = false;
-                            opts.radixPoint = '.';
-                            break;
-
-                        case "email":
-                            mask = 'Regex';
-                            opts.regex = "[a-zA-Z0-9._%-]+@[a-zA-Z0-9-]+\\.[a-zA-Z]{2,4}";
-                            break;
-
-                        case "fdecimal":
-                            mask = 'decimal';
-                            $.extend(opts, {
-                                autoGroup: true,
-                                groupSize: 3,
-                                radixPoint: attrDefault($this, 'rad', '.'),
-                                groupSeparator: attrDefault($this, 'dec', ',')
-                            });
-                    }
-
-                    if (is_regex) {
-                        opts.regex = mask;
-                        mask = 'Regex';
-                    }
-
-                    $this.inputmask(mask, opts);
-                });
-            }
-            //});
-        }
-
-    </script>
-
-
 @stop
 
 @section('content')
@@ -660,138 +583,11 @@
     </div>
 
     <!--Modal phương án giá-->
-    <div id="modal-pagia" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header modal-header-primary">
-                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                    <h4 id="modal-header-primary-label" class="modal-title">Kê khai phương án giá</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="form-horizontal" id="pag">
-                        <div class="">
-                            <div class="col-md-4">
-                                <label>Nguyên giá phương tiện</label>
-                                <input type="text" id="nguyengia" class="form-control" data-mask="fdecimal" style="text-align: right">
-                            </div>
-                            <div class="col-md-4">
-                                <label>Tổng quảng đường lăn bánh</label>
-                                <input type="text" id="tongkm" class="form-control" data-mask="fdecimal" style="text-align: right">
-                            </div>
-                            <div class="col-md-4">
-                                <label>Tổng quảng đường lăn bánh có khách</label>
-                                <input type="text" id="kmcokhach" class="form-control" data-mask="fdecimal" style="text-align: right">
-                            </div>
-                        </div>
-
-                        <div class="">
-                            <div class="col-md-4">
-                                <label for="sanluong">Chi phí khấu hao phương tiện</label>
-                                <input type="text" id="khauhao" class="form-control" data-mask="fdecimal" style="text-align: right">
-                            </div>
-                            <div class="col-md-4">
-                                <label for="sanluong">Chi phí BHXH và BHYT</label>
-                                <input type="text" id="baohiem" class="form-control" data-mask="fdecimal" style="text-align: right">
-                            </div>
-                            <div class="col-md-4">
-                                <label for="sanluong">Chi phí bảo hiểm phương tiện</label>
-                                <input type="text" id="baohiempt" class="form-control" data-mask="fdecimal" style="text-align: right">
-                            </div>
-                        </div>
-
-                        <div class="">
-                            <div class="col-md-4">
-                                <label for="sanluong">Chi phí bảo hiểm TNDS</label>
-                                <input type="text" id="baohiemtnds" class="form-control" data-mask="fdecimal" style="text-align: right">
-                            </div>
-                            <div class="col-md-4">
-                                <label for="sanluong">Chi phí vay lãi ngân hàng</label>
-                                <input type="text" id="lainganhang" class="form-control" data-mask="fdecimal" style="text-align: right">
-                            </div>
-                            <div class="col-md-4">
-                                <label for="sanluong">Chi phí thuê văn phòng, nhà xe</label>
-                                <input type="text" id="thuevp" class="form-control" data-mask="fdecimal" style="text-align: right">
-                            </div>
-                        </div>
-
-                        <div class="">
-                            <div class="col-md-4">
-                                <label>Chi phí TT sửa chữa lớn phương tiện</label>
-                                <input type="text" id="suachualon" class="form-control" data-mask="fdecimal" style="text-align: right">
-                            </div>
-                            <div class="col-md-4">
-                                <label>Chi phí chích trước săm lốp</label>
-                                <input type="text" id="samlop" class="form-control" data-mask="fdecimal" style="text-align: right">
-                            </div>
-                            <div class="col-md-4">
-                                <label>Chi phí đăng kiểm định kỳ</label>
-                                <input type="text" id="dangkiem" class="form-control" data-mask="fdecimal" style="text-align: right">
-                            </div>
-                        </div>
-
-                        <div class="">
-                            <div class="col-md-4">
-                                <label>Chi phí quản lý</label>
-                                <input type="text" id="quanly" class="form-control" data-mask="fdecimal" style="text-align: right">
-                            </div>
-                            <div class="col-md-4">
-                                <label for="sanluong">Chi phí bán hàng</label>
-                                <input type="text" id="banhang" class="form-control" data-mask="fdecimal" style="text-align: right">
-                            </div>
-                            <div class="col-md-4">
-                                <label for="sanluong">Chi phí lương lái xe</label>
-                                <input type="text" id="luonglaixe" class="form-control" data-mask="fdecimal" style="text-align: right">
-                            </div>
-
-                        </div>
-
-                        <div class="">
-                            <div class="col-md-4">
-                                <label for="sanluong">Chi phí nhiên liệu chính</label>
-                                <input type="text" id="nhienlieuchinh" class="form-control" data-mask="fdecimal" style="text-align: right">
-                            </div>
-                            <div class="col-md-4">
-                                <label>Chi phí vật liệu bôi trơn</label>
-                                <input type="text" id="nhienlieuboitron" class="form-control" data-mask="fdecimal" style="text-align: right">
-                            </div>
-                            <div class="col-md-4">
-                                <label>Chi phí BDCS các cấp</label>
-                                <input type="text" id="chiphibdcs" class="form-control" data-mask="fdecimal" style="text-align: right">
-                            </div>
-                        </div>
-
-                        <div class="">
-                            <div class="col-md-4">
-                                <label>Giá kê khai đã bao gồm VAT</label>
-                                <input type="text" id="giakekhai" class="form-control" data-mask="fdecimal" style="text-align: right">
-                            </div>
-                            <div class="col-md-4">
-                                <label for="sanluong">Tổng doanh thu đã trừ 10% VAT</label>
-                                <input type="text" id="doanhthu" class="form-control" data-mask="fdecimal" style="text-align: right">
-                            </div>
-                        </div>
-
-                        <div class="form-group" style="margin: 0px">
-                            <div class="col-md-12">
-                                <label>Ghi chú</label>
-                                <textarea rows="10" id="ghichu_pag" class="form-control">Nội dung ghi chú</textarea>
-                            </div>
-                        </div>
-                        <input type="hidden" id="madichvu" name="madichvu"/>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>
-                    <button type="submit" data-dismiss="modal" class="btn btn-primary" onclick="update_pagia()">Đồng ý</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('manage.dvvt.dvxtx.templates.phuongangia')
 
     <!--Script phương án giá-->
     <script>
         function update_pagia(){
-
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             $.ajax({
                 url: '/kkgiadvvtxtx/update_pag_temp',
@@ -817,13 +613,16 @@
                     nhienlieuchinh:$('#nhienlieuchinh').val(),
                     nhienlieuboitron:$('#nhienlieuboitron').val(),
                     chiphibdcs:$('#chiphibdcs').val(),
-                    giakekhai:$('#giakekhai').val(),
-                    doanhthu:$('#doanhthu').val(),
+                    //giakekhai:$('#giakekhai').val(),
+                    //doanhthu:$('#doanhthu').val(),
+                    phiduongbo:$('#phiduongbo').val(),
+                    loinhuan:$('#loinhuan').val(),
+                    suachuatx:$('#suachuatx').val(),
                     ghichu_pag:$('#ghichu_pag').val()
                 },
                 dataType: 'JSON',
                 success: function () {
-                    toastr.success('Thao tác thành công.','Lỗi!');
+                    toastr.success('Thao tác thành công.','Thành công!');
                 },
                 error: function(message){
                     toastr.error(message,'Lỗi!');
@@ -842,30 +641,32 @@
                 },
                 dataType: 'JSON',
                 success: function (data) {
-                    var obj = JSON.parse(data.pag);
-                    $('#nguyengia').val(obj.nguyengia);
-                    $('#tongkm').val(obj.tongkm);
-                    $('#kmcokhach').val(obj.kmcokhach);
-                    $('#khauhao').val(obj.khauhao);
-                    $('#baohiem').val(obj.baohiem);
-                    $('#baohiempt').val(obj.baohiempt);
-                    $('#baohiemtnds').val(obj.baohiemtnds);
-                    $('#lainganhang').val(obj.lainganhang);
-                    $('#thuevp').val(obj.thuevp);
-                    $('#suachualon').val(obj.suachualon);
-                    $('#samlop').val(obj.samlop);
-                    $('#dangkiem').val(obj.dangkiem);
-                    $('#quanly').val(obj.quanly);
-                    $('#banhang').val(obj.banhang);
-                    $('#luonglaixe').val(obj.luonglaixe);
-                    $('#nhienlieuchinh').val(obj.nhienlieuchinh);
-                    $('#nhienlieuboitron').val(obj.nhienlieuboitron);
-                    $('#chiphibdcs').val(obj.chiphibdcs);
-                    $('#giakekhai').val(obj.giakekhai);
-                    $('#doanhthu').val(obj.doanhthu);
+                    $('#nguyengia').val(data.nguyengia);
+                    $('#tongkm').val(data.tongkm);
+                    $('#kmcokhach').val(data.kmcokhach);
+                    $('#khauhao').val(data.khauhao);
+                    $('#baohiem').val(data.baohiem);
+                    $('#baohiempt').val(data.baohiempt);
+                    $('#baohiemtnds').val(data.baohiemtnds);
+                    $('#lainganhang').val(data.lainganhang);
+                    $('#thuevp').val(data.thuevp);
+                    $('#suachualon').val(data.suachualon);
+                    $('#samlop').val(data.samlop);
+                    $('#dangkiem').val(data.dangkiem);
+                    $('#quanly').val(data.quanly);
+                    $('#banhang').val(data.banhang);
+                    $('#luonglaixe').val(data.luonglaixe);
+                    $('#nhienlieuchinh').val(data.nhienlieuchinh);
+                    $('#nhienlieuboitron').val(data.nhienlieuboitron);
+                    $('#chiphibdcs').val(data.chiphibdcs);
+                    $('#phiduongbo').val(data.phiduongbo);
+                    $('#loinhuan').val(data.loinhuan);
+                    $('#suachuatx').val(data.suachuatx);
                     $('#ghichu_pag').val(data.ghichu_pag);
-                    InputMask();
                     $('#madichvu').val(madichvu);
+                    InputMask();
+                    tongchiphi();
+                    thuevat()
                 },
                 error: function(message){
                     toastr.error(message,'Lỗi!');

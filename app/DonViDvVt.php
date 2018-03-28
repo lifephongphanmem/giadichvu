@@ -30,6 +30,7 @@ class DonViDvVt extends Model
         'trangthai',
         'tailieu',
         'link',
-        'cqcq'
+        'cqcq',
+        'sokmtinh'
     ];
 }
