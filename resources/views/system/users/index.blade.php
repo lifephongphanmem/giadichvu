@@ -119,7 +119,6 @@
                                         @if(canGeneral('dvtacn','dvtacn'))
                                         <option value="DVTACN" {{($pl == "DVTACN") ? 'selected' : ''}}>Thức ăn chăn nuôi</option>
                                         @endif
-
                                     </select>
                                 </div>
                             </div>
