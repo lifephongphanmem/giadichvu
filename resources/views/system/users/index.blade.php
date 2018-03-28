@@ -107,10 +107,19 @@
                                 <div class="form-group">
                                     <select class="form-control" name="phanloai" id="phanloai">
                                         <option value="QL" {{($pl == "QL") ? 'selected' : ''}}>Cấp Quản lý</option>
+                                        @if(canGeneral('dvlt','dvlt') )
                                         <option value="DVLT" {{($pl == "DVLT") ? 'selected' : ''}}>Dịch vụ lưu trú</option>
+                                        @endif
+                                        @if(canGeneral('dvvt','vtxk') || canGeneral('dvvt','vtxb') || canGeneral('dvvt','vtxtx') || canGeneral('dvvt','vtch'))
                                         <option value="DVVT" {{($pl == "DVVT") ? 'selected' : ''}}>Dịch vụ vận tải</option>
+                                        @endif
+                                        @if(canGeneral('dvgs','dvgs'))
                                         <option value="DVGS" {{($pl == "DVGS") ? 'selected' : ''}}>Dịch vụ giá sữa</option>
+                                        @endif
+                                        @if(canGeneral('dvtacn','dvtacn'))
                                         <option value="DVTACN" {{($pl == "DVTACN") ? 'selected' : ''}}>Thức ăn chăn nuôi</option>
+                                        @endif
+
                                     </select>
                                 </div>
                             </div>

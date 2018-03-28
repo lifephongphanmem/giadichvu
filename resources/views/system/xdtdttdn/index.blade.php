@@ -51,10 +51,18 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <select class="form-control" name="phanloai" id="phanloai">
+                                    @if(canGeneral('dvlt','dvlt') )
                                     <option value="DVLT" {{($phanloai == "DVLT") ? 'selected' : ''}}>Dịch vụ lưu trú</option>
+                                    @endif
+                                    @if(canGeneral('dvvt','vtxk') || canGeneral('dvvt','vtxb') || canGeneral('dvvt','vtxtx') || canGeneral('dvvt','vtch'))
                                     <option value="DVVT" {{($phanloai == "DVVT") ? 'selected' : ''}}>Dịch vụ vận tải</option>
+                                    @endif
+                                    @if(canGeneral('dvgs','dvgs'))
                                     <option value="DVGS" {{($phanloai == "DVGS") ? 'selected' : ''}}>Dịch vụ giá sữa</option>
+                                    @endif
+                                    @if(canGeneral('dvtacn','dvtacn'))
                                     <option value="DVTACN" {{($phanloai == "DVTACN") ? 'selected' : ''}}>Dịch vụ thức ăn chăn nuôi</option>
+                                    @endif
                                 </select>
                             </div>
                         </div>
