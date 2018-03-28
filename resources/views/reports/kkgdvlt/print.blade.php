@@ -157,7 +157,7 @@
     @foreach($modelkkct as $ctkk)
         <tr>
             <th style="text-align: left">{{$ctkk->loaip.'-'.$ctkk->qccl}}</th>
-            <th style="text-align: left">{{$ctkk->sohieu}}</th>
+            <th style="text-align: left">{{getTtPhong($ctkk->sohieu)}}</th>
             <th style="text-align: right">{{number_format($ctkk->mucgialk)}}</th>
             <th style="text-align: right">{{number_format($ctkk->mucgiakk)}}</th>
             <th>{{$ctkk->ghichu}}</th>
@@ -232,7 +232,7 @@
     @foreach($modelkkct as $ctkk)
         <tr>
             <th style="text-align: left">{{$ctkk->loaip.' - '.$ctkk->qccl}}</th>
-            <th style="text-align: left">{{$ctkk->sohieu}}</th>
+            <th style="text-align: left">{{getTtPhong($ctkk->sohieu)}}</th>
             <th style="text-align: right">{{number_format($ctkk->mucgiakk)}}</th>
             <th>{{$ctkk->ghichu}}</th>
         </tr>

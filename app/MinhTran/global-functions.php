@@ -539,4 +539,13 @@ function getNgayHieuLuc($ngaynhap){
     return $ngayhieuluc;
 
 }
+
+function getTtPhong($str)
+{
+    $str = str_replace(',',', ',$str);
+    $str = str_replace('.','. ',$str);
+    $str = str_replace(';','; ',$str);
+    $str = str_replace('-','- ',$str);
+    return $str;
+}
 ?>
