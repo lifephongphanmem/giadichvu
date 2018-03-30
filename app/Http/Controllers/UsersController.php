@@ -904,7 +904,7 @@ class UsersController extends Controller
             $model->nguoiky = $input['nguoiky'];
             $model->diadanh = $input['diadanh'];
             $model->save();
-            return redirect('users/register&?phanloai='.$model->pl);
+            return redirect('users/register?&phanloai='.$model->pl);
         } else {
             return view('errors.notlogin');
         }
@@ -936,7 +936,7 @@ class UsersController extends Controller
             $model->cqcq = $input['cqcq'];
             $model->save();
 
-            return redirect('users/register&?phanloai='.$model->pl);
+            return redirect('users/register?&phanloai='.$model->pl);
         } else {
             return view('errors.notlogin');
         }
