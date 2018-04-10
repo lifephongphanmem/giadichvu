@@ -529,6 +529,9 @@ License: You must have a valid license purchased only from themeforest(the above
                         @endif
                         </ul>
                     </li>
+
+                @endif
+                @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'satc' || session('admin')->sadmin == 'savt' || session('admin')->sadmin == 'sa')
                 <li>
                     <a href="{{url('thongtinngaynghile')}}">
                         <i class="fa fa-file-o fa-fw"></i>
@@ -536,8 +539,6 @@ License: You must have a valid license purchased only from themeforest(the above
                         <span class="arrow"></span>
                     </a>
                 </li>
-                @endif
-                @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'satc' || session('admin')->sadmin == 'savt' || session('admin')->sadmin == 'sa')
                 <li>
                     <a href="{{url('xetduyet_thaydoi_ttdoanhnghiep')}}">
                         <i class="fa fa-laptop"></i>
