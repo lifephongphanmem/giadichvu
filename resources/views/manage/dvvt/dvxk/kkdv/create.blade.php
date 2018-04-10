@@ -143,6 +143,7 @@
                 <div class="portlet-body">
                     <h4 class="form-section" style="color: #0000ff">Thông tin hồ sơ</h4>
                     @include('manage.dvvt.template.createkkdv')
+                    @include('manage.dvvt.template.createkkdv')
                     <input type="hidden" name="masothue" id="masothue" value="{{$masothue}}">
                     <input type="hidden" name="cqcq" id="cqcq" value="{{$cqcq}}">
                 </div>
