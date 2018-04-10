@@ -210,7 +210,7 @@ class DnDvGsController extends Controller
                 $data['tencqcq'] = $tencqcq->tendv;
                 $maildn = $dn->email;
                 $tendn = $dn->tendn;
-                $mailql = $tencqcq->emailqt;
+                $mailql = $tencqcq->emailql;
                 $tenql = $tencqcq->tendv;
                 Mail::send('mail.changettdn', $data, function ($message) use ($maildn, $tendn, $mailql, $tenql) {
                     $message->to($maildn, $tendn)
