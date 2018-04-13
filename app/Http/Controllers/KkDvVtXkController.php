@@ -183,6 +183,7 @@ class KkDvVtXkController extends Controller
                 $ngaylk = $modelCB->ngaynhap;
                 $masokk = $modelCB->masokk;
             }
+            $m_kkct = KkDvVtXkCt::select('giakk')->where('masokk', $masokk)->get();
             $mdDV=DmDvVtXk::where('masothue',$masothue)->get();
             foreach($mdDV as $dv){
                 $mdkk = new KkDvVtXkCtDf();
@@ -195,10 +196,16 @@ class KkDvVtXkController extends Controller
                 $mdkk->qccl = $dv->qccl;
                 $mdkk->dvt = $dv->dvt;
                 $mdkk->sokm = $dv->sokm;
-                $mdCT = KkDvVtXkCt::select('giakk')->where('masokk', $masokk)->where('madichvu', $dv->madichvu)->first();
+                $mdkk->giakklk = 0;
+                $mdkk->giakk = 0;
 
-                $mdkk->giakklk = count($mdCT)>0 ? $mdCT->giakk : 0;
-                $mdkk->giakk = count($mdCT)>0 ? $mdCT->giakk : 0;
+                if(count($m_kkct)>0){
+                    $mdCT = $m_kkct->where('madichvu', $dv->madichvu)->first();
+                    $mdkk->giakklk = count($mdCT)>0 ? $mdCT->giakk : 0;
+                    $mdkk->giakk = count($mdCT)>0 ? $mdCT->giakk : 0;
+                }
+                //
+
                 $mdkk->giahl =0;
                 $mdkk->save();
 
