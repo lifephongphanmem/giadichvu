@@ -113,7 +113,7 @@
                             <th style="text-align: center">{{$i++}}</th>
                             <th style="text-align: left">{{$ctkk->loaip}}</th>
                             <th style="text-align: left">{{$ctkk->qccl}}</th>
-                            <th style="text-align: left">{{$ctkk->sohieu}}</th>
+                            <th style="text-align: left">{{getTtPhong($ctkk->sohieu)}}</th>
                             <th style="text-align: right">{{number_format($ctkk->mucgialk)}}</th>
                             <th style="text-align: right">{{number_format($ctkk->mucgiakk)}}</th>
                             <th style="text-align: right">
