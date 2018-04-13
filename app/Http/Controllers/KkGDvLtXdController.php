@@ -114,7 +114,7 @@ class KkGDvLtXdController extends Controller
                         ->get();
                 }
             }
-            $modelcskd = CsKdDvLt::all();
+            /*$modelcskd = CsKdDvLt::all();
             foreach($model as $ttkk) {
                 $model_cskd = $modelcskd->where('masothue', $ttkk->masothue)
                     ->where('macskd', $ttkk->macskd)
@@ -122,7 +122,7 @@ class KkGDvLtXdController extends Controller
                 $ttkk->tencskd = count($model_cskd) > 0 ? $model_cskd->tencskd : '';
                 $ttkk->loaihang = count($model_cskd) > 0 ? $model_cskd->loaihang : '';
                 //$this->getTTCSKD($modelcskd,$ttkk);
-            }
+            }*/
 
             return view('manage.dvlt.kkgia.xetduyet.index')
                 ->with('model',$model)
