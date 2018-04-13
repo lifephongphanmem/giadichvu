@@ -18,6 +18,9 @@ class CreateCbkkgdvltTable extends Migration
             $table->string('mahs')->nullable();
             $table->string('macskd')->nullable();
             $table->string('masothue')->nullable();
+            $table->string('tendn')->nullable();
+            $table->string('tencskd')->nullable();
+            $table->string('loaihang')->nullable();
             $table->date('ngaynhap')->nullable();
             $table->string('socv')->nullable();
             $table->string('socvlk')->nullable();

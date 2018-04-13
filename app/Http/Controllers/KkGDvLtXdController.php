@@ -390,6 +390,9 @@ class KkGDvLtXdController extends Controller
             //$model->filedk = $modelkk->filedk;
             $model->idkk = $modelkk->id;
             $model->phanloai = $modelkk->phanloai;
+            $model->tendn = $modelkk->tendn;
+            $model->tencskd = $modelkk->tencskd;
+            $model->loaihang = $modelkk->loaihang;
             $model->save();
         }else
             return view('errors.notlogin');

@@ -25,7 +25,9 @@ class CbKkGDvLt extends Model
         'trangthai',
         'idkk',
         'phanloai',
-        'dvt'
-
+        'dvt',
+        'tendn',
+        'tencskd',
+        'loaihang'
     ];
 }
