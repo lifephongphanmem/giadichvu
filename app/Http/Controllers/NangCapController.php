@@ -43,9 +43,10 @@ class NangCapController extends Controller
             $modeldn = DnDvLt::where('masothue',$tt->masothue)->first();
             $modelcskd = CsKdDvLt::where('macskd',$tt->macskd)->first();
             $modelup = KkGDvLt::where('id',$tt->id)->first();
-            $modelup->tendn = $modeldn->tendn;
-            $modelup->tencskd = $modelcskd->tencskd;
-            $modelup->loaihang = $modelcskd->loaihang;
+
+            $modelup->tendn = isset($modeldn) ? $modeldn->tendn : 'Chưa xác định';
+            $modelup->tencskd = isset($modelcskd) ? $modelcskd->tencskd : 'Chưa xác định';
+            $modelup->loaihang = isset($modelcskd) ?$modelcskd->loaihang : 'Chưa xác định';
             $modelup->save();
         }
         return redirect('nangcap?&thang='.$inputs['thang'].'&nam='.$inputs['nam']);
