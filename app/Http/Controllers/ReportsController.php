@@ -327,13 +327,75 @@ class ReportsController extends Controller
                 $m_cqcq = DmDvQl::where('maqhns',session('admin')->cqcq)->get();
                 $modelcqcq = DmDvQl::where('maqhns',session('admin')->cqcq)->first();
             }
-            $model=$this->get_KKG_TH($input);
+            //$model=$this->get_KKG_TH($input);
+            if(session('admin')->level == 'T'){//Kết xuất báo cáo quyền Tỉnh
+                if($input['cqcq']=='all'&&$input['loaihang']=='all'){
+                    $model = KkGDvLt::where('trangthai', 'Chờ duyệt')
+                        ->OrWhere('trangthai', 'Duyệt')
+                        ->whereBetween('ngaychuyen', [$input['ngaytu'], $input['ngayden']])
+                        ->orderBy('ngaychuyen')
+                        ->get();
+                }elseif($input['cqcq']=='all'&&$input['loaihang']!='all'){
+                    $model = KkGDvLt::where('trangthai', 'Chờ duyệt')
+                        ->OrWhere('trangthai', 'Duyệt')
+                        ->whereBetween('ngaychuyen', [$input['ngaytu'], $input['ngayden']])
+                        ->where('cskddvlt.loaihang', $input['loaihang'])
+                        ->orderBy('ngaychuyen')
+                        ->get();
+                }elseif($input['cqcq']!='all'&&$input['loaihang']=='all'){
+                    $model = KkGDvLt::where('trangthai', 'Chờ duyệt')
+                        ->OrWhere('trangthai', 'Duyệt')
+                        ->whereBetween('ngaychuyen', [$input['ngaytu'], $input['ngayden']])
+                        ->where('cqcq',$input['cqcq'])
+                        ->orderBy('ngaychuyen')
+                        ->get();
+                }else{
+                    $model = KkGDvLt::where('trangthai', 'Chờ duyệt')
+                        ->OrWhere('trangthai', 'Duyệt')
+                        ->whereBetween('ngaychuyen', [$input['ngaytu'], $input['ngayden']])
+                        ->where('cqcq',$input['cqcq'])
+                        ->where('loaihang', $input['loaihang'])
+                        ->orderBy('ngaychuyen')
+                        ->get();
+                }
+            }else{//Kết xuất báo cáo quyền Huyện
+                if($input['loaihang']=='all'){
+                    $model = KkGDvLt::where('trangthai', 'Chờ duyệt')
+                        ->OrWhere('trangthai', 'Duyệt')
+                        ->whereBetween('ngaychuyen', [$input['ngaytu'], $input['ngayden']])
+                        ->where('cqcq',session('admin')->cqcq)
+                        ->whereBetween('ngaychuyen', [$input['ngaytu'], $input['ngayden']])
+                        ->orderBy('ngaychuyen')
+                        ->get();
+                }else{
+                    $model = KkGDvLt::where('trangthai', 'Chờ duyệt')
+                        ->OrWhere('trangthai', 'Duyệt')
+                        ->whereBetween('ngaychuyen', [$input['ngaytu'], $input['ngayden']])
+                        ->where('cqcq',session('admin')->cqcq)
+                        ->whereBetween('ngaychuyen', [$input['ngaytu'], $input['ngayden']])
+                        ->where('loaihang', $input['loaihang'])
+                        ->orderBy('ngaychuyen')
+                        ->get();
+                }
+            }
 
             $mahss = '';
             foreach($model as $kk){
                 $mahss = $mahss.$kk->mahs.',';
             }
             $modelctkk = KkGDvLtCt::whereIn('mahs',explode(',',$mahss))->get();
+
+            foreach($modelctkk as $ttct){
+                if($ttct->mucgialk>0) {
+                    if ($ttct->mucgialk > $ttct->mucgiakk) {
+                        $ttct->muctg = '-' . ($ttct->mucgialk - $ttct->mucgiakk);
+                        $ttct->muctgpt = '-' . round(($ttct->mucgialk - $ttct->mucgiakk) / $ttct->mucgialk * 100, 2) . '%';
+                    }else {
+                        $ttct->muctg = $ttct->mucgiakk - $ttct->mucgialk;
+                        $ttct->muctgpt = round(($ttct->mucgiakk - $ttct->mucgialk) / $ttct->mucgiakk * 100, 2) . '%';
+                    }
+                }
+            }
 
             Excel::create('BaoCao2',function($excel) use($modelcqcq,$input,$model,$m_cqcq,$modelctkk){
                 $excel->sheet('New sheet', function($sheet) use($modelcqcq,$input,$model,$m_cqcq,$modelctkk){
