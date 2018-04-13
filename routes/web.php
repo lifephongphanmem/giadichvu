@@ -737,4 +737,7 @@ Route::resource('thongtinngaynghile','TtNgayNghiLeController');
 Route::post('thongtinngaynghile/delete','TtNgayNghiLeController@delete');
 Route::get('/thongtinngaynghile/show','TtNgayNghiLeController@show');
 
+Route::resource('nangcap','NangCapController');
+Route::get('nangcapdl','NangCapController@nangcapdl');
+
 
