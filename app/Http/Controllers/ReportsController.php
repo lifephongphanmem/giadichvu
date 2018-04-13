@@ -235,27 +235,30 @@ class ReportsController extends Controller
                 if($input['cqcq']=='all'&&$input['loaihang']=='all'){
                     $model = KkGDvLt::where('trangthai', 'Chờ duyệt')
                         ->OrWhere('trangthai', 'Duyệt')
-                        ->whereBetween('ngaychuyen', [$input['ngaytu'], $input['ngayden']])
+                        ->whereMonth('ngaychuyen',$input['thang'])
                         ->orderBy('ngaychuyen')
                         ->get();
                 }elseif($input['cqcq']=='all'&&$input['loaihang']!='all'){
                     $model = KkGDvLt::where('trangthai', 'Chờ duyệt')
                         ->OrWhere('trangthai', 'Duyệt')
-                        ->whereBetween('ngaychuyen', [$input['ngaytu'], $input['ngayden']])
+                        ->whereMonth('ngaychuyen',$input['thang'])
+                        ->whereYear('ngaychuyen',$input['nam'])
                         ->where('cskddvlt.loaihang', $input['loaihang'])
                         ->orderBy('ngaychuyen')
                         ->get();
                 }elseif($input['cqcq']!='all'&&$input['loaihang']=='all'){
                     $model = KkGDvLt::where('trangthai', 'Chờ duyệt')
                         ->OrWhere('trangthai', 'Duyệt')
-                        ->whereBetween('ngaychuyen', [$input['ngaytu'], $input['ngayden']])
+                        ->whereMonth('ngaychuyen',$input['thang'])
+                        ->whereYear('ngaychuyen',$input['nam'])
                         ->where('cqcq',$input['cqcq'])
                         ->orderBy('ngaychuyen')
                         ->get();
                 }else{
                     $model = KkGDvLt::where('trangthai', 'Chờ duyệt')
                         ->OrWhere('trangthai', 'Duyệt')
-                        ->whereBetween('ngaychuyen', [$input['ngaytu'], $input['ngayden']])
+                        ->whereMonth('ngaychuyen',$input['thang'])
+                        ->whereYear('ngaychuyen',$input['nam'])
                         ->where('cqcq',$input['cqcq'])
                         ->where('loaihang', $input['loaihang'])
                         ->orderBy('ngaychuyen')
@@ -265,17 +268,17 @@ class ReportsController extends Controller
                 if($input['loaihang']=='all'){
                     $model = KkGDvLt::where('trangthai', 'Chờ duyệt')
                         ->OrWhere('trangthai', 'Duyệt')
-                        ->whereBetween('ngaychuyen', [$input['ngaytu'], $input['ngayden']])
+                        ->whereMonth('ngaychuyen',$input['thang'])
+                        ->whereYear('ngaychuyen',$input['nam'])
                         ->where('cqcq',session('admin')->cqcq)
-                        ->whereBetween('ngaychuyen', [$input['ngaytu'], $input['ngayden']])
                         ->orderBy('ngaychuyen')
                         ->get();
                 }else{
                     $model = KkGDvLt::where('trangthai', 'Chờ duyệt')
                         ->OrWhere('trangthai', 'Duyệt')
-                        ->whereBetween('ngaychuyen', [$input['ngaytu'], $input['ngayden']])
+                        ->whereMonth('ngaychuyen',$input['thang'])
+                        ->whereYear('ngaychuyen',$input['nam'])
                         ->where('cqcq',session('admin')->cqcq)
-                        ->whereBetween('ngaychuyen', [$input['ngaytu'], $input['ngayden']])
                         ->where('loaihang', $input['loaihang'])
                         ->orderBy('ngaychuyen')
                         ->get();
@@ -332,27 +335,31 @@ class ReportsController extends Controller
                 if($input['cqcq']=='all'&&$input['loaihang']=='all'){
                     $model = KkGDvLt::where('trangthai', 'Chờ duyệt')
                         ->OrWhere('trangthai', 'Duyệt')
-                        ->whereBetween('ngaychuyen', [$input['ngaytu'], $input['ngayden']])
+                        ->whereMonth('ngaychuyen',$input['thang'])
+                        ->whereYear('ngaychuyen',$input['nam'])
                         ->orderBy('ngaychuyen')
                         ->get();
                 }elseif($input['cqcq']=='all'&&$input['loaihang']!='all'){
                     $model = KkGDvLt::where('trangthai', 'Chờ duyệt')
                         ->OrWhere('trangthai', 'Duyệt')
-                        ->whereBetween('ngaychuyen', [$input['ngaytu'], $input['ngayden']])
-                        ->where('cskddvlt.loaihang', $input['loaihang'])
+                        ->whereMonth('ngaychuyen',$input['thang'])
+                        ->whereYear('ngaychuyen',$input['nam'])
+                        ->where('loaihang', $input['loaihang'])
                         ->orderBy('ngaychuyen')
                         ->get();
                 }elseif($input['cqcq']!='all'&&$input['loaihang']=='all'){
                     $model = KkGDvLt::where('trangthai', 'Chờ duyệt')
                         ->OrWhere('trangthai', 'Duyệt')
-                        ->whereBetween('ngaychuyen', [$input['ngaytu'], $input['ngayden']])
+                        ->whereMonth('ngaychuyen',$input['thang'])
+                        ->whereYear('ngaychuyen',$input['nam'])
                         ->where('cqcq',$input['cqcq'])
                         ->orderBy('ngaychuyen')
                         ->get();
                 }else{
                     $model = KkGDvLt::where('trangthai', 'Chờ duyệt')
                         ->OrWhere('trangthai', 'Duyệt')
-                        ->whereBetween('ngaychuyen', [$input['ngaytu'], $input['ngayden']])
+                        ->whereMonth('ngaychuyen',$input['thang'])
+                        ->whereYear('ngaychuyen',$input['nam'])
                         ->where('cqcq',$input['cqcq'])
                         ->where('loaihang', $input['loaihang'])
                         ->orderBy('ngaychuyen')
@@ -362,17 +369,17 @@ class ReportsController extends Controller
                 if($input['loaihang']=='all'){
                     $model = KkGDvLt::where('trangthai', 'Chờ duyệt')
                         ->OrWhere('trangthai', 'Duyệt')
-                        ->whereBetween('ngaychuyen', [$input['ngaytu'], $input['ngayden']])
+                        ->whereMonth('ngaychuyen',$input['thang'])
+                        ->whereYear('ngaychuyen',$input['nam'])
                         ->where('cqcq',session('admin')->cqcq)
-                        ->whereBetween('ngaychuyen', [$input['ngaytu'], $input['ngayden']])
                         ->orderBy('ngaychuyen')
                         ->get();
                 }else{
                     $model = KkGDvLt::where('trangthai', 'Chờ duyệt')
                         ->OrWhere('trangthai', 'Duyệt')
-                        ->whereBetween('ngaychuyen', [$input['ngaytu'], $input['ngayden']])
+                        ->whereMonth('ngaychuyen',$input['thang'])
+                        ->whereYear('ngaychuyen',$input['nam'])
                         ->where('cqcq',session('admin')->cqcq)
-                        ->whereBetween('ngaychuyen', [$input['ngaytu'], $input['ngayden']])
                         ->where('loaihang', $input['loaihang'])
                         ->orderBy('ngaychuyen')
                         ->get();

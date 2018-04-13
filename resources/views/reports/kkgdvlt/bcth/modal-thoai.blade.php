@@ -137,15 +137,34 @@
             <div class="modal-body">
                 <div class="form-horizontal">
                     <div class="form-group">
-                        <label class="col-md-4 control-label"><b>Từ ngày</b></label>
+                        <label class="col-md-4 control-label"><b>Tháng</b></label>
                         <div class="col-md-6 ">
-                            <input type="date" id="ngaytu" name="ngaytu" class="form-control" value="{{intval(date('Y')).'-01-01'}}">
+                            <select name="thang" id="thang" class="form-control">
+                                <option value="01" {{date('m') == '01' ? 'selected' : ''}}>Tháng 01</option>
+                                <option value="02" {{date('m')  == '02' ? 'selected' : ''}}>Tháng 02</option>
+                                <option value="03" {{date('m')  == '03' ? 'selected' : ''}}>Tháng 03</option>
+                                <option value="04" {{date('m')  == '04' ? 'selected' : ''}}>Tháng 04</option>
+                                <option value="05" {{date('m')  == '05' ? 'selected' : ''}}>Tháng 05</option>
+                                <option value="06" {{date('m')  == '06' ? 'selected' : ''}}>Tháng 06</option>
+                                <option value="07" {{date('m')  == '07' ? 'selected' : ''}}>Tháng 07</option>
+                                <option value="08" {{date('m')  == '08' ? 'selected' : ''}}>Tháng 08</option>
+                                <option value="09" {{date('m')  == '09' ? 'selected' : ''}}>Tháng 09</option>
+                                <option value="10" {{date('m')  == '10' ? 'selected' : ''}}>Tháng 10</option>
+                                <option value="11" {{date('m')  == '11' ? 'selected' : ''}}>Tháng 11</option>
+                                <option value="12" {{date('m')  == '12' ? 'selected' : ''}}>Tháng 12</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-4 control-label"><b>Đến ngày</b></label>
+                        <label class="col-md-4 control-label"><b>Năm</b></label>
                         <div class="col-md-6 ">
-                            <input type="date" id="ngayden" name="ngayden" class="form-control" value="{{intval(date('Y')).'-12-31'}}">
+                            <select name="nam" id="nam" class="form-control">
+                                @if ($nam_start = intval(date('Y')) - 5 ) @endif
+                                @if ($nam_stop = intval(date('Y')) + 1 ) @endif
+                                @for($i = $nam_start; $i <= $nam_stop; $i++)
+                                    <option value="{{$i}}" {{$i == date('Y') ? 'selected' : ''}}>Năm {{$i}}</option>
+                                @endfor
+                            </select>
                         </div>
                     </div>
 

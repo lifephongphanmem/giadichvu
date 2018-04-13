@@ -69,7 +69,7 @@
     </tr>
     <tr>
         <td colspan="8" style="text-align: center; font-weight: bold;">
-            Từ ngày: {{getDayVn($input['ngaytu'])}} đến ngày {{getDayVn($input['ngayden'])}}
+            Tháng {{$input['thang']}} - Năm {{$input['nam']}}
         </td>
     </tr>
     <tr>
