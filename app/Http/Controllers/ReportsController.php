@@ -288,6 +288,18 @@ class ReportsController extends Controller
             }
             $modelctkk = KkGDvLtCt::whereIn('mahs',explode(',',$mahss))->get();
 
+            foreach($modelctkk as $ttct){
+                if($ttct->mucgialk>0) {
+                    if ($ttct->mucgialk > $ttct->mucgiakk) {
+                        $ttct->muctg = '-' . ($ttct->mucgialk - $ttct->mucgiakk);
+                        $ttct->muctgpt = '-' . round(($ttct->mucgialk - $ttct->mucgiakk) / $ttct->mucgialk * 100, 2) . '%';
+                    }else {
+                        $ttct->muctg = $ttct->mucgiakk - $ttct->mucgialk;
+                        $ttct->muctgpt = round(($ttct->mucgiakk - $ttct->mucgialk) / $ttct->mucgiakk * 100, 2) . '%';
+                    }
+                }
+            }
+
             return view('reports.kkgdvlt.bcth.BC2')
                 ->with('modelcqcq',$modelcqcq)
                 ->with('input',$input)
