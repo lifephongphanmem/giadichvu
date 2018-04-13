@@ -1,6 +1,6 @@
 @extends('main')
 @section('autoload')
-    <meta http-equiv="refresh" content="60">
+    <!--meta http-equiv="refresh" content="60"-->
 @stop
 
 @section('custom-style')
