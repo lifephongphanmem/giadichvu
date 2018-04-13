@@ -485,14 +485,22 @@ class UsersController extends Controller
                 }else{
                     $dv = 'cung cấp thức ăn chăn nuôi';
                 }
+                $inputs['trangthai'] = isset($inputs['trangthai']) ? $inputs['trangthai'] : 'choduyet';
+
+                if($inputs['trangthai'] == 'choduyet')
+                    $trangthai = 'Chờ duyệt';
+                else
+                    $trangthai = 'Bị trả lại';
 
                 if (session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'sa') {
                     $model = Register::where('pl', $inputs['phanloai'])
+                        ->where('trangthai',$trangthai)
                         ->orderBy('id', 'desc')
                         ->get();
                 } else {
                     $model = Register::where('pl',  $inputs['phanloai'])
                         ->where('cqcq', session('admin')->cqcq)
+                        ->where('trangthai',$trangthai)
                         ->orderBy('id', 'desc')
                         ->get();
                 }
@@ -501,6 +509,7 @@ class UsersController extends Controller
                     ->with('model', $model)
                     ->with('phanloai', $inputs['phanloai'])
                     ->with('dv',$dv)
+                    ->with('trangthai',$inputs['trangthai'])
                     ->with('pageTitle', 'Thông tin tài khoản đăng ký');
             }else{
                 return view('errors.perm');

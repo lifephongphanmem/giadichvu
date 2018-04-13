@@ -40,7 +40,14 @@
 
             $('#phanloai').change(function() {
                 var pl = $('#phanloai').val();
-                var url = '/users/register?&phanloai='+pl;
+                var trangthai = $('#trangthai').val();
+                var url = '/users/register?&phanloai='+pl+'&trangthai='+trangthai;
+                window.location.href = url;
+            });
+            $('#trangthai').change(function() {
+                var pl = $('#phanloai').val();
+                var trangthai = $('#trangthai').val();
+                var url = '/users/register?&phanloai='+pl+'&trangthai='+trangthai;
                 window.location.href = url;
             });
 
@@ -64,8 +71,9 @@
             <div class="portlet box">
                 <div class="portlet-body">
                     <div class="portlet-body">
-                        @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'sa')
+
                         <div class="row">
+                            @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'sa')
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <select class="form-control" name="phanloai" id="phanloai">
@@ -84,15 +92,24 @@
                                     </select>
                                 </div>
                             </div>
+                            @endif
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <select class="form-control" name="trangthai" id="trangthai">
+                                        <option value="choduyet" {{($trangthai == "choduyet") ? 'selected' : ''}}>Chờ duyệt</option>
+                                        <option value="bitralai" {{($trangthai == "bitralai") ? 'selected' : ''}}>Bị trả lại</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
-                        @endif
+
                         <div class="table-toolbar">
                         </div>
                     <table class="table table-striped table-bordered table-hover" id="sample_3">
                         <thead>
                         <tr>
                             <th style="text-align: center" width="2%">STT</th>
-                            <th style="text-align: center" width="30%">Tên doanh nghiệp</th>
+                            <th style="text-align: center">Tên doanh nghiệp</th>
                             <th style="text-align: center" width="10%">Mã số thuế</th>
                             <th style="text-align: center">Trạng thái</th>
                             <th style="text-align: center" width="20%">Thao tác</th>

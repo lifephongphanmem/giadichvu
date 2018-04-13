@@ -428,69 +428,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             </li>
                         @endif
                     @endif
-                    @if(canGeneral('dvgs','dvgs'))
-                        @if(can('dvgs','index') || can('kkdvgs','index'))
-                            <li>
-                                <a href="">
-                                    <i class="fa fa-laptop"></i>
-                                    <span class="title">Mặt hàng sữa</span>
-                                    <span class="arrow "></span>
-                                </a>
-                                <ul class="sub-menu">
-                                    @if(can('dvgs','index'))
-                                        @if(session('admin')->level == 'DVGS')
-                                            <li><a href="{{url('ttdn_dich_vu_gia_sua')}}">Thông tin doanh nghiệp</a></li>
-                                            @if(can('kkdvgs','index'))
-                                                <li><a href="{{url('ke_khai_gia_sua')}}">Kê khai dịch vụ giá sữa</a></li>
-                                            @endif
-                                        @endif
-
-                                        @if(session('admin')->level =='T' || session('admin')->level =='H')
-                                            @if(can('kkdvgs','index'))
-                                                <li><a href="{{url('thong_tin_dn_kkgsua')}}">Thông tin DN kkgiá sữa</a></li>
-                                            @endif
-                                            <li><a href="{{url('xet_duyet_ke_khai_gia_sua')}}">Hồ sơ kê khai</a></li>
-                                            <!--li><a href="{{url('search_ke_khai_dich_vu_luu_tru')}}">Tìm kiếm TT kê khai</a></li-->
-                                        @endif
-                                    @endif
-
-                                </ul>
-                            </li>
-                        @endif
-                    @endif
-                    @if(canGeneral('dvtacn','dvtacn'))
-                        @if(can('dvtacn','index') || can('kkdvtacn','index'))
-                            <li>
-                                <a href="">
-                                    <i class="fa fa-laptop"></i>
-                                    <span class="title">Thức ăn chăn nuôi</span>
-                                    <span class="arrow "></span>
-                                </a>
-                                <ul class="sub-menu">
-                                    @if(can('dvtacn','index'))
-                                        @if(session('admin')->level == 'DVTACN')
-                                            <li><a href="{{url('ttdn_thuc_an_chan_nuoi')}}">Thông tin doanh nghiệp</a></li>
-                                            @if(can('kkdvtacn','index'))
-                                                <li><a href="{{url('ke_khai_thuc_an_chan_nuoi')}}">Kê khai giá thức ăn chăn nuôi</a></li>
-                                            @endif
-                                        @endif
-
-                                        @if(session('admin')->level =='T' || session('admin')->level =='H')
-                                            @if(can('kkdvtacn','index'))
-                                                <li><a href="{{url('thong_tin_dn_kktacn')}}">Thông tin DN kkgiá thức ăn chăn nuôi</a></li>
-                                            @endif
-                                            <li><a href="{{url('xd_ke_khai_thucan_channuoi')}}">Hồ sơ kê khai</a></li>
-                                            <!--li><a href="{{url('')}}">Tìm kiếm TT kê khai</a></li-->
-                                        @endif
-                                    @endif
-
-                                </ul>
-                            </li>
-                        @endif
-                    @endif
                 @endif
-
-
 
                 @if((session('admin')->level == 'T' || session('admin')->level == 'H') && session('admin')->sadmin != 'satc' && session('admin')->sadmin != 'savt' && session('admin')->sadmin != 'sa')
                 <li>
@@ -574,16 +512,6 @@ License: You must have a valid license purchased only from themeforest(the above
                         @if(canGeneral('dvvt','vtxk') || canGeneral('dvvt','vtxb') || canGeneral('dvvt','vtxtx') || canGeneral('dvvt','vtch'))
                             @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'sa' ||session('admin')->sadmin == 'savt')
                             <li><a href="{{url('dn_dichvu_vantai')}}">DN dịch vụ vận tải</a></li>
-                            @endif
-                        @endif
-                        @if(canGeneral('dvgs','dvgs'))
-                            @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'sa' ||session('admin')->sadmin == 'satc')
-                                <li><a href="{{url('dn_dichvu_giasua')}}">DN cung cấp sữa</a> </li>
-                            @endif
-                        @endif
-                        @if(canGeneral('dvtacn','dvtacn'))
-                            @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'sa' ||session('admin')->sadmin == 'satacn')
-                                <li><a href="{{url('dn_thuc_an_chan_nuoi')}}">DN thức ăn chăn nuôi</a> </li>
                             @endif
                         @endif
                         <li><a href="{{url('users')}}"> Quản lý tài khoản</a></li>

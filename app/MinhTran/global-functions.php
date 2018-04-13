@@ -539,6 +539,29 @@ function getNgayHieuLuc($ngaynhap){
     return $ngayhieuluc;
 
 }
+function getNgayHieuLucLT($ngaynhap){
+    $dayngaynhap = date('D',strtotime($ngaynhap));
+    $thoihan = isset(getGeneralConfigs()['thoihan_lt']) || getGeneralConfigs()['thoihan_lt'] != 0 ? getGeneralConfigs()['thoihan_lt'] : 2;
+
+    $modelchecknn = \App\TtNgayNghiLe::where('ngaytu','<=',$ngaynhap)
+        ->where('ngayden','>=',$ngaynhap)->first();
+    if(count($modelchecknn)>0)
+        $ngaynghi = $modelchecknn->songaynghi;
+    else
+        $ngaynghi = 0;
+
+    if ($dayngaynhap == 'Thu') {
+        $ngayhieuluc = date('Y-m-d', mktime(0, 0, 0, date("m"), date("d") + 2 + $thoihan + $ngaynghi, date("Y")));
+    } elseif ($dayngaynhap == 'Fri') {
+        $ngayhieuluc = date('Y-m-d', mktime(0, 0, 0, date("m"), date("d") + 2 + $thoihan + $ngaynghi, date("Y")));
+    } elseif ($dayngaynhap == 'Sat') {
+        $ngayhieuluc = date('Y-m-d', mktime(0, 0, 0, date("m"), date("d") + 1 + $thoihan + $ngaynghi, date("Y")));
+    } else {
+        $ngayhieuluc = date('Y-m-d', mktime(0, 0, 0, date("m"), date("d") + $thoihan + $ngaynghi, date("Y")));
+    }
+    return $ngayhieuluc;
+}
+
 
 function getTtPhong($str)
 {
@@ -548,4 +571,6 @@ function getTtPhong($str)
     $str = str_replace('-','- ',$str);
     return $str;
 }
+
+
 ?>

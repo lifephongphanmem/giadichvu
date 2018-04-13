@@ -424,7 +424,8 @@
 @section('content')
 
     <h3 class="page-title">
-        Thông tin kê khai hồ sơ giá dịch vụ lưu trú<small>&nbsp;{{$modelcskd->tentencskd}}</small>
+        Thông tin kê khai hồ sơ giá<small>dịch vụ lưu trú</small>
+        <h5>{{$modeldn->tendn}}- Mã số thuế: {{$modeldn->masothue}} kê khai giá DVLT cơ sở kinh doanh {{$modelcskd->tencskd}}</h5>
     </h3>
 
     <!-- END PAGE HEADER-->
@@ -464,10 +465,10 @@
                         </div>
                         <!--/span-->
                         <div class="col-md-6">
-                            <div class="form-group has-error">
+                            <div class="form-group">
                                 <label class="control-label">Ngày thực hiện mức giá kê khai<span class="require">*</span></label>
                                 <!--input type="date" name="ngayhieuluc" id="ngayhieuluc" class="form-control required"-->
-                                {!!Form::text('ngayhieuluc',null, array('id' => 'ngayhieuluc','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required','onchange'=>"checkngay()"))!!}
+                                {!!Form::text('ngayhieuluc',$ngayhieuluc, array('id' => 'ngayhieuluc','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required','onchange'=>"checkngay()"))!!}
                             </div>
                         </div>
                         <!--/span-->
@@ -538,8 +539,12 @@
                         </div>
                     @endif
                     <input type="hidden" name="macskd" id="macskd" value="{{$modelcskd->macskd}}">
-                    <input type="hidden" name="masothue" id="masothue" value="{{$modelcskd->masothue}}">
-                    <input type="hidden" name="cqcq" id="cqcq" value="{{$modelcskd->cqcq}}">
+                    <input type="text" name="masothue" id="masothue" value="{{$modeldn->masothue}}">
+                    <input type="hidden" name="cqcq" id="cqcq" value="{{$modeldn->cqcq}}">
+                    <input type="hidden" name="tencskd" id="tencskd" value="{{$modelcskd->tencskd}}">
+                    <input type="hidden" name="tendn" id="tendn" value="{{$modeldn->tendn}}">
+                    <input type="hidden" name="loaihang" id="loaihang" value="{{$modelcskd->loaihang}}">
+
                     {!! Form::close() !!}
                     <!--/row-->
                     <h4 class="form-section" style="color: #0000ff">Thông tin chi tiết hồ sơ</h4>

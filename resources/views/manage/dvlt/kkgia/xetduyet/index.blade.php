@@ -266,7 +266,7 @@
             <div class="form-group">
                 <select name="pl" id="pl" class="form-control">
                     <option value="cho_nhan" {{$pl == 'cho_nhan' ? 'selected' : ''}}>Hồ sơ kê khai giá dịch vụ đang chờ nhận</option>
-                    <option value="duyet" {{$pl == 'duyet' ? 'selected' : ''}}>Hồ sơ kê khai giá dịch vụ đã duyệt</option>
+                    <!--option value="duyet" {{$pl == 'duyet' ? 'selected' : ''}}>Hồ sơ kê khai giá dịch vụ đã duyệt</option-->
                     <option value="cong_bo" {{$pl == 'cong_bo' ? 'selected' : ''}}>Hồ sơ kê khai giá dịch vụ đã công bố</option>
                     <option value="bi_tra_lai" {{$pl == 'bi_tra_lai' ? 'selected' : ''}}>Hồ sơ kê khai giá dịch vụ bị trả lại</option>
                 </select>

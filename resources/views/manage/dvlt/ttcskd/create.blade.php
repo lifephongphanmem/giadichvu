@@ -179,7 +179,7 @@
 
                     {!! Form::close() !!}
                     <!--/row-->
-                    <h4 class="form-section" style="color: #0000ff">Thông tin phòng nghỉ- quy cách- chất lượng</h4>
+                    <!--h4 class="form-section" style="color: #0000ff">Thông tin phòng nghỉ- quy cách- chất lượng</h4>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
@@ -195,14 +195,12 @@
                                 <textarea id="qccl" class="form-control" name="qccl" cols="30" rows="3"></textarea>
                             </div>
                         </div>
-                        <!--/span-->
                         <div class="col-md-6">
                             <div class="form-group has-error">
                                 <label class="control-label">Số hiệu phòng</label>
                                 <textarea id="sohieu" class="form-control" name="sohieu" cols="30" rows="3"></textarea>
                             </div>
                         </div>
-                        <!--/span-->
                     </div>
 
                     <div class="row">
@@ -239,7 +237,7 @@
                                 </tbody>
                             </table>
                         </div>
-                    </div>
+                    </div-->
 
                 </div>
 

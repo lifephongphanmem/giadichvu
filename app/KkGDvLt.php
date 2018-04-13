@@ -11,6 +11,7 @@ class KkGDvLt extends Model
         'id',
         'mahs',
         'macskd',
+        'masothue',
         'ngaynhap',
         'socv',
         'socvlk',
@@ -26,6 +27,9 @@ class KkGDvLt extends Model
         'cqcq',
         'dvt',
         'phanloai',
-        'plhs'
+        'plhs',
+        'tendn',
+        'tencskd',
+        'loaihang'
     ];
 }
