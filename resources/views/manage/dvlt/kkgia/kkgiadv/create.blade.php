@@ -539,7 +539,7 @@
                         </div>
                     @endif
                     <input type="hidden" name="macskd" id="macskd" value="{{$modelcskd->macskd}}">
-                    <input type="text" name="masothue" id="masothue" value="{{$modeldn->masothue}}">
+                    <input type="hidden" name="masothue" id="masothue" value="{{$modeldn->masothue}}">
                     <input type="hidden" name="cqcq" id="cqcq" value="{{$modeldn->cqcq}}">
                     <input type="hidden" name="tencskd" id="tencskd" value="{{$modelcskd->tencskd}}">
                     <input type="hidden" name="tendn" id="tendn" value="{{$modeldn->tendn}}">
@@ -552,7 +552,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <button type="button" data-target="#modal-create" data-toggle="modal" class="btn btn-success btn-xs" onclick="clearForm()"><i class="fa fa-plus"></i>&nbsp;Kê khai bổ sung phòng</button>
+                                <button type="button" data-target="#modal-create" data-toggle="modal" class="btn btn-success btn-xs" onclick="clearForm()"><i class="fa fa-plus"></i>&nbsp;Kê khai cập nhật thông tin phòng phòng</button>
                                 &nbsp;
                             </div>
                         </div>
@@ -703,7 +703,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" data-dismiss="modal" class="btn btn-default">Thoát</button>
-                    <button type="button" class="btn btn-primary" onclick="createttp()">Bổ xung</button>
+                    <button type="button" class="btn btn-primary" onclick="createttp()">Cập nhật</button>
                 </div>
             </div>
             <!-- /.modal-content -->

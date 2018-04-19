@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\CbKkGDvLt;
 use App\CsKdDvLt;
+use App\DnDvLt;
 use App\DoiTuongApDungDvLt;
 use App\KkGDvLt;
 use App\KkGDvLtCt;
@@ -70,12 +71,15 @@ class KkGiaDvLt45sController extends Controller
                     $ngaynhap = date('d/m/Y',strtotime($ngaynhap));
                     $ngayhieuluc =  date('d/m/Y',strtotime($ngayhieuluc));
 
+                    $modeldn = DnDvLt::where('masothue',$modelcskd->masothue)->first();
+
                     return view('manage.dvlt.kkgia.kkgia45s.create')
                         ->with('modelcskd',$modelcskd)
                         ->with('modelttp',$modelttp)
                         ->with('modeldtad',$modeldtad)
                         ->with('modelttdv',$modelttdv)
                         ->with('ngaynhap',$ngaynhap)
+                        ->with('modeldn',$modeldn)
                         ->with('ngayhieuluc',$ngayhieuluc)
                         ->with('modelcb',$modelcb)
                         ->with('pageTitle', 'Kê khai giá dịch vụ lưu trú thêm mới');
@@ -92,9 +96,9 @@ class KkGiaDvLt45sController extends Controller
     public function store(Request $request){
         if (Session::has('admin')) {
             $mahs = getdate()[0];
-            $insert = $request->all();
+            $inputs = $request->all();
             $model = new KkGDvLt();
-            $model->ngaynhap = date('Y-m-d', strtotime(str_replace('/', '-', $insert['ngaynhap'])));
+            /*$model->ngaynhap = date('Y-m-d', strtotime(str_replace('/', '-', $insert['ngaynhap'])));
             $model->mahs = $mahs;
             $model->socv = $insert['socv'];
             $model->ngayhieuluc = date('Y-m-d', strtotime(str_replace('/', '-', $insert['ngayhieuluc'])));
@@ -108,8 +112,18 @@ class KkGiaDvLt45sController extends Controller
             $model->cqcq = $insert['cqcq'];
             $model->dvt = $insert['dvt'];
             $model->phanloai = 'DT';
-            $model->plhs = $insert['plhs'];
-            if($model->save()){
+            $model->plhs = $insert['plhs'];*/
+            $inputs['mahs'] = $inputs['macskd'].getdate()[0];
+            $inputs['ngaynhap'] = getDateToDb($inputs['ngaynhap']);
+            $inputs['ngayhieuluc'] = getDateToDb($inputs['ngayhieuluc']);
+            if($inputs['ngaycvlk'] != '')
+                $inputs['ngaycvlk']= getDateToDb($inputs['ngaycvlk']);
+            else
+                unset($inputs['ngaycvlk']);
+            $inputs['trangthai'] = 'Chờ chuyển';
+            $inputs['phanloai'] = 'DT';
+            $model = new KkGDvLt();
+            if($model->create($inputs)){
                 $modelph = KkGDvLtCtDf::where('macskd',$insert['macskd'])
                     ->get();
                 foreach($modelph as $ph){
@@ -147,12 +161,17 @@ class KkGiaDvLt45sController extends Controller
                         ->get();
                     $modecb = CbKkGDvLt::where('macskd',$model->macskd)->first();
 
+                    $modelcskd = CsKdDvLt::where('macskd', $model->macskd)->first();
+                    $modeldn = DnDvLt::where('masothue',$model->masothue)->first();
+
                     return view('manage.dvlt.kkgia.kkgia45s.edit')
                         ->with('model',$model)
                         ->with('modelcb',$modecb)
                         ->with('modeldtad',$modeldtad)
                         ->with('modelttp',$modelttp )
                         ->with('modelloaip',$modelloaip)
+                        ->with('modelcskd',$modelcskd)
+                        ->with('modeldn',$modeldn)
                         ->with('pageTitle', 'Kê khai giá dịch vụ lưu trú chỉnh sửa');
 
             }else{

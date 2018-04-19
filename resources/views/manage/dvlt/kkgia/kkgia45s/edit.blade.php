@@ -443,6 +443,9 @@
                     <input type="hidden" name="masothue" id="masothue" value="{{$model->masothue}}">
                     <input type="hidden" name="cqcq" id="cqcq" value="{{$model->cqcq}}">
                     <input type="hidden" name="mahs" id="mahs" value="{{$model->mahs}}">
+                    <input type="hidden" name="tencskd" id="tencskd" value="{{$modelcskd->tencskd}}">
+                    <input type="hidden" name="tendn" id="tendn" value="{{$modeldn->tendn}}">
+                    <input type="hidden" name="loaihang" id="loaihang" value="{{$modelcskd->loaihang}}">
                     {!! Form::close() !!}
                     <!--/row-->
                     <h4 class="form-section" style="color: #0000ff">Thông tin chi tiết hồ sơ</h4>

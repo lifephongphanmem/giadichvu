@@ -267,9 +267,13 @@ class KkGDvLtController extends Controller
                 $model = KkGDvLt::findOrFail($id);
                 $modelct = KkGDvLtCt::where('mahs', $model->mahs)
                     ->get();
+                $modelcskd = CsKdDvLt::where('macskd', $model->macskd)->first();
+                $modeldn = DnDvLt::where('masothue',$model->masothue)->first();
                 return view('manage.dvlt.kkgia.kkgiadv.edit')
                     ->with('model', $model)
                     ->with('modelct', $modelct)
+                    ->with('modelcskd',$modelcskd)
+                    ->with('modeldn',$modeldn)
                     ->with('pageTitle', 'Chỉnh sửa thông tin kê khai giá dịch vụ lưu trú');
             }else{
                 return view('errors.perm');
@@ -302,16 +306,12 @@ class KkGDvLtController extends Controller
         if (Session::has('admin')) {
             $input = $request->all();
             $model = KkGDvLt::findOrFail($id);
-            $macskd = $model->macskd;
-            //$model->ngaynhap = date('Y-m-d', strtotime(str_replace('/', '-', $input['ngaynhap'])));
-            $model->socv = $input['socv'];
-            $model->ngayhieuluc = date('Y-m-d', strtotime(str_replace('/', '-', $input['ngayhieuluc'])));
-            $model->socvlk = $input['socvlk'];
-            $model->ngaycvlk = $input['ngaycvlk']==''? NULL  :date('Y-m-d', strtotime(str_replace('/', '-', $input['ngaycvlk'])));;
-            $model->ghichu = $input['ghichu'];
-            $model->dvt = $input['dvt'];
-            $model->plhs = $input['plhs'];
-            $model->save();
+            $input['ngayhieuluc'] = date('Y-m-d', strtotime(str_replace('/', '-', $input['ngayhieuluc'])));
+            if($input['ngaycvlk'] != '')
+                $input['ngaycvlk']= getDateToDb($inputs['ngaycvlk']);
+            else
+                unset($input['ngaycvlk']);
+            $model->update($input);
             return redirect('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh='.$macskd.'&nam='.date('Y'));
         }else
             return view('errors.notlogin');

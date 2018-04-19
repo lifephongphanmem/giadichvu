@@ -179,7 +179,7 @@
 
                     {!! Form::close() !!}
                     <!--/row-->
-                    <!--h4 class="form-section" style="color: #0000ff">Thông tin phòng nghỉ- quy cách- chất lượng</h4>
+                    <h4 class="form-section" style="color: #0000ff">Thông tin phòng nghỉ- quy cách- chất lượng</h4>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
@@ -237,7 +237,7 @@
                                 </tbody>
                             </table>
                         </div>
-                    </div-->
+                    </div>
 
                 </div>
 
