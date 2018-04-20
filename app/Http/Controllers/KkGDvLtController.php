@@ -313,7 +313,7 @@ class KkGDvLtController extends Controller
             else
                 unset($input['ngaycvlk']);
             $model->update($input);
-            return redirect('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh='.$macskd.'&nam='.date('Y'));
+            return redirect('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh='.$model->macskd.'&nam='.date('Y'));
         }else
             return view('errors.notlogin');
     }
