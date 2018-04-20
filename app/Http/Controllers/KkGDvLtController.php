@@ -308,7 +308,7 @@ class KkGDvLtController extends Controller
             $model = KkGDvLt::findOrFail($id);
             $input['ngayhieuluc'] = date('Y-m-d', strtotime(str_replace('/', '-', $input['ngayhieuluc'])));
             if($input['ngaycvlk'] != '')
-                $input['ngaycvlk']= getDateToDb($inputs['ngaycvlk']);
+                $input['ngaycvlk']= getDateToDb($input['ngaycvlk']);
             else
                 unset($input['ngaycvlk']);
             $model->update($input);
