@@ -52,6 +52,11 @@
         $('#frm_bc6').attr('action',url);
         $('#frm_bc6').submit();
     }
+
+    function ClickBC7(url){
+        $('#frm_bc7').attr('action',url);
+        $('#frm_bc7').submit();
+    }
 </script>
 
 <!--Modal Thoại BC1-->
@@ -498,6 +503,73 @@
                 <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>
                 <button type="submit" data-dismiss="modal" class="btn btn-success" onclick="ClickBC6('/reports/dich_vu_luu_tru/BC6')">Đồng ý</button>
                 <button type="submit" data-dismiss="modal" class="btn btn-primary" onclick="ClickBC6_excel('/reports/dich_vu_luu_tru/BC6_excel')">Xuất Excel</button>
+            </div>
+            {!! Form::close() !!}
+        </div>
+    </div>
+    </form>
+</div>
+
+<!--Modal Thoại Bc7-->
+<div id="BC7-thoai-confirm" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade">
+    <div class="modal-dialog">
+        {!! Form::open(['url'=>'/reports/dich_vu_luu_tru/BC7','target'=>'_blank' , 'id' => 'frm_bc7', 'class'=>'form-horizontal form-validate']) !!}
+        <div class="modal-content">
+            <div class="modal-header modal-header-primary">
+                <button type="button" data-dismiss="modal" aria-hidden="true"
+                        class="close">&times;</button>
+                <h4 id="modal-header-primary-label" class="modal-title">Báo cáo xét duyệt hồ sơ kê khai giá dịch vụ lưu trú</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label"><b>Tháng</b></label>
+                        <div class="col-md-6 ">
+                            <select name="thang" id="thang" class="form-control">
+                                <option value="01" {{date('m') == '01' ? 'selected' : ''}}>Tháng 01</option>
+                                <option value="02" {{date('m')  == '02' ? 'selected' : ''}}>Tháng 02</option>
+                                <option value="03" {{date('m')  == '03' ? 'selected' : ''}}>Tháng 03</option>
+                                <option value="04" {{date('m')  == '04' ? 'selected' : ''}}>Tháng 04</option>
+                                <option value="05" {{date('m')  == '05' ? 'selected' : ''}}>Tháng 05</option>
+                                <option value="06" {{date('m')  == '06' ? 'selected' : ''}}>Tháng 06</option>
+                                <option value="07" {{date('m')  == '07' ? 'selected' : ''}}>Tháng 07</option>
+                                <option value="08" {{date('m')  == '08' ? 'selected' : ''}}>Tháng 08</option>
+                                <option value="09" {{date('m')  == '09' ? 'selected' : ''}}>Tháng 09</option>
+                                <option value="10" {{date('m')  == '10' ? 'selected' : ''}}>Tháng 10</option>
+                                <option value="11" {{date('m')  == '11' ? 'selected' : ''}}>Tháng 11</option>
+                                <option value="12" {{date('m')  == '12' ? 'selected' : ''}}>Tháng 12</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label"><b>Năm</b></label>
+                        <div class="col-md-6 ">
+                            <select name="nam" id="nam" class="form-control">
+                                @if ($nam_start = intval(date('Y')) - 5 ) @endif
+                                @if ($nam_stop = intval(date('Y')) + 1 ) @endif
+                                @for($i = $nam_start; $i <= $nam_stop; $i++)
+                                    <option value="{{$i}}" {{$i == date('Y') ? 'selected' : ''}}>Năm {{$i}}</option>
+                                @endfor
+                            </select>
+                        </div>
+                    </div>
+                    @if(session('admin')->level == 'T')
+                        <div class="form-group">
+                            <label class="col-md-4 control-label"><b>Đơn vị</b></label>
+                            <div class="col-md-6 ">
+                                <select class="form-control" name="cqcq" id="cqcq">
+                                    @foreach($model as $cqcq)
+                                        <option value="{{$cqcq->maqhns}}">{{$cqcq->tendv}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    @endif
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>
+                <button type="submit" data-dismiss="modal" class="btn btn-success" onclick="ClickBC7('/reports/dich_vu_luu_tru/BC7')">Đồng ý</button>
             </div>
             {!! Form::close() !!}
         </div>

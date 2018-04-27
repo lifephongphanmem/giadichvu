@@ -12,6 +12,7 @@ use App\KkGDvGs;
 use App\KkGDvGsCt;
 use App\KkGDvLt;
 use App\KkGDvLtCt;
+use App\KkGDvLtH;
 use App\KkGDvTaCn;
 use App\KkGDvTaCnCt;
 use App\TtNgayNghiLe;
@@ -866,6 +867,32 @@ class ReportsController extends Controller
                     //$sheet->setColumnFormat(array('D' => '#,##0.00'));
                 });
             })->download('xls');
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function dvltbc7(Request $request){
+        if (Session::has('admin')) {
+            $input = $request->all();
+            $modelcqcq = DmDvQl::where('maqhns',$input['cqcq'])->first();
+            $modelgr = KkGDvLtH::where('cqcq',$input['cqcq'])
+                ->where('action','Nhận hồ sơ')
+                ->whereMonth('ngaynhan',$input['thang'])
+                ->whereYear('ngaynhan',$input['nam'])
+                ->select('username','name')
+                ->get();
+            $model = KkGDvLtH::where('cqcq',$input['cqcq'])
+                ->where('action','Nhận hồ sơ')
+                ->whereMonth('ngaynhan',$input['thang'])
+                ->whereYear('ngaynhan',$input['nam'])
+                ->get();
+
+            return view('reports.kkgdvlt.bcth.BC7')
+                ->with('modelcqcq',$modelcqcq)
+                ->with('input',$input)
+                ->with('model',$model)
+                ->with('modelgr',$modelgr)
+                ->with('pageTitle','Báo cáo xét duyệt hồ sơ kê khai giá dịch vụ lưu trú');
         }else
             return view('errors.notlogin');
     }

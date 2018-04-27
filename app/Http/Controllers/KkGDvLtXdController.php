@@ -190,6 +190,11 @@ class KkGDvLtXdController extends Controller
                     $his->plhs =$model->plhs;
                     $his->lydo = $input['lydo'];
                     $his->action = 'Trả lại hồ sơ';
+                    $his->username = session('admin')->username;
+                    $his->name = session('admin')->name;
+                    $his->tencskd = $model->tencskd;
+                    $his->tendn = $model->tendn;
+                    $his->loaihang = $model->loaihang;
                     if($his->save()){
                         $hsct = KkGDvLtCt::where('mahs',$model->mahs)
                             ->get();
@@ -212,7 +217,7 @@ class KkGDvLtXdController extends Controller
                     }
                 }
             }
-            return redirect('xet_duyet_ke_khai_dich_vu_luu_tru/'.'thang='.date('m').'&nam='.date('Y').'&pl=cho_nhan');
+            return redirect('xet_duyet_ke_khai_dich_vu_luu_tru');
         }else
             return view('errors.notlogin');
     }
@@ -339,7 +344,13 @@ class KkGDvLtXdController extends Controller
                 $his->plhs =$model->plhs;
                 $his->ngaynhan = $input['ngaynhan'];
                 $his->sohsnhan = $input['sohsnhan'];
+                $his->trangthai = 'Duyệt';
                 $his->action = 'Nhận hồ sơ';
+                $his->username = session('admin')->username;
+                $his->name = session('admin')->name;
+                $his->tencskd = $model->tencskd;
+                $his->tendn = $model->tendn;
+                $his->loaihang = $model->loaihang;
                 if($his->save()){
                     $hsct = KkGDvLtCt::where('mahs',$model->mahs)
                         ->get();
@@ -361,7 +372,7 @@ class KkGDvLtXdController extends Controller
                     }
                 }
             }
-            return redirect('xet_duyet_ke_khai_dich_vu_luu_tru/');
+            return redirect('xet_duyet_ke_khai_dich_vu_luu_tru');
         }else
             return view('errors.notlogin');
     }

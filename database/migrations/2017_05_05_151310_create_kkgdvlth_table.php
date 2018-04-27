@@ -38,6 +38,11 @@ class CreateKkgdvlthTable extends Migration
             $table->string('plhs')->nullable();
             $table->string('thoihan')->nullable();
             $table->string('action')->nullable();
+            $table->string('username')->nullable();
+            $table->string('name')->nullable();
+            $table->string('tencskd')->nullable();
+            $table->string('tendn')->nullable();
+            $table->string('loaihang')->nullable();
             $table->timestamps();
         });
     }

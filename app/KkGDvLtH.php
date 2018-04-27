@@ -28,6 +28,11 @@ class KkGDvLtH extends Model
         'dvt',
         'phanloai',
         'plhs',
-        'action'
+        'action',
+        'username',
+        'name',
+        'tencskd',
+        'tendn',
+        'loaihang',
     ];
 }

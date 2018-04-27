@@ -151,6 +151,7 @@ Route::post('reports/dich_vu_luu_tru/BC3','ReportsController@dvltbc3');
 Route::post('reports/dich_vu_luu_tru/BC4','ReportsController@dvltbc4');
 Route::post('reports/dich_vu_luu_tru/BC5','ReportsController@dvltbc5');
 Route::post('reports/dich_vu_luu_tru/BC6','ReportsController@dvltbc6');
+Route::post('reports/dich_vu_luu_tru/BC7','ReportsController@dvltbc7');
 
 Route::post('reports/dich_vu_luu_tru/BC1_excel','ReportsController@dvltbc1_excel');
 Route::post('reports/dich_vu_luu_tru/BC2_excel','ReportsController@dvltbc2_excel');

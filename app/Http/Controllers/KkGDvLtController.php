@@ -367,6 +367,7 @@ class KkGDvLtController extends Controller
             $model = KkGDvLt::findOrFail($id);
             //dd($model);
             if($input['ttnguoinop'] != ''){
+
                 $model->ttnguoinop = $input['ttnguoinop'];
                 $model->trangthai = 'Chờ nhận';
                 $model->ngaychuyen = $tgchuyen;
@@ -549,7 +550,21 @@ class KkGDvLtController extends Controller
             $ngaychuyen = Carbon::now()->toDateTimeString();
             if($model->plhs == 'GG') {
                 if ($ngayapdung >= date('Y-m-d',strtotime($ngaychuyen))) {
-                    $result['status'] = 'success';
+                    $modelcheckct = KkGDvLtCt::where('mahs',$model->mahs)
+                        ->get();
+                    //dd($modelcheckct);
+                    $val = 0;
+                    foreach($modelcheckct as $ct){
+                        if($ct->mucgiakk > $ct->mucgialk) {
+                            $val = 1;
+                        }
+                    }
+                    if($val == 1){
+                        $result['status'] = 'fail';
+                        $result['message'] = '"Giá dịch vụ không đúng theo loại hồ sơ", "Lỗi!!!"';
+                    }else
+                        $result['status'] = 'success';
+                  //dd($val);
                 }
             }else {
                 $modelchecknn = TtNgayNghiLe::where('ngaytu','<=',$ngaychuyen)
@@ -587,8 +602,8 @@ class KkGDvLtController extends Controller
                     }
                 }
             }
-
         }
+        //dd($result);
         die(json_encode($result));
     }
 
@@ -596,19 +611,8 @@ class KkGDvLtController extends Controller
         $model = KkGDvLtCt::where('mahs',$mahs)->get();
         foreach($model as $tt){
             if($tt->mucgiakk > $tt->mucgialk)
-               $check = '1'; //sai dk
-            if($tt->mucgiakk = $tt->mucgialk) {
-                if ($check = '1')
-                    $check = '1';
-                else
-                    $check = '2';
-            }
-            if($tt->mucgiakk < $tt->mucgialk) {
-                if ($check = '1')
-                    $check = '1';
-                else
-                    $check = '2';
-            }
+                $result['status'] = 'success';
+
 
         }
 
