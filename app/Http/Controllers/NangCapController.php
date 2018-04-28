@@ -7,6 +7,7 @@ use App\CbKkGDvLt;
 use App\CsKdDvLt;
 use App\DnDvLt;
 use App\KkGDvLt;
+use App\KkGDvLtH;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
@@ -20,7 +21,8 @@ class NangCapController extends Controller
                 $inputs['thang'] = isset($inputs['thang']) ? $inputs['thang'] : date('m');
                 $inputs['nam'] = isset($inputs['nam']) ? $inputs['nam'] : date('Y');
 
-                $model = CbKkGDvLt::whereYear('ngaynhap', $inputs['nam'])
+                $model = KkGDvLtH::whereMonth('ngaynhap',$inputs['thang'])
+                    ->whereYear('ngaynhap', $inputs['nam'])
                     ->get();
 
                 return view('manage.nangcap.index')
@@ -37,12 +39,13 @@ class NangCapController extends Controller
 
     public function nangcapdl(Request $request){
         $inputs = $request->all();
-        $model = CbKkGDvLt::whereYear('ngaynhap', $inputs['nam'])
+        $model = KkGDvLtH::whereMonth('ngaynhap',$inputs['thang'])
+            ->whereYear('ngaynhap', $inputs['nam'])
             ->get();
         foreach($model as $tt){
             $modeldn = DnDvLt::where('masothue',$tt->masothue)->first();
             $modelcskd = CsKdDvLt::where('macskd',$tt->macskd)->first();
-            $modelup = CbKkGDvLt::where('id',$tt->id)->first();
+            $modelup = KkGDvLtH::where('id',$tt->id)->first();
 
             $modelup->tendn = isset($modeldn) ? $modeldn->tendn : 'Chưa xác định';
             $modelup->tencskd = isset($modelcskd) ? $modelcskd->tencskd : 'Chưa xác định';
