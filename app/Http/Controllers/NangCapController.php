@@ -60,14 +60,16 @@ class NangCapController extends Controller
             ->where('action',$action)
             ->get();
         foreach($model as $tt){
-            $modeldn = DnDvLt::where('masothue',$tt->masothue)->first();
-            $modelcskd = CsKdDvLt::where('macskd',$tt->macskd)->first();
-            $modelup = KkGDvLtH::where('id',$tt->id)->first();
+            if($tt->tendn == '' && $tt->tencskd == '' && $tt->loaihang == '') {
+                $modeldn = DnDvLt::where('masothue', $tt->masothue)->first();
+                $modelcskd = CsKdDvLt::where('macskd', $tt->macskd)->first();
+                $modelup = KkGDvLtH::where('id', $tt->id)->first();
 
-            $modelup->tendn = isset($modeldn) ? $modeldn->tendn : 'Chưa xác định';
-            $modelup->tencskd = isset($modelcskd) ? $modelcskd->tencskd : 'Chưa xác định';
-            $modelup->loaihang = isset($modelcskd) ?$modelcskd->loaihang : 'Chưa xác định';
-            $modelup->save();
+                $modelup->tendn = isset($modeldn) ? $modeldn->tendn : 'Chưa xác định';
+                $modelup->tencskd = isset($modelcskd) ? $modelcskd->tencskd : 'Chưa xác định';
+                $modelup->loaihang = isset($modelcskd) ? $modelcskd->loaihang : 'Chưa xác định';
+                $modelup->save();
+            }
         }
         return redirect('nangcap?&phanloai='.$inputs['phanloai'].'&thang='.$inputs['thang'].'&nam='.$inputs['nam']);
 
