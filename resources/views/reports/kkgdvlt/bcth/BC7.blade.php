@@ -64,7 +64,7 @@
 <table width="96%" border="0" cellspacing="0" cellpadding="8" style="margin:0 auto 20px; text-align: center;">
     <tr>
         <td colspan="8" style="text-align: center; font-weight: bold; font-size: 16px;">
-            BÁO CÁO XÉT DUYỆT HỒ SƠ KÊ KHAI GIÁ DỊCH VỤ LƯU TRÚs
+            BÁO CÁO XÉT DUYỆT HỒ SƠ KÊ KHAI GIÁ DỊCH VỤ LƯU TRÚ
         </td>
     </tr>
     <tr>

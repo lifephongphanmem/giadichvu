@@ -16,6 +16,7 @@ use App\KkGDvLtH;
 use App\KkGDvTaCn;
 use App\KkGDvTaCnCt;
 use App\TtNgayNghiLe;
+use App\Users;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 //use Maatwebsite\Excel;
@@ -875,12 +876,18 @@ class ReportsController extends Controller
         if (Session::has('admin')) {
             $input = $request->all();
             $modelcqcq = DmDvQl::where('maqhns',$input['cqcq'])->first();
-            $modelgr = KkGDvLtH::where('cqcq',$input['cqcq'])
+            $modelgr = KkGDvLtH::select('username')
+                ->where('cqcq',$input['cqcq'])
                 ->where('action','Nhận hồ sơ')
                 ->whereMonth('ngaynhan',$input['thang'])
                 ->whereYear('ngaynhan',$input['nam'])
-                ->select('username','name')
+                ->groupBy('username')
                 ->get();
+            foreach($modelgr as $gr){
+                $name = Users::where('username',$gr->username)
+                    ->first();
+                $gr->name = $name->name;
+            }
             $model = KkGDvLtH::where('cqcq',$input['cqcq'])
                 ->where('action','Nhận hồ sơ')
                 ->whereMonth('ngaynhan',$input['thang'])
