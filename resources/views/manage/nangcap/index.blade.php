@@ -195,6 +195,7 @@
                             <th style="text-align: center">Ngày thực hiện<br>mức giá</th>
                             <th style="text-align: center" width="8%">Số công văn</th>
                             <th style="text-align: center" width="15%">Người chuyển</th>
+                            <th style="text-align: center" width="15%">Username</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -215,6 +216,8 @@
                                 <td style="text-align: center">{{getDayVn($tt->ngayhieuluc)}}</td>
                                 <td style="text-align: center" class="danger">{{$tt->socv}}</td>
                                 <td style="text-align: center">{{$tt->ttnguoinop}}</td>
+                                <td style="text-align: center">{{$tt->name.'('.$tt->username.')'}}</td>
+
                             </tr>
                         @endforeach
                         </tbody>
