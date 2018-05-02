@@ -97,151 +97,30 @@
         }
         $(function(){
 
-            /*$('#namhs').change(function() {
-                var namhs = $('#namhs').val();
-                var thanghs = $('#thanghs').val();
-                var pl = $('#pl').val();
-                var url = '/xet_duyet_ke_khai_dich_vu_luu_tru/thang='+thanghs+'&nam='+namhs+'&pl='+pl;
+            $('#phanloai').change(function() {
+                var phanloai = $('#phanloai').val();
+                var url = '/nangcap?&phanloai='+phanloai;
 
                 window.location.href = url;
             });
-            $('#thanghs').change(function() {
-                var namhs = $('#namhs').val();
-                var thanghs = $('#thanghs').val();
-                var pl = $('#pl').val();
-                var url = '/xet_duyet_ke_khai_dich_vu_luu_tru/thang='+thanghs+'&nam='+namhs+'&pl='+pl;
-
-                window.location.href = url;
-            });
-            $('#pl').change(function() {
-                var namhs = $('#namhs').val();
-                var thanghs = $('#thanghs').val();
-                var pl = $('#pl').val();
-                var url = '/xet_duyet_ke_khai_dich_vu_luu_tru/thang='+thanghs+'&nam='+namhs+'&pl='+pl;
-
-                window.location.href = url;
-            });*/
             $('#nam').change(function() {
+                var phanloai = $('#phanloai').val();
                 var namhs = $('#nam').val();
                 var thang = $('#thang').val();
-                var url = '/nangcap?&thang='+thang+'&nam='+namhs;
+                var url = '/nangcap?&phanloai='+phanloai+'&thang='+thang+'&nam='+namhs;
 
                 window.location.href = url;
             });
             $('#thang').change(function() {
+                var phanloai = $('#phanloai').val();
                 var namhs = $('#nam').val();
                 var thang = $('#thang').val();
-                var url ='/nangcap?&thang='+thang+'&nam='+namhs;
+                var url = '/nangcap?&phanloai='+phanloai+'&thang='+thang+'&nam='+namhs;
 
                 window.location.href = url;
             });
 
         });
-        function confirmTraLai(id) {
-            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-            //alert(id);
-            $.ajax({
-                url: '/xdkkgiadvlt/tralai',
-                type: 'GET',
-                data: {
-                    _token: CSRF_TOKEN,
-                    id: id
-                },
-                dataType: 'JSON',
-                success: function (data) {
-                    if (data.status == 'success') {
-                        $('#tttralai').replaceWith(data.message);
-                    }
-                }
-            })
-        }
-        function ClickTraLai(){
-            if($('#lydo').val() != ''){
-                toastr.success("Hồ sơ đã được trả lại!", "Thành công!");
-                $("#frm_tralai").unbind('submit').submit();
-            }else{
-                toastr.error("Bạn cần nhập lý do trả lại hồ sơ", "Lỗi!!!");
-                $("#frm_tralai").submit(function (e) {
-                    e.preventDefault();
-                });
-            }
-
-        }
-        function confirmNhanHs(id){
-            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-            //alert(id);
-            $.ajax({
-                url: '/xdkkgiadvlt/nhanhs',
-                type: 'GET',
-                data: {
-                    _token: CSRF_TOKEN,
-                    id: id
-                },
-                dataType: 'JSON',
-                success: function (data) {
-                    if (data.status == 'success') {
-                        $('#ttnhanhs').replaceWith(data.message);
-                        InputMask();
-                    }
-                    else
-                        toastr.error("Không thể chỉnh sửa thông tin nhận hồ sơ giá phòng nghỉ!", "Lỗi!");
-                }
-            })
-        }
-        function ClickNhanHs(){
-            $('#frm_nhanhs').submit();
-        }
-
-        function confirmNhanHsedit(mahs){
-            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-            //alert(mahs);
-
-            $.ajax({
-                url: '/xdkkgiadvlt/nhanhsedit',
-                type: 'GET',
-                data: {
-                    _token: CSRF_TOKEN,
-                    mahs: mahs
-                },
-                dataType: 'JSON',
-                success: function (data) {
-                    if (data.status == 'success') {
-                        $('#ttnhanhsedit').replaceWith(data.message);
-                        InputMask();
-                    }
-                    else
-                        toastr.error("Không thể chỉnh sửa thông tin nhận hồ sơ giá phòng nghỉ!", "Lỗi!");
-                }
-            })
-        }
-
-        function ClickNhanHsedit(){
-            $('#frm_nhanhsedit').submit();
-        }
-
-        function confirmHuyduyet(mahs){
-            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-            //alert(mahs);
-
-            $.ajax({
-                url: '/xdkkgiadvlt/tthuyduyet',
-                type: 'GET',
-                data: {
-                    _token: CSRF_TOKEN,
-                    mahs: mahs
-                },
-                dataType: 'JSON',
-                success: function (data) {
-                    if (data.status == 'success') {
-                        $('#tthuyduyet').replaceWith(data.message);
-                    }
-                }
-            })
-        }
-        function ClickHuyDuyet(){
-            $('#frm_huyduyet').submit();
-        }
-
     </script>
 @stop
 
@@ -258,13 +137,22 @@
             <div class="portlet box">
                 <div class="portlet-title">
                     <div class="actions">
-                        <a href="{{url('nangcapdl?&thang='.$thang.'&nam='.$nam)}}" class="btn btn-default btn-sm">
+                        <a href="{{url('nangcapdl?&phanloai='.$phanloai.'&thang='.$thang.'&nam='.$nam)}}" class="btn btn-default btn-sm">
                             <i class="fa fa-plus"></i> Update DL</a>
                     </div>
 
                 </div>
                 <div class="portlet-body">
                     <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <select name="phanloai" id="phanloai" class="form-control">
+                                    <option value="CHS" {{$phanloai == 'CHS' ? 'selected' : ''}}>Chuyển hồ sơ</option>
+                                    <option value="TLHS" {{$phanloai == 'TLHS' ? 'selected' : ''}}>Trả lại hồ sơ</option>
+                                    <option value="NHS" {{$phanloai == 'NHS' ? 'selected' : ''}}>Nhận hồ sơ</option>
+                                </select>
+                            </div>
+                        </div>
                         <div class="col-md-2">
                             <div class="form-group">
                                 <select name="thang" id="thang" class="form-control">

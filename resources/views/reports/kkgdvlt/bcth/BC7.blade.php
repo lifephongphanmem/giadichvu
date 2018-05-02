@@ -84,26 +84,25 @@
         <th>Ngày nhận hồ sơ</th>
     </tr>
     @foreach($modelgr as $gr)
-        <tr>
-            <th style="text-align: left" colspan="8">
-                {{$gr->name.'('. $gr->username.' )'}}
-            </th>
-        </tr>
+
         <?php
             $modelhs = $model->where('username',$gr->username);
         ?>
+        <tr>
+            <th style="text-align: left" colspan="8">
+                {{$gr->name.'('. $gr->username.' ) giải quyết: '. count($modelhs).' hồ sơ.'}}
+            </th>
+        </tr>
         <?php $i=1;?>
         @foreach($modelhs as $ctkk)
-
-                <tr>
-                    <th style="text-align: center">{{$i++}}</th>
-                    <th style="text-align: left">{{$ctkk->tendn}}</th>
-                    <th style="text-align: left">{{$ctkk->tencskd}}</th>
-                    <th style="text-align: center">{{$ctkk->socv}}</th>
-                    <th style="text-align: center">{{getDayVn($ctkk->ngayhieuluc)}}</th>
-                    <th style="text-align: center">{{getDayVn($ctkk->ngaynhan)}}</th>
-                </tr>
-
+            <tr>
+                <th style="text-align: center">{{$i++}}</th>
+                <th style="text-align: left">{{$ctkk->tendn}}</th>
+                <th style="text-align: left">{{$ctkk->tencskd}}</th>
+                <th style="text-align: center">{{$ctkk->socv}}</th>
+                <th style="text-align: center">{{getDayVn($ctkk->ngayhieuluc)}}</th>
+                <th style="text-align: center">{{getDayVn($ctkk->ngaynhan)}}</th>
+            </tr>
         @endforeach
     @endforeach
     <tr>
@@ -111,7 +110,6 @@
             {{'Tổng cộng: '. count($model).' hồ sơ.'}}
         </th>
     </tr>
-
 </table>
 
 <table width="96%" border="0" cellspacing="0" cellpadding="8">
