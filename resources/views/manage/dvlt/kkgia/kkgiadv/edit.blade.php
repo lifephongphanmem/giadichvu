@@ -306,6 +306,35 @@
             })
 
         }
+        function checkngaykk(){
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                url: '/ajax/checkngaykk',
+                type: 'GET',
+                data: {
+                    _token: CSRF_TOKEN,
+                    ngaynhap: $('input[name="ngaynhap"]').val()
+
+                },
+                dataType: 'JSON',
+                success: function (data) {
+                    if (data.status == 'success') {
+                        toastr.success("Ngày kê khai có thể sử dụng được", "Thành công!");
+                    }else {
+                        toastr.error("Bạn cần kiểm tra lại ngày có kê khai, ngày kê khai không được nhỏ hơn ngày hiện tại! ", "Lỗi!");
+                        var today = new Date();
+                        var dd = today.getDate();
+                        var mm = today.getMonth()+1;//January is 0!
+                        var yyyy = today.getFullYear();
+                        if(dd<10){dd='0'+dd}
+                        if(mm<10){mm='0'+mm}
+                        $('#ngaynhap').val(dd+'/'+mm+'/'+yyyy);
+                        $('input[name="ngayhieuluc"]').val('');
+                    }
+                }
+            })
+
+        }
         function clearngay(){
             $('input[name="ngayhieuluc"]').val('');
         }
@@ -356,7 +385,9 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Ngày kê khai<span class="require">*</span></label>
-                                <!--input type="date" name="ngaynhap" id="ngaynhap" value="{{$model->ngaynhap}}" class="form-control required"-->
+                                @if(session('admin')->sadmin == 'ssa')
+                                    {!!Form::text('ngaynhap',date('d/m/Y',  strtotime($model->ngaynhap)), array('id' => 'ngaynhap','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required','onchange'=>"checkngaykk()"))!!}
+                                @endif
                                 <p style="color: #000088"><b>{{getDayVn($model->ngaynhap)}}</b></p>
                                 {!!Form::hidden('ngaynhap',date('d/m/Y',  strtotime($model->ngaynhap)), array('id' => 'ngaynhap','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required','autofocus','onchange'=>"clearngayhieuluc()"))!!}
                             </div>
