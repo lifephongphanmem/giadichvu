@@ -414,11 +414,7 @@
             }
             //});
         }
-
-
     </script>
-
-
 @stop
 
 @section('content')

@@ -307,7 +307,6 @@
 
         }
         function clearngay(){
-            $('input[name="ngaynhap"]').val('');
             $('input[name="ngayhieuluc"]').val('');
         }
         function clearngayhieuluc(){
