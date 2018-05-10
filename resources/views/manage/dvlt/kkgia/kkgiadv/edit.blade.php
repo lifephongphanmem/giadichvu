@@ -387,9 +387,10 @@
                                 <label class="control-label">Ngày kê khai<span class="require">*</span></label>
                                 @if(session('admin')->sadmin == 'ssa')
                                     {!!Form::text('ngaynhap',date('d/m/Y',  strtotime($model->ngaynhap)), array('id' => 'ngaynhap','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required','onchange'=>"checkngaykk()"))!!}
-                                @endif
+                                @else
                                 <p style="color: #000088"><b>{{getDayVn($model->ngaynhap)}}</b></p>
                                 {!!Form::hidden('ngaynhap',date('d/m/Y',  strtotime($model->ngaynhap)), array('id' => 'ngaynhap','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required','autofocus','onchange'=>"clearngayhieuluc()"))!!}
+                                @endif
                             </div>
                         </div>
                         <!--/span-->
