@@ -612,8 +612,6 @@ class KkGDvLtController extends Controller
         foreach($model as $tt){
             if($tt->mucgiakk > $tt->mucgialk)
                 $result['status'] = 'success';
-
-
         }
 
     }

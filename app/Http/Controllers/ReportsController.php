@@ -874,14 +874,15 @@ class ReportsController extends Controller
 
     public function dvltbc7(Request $request){
         if (Session::has('admin')) {
+
             $input = $request->all();
             $modelcqcq = DmDvQl::where('maqhns',$input['cqcq'])->first();
-            $modelgr = KkGDvLtH::select('username')
-                ->where('cqcq',$input['cqcq'])
+            $modelgr = KkGDvLtH::where('cqcq',$input['cqcq'])
                 ->where('action','Nhận hồ sơ')
                 ->whereMonth('ngaynhan',$input['thang'])
                 ->whereYear('ngaynhan',$input['nam'])
-                ->groupBy('username')
+                ->select('username')
+                ->GroupBy('username')
                 ->get();
             foreach($modelgr as $gr){
                 $name = Users::where('username',$gr->username)

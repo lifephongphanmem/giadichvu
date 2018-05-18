@@ -124,7 +124,7 @@ class KkGiaDvLt45sController extends Controller
             $inputs['phanloai'] = 'DT';
             $model = new KkGDvLt();
             if($model->create($inputs)){
-                $modelph = KkGDvLtCtDf::where('macskd',$insert['macskd'])
+                $modelph = KkGDvLtCtDf::where('macskd',$inputs['macskd'])
                     ->get();
                 foreach($modelph as $ph){
                     $modelgiaph = new KkGDvLtCt();
@@ -144,7 +144,7 @@ class KkGiaDvLt45sController extends Controller
                     $modelgiaph->save();
                 }
             }
-            return redirect('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh='.$insert['macskd'].'&nam='.date('Y'));
+            return redirect('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh='.$inputs['macskd'].'&nam='.date('Y'));
         }else
             return view('errors.notlogin');
     }

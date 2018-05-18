@@ -740,3 +740,8 @@ Route::get('/thongtinngaynghile/show','TtNgayNghiLeController@show');
 
 Route::resource('nangcap','NangCapController');
 Route::get('nangcapdl','NangCapController@nangcapdl');
+
+Route::get('testjoin',function(){
+    $model = \App\TestJoin::all();
+    dd($model);
+});
