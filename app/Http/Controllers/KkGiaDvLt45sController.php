@@ -97,7 +97,6 @@ class KkGiaDvLt45sController extends Controller
         if (Session::has('admin')) {
             $mahs = getdate()[0];
             $inputs = $request->all();
-            $model = new KkGDvLt();
             /*$model->ngaynhap = date('Y-m-d', strtotime(str_replace('/', '-', $insert['ngaynhap'])));
             $model->mahs = $mahs;
             $model->socv = $insert['socv'];

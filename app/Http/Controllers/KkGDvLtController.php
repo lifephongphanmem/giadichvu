@@ -107,6 +107,24 @@ class KkGDvLtController extends Controller
 
                     $modeldn = DnDvLt::where('masothue',$modelcskd->masothue)->first();
 
+                    $modelph = TtCsKdDvLt::where('macskd',$macskd)
+                        ->get();
+                    foreach($modelph as $ttph){
+                        $dsph = new KkGDvLtCtDf();
+                        $dsph->macskd = $ttph->macskd;
+                        $dsph->maloaip = $ttph->maloaip;
+                        $dsph->loaip = $ttph->loaip;
+                        $dsph->qccl = $ttph->qccl;
+                        $dsph->sohieu = $ttph->sohieu;
+                        $dsph->ghichu = $ttph->ghichu;
+                        $dsph->mucgialk = $ttph->mucgiakk;
+                        $dsph->mucgiakk = $ttph->mucgiakk;
+                        $dsph->save();
+                    }
+
+                    $modeldsph = KkGDvLtCtDf::where('macskd', $modelcskd->macskd)
+                        ->get();
+
                     return view('manage.dvlt.kkgia.kkgiadv.create')
                         ->with('modelcskd', $modelcskd)
                         ->with('modeldn',$modeldn)
