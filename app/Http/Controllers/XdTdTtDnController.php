@@ -27,11 +27,11 @@ class XdTdTtDnController extends Controller
                 $inputs['phanloai'] = isset($inputs['phanloai']) ? 'DVLT' : 'DVLT';
             }elseif(session('admin')->sadmin == 'savt'){
                 $inputs['phanloai'] = isset($inputs['phanloai']) ? 'DVVT' : 'DVVT';
-            }elseif(session('admin')->sadmin == 'sact'){
+            }/*elseif(session('admin')->sadmin == 'sact'){
                 $inputs['phanloai'] = isset($inputs['phanloai']) ? 'DVGS' : 'DVGS';
             }else{
                 $inputs['phanloai'] = isset($inputs['phanloai']) ? 'DVTACN' : 'DVTACN';
-            }
+            }*/
             if(session('admin')->level == 'T' || session('admin')->level=='H') {
                     if (session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'sa') {
                         $model = TtDn::where('pl',$inputs['phanloai'] )
@@ -77,7 +77,7 @@ class XdTdTtDnController extends Controller
                             ->with('setting', json_decode($setting))
                             ->with('settingtttd', json_decode($settingtttd))
                             ->with('pageTitle', 'Thông tin thay đổi doanh nghiệp');
-                    }elseif($modeltttd->pl == 'DVGS'){
+                    }/*elseif($modeltttd->pl == 'DVGS'){
                         $model = DnDvGs::where('masothue', $modeltttd->masothue)
                             ->first();
                         return view('system.xdtdttdn.dvgs.show')
@@ -91,7 +91,7 @@ class XdTdTtDnController extends Controller
                             ->with('model', $model)
                             ->with('modeltttd', $modeltttd)
                             ->with('pageTitle', 'Thông tin thay đổi doanh nghiệp');
-                    }
+                    }*/
             }else{
                 return view('errors.perm');
             }
@@ -140,7 +140,8 @@ class XdTdTtDnController extends Controller
                 $model->toado = $modeltttd->toado;
                 $model->tailieu = $modeltttd->tailieu;
                 $model->link = $modeltttd->link;
-            }elseif($modeltttd->pl == 'DVGS'){
+            }
+            /*elseif($modeltttd->pl == 'DVGS'){
                 $model = DnDvGs::where('masothue', $modeltttd->masothue)
                     ->first();
                 $model->tendn = $modeltttd->tendn;
@@ -168,7 +169,7 @@ class XdTdTtDnController extends Controller
                 $model->diadanh = $modeltttd->diadanh;
                 $model->tailieu = $modeltttd->tailieu;
                 $model->giayphepkd = $modeltttd->giayphepkd;
-            }
+            }*/
             if($model->save()){
                 $tencqcq = DmDvQl::where('maqhns',$model->cqcq)->first();
                 $data=[];
