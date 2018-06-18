@@ -200,7 +200,7 @@ class KkGDvLtController extends Controller
             if(session('admin')->level == 'T' || session('admin')->level == 'H' || session('admin')->level == 'DVLT') {
                 $modelcp = CbKkGDvLt::where('macskd',$macskd)
                     ->first();
-                if($modelcb->phanloai !='DT') {
+                if($modelcp->phanloai !='DT') {
                     $modelcskd = CsKdDvLt::where('macskd', $macskd)->first();
                     $modelkkctdf = KkGDvLtCtDf::where('macskd', $macskd)
                         ->delete();
