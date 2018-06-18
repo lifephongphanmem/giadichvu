@@ -642,6 +642,7 @@ class KkGDvLtController extends Controller
             $dn = DnDvLt::all();
             if($inputs['masothue'] == 'all')
                 $model = KkGDvLt::whereYear('ngaynhap',$inputs['nam'])
+                    ->where('masothue','all')
                     ->get();
             else
                 $model = KkGDvLt::whereYear('ngaynhap',$inputs['nam'])

@@ -307,6 +307,8 @@ class HomeController extends Controller
             $update['roles'] = isset($update['roles']) ? $update['roles'] : null;
             $model->setting = json_encode($update['roles']);
             $model->urlwebcb = $update['urlwebcb'];
+            $model->thoihan_lt = $update['thoihan_lt'];
+            $model->thoihan_vt = $update['thoihan_vt'];
             $model->save();
 
             return redirect('cau_hinh_he_thong');

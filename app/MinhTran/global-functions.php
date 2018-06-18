@@ -562,7 +562,6 @@ function getNgayHieuLucLT($ngaynhap){
     return $ngayhieuluc;
 }
 
-
 function getTtPhong($str)
 {
     $str = str_replace(',',', ',$str);
@@ -571,6 +570,4 @@ function getTtPhong($str)
     $str = str_replace('-','- ',$str);
     return $str;
 }
-
-
 ?>

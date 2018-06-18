@@ -57,14 +57,14 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <!--div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label class="control-label">Thời hạn duyệt hồ sơ giá sữa<span class="require">*</span></label>
                         {!!Form::text('thoihan_ct', $model->thoihan_ct, array('id' => 'thoihan_ct','class' => 'form-control','autofocus'))!!}
                     </div>
                 </div>
-            </div>
+            </div-->
             <div class="portlet box blue">
 
                 <div class="portlet-body">
@@ -122,47 +122,6 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="col-md-3">
-                                <h4 style="text-align: center">Kê khai giá sữa</h4>
-                                <table class="table table-striped table-bordered table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th class="table-checkbox" width="5%">
-                                            <!--input type="checkbox" class="group-checkable" data-set="#sample_3 .checkboxes"/-->
-                                        </th>
-                                        <th>Chức năng</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td><input type="checkbox" {{ (isset($setting->dvgs->dvgs) && $setting->dvgs->dvgs == 1) ? 'checked' : '' }} value="1" name="roles[dvgs][dvgs]"/></td>
-                                        <td>Kê khai giá sữa</td>
-                                    </tr>
-
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="col-md-3">
-                                <h4 style="text-align: center">Kê khai giá thức ăn chăn nuôi</h4>
-                                <table class="table table-striped table-bordered table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th class="table-checkbox" width="5%">
-                                            <!--input type="checkbox" class="group-checkable" data-set="#sample_3 .checkboxes"/-->
-                                        </th>
-                                        <th>Chức năng</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td><input type="checkbox" {{ (isset($setting->dvtacn->dvtacn) && $setting->dvtacn->dvtacn == 1) ? 'checked' : '' }} value="1" name="roles[dvtacn][dvtacn]"/></td>
-                                        <td>Kê khai thức ăn chăn nuôi</td>
-                                    </tr>
-
-                                    </tbody>
-                                </table>
-                            </div>
-
                         </div>
 
                     </div>

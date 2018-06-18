@@ -342,21 +342,21 @@
                                     @endif
                                     @if(can('kkdvlt','approve'))
                                         @if($tt->trangthai !='Bị trả lại')
-                                        @if($tt->trangthai == 'Chờ nhận')
-                                            <button type="button" onclick="confirmTraLai({{$tt->id}})" class="btn btn-default btn-xs mbs" data-target="#tralai-modal" data-toggle="modal"><i class="fa fa-reply"></i>&nbsp;
-                                                Trả lại</button>
-                                            <button type="button" onclick="confirmNhanHs({{$tt->id}})" class="btn btn-default btn-xs mbs" data-target="#nhanhs-modal" data-toggle="modal"><i class="fa fa-share"></i>&nbsp;
-                                                Nhận hồ sơ</button>
-                                                <a href="{{url('ke_khai_dich_vu_luu_tru/'.$tt->macskd.'/hsdakk')}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Thông tin hồ sơ đã kê khai</a>
+                                            @if($tt->trangthai == 'Chờ nhận')
+                                                <button type="button" onclick="confirmTraLai({{$tt->id}})" class="btn btn-default btn-xs mbs" data-target="#tralai-modal" data-toggle="modal"><i class="fa fa-reply"></i>&nbsp;
+                                                    Trả lại</button>
+                                                <button type="button" onclick="confirmNhanHs({{$tt->id}})" class="btn btn-default btn-xs mbs" data-target="#nhanhs-modal" data-toggle="modal"><i class="fa fa-share"></i>&nbsp;
+                                                    Nhận hồ sơ</button>
+                                                <!--a href="{{url('ke_khai_dich_vu_luu_tru/'.$tt->macskd.'/hsdakk')}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Thông tin hồ sơ đã kê khai</a-->
 
-                                        @else
-                                            <button type="button" onclick="confirmNhanHsedit({{$tt->mahs}})" class="btn btn-default btn-xs mbs" data-target="#nhanhsedit-modal" data-toggle="modal"><i class="fa fa-edit"></i>&nbsp;
-                                                Chỉnh sửa TT nhận</button>
-                                            <button type="button" onclick="confirmHuyduyet({{$tt->mahs}})" class="btn btn-default btn-xs mbs" data-target="#huyduyet-modal" data-toggle="modal"><i class="fa fa-stop"></i>&nbsp;
-                                                Huỷ duyệt HS</button>
+                                            @else
+                                                <button type="button" onclick="confirmNhanHsedit({{$tt->mahs}})" class="btn btn-default btn-xs mbs" data-target="#nhanhsedit-modal" data-toggle="modal"><i class="fa fa-edit"></i>&nbsp;
+                                                    Chỉnh sửa TT nhận</button>
+                                                <button type="button" onclick="confirmHuyduyet({{$tt->mahs}})" class="btn btn-default btn-xs mbs" data-target="#huyduyet-modal" data-toggle="modal"><i class="fa fa-stop"></i>&nbsp;
+                                                    Huỷ duyệt HS</button>
+                                            @endif
                                         @endif
-                                        @endif
-
+                                            <a href="{{url('ke_khai_dich_vu_luu_tru/'.$tt->macskd.'/hsdakk')}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Thông tin hồ sơ đã kê khai</a>
                                     @endif
                                         <a href="{{url('ke_khai_dich_vu_luu_tru/'.$tt->mahs.'/history')}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Lịch sử</a>
 
