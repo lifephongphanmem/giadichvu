@@ -139,7 +139,7 @@ class KkGiaDvLt45sController extends Controller
                     $modelgiaph->mucgiakk = $ph->mucgiakk;
                     $modelgiaph->tendoituong = $ph->tendoituong;
                     $model->apdung = $ph->apdung;
-                    $modelgiaph->mahs = $mahs;
+                    $modelgiaph->mahs = $inputs['mahs'];
                     $modelgiaph->save();
                 }
             }
