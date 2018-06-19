@@ -94,7 +94,7 @@ class KkGiaDvLt45sController extends Controller
     }
     //add ttp
     public function store(Request $request){
-        if (Session::has('admin')) {
+        //if (Session::has('admin')) {
             $mahs = getdate()[0];
             $inputs = $request->all();
             /*$model->ngaynhap = date('Y-m-d', strtotime(str_replace('/', '-', $insert['ngaynhap'])));
@@ -144,8 +144,8 @@ class KkGiaDvLt45sController extends Controller
                 }
             }
             return redirect('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh='.$inputs['macskd'].'&nam='.date('Y'));
-        }else
-            return view('errors.notlogin');
+        //}else
+            //return view('errors.notlogin');
     }
 
     public function edit($id){

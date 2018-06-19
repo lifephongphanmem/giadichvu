@@ -38,7 +38,6 @@ class KkGDvLtController extends Controller
                 } else {
                     $model = CsKdDvLt::where('masothue', session('admin')->mahuyen)
                         ->get();
-
                 }
 
                 return view('manage.dvlt.kkgia.ttcskd.index')
