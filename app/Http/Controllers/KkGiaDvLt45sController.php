@@ -181,7 +181,7 @@ class KkGiaDvLt45sController extends Controller
     }
 
     public function update($id,Request $request){
-        if (Session::has('admin')) {
+        //if (Session::has('admin')) {
             $insert = $request->all();
             $model = KkGDvLt::findOrFail($id);
             $model->ngaynhap = date('Y-m-d', strtotime(str_replace('/', '-', $insert['ngaynhap'])));
@@ -196,7 +196,7 @@ class KkGiaDvLt45sController extends Controller
             $model->plhs = $insert['plhs'];
             $model->save();
             return redirect('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh='.$insert['macskd'].'&nam='.date('Y'));
-        }else
-            return view('errors.notlogin');
+        //}else
+            //return view('errors.notlogin');
     }
 }

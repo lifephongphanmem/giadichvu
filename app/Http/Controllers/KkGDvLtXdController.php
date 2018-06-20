@@ -150,27 +150,9 @@ class KkGDvLtXdController extends Controller
             if($input['lydo'] != '') {
                 $model->lydo = $input['lydo'];
                 $model->trangthai = 'Bị trả lại';
-                if($model->save()){
-                    $tencqcq = DmDvQl::where('maqhns',$model->cqcq)->first();
-                    $dn = DnDvLt::where('masothue',$model->masothue)->first();
-                    $data=[];
-                    $data['tendn'] = $dn->tendn;
-                    $data['masothue'] = $model->masothue;
-                    $data['tg'] = Carbon::now()->toDateTimeString();
-                    $data['tencqcq'] = $tencqcq->tendv;
-                    $data['lydo'] = $input['lydo'];
-                    $maildn = $dn->email;
-                    $tendn = $dn->tendn;
-                    $mailql = $tencqcq->email;
-                    $tenql = $tencqcq->tendv;
-                    Mail::send('mail.replykkgia',$data, function ($message) use($maildn,$tendn,$mailql,$tenql) {
-                        $message->to($maildn,$tendn)
-                            ->to($mailql,$tenql)
-                            ->subject('Thông báo trả lại hồ sơ kê khai giá dịch vụ');
-                        $message->from('qlgiakhanhhoa@gmail.com','Phần mềm CSDL giá');
-                    });
+                $model->save();
                     //History
-                    $mahsh = getdate()[0];
+                    /*$mahsh = getdate()[0];
                     $his = new KkGDvLtH();
                     $his->mahsh = $mahsh;
                     $his->mahs = $model->mahs;
@@ -214,13 +196,63 @@ class KkGDvLtXdController extends Controller
                             $hisct->maloaip = $ct->maloaip;
                             $hisct->save();
                         }
-                    }
-                }
+                    }*/
             }
+            $this->uphistlhs($model);
+            $tencqcq = DmDvQl::where('maqhns',$model->cqcq)->first();
+            $dn = DnDvLt::where('masothue',$model->masothue)->first();
+            $data=[];
+            $data['tendn'] = $dn->tendn;
+            $data['masothue'] = $model->masothue;
+            $data['tg'] = Carbon::now()->toDateTimeString();
+            $data['tencqcq'] = $tencqcq->tendv;
+            $data['lydo'] = $input['lydo'];
+            $maildn = $dn->email;
+            $tendn = $dn->tendn;
+            $mailql = $tencqcq->email;
+            $tenql = $tencqcq->tendv;
+            Mail::send('mail.replykkgia',$data, function ($message) use($maildn,$tendn,$mailql,$tenql) {
+                $message->to($maildn,$tendn)
+                    ->to($mailql,$tenql)
+                    ->subject('Thông báo trả lại hồ sơ kê khai giá dịch vụ');
+                $message->from('qlgiakhanhhoa@gmail.com','Phần mềm CSDL giá');
+            });
             return redirect('xet_duyet_ke_khai_dich_vu_luu_tru');
         }else
             return view('errors.notlogin');
     }
+
+    public function uphistlhs($model){
+        $mahsh = getdate()[0];
+        $arrays = $model->toArray();
+        unset($arrays['id']);
+        $arrays['action'] = 'Trả lại hồ sơ';
+        $arrays['mahsh'] = $mahsh;
+        $arrays['username'] = session('admin')->username;
+        $arrays['name'] = session('admin')->name;
+        $his = new KkGDvLtH();
+        if($his->create($arrays)){
+            $hsct = KkGDvLtCt::where('mahs',$model->mahs)
+                ->get();
+            foreach($hsct as $ct){
+                $hisct = new KkGDvLtCtH();
+                $hisct->mahsh = $mahsh;
+                $hisct->loaip = $ct->loaip;
+                $hisct->qccl = $ct->qccl;
+                $hisct->sohieu = $ct->sohieu;
+                $hisct->ghichu = $ct->ghichu;
+                $hisct->macskd = $ct->macskd;
+                $hisct->mahs = $ct->mahs;
+                $hisct->mucgialk = $ct->mucgialk;
+                $hisct->mucgiakk = $ct->mucgiakk;
+                $hisct->tendoituong = $ct->tendoituong;
+                $hisct->apdung = $ct->apdung;
+                $hisct->maloaip = $ct->maloaip;
+                $hisct->save();
+            }
+        }
+    }
+
 
     public function getTTnHs(Request $request){
         $result = array(
@@ -300,31 +332,8 @@ class KkGDvLtXdController extends Controller
                     ->first();
                 $nhanhs->sohsnhan = $input['sohsnhan'];
                 $nhanhs->save();
-
-                $tencqcq = DmDvQl::where('maqhns',$model->cqcq)->first();
-                $dn = DnDvLt::where('masothue',$model->masothue)->first();
-                $data=[];
-                $data['tendn'] = $dn->tendn;
-                $data['tg'] = Carbon::now()->toDateTimeString();
-                $data['tencqcq'] = $tencqcq->tendv;
-                $data['ngaykk'] = $model->ngaynhap;
-                $data['ngayapdung'] = $model->ngayhieuluc;
-                $data['socv'] = $model->socv;
-                $data['ngaynhan'] = $input['ngaynhan'];
-                $data['sohsnhan'] = $input['sohsnhan'];
-
-                $maildn = $dn->email;
-                $tendn = $dn->tendn;
-                $mailql = $tencqcq->email;
-                $tenql = $tencqcq->tendv;
-                Mail::send('mail.successkkgia',$data, function ($message) use($maildn,$tendn,$mailql,$tenql) {
-                    $message->to($maildn,$tendn)
-                        ->to($mailql,$tenql)
-                        ->subject('Thông báo xét duyệt hồ sơ kê khai giá dịch vụ');
-                    $message->from('qlgiakhanhhoa@gmail.com','Phần mềm CSDL giá');
-                });
                 //History
-                $mahsh = getdate()[0];
+                /*$mahsh = getdate()[0];
                 $his = new KkGDvLtH();
                 $his->mahsh = $mahsh;
                 $his->mahs = $model->mahs;
@@ -370,11 +379,67 @@ class KkGDvLtXdController extends Controller
                         $hisct->maloaip = $ct->maloaip;
                         $hisct->save();
                     }
-                }
+                }*/
             }
+            $this->uphisnhanhs($model);
+            $tencqcq = DmDvQl::where('maqhns',$model->cqcq)->first();
+            $dn = DnDvLt::where('masothue',$model->masothue)->first();
+            $data=[];
+            $data['tendn'] = $dn->tendn;
+            $data['tg'] = Carbon::now()->toDateTimeString();
+            $data['tencqcq'] = $tencqcq->tendv;
+            $data['ngaykk'] = $model->ngaynhap;
+            $data['ngayapdung'] = $model->ngayhieuluc;
+            $data['socv'] = $model->socv;
+            $data['ngaynhan'] = $input['ngaynhan'];
+            $data['sohsnhan'] = $input['sohsnhan'];
+
+            $maildn = $dn->email;
+            $tendn = $dn->tendn;
+            $mailql = $tencqcq->email;
+            $tenql = $tencqcq->tendv;
+            Mail::send('mail.successkkgia',$data, function ($message) use($maildn,$tendn,$mailql,$tenql) {
+                $message->to($maildn,$tendn)
+                    ->to($mailql,$tenql)
+                    ->subject('Thông báo xét duyệt hồ sơ kê khai giá dịch vụ');
+                $message->from('qlgiakhanhhoa@gmail.com','Phần mềm CSDL giá');
+            });
             return redirect('xet_duyet_ke_khai_dich_vu_luu_tru');
         }else
             return view('errors.notlogin');
+    }
+
+    public function uphisnhanhs($model){
+        $mahsh = getdate()[0];
+        $arrays = $model->toArray();
+        unset($arrays['id']);
+        $arrays['action'] = 'Nhận hồ sơ';
+        $arrays['mahsh'] = $mahsh;
+        $arrays['username'] = session('admin')->username;
+        $arrays['name'] = session('admin')->name;
+        $his = new KkGDvLtH();
+
+        if($his->create($arrays)){
+            $hsct = KkGDvLtCt::where('mahs',$model->mahs)
+                ->get();
+            dd($hsct);
+            foreach($hsct as $ct){
+                $hisct = new KkGDvLtCtH();
+                $hisct->mahsh = $mahsh;
+                $hisct->loaip = $ct->loaip;
+                $hisct->qccl = $ct->qccl;
+                $hisct->sohieu = $ct->sohieu;
+                $hisct->ghichu = $ct->ghichu;
+                $hisct->macskd = $ct->macskd;
+                $hisct->mahs = $ct->mahs;
+                $hisct->mucgialk = $ct->mucgialk;
+                $hisct->mucgiakk = $ct->mucgiakk;
+                $hisct->tendoituong = $ct->tendoituong;
+                $hisct->apdung = $ct->apdung;
+                $hisct->maloaip = $ct->maloaip;
+                $hisct->save();
+            }
+        }
     }
 
     public function congbo($id){
@@ -485,11 +550,13 @@ class KkGDvLtXdController extends Controller
         }else
             return view('errors.notlogin');
     }
+
     public function showhis($mahsh){
         if (Session::has('admin')) {
             $model = KkGDvLtH::where('mahsh',$mahsh)->first();
-            $modeldn = DnDvLt::where('masothue',$model->masothue)->first();
             $modelcskd = CsKdDvLt::where('macskd',$model->macskd)->first();
+            $modeldn = DnDvLt::where('masothue',$modelcskd->masothue)->first();
+
             $modelct = KkGDvLtCtH::where('mahsh',$mahsh)
                 ->get();
 
@@ -503,6 +570,7 @@ class KkGDvLtXdController extends Controller
             return view('errors.notlogin');
 
     }
+
     public function showhis45s($mahsh){
         if (Session::has('admin')) {
             $model = KkGDvLtH::where('mahsh',$mahsh)->first();
@@ -530,7 +598,7 @@ class KkGDvLtXdController extends Controller
 
             $model = KkGDvLt::where('macskd',$macskd)
                 ->where('trangthai','Duyệt')
-                ->orderBy('id', 'desc')
+                //->orderBy('id', 'desc')
                 ->get();
             return view('manage.dvlt.kkgia.xetduyet.hsdakk')
                 ->with('pageTitle','Thông tin hồ sơ đa kê khai')
@@ -638,5 +706,7 @@ class KkGDvLtXdController extends Controller
         }
         die(json_encode($result));
     }
+
+
 
 }
