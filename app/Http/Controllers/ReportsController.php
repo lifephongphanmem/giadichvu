@@ -32,13 +32,21 @@ class ReportsController extends Controller
             $model = DmDvQl::where('plql','TC')->get();
             if(session('admin')->level=='T'){
                 $model_donvi = dndvlt::select('tendn','masothue')->get();
+                $model_cskd = CsKdDvLt::select('tencskd','macskd')->get();
             }else{
                 $model_donvi = dndvlt::select('tendn','masothue')->where('cqcq',session('admin')->cqcq)->get();
+                $arraymasothue = '[]';
+                foreach($model_donvi as $masothue){
+                    $arraymasothue = $arraymasothue.$masothue->masothue.',';
+                }
+                $model_cskd = CsKdDvLt::whereIn('masothue',explode(',',$arraymasothue))
+                    ->select('tencskd','macskd')->get();
             }
 
             return view('reports.kkgdvlt.bcth.index')
                 ->with('model',$model)
                 ->with('model_donvi',$model_donvi)
+                ->with('model_cskd',$model_cskd)
                 ->with('pageTitle', 'Báo cáo tổng hợp dịch vụ lưu trú');
 
         }else
@@ -901,6 +909,65 @@ class ReportsController extends Controller
                 ->with('model',$model)
                 ->with('modelgr',$modelgr)
                 ->with('pageTitle','Báo cáo xét duyệt hồ sơ kê khai giá dịch vụ lưu trú');
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function dvltbc8(Request $request){
+        if (Session::has('admin')) {
+            $input = $request->all();
+            if(session('admin')->level == 'T'){
+                if($input['cqcq']=='all') {
+                    $m_cqcq = DmDvQl::where('plql','TC')->get();
+                    $modelcqcq = DmDvQl::where('maqhns',session('admin')->cqcq)->first();
+                } else {
+                    $m_cqcq = DmDvQl::where('maqhns',$input['cqcq'])->get();
+                    $modelcqcq = DmDvQl::where('maqhns',$input['cqcq'])->first();
+                }
+            }else{
+                $m_cqcq = DmDvQl::where('maqhns',session('admin')->cqcq)->get();
+                $modelcqcq = DmDvQl::where('maqhns',session('admin')->cqcq)->first();
+            }
+
+            $model=$this->get_KKG_TH($input);
+
+            return view('reports.kkgdvlt.bcth.BC8')
+                ->with('modelcqcq',$modelcqcq)
+                ->with('input',$input)
+                ->with('model',$model)
+                ->with('m_cqcq',$m_cqcq)
+                ->with('pageTitle','Báo cáo thống kê các đơn vị kê khai giá trong khoảng thời gian');
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function dvltbc9(Request $request){
+        if (Session::has('admin')) {
+            $input = $request->all();
+            $m_cskd = CsKdDvLt::where('macskd',$input['macskd'])->first();
+            $cqcq = DnDvLt::where('masothue',$m_cskd->masothue)->first();
+
+            $modelcqcq = DmDvQl::where('maqhns',$cqcq->cqcq)->first();
+
+            $model = KkGDvLt::where('trangthai', 'Chờ duyệt')
+                ->OrWhere('trangthai', 'Duyệt')
+                ->where('macskd',$input['macskd'])
+                ->whereBetween('ngaychuyen', [$input['ngaytu'], $input['ngayden']])
+                ->orderBy('ngaychuyen')
+                ->get();
+
+            $mahss = '';
+            foreach($model as $kk){
+                $mahss = $mahss.$kk->mahs.',';
+            }
+            $modelctkk = KkGDvLtCt::whereIn('mahs',explode(',',$mahss))->get();
+            return view('reports.kkgdvlt.bcth.BC9')
+                ->with('modelcqcq',$modelcqcq)
+                ->with('input',$input)
+                ->with('model',$model)
+                ->with('modelctkk',$modelctkk)
+                ->with('m_cskd',$m_cskd)
+                ->with('pageTitle','Báo cáo chi tiết hồ sơ kê khai giá');
         }else
             return view('errors.notlogin');
     }

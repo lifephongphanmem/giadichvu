@@ -57,6 +57,15 @@
         $('#frm_bc7').attr('action',url);
         $('#frm_bc7').submit();
     }
+
+    function ClickBC8(url){
+        $('#frm_bc8').attr('action',url);
+        $('#frm_bc8').submit();
+    }
+    function ClickBC9(url){
+        $('#frm_bc9').attr('action',url);
+        $('#frm_bc9').submit();
+    }
 </script>
 
 <!--Modal Thoại BC1-->
@@ -570,6 +579,125 @@
             <div class="modal-footer">
                 <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>
                 <button type="submit" data-dismiss="modal" class="btn btn-success" onclick="ClickBC7('/reports/dich_vu_luu_tru/BC7')">Đồng ý</button>
+            </div>
+            {!! Form::close() !!}
+        </div>
+    </div>
+    </form>
+</div>
+
+<!--Modal Thoại BC8-->
+<div id="BC8-thoai-confirm" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade">
+    <div class="modal-dialog">
+        {!! Form::open(['url'=>'/reports/dich_vu_luu_tru/BC8','target'=>'_blank' , 'id' => 'frm_bc8', 'class'=>'form-horizontal form-validate']) !!}
+        <div class="modal-content">
+            <div class="modal-header modal-header-primary">
+                <button type="button" data-dismiss="modal" aria-hidden="true"
+                        class="close">&times;</button>
+                <h4 id="modal-header-primary-label" class="modal-title">Báo cáo tổng hợp hồ sơ kê khai giá</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label"><b>Từ ngày</b></label>
+                        <div class="col-md-6 ">
+                            <input type="date" id="ngaytu" name="ngaytu" class="form-control" value="{{intval(date('Y')).'-01-01'}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label"><b>Đến ngày</b></label>
+                        <div class="col-md-6 ">
+                            <input type="date" id="ngayden" name="ngayden" class="form-control" value="{{intval(date('Y')).'-12-31'}}">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label"><b>Loại hạng</b></label>
+                        <div class="col-md-6 ">
+                            <select id="loaihang" name="loaihang" class="form-control select2me">
+                                <option value="all">--Tất cả--</option>
+                                <option value="1">1 sao</option>
+                                <option value="1.5">1.5 sao</option>
+                                <option value="2">2 sao</option>
+                                <option value="2.5">2.5 sao</option>
+                                <option value="3">3 sao</option>
+                                <option value="3.5">3.5 sao</option>
+                                <option value="4">4 sao</option>
+                                <option value="4.5">4.5 sao</option>
+                                <option value="5">5 sao</option>
+                                <option value="K">Khác (Nhà nghỉ)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    @if(session('admin')->level == 'T')
+                        <div class="form-group">
+                            <label class="col-md-4 control-label"><b>Đơn vị chủ quản</b></label>
+                            <div class="col-md-6 ">
+                                <select class="form-control select2me" name="cqcq" id="cqcq">
+                                    <option value="all">--Tất cả--</option>
+                                    @foreach($model as $cqcq)
+                                        <option value="{{$cqcq->maqhns}}">{{$cqcq->tendv}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    @endif
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>
+                <button type="submit" data-dismiss="modal" class="btn btn-success" onclick="ClickBC8('/reports/dich_vu_luu_tru/BC8')">Đồng ý</button>
+                <!--button type="submit" data-dismiss="modal" class="btn btn-primary" onclick="ClickBC1_excel('/reports/dich_vu_luu_tru/BC1_excel')">Xuất Excel</button-->
+                <!--button type="submit" data-dismiss="modal" class="btn btn-primary" onclick="ClickPL1Excel('/reports/tt55-2011-BTC/PL1Excel')">Xuất Excel</button-->
+            </div>
+            {!! Form::close() !!}
+        </div>
+    </div>
+    </form>
+</div>
+
+<!--Modal Thoại Bc9-->
+<div id="BC9-thoai-confirm" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade">
+    <div class="modal-dialog">
+        {!! Form::open(['url'=>'/reports/dich_vu_luu_tru/BC9','target'=>'_blank' , 'id' => 'frm_bc9', 'class'=>'form-horizontal form-validate']) !!}
+        <div class="modal-content">
+            <div class="modal-header modal-header-primary">
+                <button type="button" data-dismiss="modal" aria-hidden="true"
+                        class="close">&times;</button>
+                <h4 id="modal-header-primary-label" class="modal-title">Báo cáo chi tiết hồ sơ kê khai giá</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label"><b>Từ ngày</b></label>
+                        <div class="col-md-8">
+                            <input type="date" id="ngaytu" name="ngaytu" class="form-control" value="{{intval(date('Y')).'-01-01'}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label"><b>Đến ngày</b></label>
+                        <div class="col-md-8">
+                            <input type="date" id="ngayden" name="ngayden" class="form-control" value="{{intval(date('Y')).'-12-31'}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label"><b>Cơ sở kinh doanh</b></label>
+                        <div class="col-md-8">
+                            <select class="form-control select2me" name="macskd" id="macskd">
+                                @foreach($model_cskd as $cskd)
+                                    <option value="{{$cskd->macskd}}">{{$cskd->tencskd}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>
+                <button type="submit" data-dismiss="modal" class="btn btn-success" onclick="ClickBC9('/reports/dich_vu_luu_tru/BC9')">Đồng ý</button>
+                <!--button type="submit" data-dismiss="modal" class="btn btn-primary" onclick="ClickBC4_excel('/reports/dich_vu_luu_tru/BC4_excel')">Xuất Excel</button-->
+                <!--button type="submit" data-dismiss="modal" class="btn btn-primary" onclick="ClickPL1Excel('/reports/tt55-2011-BTC/PL1Excel')">Xuất Excel</button-->
             </div>
             {!! Form::close() !!}
         </div>

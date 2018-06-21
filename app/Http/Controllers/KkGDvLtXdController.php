@@ -317,7 +317,11 @@ class KkGDvLtXdController extends Controller
             $ngaynhan = Carbon::parse($model->ngaynhan);
             $ngaychuyen = Carbon::parse($model->ngaychuyen);
             $ngay = $ngaynhan->diff($ngaychuyen)->days;
-            $thoihan_lt=getGeneralConfigs()['thoihan_lt'];
+            $ktgio = date('H',strtotime($model->ngaychuyen));
+            if($ktgio >= '16')
+                $thoihan_lt=getGeneralConfigs()['thoihan_lt'] + 1;
+            else
+                $thoihan_lt=getGeneralConfigs()['thoihan_lt'];
             if($ngay<$thoihan_lt){
                 $model->thoihan='Trước thời hạn';
             }elseif($ngay==$thoihan_lt){

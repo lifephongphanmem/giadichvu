@@ -36,6 +36,7 @@
             }
         }
     </style>
+    <link rel="shortcut icon" href="{{ url('images/LIFESOFT.png')}}" type="image/x-icon">
 </head>
 <div class="in" style="margin-left: 20px;">
     <input type="submit" onclick=" window.print()" value="In báo cáo"  />

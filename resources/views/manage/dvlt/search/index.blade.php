@@ -33,6 +33,13 @@
                 var url = 'search_ke_khai_dich_vu_luu_tru?&masothue='+ masothue +'&nam='+namhs;
                 window.location.href = url;
             });
+            $('#macskd').change(function() {
+                var namhs = $('#namhs').val();
+                var masothue = $('#masothue').val();
+                var macskd = $('#macskd').val();
+                var url = 'search_ke_khai_dich_vu_luu_tru?&masothue='+ masothue +'&nam='+namhs+'&macskd='+macskd;
+                window.location.href = url;
+            });
         });
     </script>
 @stop
@@ -64,6 +71,16 @@
                 </select>
             </div>
         </div>
+        <div class="col-md-5">
+            <div class="form-group">
+                <select class="form-control select2me" id="macskd" name="macskd">
+                    <option value="all">-- Nhập thông tin cơ sở kinh doanh --</option>
+                    @foreach($cskd as $ks)
+                        <option value="{{$ks->macskd}}" {{$select_macskd == $ks->macskd ? 'selected' : '' }}>{{$ks->tencskd}}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
 
     </div>
     <!-- END PAGE HEADER-->
@@ -90,7 +107,7 @@
                         @foreach($model as $key=>$tt)
                             <tr>
                                 <td style="text-align: center">{{$key+1}}</td>
-                                <td class="active">{{$tt->tencskd}}<br>Mã số thuế: {{$tt->masothue}}<br>Số hồ sơ: {{$tt->mahs}}</td>
+                                <td class="active"><b>{{$tt->tencskd}}</b><br>Mã số thuế: {{$tt->masothue}}<br>Số hồ sơ: {{$tt->mahs}}</td>
                                 <td style="text-align: center">{{getDayVn($tt->ngaynhap)}}</td>
                                 <td style="text-align: center">{{getDayVn($tt->ngayhieuluc)}}</td>
                                 <td style="text-align: center" class="active">{{$tt->socv}}</td>

@@ -24,9 +24,10 @@
         p{
             padding: 5px;
         }
-        span {
+        span{
             text-transform: uppercase;
             font-weight: bold;
+
         }
 
         @media print {
@@ -37,7 +38,6 @@
     </style>
     <link rel="shortcut icon" href="{{ url('images/LIFESOFT.png')}}" type="image/x-icon">
 </head>
-
 <div class="in" style="margin-left: 20px;">
     <input type="submit" onclick=" window.print()" value="In báo cáo"  />
 </div>
@@ -66,7 +66,7 @@
 <table width="96%" border="0" cellspacing="0" cellpadding="8" style="margin:0 auto 20px; text-align: center;">
     <tr>
         <td colspan="9" style="text-align: center; font-weight: bold; font-size: 16px;">
-            BÁO CÁO KẾT QUẢ GIẢI QUYẾT HỒ SƠ
+            BÁO CÁO THỐNG KÊ CÁC ĐƠN VỊ KÊ KHAI GIÁ
         </td>
     </tr>
     <tr>
@@ -79,23 +79,13 @@
             Loại hạng: {{$input['loaihang']=='all'?'Tất cả':$input['loaihang'].' sao'}}
         </td>
     </tr>
-    <tr>
-        <td colspan="9" style="text-align: center; font-weight: bold;">
-            Phân loại hồ sơ: <?php
-                if($input['thoihan']=='all'){
-                    echo 'Tất cả';
-                }else{
-                    echo $input['thoihan'];
-                }
-            ?>
-        </td>
-    </tr>
 </table>
 
 
 <table cellspacing="0" cellpadding="0" border="1" style="margin: 20px auto; border-collapse: collapse;">
     <tr>
         <th>STT</th>
+        <th>Tên doanh nghiệp</th>
         <th>Tên cơ sở kinh doanh</th>
         <th>Loại hạng</th>
         <th>Địa chỉ</th>
@@ -104,7 +94,7 @@
         <th>Ngày gửi kê khai giá</th>
         <th>Ngày trả kết quả</th>
         <th>Ngày thực hiện<br> mức giá kê khai</th>
-        <th>Thời hạn giải quyết</th>
+        <th>Trạng thái hồ sơ</th>
     </tr>
     @foreach($m_cqcq as $cskd)
         <?php $model_kk=$model->where('cqcq',$cskd->maqhns) ?>
@@ -118,6 +108,7 @@
             @foreach($model_kk as $key => $ttkk)
                 <tr>
                     <th style="text-align: center">{{$i++}}</th>
+                    <th style="text-align: left">{{$ttkk->tendn}}</th>
                     <th style="text-align: left">{{$ttkk->tencskd}}</th>
                     <th style="text-align: center">{{$ttkk->loaihang}} sao</th>
                     <th style="text-align: left">{{$ttkk->diachikd}}</th>
@@ -126,18 +117,17 @@
                     <th style="text-align: center">{{getDateTime($ttkk->ngaychuyen)}}</th>
                     <th style="text-align: center">{{getDayVn($ttkk->ngaynhan)}}</th>
                     <th style="text-align: center">{{getDayVn($ttkk->ngayhieuluc)}}</th>
-                    <th style="text-align: center">{{$ttkk->thoihan}}</th>
+                    <th style="text-align: center">{{$ttkk->trangthai}}</th>
                 </tr>
             @endforeach
         @endif
     @endforeach
     <tr>
-        <th style="text-align: left" colspan="10">
+        <th style="text-align: left" colspan="11">
             {{'Tổng cộng: '. count($model).' hồ sơ.'}}
         </th>
     </tr>
 </table>
-
 <table width="96%" border="0" cellspacing="0" cellpadding="8">
     <tr>
         <td style="text-align: left;" width="50%">

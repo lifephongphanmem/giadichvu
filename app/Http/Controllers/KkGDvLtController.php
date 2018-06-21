@@ -677,15 +677,34 @@ class KkGDvLtController extends Controller
             $inputs = $request->all();
             $inputs['nam'] = isset($inputs['nam']) ? $inputs['nam'] : date('Y');
             $inputs['masothue'] = isset($inputs['masothue']) ? $inputs['masothue']: 'all';
+            $inputs['macskd'] = isset($inputs['macskd']) ? $inputs['macskd']: 'all';
             $dn = DnDvLt::all();
-            if($inputs['masothue'] == 'all')
-                $model = KkGDvLt::whereYear('ngaynhap',$inputs['nam'])
-                    ->where('masothue','all')
+            if($inputs['masothue'] == 'all') {
+                if($inputs['macskd'] == 'all')
+                    $model = KkGDvLt::whereYear('ngaynhap', $inputs['nam'])
+                        ->where('masothue', 'all')
+                        ->get();
+                else
+                    $model = KkGDvLt::whereYear('ngaynhap', $inputs['nam'])
+                        ->where('macskd', $inputs['macskd'])
+                        ->get();
+
+                $cskd = CsKdDvLt::all();
+            }else {
+                $cskd = CsKdDvLt::where('masothue',$inputs['masothue'])
                     ->get();
-            else
-                $model = KkGDvLt::whereYear('ngaynhap',$inputs['nam'])
-                    ->where('masothue',$inputs['masothue'])
-                    ->get();
+                if($inputs['macskd'] == 'all')
+                    $model = KkGDvLt::whereYear('ngaynhap', $inputs['nam'])
+                        ->where('masothue', $inputs['masothue'])
+                        ->get();
+                else
+                    $model = KkGDvLt::whereYear('ngaynhap', $inputs['nam'])
+                        ->where('masothue', $inputs['masothue'])
+                        ->where('macskd', $inputs['macskd'])
+                        ->get();
+
+            }
+
             $allcskd = CsKdDvLt::all();
             foreach($model as $ttkk){
                 $this->getTTCSKD($allcskd,$ttkk);
@@ -694,9 +713,11 @@ class KkGDvLtController extends Controller
             return view('manage.dvlt.search.index')
                 ->with('select_nam',$inputs['nam'])
                 ->with('dn',$dn)
-                ->with('selectdn',$inputs['masothue'])
+                //->with('selectdn',$inputs['masothue'])
                 ->with('model',$model)
                 ->with('select_masothue',$inputs['masothue'])
+                ->with('cskd',$cskd)
+                ->with('select_macskd',$inputs['macskd'])
                 ->with('pageTitle','Tìm kiếm thông tin kê khai giá dịch vụ lưu trú');
         }else
             return view('errors.notlogin');
