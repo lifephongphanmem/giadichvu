@@ -426,7 +426,7 @@ class KkGDvLtXdController extends Controller
         if($his->create($arrays)){
             $hsct = KkGDvLtCt::where('mahs',$model->mahs)
                 ->get();
-            dd($hsct);
+            //dd($hsct);
             foreach($hsct as $ct){
                 $hisct = new KkGDvLtCtH();
                 $hisct->mahsh = $mahsh;
