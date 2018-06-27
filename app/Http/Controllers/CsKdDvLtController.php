@@ -371,25 +371,21 @@ class CsKdDvLtController extends Controller
 
     public function store(Request $request){
         if (Session::has('admin')) {
-            $insert = $request->all();
-            $now = getdate();
-            $ma = $insert['masothue'].'_'.getdate()[0];
-
+            $inputs = $request->all();
+            $inputs['macskd'] =  $inputs['masothue'].'_'.getdate()[0];
+            if(isset($inputs['toado'])){
+                $avatar = $request->file('toado');
+                $inputs['toado'] = $inputs['macskd'] .'.'.$avatar->getClientOriginalExtension();
+                $avatar->move(public_path() . '/images/cskddvlt/', $inputs['toado']);
+            }else{
+                $inputs['toado'] = 'no-image-available.jpg';
+            }
             $model = new CsKdDvLt();
-            $model->macskd = $ma;
-            $model->masothue = $insert['masothue'];
-            $model->tencskd = $insert['tencskd'];
-            $model->loaihang = $insert['loaihang'];
-            $model->diachikd = $insert['diachikd'];
-            $model->telkd = $insert['telkd'];
-            //$model->toado = getAddMap($insert['diachikd']);
-            $model->link = $insert['link'];
-            $model->cqcq = $insert['cqcq'];
-            if($model->save()) {
-                $this->StorePh($ma,$insert['masothue']);
+            if($model->create($inputs)) {
+                $this->StorePh( $inputs['masothue'].'_'.getdate()[0],$inputs['masothue']);
             }
             if(session('admin')->level == 'T' || session('admin')->level == 'H')
-                return redirect('ttcskd_dich_vu_luu_tru/masothue='.$insert['masothue']);
+                return redirect('ttcskd_dich_vu_luu_tru/masothue='.$inputs['masothue']);
             else
                 return redirect('ttcskd_dich_vu_luu_tru');
         }else
@@ -700,21 +696,20 @@ class CsKdDvLtController extends Controller
 
     public function update(Request $request, $id){
         if (Session::has('admin')) {
-            $input = $request->all();
+            $inputs = $request->all();
             $model = CsKdDvLt::findOrFail($id);
-                $model->tencskd = $input['tencskd'];
-                $model->loaihang = $input['loaihang'];
-                $model->diachikd = $input['diachikd'];
-                $model->telkd = $input['telkd'];
-                //$model->toado = getAddMap($input['diachikd']);
 
-                $model->link = $input['link'];
-                $model->save();
+            if(isset($inputs['toado'])){
+                $avatar = $request->file('toado');
+                $inputs['toado'] = $inputs['macskd'] .'.'.$avatar->getClientOriginalExtension();
+                $avatar->move(public_path() . '/images/cskddvlt/', $inputs['toado']);
+            }
+            $model->update($inputs);
 
-                if (session('admin')->level == 'T' || session('admin')->level == 'H')
-                    return redirect('ttcskd_dich_vu_luu_tru/masothue=' . $input['masothue']);
-                else
-                    return redirect('ttcskd_dich_vu_luu_tru');
+            if (session('admin')->level == 'T' || session('admin')->level == 'H')
+                return redirect('ttcskd_dich_vu_luu_tru/masothue=' . $inputs['masothue']);
+            else
+                return redirect('ttcskd_dich_vu_luu_tru');
         }else
             return view('errors.notlogin');
     }

@@ -172,24 +172,24 @@
                                 {!!Form::text('link', null, array('id' => 'link','class' => 'form-control'))!!}
                             </div>
                         </div>
-                        <!--div class="col-md-6">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Ảnh đại diện<span class="require">*</span></label>
                                 {!!Form::file('toado',array('id'=>'toado','class' => 'passvalid','accept'=>'image/*'))!!}
                             </div>
-                        </div-->
+                        </div>
                         <input type="hidden" name="cqcq" id="cqcq" value="{{$model->cqcq}}">
                         <input type="hidden" name="masothue" id="masothue" value="{{$model->masothue}}">
 
                     </div>
-                    <!--div class="row">
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Ảnh hiện tại<span class="require">*</span></label>
-                                <img src="{{ url('images/cskddvlt/'.$model->toado)}}" width="50%">
+                                <img src="{{ url('images/cskddvlt/'.$model->toado)}}" width="20%">
                             </div>
                         </div>
-                    </div-->
+                    </div>
                     {!! Form::close() !!}
                     <!--/row-->
                     <h4 class="form-section" style="color: #0000ff">Thông tin phòng nghỉ- quy cách- chất lượng</h4>
