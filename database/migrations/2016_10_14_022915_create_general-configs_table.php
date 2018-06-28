@@ -33,6 +33,10 @@ class CreateGeneralConfigsTable extends Migration
             $table->double('thoihan_lt')->default(0);
             $table->double('thoihan_vt')->default(0);
             $table->double('thoihan_ct')->default(0);
+            $table->string('diadanh')->nullable();
+            $table->string('tendonvi')->nullable();
+            $table->text('tel')->nullable();
+
             $table->timestamps();
         });
     }

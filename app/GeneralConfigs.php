@@ -26,7 +26,11 @@ class GeneralConfigs extends Model
         'urlwebcb',
         'thoihan_lt',
         'thoihan_vt',
-        'thoihan_ct'
+        'thoihan_ct',
+
+        'tendonvi',
+        'diadanh',
+        'tel'
 
     ];
 }

@@ -76,7 +76,7 @@
                         <tr class="odd gradeX">
                             <td style="text-align: center">{{$key + 1}}</td>
                             <td align="center" style="vertical-align: middle">
-                                <img src="{{ url('images/cskddvlt/'.$tt->toado)}}" width="96%">
+                                <img src="{{ url('images/cskddvlt/'.$tt->toado)}}" width="80%">
                             </td>
                             <td class="active" >{{$tt->tencskd}}</td>
                             <td>@if($tt->loaihang == 'K' ) Khác(Nhà nghỉ)

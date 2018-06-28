@@ -22,6 +22,7 @@ use App\Users;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
+use App\CsKdDvLt;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Session;
@@ -84,14 +85,6 @@ class HomeController extends Controller
                         ->count();
                     $btlkkgvtkhac = KkDvVtKhac::where('trangthai','Bị trả lại')
                         ->count();
-                    $cnkkgs = KkGDvGs::where('trangthai','Chờ nhận')
-                        ->count();
-                    $btlkkgs = KkGDvGs::where('trangthai','Bị trả lại')
-                        ->count();
-                    $cnkkgtacn = KkGDvTaCn::where('trangthai','Chờ nhận')
-                        ->count();
-                    $btlkkgtacn = KkGDvTaCn::where('trangthai','Bị trả lại')
-                        ->count();
                 }elseif(session('admin')->level == 'T' || session('admin') == 'H'){
                     $cnttdndvlt = TtDn::where('pl','DVLT')
                         ->where('trangthai','Chờ duyệt')
@@ -153,18 +146,6 @@ class HomeController extends Controller
                         ->where('cqcq',session('admin')->cqcq)
                         ->count();
                     $btlkkgvtkhac = KkDvVtKhac::where('trangthai','Bị trả lại')
-                        ->where('cqcq',session('admin')->cqcq)
-                        ->count();
-                    $cnkkgs = KkGDvGs::where('trangthai','Chờ nhận')
-                        ->where('cqcq',session('admin')->cqcq)
-                        ->count();
-                    $btlkkgs = KkGDvGs::where('trangthai','Bị trả lại')
-                        ->where('cqcq',session('admin')->cqcq)
-                        ->count();
-                    $cnkkgtacn = KkGDvTaCn::where('trangthai','Chờ nhận')
-                        ->where('cqcq',session('admin')->cqcq)
-                        ->count();
-                    $btlkkgtacn = KkGDvTaCn::where('trangthai','Bị trả lại')
                         ->where('cqcq',session('admin')->cqcq)
                         ->count();
                 }else{
@@ -230,18 +211,6 @@ class HomeController extends Controller
                     $btlkkgvtkhac = KkDvVtKhac::where('trangthai','Bị trả lại')
                         ->where('masothue',session('admin')->mahuyen)
                         ->count();
-                    $cnkkgs = KkGDvGs::where('trangthai','Chờ nhận')
-                        ->where('masothue',session('admin')->mahuyen)
-                        ->count();
-                    $btlkkgs = KkGDvGs::where('trangthai','Bị trả lại')
-                        ->where('masothue',session('admin')->mahuyen)
-                        ->count();
-                    $cnkkgtacn = KkGDvTaCn::where('trangthai','Chờ nhận')
-                        ->where('masothue',session('admin')->mahuyen)
-                        ->count();
-                    $btlkkgtacn = KkGDvTaCn::where('trangthai','Bị trả lại')
-                        ->where('masothue',session('admin')->mahuyen)
-                        ->count();
                 }
                 $array = '';
                 $array['cnttdndvlt'] = $cnttdndvlt;
@@ -258,14 +227,6 @@ class HomeController extends Controller
                 $array['btlkkgvtxtx'] = $btlkkgvtxtx;
                 $array['cnkkgvtkhac'] = $cnkkgvtkhac;
                 $array['btlkkgvtkhac'] = $btlkkgvtkhac;
-                $array['cnkkgs'] = $cnkkgs;
-                $array['btlkkgs'] = $btlkkgs;
-                $array['cnttdndvgs'] = $cnttdndvgs;
-                $array['btlttdndvgs'] = $btlttdndvgs;
-                $array['cnttdndvtacn']= $cnttdndvtacn;
-                $array['btlttdndvtacn'] = $btlttdndvtacn;
-                $array['cnkkgtacn'] = $cnkkgtacn;
-                $array['btlkkgtacn'] = $btlkkgtacn;
                 //dd($array);
                 return view('dashboard')
                     ->with('sl',$array)
@@ -906,6 +867,15 @@ class HomeController extends Controller
             });
         }
         return view('errors.register-success');
+    }
+
+    public function congbo(){
+        $modellt = CsKdDvLt::orderByRaw("RAND()")
+            ->take(4)
+            ->get();
+        return view('dashboardcb')
+            ->with('modellt',$modellt)
+            ->with('pageTitle','Giá dịch vụ');
     }
 
 }

@@ -650,3 +650,6 @@ Route::get('/thongtinngaynghile/show','TtNgayNghiLeController@show');
 
 Route::resource('nangcap','NangCapController');
 Route::get('nangcapdl','NangCapController@nangcapdl');
+
+
+include('congbo/congbo.php');
