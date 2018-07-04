@@ -198,9 +198,8 @@ License: You must have a valid license purchased only from themeforest(the above
                     $model = \App\GeneralConfigs::first();
                     $url = $model->urlwebcb;
                 ?>
-                @if($url != '' && $url != 'null')
                 <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
-                    <a href="{{$url}}" target="_blank" class="dropdown-toggle">
+                    <a href="{{url('giadichvu')}}" target="_blank" class="dropdown-toggle">
                         <i class="fa fa-cloud"></i>
 					<span class="badge badge-danger">
 					View</span>
@@ -208,7 +207,6 @@ License: You must have a valid license purchased only from themeforest(the above
                     <ul>
                     </ul>
                 </li>
-                @endif
                 <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
                     <a href="http://help.csdlgia.vn" class="dropdown-toggle" target="_blank">
                         <i class="fa fa-folder-open-o"></i>
