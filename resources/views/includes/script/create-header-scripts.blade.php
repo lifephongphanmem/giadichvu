@@ -59,6 +59,11 @@
                         opts.regex = "[a-zA-Z0-9._%-]+@[a-zA-Z0-9-]+\\.[a-zA-Z]{2,4}";
                         break;
 
+                    case "user":
+                        mask = 'Regex';
+                        opts.regex = "[a-zA-Z0-9._%-]+@[a-zA-Z0-9-]+\\.[a-zA-Z]{2,15}";
+                        break;
+
                     case "fdecimal":
                         mask = 'decimal';
                         $.extend(opts, {

@@ -51,6 +51,13 @@ License: You must have a valid license purchased only from themeforest(the above
             color: #999;
         }
     </style>
+    <script src="{{url('minhtran/jquery.inputmask.bundle.min.js')}}"></script>
+
+    <script>
+        $(document).ready(function(){
+            $(":input").inputmask();
+        });
+    </script>
 
 </head>
 <!-- END HEAD -->
@@ -217,7 +224,7 @@ License: You must have a valid license purchased only from themeforest(the above
             <label class="control-label visible-ie8 visible-ie9">Username</label>
             <div class="input-icon">
                 <i class="fa fa-user"></i>
-                <input class="form-control required" type="text" autocomplete="off" placeholder="Username" name="username" id="username" >
+                <input class="form-control required" type="text" autocomplete="off" placeholder="Username" name="username" id="username" data-mask="user">
                 <span id="userror" style="color: red; font-weight: bold"></span>
             </div>
         </div>
@@ -386,6 +393,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
 
 </script>
+@include('includes.script.create-header-scripts')
 </body>
 <!-- END BODY -->
 </html>

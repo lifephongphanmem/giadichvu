@@ -164,7 +164,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 @if(Illuminate\Support\Facades\Session::has('admin'))
                     <a class="text-bold text-white no-underline" href="{{url('')}}" data-ga-click="(Logged out) Header, clicked Sign in, text:sign-in">Vào chương trình</a>
                 @else
-                    <a class="text-bold text-white no-underline" href="{{url('login')}}" data-ga-click="(Logged out) Header, clicked Sign in, text:sign-in">Đăng nhập</a>
+                    <a class="text-bold text-white no-underline" href="{{url('login')}}" data-ga-click="(Logged out) Header, clicked Sign in, text:sign-in">Truy cập vào hệ thống</a>
                     or <a class="text-bold text-white no-underline" href="{{url('search_register')}}" data-ga-click="(Logged out) Header, clicked Sign in, text:sign-in">Kiểm tra tài khoản đăng ký</a>
                 @endif
             </div>
