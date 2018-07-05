@@ -233,7 +233,7 @@ class HomeController extends Controller
                     ->with('pageTitle','Tổng quan');
             }
         }else
-            return redirect('giadichvu');
+            return view('welcome');
 
     }
 
