@@ -47,6 +47,7 @@
 </div>
 <div class="row mbxl">
     <a href="{{ url('/login') }}" class="btn btn-primary btn-lg">Đăng nhập tài khoản</a>&nbsp;
+    <a href="{{ url('/giadichvu') }}" class="btn btn-blue btn-lg" target="_blank"Trang công bố giá</a>&nbsp;
     <a href="{{ url('/search_register') }}"> <h5 style="color: blue"><i><u> Kiểm tra tài khoản đã đăng ký</u></i></h5></a>
 
 
@@ -56,11 +57,12 @@
 <br>
 <hr class="mtxl mbxl">
 <div class="row">
-    <p style="text"><b>Phát triển bởi Công ty TNHH Phát Triển Phần Mềm Cuộc Sống</b></p>
 
-    <p><b>Địa chỉ</b>: T14 – Cụm 591 – Liên Ninh – Thanh trì – Hà Nội</p>
-
-    <p><b>Tel</b>: 04.36343951 - <b>Email</b>: phanmemcuocsong@gmail.com</p>
+    <div class="col-md-12 footer-block" style="text-align: center">
+        <p>Bản quyền thuộc về &nbsp;<b>{{isset(getGeneralConfigs()['tendonvi']) ? getGeneralConfigs()['tendonvi'] : ''}}</b></p>
+        <p>Địa chỉ: &nbsp;<b>{{isset(getGeneralConfigs()['diachi']) ? getGeneralConfigs()['diachi'] : ''}}</b></p>
+        <p>Thông tin liên hệ: &nbsp;<b>{{isset(getGeneralConfigs()['tel']) ? getGeneralConfigs()['tel'] : ''}}</b></p>
+    </div>
 </div>
 
 <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
