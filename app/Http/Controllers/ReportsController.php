@@ -599,7 +599,7 @@ class ReportsController extends Controller
 
     public function dvltbc5_excel(Request $request){
         if (Session::has('admin')) {
-            $input = $request->all();
+            /*$input = $request->all();
             if(session('admin')->level == 'T'){
                 if($input['cqcq']=='all') {
                     $m_cqcq = DmDvQl::where('plql','TC')->get();
@@ -618,6 +618,49 @@ class ReportsController extends Controller
             /*if($input['trangthai']!='all'){
                 $model=$model->where('trangthai', $input['trangthai']);
             }*/
+            /*if($input['thoihan']!='all'){
+                $model=$model->where('thoihan', $input['thoihan']);
+            }*/
+            $input = $request->all();
+            if(session('admin')->level == 'T'){
+                if($input['cqcq']=='all') {
+                    $m_cqcq = DmDvQl::where('plql','TC')->get();
+                    $modelcqcq = DmDvQl::where('maqhns',session('admin')->cqcq)->first();
+                } else {
+                    $m_cqcq = DmDvQl::where('maqhns',$input['cqcq'])->get();
+                    $modelcqcq = DmDvQl::where('maqhns',$input['cqcq'])->first();
+                }
+            }else{
+                $m_cqcq = DmDvQl::where('maqhns',session('admin')->cqcq)->get();
+                $modelcqcq = DmDvQl::where('maqhns',session('admin')->cqcq)->first();
+            }
+
+            $model=$this->get_KKG_TH($input);
+
+
+            //1.sau này triển khai bỏ vì đã làm trong form nhập
+            foreach($model as $ct){
+                $ngaynhan = Carbon::parse($ct->ngaynhan);
+                $ngaychuyen = Carbon::parse($ct->ngaychuyen);
+                $ngay= $ngaynhan->diff($ngaychuyen)->days;
+                $modelchecknn = TtNgayNghiLe::where('ngaytu','<=',$ngaychuyen)
+                    ->where('ngayden','>=',$ngaychuyen)->first();
+                if(count($modelchecknn)>0){
+                    $thoihan_lt= getGeneralConfigs()['thoihan_lt'] + $modelchecknn->songaynghi;
+                }else{
+                    $thoihan_lt= getGeneralConfigs()['thoihan_lt'];
+                }
+
+                if($ngay<$thoihan_lt){
+                    $ct->thoihan='Trước thời hạn';
+                }elseif($ngay==$thoihan_lt){
+                    $ct->thoihan='Đúng thời hạn';
+                }else{
+                    $ct->thoihan='Quá thời hạn';
+                }
+            }
+            //end 1.sau này triển khai bỏ vì đã làm trong form nhập
+
             if($input['thoihan']!='all'){
                 $model=$model->where('thoihan', $input['thoihan']);
             }
