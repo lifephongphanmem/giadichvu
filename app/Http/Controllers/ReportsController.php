@@ -544,7 +544,7 @@ class ReportsController extends Controller
 
     public function dvltbc5(Request $request){
         if (Session::has('admin')) {
-            $input = $request->all();
+            /*$input = $request->all();
             if(session('admin')->level == 'T'){
                 if($input['cqcq']=='all') {
                     $m_cqcq = DmDvQl::where('plql','TC')->get();
@@ -586,20 +586,8 @@ class ReportsController extends Controller
 
             if($input['thoihan']!='all'){
                 $model=$model->where('thoihan', $input['thoihan']);
-            }
-            return view('reports.kkgdvlt.bcth.BC5')
-                ->with('modelcqcq',$modelcqcq)
-                ->with('input',$input)
-                ->with('model',$model)
-                ->with('m_cqcq',$m_cqcq)
-                ->with('pageTitle','Báo cáo thống kê các đơn vị kê khai giá trong khoảng thời gian');
-        }else
-            return view('errors.notlogin');
-    }
-
-    public function dvltbc5_excel(Request $request){
-        if (Session::has('admin')) {
-            /*$input = $request->all();
+            }*/
+            $input = $request->all();
             if(session('admin')->level == 'T'){
                 if($input['cqcq']=='all') {
                     $m_cqcq = DmDvQl::where('plql','TC')->get();
@@ -618,9 +606,21 @@ class ReportsController extends Controller
             /*if($input['trangthai']!='all'){
                 $model=$model->where('trangthai', $input['trangthai']);
             }*/
-            /*if($input['thoihan']!='all'){
+            if($input['thoihan']!='all'){
                 $model=$model->where('thoihan', $input['thoihan']);
-            }*/
+            }
+            return view('reports.kkgdvlt.bcth.BC5')
+                ->with('modelcqcq',$modelcqcq)
+                ->with('input',$input)
+                ->with('model',$model)
+                ->with('m_cqcq',$m_cqcq)
+                ->with('pageTitle','Báo cáo thống kê các đơn vị kê khai giá trong khoảng thời gian');
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function dvltbc5_excel(Request $request){
+        if (Session::has('admin')) {
             $input = $request->all();
             if(session('admin')->level == 'T'){
                 if($input['cqcq']=='all') {
@@ -637,34 +637,12 @@ class ReportsController extends Controller
 
             $model=$this->get_KKG_TH($input);
 
-
-            //1.sau này triển khai bỏ vì đã làm trong form nhập
-            foreach($model as $ct){
-                $ngaynhan = Carbon::parse($ct->ngaynhan);
-                $ngaychuyen = Carbon::parse($ct->ngaychuyen);
-                $ngay= $ngaynhan->diff($ngaychuyen)->days;
-                $modelchecknn = TtNgayNghiLe::where('ngaytu','<=',$ngaychuyen)
-                    ->where('ngayden','>=',$ngaychuyen)->first();
-                if(count($modelchecknn)>0){
-                    $thoihan_lt= getGeneralConfigs()['thoihan_lt'] + $modelchecknn->songaynghi;
-                }else{
-                    $thoihan_lt= getGeneralConfigs()['thoihan_lt'];
-                }
-
-                if($ngay<$thoihan_lt){
-                    $ct->thoihan='Trước thời hạn';
-                }elseif($ngay==$thoihan_lt){
-                    $ct->thoihan='Đúng thời hạn';
-                }else{
-                    $ct->thoihan='Quá thời hạn';
-                }
-            }
-            //end 1.sau này triển khai bỏ vì đã làm trong form nhập
-
+            /*if($input['trangthai']!='all'){
+                $model=$model->where('trangthai', $input['trangthai']);
+            }*/
             if($input['thoihan']!='all'){
                 $model=$model->where('thoihan', $input['thoihan']);
             }
-
 
 
             Excel::create('BaoCao5',function($excel) use($modelcqcq,$input,$model,$m_cqcq){
