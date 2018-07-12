@@ -570,4 +570,40 @@ function getTtPhong($str)
     $str = str_replace('-','- ',$str);
     return $str;
 }
+
+function getThXdHsDvLt($ngaychuyen,$ngayduyet){
+    //Kiểm tra giờ chuyển quá 16h thì sang ngày sau
+    if (date('H', strtotime($ngaychuyen)) > 16) {
+        $date = date_create($ngaychuyen);
+        $datenew = date_modify($date, "+1 days");
+        $ngaychuyen = date_format($datenew, "Y-m-d");
+    } else {
+        $ngaychuyen = date("Y-m-d",strtotime($ngaychuyen));
+    }
+    $ngaylv = 0;
+    while (strtotime($ngaychuyen) <= strtotime($ngayduyet)) {
+        $checkngay = \App\TtNgayNghiLe::where('ngaytu', '<=', $ngaychuyen)
+            ->where('ngayden', '>=', $ngaychuyen)->first();
+        if (count($checkngay) > 0)
+            $ngaylv = $ngaylv;
+        elseif (date('D', strtotime($ngaychuyen)) == 'Sat')
+            $ngaylv = $ngaylv;
+        elseif (date('D', strtotime($ngaychuyen)) == 'Sun')
+            $ngaylv = $ngaylv;
+        else
+            $ngaylv = $ngaylv + 1;
+        $datestart = date_create($ngaychuyen);
+        $datestartnew = date_modify($datestart, "+1 days");
+        $ngaychuyen = date_format($datestartnew, "Y-m-d");
+
+    }
+    if ($ngaylv < getGeneralConfigs()['thoihan_lt']) {
+        $thoihan= 'Trước thời hạn';
+    } elseif ($ngaylv == getGeneralConfigs()['thoihan_lt']) {
+        $thoihan = 'Đúng thời hạn';
+    } else {
+        $thoihan = 'Quá thời hạn';
+    }
+    return $thoihan;
+}
 ?>

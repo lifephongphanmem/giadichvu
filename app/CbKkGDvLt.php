@@ -28,6 +28,7 @@ class CbKkGDvLt extends Model
         'dvt',
         'tendn',
         'tencskd',
-        'loaihang'
+        'loaihang',
+        'thoihan'
     ];
 }

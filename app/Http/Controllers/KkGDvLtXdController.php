@@ -11,6 +11,7 @@ use App\KkGDvLt;
 use App\KkGDvLtCt;
 use App\KkGDvLtCtH;
 use App\KkGDvLtH;
+use App\TtNgayNghiLe;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -123,7 +124,6 @@ class KkGDvLtXdController extends Controller
                 $ttkk->loaihang = count($model_cskd) > 0 ? $model_cskd->loaihang : '';
                 //$this->getTTCSKD($modelcskd,$ttkk);
             }*/
-
             return view('manage.dvlt.kkgia.xetduyet.index')
                 ->with('model',$model)
                 ->with('nam',$inputs['nam'])
@@ -306,84 +306,17 @@ class KkGDvLtXdController extends Controller
 
     public function nhanhs(Request $request){
         if (Session::has('admin')) {
-            $input = $request->all();
-            $id = $input['idnhanhs'];
-            $model = KkGDvLt::findOrFail($id);
-            $model->trangthai = "Duyệt";
-            $model->ngaynhan = $input['ngaynhan'];
-            $model->sohsnhan = $input['sohsnhan'];
-            //$model->ngayhieuluc = $input['ngayhieuluc'];
+            $inputs = $request ->all();
+            $inputs['trangthai'] = 'Duyệt';
+            $model = KkGDvLt::where('id',$inputs['idnhanhs'])->first();
+            $inputs['thoihan'] = getThXdHsDvLt($model->ngaychuyen,$inputs['ngaynhan']);
 
-            $ngaynhan = Carbon::parse($model->ngaynhan);
-            $ngaychuyen = Carbon::parse($model->ngaychuyen);
-            $ngay = $ngaynhan->diff($ngaychuyen)->days;
-            $ktgio = date('H',strtotime($model->ngaychuyen));
-            if($ktgio >= '16')
-                $thoihan_lt=getGeneralConfigs()['thoihan_lt'] + 1;
-            else
-                $thoihan_lt=getGeneralConfigs()['thoihan_lt'];
-            if($ngay<$thoihan_lt){
-                $model->thoihan='Trước thời hạn';
-            }elseif($ngay==$thoihan_lt){
-                $model->thoihan='Đúng thời hạn';
-            }else{
-                $model->thoihan='Quá thời hạn';
-            }
-
-            if($model->save()){
-                $this->congbo($id);
+            if($model->update($inputs)){
+                $this->congbo($inputs['idnhanhs']);
                 $nhanhs = DmDvQl::where('maqhns',$model->cqcq)
                     ->first();
-                $nhanhs->sohsnhan = $input['sohsnhan'];
+                $nhanhs->sohsnhan = $inputs['sohsnhan'];
                 $nhanhs->save();
-                //History
-                /*$mahsh = getdate()[0];
-                $his = new KkGDvLtH();
-                $his->mahsh = $mahsh;
-                $his->mahs = $model->mahs;
-                $his->macskd = $model->macskd;
-                $his->masothue = $model->masothue;
-                $his->ngaynhap = $model->ngaynhap;
-                $his->socv = $model->socv;
-                $his->socvlk = $model->socvlk;
-                $his->ngaycvlk = $model->ngaycvlk;
-                $his->ngayhieuluc = $model->ngayhieuluc;
-                $his->ttnguoinop = $model->ttnguoinop;
-                $his->ghichu = $model->ghichu;
-                $his->ngaychuyen = $model->ngaychuyen;
-                $his->cqcq = $model->cqcq;
-                $his->dvt = $model->dvt;
-                $his->phanloai = $model->phanloai;
-                $his->plhs =$model->plhs;
-                $his->ngaynhan = $input['ngaynhan'];
-                $his->sohsnhan = $input['sohsnhan'];
-                $his->trangthai = 'Duyệt';
-                $his->action = 'Nhận hồ sơ';
-                $his->username = session('admin')->username;
-                $his->name = session('admin')->name;
-                $his->tencskd = $model->tencskd;
-                $his->tendn = $model->tendn;
-                $his->loaihang = $model->loaihang;
-                if($his->save()){
-                    $hsct = KkGDvLtCt::where('mahs',$model->mahs)
-                        ->get();
-                    foreach($hsct as $ct){
-                        $hisct = new KkGDvLtCtH();
-                        $hisct->mahsh = $mahsh;
-                        $hisct->loaip = $ct->loaip;
-                        $hisct->qccl = $ct->qccl;
-                        $hisct->sohieu = $ct->sohieu;
-                        $hisct->ghichu = $ct->ghichu;
-                        $hisct->macskd = $ct->macskd;
-                        $hisct->mahs = $ct->mahs;
-                        $hisct->mucgialk = $ct->mucgialk;
-                        $hisct->mucgiakk = $ct->mucgiakk;
-                        $hisct->tendoituong = $ct->tendoituong;
-                        $hisct->apdung = $ct->apdung;
-                        $hisct->maloaip = $ct->maloaip;
-                        $hisct->save();
-                    }
-                }*/
             }
             $this->uphisnhanhs($model);
             $tencqcq = DmDvQl::where('maqhns',$model->cqcq)->first();
@@ -395,8 +328,8 @@ class KkGDvLtXdController extends Controller
             $data['ngaykk'] = $model->ngaynhap;
             $data['ngayapdung'] = $model->ngayhieuluc;
             $data['socv'] = $model->socv;
-            $data['ngaynhan'] = $input['ngaynhan'];
-            $data['sohsnhan'] = $input['sohsnhan'];
+            $data['ngaynhan'] = $inputs['ngaynhan'];
+            $data['sohsnhan'] = $inputs['sohsnhan'];
 
             $maildn = $dn->email;
             $tendn = $dn->tendn;
@@ -473,6 +406,7 @@ class KkGDvLtXdController extends Controller
             $model->tendn = $modelkk->tendn;
             $model->tencskd = $modelkk->tencskd;
             $model->loaihang = $modelkk->loaihang;
+            //$model->thoihan = $modelkk->thoihan;
             $model->save();
         }else
             return view('errors.notlogin');

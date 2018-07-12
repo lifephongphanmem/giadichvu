@@ -130,6 +130,7 @@
                                     <td align="center">
                                         <span class="badge badge-success">{{$tt->trangthai}}</span>
                                         <br>Thời gian chuyển:<br><b>{{getDateTime($tt->ngaychuyen)}}</b>
+                                        <br>Thời hạn xét duyệt: <b>{{$tt->thoihan}}</b>
                                     </td>
                                 @endif
                                 <td>

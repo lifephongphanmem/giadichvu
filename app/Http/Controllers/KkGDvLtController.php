@@ -705,10 +705,10 @@ class KkGDvLtController extends Controller
 
             }
 
-            $allcskd = CsKdDvLt::all();
+            /*$allcskd = CsKdDvLt::all();
             foreach($model as $ttkk){
                 $this->getTTCSKD($allcskd,$ttkk);
-            }
+            }*/
 
             return view('manage.dvlt.search.index')
                 ->with('select_nam',$inputs['nam'])
@@ -723,7 +723,7 @@ class KkGDvLtController extends Controller
             return view('errors.notlogin');
     }
 
-    public function viewsearch($masothue,$macskd,$nam){
+    /*public function viewsearch($masothue,$macskd,$nam){
         if (Session::has('admin')) {
             $allcskd = CsKdDvLt::all();
             $cskd = CsKdDvLt::where('masothue',$masothue)
@@ -761,7 +761,7 @@ class KkGDvLtController extends Controller
                 ->with('pageTitle','Tìm kiếm thông tin kê khai giá dịch vụ lưu trú');
         }else
             return view('errors.notlogin');
-    }
+    }*/
     public function getTTCSKD($cskds,$array){
         foreach($cskds as $cskd){
             if($cskd->macskd == $array->macskd){

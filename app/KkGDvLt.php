@@ -30,6 +30,7 @@ class KkGDvLt extends Model
         'plhs',
         'tendn',
         'tencskd',
-        'loaihang'
+        'loaihang',
+        'thoihan'
     ];
 }

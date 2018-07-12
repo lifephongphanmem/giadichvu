@@ -651,5 +651,6 @@ Route::get('/thongtinngaynghile/show','TtNgayNghiLeController@show');
 Route::resource('nangcap','NangCapController');
 Route::get('nangcapdl','NangCapController@nangcapdl');
 
+Route::resource('hsduyetdvlt','HsXdDvLtController');
 
 include('congbo/congbo.php');
