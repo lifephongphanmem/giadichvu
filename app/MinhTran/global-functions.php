@@ -573,13 +573,14 @@ function getTtPhong($str)
 
 function getThXdHsDvLt($ngaychuyen,$ngayduyet){
     //Kiểm tra giờ chuyển quá 16h thì sang ngày sau
-    if (date('H', strtotime($ngaychuyen)) > 16) {
+    //if (date('H', strtotime($ngaychuyen)) > 16) {
+        //Không tính ngày chuyển hs, ngày tiếp theo sẽ là ngày xét duyệt
         $date = date_create($ngaychuyen);
         $datenew = date_modify($date, "+1 days");
         $ngaychuyen = date_format($datenew, "Y-m-d");
-    } else {
+    /*} else {
         $ngaychuyen = date("Y-m-d",strtotime($ngaychuyen));
-    }
+    }*/
     $ngaylv = 0;
     while (strtotime($ngaychuyen) <= strtotime($ngayduyet)) {
         $checkngay = \App\TtNgayNghiLe::where('ngaytu', '<=', $ngaychuyen)
