@@ -95,10 +95,10 @@
                         <tr>
                             <th style="text-align: center" width="2%">STT</th>
                             <th style="text-align: center">Tên cơ sở kinh doanh</th>
-                            <th style="text-align: center">Ngày kê khai</th>
-                            <th style="text-align: center">Ngày thực hiện<br>mức giá kê khai</th>
-                            <th style="text-align: center">Số công văn</th>
-                            <th style="text-align: center">Số công văn liền kề</th>
+                            <th style="text-align: center">Ngày<br> kê khai</th>
+                            <th style="text-align: center">Ngày<br> thực hiện<br>mức giá<br> kê khai</th>
+                            <th style="text-align: center">Số <br>công văn</th>
+                            <th style="text-align: center">Số <br>công văn <br>liền kề</th>
                             <th style="text-align: center">Trạng thái</th>
                             <th style="text-align: center" width="25%">Thao tác</th>
                         </tr>
@@ -130,6 +130,7 @@
                                     <td align="center">
                                         <span class="badge badge-success">{{$tt->trangthai}}</span>
                                         <br>Thời gian chuyển:<br><b>{{getDateTime($tt->ngaychuyen)}}</b>
+                                        <br>Ngày nhận: <b>{{getDayVn($tt->ngaynhan)}}</b>
                                         <br>Thời hạn xét duyệt: <b>{{$tt->thoihan}}</b>
                                     </td>
                                 @endif

@@ -682,12 +682,10 @@ class KkGDvLtController extends Controller
             if($inputs['masothue'] == 'all') {
                 if($inputs['macskd'] == 'all')
                     $model = KkGDvLt::whereYear('ngaynhap', $inputs['nam'])
-                        ->where('masothue', 'all')
-                        ->get();
+                        ->where('masothue', 'all');
                 else
                     $model = KkGDvLt::whereYear('ngaynhap', $inputs['nam'])
-                        ->where('macskd', $inputs['macskd'])
-                        ->get();
+                        ->where('macskd', $inputs['macskd']);
 
                 $cskd = CsKdDvLt::all();
             }else {
@@ -695,15 +693,14 @@ class KkGDvLtController extends Controller
                     ->get();
                 if($inputs['macskd'] == 'all')
                     $model = KkGDvLt::whereYear('ngaynhap', $inputs['nam'])
-                        ->where('masothue', $inputs['masothue'])
-                        ->get();
+                        ->where('masothue', $inputs['masothue']);
                 else
                     $model = KkGDvLt::whereYear('ngaynhap', $inputs['nam'])
                         ->where('masothue', $inputs['masothue'])
-                        ->where('macskd', $inputs['macskd'])
-                        ->get();
+                        ->where('macskd', $inputs['macskd']);
 
             }
+            $model = $model->orderBy('id', 'asc')->get();
 
             /*$allcskd = CsKdDvLt::all();
             foreach($model as $ttkk){
