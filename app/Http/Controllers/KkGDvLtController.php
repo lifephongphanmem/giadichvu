@@ -290,11 +290,14 @@ class KkGDvLtController extends Controller
                     ->get();
                 $modelcskd = CsKdDvLt::where('macskd', $model->macskd)->first();
                 $modeldn = DnDvLt::where('masothue',$model->masothue)->first();
+                $modelcb = CbKkGDvLt::where('macskd',$model->macskd)
+                    ->first();
                 return view('manage.dvlt.kkgia.kkgiadv.edit')
                     ->with('model', $model)
                     ->with('modelct', $modelct)
                     ->with('modelcskd',$modelcskd)
                     ->with('modeldn',$modeldn)
+                    ->with('modelcb',$modelcb)
                     ->with('pageTitle', 'Chỉnh sửa thông tin kê khai giá dịch vụ lưu trú');
             }else{
                 return view('errors.perm');
@@ -592,20 +595,20 @@ class KkGDvLtController extends Controller
         if(!Session::has('admin')) {
             $result = array(
                 'status' => 'fail',
-                'message' => 'permission denied',
+                'message' => '"Bạn cần đăng nhập tài khoản để chuyển hồ so", "Lỗi!!!"',
             );
             die(json_encode($result));
         }
         //dd($request);
         $inputs = $request->all();
-
+        $ngaychuyen = Carbon::now()->toDateTimeString();
         if(isset($inputs['id'])){
             $model = KkGDvLt::where('id',$inputs['id'])
                 ->first();
             $ngayapdung = $model->ngayhieuluc;
-            $ngaychuyen = Carbon::now()->toDateTimeString();
+
             if($model->plhs == 'GG') {
-                if ($ngayapdung >= date('Y-m-d',strtotime($ngaychuyen))) {
+                if ($ngayapdung > date('Y-m-d',strtotime($ngaychuyen))) {
                     $modelcheckct = KkGDvLtCt::where('mahs',$model->mahs)
                         ->get();
                     //dd($modelcheckct);
@@ -617,13 +620,16 @@ class KkGDvLtController extends Controller
                     }
                     if($val == 1){
                         $result['status'] = 'fail';
-                        $result['message'] = '"Giá dịch vụ không đúng theo loại hồ sơ", "Lỗi!!!"';
+                        $result['message'] = '"Giá dịch vụ không đúng theo loại hồ sơ giảm giá", "Lỗi!!!"';
                     }else
                         $result['status'] = 'success';
                   //dd($val);
+                }else{
+                    $result['status'] = 'fail';
+                    $result['message'] = '"Ngày áp dụng hồ sơ giảm giá phải sau ngày nộp ít nhất 1 ngày", "Lỗi!!!"';
                 }
             }else {
-                $modelchecknn = TtNgayNghiLe::where('ngaytu','<=',$ngaychuyen)
+                /*$modelchecknn = TtNgayNghiLe::where('ngaytu','<=',$ngaychuyen)
                     ->where('ngayden','>=',$ngaychuyen)->first();
                 if(count($modelchecknn)>0){
                     $ngaynghi = $modelchecknn->songaynghi;
@@ -656,6 +662,38 @@ class KkGDvLtController extends Controller
                     if ($ngayapdung >= $ngaysosanh) {
                         $result['status'] = 'success';
                     }
+                }*/
+                $date = date_create($ngaychuyen);
+                $datenew = date_modify($date, "+1 days");
+                $ngaychuyen = date_format($datenew, "Y-m-d");
+                /*} else {
+                    $ngaychuyen = date("Y-m-d",strtotime($ngaychuyen));
+                }*/
+                $model = KkGDvLt::where('id',$inputs['id'])
+                    ->first();
+                $ngayduyet = $model->ngayhieuluc;
+                $ngaylv = 0;
+                while (strtotime($ngaychuyen) <= strtotime($ngayduyet)) {
+                    $checkngay = \App\TtNgayNghiLe::where('ngaytu', '<=', $ngaychuyen)
+                        ->where('ngayden', '>=', $ngaychuyen)->first();
+                    if (count($checkngay) > 0)
+                        $ngaylv = $ngaylv;
+                    elseif (date('D', strtotime($ngaychuyen)) == 'Sat')
+                        $ngaylv = $ngaylv;
+                    elseif (date('D', strtotime($ngaychuyen)) == 'Sun')
+                        $ngaylv = $ngaylv;
+                    else
+                        $ngaylv = $ngaylv + 1;
+                    $datestart = date_create($ngaychuyen);
+                    $datestartnew = date_modify($datestart, "+1 days");
+                    $ngaychuyen = date_format($datestartnew, "Y-m-d");
+
+                }
+                if ($ngaylv >= getGeneralConfigs()['thoihan_lt']) {
+                    $result['status'] = 'success';
+                }else{
+                    $result['status'] = 'fail';
+                    $result['message'] = '"Ngày áp dụng hồ sơ không đủ điều kiện xét duyệt", "Lỗi!!!"';
                 }
             }
         }

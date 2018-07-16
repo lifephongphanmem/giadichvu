@@ -438,15 +438,26 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Hồ sơ kê khai<span class="require">*</span></label>
-                                {!! Form::select(
-                                'plhs',
-                                array(
-                                'LD' => 'Lần đầu',
-                                'GG' => 'Giảm giá',
-                                'TG' => 'Tăng giá',
-                                ),isset($modelcb) ? 'GG' : 'LD',
-                                array('id' => 'plhs', 'class' => 'form-control','onchange'=>"clearngay()"))
-                                !!}
+                                @if(isset($modelcb))
+                                    {!! Form::select(
+                                    'plhs',
+                                    array(
+                                    'GG' => 'Giảm giá',
+                                    'TG' => 'Tăng giá',
+                                    ),isset($modelcb) ? 'GG' : 'LD',
+                                    array('id' => 'plhs', 'class' => 'form-control','onchange'=>"clearngay()"))
+                                    !!}
+                                @else
+                                    {!! Form::select(
+                                    'plhs',
+                                    array(
+                                    'LD' => 'Lần đầu',
+                                    'GG' => 'Giảm giá',
+                                    'TG' => 'Tăng giá',
+                                    ),isset($modelcb) ? 'GG' : 'LD',
+                                    array('id' => 'plhs', 'class' => 'form-control','onchange'=>"clearngay()"))
+                                    !!}
+                                @endif
                             </div>
                         </div>
                         <!--/span-->

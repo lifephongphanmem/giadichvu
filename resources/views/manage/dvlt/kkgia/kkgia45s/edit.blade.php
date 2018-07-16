@@ -525,7 +525,7 @@
     <script type="text/javascript">
         function validateForm(){
 
-            var validator = $("#create_kkdvlt").validate({
+            var validator = $("#update_kkdvlt").validate({
                 rules: {
                     ten :"required"
                 },

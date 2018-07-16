@@ -368,15 +368,26 @@
                             <div class="form-group">
                                 <label class="control-label">Hồ sơ kê khai<span class="require">*</span></label>
                                 <!--input type="date" name="ngaynhap" id="ngaynhap" class="form-control required" autofocus-->
-                                {!! Form::select(
-                                'plhs',
-                                array(
-                                'LD' => 'Lần đầu',
-                                'GG' => 'Giảm giá',
-                                'TG' => 'Tăng giá',
-                                ),null,
-                                array('id' => 'plhs', 'class' => 'form-control','onchange'=>"clearngay()"))
-                                !!}
+                                @if(isset($modelcb))
+                                    {!! Form::select(
+                                    'plhs',
+                                    array(
+                                    'GG' => 'Giảm giá',
+                                    'TG' => 'Tăng giá',
+                                    ),null,
+                                    array('id' => 'plhs', 'class' => 'form-control','onchange'=>"clearngay()"))
+                                    !!}
+                                @else
+                                    {!! Form::select(
+                                    'plhs',
+                                    array(
+                                    'LD' => 'Lần đầu',
+                                    'GG' => 'Giảm giá',
+                                    'TG' => 'Tăng giá',
+                                    ),null,
+                                    array('id' => 'plhs', 'class' => 'form-control','onchange'=>"clearngay()"))
+                                    !!}
+                                @endif
                             </div>
                         </div>
                         <!--/span-->
@@ -549,7 +560,7 @@
     <script type="text/javascript">
         function validateForm(){
 
-            var validator = $("#update_ttcskddvlt").validate({
+            var validator = $("#update_kkdvlt").validate({
                 rules: {
                     ten :"required"
                 },
