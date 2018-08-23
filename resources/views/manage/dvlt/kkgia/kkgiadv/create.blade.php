@@ -198,7 +198,7 @@
 
         }
         function clearngay(){
-            $('input[name="ngaynhap"]').val('');
+            //$('input[name="ngaynhap"]').val() = $('input[name="ngaynhapdf"]').val();
             $('input[name="ngayhieuluc"]').val('');
         }
         function clearForm(){

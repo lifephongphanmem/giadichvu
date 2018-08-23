@@ -182,7 +182,7 @@
             var yyyy = today.getFullYear();
             if(dd<10){dd='0'+dd}
             if(mm<10){mm='0'+mm}
-            $('input[name="ngaynhap"]').val(dd+'/'+mm+'/'+yyyy);
+            //$('input[name="ngaynhap"]').val(dd+'/'+mm+'/'+yyyy);
             $('input[name="ngayhieuluc"]').val('');
         }
 

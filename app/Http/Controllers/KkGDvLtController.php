@@ -124,12 +124,14 @@ class KkGDvLtController extends Controller
                     $modeldsph = KkGDvLtCtDf::where('macskd', $modelcskd->macskd)
                         ->get();
 
+                    dd($datehl);
                     return view('manage.dvlt.kkgia.kkgiadv.create')
                         ->with('modelcskd', $modelcskd)
                         ->with('modeldn',$modeldn)
                         ->with('ngaynhap',$ngaynhap)
                         ->with('ngayhieuluc',$ngayhieuluc)
                         ->with('modeldsph',$modeldsph)
+                        ->with('ngaynhapdf',$datehl)
                         ->with('pageTitle', 'Kê khai giá dịch vụ lưu trú thêm mới');
                 }else{
                     return view('errors.noperm');
@@ -229,7 +231,6 @@ class KkGDvLtController extends Controller
 
                     $modeldn = DnDvLt::where('masothue', $modelcskd->masothue)
                         ->first();
-
                     return view('manage.dvlt.kkgia.kkgiadv.create')
                         ->with('modelcskd', $modelcskd)
                         ->with('modeldsph', $modeldsph)

@@ -311,6 +311,8 @@ class UsersController extends Controller
                     elseif($model->level == 'DVTACN')
                         $modeldvql = DmDvQl::where('plql','TC')
                         ->get();
+                    else
+                        $modeldvql = '';
                     return view('system.users.edit')
                         ->with('model', $model)
                         ->with('modeldvql', $modeldvql)

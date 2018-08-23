@@ -62,6 +62,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @if($modeldvql != '')
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -74,8 +75,8 @@
                                         </select>
                                     </div>
                                 </div>
-
                             </div>
+                            @endif
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -91,7 +92,7 @@
                 </div>
             </div>
             <div style="text-align: center">
-                <a href="{{url('users?&phanloai='.$model->level)}}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
+                <a href="{{url('users')}}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
                 <button type="reset" class="btn btn-default"><i class="fa fa-refresh"></i>&nbsp;Nhập lại</button>
                 <button type="submit" class="btn green" onclick="validateForm()"><i class="fa fa-check"></i> Cập nhật</button>
             </div>
