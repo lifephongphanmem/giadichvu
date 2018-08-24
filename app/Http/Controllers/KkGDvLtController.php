@@ -124,7 +124,7 @@ class KkGDvLtController extends Controller
                     $modeldsph = KkGDvLtCtDf::where('macskd', $modelcskd->macskd)
                         ->get();
 
-                    dd($datehl);
+                    //dd($datehl);
                     return view('manage.dvlt.kkgia.kkgiadv.create')
                         ->with('modelcskd', $modelcskd)
                         ->with('modeldn',$modeldn)
