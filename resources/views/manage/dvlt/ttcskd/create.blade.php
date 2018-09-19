@@ -99,6 +99,26 @@
                 }
             })
         }
+        function checktencskd(){
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                type: 'GET',
+                url: '/checktencskd',
+                data: {
+                    _token: CSRF_TOKEN,
+                    tencskd: $('input[name="tencskd"]').val()
+                },
+                success: function (respond) {
+                    if(respond != 'ok'){
+                        toastr.error("Bạn cần nhập lại tên khách sạn", "Tên khách sạn nhập vào đã tồn tại !!!");
+                        $('input[name="tencskd"]').val('');
+                        $('#tencskd').focus();
+                    }else
+                        toastr.success("Tên khách sạn sử dụng được!", "Thành công!");
+                }
+
+            });
+        }
     </script>
 @stop
 
@@ -121,7 +141,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Tên cơ sở kinh doanh<span class="require">*</span></label>
-                                <input type="text" id="tencskd" name="tencskd" class="form-control required" autofocus>
+                                <input type="text" id="tencskd" name="tencskd" class="form-control required" autofocus onchange="checktencskd()">
                             </div>
                         </div>
                         <!--/span-->
@@ -154,7 +174,7 @@
                         <div class="col-md-6">
                             <div class="form-group has-error">
                                 <label class="control-label">Địa chỉ</label>
-                                <input type="text" id="diachikd" name="diachikd" class="form-control">
+                                <input type="text" id="diachikd" name="diachikd" class="form-control required">
                             </div>
                         </div>
                         <!--/span-->
@@ -354,6 +374,7 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
+
 
     @include('includes.script.create-header-scripts')
 

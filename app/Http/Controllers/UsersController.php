@@ -46,10 +46,6 @@ class UsersController extends Controller
            // else
                 //$ttuser = Users::where('email', $input['username'])->first();
         }
-
-
-
-
         if (md5($input['password']) == $ttuser->password) {
             if ($ttuser->status == "Kích hoạt") {
                 if ($ttuser->level == 'DVVT') {

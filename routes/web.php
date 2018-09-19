@@ -181,6 +181,7 @@ Route::get('ttdn_dich_vu_luu_tru/{id}/chuyen','DnDvLtController@ttdnchuyen');
 //Thông tin CSKD
 Route::get('ttcskd_dich_vu_luu_tru','CsKdDvLtController@index');
 Route::get('ttcskd_dich_vu_luu_tru/create','CsKdDvLtController@create');
+Route::get('checktencskd','CsKdDvLtController@checktencskd');
     /*Form quản lý*/
 Route::get('ttcskd_dich_vu_luu_tru/masothue={masothue}','CsKdDvLtController@showcskd');
 Route::get('ttcskd_dich_vu_luu_tru/masothue={masothue}/create','CsKdDvLtController@createcskd');
@@ -653,4 +654,5 @@ Route::get('nangcapdl','NangCapController@nangcapdl');
 
 Route::resource('hsduyetdvlt','HsXdDvLtController');
 
+include('congbo/congbo.php');
 include('congbo/congbo.php');

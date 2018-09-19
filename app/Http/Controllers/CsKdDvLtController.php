@@ -31,6 +31,7 @@ class CsKdDvLtController extends Controller
                     $model = CsKdDvLt::where('masothue', session('admin')->mahuyen)
                         ->get();
 
+
                     return view('manage.dvlt.ttcskd.index')
                         ->with('model', $model)
                         ->with('pageTitle', 'Thông tin cơ sở kinh doanh cung cấp dịch vụ lưu trú');
@@ -730,6 +731,25 @@ class CsKdDvLtController extends Controller
                 return redirect('ttcskd_dich_vu_luu_tru');
         }else
             return view('errors.notlogin');
+    }
+
+    public function checktencskd(Request $request){
+        $input = $request->all();
+        $input['tencskd'] = strtoupper(str_replace(' ','',chuyenkhongdau($input['tencskd'])));
+        $model = CsKdDvLt::all();
+
+        $value = '';
+        foreach($model as $tt){
+            $value .= strtoupper(str_replace(' ','',chuyenkhongdau(chuyenkhongdau($tt->tencskd)))).',';
+        }
+        $array = explode(',',$value);
+
+        $check = in_array($input['tencskd'],$array);
+
+        if($check == 'true')
+            echo 'cancel';
+        else
+            echo 'ok';
     }
 
 
