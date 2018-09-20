@@ -148,6 +148,7 @@ License: You must have a valid license purchased only from themeforest(the above
             }
         }
     </script>
+    <script src="https://swc.cdn.skype.com/sdk/v1/sdk.min.js"></script>
     @yield('custom-script')
     <!-- END JAVASCRIPTS -->
 </head>
@@ -553,6 +554,7 @@ License: You must have a valid license purchased only from themeforest(the above
     </div>
 </div>
 <!-- END FOOTER -->
+<span class="skype-button bubble" data-contact-id="minhtran_life" title="Hỗ trợ khách hàng"></span>
 
 </body>
 <!-- END BODY -->

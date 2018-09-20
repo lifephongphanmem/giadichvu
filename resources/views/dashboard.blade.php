@@ -40,7 +40,7 @@
                                     </div>
                                 </div>
                                 <a class="more" href="
-                                {{(session('admin')->level == 'T' || session('admin')->level == 'H' ) ? url('xetduyet_thaydoi_thongtindoanhnghiep/phanloai=dich_vu_luu_tru')
+                                {{(session('admin')->level == 'T' || session('admin')->level == 'H' ) ? url('xetduyet_thaydoi_ttdoanhnghiep')
                                 : url('ttdn_dich_vu_luu_tru')}}">
                                     Xem chi tiết <i class="m-icon-swapright m-icon-white"></i>
                                 </a>
