@@ -630,40 +630,7 @@ class KkGDvLtController extends Controller
                     $result['message'] = '"Ngày áp dụng hồ sơ giảm giá phải sau ngày nộp ít nhất 1 ngày", "Lỗi!!!"';
                 }
             }else {
-                /*$modelchecknn = TtNgayNghiLe::where('ngaytu','<=',$ngaychuyen)
-                    ->where('ngayden','>=',$ngaychuyen)->first();
-                if(count($modelchecknn)>0){
-                    $ngaynghi = $modelchecknn->songaynghi;
-                    $day = date("D", strtotime($ngaychuyen));
 
-                    if ($day == 'Thu') {
-                        $ngaysosanh = date('Y-m-d', mktime(0, 0, 0, date('m', strtotime($ngaychuyen)), date('d', strtotime($ngaychuyen)) + 5 + $ngaynghi, date('Y', strtotime($ngaychuyen))));
-                    } elseif ($day == 'Fri') {
-                        $ngaysosanh = date('Y-m-d', mktime(0, 0, 0, date('m', strtotime($ngaychuyen)), date('d', strtotime($ngaychuyen)) + 5 + $ngaynghi, date('Y', strtotime($ngaychuyen))));
-                    } elseif ($day == 'Sat') {
-                        $ngaysosanh = date('Y-m-d', mktime(0, 0, 0, date('m', strtotime($ngaychuyen)), date('d', strtotime($ngaychuyen)) + 4 + $ngaynghi, date('Y', strtotime($ngaychuyen))));
-                    } else {
-                        $ngaysosanh = date('Y-m-d', mktime(0, 0, 0, date('m', strtotime($ngaychuyen)), date('d', strtotime($ngaychuyen)) + 3 + $ngaynghi, date('Y', strtotime($ngaychuyen))));
-                    }
-                    if ($ngayapdung >= $ngaysosanh) {
-                        $result['status'] = 'success';
-                    }
-                }else {
-                    $day = date("D", strtotime($ngaychuyen));
-
-                    if ($day == 'Thu') {
-                        $ngaysosanh = date('Y-m-d', mktime(0, 0, 0, date('m', strtotime($ngaychuyen)), date('d', strtotime($ngaychuyen)) + 5, date('Y', strtotime($ngaychuyen))));
-                    } elseif ($day == 'Fri') {
-                        $ngaysosanh = date('Y-m-d', mktime(0, 0, 0, date('m', strtotime($ngaychuyen)), date('d', strtotime($ngaychuyen)) + 5, date('Y', strtotime($ngaychuyen))));
-                    } elseif ($day == 'Sat') {
-                        $ngaysosanh = date('Y-m-d', mktime(0, 0, 0, date('m', strtotime($ngaychuyen)), date('d', strtotime($ngaychuyen)) + 4, date('Y', strtotime($ngaychuyen))));
-                    } else {
-                        $ngaysosanh = date('Y-m-d', mktime(0, 0, 0, date('m', strtotime($ngaychuyen)), date('d', strtotime($ngaychuyen)) + 3, date('Y', strtotime($ngaychuyen))));
-                    }
-                    if ($ngayapdung >= $ngaysosanh) {
-                        $result['status'] = 'success';
-                    }
-                }*/
                 $date = date_create($ngaychuyen);
                 $datenew = date_modify($date, "+1 days");
                 $ngaychuyen = date_format($datenew, "Y-m-d");

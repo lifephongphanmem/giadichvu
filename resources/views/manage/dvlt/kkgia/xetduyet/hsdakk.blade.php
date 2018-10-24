@@ -36,7 +36,11 @@
             <td style="text-align: center">{{$tt->socv}}</td>
             <td style="text-align: center">{{$tt->socvlk}}</td>
             <td>
+                @if($tt->phanloai == 'DT')
+                @else
                 <a href="{{url('/ke_khai_dich_vu_luu_tru/report_ke_khai/'.$tt->mahs)}}" target="_blank" style="background-color: #eee">Xem HS tại thời điểm này</a>
+                <a href="{{url('/ke_khai_dich_vu_luu_tru/report_ke_khai/khach_san/'.$tt->mahs)}}" target="_blank" style="background-color: #eee">Xem HS tại thời điểm này</a>
+                @endif
             </td>
         </tr>
     @endforeach
