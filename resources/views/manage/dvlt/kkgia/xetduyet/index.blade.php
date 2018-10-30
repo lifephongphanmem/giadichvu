@@ -243,6 +243,10 @@
                 }
             })*/
         }
+        function ClickHuyDuyet(mahs){
+            alert(mahs);
+            document.getElementById("mahshuyduyet").value=mahs;
+        }
         function ClickHuyDuyet(){
             $('#frm_huyduyet').submit();
         }
@@ -357,7 +361,7 @@
                                             @else
                                                 <button type="button" onclick="confirmNhanHsedit({{$tt->mahs}})" class="btn btn-default btn-xs mbs" data-target="#nhanhsedit-modal" data-toggle="modal"><i class="fa fa-edit"></i>&nbsp;
                                                     Chỉnh sửa TT nhận</button>
-                                                <button type="button" onclick="Huyduyet({{$tt->mahs}})" class="btn btn-default btn-xs mbs" data-target="#huyduyet-modal" data-toggle="modal"><i class="fa fa-stop"></i>&nbsp;
+                                                <button type="button" onclick="ClickHuyDuyet({{$tt->mahs}})" class="btn btn-default btn-xs mbs" data-target="#huyduyet-modal" data-toggle="modal"><i class="fa fa-stop"></i>&nbsp;
                                                     Huỷ duyệt HS</button>
                                             @endif
                                         @endif
