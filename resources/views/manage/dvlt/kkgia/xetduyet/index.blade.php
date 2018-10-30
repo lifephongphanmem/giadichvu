@@ -223,6 +223,7 @@
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             //alert(mahs);
             //document.getElementById("mahshuyduyet").value=mahs;
+            console.log();
 
             $.ajax({
                 url: '/giadvltxd/gettthuyduyet',
@@ -238,6 +239,7 @@
                     }
                     else
                         toastr.error("Không thể hủy duyệt hồ sơ giá phòng nghỉ!", "Lỗi!");
+
                 }
             })
         }
