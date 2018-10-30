@@ -222,10 +222,10 @@
         function Huyduyet(mahs){
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             //alert(mahs);
-            //document.getElementById("mahshuyduyet").value=mahs;
-            console.log();
+            document.getElementById("mahshuyduyet").value=mahs;
+            //console.log();
 
-            $.ajax({
+            /*$.ajax({
                 url: '/giadvltxd/gettthuyduyet',
                 type: 'GET',
                 data: {
@@ -241,7 +241,7 @@
                         toastr.error("Không thể hủy duyệt hồ sơ giá phòng nghỉ!", "Lỗi!");
 
                 }
-            })
+            })*/
         }
         function ClickHuyDuyet(){
             $('#frm_huyduyet').submit();
@@ -467,6 +467,7 @@
                     <div class="form-group">
                         <label style="color: blue"><b>Hồ sơ sẽ chuyển về trạng thái chờ xét duyệt, hồ sơ lưu bên trang công bố sẽ bị xoá bỏ. Đồng thời trong lịch sử hồ sơ sẽ lưu lại vết hồ sơ bị huỷ duyệt</b></label>
                     </div>
+                    <input type="text" name="mahshuyduyet" id="mahshuyduyet">
                     <div class="form-group" id="tthuyduyet">
                     </div>
                     <div class="modal-footer">
