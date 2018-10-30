@@ -245,7 +245,7 @@
         }
         function ClickHuyDuyet(mahs){
             alert(mahs);
-            document.getElementById("mahshuyduyet").value=mahs;
+            //document.getElementById("mahshuyduyet").value=mahs;
         }
         function ClickHuyDuyet(){
             $('#frm_huyduyet').submit();
