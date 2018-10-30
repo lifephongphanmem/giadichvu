@@ -504,7 +504,9 @@ class KkGDvLtXdController extends Controller
         if (Session::has('admin')) {
             $inputs = $request->all();
             $mahs = $inputs['mahshuyduyet'];
+            //dd($inputs);
             $model = KkGDvLt::where('mahs',$mahs)->first();
+            dd($model);
             $model->trangthai = 'Chờ nhận';
             if($model->save()){
                 $modelcb = CbKkGDvLt::where('mahs',$mahs)->delete();
@@ -558,7 +560,7 @@ class KkGDvLtXdController extends Controller
             $result['message'] = '<div class="form-group" id="tthuyduyet"> ';
             $result['message'] .= '<label style="color: blue"><b>'.$modelcskd->tencskd.'</b> kê khai giá dịch vụ lưu trú số công văn <b>'.$modelhs->socv.'</b> ngày áp dụng <b>'.getDayVn($modelhs->ngayhieuluc).'</b></b></label>';
             $result['message'] .= '<label style="color: blue">Mã hồ sơ kê khai: <b>'.$inputs['mahs'].'</b></label>';
-            $result['message'] .= '<input type="hidden" id="mahshuyduyet" name="mahshuyduyet" value="'.$inputs['mahs'].'">';
+            $result['message'] .= '<input type="text" id="mahshuyduyet" name="mahshuyduyet" value="'.$inputs['mahs'].'">';
             $result['message'] .= '</div>';
 
             $result['status'] = 'success';

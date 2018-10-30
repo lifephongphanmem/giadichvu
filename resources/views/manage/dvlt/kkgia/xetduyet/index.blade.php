@@ -225,7 +225,7 @@
             //document.getElementById("mahshuyduyet").value=mahs;
 
             $.ajax({
-                url: '/xdkkgiadvlt/gettthuyduyet',
+                url: '/giadvltxd/gettthuyduyet',
                 type: 'GET',
                 data: {
                     _token: CSRF_TOKEN,
@@ -467,7 +467,6 @@
                     </div>
                     <div class="form-group" id="tthuyduyet">
                     </div>
-                    <input type="hidden" id="mahshuyduyet" name="mahshuyduyet">
                     <div class="modal-footer">
                         <button type="button" class="btn default" data-dismiss="modal">Hủy</button>
                         <button type="submit" class="btn blue" onclick="ClickHuyDuyet()">Đồng ý</button>
