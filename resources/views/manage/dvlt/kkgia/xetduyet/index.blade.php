@@ -222,9 +222,9 @@
         function Huyduyet(mahs){
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             //alert(mahs);
-            document.getElementById("mahshuyduyet").value=mahs;
+            //document.getElementById("mahshuyduyet").value=mahs;
 
-            /*$.ajax({
+            $.ajax({
                 url: '/xet_duyet_ke_khai_dich_vu_luu_tru/gettthuyduyet',
                 type: 'GET',
                 data: {
@@ -236,8 +236,10 @@
                     if (data.status == 'success') {
                         $('#tthuyduyet').replaceWith(data.message);
                     }
+                    else
+                        toastr.error("Không thể hủy duyệt hồ sơ giá phòng nghỉ!", "Lỗi!");
                 }
-            })*/
+            })
         }
         function ClickHuyDuyet(){
             $('#frm_huyduyet').submit();
