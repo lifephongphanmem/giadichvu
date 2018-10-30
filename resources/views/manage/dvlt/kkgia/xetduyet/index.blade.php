@@ -219,7 +219,7 @@
             $('#frm_nhanhsedit').submit();
         }
 
-        function confirmHuyduyet(mahs){
+        function Huyduyet(mahs){
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             //alert(mahs);
 
@@ -352,7 +352,7 @@
                                             @else
                                                 <button type="button" onclick="confirmNhanHsedit({{$tt->mahs}})" class="btn btn-default btn-xs mbs" data-target="#nhanhsedit-modal" data-toggle="modal"><i class="fa fa-edit"></i>&nbsp;
                                                     Chỉnh sửa TT nhận</button>
-                                                <button type="button" onclick="confirmHuyduyet({{$tt->mahs}})" class="btn btn-default btn-xs mbs" data-target="#huyduyet-modal" data-toggle="modal"><i class="fa fa-stop"></i>&nbsp;
+                                                <button type="button" onclick="Huyduyet({{$tt->mahs}})" class="btn btn-default btn-xs mbs" data-target="#huyduyet-modal" data-toggle="modal"><i class="fa fa-stop"></i>&nbsp;
                                                     Huỷ duyệt HS</button>
                                             @endif
                                         @endif

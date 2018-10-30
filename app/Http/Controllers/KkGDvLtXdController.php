@@ -100,9 +100,8 @@ class KkGDvLtXdController extends Controller
                 }
             }
             elseif($inputs['pl'] == 'cong_bo') {
-
-                    $model = CbKkGDvLt::whereYear('ngaychuyen', $inputs['nam'])
-                        ->get();
+                $model = CbKkGDvLt::whereYear('ngaychuyen', $inputs['nam'])
+                    ->get();
             }elseif($inputs['pl']='bi_tra_lai'){
                 if(session('admin')->level == 'T'  && session('admin')->sadmin == 'ssa') {
                     $model = KkGDvLt::where('trangthai', 'Bị trả lại')
