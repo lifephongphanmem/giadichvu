@@ -225,7 +225,7 @@
             //document.getElementById("mahshuyduyet").value=mahs;
 
             $.ajax({
-                url: '/xet_duyet_ke_khai_dich_vu_luu_tru/gettthuyduyet',
+                url: '/xdkkgiadvlt/gettthuyduyet',
                 type: 'GET',
                 data: {
                     _token: CSRF_TOKEN,
