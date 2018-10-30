@@ -282,7 +282,7 @@ Route::post('xet_duyet_ke_khai_dich_vu_luu_tru/tralai','KkGDvLtXdController@tral
 Route::get('/xdkkgiadvlt/nhanhs','KkGDvLtXdController@getTTnHs');
 Route::post('xet_duyet_ke_khai_dich_vu_luu_tru/nhanhs','KkGDvLtXdController@nhanhs');
 Route::post('xet_duyet_ke_khai_dich_vu_luu_tru/huyduyet','KkGDvLtXdController@huyduyet');
-Route::get('/xdkkgiadvlt/tthuyduyet','KkGDvLtXdController@gettthuyduyet');
+Route::get('/xdkkgiadvlt/gettthuyduyet','KkGDvLtXdController@gettthuyduyet');
 Route::get('/xdkkgiadvlt/nhanhsedit','KkGDvLtXdController@getTTnHsedit');
 Route::post('xet_duyet_ke_khai_dich_vu_luu_tru/nhanhsedit','KkGDvLtXdController@updatettnhs');
 Route::get('ke_khai_dich_vu_luu_tru/{mahs}/history', 'KkGDvLtXdController@history');

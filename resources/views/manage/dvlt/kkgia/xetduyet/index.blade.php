@@ -224,7 +224,7 @@
             //alert(mahs);
 
             $.ajax({
-                url: '/xdkkgiadvlt/tthuyduyet',
+                url: '/xdkkgiadvlt/gettthuyduyet',
                 type: 'GET',
                 data: {
                     _token: CSRF_TOKEN,
