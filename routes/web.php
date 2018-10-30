@@ -281,9 +281,9 @@ Route::get('xdkkgiadvlt/tralai','KkGDvLtXdController@gettttralai');
 Route::post('xet_duyet_ke_khai_dich_vu_luu_tru/tralai','KkGDvLtXdController@tralai');
 Route::get('/xdkkgiadvlt/nhanhs','KkGDvLtXdController@getTTnHs');
 Route::post('xet_duyet_ke_khai_dich_vu_luu_tru/nhanhs','KkGDvLtXdController@nhanhs');
-Route::post('xet_duyet_ke_khai_dich_vu_luu_tru/huyduyet','KkGDvLtXdController@huyduyet');
-Route::get('/giadvltxd/gettthuyduyet','AjaxController@gettthuyduyetdvlt');
-Route::get('/xdkkgiadvlt/nhanhsedit','KkGDvLtXdController@getTTnHsedit');
+
+
+
 Route::post('xet_duyet_ke_khai_dich_vu_luu_tru/nhanhsedit','KkGDvLtXdController@updatettnhs');
 Route::get('ke_khai_dich_vu_luu_tru/{mahs}/history', 'KkGDvLtXdController@history');
 Route::get('ke_khai_dich_vu_luu_tru/history/mahsh={mahsh}', 'KkGDvLtXdController@showhis');
@@ -291,6 +291,16 @@ Route::get('ke_khai_dich_vu_luu_tru/historyks/mahsh={mahsh}', 'KkGDvLtXdControll
 
 Route::get('ke_khai_dich_vu_luu_tru/{macskd}/hsdakk', 'KkGDvLtXdController@hsdakk');
     //End xét duyệt kê khai
+
+Route::get('hosocongbokekhaigiadvlt','HsCBGKkDvLtController@index');
+Route::get('hosocongbokekhaigiadvlt/gettthuyduyet','HsCBGKkDvLtController@gettthuyduyetdvlt');
+Route::post('hosocongbokekhaigiadvlt/huyduyet','HsCBGKkDvLtController@huyduyet');
+
+
+Route::get('/hosocongbokekhaigiadvlt/nhanhsedit','HsCBGKkDvLtController@getTTnHsedit');
+Route::post('hosocongbokekhaigiadvlt/nhanhsedit','HsCBGKkDvLtController@updatettnhs');
+
+
     //Search kê khai
 Route::get('search_ke_khai_dich_vu_luu_tru','KkGDvLtController@search');
 //Route::get('search_ke_khai_dich_vu_luu_tru/doanh_nghiep={masothue}&co_so_kinh_doanh={macskd}&namhs={nam}','KkGDvLtController@viewsearch');
