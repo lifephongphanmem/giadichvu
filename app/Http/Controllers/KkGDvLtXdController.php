@@ -150,52 +150,6 @@ class KkGDvLtXdController extends Controller
                 $model->lydo = $input['lydo'];
                 $model->trangthai = 'Bị trả lại';
                 $model->save();
-                    //History
-                    /*$mahsh = getdate()[0];
-                    $his = new KkGDvLtH();
-                    $his->mahsh = $mahsh;
-                    $his->mahs = $model->mahs;
-                    $his->macskd = $model->macskd;
-                    $his->masothue = $model->masothue;
-                    $his->ngaynhap = $model->ngaynhap;
-                    $his->socv = $model->socv;
-                    $his->socvlk = $model->socvlk;
-                    $his->ngaycvlk = $model->ngaycvlk;
-                    $his->ngayhieuluc = $model->ngayhieuluc;
-                    $his->ttnguoinop = $model->ttnguoinop;
-                    $his->ghichu = $model->ghichu;
-                    $his->ngaychuyen = $model->ngaychuyen;
-                    $his->cqcq = $model->cqcq;
-                    $his->dvt = $model->dvt;
-                    $his->phanloai = $model->phanloai;
-                    $his->plhs =$model->plhs;
-                    $his->lydo = $input['lydo'];
-                    $his->action = 'Trả lại hồ sơ';
-                    $his->username = session('admin')->username;
-                    $his->name = session('admin')->name;
-                    $his->tencskd = $model->tencskd;
-                    $his->tendn = $model->tendn;
-                    $his->loaihang = $model->loaihang;
-                    if($his->save()){
-                        $hsct = KkGDvLtCt::where('mahs',$model->mahs)
-                            ->get();
-                        foreach($hsct as $ct){
-                            $hisct = new KkGDvLtCtH();
-                            $hisct->mahsh = $mahsh;
-                            $hisct->loaip = $ct->loaip;
-                            $hisct->qccl = $ct->qccl;
-                            $hisct->sohieu = $ct->sohieu;
-                            $hisct->ghichu = $ct->ghichu;
-                            $hisct->macskd = $ct->macskd;
-                            $hisct->mahs = $ct->mahs;
-                            $hisct->mucgialk = $ct->mucgialk;
-                            $hisct->mucgiakk = $ct->mucgiakk;
-                            $hisct->tendoituong = $ct->tendoituong;
-                            $hisct->apdung = $ct->apdung;
-                            $hisct->maloaip = $ct->maloaip;
-                            $hisct->save();
-                        }
-                    }*/
             }
             $this->uphistlhs($model);
             $tencqcq = DmDvQl::where('maqhns',$model->cqcq)->first();
