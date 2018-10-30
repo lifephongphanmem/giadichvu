@@ -221,10 +221,10 @@
 
         function confirmHuyduyet(mahs){
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-            alert(mahs);
+            //alert(mahs);
 
             $.ajax({
-                url: '/xdkkgiadvlt/gettthuyduyet',
+                url: '/xet_duyet_ke_khai_dich_vu_luu_tru/gettthuyduyet',
                 type: 'GET',
                 data: {
                     _token: CSRF_TOKEN,
