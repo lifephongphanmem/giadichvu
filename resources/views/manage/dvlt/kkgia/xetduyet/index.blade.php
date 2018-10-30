@@ -221,7 +221,7 @@
 
         function confirmHuyduyet(mahs){
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-            //alert(mahs);
+            alert(mahs);
 
             $.ajax({
                 url: '/xdkkgiadvlt/gettthuyduyet',
