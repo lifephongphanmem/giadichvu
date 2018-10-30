@@ -219,11 +219,10 @@
             $('#frm_nhanhsedit').submit();
         }
 
-        function Huyduyet(mahs){
+        function ClickgetTTHuyDuyet(mahs){
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-            alert(mahs);
+            //alert(mahs);
             document.getElementById("mahshuyduyet").value=mahs;
-            //console.log();
 
             /*$.ajax({
                 url: '/giadvltxd/gettthuyduyet',
@@ -242,10 +241,6 @@
 
                 }
             })*/
-        }
-        function ClickHuyDuyet(mahs){
-            alert(mahs);
-            //document.getElementById("mahshuyduyet").value=mahs;
         }
         function ClickHuyDuyet(){
             $('#frm_huyduyet').submit();
@@ -361,7 +356,7 @@
                                             @else
                                                 <button type="button" onclick="confirmNhanHsedit({{$tt->mahs}})" class="btn btn-default btn-xs mbs" data-target="#nhanhsedit-modal" data-toggle="modal"><i class="fa fa-edit"></i>&nbsp;
                                                     Chỉnh sửa TT nhận</button>
-                                                <button type="button" onclick="ClickHuyDuyet({{$tt->mahs}})" class="btn btn-default btn-xs mbs" data-target="#huyduyet-modal" data-toggle="modal"><i class="fa fa-stop"></i>&nbsp;
+                                                <button type="button" onclick="ClickgetTTHuyDuyet({{$tt->mahs}})" class="btn btn-default btn-xs mbs" data-target="#huyduyet-modal" data-toggle="modal"><i class="fa fa-stop"></i>&nbsp;
                                                     Huỷ duyệt HS</button>
                                             @endif
                                         @endif
