@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\CsKdDvLt;
+use App\KkGDvLt;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
@@ -73,6 +75,38 @@ class AjaxController extends Controller
             if ($ngaynhap >= $ngayht) {
                 $result['status'] = 'success';
             }
+        }
+        die(json_encode($result));
+    }
+
+    public function gettthuyduyetdvlt(Request $request){
+        $result = array(
+            'status' => 'fail',
+            'message' => 'error',
+        );
+        if(!Session::has('admin')) {
+            $result = array(
+                'status' => 'fail',
+                'message' => 'permission denied',
+            );
+            die(json_encode($result));
+        }
+        //dd($request);
+        $inputs = $request->all();
+
+        if(isset($inputs['mahs'])){
+
+            $modelhs = KkGDvLt::where('mahs',$inputs['mahs'])
+                ->first();
+            $modelcskd = CsKdDvLt::where('macskd',$modelhs->macskd)->first();
+
+            $result['message'] = '<div class="form-group" id="tthuyduyet"> ';
+            $result['message'] .= '<label style="color: blue"><b>'.$modelcskd->tencskd.'</b> kê khai giá dịch vụ lưu trú số công văn <b>'.$modelhs->socv.'</b> ngày áp dụng <b>'.getDayVn($modelhs->ngayhieuluc).'</b></b></label>';
+            $result['message'] .= '<label style="color: blue">Mã hồ sơ kê khai: <b>'.$inputs['mahs'].'</b></label>';
+            $result['message'] .= '<input type="hidden" id="mahshuyduyet" name="mahshuyduyet" value="'.$inputs['mahs'].'">';
+            $result['message'] .= '</div>';
+
+            $result['status'] = 'success';
         }
         die(json_encode($result));
     }
