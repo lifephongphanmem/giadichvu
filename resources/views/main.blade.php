@@ -148,7 +148,7 @@ License: You must have a valid license purchased only from themeforest(the above
             }
         }
     </script>
-    <script src="https://swc.cdn.skype.com/sdk/v1/sdk.min.js"></script>
+
     @yield('custom-script')
     <!-- END JAVASCRIPTS -->
 </head>
@@ -299,31 +299,31 @@ License: You must have a valid license purchased only from themeforest(the above
                 @if(session('admin')->sadmin != 'satc' && session('admin')->sadmin != 'savt' && session('admin')->sadmin != 'sa' && session('admin')!='sact')
                     @if(canGeneral('dvlt','dvlt'))
                         @if(can('dvlt','index') || can('kkdvlt','index'))
-                    <li>
-                        <a href="">
-                            <i class="fa fa-laptop"></i>
-                            <span class="title">Dịch vụ lưu trú</span>
-                            <span class="arrow "></span>
-                        </a>
-                        <ul class="sub-menu">
-                            @if(can('dvlt','index'))
-                                <li><a href="{{url('ttdn_dich_vu_luu_tru')}}">Thông tin doanh nghiệp</a></li>
-                                <li><a href="{{url('ttcskd_dich_vu_luu_tru')}}">Thông tin CSKD</a></li>
-                                <li><a href="{{url('doi_tuong_ap_dung')}}">Đối tượng áp dụng</a></li>
-                            @endif
-                            @if(can('kkdvlt','index'))
-                                @if(can('kkdvlt','create'))
-                                    <li><a href="{{url('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh')}}">Kê khai dịch vụ lưu trú </a></li>
+                        <li>
+                            <a href="">
+                                <i class="fa fa-laptop"></i>
+                                <span class="title">Dịch vụ lưu trú</span>
+                                <span class="arrow "></span>
+                            </a>
+                            <ul class="sub-menu">
+                                @if(can('dvlt','index'))
+                                    <li><a href="{{url('ttdn_dich_vu_luu_tru')}}">Thông tin doanh nghiệp</a></li>
+                                    <li><a href="{{url('ttcskd_dich_vu_luu_tru')}}">Thông tin CSKD</a></li>
+                                    <li><a href="{{url('doi_tuong_ap_dung')}}">Đối tượng áp dụng</a></li>
                                 @endif
-                                @if(session('admin')->level =='T' || session('admin')->level =='H')
-                                    <li><a href="{{url('xet_duyet_ke_khai_dich_vu_luu_tru')}}">Hồ sơ kê khai</a></li>
-                                    <li><a href="{{url('hosocongbokekhaigiadvlt')}}">Hồ sơ công bố</a></li>
-                                    <li><a href="{{url('search_ke_khai_dich_vu_luu_tru')}}">Tìm kiếm TT kê khai</a></li>
+                                @if(can('kkdvlt','index'))
+                                    @if(can('kkdvlt','create'))
+                                        <li><a href="{{url('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh')}}">Kê khai dịch vụ lưu trú </a></li>
+                                    @endif
+                                    @if(session('admin')->level =='T' || session('admin')->level =='H')
+                                        <li><a href="{{url('xet_duyet_ke_khai_dich_vu_luu_tru')}}">Hồ sơ kê khai</a></li>
+                                        <li><a href="{{url('hosocongbokekhaigiadvlt')}}">Hồ sơ công bố</a></li>
+                                        <li><a href="{{url('search_ke_khai_dich_vu_luu_tru')}}">Tìm kiếm TT kê khai</a></li>
+                                    @endif
                                 @endif
-                            @endif
 
-                        </ul>
-                    </li>
+                            </ul>
+                        </li>
                         @endif
                     @endif
                     @if(canGeneral('dvvt','vtxk') || canGeneral('dvvt','vtxb') || canGeneral('dvvt','vtxtx') || canGeneral('dvvt','vtch'))
@@ -555,7 +555,6 @@ License: You must have a valid license purchased only from themeforest(the above
     </div>
 </div>
 <!-- END FOOTER -->
-<span class="skype-button bubble" data-contact-id="minhtran_life" title="Hỗ trợ khách hàng"></span>
 
 </body>
 <!-- END BODY -->
