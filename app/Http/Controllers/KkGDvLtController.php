@@ -259,6 +259,11 @@ class KkGDvLtController extends Controller
                 $inputs['ngaycvlk']= getDateToDb($inputs['ngaycvlk']);
             else
                 unset($inputs['ngaycvlk']);
+            if(isset($inputs['giaycnhangcs'])){
+                $giaycnhangcs = $request->file('giaycnhangcs');
+                $inputs['giaycnhangcs'] = $inputs['macskd'] .'.'.$giaycnhangcs->getClientOriginalExtension();
+                $giaycnhangcs->move(public_path() . '/images/cskddvlt/hangcslt', $inputs['giaycnhangcs']);
+            }
             $inputs['trangthai'] = 'Chờ chuyển';
             $model = new KkGDvLt();
             if($model->create($inputs)){
@@ -337,6 +342,11 @@ class KkGDvLtController extends Controller
                 $input['ngaycvlk']= getDateToDb($input['ngaycvlk']);
             else
                 unset($input['ngaycvlk']);
+            if(isset($input['giaycnhangcs'])){
+                $giaycnhangcs = $request->file('giaycnhangcs');
+                $input['giaycnhangcs'] = $input['macskd'] .'.'.$giaycnhangcs->getClientOriginalExtension();
+                $giaycnhangcs->move(public_path() . '/images/cskddvlt/hangcslt/', $input['giaycnhangcs']);
+            }
             $model->update($input);
             return redirect('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh='.$model->macskd.'&nam='.date('Y'));
         }else

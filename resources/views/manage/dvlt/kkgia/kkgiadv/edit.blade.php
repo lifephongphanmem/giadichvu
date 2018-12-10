@@ -355,7 +355,7 @@
 
     <!-- END PAGE HEADER-->
     <div class="row">
-        {!! Form::model($model, ['method' => 'PATCH', 'url'=>'ke_khai_dich_vu_luu_tru/'. $model->id, 'class'=>'horizontal-form','id'=>'update_kkdvlt']) !!}
+        {!! Form::model($model, ['method' => 'PATCH', 'url'=>'ke_khai_dich_vu_luu_tru/'. $model->id, 'class'=>'horizontal-form','id'=>'update_kkdvlt','files'=>true,'enctype'=>'multipart/form-data']) !!}
         <div class="col-md-12">
             <!-- BEGIN EXAMPLE TABLE PORTLET-->
             <div class="portlet box blue">
@@ -476,6 +476,22 @@
                         </div>
                     </div>
                     @endif
+                    <div class="row">
+                        @if($model->giaycnhangcs != '')
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Giấy công nhận hạng cơ sở lưu trú</label>
+                                    <a href="{{ url('images/cskddvlt/hangcslt/'.$model->giaycnhangcs)}}" class="form-control" target="_blank">{{$model->giaycnhangcs}}</a>
+                                </div>
+                            </div>
+                        @endif
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">File công nhận hạng cơ sở lưu trú<span class="require">*</span></label>
+                                {!!Form::file('giaycnhangcs',array('id'=>'giaycnhangcs','class' => 'passvalid','accept'=>'image/*'))!!}
+                            </div>
+                        </div>
+                    </div>
                     <input type="hidden" name="macskd" id="macskd" value="{{$model->macskd}}">
                     <input type="hidden" name="mahs" id="mahs" value="{{$model->mahs}}">
                     {!! Form::close() !!}

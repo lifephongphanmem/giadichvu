@@ -426,7 +426,7 @@
 
     <!-- END PAGE HEADER-->
     <div class="row">
-        {!! Form::open(['url'=>'ke_khai_dich_vu_luu_tru', 'id' => 'create_kkdvlt', 'class'=>'horizontal-form']) !!}
+        {!! Form::open(['url'=>'ke_khai_dich_vu_luu_tru', 'id' => 'create_kkdvlt', 'class'=>'horizontal-form','files'=>true,'enctype'=>'multipart/form-data']) !!}
         <div class="col-md-12">
             <!-- BEGIN EXAMPLE TABLE PORTLET-->
             <div class="portlet box blue">
@@ -546,6 +546,24 @@
                             </div>
                         </div>
                     @endif
+                    <div class="row">
+                        @if(isset($modelcb))
+                            @if($modelcb->giaycnhangcs != '')
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Giấy công nhận hạng cơ sở lưu trú</label>
+                                    <a href="{{ url('images/cskddvlt/hangcslt/'.$modelcb->giaycnhangcs)}}" class="form-control" target="_blank">{{$modelcb->giaycnhangcs}}</a>
+                                </div>
+                            </div>
+                            @endif
+                        @endif
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">File công nhận hạng cơ sở lưu trú<span class="require">*</span></label>
+                                {!!Form::file('giaycnhangcs',array('id'=>'giaycnhangcs','class' => 'passvalid','accept'=>'image/*'))!!}
+                            </div>
+                        </div>
+                    </div>
                     <input type="hidden" name="macskd" id="macskd" value="{{$modelcskd->macskd}}">
                     <input type="hidden" name="masothue" id="masothue" value="{{$modeldn->masothue}}">
                     <input type="hidden" name="cqcq" id="cqcq" value="{{$modeldn->cqcq}}">

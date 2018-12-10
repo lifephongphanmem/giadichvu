@@ -31,6 +31,7 @@ class KkGDvLt extends Model
         'tendn',
         'tencskd',
         'loaihang',
-        'thoihan'
+        'thoihan',
+        'giaycnhangcs'
     ];
 }

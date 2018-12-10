@@ -473,6 +473,24 @@
                         </div>
                     </div>
                     @endif
+                    <div class="row">
+                        @if(isset($modelcb))
+                            @if($modelcb->giaycnhangcs != '')
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Giấy công nhận hạng cơ sở lưu trú</label>
+                                        <a href="{{ url('images/cskddvlt/hangcslt/'.$modelcb->giaycnhangcs)}}" class="form-control" target="_blank">{{$modelcb->giaycnhangcs}}</a>
+                                    </div>
+                                </div>
+                            @endif
+                        @endif
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">File công nhận hạng cơ sở lưu trú<span class="require">*</span></label>
+                                {!!Form::file('giaycnhangcs',array('id'=>'giaycnhangcs','class' => 'passvalid','accept'=>'image/*'))!!}
+                            </div>
+                        </div>
+                    </div>
                     <input type="hidden" name="macskd" id="macskd" value="{{$modelcskd->macskd}}">
                     <input type="hidden" name="masothue" id="masothue" value="{{$modelcskd->masothue}}">
                     <input type="hidden" name="cqcq" id="cqcq" value="{{$modelcskd->cqcq}}">

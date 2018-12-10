@@ -379,6 +379,22 @@
                         </div>
                         <!--/span-->
                     </div>
+                    <div class="row">
+                        @if($model->giaycnhangcs != '')
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Giấy công nhận hạng cơ sở lưu trú</label>
+                                    <a href="{{ url('images/cskddvlt/hangcslt/'.$model->giaycnhangcs)}}" class="form-control" target="_blank">{{$model->giaycnhangcs}}</a>
+                                </div>
+                            </div>
+                        @endif
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">File công nhận hạng cơ sở lưu trú<span class="require">*</span></label>
+                                {!!Form::file('giaycnhangcs',array('id'=>'giaycnhangcs','class' => 'passvalid','accept'=>'image/*'))!!}
+                            </div>
+                        </div>
+                    </div>
 
                     <!--/row-->
                     <div class="row">
