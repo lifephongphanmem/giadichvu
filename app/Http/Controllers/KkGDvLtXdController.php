@@ -75,45 +75,42 @@ class KkGDvLtXdController extends Controller
             $inputs = $request->all();
             $inputs['nam'] = isset($inputs['nam']) ? $inputs['nam'] : date('Y');
             $inputs['pl'] = isset($inputs['pl']) ? $inputs['pl'] : 'cho_nhan';
+
+            $model = KkGDvLt::join('cskddvlt','cskddvlt.macskd','=','kkgdvlt.macskd')
+                ->select('cskddvlt.*','kkgdvlt.mahs','kkgdvlt.ngaynhap','kkgdvlt.ngayhieuluc','kkgdvlt.socv','kkgdvlt.ttnguoinop','kkgdvlt.trangthai');
             if($inputs['pl']=='cho_nhan') {
                 if(session('admin')->level == 'T'  && session('admin')->sadmin == 'ssa') {
-                    $model = KkGDvLt::where('trangthai', 'Chờ nhận')
-                        ->whereYear('ngaychuyen', $inputs['nam'])
-                        ->get();
+                    $model = $model->where('kkgdvlt.trangthai', 'Chờ nhận')
+                        ->whereYear('kkgdvlt.ngaychuyen', $inputs['nam']);
                 }else{
-                    $model = KkGDvLt::where('trangthai', 'Chờ nhận')
-                        ->where('cqcq',session('admin')->cqcq)
-                        ->whereYear('ngaychuyen', $inputs['nam'])
-                        ->get();
+                    $model = $model->where('kkgdvlt.trangthai', 'Chờ nhận')
+                        ->where('kkgdvlt.cqcq',session('admin')->cqcq)
+                        ->whereYear('ngaychuyen', $inputs['nam']);
                 }
             }
             elseif($inputs['pl'] == 'duyet') {
                 if(session('admin')->level == 'T'  && session('admin')->sadmin == 'ssa') {
-                    $model = KkGDvLt::where('trangthai', 'Duyệt')
-                        ->whereYear('ngaychuyen', $inputs['nam'])
-                        ->get();
+                    $model = $model->where('kkgdvlt.trangthai', 'Duyệt')
+                        ->whereYear('kkgdvlt.ngaychuyen', $inputs['nam']);
                 }else{
-                    $model = KkGDvLt::where('trangthai', 'Duyệt')
-                        ->where('cqcq',session('admin')->cqcq)
-                        ->whereYear('ngaychuyen', $inputs['nam'])
-                        ->get();
+                    $model = $model->where('kkgdvlt.trangthai', 'Duyệt')
+                        ->where('kkgdvlt.cqcq',session('admin')->cqcq)
+                        ->whereYear('kkgdvlt.ngaychuyen', $inputs['nam']);
                 }
-            }
-            elseif($inputs['pl'] == 'cong_bo') {
+            /*}elseif($inputs['pl'] == 'cong_bo') {
                 $model = CbKkGDvLt::whereYear('ngaychuyen', $inputs['nam'])
-                    ->get();
+                    ->get();*/
             }elseif($inputs['pl']='bi_tra_lai'){
                 if(session('admin')->level == 'T'  && session('admin')->sadmin == 'ssa') {
-                    $model = KkGDvLt::where('trangthai', 'Bị trả lại')
-                        ->whereYear('ngaychuyen', $inputs['nam'])
-                        ->get();
+                    $model = $model->where('kkgdvlt.trangthai', 'Bị trả lại')
+                        ->whereYear('kkgdvlt.ngaychuyen', $inputs['nam']);
                 }else{
-                    $model = KkGDvLt::where('trangthai', 'Bị trả lại')
-                        ->where('cqcq',session('admin')->cqcq)
-                        ->whereYear('ngaychuyen', $inputs['nam'])
-                        ->get();
+                    $model = $model->where('kkgdvlt.trangthai', 'Bị trả lại')
+                        ->where('kkgdvlt.cqcq',session('admin')->cqcq)
+                        ->whereYear('kkgdvlt.ngaychuyen', $inputs['nam']);
                 }
             }
+            $model = $model->geT();
             /*$modelcskd = CsKdDvLt::all();
             foreach($model as $ttkk) {
                 $model_cskd = $modelcskd->where('masothue', $ttkk->masothue)
