@@ -304,14 +304,14 @@
                         @foreach($model as $key=>$tt)
                             <tr>
                                 <td style="text-align: center">{{$key+1}}</td>
-                                <td class="active">{{$tt->tencskd}}<br>
+                                <td class="active"><b>{{$tt->tencskd}}</b><br>
                                     @if($tt->loaihang == 'K' ) Khác(Nhà nghỉ)
                                     @elseif ($tt->loaihang == 'CXD' ) Chưa xác định (Khách sạn chưa xác định sao)
                                     @else
                                         {{$tt->loaihang.' sao'}}
                                     @endif
                                     <br>Mã kê khai: {{$tt->mahs}}
-                                    <br>Mã số thuế: {{$tt->masothue}}</td>
+                                    <br>Mã số thuế: <b>{{$tt->masothue}}</b></td>
                                 <td style="text-align: center">{{getDayVn($tt->ngaynhap)}}</td>
                                 <td style="text-align: center">{{getDayVn($tt->ngayhieuluc)}}</td>
                                 <td style="text-align: center" class="danger">{{$tt->socv}}</td>
