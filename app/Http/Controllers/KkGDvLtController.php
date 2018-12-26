@@ -642,7 +642,11 @@ class KkGDvLtController extends Controller
             }else {
 
                 $date = date_create($ngaychuyen);
-                $datenew = date_modify($date, "+1 days");
+                if(date('H',$ngaychuyen) >=16)
+                    $datenew = date_modify($date, "+1 days");
+                else
+                    $datenew = $date;
+
                 $ngaychuyen = date_format($datenew, "Y-m-d");
                 /*} else {
                     $ngaychuyen = date("Y-m-d",strtotime($ngaychuyen));
@@ -667,7 +671,7 @@ class KkGDvLtController extends Controller
                     $ngaychuyen = date_format($datestartnew, "Y-m-d");
 
                 }
-                if ($ngaylv > getGeneralConfigs()['thoihan_lt']) {
+                if ($ngaylv >= getGeneralConfigs()['thoihan_lt']) {
                     $result['status'] = 'success';
                 }else{
                     $result['status'] = 'fail';
