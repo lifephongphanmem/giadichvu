@@ -334,7 +334,7 @@
 
     <!-- END PAGE HEADER-->
     <div class="row">
-        {!! Form::model($model, ['method' => 'PATCH', 'url'=>'ke_khai_dich_vu_luu_tru/khach_san/'. $model->id, 'class'=>'horizontal-form','id'=>'update_kkdvlt']) !!}
+        {!! Form::model($model, ['method' => 'PATCH', 'url'=>'ke_khai_dich_vu_luu_tru/khach_san/'. $model->id, 'class'=>'horizontal-form','id'=>'update_kkdvlt','files'=>true,'enctype'=>'multipart/form-data']) !!}
         <div class="col-md-12">
             <!-- BEGIN EXAMPLE TABLE PORTLET-->
             <div class="portlet box blue">

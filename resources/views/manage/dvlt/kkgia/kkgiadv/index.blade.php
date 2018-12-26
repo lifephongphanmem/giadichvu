@@ -245,6 +245,8 @@
                                     <a href="{{url('ke_khai_dich_vu_luu_tru/'.$tt->mahs.'/history')}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Lịch sử</a>
                                     @if($tt->giaycnhangcs != '')
                                     <a href="{{ url('images/cskddvlt/hangcslt/'.$tt->giaycnhangcs)}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Giấy công nhận hạng cơ sở lưu trú</a>
+                                    @else
+                                        <p>Doanh nghiệp chưa cập nhật giấy chứng nhận loại hạng</p>
                                     @endif
                                 </td>
                             </tr>

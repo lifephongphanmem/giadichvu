@@ -367,7 +367,7 @@
 
     <!-- END PAGE HEADER-->
     <div class="row">
-        {!! Form::open(['url'=>'ke_khai_dich_vu_luu_tru/khach_san', 'id' => 'create_kkdvlt', 'class'=>'horizontal-form']) !!}
+        {!! Form::open(['url'=>'ke_khai_dich_vu_luu_tru/khach_san', 'id' => 'create_kkdvlt', 'class'=>'horizontal-form','files'=>true,'enctype'=>'multipart/form-data']) !!}
         <div class="col-md-12">
             <!-- BEGIN EXAMPLE TABLE PORTLET-->
             <div class="portlet box blue">
