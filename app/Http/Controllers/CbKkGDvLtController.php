@@ -38,6 +38,7 @@ class CbKkGDvLtController extends Controller
             $modelcq = DnDvLt::where('masothue', $modelcskd->masothue)->first();
             $modelcb = CbKkGDvLt::where('macskd', $macskd)
                 ->first();
+            $model = KkGDvLt::where('mahs',$modelcb->mahs)->first();
             if (count($modelcb) > 0)
                 $modelcbct = KkGDvLtCt::where('mahs', $modelcb->mahs)
                     ->get();
@@ -49,6 +50,7 @@ class CbKkGDvLtController extends Controller
                 ->with('modelcq', $modelcq)
                 ->with('modelcb', $modelcb)
                 ->with('modelcbct', $modelcbct)
+                ->with('model',$model)
                 ->with('pageTitle', 'Thông tin kê khai dịch vụ');
         }else{
             dd('Không tìm thấy cơ sở kinh doanh dịch vụ lưu trú');

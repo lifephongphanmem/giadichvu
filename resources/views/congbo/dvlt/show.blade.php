@@ -76,8 +76,8 @@
                     @else
                     <p>Ngày áp dụng mức giá <b>{{getDayVn($modelcb->ngayhieuluc)}}</b> - {{$modelcq->tendv}} đã nhận hồ sơ vào ngày {{getDayVn($modelcb->ngaynhan)}}</p>
                     <br>
-                        @if($modelcb->giaycnhangcs != '')
-                            <a href="{{ url('images/cskddvlt/hangcslt/'.$modelcb->giaycnhangcs)}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Giấy công nhận hạng cơ sở lưu trú</a>
+                        @if($model->giaycnhangcs != '')
+                            <a href="{{ url('images/cskddvlt/hangcslt/'.$model->giaycnhangcs)}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Giấy công nhận hạng cơ sở lưu trú</a>
                         @else
                         <p>Doanh nghiệp chưa cập nhật giấy chứng nhận loại hạng theo hồ sơ kê khai</p>
                         @endif
