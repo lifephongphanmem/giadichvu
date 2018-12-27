@@ -91,6 +91,11 @@
                                 @if(can('dvlt','edit'))
                                 <a href="{{url('ttcskd_dich_vu_luu_tru/'.$tt->id.'/edit')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</a>
                                 @endif
+                                @if($tt->toado != '')
+                                    <a href="{{ url('images/cskddvlt/'.$tt->toado)}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Giấy công nhận hạng cơ sở lưu trú</a>
+                                @else
+                                    <p>Doanh nghiệp chưa cập nhật giấy chứng nhận loại hạng</p>
+                                @endif
                                 @if(can('dvlt','delete'))
                                 <!--button type="button" onclick="getId('{{$tt->id}}')" class="btn btn-default btn-xs mbs" data-target="#delete-modal" data-toggle="modal"><i class="fa fa-trash-o"></i>&nbsp;
                                     Xóa</button-->

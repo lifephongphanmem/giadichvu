@@ -174,7 +174,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="control-label">Ảnh đại diện<span class="require">*</span></label>
+                                <label class="control-label">Giấy chứng nhận loại hạng<span class="require">*</span></label>
                                 {!!Form::file('toado',array('id'=>'toado','class' => 'passvalid','accept'=>'image/*'))!!}
                             </div>
                         </div>
@@ -185,7 +185,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="control-label">Ảnh hiện tại<span class="require">*</span></label>
+                                <label class="control-label">Giấy chứng nhận loại hạng<span class="require">*</span></label>
                                 <img src="{{ url('images/cskddvlt/'.$model->toado)}}" width="20%">
                             </div>
                         </div>

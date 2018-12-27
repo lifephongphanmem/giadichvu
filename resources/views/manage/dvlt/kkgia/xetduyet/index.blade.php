@@ -311,7 +311,14 @@
                                         {{$tt->loaihang.' sao'}}
                                     @endif
                                     <br>Mã kê khai: {{$tt->mahs}}
-                                    <br>Mã số thuế: <b>{{$tt->masothue}}</b></td>
+                                    <br>Mã số thuế: <b>{{$tt->masothue}}</b>
+                                    <br>
+                                    @if($tt->toado != '')
+                                        <a href="{{ url('images/cskddvlt/'.$tt->toado)}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Giấy công nhận hạng cơ sở lưu trú</a>
+                                    @else
+                                        <p>Doanh nghiệp chưa cập nhật giấy chứng nhận loại hạng trong thông tin cskd</p>
+                                    @endif
+                                </td>
                                 <td style="text-align: center">{{getDayVn($tt->ngaynhap)}}</td>
                                 <td style="text-align: center">{{getDayVn($tt->ngayhieuluc)}}</td>
                                 <td style="text-align: center" class="danger">{{$tt->socv}}</td>

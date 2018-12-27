@@ -77,7 +77,8 @@ class KkGDvLtXdController extends Controller
             $inputs['pl'] = isset($inputs['pl']) ? $inputs['pl'] : 'cho_nhan';
 
             $model = KkGDvLt::join('cskddvlt','cskddvlt.macskd','=','kkgdvlt.macskd')
-                ->select('cskddvlt.tencskd','cskddvlt.loaihang','cskddvlt.masothue','cskddvlt.macskd','kkgdvlt.mahs','kkgdvlt.ngaynhap','kkgdvlt.ngayhieuluc','kkgdvlt.socv','kkgdvlt.ttnguoinop','kkgdvlt.trangthai',
+                ->select('cskddvlt.tencskd','cskddvlt.loaihang','cskddvlt.masothue','cskddvlt.macskd','cskddvlt.toado',
+                    'kkgdvlt.mahs','kkgdvlt.ngaynhap','kkgdvlt.ngayhieuluc','kkgdvlt.socv','kkgdvlt.ttnguoinop','kkgdvlt.trangthai',
                 'kkgdvlt.id','kkgdvlt.ngaychuyen','kkgdvlt.giaycnhangcs');
             if($inputs['pl']=='cho_nhan') {
                 if(session('admin')->level == 'T'  && session('admin')->sadmin == 'ssa') {
