@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\CsKdDvLt;
+use App\DmDvQl;
 use App\DnDvLt;
 use App\TtCsKdDvLt;
 use App\TtPhong;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class CsKdDvLtController extends Controller
@@ -706,7 +709,31 @@ class CsKdDvLtController extends Controller
                 $avatar->move(public_path() . '/images/cskddvlt/', $inputs['toado']);
             }
             $model->update($inputs);
+            if(isset($inputs['toado'])){
+                $tencqcq = DmDvQl::where('maqhns',$model->cqcq)->first();
+                $dn = DnDvLt::where('masothue',$model->masothue)->first();
+                $cskd = $model->tencskd;
+                $loaihang = $model->loaihang;
+                $data=[];
+                $data['tendn'] = $dn->tendn;
+                $data['masothue'] = $dn->masothue;
+                $data['tg'] = Carbon::now()->toDateTimeString();
+                $data['tencqcq'] = $tencqcq->tendv;
+                $data['tencskd'] =$cskd;
+                $data['loaihang'] = $loaihang;
+                $data['url'] = url('/images/cskddvlt/'.$model->toado);
 
+                $maildn = $dn->email;
+                $tendn = $dn->tendn;
+                $mailql = $tencqcq->email;
+                $tenql = $tencqcq->tendv;
+                Mail::send('mail.tdchungnhanhang',$data, function ($message) use($maildn,$tendn,$mailql,$tenql) {
+                    $message->to($maildn,$tendn)
+                        ->to($mailql,$tenql)
+                        ->subject('Thông báo thay đổi giấy chứng nhận loại hạng');
+                    $message->from('qlgiakhanhhoa@gmail.com','Phần mềm CSDL giá');
+                });
+            }
             if (session('admin')->level == 'T' || session('admin')->level == 'H')
                 return redirect('ttcskd_dich_vu_luu_tru/masothue=' . $inputs['masothue']);
             else
