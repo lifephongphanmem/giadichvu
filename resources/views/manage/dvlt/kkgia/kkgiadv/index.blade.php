@@ -274,6 +274,8 @@
                         <h4 class="modal-title">Đồng ý chuyển hồ sơ?</h4>
                     </div>
                     <div class="modal-body">
+                        <p style="color: #000066">Hồ sơ chuyển sau 17h sẽ tính ngày hôm sau,
+                            thời gian xét duyệt hồ sơ là {{getGeneralConfigs()['thoihan_lt']}} ngày</p>
                         <div class="form-group">
                             <label><b>Thông tin người nộp</b></label>
                             <textarea id="ttnguoinop" class="form-control required" name="ttnguoinop" cols="30" rows="5" placeholder="Họ và tên người chuyển- Số ĐT liên lạc- Email lien lạc"></textarea></div>
