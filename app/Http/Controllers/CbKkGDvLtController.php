@@ -17,10 +17,9 @@ class CbKkGDvLtController extends Controller
         $inputs = $request->all();
         $inputs['loaihang'] = isset($inputs['loaihang']) ? $inputs['loaihang'] : '3';
         $inputs['macskd'] = isset($inputs['macskd']) ? $inputs['macskd'] : 'all';
-        $model = CsKdDvLt::where('loaihang',$inputs['loaihang']);
-        /*if($inputs['macskd'] != 'all'){
-            $model = $model->where('macskd',$inputs['macskd']);
-        }*/
+        $model = new CsKdDvLt();
+        if($inputs['loaihang'] != 'all')
+            $model = CsKdDvLt::where('loaihang',$inputs['loaihang']);
         $model = $model->get();
         //dd($model);
 

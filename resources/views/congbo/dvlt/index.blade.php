@@ -46,6 +46,7 @@
                             <div class="col-md-5">
                                 <div class="form-group">
                                     <select id="loaihang" name="loaihang" class="form-control">
+                                        <option value="all">--Tất cả--</option>
                                         <option value="1" {{$loaihang == 1 ? 'selected' : ''}}>1 sao</option>
                                         <option value="2" {{$loaihang == 2 ? 'selected' : ''}}>2 sao</option>
                                         <option value="3" {{$loaihang == 3 ? 'selected' : ''}}>3 sao</option>
@@ -90,6 +91,11 @@
                                     <td><a href="{{$tt->link}}" target="_blank">{{$tt->link}}</a></td>
                                     <td>
                                         <a href="{{url('giadichvuluutru/'.$tt->macskd)}}" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Thông tin kê khai giá </a>
+                                        @if($tt->toado != '')
+                                            <br><a href="{{ url('images/cskddvlt/'.$tt->toado)}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Giấy công nhận hạng cơ sở lưu trú</a>
+                                        @else
+                                            <br><p>Doanh nghiệp chưa cập nhật giấy chứng nhận loại hạng</p>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

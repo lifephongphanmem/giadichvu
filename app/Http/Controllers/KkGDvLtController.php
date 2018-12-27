@@ -671,7 +671,7 @@ class KkGDvLtController extends Controller
                     $ngaychuyen = date_format($datestartnew, "Y-m-d");
 
                 }
-                if ($ngaylv >= getGeneralConfigs()['thoihan_lt']) {
+                if ($ngaylv > getGeneralConfigs()['thoihan_lt']) {
                     $result['status'] = 'success';
                 }else{
                     $result['status'] = 'fail';
