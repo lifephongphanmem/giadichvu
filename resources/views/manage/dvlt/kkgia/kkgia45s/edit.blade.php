@@ -384,7 +384,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">Giấy công nhận hạng cơ sở lưu trú</label>
-                                    <a href="{{ url('images/cskddvlt/hangcslt/'.$model->giaycnhangcs)}}" class="form-control" target="_blank">{{$model->giaycnhangcs}}</a>
+                                    <a href="{{ url('images/cskddvlt/hangcslt/'.$model->giaycnhangcs)}}" target="_blank">{{$model->giaycnhangcs}}</a>
                                 </div>
                             </div>
                         @endif
