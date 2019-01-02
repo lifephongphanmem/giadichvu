@@ -657,7 +657,8 @@ class KkGDvLtController extends Controller
                 $ngaylv = 0;
                 while (strtotime($ngaychuyen) <= strtotime($ngayduyet)) {
                     $checkngay = \App\TtNgayNghiLe::where('ngaytu', '<=', $ngaychuyen)
-                        ->where('ngayden', '>=', $ngaychuyen)->first();
+                        ->where('ngayden', '>=', $ngaychuyen)->get();
+                    dd(count($checkngay));
                     if (count($checkngay) > 0)
                         $ngaylv = $ngaylv;
                     elseif (date('D', strtotime($ngaychuyen)) == 'Sat')
@@ -671,7 +672,7 @@ class KkGDvLtController extends Controller
                     $ngaychuyen = date_format($datestartnew, "Y-m-d");
 
                 }
-                if ($ngaylv > getGeneralConfigs()['thoihan_lt']) {
+                if ($ngaylv >= getGeneralConfigs()['thoihan_lt']) {
                     $result['status'] = 'success';
                 }else{
                     $result['status'] = 'fail';
