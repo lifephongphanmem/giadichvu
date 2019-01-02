@@ -400,7 +400,7 @@ class KkGDvLtController extends Controller
             $input = $request->all();
             $id = $input['idchuyen'];
             $model = KkGDvLt::findOrFail($id);
-            dd($model);
+            //dd($model);
             if($input['ttnguoinop'] != ''){
                 $model->ttnguoinop = $input['ttnguoinop'];
                 $model->trangthai = 'Chờ nhận';
