@@ -18,6 +18,7 @@ class CsKdDvLt extends Model
         'telkd',
         'toado',
         'link',
-        'cqcq'
+        'cqcq',
+        'ghichu'
     ];
 }

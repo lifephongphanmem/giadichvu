@@ -154,6 +154,7 @@ Route::post('reports/dich_vu_luu_tru/BC6','ReportsController@dvltbc6');
 Route::post('reports/dich_vu_luu_tru/BC7','ReportsController@dvltbc7');
 Route::post('reports/dich_vu_luu_tru/BC8','ReportsController@dvltbc8');
 Route::post('reports/dich_vu_luu_tru/BC9','ReportsController@dvltbc9');
+Route::get('reports/dich_vu_luu_tru/BC10','ReportsController@dvltbc10');
 
 Route::post('reports/dich_vu_luu_tru/BC1_excel','ReportsController@dvltbc1_excel');
 Route::post('reports/dich_vu_luu_tru/BC2_excel','ReportsController@dvltbc2_excel');
@@ -182,6 +183,7 @@ Route::get('ttdn_dich_vu_luu_tru/{id}/chuyen','DnDvLtController@ttdnchuyen');
 Route::get('ttcskd_dich_vu_luu_tru','CsKdDvLtController@index');
 Route::get('ttcskd_dich_vu_luu_tru/create','CsKdDvLtController@create');
 Route::get('checktencskd','CsKdDvLtController@checktencskd');
+Route::post('ttcskd_dich_vu_luu_tru/stop','CsKdDvLtController@stop');
     /*Form quản lý*/
 Route::get('ttcskd_dich_vu_luu_tru/masothue={masothue}','CsKdDvLtController@showcskd');
 Route::get('ttcskd_dich_vu_luu_tru/masothue={masothue}/create','CsKdDvLtController@createcskd');

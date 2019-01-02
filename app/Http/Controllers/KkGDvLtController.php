@@ -658,7 +658,7 @@ class KkGDvLtController extends Controller
                 while (strtotime($ngaychuyen) <= strtotime($ngayduyet)) {
                     $checkngay = \App\TtNgayNghiLe::where('ngaytu', '<=', $ngaychuyen)
                         ->where('ngayden', '>=', $ngaychuyen)->get();
-                    //dd(count($checkngay));
+                    dd(count($checkngay));
                     if (count($checkngay) > 0)
                         $ngaylv = $ngaylv;
                     elseif (date('D', strtotime($ngaychuyen)) == 'Sat')

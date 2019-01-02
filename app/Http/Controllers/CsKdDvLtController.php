@@ -422,7 +422,7 @@ class CsKdDvLtController extends Controller
                         ->with('model', $model)
                         ->with('modelttp', $modelttp)
                         ->with('pageTitle', 'Chỉnh sửa thông tin cơ sở kinh doanh dịch vụ lưu trú');
-                } else {
+                }else {
                     return view('errors.noperm');
                 }
             }else{
@@ -777,6 +777,21 @@ class CsKdDvLtController extends Controller
             echo 'cancel';
         else
             echo 'ok';
+    }
+
+    public function stop(Request $request){
+        if (Session::has('admin')) {
+            $input = $request->all();
+            $id = $input['idstop'];
+            $model = CsKdDvLt::findOrFail($id);
+            $model->ghichu = 'Dừng hoạt động';
+            $model->save();
+            if(session('admin')->level == 'T' || session('admin')->level == 'H')
+                return redirect('ttcskd_dich_vu_luu_tru/masothue='.$model->masothue);
+            else
+                return redirect('ttcskd_dich_vu_luu_tru');
+        }else
+            return view('errors.notlogin');
     }
 
 

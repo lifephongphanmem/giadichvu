@@ -26,6 +26,13 @@
         function ClickDelete(){
             $('#frm_delete').submit();
         }
+        function getStopId(id){
+            document.getElementById("idstop").value=id;
+        }
+
+        function ClickStop(){
+            $('#frm_stop').submit();
+        }
     </script>
 @stop
 
@@ -68,7 +75,7 @@
                             <th style="text-align: center">Loại hạng</th>
                             <th style="text-align: center">Số điện thoại</th>
                             <th style="text-align: center">Địa chỉ</th>
-                            <th style="text-align: center" width="20%">Thao tác</th>
+                            <th style="text-align: center" width="25%">Thao tác</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -78,7 +85,7 @@
                             <!--td align="center" style="vertical-align: middle">
                                 <img src="{{ url('images/cskddvlt/'.$tt->toado)}}" width="80%">
                             </td-->
-                            <td class="active" >{{$tt->tencskd}}</td>
+                            <td class="active" >{{$tt->tencskd}}<br>{{$tt->ghichu != '' ? '('.$tt->ghichu.')' : ''}}</td>
                             <td>@if($tt->loaihang == 'K' ) Khác(Nhà nghỉ)
                                 @elseif ($tt->loaihang == 'CXD' ) Chưa xác định (Khách sạn chưa xác định sao)
                                 @else
@@ -99,6 +106,10 @@
                                 @if(can('dvlt','delete'))
                                 <!--button type="button" onclick="getId('{{$tt->id}}')" class="btn btn-default btn-xs mbs" data-target="#delete-modal" data-toggle="modal"><i class="fa fa-trash-o"></i>&nbsp;
                                     Xóa</button-->
+                                @endif
+                                @if($tt->ghichu == '')
+                                <button type="button" onclick="getStopId('{{$tt->id}}')" class="btn btn-default btn-xs mbs" data-target="#stop-modal" data-toggle="modal"><i class="fa fa-stop"></i>&nbsp;
+                                    Dừng hoạt động</button>
                                 @endif
                             </td>
                         </tr>
@@ -126,6 +137,28 @@
                     <input type="hidden" name="iddelete" id="iddelete">
                     <div class="modal-footer">
                         <button type="submit" class="btn blue" onclick="ClickDelete()">Đồng ý</button>
+                        <button type="button" class="btn default" data-dismiss="modal">Hủy</button>
+                    </div>
+                    {!! Form::close() !!}
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <div class="modal fade" id="stop-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    {!! Form::open(['url'=>'ttcskd_dich_vu_luu_tru/stop','id' => 'frm_stop'])!!}
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h4 class="modal-title">Đồng ý dừng hoạt động của cơ sở kinh doanh?</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p style="color: #000066">Khi dừng hoạt động cơ sở kinh doanh sẽ không thể đăng ký giá của cơ sở kinh doanh này nữa! Thông tin liên hệ quản trị hệ thống!</p>
+                    </div>
+                    <input type="hidden" name="idstop" id="idstop">
+                    <div class="modal-footer">
+                        <button type="submit" class="btn blue" onclick="ClickStop()">Đồng ý</button>
                         <button type="button" class="btn default" data-dismiss="modal">Hủy</button>
                     </div>
                     {!! Form::close() !!}

@@ -52,7 +52,7 @@
                         <tr class="odd gradeX">
                             <td style="text-align: center">{{$key + 1}}</td>
                             <td>{{$tt->masothue}}</td>
-                            <td class="active" >{{$tt->tencskd}}</td>
+                            <td class="active" >{{$tt->tencskd}}<br>{{$tt->ghichu != '' ? '('.$tt->ghichu.')' : ''}}</td>
                             <td>@if($tt->loaihang == 'K' ) Khác(Nhà nghỉ)
                                 @elseif ($tt->loaihang == 'CXD' ) Chưa xác định (Khách sạn chưa xác định sao)
                                 @else  {{$tt->loaihang.' sao'}}
@@ -61,7 +61,9 @@
                             <td>{{$tt->telkd}}</td>
                             <td>{{$tt->diachikd}}</td>
                             <td>
-                                <a href="{{url('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh='.$tt->macskd.'&nam='. date('Y'))}}" class="btn btn-default btn-xs mbs"><i class="fa fa-plus"></i>&nbsp;Kê khai giá dịch vụ</a>
+                                @if($tt->ghichu != 'Dừng hoạt động')
+                                    <a href="{{url('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh='.$tt->macskd.'&nam='. date('Y'))}}" class="btn btn-default btn-xs mbs"><i class="fa fa-plus"></i>&nbsp;Kê khai giá dịch vụ</a>
+                                @endif
                             </td>
                         </tr>
                         @endforeach

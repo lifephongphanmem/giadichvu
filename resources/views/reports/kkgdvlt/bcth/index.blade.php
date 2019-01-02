@@ -35,6 +35,7 @@
                                 <li><a data-target="#BC7-thoai-confirm" data-toggle="modal">Báo cáo xét duyệt hồ sơ kê khai dịch vụ lưu trú</a></li>
                                 <li><a data-target="#BC8-thoai-confirm" data-toggle="modal">Báo cáo tổng hợp hồ sơ kê khai giá (theo đơn vị chủ quản)(bổ xung)</a></li>
                                 <li><a data-target="#BC9-thoai-confirm" data-toggle="modal">Báo cáo chi tiết hồ sơ kê khai giá (theo đơn vị, cơ sở kinh doanh kê khai)</a></li>
+                                <li><a href="{{url('/reports/dich_vu_luu_tru/BC10')}}" target="_blank">Báo cáo cơ sở kinh doanh dừng hoạt động</a></li>
                             </ol>
                         </div>
                     </div>

@@ -24,6 +24,7 @@ class CreateCskddvltTable extends Migration
             $table->string('toado')->nullable();
             $table->string('link')->nullable();
             $table->string('cqcq')->nullable();
+            $table->string('ghichu')->nullable();
             $table->timestamps();
         });
     }
