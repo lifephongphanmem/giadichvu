@@ -656,7 +656,7 @@ class KkGDvLtController extends Controller
                 $ngayduyet = $model->ngayhieuluc;
                 $ngaylv = 0;
                 while (strtotime($ngaychuyen) <= strtotime($ngayduyet)) {
-                    $checkngay = \App\TtNgayNghiLe::where('ngaytu', '<=', $ngaychuyen)
+                    $checkngay = TtNgayNghiLe::where('ngaytu', '<=', $ngaychuyen)
                         ->where('ngayden', '>=', $ngaychuyen)->get();
                     //dd(count($checkngay));
                     if (count($checkngay) > 0)
@@ -672,7 +672,7 @@ class KkGDvLtController extends Controller
                     $ngaychuyen = date_format($datestartnew, "Y-m-d");
 
                 }
-                if ($ngaylv >= getGeneralConfigs()['thoihan_lt']) {
+                if ($ngaylv > getGeneralConfigs()['thoihan_lt']) {
                     $result['status'] = 'success';
                 }else{
                     $result['status'] = 'fail';
