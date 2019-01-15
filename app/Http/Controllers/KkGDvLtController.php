@@ -655,10 +655,9 @@ class KkGDvLtController extends Controller
                     ->first();
                 $ngayduyet = $model->ngayhieuluc;
                 $ngaylv = 0;
-                while (strtotime($ngaychuyen) <= strtotime($ngayduyet)) {
+                while (strtotime($ngaychuyen) < strtotime($ngayduyet)) {
                     $checkngay = TtNgayNghiLe::where('ngaytu', '<=', $ngaychuyen)
                         ->where('ngayden', '>=', $ngaychuyen)->get();
-                    //dd(count($checkngay));
                     if (count($checkngay) > 0)
                         $ngaylv = $ngaylv;
                     elseif (date('D', strtotime($ngaychuyen)) == 'Sat')
@@ -667,13 +666,17 @@ class KkGDvLtController extends Controller
                         $ngaylv = $ngaylv;
                     else
                         $ngaylv = $ngaylv + 1;
+                    //dd($ngaylv);
                     $datestart = date_create($ngaychuyen);
                     $datestartnew = date_modify($datestart, "+1 days");
                     $ngaychuyen = date_format($datestartnew, "Y-m-d");
 
                 }
+                //dd($ngaylv.'-'. getGeneralConfigs()['thoihan_lt'] );
                 if ($ngaylv > getGeneralConfigs()['thoihan_lt']) {
+
                     $result['status'] = 'success';
+
                 }else{
                     $result['status'] = 'fail';
                     $result['message'] = '"Ngày áp dụng hồ sơ không đủ điều kiện xét duyệt", "Lỗi!!!"';
