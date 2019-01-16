@@ -183,6 +183,7 @@
     <div class="row">
         <div class="col-md-2">
             <div class="form-group">
+                <label>Tháng</label>
                 <select name="thang" id="thang" class="form-control">
                         <option value="01" {{'01' == $thang ? 'selected' : ''}}>Tháng 01</option>
                         <option value="02" {{'02' == $thang ? 'selected' : ''}}>Tháng 02</option>
@@ -201,6 +202,7 @@
         </div>
         <div class="col-md-2">
             <div class="form-group">
+                <label>Năm</label>
                 <select name="namhs" id="namhs" class="form-control">
                     @if ($nam_start = intval(date('Y')) - 5 ) @endif
                     @if ($nam_stop = intval(date('Y')) + 1 ) @endif
