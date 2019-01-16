@@ -24,14 +24,14 @@
             $('#thang').change(function() {
                 var namhs = '&nam='+ $('#namhs').val();
                 var thang = '&thang=' + $('#thang').val();
-                var url = '/hosocongbokekhaigiadvlt?&'+thang+nam;
+                var url = '/hosocongbokekhaigiadvlt?&'+thang+namhs;
 
                 window.location.href = url;
             });
             $('#namhs').change(function() {
                 var namhs = '&nam='+ $('#namhs').val();
                 var thang = '&thang=' + $('#thang').val();
-                var url = '/hosocongbokekhaigiadvlt?&'+thang+nam;
+                var url = '/hosocongbokekhaigiadvlt?&'+thang+namhs;
 
                 window.location.href = url;
             });
