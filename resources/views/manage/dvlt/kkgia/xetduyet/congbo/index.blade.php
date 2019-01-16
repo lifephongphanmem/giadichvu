@@ -24,14 +24,14 @@
             $('#thang').change(function() {
                 var namhs = '&nam='+ $('#namhs').val();
                 var thang = '&thang=' + $('#thang').val();
-                var url = '/hosocongbokekhaigiadvlt?&'+thang+namhs;
+                var url = '/hosocongbokekhaigiadvlt?'+thang+namhs;
 
                 window.location.href = url;
             });
             $('#namhs').change(function() {
                 var namhs = '&nam='+ $('#namhs').val();
                 var thang = '&thang=' + $('#thang').val();
-                var url = '/hosocongbokekhaigiadvlt?&'+thang+namhs;
+                var url = '/hosocongbokekhaigiadvlt?'+thang+namhs;
 
                 window.location.href = url;
             });
@@ -184,18 +184,18 @@
         <div class="col-md-2">
             <div class="form-group">
                 <select name="thang" id="thang" class="form-control">
-                        <option value="01" {{$t == $thang ? 'selected' : ''}}>Tháng 01</option>
-                        <option value="02" {{$t == $thang ? 'selected' : ''}}>Tháng 02</option>
-                        <option value="03" {{$t == $thang ? 'selected' : ''}}>Tháng 03</option>
-                        <option value="04" {{$t == $thang ? 'selected' : ''}}>Tháng 04</option>
-                        <option value="05" {{$t == $thang ? 'selected' : ''}}>Tháng 05</option>
-                        <option value="06" {{$t == $thang ? 'selected' : ''}}>Tháng 06</option>
-                        <option value="07" {{$t == $thang ? 'selected' : ''}}>Tháng 07</option>
-                        <option value="08" {{$t == $thang ? 'selected' : ''}}>Tháng 08</option>
-                        <option value="09" {{$t == $thang ? 'selected' : ''}}>Tháng 09</option>
-                        <option value="10" {{$t == $thang ? 'selected' : ''}}>Tháng 10</option>
-                        <option value="11" {{$t == $thang ? 'selected' : ''}}>Tháng 11</option>
-                        <option value="12" {{$t == $thang ? 'selected' : ''}}>Tháng 12</option>
+                        <option value="01" {{'01' == $thang ? 'selected' : ''}}>Tháng 01</option>
+                        <option value="02" {{'02' == $thang ? 'selected' : ''}}>Tháng 02</option>
+                        <option value="03" {{'03' == $thang ? 'selected' : ''}}>Tháng 03</option>
+                        <option value="04" {{'04' == $thang ? 'selected' : ''}}>Tháng 04</option>
+                        <option value="05" {{'05' == $thang ? 'selected' : ''}}>Tháng 05</option>
+                        <option value="06" {{'06' == $thang ? 'selected' : ''}}>Tháng 06</option>
+                        <option value="07" {{'07' == $thang ? 'selected' : ''}}>Tháng 07</option>
+                        <option value="08" {{'08' == $thang ? 'selected' : ''}}>Tháng 08</option>
+                        <option value="09" {{'09' == $thang ? 'selected' : ''}}>Tháng 09</option>
+                        <option value="10" {{'10' == $thang ? 'selected' : ''}}>Tháng 10</option>
+                        <option value="11" {{'11' == $thang ? 'selected' : ''}}>Tháng 11</option>
+                        <option value="12" {{'12' == $thang ? 'selected' : ''}}>Tháng 12</option>
                 </select>
             </div>
         </div>

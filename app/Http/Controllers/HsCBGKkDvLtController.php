@@ -16,7 +16,7 @@ class HsCBGKkDvLtController extends Controller
         if (Session::has('admin')) {
             $inputs = $request->all();
             $inputs['nam'] = isset($inputs['nam']) ? $inputs['nam'] : date('Y');
-            $inputs['thang'] = isset($inputs['thang']) ? $inputs['nam'] : date('m');
+            $inputs['thang'] = isset($inputs['thang']) ? $inputs['thang'] : date('m');
             $model = KkGDvLt::whereYear('ngaychuyen', $inputs['nam'])
                 ->where('trangthai','Duyệt')
                 ->whereMonth('ngaychuyen',$inputs['thang'])
