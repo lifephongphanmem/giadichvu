@@ -319,6 +319,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                         <li><a href="{{url('xet_duyet_ke_khai_dich_vu_luu_tru')}}">Hồ sơ kê khai</a></li>
                                         <li><a href="{{url('hosocongbokekhaigiadvlt')}}">Hồ sơ công bố</a></li>
                                         <li><a href="{{url('search_ke_khai_dich_vu_luu_tru')}}">Tìm kiếm TT kê khai</a></li>
+                                        <li><a href="{{url('thongtinhoatdongcskd')}}">Thông tin hoạt động của CSKD</a></li>
                                     @endif
                                 @endif
 

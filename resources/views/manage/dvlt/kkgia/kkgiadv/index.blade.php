@@ -221,8 +221,10 @@
                                             @endif
                                         @endif
                                         @if(can('kkdvlt','delete'))
+                                            @if($tt->trangthai == 'Chờ chuyển')
                                         <button type="button" onclick="getId('{{$tt->id}}')" class="btn btn-default btn-xs mbs" data-target="#delete-modal" data-toggle="modal"><i class="fa fa-trash-o"></i>&nbsp;
                                             Xóa</button>
+                                            @endif
                                         @endif
                                         @if(can('kkdvlt','approve'))
                                         <button type="button" onclick="confirmChuyen('{{$tt->id}}')" class="btn btn-default btn-xs mbs" data-target="#chuyen-modal" data-toggle="modal"><i class="fa fa-share-square-o"></i>&nbsp;

@@ -312,6 +312,9 @@ Route::get('ke_khai_dich_vu_luu_tru/report_ke_khai/{mahs}','ReportsController@kk
 Route::get('ke_khai_dich_vu_luu_tru/report_ke_khai/khach_san/{mahs}','ReportsController@kkgdvltks');
 //End kê khai giá dịch vụ lưu trú
 
+Route::get('thongtinhoatdongcskd','HoatDongCsKdController@ttcskd');
+Route::get('hoatdongcskd','HoatDongCsKdController@index');
+
 
 //End Thông tin CSKD
     //End Dịch vụ lưu trú
