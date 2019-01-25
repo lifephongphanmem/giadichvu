@@ -1004,4 +1004,16 @@ class ReportsController extends Controller
         }else
             return view('errors.notlogin');
     }
+
+    public function dvltbc11(){
+        if (Session::has('admin')) {
+            $model = CsKdDvLt::join('dndvlt','dndvlt.masothue','=','cskddvlt.masothue')
+                ->select('dndvlt.tendn','dndvlt.masothue','cskddvlt.tencskd','cskddvlt.updated_at','cskddvlt.ghichu')
+                ->get();
+            return view('reports.kkgdvlt.bcth.BC11')
+                ->with('model',$model)
+                ->with('pageTitle','Báo cáo thông tin cơ sở kinh doanh dừng hoạt động');
+        }else
+            return view('errors.notlogin');
+    }
 }
