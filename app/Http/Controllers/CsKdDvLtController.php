@@ -52,7 +52,8 @@ class CsKdDvLtController extends Controller
             if(session('admin')->level == 'T' || session('admin')->level == 'H') {
                 $model = CsKdDvLt::where('masothue', $masothue)
                     ->get();
-                if(session('admin')->sadmin == 'ssa' || session('admin')->cqcq == $model->cqcq) {
+                $modeldn = DnDvLt::where('masothue',$masothue)->first();
+                if(session('admin')->sadmin == 'ssa' || session('admin')->cqcq == $modeldn->cqcq) {
                     return view('manage.dvlt.ttcskd.index')
                         ->with('masothue', $masothue)
                         ->with('model', $model)
