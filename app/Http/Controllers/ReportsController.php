@@ -1016,4 +1016,21 @@ class ReportsController extends Controller
         }else
             return view('errors.notlogin');
     }
+
+    public function dvltbc12(Request $request){
+        if (Session::has('admin')) {
+            $input = $request->all();
+            $model = KkGDvLtH::join('cskddvlt','cskddvlt.macskd','=','kkgdvlth.macskd')
+                ->join('dndvlt','cskddvlt.masothue','=','dndvlt.masothue')
+                ->whereBetween('kkgdvlth.created_at', [$input['ngaytu'], $input['ngayden']])
+                ->where('kkgdvlth.action','Trả lại hồ sơ')
+                ->select('kkgdvlth.*','dndvlt.tendn','cskddvlt.tencskd')
+                ->get();
+            return view('reports.kkgdvlt.bcth.BC12')
+                ->with('model',$model)
+                ->with('input',$input)
+                ->with('pageTitle','Báo cáo hồ sơ kê khai giá bị trả lại');
+        }else
+            return view('errors.notlogin');
+    }
 }

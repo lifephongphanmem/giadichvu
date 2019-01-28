@@ -66,6 +66,10 @@
         $('#frm_bc9').attr('action',url);
         $('#frm_bc9').submit();
     }
+    function ClickBC12(url){
+        $('#frm_bc12').attr('action',url);
+        $('#frm_bc12').submit();
+    }
 </script>
 
 <!--Modal Thoại BC1-->
@@ -696,6 +700,44 @@
             <div class="modal-footer">
                 <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>
                 <button type="submit" data-dismiss="modal" class="btn btn-success" onclick="ClickBC9('/reports/dich_vu_luu_tru/BC9')">Đồng ý</button>
+                <!--button type="submit" data-dismiss="modal" class="btn btn-primary" onclick="ClickBC4_excel('/reports/dich_vu_luu_tru/BC4_excel')">Xuất Excel</button-->
+                <!--button type="submit" data-dismiss="modal" class="btn btn-primary" onclick="ClickPL1Excel('/reports/tt55-2011-BTC/PL1Excel')">Xuất Excel</button-->
+            </div>
+            {!! Form::close() !!}
+        </div>
+    </div>
+    </form>
+</div>
+
+<!--Modal Thoại Bc12-->
+<div id="BC12-thoai-confirm" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade">
+    <div class="modal-dialog">
+        {!! Form::open(['url'=>'/reports/dich_vu_luu_tru/BC12','target'=>'_blank' , 'id' => 'frm_bc12', 'class'=>'form-horizontal form-validate']) !!}
+        <div class="modal-content">
+            <div class="modal-header modal-header-primary">
+                <button type="button" data-dismiss="modal" aria-hidden="true"
+                        class="close">&times;</button>
+                <h4 id="modal-header-primary-label" class="modal-title">Báo cáo hồ sơ trả lại</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label"><b>Từ ngày</b></label>
+                        <div class="col-md-8">
+                            <input type="date" id="ngaytu" name="ngaytu" class="form-control" value="{{intval(date('Y')).'-01-01'}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label"><b>Đến ngày</b></label>
+                        <div class="col-md-8">
+                            <input type="date" id="ngayden" name="ngayden" class="form-control" value="{{intval(date('Y')).'-12-31'}}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>
+                <button type="submit" data-dismiss="modal" class="btn btn-success" onclick="ClickBC9('/reports/dich_vu_luu_tru/BC12')">Đồng ý</button>
                 <!--button type="submit" data-dismiss="modal" class="btn btn-primary" onclick="ClickBC4_excel('/reports/dich_vu_luu_tru/BC4_excel')">Xuất Excel</button-->
                 <!--button type="submit" data-dismiss="modal" class="btn btn-primary" onclick="ClickPL1Excel('/reports/tt55-2011-BTC/PL1Excel')">Xuất Excel</button-->
             </div>

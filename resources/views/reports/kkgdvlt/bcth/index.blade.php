@@ -37,6 +37,7 @@
                                 <li><a data-target="#BC9-thoai-confirm" data-toggle="modal">Báo cáo chi tiết hồ sơ kê khai giá (theo đơn vị, cơ sở kinh doanh kê khai)</a></li>
                                 <li><a href="{{url('/reports/dich_vu_luu_tru/BC10')}}" target="_blank">Báo cáo cơ sở kinh doanh dừng hoạt động</a></li>
                                 <li><a href="{{url('/reports/dich_vu_luu_tru/BC11')}}" target="_blank">Báo cáo tổn hợp cơ sở kinh doanh</a></li>
+                                <li><a data-target="#BC12-thoai-confirm" data-toggle="modal">Báo cáo hồ sơ trả lại</a></li>
                             </ol>
                         </div>
                     </div>
