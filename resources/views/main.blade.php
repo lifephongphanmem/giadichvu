@@ -527,10 +527,12 @@ License: You must have a valid license purchased only from themeforest(the above
                         <a href="{{url('')}}">Trang chủ</a>
                         <i class="fa fa-angle-right"></i>
                     </li>
+
                     <li>
                         {{$pageTitle}}
                     </li>
                 </ul>
+
                 <div class="page-toolbar">
                     <div class="page-toolbar">
                         <b><div id="clock"></div></b>
@@ -538,6 +540,11 @@ License: You must have a valid license purchased only from themeforest(the above
 
                 </div>
             </div>
+            <marquee>
+
+                <b style="color: #ff0000">Thông báo:</b> Sở tài chính Khánh Hòa sẽ nhận hồ sơ kê khai giá dịch vụ lưu trú đến hết 24h ngày hôm nay (30/01/2019)
+
+            </marquee>
 
     @yield('content')
         </div>
