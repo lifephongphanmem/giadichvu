@@ -640,9 +640,8 @@ class KkGDvLtController extends Controller
                     $result['message'] = '"Ngày áp dụng hồ sơ giảm giá phải sau ngày nộp ít nhất 1 ngày", "Lỗi!!!"';
                 }
             }else {
-
                 $date = date_create($ngaychuyen);
-                if(date('H',strtotime($ngaychuyen)) >= '17')
+                if(date('H',strtotime($ngaychuyen)) >= '24')
                     $datenew = date_modify($date, "+1 days");
                 else
                     $datenew = $date;
