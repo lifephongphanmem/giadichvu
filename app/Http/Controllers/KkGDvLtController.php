@@ -641,7 +641,7 @@ class KkGDvLtController extends Controller
                 }
             }else {
                 $date = date_create($ngaychuyen);
-                if(date('H',strtotime($ngaychuyen)) >= '24')
+                if(date('H',strtotime($ngaychuyen)) >= '17')
                     $datenew = date_modify($date, "+1 days");
                 else
                     $datenew = $date;
