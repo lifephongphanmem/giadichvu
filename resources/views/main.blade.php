@@ -542,7 +542,7 @@ License: You must have a valid license purchased only from themeforest(the above
             </div>
             <marquee>
 
-                <b style="color: #ff0000">Thông báo:</b> Sở tài chính Khánh Hòa sẽ nhận hồ sơ kê khai giá dịch vụ lưu trú đến hết 24h ngày hôm nay (30/01/2019)
+                <b style="color: #ff0000">Thông báo:</b> Ngày áp dụng hồ sơ sẽ được tính sau 2 ngày làm việc. Hồ sơ gửi trước 17h sẽ tính từ ngày gửi, sau 17h sẽ tính ngày hôm sau!
 
             </marquee>
 
