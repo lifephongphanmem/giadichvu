@@ -542,7 +542,7 @@ License: You must have a valid license purchased only from themeforest(the above
             </div>
             <marquee>
 
-                <b style="color: #ff0000">Thông báo:</b> Ngày áp dụng hồ sơ giá dịch vụ lưu trú sẽ được tính sau 2 ngày làm việc tính từ lúc chuyển hồ sơ. Hồ sơ gửi trước 17h sẽ tính từ ngày gửi, sau 17h sẽ tính ngày hôm sau!
+                <b style="color: #ff0000">Thông báo:</b> Ngày áp dụng hồ sơ giá dịch vụ lưu trú phải sau 2 ngày làm việc, tính từ thời điểm chuyển hồ sơ. Hồ sơ chuyển  trước 17h sẽ tính từ ngày gửi, sau 17h sẽ tính ngày hôm sau!(Ngày làm việc không tính thứ 7, CN và ngày nghỉ lể)
 
             </marquee>
 
