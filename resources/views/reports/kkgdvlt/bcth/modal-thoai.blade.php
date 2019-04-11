@@ -500,13 +500,12 @@
                             </div>
                         </div>
                     @endif
-                    <!--div class="form-group">
+                    <div class="form-group">
                         <label class="col-md-4 control-label"><b>Phân loại</b></label>
                         <div class="col-md-6 ">
-                            <select id="phanloai" name="phanloai" class="form-control select2me">
+                            <select id="phanloai" name="phanloai" class="form-control">
                                 <option value="all">--Tất cả--</option>
                                 <option value="CKK">Chưa kê khai</option>
-                                <option value="DKK">Đã kê khai</option>
                             </select>
                         </div>
                     </div-->

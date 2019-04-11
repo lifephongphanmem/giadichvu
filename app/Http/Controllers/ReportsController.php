@@ -864,6 +864,10 @@ class ReportsController extends Controller
                 else
                     $ttks->kklc = $modelkkmn['socv'].', ngày hiệu lực: '. getDayVn($modelkkmn['ngayhieuluc']);
             }
+            if($inputs['phanloai'] != 'all'){
+                if($inputs['phanloai'] == 'CKK')
+                    $model = $model->where('kklc','Chưa kê khai');
+            }
         //}
 
         return $model;
