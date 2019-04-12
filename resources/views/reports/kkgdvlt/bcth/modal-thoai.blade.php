@@ -229,7 +229,6 @@
             {!! Form::close() !!}
         </div>
     </div>
-    </form>
 </div>
 <!--Modal Thoại BC3-->
 <div id="BC3-thoai-confirm" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade">
@@ -508,7 +507,7 @@
                                 <option value="CKK">Chưa kê khai</option>
                             </select>
                         </div>
-                    </div-->
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
@@ -519,7 +518,6 @@
             {!! Form::close() !!}
         </div>
     </div>
-    </form>
 </div>
 
 <!--Modal Thoại Bc7-->
@@ -586,7 +584,6 @@
             {!! Form::close() !!}
         </div>
     </div>
-    </form>
 </div>
 
 <!--Modal Thoại BC8-->
@@ -657,7 +654,6 @@
             {!! Form::close() !!}
         </div>
     </div>
-    </form>
 </div>
 
 <!--Modal Thoại Bc9-->
@@ -705,7 +701,6 @@
             {!! Form::close() !!}
         </div>
     </div>
-    </form>
 </div>
 
 <!--Modal Thoại Bc12-->
@@ -736,12 +731,11 @@
             </div>
             <div class="modal-footer">
                 <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>
-                <button type="submit" data-dismiss="modal" class="btn btn-success" onclick="ClickBC9('/reports/dich_vu_luu_tru/BC12')">Đồng ý</button>
+                <button type="submit" data-dismiss="modal" class="btn btn-success" onclick="ClickBC12('/reports/dich_vu_luu_tru/BC12')">Đồng ý</button>
                 <!--button type="submit" data-dismiss="modal" class="btn btn-primary" onclick="ClickBC4_excel('/reports/dich_vu_luu_tru/BC4_excel')">Xuất Excel</button-->
                 <!--button type="submit" data-dismiss="modal" class="btn btn-primary" onclick="ClickPL1Excel('/reports/tt55-2011-BTC/PL1Excel')">Xuất Excel</button-->
             </div>
             {!! Form::close() !!}
         </div>
     </div>
-    </form>
 </div>
