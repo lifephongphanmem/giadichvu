@@ -40,6 +40,9 @@ class CreateKkgdvltTable extends Migration
             $table->string('tendn')->nullable();
             $table->string('loaihang')->nullable();
             $table->string('giaycnhangcs')->nullable();
+            $table->string('soqdgiaycnhangcs')->nullable();
+            $table->date('giaycnhangcstungay')->nullable();
+            $table->date('giaycnhangcsdenngay')->nullable();
             $table->timestamps();
         });
     }

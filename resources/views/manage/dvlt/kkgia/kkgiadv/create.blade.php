@@ -555,12 +555,34 @@
                                     <a href="{{ url('images/cskddvlt/hangcslt/'.$modelcb->giaycnhangcs)}}" target="_blank">{{$modelcb->giaycnhangcs}}</a>
                                 </div>
                             </div>
+                                <input type="hidden" name="giaycnhangcsplus" id="giaycnhangcsplus" value="{{$modelcb->giaycnhangcs}}">
                             @endif
                         @endif
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">File công nhận hạng cơ sở lưu trú<span class="require">*</span></label>
                                 {!!Form::file('giaycnhangcs',array('id'=>'giaycnhangcs','class' => 'passvalid','accept'=>'image/*'))!!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Số quyết định giấy công nhận hạng cơ sở lưu trú</label>
+                                <input type="text" name="soqdgiaycnhangcs" id="soqdgiaycnhangcs" class="form-control required" value="{{isset($modelcb) ? $modelcb->soqdgiaycnhangcs : '' }}">
+
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Giấy công nhận hạng cơ sở lưu trú có hiệu lực từ ngày<span class="require">*</span></label>
+                                {!!Form::text('giaycnhangcstungay',(isset($modelcb) ? ($modelcb->giaycnhangcstungay != '' ? date('d/m/Y',  strtotime($modelcb->giaycnhangcstungay)) : ''): ''), array('id' => 'giaycnhangcstungay','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required'))!!}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Giấy công nhận hạng cơ sở lưu trú có hiệu lực đến ngày<span class="require">*</span></label>
+                                {!!Form::text('giaycnhangcsdenngay',(isset($modelcb) ? ($modelcb->giaycnhangcsdenngay != '' ? date('d/m/Y',  strtotime($modelcb->giaycnhangcsdenngay)) : '') : ''), array('id' => 'giaycnhangcsdenngay','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required'))!!}
                             </div>
                         </div>
                     </div>

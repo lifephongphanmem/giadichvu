@@ -31,9 +31,9 @@ class KkGiaDvLt45sController extends Controller
                     $modeldtad = DoiTuongApDungDvLt::where('macskd',$macskd)
                         ->get();
                     $modelctdf = KkGDvLtCtDf::where('macskd',$macskd)->delete();
-                    $modelcb = CbKkGDvLt::where('macskd',$macskd)
+                    $modelcp = CbKkGDvLt::where('macskd',$macskd)
                         ->first();
-                    //dd($modelcb);
+                    $modelcb = KkGDvLt::where('mahs',$modelcp->mahs)->first();
                     if(isset($modelcb)){
                         $modelph = KkGDvLtCt::where('mahs',$modelcb->mahs)
                             ->get();
@@ -115,6 +115,8 @@ class KkGiaDvLt45sController extends Controller
             $inputs['mahs'] = $inputs['macskd'].getdate()[0];
             $inputs['ngaynhap'] = getDateToDb($inputs['ngaynhap']);
             $inputs['ngayhieuluc'] = getDateToDb($inputs['ngayhieuluc']);
+            $inputs['giaycnhangcstungay'] = getDateToDb($inputs['giaycnhangcstungay']);
+            $inputs['giaycnhangcsdenngay'] = getDateToDb($inputs['giaycnhangcsdenngay']);
             if($inputs['ngaycvlk'] != '')
                 $inputs['ngaycvlk']= getDateToDb($inputs['ngaycvlk']);
             else
@@ -123,7 +125,9 @@ class KkGiaDvLt45sController extends Controller
                 $giaycnhangcs = $request->file('giaycnhangcs');
                 $inputs['giaycnhangcs'] = $inputs['macskd'] .'.'.$giaycnhangcs->getClientOriginalExtension();
                 $giaycnhangcs->move(public_path() . '/images/cskddvlt/hangcslt', $inputs['giaycnhangcs']);
-            }
+            }else
+                $inputs['giaycnhangcs'] = $inputs['giaycnhangcsplus'];
+
             $inputs['trangthai'] = 'Chờ chuyển';
             $inputs['phanloai'] = 'DT';
             $model = new KkGDvLt();
@@ -189,23 +193,20 @@ class KkGiaDvLt45sController extends Controller
         //if (Session::has('admin')) {
             $insert = $request->all();
             $model = KkGDvLt::findOrFail($id);
-            $model->ngaynhap = date('Y-m-d', strtotime(str_replace('/', '-', $insert['ngaynhap'])));
-            $model->socv = $insert['socv'];
-            $model->ngayhieuluc = date('Y-m-d', strtotime(str_replace('/', '-', $insert['ngayhieuluc'])));
-            $model->socvlk = $insert['socvlk'];
+            $insert['ngaynhap'] = date('Y-m-d', strtotime(str_replace('/', '-', $insert['ngaynhap'])));
+            $insert['ngayhieuluc'] = date('Y-m-d', strtotime(str_replace('/', '-', $insert['ngayhieuluc'])));
+            $insert['giaycnhangcstungay'] = getDateToDb($insert['giaycnhangcstungay']);
+            $insert['giaycnhangcsdenngay'] = getDateToDb($insert['giaycnhangcsdenngay']);
             if($insert['ngaycvlk'] != '')
-                $model->ngaycvlk = date('Y-m-d', strtotime(str_replace('/', '-', $insert['ngaycvlk'])));
-            $model->macskd = $insert['macskd'];
-            $model->ghichu = $insert['ghichu'];
-            $model->dvt = $insert['dvt'];
-            $model->plhs = $insert['plhs'];
+                $insert['ngaycvlk']  = date('Y-m-d', strtotime(str_replace('/', '-', $insert['ngaycvlk'])));
+            else
+                unset($insert['ngaycvlk']);
             if(isset($insert['giaycnhangcs'])){
                 $giaycnhangcs = $request->file('giaycnhangcs');
                 $insert['giaycnhangcs'] = $insert['macskd'] .'.'.$giaycnhangcs->getClientOriginalExtension();
                 $giaycnhangcs->move(public_path() . '/images/cskddvlt/hangcslt/', $insert['giaycnhangcs']);
-                $model->giaycnhangcs = $insert['giaycnhangcs'];
             }
-            $model->save();
+            $model->update($insert);
             return redirect('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh='.$insert['macskd'].'&nam='.date('Y'));
         //}else
             //return view('errors.notlogin');

@@ -371,7 +371,7 @@
                         </div>
                         <!--/span-->
                         <div class="col-md-6">
-                            <div class="form-group has-error">
+                            <div class="form-group">
                                 <label class="control-label">Ngày thực hiện mức giá kê khai<span class="require">*</span></label>
                                 {!!Form::text('ngayhieuluc',date('d/m/Y',  strtotime($model->ngayhieuluc)), array('id' => 'ngayhieuluc','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required','onchange'=>"checkngay()"))!!}
                                 <!--Form::text('ngayhieuluc',date('d/m/Y',  strtotime($model->ngayhieuluc)), array('id' => 'ngayhieuluc','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required','onchange'=>"checkngay()"))-->
@@ -379,22 +379,7 @@
                         </div>
                         <!--/span-->
                     </div>
-                    <div class="row">
-                        @if($model->giaycnhangcs != '')
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label">Giấy công nhận hạng cơ sở lưu trú</label>
-                                    <a href="{{ url('images/cskddvlt/hangcslt/'.$model->giaycnhangcs)}}" target="_blank">{{$model->giaycnhangcs}}</a>
-                                </div>
-                            </div>
-                        @endif
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label">File công nhận hạng cơ sở lưu trú<span class="require">*</span></label>
-                                {!!Form::file('giaycnhangcs',array('id'=>'giaycnhangcs','class' => 'passvalid','accept'=>'image/*'))!!}
-                            </div>
-                        </div>
-                    </div>
+
 
                     <!--/row-->
                     <div class="row">
@@ -441,7 +426,7 @@
                     @else
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="form-group has-error">
+                                <div class="form-group">
                                     <label class="control-label">Số công văn liền kề</label>
                                     <input type="text" name="socvlk" id="socvlk" class="form-control" value="{{$model->socvlk}}">
 
@@ -455,6 +440,43 @@
                             </div>
                         </div>
                     @endif
+                    <div class="row">
+                        @if($model->giaycnhangcs != '')
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Giấy công nhận hạng cơ sở lưu trú</label>
+                                    <a href="{{ url('images/cskddvlt/hangcslt/'.$model->giaycnhangcs)}}" target="_blank">{{$model->giaycnhangcs}}</a>
+                                </div>
+                            </div>
+                        @endif
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">File công nhận hạng cơ sở lưu trú<span class="require">*</span></label>
+                                {!!Form::file('giaycnhangcs',array('id'=>'giaycnhangcs','class' => 'passvalid','accept'=>'image/*'))!!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Số quyết định giấy công nhận hạng cơ sở lưu trú</label>
+                                {!!Form::text('soqdgiaycnhangcs', null, array('id' => 'soqdgiaycnhangcs','class' => 'form-control required'))!!}
+
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Giấy công nhận hạng cơ sở lưu trú có hiệu lực từ ngày<span class="require">*</span></label>
+                                {!!Form::text('giaycnhangcstungay',($model->giaycnhangcstungay != '' ? date('d/m/Y',  strtotime($model->giaycnhangcstungay)) : ''), array('id' => 'giaycnhangcstungay','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required'))!!}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Giấy công nhận hạng cơ sở lưu trú có hiệu lực đến ngày<span class="require">*</span></label>
+                                {!!Form::text('giaycnhangcsdenngay',($model->giaycnhangcsdenngay != '' ? date('d/m/Y',  strtotime($model->giaycnhangcsdenngay)) : ''), array('id' => 'giaycnhangcsdenngay','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required'))!!}
+                            </div>
+                        </div>
+                    </div>
                     <input type="hidden" name="macskd" id="macskd" value="{{$model->macskd}}">
                     <input type="hidden" name="masothue" id="masothue" value="{{$model->masothue}}">
                     <input type="hidden" name="cqcq" id="cqcq" value="{{$model->cqcq}}">

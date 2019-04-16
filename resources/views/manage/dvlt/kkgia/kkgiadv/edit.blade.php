@@ -492,6 +492,27 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Số quyết định giấy công nhận hạng cơ sở lưu trú</label>
+                                {!!Form::text('soqdgiaycnhangcs', null, array('id' => 'soqdgiaycnhangcs','class' => 'form-control required'))!!}
+
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Giấy công nhận hạng cơ sở lưu trú có hiệu lực từ ngày<span class="require">*</span></label>
+                                {!!Form::text('giaycnhangcstungay',($model->giaycnhangcstungay != '' ? date('d/m/Y',  strtotime($model->giaycnhangcstungay)) : ''), array('id' => 'giaycnhangcstungay','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required'))!!}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Giấy công nhận hạng cơ sở lưu trú có hiệu lực đến ngày<span class="require">*</span></label>
+                                {!!Form::text('giaycnhangcsdenngay',($model->giaycnhangcsdenngay != '' ? date('d/m/Y',  strtotime($model->giaycnhangcsdenngay)) : ''), array('id' => 'giaycnhangcsdenngay','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required'))!!}
+                            </div>
+                        </div>
+                    </div>
                     <input type="hidden" name="macskd" id="macskd" value="{{$model->macskd}}">
                     <input type="hidden" name="mahs" id="mahs" value="{{$model->mahs}}">
                     {!! Form::close() !!}

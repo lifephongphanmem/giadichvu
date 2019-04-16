@@ -255,6 +255,8 @@ class KkGDvLtController extends Controller
             $inputs['mahs'] = $inputs['macskd'].getdate()[0];
             $inputs['ngaynhap'] = getDateToDb($inputs['ngaynhap']);
             $inputs['ngayhieuluc'] = getDateToDb($inputs['ngayhieuluc']);
+            $inputs['giaycnhangcstungay'] = getDateToDb($inputs['giaycnhangcstungay']);
+            $inputs['giaycnhangcsdenngay'] = getDateToDb($inputs['giaycnhangcsdenngay']);
             if($inputs['ngaycvlk'] != '')
                 $inputs['ngaycvlk']= getDateToDb($inputs['ngaycvlk']);
             else
@@ -263,7 +265,9 @@ class KkGDvLtController extends Controller
                 $giaycnhangcs = $request->file('giaycnhangcs');
                 $inputs['giaycnhangcs'] = $inputs['macskd'] .'.'.$giaycnhangcs->getClientOriginalExtension();
                 $giaycnhangcs->move(public_path() . '/images/cskddvlt/hangcslt', $inputs['giaycnhangcs']);
-            }
+            }else
+                $inputs['giaycnhangcs'] = $inputs['giaycnhangcsplus'];
+
             $inputs['trangthai'] = 'Chờ chuyển';
             $model = new KkGDvLt();
             if($model->create($inputs)){
@@ -338,6 +342,8 @@ class KkGDvLtController extends Controller
             $model = KkGDvLt::findOrFail($id);
             $input['ngayhieuluc'] = date('Y-m-d', strtotime(str_replace('/', '-', $input['ngayhieuluc'])));
             $input['ngaynhap'] = date('Y-m-d', strtotime(str_replace('/', '-', $input['ngaynhap'])));
+            $input['giaycnhangcstungay'] = getDateToDb($input['giaycnhangcstungay']);
+            $input['giaycnhangcsdenngay'] = getDateToDb($input['giaycnhangcsdenngay']);
             if($input['ngaycvlk'] != '')
                 $input['ngaycvlk']= getDateToDb($input['ngaycvlk']);
             else
