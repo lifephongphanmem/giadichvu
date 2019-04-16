@@ -555,8 +555,8 @@
                                     <a href="{{ url('images/cskddvlt/hangcslt/'.$modelcb->giaycnhangcs)}}" target="_blank">{{$modelcb->giaycnhangcs}}</a>
                                 </div>
                             </div>
-                                <input type="hidden" name="giaycnhangcsplus" id="giaycnhangcsplus" value="{{$modelcb->giaycnhangcs}}">
                             @endif
+                            <input type="hidden" name="giaycnhangcsplus" id="giaycnhangcsplus" value="{{$modelcb->giaycnhangcs}}">
                         @endif
                         <div class="col-md-6">
                             <div class="form-group">
