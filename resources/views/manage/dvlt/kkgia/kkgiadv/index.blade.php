@@ -162,8 +162,8 @@
                         <thead>
                         <tr>
                             <th style="text-align: center" width="2%">STT</th>
-                            <th style="text-align: center">Ngày kê khai</th>
-                            <th style="text-align: center">Ngày thực hiện<br>mức giá kê khai</th>
+                            <th style="text-align: center">Ngày kê khai/ <br>Ngày thực hiện<br>mức giá kê khai</th>
+                            <th style="text-align: center" width="8%">Thông tin <br>Giấy chứng nhận<br> loại hạng</th>
                             <th style="text-align: center">Số công văn</th>
                             <th style="text-align: center">Số công văn<br> liền kề</th>
                             <th style="text-align: center">Người chuyển</th>
@@ -175,8 +175,8 @@
                         @foreach($model as $key=>$tt)
                             <tr>
                                 <td style="text-align: center">{{$key+1}}</td>
-                                <td style="text-align: center">{{getDayVn($tt->ngaynhap)}}</td>
-                                <td style="text-align: center">{{getDayVn($tt->ngayhieuluc)}}</td>
+                                <td style="text-align: center">{{getDayVn($tt->ngaynhap)}}/<br>{{getDayVn($tt->ngayhieuluc)}}</td>
+                                <td style="text-align: center">Số: {{$tt->soqdgiaycnhangcs}} <br> Từ ngày: {{getDayVn($tt->giaycnhangcstungay)}} <br> Đến ngày: {{getDayVn($tt->giaycnhangcsdenngay)}}</td>
                                 <td style="text-align: center" class="active">{{$tt->socv}}</td>
                                 <td style="text-align: center">{{$tt->socvlk}}</td>
                                 <td style="text-align: center">{{$tt->ttnguoinop}}</td>

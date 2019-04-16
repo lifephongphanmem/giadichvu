@@ -292,8 +292,8 @@
                         <tr>
                             <th style="text-align: center ; margin: auto" width="2%">STT</th>
                             <th style="text-align: center" width="20%">Cơ sở kinh doanh</th>
-                            <th style="text-align: center" width="8%">Ngày<br> kê khai</th>
-                            <th style="text-align: center" width="8%">Ngày thực hiện<br>mức giá</th>
+                            <th style="text-align: center" width="8%">Ngày kê khai/<br>Ngày thực hiện<br>mức giá</th>
+                            <th style="text-align: center" width="8%">Thông tin <br>Giấy chứng nhận<br> loại hạng</th>
                             <th style="text-align: center" width="8%">Số công văn</th>
                             <th style="text-align: center" width="15%">Người chuyển</th>
                             <th style="text-align: center" width="15%">Trạng thái</th>
@@ -319,8 +319,8 @@
                                         <p>Doanh nghiệp chưa cập nhật giấy chứng nhận loại hạng trong thông tin cskd</p>
                                     @endif
                                 </td>
-                                <td style="text-align: center">{{getDayVn($tt->ngaynhap)}}</td>
-                                <td style="text-align: center">{{getDayVn($tt->ngayhieuluc)}}</td>
+                                <td style="text-align: center">{{getDayVn($tt->ngaynhap)}} / <br>{{getDayVn($tt->ngayhieuluc)}}</td>
+                                <td style="text-align: center">Số: {{$tt->soqdgiaycnhangcs}} <br> Từ ngày: {{getDayVn($tt->giaycnhangcstungay)}} <br> Đến ngày: {{getDayVn($tt->giaycnhangcsdenngay)}}</td>
                                 <td style="text-align: center" class="danger">{{$tt->socv}}</td>
                                 <td style="text-align: center">{{$tt->ttnguoinop}}</td>
                                 @if($tt->trangthai == "Chờ chuyển")
