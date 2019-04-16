@@ -460,20 +460,20 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label class="control-label">Số quyết định giấy công nhận hạng cơ sở lưu trú</label>
-                                {!!Form::text('soqdgiaycnhangcs', null, array('id' => 'soqdgiaycnhangcs','class' => 'form-control required'))!!}
+                                {!!Form::text('soqdgiaycnhangcs', null, array('id' => 'soqdgiaycnhangcs','class' => 'form-control'))!!}
 
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label class="control-label">Giấy công nhận hạng cơ sở lưu trú có hiệu lực từ ngày<span class="require">*</span></label>
-                                {!!Form::text('giaycnhangcstungay',($model->giaycnhangcstungay != '' ? date('d/m/Y',  strtotime($model->giaycnhangcstungay)) : ''), array('id' => 'giaycnhangcstungay','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required'))!!}
+                                {!!Form::text('giaycnhangcstungay',($model->giaycnhangcstungay != '' ? date('d/m/Y',  strtotime($model->giaycnhangcstungay)) : ''), array('id' => 'giaycnhangcstungay','data-inputmask'=>"'alias': 'date'",'class' => 'form-control'))!!}
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label class="control-label">Giấy công nhận hạng cơ sở lưu trú có hiệu lực đến ngày<span class="require">*</span></label>
-                                {!!Form::text('giaycnhangcsdenngay',($model->giaycnhangcsdenngay != '' ? date('d/m/Y',  strtotime($model->giaycnhangcsdenngay)) : ''), array('id' => 'giaycnhangcsdenngay','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required'))!!}
+                                {!!Form::text('giaycnhangcsdenngay',($model->giaycnhangcsdenngay != '' ? date('d/m/Y',  strtotime($model->giaycnhangcsdenngay)) : ''), array('id' => 'giaycnhangcsdenngay','data-inputmask'=>"'alias': 'date'",'class' => 'form-control'))!!}
                             </div>
                         </div>
                     </div>

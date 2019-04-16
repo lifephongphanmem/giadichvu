@@ -496,20 +496,20 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label class="control-label">Số quyết định giấy công nhận hạng cơ sở lưu trú</label>
-                                <input type="text" name="soqdgiaycnhangcs" id="soqdgiaycnhangcs" class="form-control required" value="{{isset($modelcb) ? $modelcb->soqdgiaycnhangcs : '' }}">
+                                <input type="text" name="soqdgiaycnhangcs" id="soqdgiaycnhangcs" class="form-control" value="{{isset($modelcb) ? $modelcb->soqdgiaycnhangcs : '' }}">
 
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label class="control-label">Giấy công nhận hạng cơ sở lưu trú có hiệu lực từ ngày<span class="require">*</span></label>
-                                {!!Form::text('giaycnhangcstungay',(isset($modelcb) ? ($modelcb->giaycnhangcstungay != '' ? date('d/m/Y',  strtotime($modelcb->giaycnhangcstungay)) : ''): ''), array('id' => 'giaycnhangcstungay','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required'))!!}
+                                {!!Form::text('giaycnhangcstungay',(isset($modelcb) ? ($modelcb->giaycnhangcstungay != '' ? date('d/m/Y',  strtotime($modelcb->giaycnhangcstungay)) : ''): ''), array('id' => 'giaycnhangcstungay','data-inputmask'=>"'alias': 'date'",'class' => 'form-control'))!!}
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label class="control-label">Giấy công nhận hạng cơ sở lưu trú có hiệu lực đến ngày<span class="require">*</span></label>
-                                {!!Form::text('giaycnhangcsdenngay',(isset($modelcb) ? ($modelcb->giaycnhangcsdenngay != '' ? date('d/m/Y',  strtotime($modelcb->giaycnhangcsdenngay)) : '') : ''), array('id' => 'giaycnhangcsdenngay','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required'))!!}
+                                {!!Form::text('giaycnhangcsdenngay',(isset($modelcb) ? ($modelcb->giaycnhangcsdenngay != '' ? date('d/m/Y',  strtotime($modelcb->giaycnhangcsdenngay)) : '') : ''), array('id' => 'giaycnhangcsdenngay','data-inputmask'=>"'alias': 'date'",'class' => 'form-control'))!!}
                             </div>
                         </div>
                     </div>
