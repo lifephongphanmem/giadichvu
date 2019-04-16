@@ -569,7 +569,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label class="control-label">Số quyết định giấy công nhận hạng cơ sở lưu trú</label>
-                                <input type="text" name="soqdgiaycnhangcs" id="soqdgiaycnhangcs" class="form-control required" value="{{isset($modelcb) ? $modelcb->soqdgiaycnhangcs : '' }}">
+                                <input type="text" name="soqdgiaycnhangcs" id="soqdgiaycnhangcs" class="form-control" value="{{isset($modelcb) ? $modelcb->soqdgiaycnhangcs : '' }}">
 
                             </div>
                         </div>
