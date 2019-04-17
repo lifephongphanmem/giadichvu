@@ -484,6 +484,8 @@
                                 </div>
                             @endif
                                 <input type="hidden" name="giaycnhangcsplus" id="giaycnhangcsplus" value="{{$modelcb->giaycnhangcs}}">
+                        @else
+                            <input type="hidden" name="giaycnhangcsplus" id="giaycnhangcsplus" value="">
                         @endif
                         <div class="col-md-6">
                             <div class="form-group">
