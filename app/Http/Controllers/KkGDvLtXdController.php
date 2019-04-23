@@ -410,7 +410,6 @@ class KkGDvLtXdController extends Controller
             $modelcskd = CsKdDvLt::where('macskd',$model->macskd)->first();
             $modelct = KkGDvLtCtH::where('mahsh',$mahsh)
                 ->get();
-
             return view('manage.dvlt.kkgia.xetduyet.hs45shistory')
                 ->with('pageTitle','Lịch sử hồ sơ kê khai')
                 ->with('model',$model)
