@@ -30,13 +30,19 @@ class KkGDvLtController extends Controller
             if(session('admin')->level == 'T' || session('admin')->level == 'H' || session('admin')->level == 'DVLT') {
                 if (session('admin')->level == 'T' || session('admin')->level == 'H') {
                     if (session('admin')->sadmin == 'ssa') {
-                        $model = CsKdDvLt::all();
+                        $model = CsKdDvLt::join('dmdvql','cskddvlt.cqcq','=','dmdvql.maqhns')
+                            ->select('cskddvlt.*','dmdvql.tendv')
+                            ->get();
                     } else {
-                        $model = CsKdDvLt::where('cqcq', session('admin')->cqcq)
+                        $model = CsKdDvLt::join('dmdvql','cskddvlt.cqcq','=','dmdvql.maqhns')
+                            ->select('cskddvlt.*','dmdvql.tendv')
+                            ->where('cqcq', session('admin')->cqcq)
                             ->get();
                     }
                 } else {
-                    $model = CsKdDvLt::where('masothue', session('admin')->mahuyen)
+                    $model = CsKdDvLt::join('dmdvql','cskddvlt.cqcq','=','dmdvql.maqhns')
+                        ->select('cskddvlt.*','dmdvql.tendv')
+                        ->where('masothue', session('admin')->mahuyen)
                         ->get();
                 }
 

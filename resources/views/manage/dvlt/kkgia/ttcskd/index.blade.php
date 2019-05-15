@@ -39,6 +39,7 @@
                         <thead>
                         <tr>
                             <th style="text-align: center" width="2%">STT</th>
+                            <th style="text-align: center">Đơn vị chủ quản</th>
                             <th style="text-align: center">Mã số thuế</th>
                             <th style="text-align: center">Tên cơ sở kinh doanh</th>
                             <th style="text-align: center">Loại hạng</th>
@@ -51,6 +52,7 @@
                         @foreach($model as $key=>$tt)
                         <tr class="odd gradeX">
                             <td style="text-align: center">{{$key + 1}}</td>
+                            <td>{{$tt->tendv}}</td>
                             <td>{{$tt->masothue}}</td>
                             <td class="active" >{{$tt->tencskd}}<br>{{$tt->ghichu != '' ? '('.$tt->ghichu.')' : ''}}</td>
                             <td>@if($tt->loaihang == 'K' ) Khác(Nhà nghỉ)
