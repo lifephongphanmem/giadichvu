@@ -411,7 +411,7 @@ class KkGDvLtController extends Controller
             if($model->delete()){
                 $modelct = KkGDvLtCt::where('mahs',$model->mahs)->delete();
                 $modelcth = KkGDvLtCtH::where('mahs',$model->mahs)->delete();
-                $modelh = KkGDvLtH::where('mahs',$macskd->mahs)->delete();
+                $modelh = KkGDvLtH::where('mahs',$model->mahs)->delete();
             }
             return redirect('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh='.$macskd.'&nam='.date('Y'));
         }else
