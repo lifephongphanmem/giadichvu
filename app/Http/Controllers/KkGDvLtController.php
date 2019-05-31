@@ -66,28 +66,24 @@ class KkGDvLtController extends Controller
                 $modelcskd = CsKdDvLt::where('macskd', $macskd)
                     ->first();
 
-                if(session('admin')->sadmin == 'ssa' || session('admin')->cqcq == $modelcskd->cqcq) {
-                    $tthscp = KkGDvLt::where('macskd', $macskd)
-                        ->whereYear('ngaynhap', $nam)
-                        ->where('trangthai','Duyệt')
-                        ->orderBy('id','desc')
-                        ->get();
-                    $cb = CbKkGDvLt::where('macskd', $macskd)->first();
-                    if(isset($cb))
-                        $cp = 'yes';
-                    else
-                        $cp = 'no';
-                    return view('manage.dvlt.kkgia.kkgiadv.index')
-                        ->with('model', $model)
-                        ->with('nam', $nam)
-                        ->with('macskd', $macskd)
-                        ->with('modelcskd', $modelcskd)
-                        ->with('tthscp',$tthscp)
-                        ->with('cp',$cp)
-                        ->with('pageTitle', 'Thông tin kê khai giá dịch vụ lưu trú');
-                }else{
-                    return view('errors.noperm');
-                }
+                $tthscp = KkGDvLt::where('macskd', $macskd)
+                    ->whereYear('ngaynhap', $nam)
+                    ->where('trangthai','Duyệt')
+                    ->orderBy('id','desc')
+                    ->get();
+                $cb = CbKkGDvLt::where('macskd', $macskd)->first();
+                if(isset($cb))
+                    $cp = 'yes';
+                else
+                    $cp = 'no';
+                return view('manage.dvlt.kkgia.kkgiadv.index')
+                    ->with('model', $model)
+                    ->with('nam', $nam)
+                    ->with('macskd', $macskd)
+                    ->with('modelcskd', $modelcskd)
+                    ->with('tthscp',$tthscp)
+                    ->with('cp',$cp)
+                    ->with('pageTitle', 'Thông tin kê khai giá dịch vụ lưu trú');
             }else{
                 return view('errors.perm');
             }
