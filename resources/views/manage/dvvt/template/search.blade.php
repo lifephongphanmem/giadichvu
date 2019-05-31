@@ -50,7 +50,7 @@
                                     <td style="text-align: center" class="active">{{$tt->socv}}</td>
                                     <td style="text-align: center">{{$tt->socvlk}}</td>
                                     <td>
-                                        <a href="{{url($url.'in/'.$tt->masokk)}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Xem chi tiết</a>
+                                        <a href="{{url('/ke_khai_dich_vu_van_tai/xe_taxi/report_ke_khai/'.$tt->masokk)}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Xem chi tiết</a>
                                     </td>
                                 </tr>
                             @endforeach

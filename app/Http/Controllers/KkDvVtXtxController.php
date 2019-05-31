@@ -889,7 +889,6 @@ class KkDvVtXtxController extends Controller
             $modeldm = DmDvVtXtx::where('masothue', $modelkk->masothue)->get();
             $modelgia = KkDvVtXtxCt::where('masokk', $masokk)->get();
             $modelpag = PagDvVtXtx::where('masokk', $masokk)->get();
-
             return view('reports.kkgdvvt.kkgdvxtx.printfPAG')
                 ->with('modeldonvi', $modeldonvi)
                 ->with('modelkk', $modelkk)
