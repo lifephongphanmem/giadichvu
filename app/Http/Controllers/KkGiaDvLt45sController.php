@@ -23,72 +23,77 @@ class KkGiaDvLt45sController extends Controller
 
         if (Session::has('admin')) {
             if(session('admin')->level == 'T' || session('admin')->level == 'H' || session('admin')->level == 'DVLT') {
-                $modelcskd = CsKdDvLt::where('macskd', $macskd)->first();
-                if(session('admin')->sadmin =='ssa' || session('admin')->cqcq == $modelcskd->cqcq) {
-                    $modelttp = TtCsKdDvLt::where('macskd',$macskd)
-                        ->get();
-
-                    $modeldtad = DoiTuongApDungDvLt::where('macskd',$macskd)
-                        ->get();
-                    $modelctdf = KkGDvLtCtDf::where('macskd',$macskd)->delete();
-                    $modelcp = CbKkGDvLt::where('macskd',$macskd)
-                        ->first();
-                    $modelcb = KkGDvLt::where('mahs',$modelcp->mahs)->first();
-                    if(isset($modelcb)){
-                        $modelph = KkGDvLtCt::where('mahs',$modelcb->mahs)
+                $check = KkGDvLt::where('macskd',$macskd)
+                    ->wherein('trangthai',['Chờ chuyển','Bị trả lại','Chờ nhận'])
+                    ->whereYear('ngaynhap', date('Y'))
+                    ->count();
+                if($check == 0) {
+                    $modelcskd = CsKdDvLt::where('macskd', $macskd)->first();
+                    if (session('admin')->sadmin == 'ssa' || session('admin')->cqcq == $modelcskd->cqcq) {
+                        $modelttp = TtCsKdDvLt::where('macskd', $macskd)
                             ->get();
-                        foreach($modelph as $ttph){
-                            $dsph = new KkGDvLtCtDf();
-                            $dsph->macskd = $ttph->macskd;
-                            $dsph->maloaip = $ttph->maloaip;
-                            $dsph->loaip = $ttph->loaip;
-                            $dsph->qccl = $ttph->qccl;
-                            $dsph->sohieu = $ttph->sohieu;
-                            $dsph->ghichu = $ttph->ghichu;
-                            $dsph->mucgialk = $ttph->mucgiakk;
-                            $dsph->mucgiakk = $ttph->mucgiakk;
-                            $dsph->tendoituong = $ttph->tendoituong;
-                            $dsph->apdung = $ttph->apdung;
-                            $dsph->ghichu = $ttph->ghichu;
-                            $dsph->save();
+
+                        $modeldtad = DoiTuongApDungDvLt::where('macskd', $macskd)
+                            ->get();
+                        $modelctdf = KkGDvLtCtDf::where('macskd', $macskd)->delete();
+                        $modelcp = CbKkGDvLt::where('macskd', $macskd)
+                            ->first();
+                        $modelcb = KkGDvLt::where('mahs', $modelcp->mahs)->first();
+                        if (isset($modelcb)) {
+                            $modelph = KkGDvLtCt::where('mahs', $modelcb->mahs)
+                                ->get();
+                            foreach ($modelph as $ttph) {
+                                $dsph = new KkGDvLtCtDf();
+                                $dsph->macskd = $ttph->macskd;
+                                $dsph->maloaip = $ttph->maloaip;
+                                $dsph->loaip = $ttph->loaip;
+                                $dsph->qccl = $ttph->qccl;
+                                $dsph->sohieu = $ttph->sohieu;
+                                $dsph->ghichu = $ttph->ghichu;
+                                $dsph->mucgialk = $ttph->mucgiakk;
+                                $dsph->mucgiakk = $ttph->mucgiakk;
+                                $dsph->tendoituong = $ttph->tendoituong;
+                                $dsph->apdung = $ttph->apdung;
+                                $dsph->ghichu = $ttph->ghichu;
+                                $dsph->save();
+                            }
                         }
-                    }
 
-                    $modelttdv = KkGDvLtCtDf::where('macskd',$macskd)
-                        ->get();
-                    //dd($modelttdv);
-                    $ngaynhap = date('Y-m-d');
-                    $dayngaynhap = date('D');
-                    if($dayngaynhap == 'Thu'){
-                        $ngayhieuluc  =  date('Y-m-d',mktime(0, 0, 0, date("m")  , date("d")+5, date("Y")));
-                    }elseif($dayngaynhap == 'Fri') {
-                        $ngayhieuluc  =  date('Y-m-d',mktime(0, 0, 0, date("m")  , date("d")+5, date("Y")));
-                    }elseif( $dayngaynhap == 'Sat'){
-                        $ngayhieuluc  =  date('Y-m-d',mktime(0, 0, 0, date("m")  , date("d")+4, date("Y")));
-                    }else {
-                        $ngayhieuluc  =  date('Y-m-d',mktime(0, 0, 0, date("m")  , date("d")+3, date("Y")));
-                    }
-                    $ngaynhap = date('d/m/Y',strtotime($ngaynhap));
-                    $ngayhieuluc =  date('d/m/Y',strtotime($ngayhieuluc));
+                        $modelttdv = KkGDvLtCtDf::where('macskd', $macskd)
+                            ->get();
+                        //dd($modelttdv);
+                        $ngaynhap = date('Y-m-d');
+                        $dayngaynhap = date('D');
+                        if ($dayngaynhap == 'Thu') {
+                            $ngayhieuluc = date('Y-m-d', mktime(0, 0, 0, date("m"), date("d") + 5, date("Y")));
+                        } elseif ($dayngaynhap == 'Fri') {
+                            $ngayhieuluc = date('Y-m-d', mktime(0, 0, 0, date("m"), date("d") + 5, date("Y")));
+                        } elseif ($dayngaynhap == 'Sat') {
+                            $ngayhieuluc = date('Y-m-d', mktime(0, 0, 0, date("m"), date("d") + 4, date("Y")));
+                        } else {
+                            $ngayhieuluc = date('Y-m-d', mktime(0, 0, 0, date("m"), date("d") + 3, date("Y")));
+                        }
+                        $ngaynhap = date('d/m/Y', strtotime($ngaynhap));
+                        $ngayhieuluc = date('d/m/Y', strtotime($ngayhieuluc));
 
-                    $modeldn = DnDvLt::where('masothue',$modelcskd->masothue)->first();
+                        $modeldn = DnDvLt::where('masothue', $modelcskd->masothue)->first();
 
-                    return view('manage.dvlt.kkgia.kkgia45s.create')
-                        ->with('modelcskd',$modelcskd)
-                        ->with('modelttp',$modelttp)
-                        ->with('modeldtad',$modeldtad)
-                        ->with('modelttdv',$modelttdv)
-                        ->with('ngaynhap',$ngaynhap)
-                        ->with('modeldn',$modeldn)
-                        ->with('ngayhieuluc',$ngayhieuluc)
-                        ->with('modelcb',$modelcb)
-                        ->with('pageTitle', 'Kê khai giá dịch vụ lưu trú thêm mới');
-                }else{
-                    return view('errors.noperm');
-                }
-            }else{
+                        return view('manage.dvlt.kkgia.kkgia45s.create')
+                            ->with('modelcskd', $modelcskd)
+                            ->with('modelttp', $modelttp)
+                            ->with('modeldtad', $modeldtad)
+                            ->with('modelttdv', $modelttdv)
+                            ->with('ngaynhap', $ngaynhap)
+                            ->with('modeldn', $modeldn)
+                            ->with('ngayhieuluc', $ngayhieuluc)
+                            ->with('modelcb', $modelcb)
+                            ->with('pageTitle', 'Kê khai giá dịch vụ lưu trú thêm mới');
+                    }else
+                        return view('errors.noperm');
+                }else
+                    dd('Hiện tại đang tồn tại hồ sơ có trạng thái chờ duyệt, chờ chuyển or bị trả lại! Bạn không thể tạo thêm hồ sơ');
+            }else
                 return view('errors.perm');
-            }
         }else
             return view('errors.notlogin');
     }
