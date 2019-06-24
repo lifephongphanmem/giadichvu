@@ -73,12 +73,15 @@
 <p style="text-align: center">Từ ngày {{getDayVn($input['ngaytu'])}} - Đến ngày {{getDayVn($input['ngayden'])}}</p>
 
 <table cellspacing="0" cellpadding="0" border="1" style="margin: 20px auto; border-collapse: collapse;">
+    <thead>
     <tr>
         <th>STT</th>
         <th width="30%">Tên doanh nghiệp<br>Tên cơ sở kinh doanh</th>
         <th width="15%">Số hồ sơ<br>Ngày chuyển</th>
         <th>Lý do trả lại- Ngày trả lại</th>
     </tr>
+    </thead>
+    <tbody>
     @foreach($model as $key=>$tt)
     <tr>
         <td>{{$key+1}}</td>
@@ -87,6 +90,7 @@
         <td>Lý do: {{$tt->lydo}}<br>Ngày trả lại: {{getDateTime($tt->created_at)}}</td>
     </tr>
     @endforeach
+    </tbody>
 
 </table>
 

@@ -72,6 +72,7 @@
 </table>
 
 <table cellspacing="0" cellpadding="0" border="1" style="margin: 20px auto; border-collapse: collapse;">
+    <thead>
     <tr>
         <th>STT</th>
         <th>Doanh nghiệp</th>
@@ -79,7 +80,8 @@
         <th>Tên cơ sở kinh doanh</th>
         <th>Thời gian dừng hoạt động</th>
     </tr>
-
+    </thead>
+    <tbody>
     @foreach($model as $key=>$cskd)
         <tr>
             <td style="text-align: center">{{$key+1}}</td>
@@ -89,6 +91,7 @@
             <td>{{getDateTime($cskd->updated_at)}}</td>
         </tr>
     @endforeach
+    </tbody>
     <tr>
         <th style="text-align: left" colspan="8">
             {{'Tổng cộng: '. count($model).' hồ sơ.'}}

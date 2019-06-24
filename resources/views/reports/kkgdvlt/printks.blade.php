@@ -152,6 +152,7 @@
 <p style="text-align: center;">(Kèm theo công văn số {{$modelkk->socv}}  ngày {{ date("d",strtotime($modelkk->ngaynhap))}} tháng {{ date("m",strtotime($modelkk->ngaynhap))}} năm {{ date("Y",strtotime($modelkk->ngaynhap))}} của {{$modeldn->tendn}})</p>
 <p style="text-align: right; font-size: 16px;"><i>Đơn vị tính: {{$modelkk->dvt}}</i></p>
 <table cellspacing="0" cellpadding="0" border="1" style="margin: 20px auto; border-collapse: collapse;">
+    <thead>
     <tr>
         <th style="text-align: center">Loại phòng/ Quy<br>cách chất lượng<br>phòng</th>
         <th style="text-align: center">Số hiệu<br>Phòng</th>
@@ -161,6 +162,8 @@
         <th style="text-align: center">Mức giá kê<br>khai</th>
         <th>Ghi chú</th>
     </tr>
+    </thead>
+    <tbody>
     @foreach($modelkkct as $ctkk)
         <tr>
             <th style="text-align: left">{{$ctkk->loaip.'-'.$ctkk->qccl}}</th>
@@ -172,6 +175,7 @@
             <th>{{$ctkk->ghichu}}</th>
         </tr>
     @endforeach
+    </tbody>
 </table>
 <p>{!! nl2br(e($modelkk->ghichu)) !!}
 @if($modelkk->socvlk != '')<br>
@@ -232,6 +236,7 @@
 <p style="text-align: center; font-weight: bold; font-size: 16px;">BẢNG GIÁ PHÒNG</p>
 <p style="text-align: center;">Thực hiện từ ngày {{ date("d",strtotime($modelkk->ngayhieuluc))}} tháng {{ date("m",strtotime($modelkk->ngayhieuluc))}} năm {{ date("Y",strtotime($modelkk->ngayhieuluc))}} <br>(Theo bảng giá đã kê khai với cơ quan tài chính  ngày {{ date("d",strtotime($modelkk->ngaynhap))}} tháng {{ date("m",strtotime($modelkk->ngaynhap))}} năm {{ date("Y",strtotime($modelkk->ngaynhap))}} )</p>
 <table cellspacing="0" cellpadding="0" border="1" style="margin: 20px auto; border-collapse: collapse;">
+    <thead>
     <tr>
         <th style="text-align: center">Loại phòng/ Quy<br>cách chất lượng<br>phòng</th>
         <th style="text-align: center">Số hiệu<br>Phòng</th>
@@ -240,6 +245,8 @@
         <th width="15%">Mức giá niêm<br>yết</th>
         <th>Ghi chú</th>
     </tr>
+    </thead>
+    <tbody>
     @foreach($modelkkct as $ctkk)
         <tr>
             <th style="text-align: left">{{$ctkk->loaip.' - '.$ctkk->qccl}}</th>
@@ -250,6 +257,7 @@
             <th>{{$ctkk->ghichu}}</th>
         </tr>
     @endforeach
+    </tbody>
 </table>
 <p>{!! nl2br(e($modelkk->ghichu)) !!}<br>
     Cơ sở kinh doanh chúng tôi cam kết thực hiện niêm yết giá và bán theo giá niêm yết.<br>

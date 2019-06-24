@@ -72,12 +72,15 @@
 </table>
 
 <table cellspacing="0" cellpadding="0" border="1" style="margin: 20px auto; border-collapse: collapse;">
+    <thead>
     <tr>
         <th>STT</th>
         <th>Mã số thuế</th>
         <th>Tên cơ sở kinh doanh</th>
         <th>Ghi chú</th>
     </tr>
+    </thead>
+    <tbody>
     <?php $modelgr = \App\DnDvLt::all();?>
     @foreach($modelgr as $tt)
         <?php $modelct = $model->where('masothue',$tt->masothue); ?>
@@ -94,6 +97,7 @@
             </tr>
         @endforeach
     @endforeach
+    </tbody>
     <tr>
         <th style="text-align: left" colspan="8">
             {{'Tổng cộng: '. count($model).' cơ sở kinh doanh.'}} / {{count($modelgr)}} doanh nghiệp

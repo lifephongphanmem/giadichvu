@@ -78,6 +78,7 @@
 
 
 <table cellspacing="0" cellpadding="0" border="1" style="margin: 20px auto; border-collapse: collapse;">
+    <thead>
     <tr>
         <th>STT</th>
         <th>Tên cơ sở kinh doanh</th>
@@ -87,6 +88,8 @@
         <th>Số lượt kê khai</th>
         <th>Lần kê khai gần nhất</th>
     </tr>
+    </thead>
+    <tbody>
     @foreach($model as $key=>$tt)
         <tr>
             <td>{{$key+1}}</td>
@@ -98,6 +101,7 @@
             <td style="text-align: left">{{$tt->kklc}}</td>
         </tr>
     @endforeach
+    </tbody>
     <tr>
         <th style="text-align: left" colspan="9">
             <?php $modeldkk = $model->where('lankk','<>','0')->count();?>

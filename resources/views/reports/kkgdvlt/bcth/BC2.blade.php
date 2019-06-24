@@ -81,6 +81,7 @@
 </table>
 
 <table cellspacing="0" cellpadding="0" border="1" style="margin: 20px auto; border-collapse: collapse;">
+    <thead>
     <tr>
         <th>STT</th>
         <th>Loại phòng</th>
@@ -91,6 +92,8 @@
         <th>Mức tăng giảm</th>
         <th>Tỷ lệ (%)</th>
     </tr>
+    </thead>
+    <tbody>
     @foreach($m_cqcq as $cqcq)
         <?php $m_donvi=$model->where('cqcq',$cqcq->maqhns) ?>
         @if(count($m_donvi)>0)
@@ -125,6 +128,7 @@
             @endforeach
         @endif
     @endforeach
+    </tbody>
     <tr>
         <th style="text-align: left" colspan="8">
             {{'Tổng cộng: '. count($model).' hồ sơ.'}}

@@ -87,6 +87,7 @@
 </table>
 
 <table cellspacing="0" cellpadding="0" border="1" style="margin: 20px auto; border-collapse: collapse;">
+    <thead>
     <tr>
         <th>STT</th>
         <th>Tên cơ sở kinh doanh</th>
@@ -99,7 +100,8 @@
         <th>Ngày thực hiện<br> mức giá kê khai</th>
         <th>Trạng thái hồ sơ</th>
     </tr>
-
+    </thead>
+    <tbody>
     <?php $i=1;?>
     @foreach($model as $key => $ttkk)
         <tr>
@@ -115,6 +117,7 @@
             <th style="text-align: center">{{$ttkk->trangthai}}</th>
         </tr>
     @endforeach
+    </tbody>
     <tr>
         <th style="text-align: left" colspan="10">
             {{'Tổng cộng: '. count($model).' hồ sơ.'}}

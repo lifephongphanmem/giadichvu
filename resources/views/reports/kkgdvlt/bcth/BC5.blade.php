@@ -94,6 +94,7 @@
 
 
 <table cellspacing="0" cellpadding="0" border="1" style="margin: 20px auto; border-collapse: collapse;">
+    <thead>
     <tr>
         <th>STT</th>
         <th>Tên cơ sở kinh doanh</th>
@@ -106,6 +107,8 @@
         <th>Ngày thực hiện<br> mức giá kê khai</th>
         <th>Thời hạn giải quyết</th>
     </tr>
+    </thead>
+    <tbody>
     @foreach($m_cqcq as $cskd)
         <?php $model_kk=$model->where('cqcq',$cskd->maqhns) ?>
         @if(count($model_kk)>0)
@@ -131,6 +134,7 @@
             @endforeach
         @endif
     @endforeach
+    </tbody>
     <tr>
         <th style="text-align: left" colspan="10">
             {{'Tổng cộng: '. count($model).' hồ sơ.'}}
