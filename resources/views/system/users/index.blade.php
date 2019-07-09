@@ -86,8 +86,8 @@
                     <div class="caption">
                     </div>
                     <div class="actions">
-                        <!--a href="{{url('users/create')}}" class="btn btn-default btn-sm">
-                            <i class="fa fa-plus"></i> Thêm mới </a-->
+                        <a href="{{url('users/create')}}" class="btn btn-default btn-sm">
+                            <i class="fa fa-plus"></i> Thêm mới </a>
                         <button id="btnMultiLockUser" type="button" onclick="multiLock()" class="btn btn-default btn-sm" data-target="#lockuser-modal-confirm" data-toggle="modal"><i class="fa fa-lock"></i>&nbsp;
                             Khóa</button>
                         <button id="btnMultiUnLockUser" type="button" onclick="multiUnLock()" class="btn btn-default btn-sm" data-target="#unlockuser-modal-confirm" data-toggle="modal"><i class="fa fa-unlock"></i>&nbsp;
