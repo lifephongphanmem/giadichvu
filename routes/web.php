@@ -186,6 +186,7 @@ Route::get('ttcskd_dich_vu_luu_tru','CsKdDvLtController@index');
 Route::get('ttcskd_dich_vu_luu_tru/create','CsKdDvLtController@create');
 Route::get('checktencskd','CsKdDvLtController@checktencskd');
 Route::post('ttcskd_dich_vu_luu_tru/stop','CsKdDvLtController@stop');
+Route::post('ttcskd_dich_vu_luu_tru/start','CsKdDvLtController@start');
     /*Form quản lý*/
 Route::get('ttcskd_dich_vu_luu_tru/masothue={masothue}','CsKdDvLtController@showcskd');
 Route::get('ttcskd_dich_vu_luu_tru/masothue={masothue}/create','CsKdDvLtController@createcskd');

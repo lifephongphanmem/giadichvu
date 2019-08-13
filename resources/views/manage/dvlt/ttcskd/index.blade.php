@@ -29,9 +29,15 @@
         function getStopId(id){
             document.getElementById("idstop").value=id;
         }
+        function getStartId(id){
+            document.getElementById("idstart").value=id;
+        }
 
         function ClickStop(){
             $('#frm_stop').submit();
+        }
+        function ClickStart(){
+            $('#frm_start').submit();
         }
     </script>
 @stop
@@ -107,9 +113,14 @@
                                 <!--button type="button" onclick="getId('{{$tt->id}}')" class="btn btn-default btn-xs mbs" data-target="#delete-modal" data-toggle="modal"><i class="fa fa-trash-o"></i>&nbsp;
                                     Xóa</button-->
                                 @endif
-                                @if($tt->ghichu == '')
-                                <button type="button" onclick="getStopId('{{$tt->id}}')" class="btn btn-default btn-xs mbs" data-target="#stop-modal" data-toggle="modal"><i class="fa fa-stop"></i>&nbsp;
-                                    Dừng hoạt động</button>
+                                @if($tt->ghichu == 'Dừng hoạt động')
+                                    @if(session('admin')->level == 'T' || session('admin')->level == 'H' || session('admin')->level == 'X')
+                                        <button type="button" onclick="getStartId('{{$tt->id}}')" class="btn btn-default btn-xs mbs" data-target="#start-modal" data-toggle="modal"><i class="fa fa-play"></i>&nbsp;
+                                            Hoạt động lại</button>
+                                    @endif
+                                @else
+                                    <button type="button" onclick="getStopId('{{$tt->id}}')" class="btn btn-default btn-xs mbs" data-target="#stop-modal" data-toggle="modal"><i class="fa fa-stop"></i>&nbsp;
+                                        Dừng hoạt động</button>
                                 @endif
                             </td>
                         </tr>
@@ -159,6 +170,27 @@
                     <input type="hidden" name="idstop" id="idstop">
                     <div class="modal-footer">
                         <button type="submit" class="btn blue" onclick="ClickStop()">Đồng ý</button>
+                        <button type="button" class="btn default" data-dismiss="modal">Hủy</button>
+                    </div>
+                    {!! Form::close() !!}
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <div class="modal fade" id="start-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    {!! Form::open(['url'=>'ttcskd_dich_vu_luu_tru/start','id' => 'frm_start'])!!}
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h4 class="modal-title">Đồng ý kích hoạt lại hoạt động của cơ sở kinh doanh?</h4>
+                    </div>
+                    {{--<div class="modal-body">--}}
+                    {{--</div>--}}
+                    <input type="hidden" name="idstart" id="idstart">
+                    <div class="modal-footer">
+                        <button type="submit" class="btn blue" onclick="ClickStart()">Đồng ý</button>
                         <button type="button" class="btn default" data-dismiss="modal">Hủy</button>
                     </div>
                     {!! Form::close() !!}

@@ -795,5 +795,20 @@ class CsKdDvLtController extends Controller
             return view('errors.notlogin');
     }
 
+    public function start(Request $request){
+        if (Session::has('admin')) {
+            $input = $request->all();
+            $id = $input['idstart'];
+            $model = CsKdDvLt::findOrFail($id);
+            $model->ghichu = 'Hoạt động';
+            $model->save();
+            if(session('admin')->level == 'T' || session('admin')->level == 'H')
+                return redirect('ttcskd_dich_vu_luu_tru/masothue='.$model->masothue);
+            else
+                return redirect('ttcskd_dich_vu_luu_tru');
+        }else
+            return view('errors.notlogin');
+    }
+
 
 }
