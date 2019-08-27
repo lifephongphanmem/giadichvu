@@ -696,7 +696,7 @@ class KkGDvLtController extends Controller
 
                 }
                 //dd($ngaylv.'-'. getGeneralConfigs()['thoihan_lt'] );
-                if ($ngaylv > getGeneralConfigs()['thoihan_lt']) {
+                if ($ngaylv >= getGeneralConfigs()['thoihan_lt']) {
 
                     $result['status'] = 'success';
 
