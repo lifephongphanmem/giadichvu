@@ -24,7 +24,7 @@ class KkGiaDvLt45sController extends Controller
         if (Session::has('admin')) {
             if(session('admin')->level == 'T' || session('admin')->level == 'H' || session('admin')->level == 'DVLT') {
                 $check = KkGDvLt::where('macskd',$macskd)
-                    ->wherein('trangthai',['Chờ chuyển','Bị trả lại','Chờ nhận'])
+                    ->wherein('trangthai',['Bị trả lại','Chờ nhận'])
                     ->whereYear('ngaynhap', date('Y'))
                     ->count();
                 if($check == 0) {
