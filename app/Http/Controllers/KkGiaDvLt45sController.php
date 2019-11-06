@@ -23,6 +23,7 @@ class KkGiaDvLt45sController extends Controller
 
         if (Session::has('admin')) {
             if(session('admin')->level == 'T' || session('admin')->level == 'H' || session('admin')->level == 'DVLT') {
+                $inputs = array();
                 $check = KkGDvLt::where('macskd',$macskd)
                     ->wherein('trangthai',['Bị trả lại','Chờ nhận'])
                     ->whereYear('ngaynhap', date('Y'))
@@ -43,6 +44,12 @@ class KkGiaDvLt45sController extends Controller
                             if (isset($modelcb)) {
                                 $modelph = KkGDvLtCt::where('mahs', $modelcb->mahs)
                                     ->get();
+                                $inputs['socvlk'] = $modelcb->socv;
+                                $inputs['ngaycvlk'] = $modelcb->ngaynhap;
+                                $inputs['giaycnhangcs'] = $modelcb->giaycnhangcs;
+                                $inputs['soqdgiaycnhangcs'] = $modelcb->soqdgiaycnhangcs;
+                                $inputs['giaycnhangcstungay'] = $modelcb->giaycnhangcstungay;
+                                $inputs['giaycnhangcsdenngay'] = $modelcb->giaycnhangcsdenngay;
                                 foreach ($modelph as $ttph) {
                                     $dsph = new KkGDvLtCtDf();
                                     $dsph->macskd = $ttph->macskd;
@@ -59,25 +66,13 @@ class KkGiaDvLt45sController extends Controller
                                     $dsph->save();
                                 }
                             }
+
                         }
-                        $modelcb = '';
 
                         $modelttdv = KkGDvLtCtDf::where('macskd', $macskd)
                             ->get();
                         //dd($modelttdv);
                         $ngaynhap = date('Y-m-d');
-                        $dayngaynhap = date('D');
-                        if ($dayngaynhap == 'Thu') {
-                            $ngayhieuluc = date('Y-m-d', mktime(0, 0, 0, date("m"), date("d") + 5, date("Y")));
-                        } elseif ($dayngaynhap == 'Fri') {
-                            $ngayhieuluc = date('Y-m-d', mktime(0, 0, 0, date("m"), date("d") + 5, date("Y")));
-                        } elseif ($dayngaynhap == 'Sat') {
-                            $ngayhieuluc = date('Y-m-d', mktime(0, 0, 0, date("m"), date("d") + 4, date("Y")));
-                        } else {
-                            $ngayhieuluc = date('Y-m-d', mktime(0, 0, 0, date("m"), date("d") + 3, date("Y")));
-                        }
-                        $ngaynhap = date('d/m/Y', strtotime($ngaynhap));
-                        $ngayhieuluc = date('d/m/Y', strtotime($ngayhieuluc));
 
                         $modeldn = DnDvLt::where('masothue', $modelcskd->masothue)->first();
 
@@ -88,8 +83,7 @@ class KkGiaDvLt45sController extends Controller
                             ->with('modelttdv', $modelttdv)
                             ->with('ngaynhap', $ngaynhap)
                             ->with('modeldn', $modeldn)
-                            ->with('ngayhieuluc', $ngayhieuluc)
-                            ->with('modelcb', $modelcb)
+                            ->with('inputs', $inputs)
                             ->with('pageTitle', 'Kê khai giá dịch vụ lưu trú thêm mới');
                     }else
                         return view('errors.noperm');
