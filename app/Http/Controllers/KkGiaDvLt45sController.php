@@ -38,24 +38,26 @@ class KkGiaDvLt45sController extends Controller
                         $modelctdf = KkGDvLtCtDf::where('macskd', $macskd)->delete();
                         $modelcp = CbKkGDvLt::where('macskd', $macskd)
                             ->first();
-                        $modelcb = KkGDvLt::where('mahs', $modelcp->mahs)->first();
-                        if (isset($modelcb)) {
-                            $modelph = KkGDvLtCt::where('mahs', $modelcb->mahs)
-                                ->get();
-                            foreach ($modelph as $ttph) {
-                                $dsph = new KkGDvLtCtDf();
-                                $dsph->macskd = $ttph->macskd;
-                                $dsph->maloaip = $ttph->maloaip;
-                                $dsph->loaip = $ttph->loaip;
-                                $dsph->qccl = $ttph->qccl;
-                                $dsph->sohieu = $ttph->sohieu;
-                                $dsph->ghichu = $ttph->ghichu;
-                                $dsph->mucgialk = $ttph->mucgiakk;
-                                $dsph->mucgiakk = $ttph->mucgiakk;
-                                $dsph->tendoituong = $ttph->tendoituong;
-                                $dsph->apdung = $ttph->apdung;
-                                $dsph->ghichu = $ttph->ghichu;
-                                $dsph->save();
+                        if(isset($modelcp)) {
+                            $modelcb = KkGDvLt::where('mahs', $modelcp->mahs)->first();
+                            if (isset($modelcb)) {
+                                $modelph = KkGDvLtCt::where('mahs', $modelcb->mahs)
+                                    ->get();
+                                foreach ($modelph as $ttph) {
+                                    $dsph = new KkGDvLtCtDf();
+                                    $dsph->macskd = $ttph->macskd;
+                                    $dsph->maloaip = $ttph->maloaip;
+                                    $dsph->loaip = $ttph->loaip;
+                                    $dsph->qccl = $ttph->qccl;
+                                    $dsph->sohieu = $ttph->sohieu;
+                                    $dsph->ghichu = $ttph->ghichu;
+                                    $dsph->mucgialk = $ttph->mucgiakk;
+                                    $dsph->mucgiakk = $ttph->mucgiakk;
+                                    $dsph->tendoituong = $ttph->tendoituong;
+                                    $dsph->apdung = $ttph->apdung;
+                                    $dsph->ghichu = $ttph->ghichu;
+                                    $dsph->save();
+                                }
                             }
                         }
 
