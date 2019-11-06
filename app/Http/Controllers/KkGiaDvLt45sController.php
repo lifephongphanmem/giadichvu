@@ -58,7 +58,8 @@ class KkGiaDvLt45sController extends Controller
                                     $dsph->ghichu = $ttph->ghichu;
                                     $dsph->save();
                                 }
-                            }
+                            }else
+                                $modelcb = '';
                         }
 
                         $modelttdv = KkGDvLtCtDf::where('macskd', $macskd)
