@@ -396,12 +396,12 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Ngày kê khai<span class="require">*</span></label>
-                                @if(session('admin')->sadmin == 'ssa')
-                                    {!!Form::text('ngaynhap',date('d/m/Y',  strtotime($model->ngaynhap)), array('id' => 'ngaynhap','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required','onchange'=>"checkngaykk()"))!!}
-                                @else
-                                <p style="color: #000088"><b>{{getDayVn($model->ngaynhap)}}</b></p>
-                                {!!Form::hidden('ngaynhap',date('d/m/Y',  strtotime($model->ngaynhap)), array('id' => 'ngaynhap','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required','autofocus','onchange'=>"clearngayhieuluc()"))!!}
-                                @endif
+                                {{--@if(session('admin')->sadmin == 'ssa')--}}
+                                    {!!Form::text('ngaynhap',date('d/m/Y',  strtotime($model->ngaynhap)), array('id' => 'ngaynhap','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required'))!!}
+                                {{--@else--}}
+                                {{--<p style="color: #000088"><b>{{getDayVn($model->ngaynhap)}}</b></p>--}}
+                                {{--{!!Form::hidden('ngaynhap',date('d/m/Y',  strtotime($model->ngaynhap)), array('id' => 'ngaynhap','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required','autofocus','onchange'=>"clearngayhieuluc()"))!!}--}}
+                                {{--@endif--}}
                             </div>
                         </div>
                         <!--/span-->
@@ -409,7 +409,7 @@
                             <div class="form-group">
                                 <label class="control-label">Ngày thực hiện mức giá kê khai<span class="require">*</span></label>
                                 <!--input type="date" name="ngayhieuluc" id="ngayhieuluc" value="{{$model->ngayhieuluc}}" class="form-control required"-->
-                                {!!Form::text('ngayhieuluc',date('d/m/Y',  strtotime($model->ngayhieuluc)), array('id' => 'ngayhieuluc','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required','onchange'=>"checkngay()"))!!}
+                                {!!Form::text('ngayhieuluc',date('d/m/Y',  strtotime($model->ngayhieuluc)), array('id' => 'ngayhieuluc','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required'))!!}
                                 <!--Form::text('ngayhieuluc',date('d/m/Y',  strtotime($model->ngayhieuluc)), array('id' => 'ngayhieuluc','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required','onchange'=>"checkngay()"))-->
                             </div>
                         </div>
