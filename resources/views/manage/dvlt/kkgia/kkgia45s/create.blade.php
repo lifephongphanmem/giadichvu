@@ -402,7 +402,7 @@
                             <div class="form-group">
                                 <label class="control-label">Ngày kê khai<span class="require">*</span></label>
                                 <!--input type="date" name="ngaynhap" id="ngaynhap" class="form-control required" autofocus-->
-                                {!!Form::text('ngaynhap',$ngaynhap, array('id' => 'ngaynhap','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required','onchange'=>"checkngaykk()"))!!}
+                                {!!Form::text('ngaynhap',null, array('id' => 'ngaynhap','data-inputmask'=>"'alias': 'date'",'class' => 'form-control required','onchange'=>"checkngaykk()"))!!}
                             </div>
                         </div>
                         <!--/span-->
