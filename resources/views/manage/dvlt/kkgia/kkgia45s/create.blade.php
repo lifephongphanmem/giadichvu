@@ -449,7 +449,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Ngày nhập số công văn liền kề<span class="require">*</span></label>
-                                {!!Form::text('ngaycvlk',(isset($modelcb) ? date('d/m/Y',  strtotime($modelcb->ngaynhap)) : ''), array('id' => 'ngaycvlk','data-inputmask'=>"'alias': 'date'",'class' => 'form-control'))!!}
+                                {!!Form::text('ngaycvlk',(isset($inputs['ngaycvlk']) ? date('d/m/Y',  strtotime($inputs['ngaycvlk'])) : ''), array('id' => 'ngaycvlk','data-inputmask'=>"'alias': 'date'",'class' => 'form-control'))!!}
                             </div>
                         </div>
                     </div>
@@ -459,11 +459,11 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Giấy công nhận hạng cơ sở lưu trú</label>
-                                        <a href="{{ url('images/cskddvlt/hangcslt/'.$modelcb->giaycnhangcs)}}" target="_blank">{{$modelcb->giaycnhangcs}}</a>
+                                        <a href="{{ url('images/cskddvlt/hangcslt/'.$inputs['giaycnhangcs'])}}" target="_blank">{{$inputs['soqdgiaycnhangcs']}}</a>
                                     </div>
                                 </div>
                             @endif
-                                <input type="hidden" name="giaycnhangcsplus" id="giaycnhangcsplus" value="{{$modelcb->giaycnhangcs}}">
+                                <input type="hidden" name="giaycnhangcsplus" id="giaycnhangcsplus" value="{{$inputs['giaycnhangcs']}}">
                         @else
                             <input type="hidden" name="giaycnhangcsplus" id="giaycnhangcsplus" value="">
                         @endif
