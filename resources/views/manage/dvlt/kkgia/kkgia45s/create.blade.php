@@ -382,6 +382,10 @@
                                 <!--input type="date" name="ngaynhap" id="ngaynhap" class="form-control required" autofocus-->
                                 {!! Form::select(
                                 'plhs',
+                                isset($inputs['socvlk']) ? array(
+                                'GG' => 'Giảm giá',
+                                'TG' => 'Tăng giá',
+                                ) :
                                 array(
                                 'LD' => 'Lần đầu',
                                 'GG' => 'Giảm giá',
