@@ -386,7 +386,7 @@
                                 'LD' => 'Lần đầu',
                                 'GG' => 'Giảm giá',
                                 'TG' => 'Tăng giá',
-                                ),isset($modelcb) ? 'GG' : 'LD',
+                                ),isset($inputs['socvlk']) ? 'GG' : 'LD',
                                 array('id' => 'plhs', 'class' => 'form-control','onchange'=>"clearngay()"))
                                 !!}
                             </div>
