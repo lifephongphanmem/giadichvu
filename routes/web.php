@@ -5,6 +5,10 @@ Route::get('/ajax/checkngaykk','AjaxController@checkngaykk');
 Route::get('/test', 'MailController@test_mail');
 Route::get('/testday','MailController@testday');
 Route::post('/testday','MailController@testdaysm');
+Route::get('thongtinhotro',function(){
+    return view('thongtinhotro')
+        ->with('pageTitle','Thông tin hỗ trợ');
+});
 
 // <editor-fold defaultstate="collapsed" desc="--Hệ thống-Đăng ký--">
 Route::get('/', 'HomeController@index');

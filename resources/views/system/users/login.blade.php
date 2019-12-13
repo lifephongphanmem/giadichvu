@@ -109,7 +109,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- END LOGIN -->
 <!-- BEGIN COPYRIGHT -->
 <div class="copyright">
-	2016 &copy; LifeSoft <a href="" >Tiện ích hơn - Hiệu quả hơn</a>
+	Copyright &copy;  2016 - {{date('Y')}} LifeSoft <a href="" >Tiện ích hơn - Hiệu quả hơn</a>
 </div>
 
 <!--Modal đăng ký-->
