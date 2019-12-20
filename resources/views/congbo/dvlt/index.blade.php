@@ -86,15 +86,17 @@
                                     <td align="center" style="vertical-align: middle">
                                         <img src="{{ url('images/cskddvlt/'.$tt->toado)}}" width="96">
                                     </td>
-                                    <td>{{$tt->tencskd}}</td>
+                                    <td>{{$tt->tencskd}}<br><b>({{$tt->ghichu}})</b></td>
                                     <td>{{$tt->diachikd}}</td>
                                     <td><a href="{{$tt->link}}" target="_blank">{{$tt->link}}</a></td>
                                     <td>
-                                        <a href="{{url('giadichvuluutru/'.$tt->macskd)}}" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Thông tin kê khai giá </a>
-                                        @if($tt->toado != '')
-                                            <br><a href="{{ url('images/cskddvlt/'.$tt->toado)}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Giấy công nhận hạng cơ sở lưu trú</a>
-                                        @else
-                                            <br><p>Doanh nghiệp chưa cập nhật giấy chứng nhận loại hạng</p>
+                                        @if($tt->ghichu != 'Dừng hoạt động')
+                                            <a href="{{url('giadichvuluutru/'.$tt->macskd)}}" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Thông tin kê khai giá </a>
+                                            @if($tt->toado != '')
+                                                <br><a href="{{ url('images/cskddvlt/'.$tt->toado)}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Giấy công nhận hạng cơ sở lưu trú</a>
+                                            @else
+                                                <br><p>Doanh nghiệp chưa cập nhật giấy chứng nhận loại hạng</p>
+                                            @endif
                                         @endif
                                     </td>
                                 </tr>

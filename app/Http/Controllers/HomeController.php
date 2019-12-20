@@ -870,7 +870,8 @@ class HomeController extends Controller
     }
 
     public function congbo(){
-        $modellt = CsKdDvLt::orderByRaw("RAND()")
+        $modellt = CsKdDvLt::where('ghichu','<>','Dừng hoạt động')
+            ->orderByRaw("RAND()")
             ->take(4)
             ->get();
         return view('dashboardcb')
