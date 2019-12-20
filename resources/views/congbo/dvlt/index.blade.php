@@ -21,22 +21,33 @@
             $('#loaihang').change(function() {
                 var loaihang = '&loaihang='+$('#loaihang').val();
                 var tencskd = '&tencskd='+ $('#tencskd').val();
+                var diachikd = '&diachikd='+ $('#diachikd').val();
                 var paginate = '&paginate='+ $('#paginate').val();
-                var url = '/giadichvuluutru?'+loaihang + tencskd + paginate;
+                var url = '/giadichvuluutru?'+loaihang + tencskd + diachikd + paginate;
                 window.location.href = url;
             });
             $('#tencskd').change(function() {
                 var loaihang = '&loaihang='+$('#loaihang').val();
                 var tencskd = '&tencskd='+ $('#tencskd').val();
+                var diachikd = '&diachikd='+ $('#diachikd').val();
                 var paginate = '&paginate='+ $('#paginate').val();
-                var url = '/giadichvuluutru?'+loaihang + tencskd + paginate;
+                var url = '/giadichvuluutru?'+loaihang + tencskd + diachikd + paginate;
+                window.location.href = url;
+            });
+            $('#diachikd').change(function() {
+                var loaihang = '&loaihang='+$('#loaihang').val();
+                var tencskd = '&tencskd='+ $('#tencskd').val();
+                var diachikd = '&diachikd='+ $('#diachikd').val();
+                var paginate = '&paginate='+ $('#paginate').val();
+                var url = '/giadichvuluutru?'+loaihang + tencskd + diachikd + paginate;
                 window.location.href = url;
             });
             $('#paginate').change(function() {
                 var loaihang = '&loaihang='+$('#loaihang').val();
                 var tencskd = '&tencskd='+ $('#tencskd').val();
+                var diachikd = '&diachikd='+ $('#diachikd').val();
                 var paginate = '&paginate='+ $('#paginate').val();
-                var url = '/giadichvuluutru?'+loaihang + tencskd + paginate;
+                var url = '/giadichvuluutru?'+loaihang + tencskd + diachikd + paginate;
                 window.location.href = url;
             });
         });
@@ -59,7 +70,7 @@
                     </div>
                     <div class="portlet-body">
                         <div class="row">
-                            <div class="col-md-5">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">Loại hạng<span class="require">*</span></label>
                                     <select id="loaihang" name="loaihang" class="form-control">
@@ -74,10 +85,16 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">Tên cơ sở kinh doanh<span class="require">*</span></label>
                                     {!! Form::text('tencskd', $inputs['tencskd'], ['id' => 'tencskd', 'class' => 'form-control']) !!}
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label">Địa chỉ<span class="require">*</span></label>
+                                    {!! Form::text('diachikd', $inputs['diachikd'], ['id' => 'diachikd', 'class' => 'form-control']) !!}
                                 </div>
                             </div>
                         </div>

@@ -17,12 +17,15 @@ class CbKkGDvLtController extends Controller
         $inputs = $request->all();
         $inputs['loaihang'] = isset($inputs['loaihang']) ? $inputs['loaihang'] : 'all';
         $inputs['tencskd'] = isset($inputs['tencskd']) ? $inputs['tencskd'] : '';
+        $inputs['diachikd'] = isset($inputs['diachikd']) ? $inputs['diachikd'] : '';
         $inputs['paginate'] = isset($inputs['paginate']) ? $inputs['paginate'] : '5';
         $model = new CsKdDvLt();
         if($inputs['loaihang'] != 'all')
             $model = CsKdDvLt::where('loaihang',$inputs['loaihang']);
         if($inputs['tencskd'] != '')
             $model = $model->where('tencskd','like', '%'.$inputs['tencskd'].'%');
+        if($inputs['diachikd'] != '')
+            $model = $model->where('diachikd','like', '%'.$inputs['diachikd'].'%');
         $model = $model->paginate($inputs['paginate']);
         //dd($model);
 
