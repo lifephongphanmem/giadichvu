@@ -15,18 +15,20 @@ class CbKkGDvLtController extends Controller
 {
     public function index(Request $request){
         $inputs = $request->all();
-        $inputs['loaihang'] = isset($inputs['loaihang']) ? $inputs['loaihang'] : '3';
-        $inputs['macskd'] = isset($inputs['macskd']) ? $inputs['macskd'] : 'all';
+        $inputs['loaihang'] = isset($inputs['loaihang']) ? $inputs['loaihang'] : 'all';
+        $inputs['tencskd'] = isset($inputs['tencskd']) ? $inputs['tencskd'] : '';
+        $inputs['paginate'] = isset($inputs['paginate']) ? $inputs['paginate'] : '5';
         $model = new CsKdDvLt();
         if($inputs['loaihang'] != 'all')
             $model = CsKdDvLt::where('loaihang',$inputs['loaihang']);
-        $model = $model->get();
+        if($inputs['tencskd'] != '')
+            $model = $model->where('tencskd','like', '%'.$inputs['tencskd'].'%');
+        $model = $model->paginate($inputs['paginate']);
         //dd($model);
 
         return view('congbo.dvlt.index')
             ->with('model',$model)
-            ->with('loaihang',$inputs['loaihang'])
-            ->with('select_macskd',$inputs['macskd'])
+            ->with('inputs',$inputs)
             ->with('pageTitle','Thông tin cơ sở kinh doanh kê khai dịch vụ lưu trú');
     }
 
