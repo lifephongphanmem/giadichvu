@@ -24,6 +24,30 @@
                             <a href="{{url('giadichvuluutru/'.$ks->macskd)}}" style="text-align: center">
                                 <img src="{{ url('images/cskddvlt/'.$ks->toado)}}" width="80" >
                             </a>
+                            <p>
+                            @if($ks->loaihang == '1')
+                                <span class="glyphicon glyphicon-star"></span>
+                            @elseif($ks->loaihang == '2')
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                            @elseif($ks->loaihang == '3')
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                            @elseif($ks->loaihang == '4')
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                            @elseif($ks->loaihang == '5')
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                            {{--@elseif($ks->loaihang == 'K' ) Nhà nghỉ--}}
+                            {{--@elseif ($ks->loaihang == 'CXD' ) Khách sạn chưa xác định sao--}}
+                            @endif</p>
                             <p><h3 style="color: #18bc9c"><a href="{{url('giadichvuluutru/'.$ks->macskd)}}">{{$ks->tencskd}}</a></h3></p>
                             <p><i class="fa fa-map-marker"></i> {{$ks->diachikd}}</p>
                             <p><i class="fa fa-phone"></i> {{$ks->telkd}}</p>

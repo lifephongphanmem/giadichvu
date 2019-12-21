@@ -43,13 +43,17 @@ class CbKkGDvLtController extends Controller
             $modelcq = DnDvLt::where('masothue', $modelcskd->masothue)->first();
             $modelcb = CbKkGDvLt::where('macskd', $macskd)
                 ->first();
-            $model = KkGDvLt::where('mahs',$modelcb->mahs)->first();
-            if (count($modelcb) > 0)
-                $modelcbct = KkGDvLtCt::where('mahs', $modelcb->mahs)
-                    ->get();
-            else
+            if(isset($modelcb)) {
+                $model = KkGDvLt::where('mahs', $modelcb->mahs)->first();
+                if (count($modelcb) > 0)
+                    $modelcbct = KkGDvLtCt::where('mahs', $modelcb->mahs)
+                        ->get();
+                else
+                    $modelcbct = '';
+            }else {
+                $model = '';
                 $modelcbct = '';
-
+            }
             return view('congbo.dvlt.show')
                 ->with('modelcskd', $modelcskd)
                 ->with('modelcq', $modelcq)

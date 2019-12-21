@@ -169,7 +169,31 @@
                                         <td align="center" style="vertical-align: middle">
                                             <img src="{{ url('images/cskddvlt/'.$tt->toado)}}" width="96">
                                         </td>
-                                        <td>{{$tt->tencskd}}<br><b>{{$tt->ghichu}}</b></td>
+                                        <td>
+                                            @if($tt->loaihang == '1')
+                                                <span class="glyphicon glyphicon-star"></span>
+                                            @elseif($tt->loaihang == '2')
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                            @elseif($tt->loaihang == '3')
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                            @elseif($tt->loaihang == '4')
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                            @elseif($tt->loaihang == '5')
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                            {{--@elseif($tt->loaihang == 'K' ) Nhà nghỉ--}}
+                                            {{--@elseif ($tt->loaihang == 'CXD' ) Khách sạn chưa xác định sao--}}
+                                            @endif<br>
+                                            {{$tt->tencskd}}<br><b>{{$tt->ghichu}}</b></td>
                                         <td>{{$tt->diachikd}}</td>
                                         <td><a href="{{$tt->link}}" target="_blank">{{$tt->link}}</a></td>
                                         <td>
