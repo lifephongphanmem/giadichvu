@@ -130,7 +130,7 @@
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             $.ajax({
                 url: '/kkgdvlt/boxungttp',
-                type: 'GET',
+                type: 'POST',
                 data: {
                     _token: CSRF_TOKEN,
                     loaip: $('input[name="loaipcreate"]').val(),
@@ -230,7 +230,7 @@
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             $.ajax({
                 url: '/kkgdvlt/capnhatttp',
-                type: 'GET',
+                type: 'POST',
                 data: {
                     _token: CSRF_TOKEN,
                     id: $('input[name="idedit"]').val(),
@@ -356,6 +356,7 @@
     <!-- END PAGE HEADER-->
     <div class="row">
         {!! Form::model($model, ['method' => 'PATCH', 'url'=>'ke_khai_dich_vu_luu_tru/'. $model->id, 'class'=>'horizontal-form','id'=>'update_kkdvlt','files'=>true,'enctype'=>'multipart/form-data']) !!}
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
         <div class="col-md-12">
             <!-- BEGIN EXAMPLE TABLE PORTLET-->
             <div class="portlet box blue">
