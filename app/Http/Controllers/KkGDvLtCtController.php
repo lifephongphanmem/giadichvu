@@ -61,8 +61,8 @@ class KkGDvLtCtController extends Controller
                     $result['message'] .= '<tr id="'.$ttphong->id.'">';
                     $result['message'] .= '<td style="text-align: center">'.($key +1).'</td>';
                     $result['message'] .= '<td class="active">'.$ttphong->loaip.'-'.$ttphong->qccl.'</td>';
-                    $result['message'] .= '<td style="text-align: right">'.$ttphong->sohieu.'</td>';
-                    $result['message'] .= '<td style="text-align: right">'.$ttphong->ghichu.'</td>';
+                    $result['message'] .= '<td style="text-align: left">'.$ttphong->sohieu.'</td>';
+                    $result['message'] .= '<td style="text-align: left">'.$ttphong->ghichu.'</td>';
                     $result['message'] .= '<td style="text-align: right">'.number_format($ttphong->mucgialk).'</td>';
                     $result['message'] .= '<td style="text-align: right">'.number_format($ttphong->mucgiakk).'</td>';
                     $result['message'] .= '<td>'.
@@ -183,8 +183,8 @@ class KkGDvLtCtController extends Controller
                     $result['message'] .= '<tr id="'.$ttphong->id.'">';
                     $result['message'] .= '<td style="text-align: center">'.($key +1).'</td>';
                     $result['message'] .= '<td class="active">'.$ttphong->loaip.'-'.$ttphong->qccl.'</td>';
-                    $result['message'] .= '<td style="text-align: right">'.$ttphong->sohieu.'</td>';
-                    $result['message'] .= '<td style="text-align: right">'.$ttphong->ghichu.'</td>';
+                    $result['message'] .= '<td style="text-align: left">'.$ttphong->sohieu.'</td>';
+                    $result['message'] .= '<td style="text-align: left">'.$ttphong->ghichu.'</td>';
                     $result['message'] .= '<td style="text-align: right">'.number_format($ttphong->mucgialk).'</td>';
                     $result['message'] .= '<td style="text-align: right">'.number_format($ttphong->mucgiakk).'</td>';
                     $result['message'] .= '<td>'.
@@ -312,8 +312,8 @@ class KkGDvLtCtController extends Controller
                     $result['message'] .= '<tr id="'.$ttphong->id.'">';
                     $result['message'] .= '<td style="text-align: center">'.($key +1).'</td>';
                     $result['message'] .= '<td class="active">'.$ttphong->loaip.'-'.$ttphong->qccl.'</td>';
-                    $result['message'] .= '<td style="text-align: right">'.$ttphong->sohieu.'</td>';
-                    $result['message'] .= '<td style="text-align: right">'.$ttphong->ghichu.'</td>';
+                    $result['message'] .= '<td style="text-align: left">'.$ttphong->sohieu.'</td>';
+                    $result['message'] .= '<td style="text-align: left">'.$ttphong->ghichu.'</td>';
                     $result['message'] .= '<td style="text-align: right">'.number_format($ttphong->mucgialk).'</td>';
                     $result['message'] .= '<td style="text-align: right">'.number_format($ttphong->mucgiakk).'</td>';
                     $result['message'] .= '<td>'.
@@ -380,8 +380,8 @@ class KkGDvLtCtController extends Controller
                     $result['message'] .= '<tr id="'.$ttphong->id.'">';
                     $result['message'] .= '<td style="text-align: center">'.($key +1).'</td>';
                     $result['message'] .= '<td class="active">'.$ttphong->loaip.'-'.$ttphong->qccl.'</td>';
-                    $result['message'] .= '<td style="text-align: right">'.$ttphong->sohieu.'</td>';
-                    $result['message'] .= '<td style="text-align: right">'.$ttphong->ghichu.'</td>';
+                    $result['message'] .= '<td style="text-align: left">'.$ttphong->sohieu.'</td>';
+                    $result['message'] .= '<td style="text-align: left">'.$ttphong->ghichu.'</td>';
                     $result['message'] .= '<td style="text-align: right">'.number_format($ttphong->mucgialk).'</td>';
                     $result['message'] .= '<td style="text-align: right">'.number_format($ttphong->mucgiakk).'</td>';
                     $result['message'] .= '<td>'.

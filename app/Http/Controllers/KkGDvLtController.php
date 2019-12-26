@@ -22,6 +22,8 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Mail;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class KkGDvLtController extends Controller
 {
@@ -820,6 +822,74 @@ class KkGDvLtController extends Controller
                 break;
             }
         }
+    }
+
+    public function nhandl(Request $request){
+        if (Session::has('admin')) {
+            $inputs = $request->all();
+            $model = CsKdDvLt::where('macskd',$inputs['macskd'])->first();
+            return view('manage.dvlt.kkgia.kkgiadv.importexcel')
+                ->with('inputs',$inputs)
+                ->with('model',$model)
+                ->with('pageTitle','Nhận dữ liệu kê khai từ file excel');
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function importexcel(Request $request){
+        if(Session::has('admin')){
+            $inputs = $request->all();
+            $dels = KkGDvLtCtDf::where('macskd',$inputs['macskd'])
+                ->delete();
+            $filename = $inputs['macskd'] . '_' . getdate()[0];
+            $request->file('fexcel')->move(public_path() . '/data/uploads/excels/', $filename . '.xls');
+            $path = public_path() . '/data/uploads/excels/' . $filename . '.xls';
+            $data = [];
+
+            Excel::load($path, function ($reader) use (&$data, $inputs) {
+                $obj = $reader->getExcel();
+                $sheet = $obj->getSheet(0);
+                $data = $sheet->toArray(null, true, true, true);// giữ lại tiêu đề A=>'val';
+            });
+            //dd($data);
+            for ($i = $inputs['tudong']; $i <= $inputs['dendong']; $i++) {
+                //dd($data[$i]);
+                if (!isset($data[$i][$inputs['loaip']]) || $data[$i][$inputs['loaip']] == '') {
+                    continue;//Tên cán bộ rỗng => thoát
+                }
+                $modelctnew = new KkGDvLtCtDf();
+                $modelctnew->macskd = $inputs['macskd'];
+                $modelctnew->loaip = $data[$i][$inputs['loaip']];
+                $modelctnew->qccl = $data[$i][$inputs['qccl']];
+                $modelctnew->sohieu = $data[$i][$inputs['sohieu']];
+                $modelctnew->ghichu = $data[$i][$inputs['ghichu']];
+                $modelctnew->mucgialk = getDbl($data[$i][$inputs['mucgialk']]);
+                $modelctnew->mucgiakk = getDbl($data[$i][$inputs['mucgiakk']]);
+                $modelctnew->save();
+            }
+            File::Delete($path);
+            $modelcskd = CsKdDvLt::where('macskd', $inputs['macskd'])->first();
+            $datenow = date('Y-m-d');
+            $datehl = getNgayHieuLucLT($datenow);
+            $ngaynhap = date('d/m/Y', strtotime($datenow));
+            $ngayhieuluc = date('d/m/Y', strtotime($datehl));
+
+            $modeldn = DnDvLt::where('masothue', $modelcskd->masothue)->first();
+            $modeldsph = KkGDvLtCtDf::where('macskd',$inputs['macskd'])
+                ->get();
+
+            //dd($datehl);
+            return view('manage.dvlt.kkgia.kkgiadv.create')
+                ->with('modelcskd', $modelcskd)
+                ->with('modeldn', $modeldn)
+                ->with('ngaynhap', $ngaynhap)
+                ->with('ngayhieuluc', $ngayhieuluc)
+                ->with('modeldsph', $modeldsph)
+                ->with('ngaynhapdf', $datehl)
+                ->with('pageTitle', 'Kê khai giá dịch vụ lưu trú thêm mới');
+
+        }else
+            return view('errors.notlogin');
     }
 
 }

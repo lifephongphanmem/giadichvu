@@ -230,6 +230,9 @@ Route::get('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh={macskd}/create_dk','KkGDvL
 //Route::post('ke_khai_dich_vu_luu_tru/copy','KkGDvLtController@copy');
 Route::get('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh={macskd}/copy','KkGDvLtController@saochep');
 
+Route::get('kekhaidvlt/nhandulieutuexcel','KkGDvLtController@nhandl');
+Route::post('kekhaidvlt/import_excel','KkGDvLtController@importexcel');
+
     //Ajax ttphong create
 Route::get('/kkgdvlt/kkgia','KkGDvLtCtDfController@kkgia');
 Route::get('/kkgdvlt/upkkgia','KkGDvLtCtDfController@upkkgia');

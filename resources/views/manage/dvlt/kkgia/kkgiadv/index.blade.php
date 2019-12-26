@@ -130,9 +130,10 @@
                                     <i class="fa fa-plus"></i> Kê khai mới </a>
                                 <a href="{{url('ke_khai_dich_vu_luu_tru/khach_san='.$macskd.'/create')}}" class="btn btn-default btn-sm">
                                     <i class="fa fa-plus"></i> Kê khai giá KS 4 5 sao </a>
-
                             @endif
                         @endif
+                        <a href="{{url('kekhaidvlt/nhandulieutuexcel?&macskd='.$macskd)}}" class="btn btn-default btn-sm">
+                            <i class="fa fa-plus"></i> Import Kê khai </a>
                         <a href="{{url('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh')}}" class="btn btn-default btn-sm"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
                     </div>
 

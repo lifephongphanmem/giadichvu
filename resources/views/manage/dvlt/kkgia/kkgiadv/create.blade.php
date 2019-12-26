@@ -420,10 +420,10 @@
 @section('content')
 
     <h3 class="page-title">
-        Thông tin kê khai hồ sơ giá<small>dịch vụ lưu trú</small>
+        Thông tin kê khai hồ sơ giá<small> dịch vụ lưu trú</small>
         <h5>{{$modeldn->tendn}}- Mã số thuế: {{$modeldn->masothue}} kê khai giá DVLT cơ sở kinh doanh {{$modelcskd->tencskd}}</h5>
     </h3>
-
+    <hr>
     <!-- END PAGE HEADER-->
     <div class="row">
         {!! Form::open(['url'=>'ke_khai_dich_vu_luu_tru', 'id' => 'create_kkdvlt', 'class'=>'horizontal-form','files'=>true,'enctype'=>'multipart/form-data']) !!}

@@ -352,7 +352,7 @@
     <h3 class="page-title">
         Thông tin kê khai giá dịch vụ lưu trú<small>&nbsp;chỉnh sửa</small>
     </h3>
-
+    <hr>
     <!-- END PAGE HEADER-->
     <div class="row">
         {!! Form::model($model, ['method' => 'PATCH', 'url'=>'ke_khai_dich_vu_luu_tru/'. $model->id, 'class'=>'horizontal-form','id'=>'update_kkdvlt','files'=>true,'enctype'=>'multipart/form-data']) !!}
