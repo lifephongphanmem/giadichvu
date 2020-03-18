@@ -63,7 +63,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- BEGIN LOGIN -->
 <div class="content">
     <!-- BEGIN REGISTER FORM -->
-    {!! Form::open(['url'=>'register/dich_vu_van_tai','id' => 'form-register', 'class'=>'register-form"']) !!}
+    {!! Form::open(['url'=>'register/dich_vu_van_tai','files'=>true,'id' => 'form-register', 'class'=>'register-form"']) !!}
     <!--form class="register-form" action="index.html" method="post" novalidate="novalidate" style="display: block;"-->
     <div class="row">
     <div class="col-md-12">
@@ -161,6 +161,14 @@ License: You must have a valid license purchased only from themeforest(the above
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
+                    <label class="control-label">Giấy đăng ký kinh doanh của doanh nghiệp</label>
+                    <input placeholder="Link chia sẻ giấy đăng ký kinh doanh của doanh nghiệp" name="tailieu" id="tailieu" type="file">
+                </div>
+            </div>
+        </div>
+        <!--div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
                     <div class="input-icon">
                         <i class="fa fa-file"></i>
                         <input class="form-control required" type="text" placeholder="Link chia sẻ giấy đăng ký kinh doanh của doanh nghiệp" name="tailieu" id="tailieu">
@@ -173,7 +181,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     </p>
                 </div>
             </div>
-        </div>
+        </div-->
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">

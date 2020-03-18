@@ -212,7 +212,7 @@ class HomeController extends Controller
                         ->where('masothue',session('admin')->mahuyen)
                         ->count();
                 }
-                $array = '';
+                $array = array();
                 $array['cnttdndvlt'] = $cnttdndvlt;
                 $array['btlttdndvlt'] = $btlttdndvlt;
                 $array['cnkkgdvlt'] = $cnkkgdvlt;
@@ -287,7 +287,7 @@ class HomeController extends Controller
 
     public function regdvltstore(Request $request){
         $input = $request->all();
-        if($input['g-recaptcha-response'] != '') {
+        //if($input['g-recaptcha-response'] != '') {
             $check = DnDvLt::where('masothue', $input['masothue'])
                 ->first();
             if (count($check) > 0) {
@@ -309,7 +309,14 @@ class HomeController extends Controller
                     $model->noidknopthue = $input['noidknopthue'];
                     $model->cqcq = $input['cqcq'];
                     $model->giayphepkd = $input['giayphepkd'];
-                    $model->tailieu = $input['tailieu'];
+                    $tenfile = "";
+                    if(isset($input['tailieu'])){
+                        $tailieu = $request->file('tailieu');
+                        $input['tailieu'] = $input['masothue'].$tailieu->getClientOriginalExtension();
+                        $tailieu->move(public_path() . '/data/dkdn/', $input['tailieu']);
+                        $tenfile ="/data/dkdn/" . $input['tailieu'];
+                    }
+                    $model->tailieu = $tenfile;
                     $model->username = $input['username'];
                     $model->password = md5($input['rpassword']);
                     $model->pl = 'DVLT';
@@ -337,21 +344,21 @@ class HomeController extends Controller
                         $tendn = $input['tendn'];
                         $mailql = $tencqcq->emailqt;
                         $tenql = $tencqcq->tendv;
-
+/*
                         Mail::send('mail.register', $data, function ($message) use ($maildn, $tendn, $mailql, $tenql) {
                             $message->to($maildn, $tendn)
                                 ->to($mailql, $tenql)
                                 ->subject('Thông báo đăng ký tài khoản');
                             $message->from('qlgiakhanhhoa@gmail.com', 'Phần mềm CSDL giá');
                         });
-
+*/
                     }
                     return view('system.register.view.register-success')
                         ->with('ma', $ma);
                 }
             }
-        }else
-            return view('errors.register-errors');
+        //}else
+         //   return view('errors.register-errors');
     }
 
     public function regdvvt(){
@@ -375,7 +382,14 @@ class HomeController extends Controller
         $model->email = $input['emaildn'];
         $model->noidknopthue = $input['noidknopthue'];
         $model->giayphepkd = $input['giayphepkd'];
-        $model->tailieu = $input['tailieu'];
+        $tenfile = "";
+        if(isset($input['tailieu'])){
+            $tailieu = $request->file('tailieu');
+            $input['tailieu'] = $input['masothue'].$tailieu->getClientOriginalExtension();
+            $tailieu->move(public_path() . '/data/dkdn/', $input['tailieu']);
+            $tenfile ="/data/dkdn/" . $input['tailieu'];
+        }
+        $model->tailieu = $tenfile;
         $model->cqcq = $input['cqcq'];
         $model->username = $input['username'];
         $model->password = md5($input['rpassword']);
