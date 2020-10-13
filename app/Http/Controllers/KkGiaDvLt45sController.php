@@ -195,7 +195,7 @@ class KkGiaDvLt45sController extends Controller
         //if (Session::has('admin')) {
             $insert = $request->all();
             $model = KkGDvLt::findOrFail($id);
-            $insert['ngaynhap'] = date('Y-m-d', strtotime(str_replace('/', '-', $insert['ngaynhap'])));
+            $insert['ngaynhap'] = date('Y-m-d', strtotime(str_replace('/', '-', $model->ngaynhap)));
             $insert['ngayhieuluc'] = date('Y-m-d', strtotime(str_replace('/', '-', $insert['ngayhieuluc'])));
             $insert['giaycnhangcstungay'] = getDateToDb($insert['giaycnhangcstungay']);
             $insert['giaycnhangcsdenngay'] = getDateToDb($insert['giaycnhangcsdenngay']);
