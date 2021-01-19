@@ -280,25 +280,25 @@ class KkGDvLtController extends Controller
                 unset($inputs['ngaycvlk']);
             if(isset($inputs['giaycnhangcs'])){
                 $giaycnhangcs = $request->file('giaycnhangcs');
-                $inputs['giaycnhangcs'] = $inputs['macskd'] .'.'.$giaycnhangcs->getClientOriginalExtension();
+                $inputs['giaycnhangcs'] = $inputs['macskd'] .getdate()[0].'.'.$giaycnhangcs->getClientOriginalExtension();
                 $giaycnhangcs->move(public_path() . '/images/cskddvlt/hangcslt', $inputs['giaycnhangcs']);
             }else
                 $inputs['giaycnhangcs'] = $inputs['giaycnhangcsplus'];
             if(isset($inputs['filedk1'])){
                 $giaycnhangcs = $request->file('filedk1');
-                $inputs['filedk1'] = $inputs['macskd'] .'_1.'.$giaycnhangcs->getClientOriginalExtension();
+                $inputs['filedk1'] = $inputs['macskd'] .getdate()[0].'_1.'.$giaycnhangcs->getClientOriginalExtension();
                 $giaycnhangcs->move(public_path() . '/images/cskddvlt/hangcslt', $inputs['filedk1']);
             }else
                 $inputs['filedk1'] = $inputs['filedk1plus'];
             if(isset($inputs['filedk2'])){
                 $giaycnhangcs = $request->file('filedk2');
-                $inputs['filedk2'] = $inputs['macskd'] .'_2.'.$giaycnhangcs->getClientOriginalExtension();
+                $inputs['filedk2'] = $inputs['macskd'] .getdate()[0].'_2.'.$giaycnhangcs->getClientOriginalExtension();
                 $giaycnhangcs->move(public_path() . '/images/cskddvlt/hangcslt', $inputs['filedk2']);
             }else
                 $inputs['filedk2'] = $inputs['filedk2plus'];
             if(isset($inputs['filedk3'])){
                 $giaycnhangcs = $request->file('filedk3');
-                $inputs['filedk3'] = $inputs['macskd'] .'_3.'.$giaycnhangcs->getClientOriginalExtension();
+                $inputs['filedk3'] = $inputs['macskd'] .getdate()[0].'_3.'.$giaycnhangcs->getClientOriginalExtension();
                 $giaycnhangcs->move(public_path() . '/images/cskddvlt/hangcslt', $inputs['filedk3']);
             }else
                 $inputs['filedk3'] = $inputs['filedk3plus'];
@@ -392,22 +392,22 @@ class KkGDvLtController extends Controller
                 $input['filedk3'] = "";
             if(isset($input['giaycnhangcs']) && $input['giaycnhangcs'] != ''){
                 $giaycnhangcs = $request->file('giaycnhangcs');
-                $input['giaycnhangcs'] = $input['macskd'] .'.'.$giaycnhangcs->getClientOriginalExtension();
+                $input['giaycnhangcs'] = $input['macskd'] .getdate()[0].'.'.$giaycnhangcs->getClientOriginalExtension();
                 $giaycnhangcs->move(public_path() . '/images/cskddvlt/hangcslt/', $input['giaycnhangcs']);
             }
             if(isset($input['filedk1']) && $input['filedk1'] != "") {
                 $giaycnhangcs = $request->file('filedk1');
-                $input['filedk1'] = $input['macskd'] . '_1.' . $giaycnhangcs->getClientOriginalExtension();
+                $input['filedk1'] = $input['macskd'] .getdate()[0].'_1.' . $giaycnhangcs->getClientOriginalExtension();
                 $giaycnhangcs->move(public_path() . '/images/cskddvlt/hangcslt', $input['filedk1']);
             }
             if(isset($input['filedk2']) && $input['filedk2'] != "") {
                 $giaycnhangcs = $request->file('filedk2');
-                $input['filedk2'] = $input['macskd'] . '_2.' . $giaycnhangcs->getClientOriginalExtension();
+                $input['filedk2'] = $input['macskd'] .getdate()[0]. '_2.' . $giaycnhangcs->getClientOriginalExtension();
                 $giaycnhangcs->move(public_path() . '/images/cskddvlt/hangcslt', $input['filedk2']);
             }
             if(isset($input['filedk3']) && $input['filedk3'] != "") {
                 $giaycnhangcs = $request->file('filedk3');
-                $input['filedk3'] = $input['macskd'] . '_3.' . $giaycnhangcs->getClientOriginalExtension();
+                $input['filedk3'] = $input['macskd'] .getdate()[0].'_3.' . $giaycnhangcs->getClientOriginalExtension();
                 $giaycnhangcs->move(public_path() . '/images/cskddvlt/hangcslt', $input['filedk3']);
             }
 
