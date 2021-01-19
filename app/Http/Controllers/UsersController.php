@@ -608,6 +608,12 @@ class UsersController extends Controller
                     $data['tencqcq'] = $tencqcq->tendv;
                     $data['masothue'] = $model->masothue;
                     $data['username'] = $model->username;
+
+                    $phone = $model->teldn;
+                    $content ="Thông báo thông tin đăng ký đã được xét duyệt. ". $data['tendn']." - ".
+                        $data['masothue']. " - ". $data['tg']." - ". $data['tencqcq']. " - ". $data['username'];
+                    guitinjson($phone,$content);
+
                     $maildn = $model->email;
                     $tendn = $model->tendn;
                     $mailql = $tencqcq->emailqt;
@@ -678,6 +684,12 @@ class UsersController extends Controller
                 $data['tencqcq'] = $tencqcq->tendv;
                 $data['masothue'] = $model->masothue;
                 $data['username'] = $model->username;
+
+                $phone = $model->teldn;
+                $content ="Thông báo thông tin đăng ký đã được xét duyệt. ". $data['tendn']." - ".
+                    $data['masothue']. " - ". $data['tg']." - ". $data['tencqcq']. " - ". $data['username'];
+                guitinjson($phone,$content);
+
                 $a = $model->email;
                 $b  =  $model->tendn;
                 Mail::send('mail.successregister',$data, function ($message) use($a,$b) {
@@ -740,6 +752,12 @@ class UsersController extends Controller
                 $data['tencqcq'] = $tencqcq->tendv;
                 $data['masothue'] = $model->masothue;
                 $data['username'] = $model->username;
+
+                $phone = $model->teldn;
+                $content ="Thông báo thông tin đăng ký đã được xét duyệt. ". $data['tendn']." - ".
+                    $data['masothue']. " - ". $data['tg']." - ". $data['tencqcq']. " - ". $data['username'];
+                guitinjson($phone,$content);
+
                 $a = $model->email;
                 $b  =  $model->tendn;
                 Mail::send('mail.successregister',$data, function ($message) use($a,$b) {
@@ -803,6 +821,12 @@ class UsersController extends Controller
                     $data['tencqcq'] = $tencqcq->tendv;
                     $data['masothue'] = $model->masothue;
                     $data['username'] = $model->username;
+
+                    $phone = $model->teldn;
+                    $content ="Thông báo thông tin đăng ký đã được xét duyệt. ". $data['tendn']." - ".
+                        $data['masothue']. " - ". $data['tg']." - ". $data['tencqcq']. " - ". $data['username'];
+                    guitinjson($phone,$content);
+
                     $maildn = $model->email;
                     $tendn = $model->tendn;
                     $mailql = $tencqcq->emailqt;
@@ -995,6 +1019,12 @@ class UsersController extends Controller
                     $data['user'] = $model->username;
                     $data['madk'] = $model->ma;
                     $data['lydo'] = $input['lydo'];
+
+                    $phone = $model->teldn;
+                    $content ="Thông báo trả lại thông tin đăng ký. ". $data['tendn']." - ".
+                        $data['masothue']. " - ". $data['tg']." - ". $data['tencqcq']. " - ". $data['user'];
+                    guitinjson($phone,$content);
+
                     $a = $model->email;
                     $b  =  $model->tendn;
                     Mail::send('mail.replyregister',$data, function ($message) use($a,$b) {

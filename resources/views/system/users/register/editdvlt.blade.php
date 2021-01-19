@@ -130,6 +130,12 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
+                                    <label class="control-label">Link chia sẻ giấy đăng ký kinh doanh</label>
+                                    <input type="text" class="form-control required" name="filedk" id="tailieu" value="{{$model->filedk}}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
                                     <label class="control-label">Tài khoản truy cập<span class="require">*</span></label>
                                     <input type="text" class="form-control required" name="username" id="username" value="{{$model->username}}">
                                 </div>

@@ -12,7 +12,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 
-class KkGiaDvVtTaxiCtDfController extends Controller
+class iKkGiaDvVtTaxiCtDfController extends Controller
 {
     //Ajax Form create
     public function storedv(Request $request){

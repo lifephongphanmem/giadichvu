@@ -135,6 +135,14 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
+                                    <a href="{{$model->filedk}}" target="_blank">Xem giấy phép đăng ký kinh doanh</a>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
                                     <label class="control-label">Tài khoản truy cập<span class="require">*</span></label>
                                     <input type="text" class="form-control required" name="username" id="username" value="{{$model->username}}" readonly>
                                 </div>

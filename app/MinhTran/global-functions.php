@@ -545,7 +545,7 @@ function getNgayHieuLucLT($ngaynhap){
 
     $modelchecknn = \App\TtNgayNghiLe::where('ngaytu','<=',$ngaynhap)
         ->where('ngayden','>=',$ngaynhap)->first();
-    if(count($modelchecknn)>0)
+    if(count((array) $modelchecknn)>0)
         $ngaynghi = $modelchecknn->songaynghi;
     else
         $ngaynghi = 0;
@@ -606,5 +606,71 @@ function getThXdHsDvLt($ngaychuyen,$ngayduyet){
         $thoihan = 'Quá thời hạn';
     }
     return $thoihan;
+}
+function guitin($YourPhone,$content)
+{
+    $APIKey="1D6D739D178D0BC1F10A6FF3BFB3F9";
+    $SecretKey="E1C6228918BFC383CB96DBAF3C6514";
+    $ch = curl_init();
+
+
+    $SampleXml = "<RQST>"
+        . "<APIKEY>". $APIKey ."</APIKEY>"
+        . "<SECRETKEY>". $SecretKey ."</SECRETKEY>"
+        . "<SMSTYPE>2</SMSTYPE>"
+        . "<CONTENT>".$content."</CONTENT>"
+        . "<BRANDNAME>QCAO_ONLINE</BRANDNAME>"
+        . "<CONTACTS>"
+        . "<CUSTOMER>"
+        . "<PHONE>". $YourPhone ."</PHONE>"
+        . "</CUSTOMER>"
+        . "</CONTACTS>"
+        . "</RQST>";
+
+
+    curl_setopt($ch, CURLOPT_URL,            "http://api.esms.vn/MainService.svc/xml/SendMultipleMessage_V4/" );
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1 );
+    curl_setopt($ch, CURLOPT_POST,           1 );
+    curl_setopt($ch, CURLOPT_POSTFIELDS,     $SampleXml );
+    curl_setopt($ch, CURLOPT_HTTPHEADER,     array('Content-Type: text/plain'));
+
+    $result=curl_exec ($ch);
+    $xml = simplexml_load_string($result);
+
+    if ($xml === false) {
+        die('Error parsing XML');
+    }
+    print "Ket qua goi API: " . $xml->CodeResult . "\n";
+}
+function  guitinjson($YourPhone,$Content)
+{
+
+    $APIKey="1D6D739D178D0BC1F10A6FF3BFB3F9";
+    $SecretKey="E1C6228918BFC383CB96DBAF3C6514";
+
+    $SendContent=urlencode($Content);
+    $data="http://rest.esms.vn/MainService.svc/json/SendMultipleMessage_V4_get?Phone=$YourPhone&ApiKey=$APIKey&SecretKey=$SecretKey&Content=$SendContent&Brandname=STCKhanhHoa&SmsType=2";
+    $curl = curl_init($data);
+    curl_setopt($curl, CURLOPT_FAILONERROR, true);
+    curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    $result = curl_exec($curl);
+
+    $obj = json_decode($result,true);
+    if($obj['CodeResult']==100)
+    {
+        print "<br>";
+        print "CodeResult:".$obj['CodeResult'];
+        print "<br>";
+        print "CountRegenerate:".$obj['CountRegenerate'];
+        print "<br>";
+        print "SMSID:".$obj['SMSID'];
+        print "<br>";
+    }
+    else
+    {
+        print "ErrorMessage:".$obj['ErrorMessage'];
+    }
+
 }
 ?>

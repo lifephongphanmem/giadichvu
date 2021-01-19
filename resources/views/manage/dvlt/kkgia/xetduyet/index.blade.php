@@ -263,6 +263,7 @@
                     @for($i = $nam_start; $i <= $nam_stop; $i++)
                         <option value="{{$i}}" {{$i == $nam ? 'selected' : ''}}>Năm {{$i}}</option>
                     @endfor
+                        <option value="" {{$nam == "" ? 'selected' : ''}}>Tất cả các năm</option>
                 </select>
             </div>
         </div>

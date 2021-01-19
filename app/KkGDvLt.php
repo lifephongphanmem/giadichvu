@@ -33,6 +33,9 @@ class KkGDvLt extends Model
         'loaihang',
         'thoihan',
         'giaycnhangcs',
+        'filedk1',
+        'filedk2',
+        'filedk3',
         'soqdgiaycnhangcs',
         'giaycnhangcstungay',
         'giaycnhangcsdenngay'

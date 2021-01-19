@@ -34,6 +34,7 @@ class CreateRegisterTable extends Migration
             $table->string('ghichu')->nullable();
             $table->string('trangthai')->nullable();
             $table->string('tailieu')->nullable();
+            $table->string('filedk')->nullable();
             $table->string('giayphepkd')->nullable();
             $table->string('username')->nullable();
             $table->string('password')->nullable();

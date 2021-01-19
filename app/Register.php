@@ -28,6 +28,7 @@ class Register extends Model
         'ghichu',
         'trangthai',
         'tailieu',
+        'filedk',
         'giayphepkd',
         'username',
         'password',

@@ -190,6 +190,11 @@ class DnTaCnController extends Controller
                 $data['tendn'] = $dn->tendn;
                 $data['tg'] = Carbon::now()->toDateTimeString();
                 $data['tencqcq'] = $tencqcq->tendv;
+
+                $phone = $model->tel;
+                $content ="Thông báo thông tin thay đổi thông tin doanh nghiệp. ". $data['tendn']." - ".
+                    $data['tg'];
+                guitinjson($phone,$content);
                 $maildn = $dn->email;
                 $tendn = $dn->tendn;
                 $mailql = $tencqcq->emailqt;

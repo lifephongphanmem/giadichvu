@@ -176,6 +176,12 @@ class XdTdTtDnController extends Controller
                 $data['tendn'] = $model->tendn;
                 $data['tg'] = Carbon::now()->toDateTimeString();
                 $data['tencqcq'] = $tencqcq->tendv;
+
+                $phone = $model->teldn;
+                $content ="Thông báo duyệt thay đổi thông tin doanh nghiệp. ". $data['tendn']." - ".
+                   $data['tg']." - ". $data['tencqcq'];
+                guitinjson($phone,$content);
+
                 $a = $model->email;
                 $b = $model->tendn;
                 Mail::send('mail.successchangettdn',$data, function ($message) use($a,$b) {
@@ -216,6 +222,12 @@ class XdTdTtDnController extends Controller
                 $data['tg'] = Carbon::now()->toDateTimeString();
                 $data['tencqcq'] = $tencqcq->tendv;
                 $data['lydo'] = $input['lydo'];
+
+                $phone = $model->teldn;
+                $content ="Thông báo không xét duyệt thay đổi thông tin doanh nghiệp. ". $data['tendn']." - ".
+                    $data['tg']." - ". $data['tencqcq'];
+                guitinjson($phone,$content);
+
                 $a = $dn->email;
                 $b = $dn->tendn;
                 Mail::send('mail.replychangettdn',$data, function ($message) use($a,$b) {

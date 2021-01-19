@@ -556,17 +556,80 @@
                                     <a href="{{ url('images/cskddvlt/hangcslt/'.$modelcb->giaycnhangcs)}}" target="_blank">{{$modelcb->giaycnhangcs}}</a>
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="checkbox" name="checkgiaycncs" value="checkgiaycncs"> <label>Xóa bỏ file giấy chứng nhận hạng</label>
+                                </div>
+                            </div>
                             @endif
+                            @if($modelcb->filedk1 != '')
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Giấy công nhận hạng cơ sở lưu trú</label>
+                                        <a href="{{ url('images/cskddvlt/hangcslt/'.$modelcb->filedk1)}}" target="_blank">{{$modelcb->filedk1}}</a>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="checkbox" name="checkfiledk1" value="checkfiledk1"> <label>Xóa bỏ file giấy chứng nhận hạng</label>
+                                    </div>
+                                </div>
+                            @endif
+                                @if($modelcb->filedk2 != '')
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Giấy công nhận hạng cơ sở lưu trú</label>
+                                        <a href="{{ url('images/cskddvlt/hangcslt/'.$modelcb->filedk2)}}" target="_blank">{{$modelcb->filedk2}}</a>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="checkbox" name="checkfiledk2" value="checkfiledk2"> <label>Xóa bỏ file giấy chứng nhận hạng</label>
+                                    </div>
+                                </div>
+                            @endif
+                                @if($modelcb->filedk3 != '')
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Giấy công nhận hạng cơ sở lưu trú</label>
+                                            <a href="{{ url('images/cskddvlt/hangcslt/'.$modelcb->filedk3)}}" target="_blank">{{$modelcb->filedk3}}</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="checkbox" name="checkfiledk3" value="checkfiledk3"> <label>Xóa bỏ file giấy chứng nhận hạng</label>
+                                        </div>
+                                    </div>
+                                @endif
                             <input type="hidden" name="giaycnhangcsplus" id="giaycnhangcsplus" value="{{$modelcb->giaycnhangcs}}">
+                            <input type="hidden" name="filedk1plus" id="filedk1plus" value="{{$modelcb->filedk1}}">
+                            <input type="hidden" name="filedk2plus" id="filedk2plus" value="{{$modelcb->filedk2}}">
+                            <input type="hidden" name="filedk3plus" id="filedk3plus" value="{{$modelcb->filedk3}}">
                         @else
                             <input type="hidden" name="giaycnhangcsplus" id="giaycnhangcsplus" value="">
+                            <input type="hidden" name="filedk1plus" id="filedk1plus" value="">
+                            <input type="hidden" name="filedk2plus" id="filedk2plus" value="">
+                            <input type="hidden" name="filedk3plus" id="filedk3plus" value="">
                         @endif
+
                         <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">File công nhận hạng cơ sở lưu trú<span class="require">*</span></label>
+                                    {!!Form::file('giaycnhangcs',array('id'=>'giaycnhangcs','class' => 'passvalid','accept'=>'image/*'))!!}
+                                </div>
                             <div class="form-group">
                                 <label class="control-label">File công nhận hạng cơ sở lưu trú<span class="require">*</span></label>
-                                {!!Form::file('giaycnhangcs',array('id'=>'giaycnhangcs','class' => 'passvalid','accept'=>'image/*'))!!}
+                                {!!Form::file('filedk1',array('id'=>'filedk1','class' => 'passvalid','accept'=>'image/*'))!!}
                             </div>
-                        </div>
+                            <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">File công nhận hạng cơ sở lưu trú<span class="require">*</span></label>
+                                {!!Form::file('filedk2',array('id'=>'filedk2','class' => 'passvalid','accept'=>'image/*'))!!}
+                            </div> <div class="form-group">
+                                <label class="control-label">File công nhận hạng cơ sở lưu trú<span class="require">*</span></label>
+                                {!!Form::file('filedk3',array('id'=>'filedk3','class' => 'passvalid','accept'=>'image/*'))!!}
+                            </div>
+                            </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4">

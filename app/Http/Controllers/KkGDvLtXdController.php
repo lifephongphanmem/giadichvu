@@ -73,13 +73,42 @@ class KkGDvLtXdController extends Controller
     public function index(Request $request){
         if (Session::has('admin')) {
             $inputs = $request->all();
+            $phanloai = "";
             $inputs['nam'] = isset($inputs['nam']) ? $inputs['nam'] : date('Y');
             $inputs['pl'] = isset($inputs['pl']) ? $inputs['pl'] : 'cho_nhan';
+
+            switch ($inputs['pl']) {
+                case "cho_nhan":
+                    $phanloai = "Chờ nhận";
+                    break;
+                case "duyet":
+                    $phanloai = "Duyệt";
+                    break;
+                case "bi_tra_lai":
+                    $phanloai = "Bị trả lại";
+                    break;
+                default:
+                    $phanloai = "Chờ nhận";
+                    break;
+            }
 
             $model = KkGDvLt::join('cskddvlt','cskddvlt.macskd','=','kkgdvlt.macskd')
                 ->select('cskddvlt.tencskd','cskddvlt.loaihang','cskddvlt.masothue','cskddvlt.macskd','cskddvlt.toado',
                     'kkgdvlt.mahs','kkgdvlt.ngaynhap','kkgdvlt.ngayhieuluc','kkgdvlt.socv','kkgdvlt.ttnguoinop','kkgdvlt.trangthai',
+                    'kkgdvlt.id','kkgdvlt.ngaychuyen','kkgdvlt.giaycnhangcs','kkgdvlt.phanloai')
+            ->where('kkgdvlt.trangthai', $phanloai);
+            if ($inputs['nam']!="")
+                $model = $model->whereYear('kkgdvlt.ngaychuyen', $inputs['nam']);
+            if(session('admin')->level != 'T'  && session('admin')->sadmin != 'ssa') {
+                    $model = $model->where('kkgdvlt.cqcq',session('admin')->cqcq);
+            }
+            $model=$model->get();
+            /*
+            $model = KkGDvLt::join('cskddvlt','cskddvlt.macskd','=','kkgdvlt.macskd')
+                ->select('cskddvlt.tencskd','cskddvlt.loaihang','cskddvlt.masothue','cskddvlt.macskd','cskddvlt.toado',
+                    'kkgdvlt.mahs','kkgdvlt.ngaynhap','kkgdvlt.ngayhieuluc','kkgdvlt.socv','kkgdvlt.ttnguoinop','kkgdvlt.trangthai',
                 'kkgdvlt.id','kkgdvlt.ngaychuyen','kkgdvlt.giaycnhangcs','kkgdvlt.phanloai');
+
             if($inputs['pl']=='cho_nhan') {
                 if(session('admin')->level == 'T'  && session('admin')->sadmin == 'ssa') {
                     $model = $model->where('kkgdvlt.trangthai', 'Chờ nhận')
@@ -102,6 +131,7 @@ class KkGDvLtXdController extends Controller
             /*}elseif($inputs['pl'] == 'cong_bo') {
                 $model = CbKkGDvLt::whereYear('ngaychuyen', $inputs['nam'])
                     ->get();*/
+            /*
             }elseif($inputs['pl']='bi_tra_lai'){
                 if(session('admin')->level == 'T'  && session('admin')->sadmin == 'ssa') {
                     $model = $model->where('kkgdvlt.trangthai', 'Bị trả lại')
@@ -112,7 +142,8 @@ class KkGDvLtXdController extends Controller
                         ->whereYear('kkgdvlt.ngaychuyen', $inputs['nam']);
                 }
             }
-            $model = $model->geT();
+        */
+           // $model = $model->geT();
             /*$modelcskd = CsKdDvLt::all();
             foreach($model as $ttkk) {
                 $model_cskd = $modelcskd->where('masothue', $ttkk->masothue)
@@ -159,6 +190,12 @@ class KkGDvLtXdController extends Controller
             $data['tg'] = Carbon::now()->toDateTimeString();
             $data['tencqcq'] = $tencqcq->tendv;
             $data['lydo'] = $input['lydo'];
+
+            $phone = $dn->teldn;
+            $content ="Thông báo trả lại hồ sơ kê khai giá dịch vụ. ". $data['tendn']." - ".
+                $data['masothue']. " - ". $data['tg']." - ". $data['tencqcq']. " - ". $data['lydo'];
+            guitinjson($phone,$content);
+
             $maildn = $dn->email;
             $tendn = $dn->tendn;
             $mailql = $tencqcq->email;
@@ -282,6 +319,11 @@ class KkGDvLtXdController extends Controller
             $data['socv'] = $model->socv;
             $data['ngaynhan'] = $inputs['ngaynhan'];
             $data['sohsnhan'] = $inputs['sohsnhan'];
+
+            $phone = $dn->teldn;
+            $content ="Thông báo xét duyệt hồ sơ kê khai giá dịch vụ. ". $data['tendn']." - ".
+                $data['masothue']. " - ". $data['tg']." - ". $data['tencqcq']. " - ". $data['socv'];
+            guitinjson($phone,$content);
 
             $maildn = $dn->email;
             $tendn = $dn->tendn;

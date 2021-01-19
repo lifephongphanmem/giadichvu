@@ -724,6 +724,10 @@ class CsKdDvLtController extends Controller
                 $data['loaihang'] = $loaihang;
                 $data['url'] = url('/images/cskddvlt/'.$model->toado);
 
+                $phone = $model->teldn;
+                $content ="Thông báo thay đổi giấy chứng nhận loại hạng. ". $data['tendn']." - ".
+                    $data['masothue']. " - ". $data['tg']." - ". $data['tencskd']. " - ". $data['loaihang'];
+                guitinjson($phone,$content);
                 $maildn = $dn->email;
                 $tendn = $dn->tendn;
                 $mailql = $tencqcq->email;

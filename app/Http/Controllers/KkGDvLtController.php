@@ -212,9 +212,8 @@ class KkGDvLtController extends Controller
             if(session('admin')->level == 'T' || session('admin')->level == 'H' || session('admin')->level == 'DVLT') {
                 $check = KkGDvLt::where('macskd',$macskd)
                     ->wherein('trangthai',['Bị trả lại','Chờ nhận'])
-                    ->whereYear('ngaynhap', date('Y'))
-                    ->count();
-                if($check == 0) {
+                    ->whereYear('ngaynhap', date('Y'))->get()->toarray();
+                if(count((array) $check)==0) {
                     $modelcp = CbKkGDvLt::where('macskd', $macskd)
                         ->first();
                     if ($modelcp->phanloai != 'DT') {
@@ -285,7 +284,24 @@ class KkGDvLtController extends Controller
                 $giaycnhangcs->move(public_path() . '/images/cskddvlt/hangcslt', $inputs['giaycnhangcs']);
             }else
                 $inputs['giaycnhangcs'] = $inputs['giaycnhangcsplus'];
-
+            if(isset($inputs['filedk1'])){
+                $giaycnhangcs = $request->file('filedk1');
+                $inputs['filedk1'] = $inputs['macskd'] .'_1.'.$giaycnhangcs->getClientOriginalExtension();
+                $giaycnhangcs->move(public_path() . '/images/cskddvlt/hangcslt', $inputs['filedk1']);
+            }else
+                $inputs['filedk1'] = $inputs['filedk1plus'];
+            if(isset($inputs['filedk2'])){
+                $giaycnhangcs = $request->file('filedk2');
+                $inputs['filedk2'] = $inputs['macskd'] .'_2.'.$giaycnhangcs->getClientOriginalExtension();
+                $giaycnhangcs->move(public_path() . '/images/cskddvlt/hangcslt', $inputs['filedk2']);
+            }else
+                $inputs['filedk2'] = $inputs['filedk2plus'];
+            if(isset($inputs['filedk3'])){
+                $giaycnhangcs = $request->file('filedk3');
+                $inputs['filedk3'] = $inputs['macskd'] .'_3.'.$giaycnhangcs->getClientOriginalExtension();
+                $giaycnhangcs->move(public_path() . '/images/cskddvlt/hangcslt', $inputs['filedk3']);
+            }else
+                $inputs['filedk3'] = $inputs['filedk3plus'];
             $inputs['trangthai'] = 'Chờ chuyển';
             $model = new KkGDvLt();
             if($model->create($inputs)){
@@ -366,11 +382,35 @@ class KkGDvLtController extends Controller
                 $input['ngaycvlk']= getDateToDb($input['ngaycvlk']);
             else
                 unset($input['ngaycvlk']);
-            if(isset($input['giaycnhangcs'])){
+            if(isset($input['checkgiaycncs']))
+                $input['giaycnhangcs'] = "";
+            if(isset($input['checkfiledk1']))
+                $input['filedk1'] = "";
+            if(isset($input['checkfiledk2']))
+                $input['filedk2'] = "";
+            if(isset($input['checkfiledk3']))
+                $input['filedk3'] = "";
+            if(isset($input['giaycnhangcs']) && $input['giaycnhangcs'] != ''){
                 $giaycnhangcs = $request->file('giaycnhangcs');
                 $input['giaycnhangcs'] = $input['macskd'] .'.'.$giaycnhangcs->getClientOriginalExtension();
                 $giaycnhangcs->move(public_path() . '/images/cskddvlt/hangcslt/', $input['giaycnhangcs']);
             }
+            if(isset($input['filedk1']) && $input['filedk1'] != "") {
+                $giaycnhangcs = $request->file('filedk1');
+                $input['filedk1'] = $input['macskd'] . '_1.' . $giaycnhangcs->getClientOriginalExtension();
+                $giaycnhangcs->move(public_path() . '/images/cskddvlt/hangcslt', $input['filedk1']);
+            }
+            if(isset($input['filedk2']) && $input['filedk2'] != "") {
+                $giaycnhangcs = $request->file('filedk2');
+                $input['filedk2'] = $input['macskd'] . '_2.' . $giaycnhangcs->getClientOriginalExtension();
+                $giaycnhangcs->move(public_path() . '/images/cskddvlt/hangcslt', $input['filedk2']);
+            }
+            if(isset($input['filedk3']) && $input['filedk3'] != "") {
+                $giaycnhangcs = $request->file('filedk3');
+                $input['filedk3'] = $input['macskd'] . '_3.' . $giaycnhangcs->getClientOriginalExtension();
+                $giaycnhangcs->move(public_path() . '/images/cskddvlt/hangcslt', $input['filedk3']);
+            }
+
             $model->update($input);
             return redirect('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh='.$model->macskd.'&nam='.date('Y'));
         }else
@@ -445,6 +485,12 @@ class KkGDvLtController extends Controller
                 $data['tg'] = $tgchuyen;
                 $data['tencqcq'] = $tencqcq->tendv;
                 $data['ttnguoinop'] = $input['ttnguoinop'];
+
+                $phone = $dn->teldn;
+                $content ="Thông báo nhận hồ sơ kê khai giá dịch vụ. ". $data['tendn']." - ".
+                    $data['masothue']. " - ". $data['tg']." - ". $data['tencqcq']. " - ". $data['ttnguoinop'];
+                guitinjson($phone,$content);
+
                 $maildn = $dn->email;
                 $tendn = $dn->tendn;
                 $mailql = $tencqcq->email;

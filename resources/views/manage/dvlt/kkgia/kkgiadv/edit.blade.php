@@ -361,7 +361,7 @@
             <!-- BEGIN EXAMPLE TABLE PORTLET-->
             <div class="portlet box blue">
                 <input type="hidden" name="ngaychange" id="ngaychange">
-                <input type="hidden" name="ttcb" id="ttcb" value="{{isset($modelcb) ? 'yes' : 'no'}}">
+                <input type="hidden" name="ttcb" id="ttcb" value="{{isset($model) ? 'yes' : 'no'}}">
                 <div class="portlet-body">
                     <h4 class="form-section" style="color: #0000ff">Thông tin hồ sơ</h4>
                     <div class="row">
@@ -369,7 +369,7 @@
                             <div class="form-group">
                                 <label class="control-label">Hồ sơ kê khai<span class="require">*</span></label>
                                 <!--input type="date" name="ngaynhap" id="ngaynhap" class="form-control required" autofocus-->
-                                @if(isset($modelcb))
+                                @if(isset($model))
                                     {!! Form::select(
                                     'plhs',
                                     array(
@@ -431,7 +431,7 @@
                                 <label class="control-label">Đơn vị tính<span class="require">*</span></label>
                                 <select class="form-control" name="dvt" id="dvt">
                                     <option value="no" {{($model->dvt == 'no') ? 'selected' : ''}}>--Chọn đơn vị tính--</option>
-                                    <option value="Đồng/giường/ngày đêm" {{isset($modelcb) && $modelcb->dvt == 'Đồng/giường/ngày đêm' ? 'selected' : ''}}>Đồng/giường/ngày đêm</option>
+                                    <option value="Đồng/giường/ngày đêm" {{isset($model) && $model->dvt == 'Đồng/giường/ngày đêm' ? 'selected' : ''}}>Đồng/giường/ngày đêm</option>
                                     <option value="Đồng/phòng/ngày đêm" {{($model->dvt == 'Đồng/phòng/ngày đêm') ? 'selected' : ''}}>Đồng/phòng/ngày đêm</option>
                                     <option value="Đồng/phòng/tuần" {{($model->dvt == 'Đồng/phòng/tuần') ? 'selected' : ''}}>Đồng/phòng/tuần</option>
                                     <option value="Đồng/phòng/tháng" {{($model->dvt == 'Đồng/phòng/tháng') ? 'selected' : ''}}>Đồng/phòng/tháng</option>
@@ -443,7 +443,7 @@
                         </div>
                         <!--/span-->
                     </div>
-                    @if(isset($modelcb))
+                    @if(isset($model))
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -485,12 +485,84 @@
                                     <a href="{{ url('images/cskddvlt/hangcslt/'.$model->giaycnhangcs)}}" target="_blank">{{$model->giaycnhangcs}}</a>
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="checkbox" name="checkgiaycncs" value="checkgiaycncs"> <label>Xóa bỏ file giấy chứng nhận hạng</label>
+                                </div>
+                            </div>
                         @endif
+                    </div>
+                    <div class="row">
+                        @if($model->filedk1 != '')
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Giấy công nhận hạng cơ sở lưu trú</label>
+                                    <a href="{{ url('images/cskddvlt/hangcslt/'.$model->filedk1)}}" target="_blank">{{$model->filedk1}}</a>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="checkbox" name="checkfiledk1" value="checkfiledk1"> <label>Xóa bỏ file giấy chứng nhận hạng</label>
+                                </div>
+                            </div>
+                        @endif
+                    </div>
+                    <div class="row">
+                    @if($model->filedk2 != '')
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Giấy công nhận hạng cơ sở lưu trú</label>
+                                    <a href="{{ url('images/cskddvlt/hangcslt/'.$model->filedk2)}}" target="_blank">{{$model->filedk2}}</a>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="checkbox" name="checkfiledk2" value="checkfiledk2"> <label>Xóa bỏ file giấy chứng nhận hạng</label>
+                                </div>
+                            </div>
+                        @endif
+                    </div>
+                    <div class="row">
+                    @if($model->filedk3 != '')
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Giấy công nhận hạng cơ sở lưu trú</label>
+                                    <a href="{{ url('images/cskddvlt/hangcslt/'.$model->filedk3)}}" target="_blank">{{$model->filedk3}}</a>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="checkbox" name="checkfiledk3" value="checkfiledk3"> <label>Xóa bỏ file giấy chứng nhận hạng</label>
+                                </div>
+                            </div>
+                        @endif
+
+                    </div>
+                    <div class="row">
+                     <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">File công nhận hạng cơ sở lưu trú<span class="require">*</span></label>
+                            {!!Form::file('giaycnhangcs',array('id'=>'giaycnhangcs','class' => 'passvalid','accept'=>'image/*'))!!}
+                        </div>
+                     </div>
+                         <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">File công nhận hạng cơ sở lưu trú<span class="require">*</span></label>
+                            {!!Form::file('filedk1',array('id'=>'filedk1','class' => 'passvalid','accept'=>'image/*'))!!}
+                        </div>
+                        </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">File công nhận hạng cơ sở lưu trú<span class="require">*</span></label>
-                                {!!Form::file('giaycnhangcs',array('id'=>'giaycnhangcs','class' => 'passvalid','accept'=>'image/*'))!!}
+                                {!!Form::file('filedk2',array('id'=>'filedk2','class' => 'passvalid','accept'=>'image/*'))!!}
+
                             </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                <label class="control-label">File công nhận hạng cơ sở lưu trú<span class="require">*</span></label>
+                                {!!Form::file('filedk3',array('id'=>'filedk3','class' => 'passvalid','accept'=>'image/*'))!!}
+                                </div>
                         </div>
                     </div>
                     <div class="row">

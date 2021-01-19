@@ -331,6 +331,11 @@ class DnDvLtController extends Controller
                 $tendn = $dn->tendn;
                 $mailql = $tencqcq->emailqt;
                 $tenql = $tencqcq->tendv;
+
+                $phone = $model->tel;
+                $content ="Thông báo thông tin thay đổi thông tin doanh nghiệp. ". $data['tendn']." - ".
+                    $data['tg'];
+                guitinjson($phone,$content);
                 Mail::send('mail.changettdn', $data, function ($message) use ($maildn, $tendn, $mailql, $tenql) {
                     $message->to($maildn, $tendn)
                         ->to($mailql, $tenql)

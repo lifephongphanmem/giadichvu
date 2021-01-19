@@ -290,11 +290,11 @@ class HomeController extends Controller
         //if($input['g-recaptcha-response'] != '') {
             $check = DnDvLt::where('masothue', $input['masothue'])
                 ->first();
-            if (count($check) > 0) {
+            if (count((array) $check) > 0) {
                 return view('errors.register-errors');
             } else {
                 $checkuser = User::where('username', $input['username'])->first();
-                if (count($checkuser) > 0) {
+                if (count((array) $checkuser) > 0) {
                     return view('errors.register-errors');
                 } else {
 
@@ -312,11 +312,18 @@ class HomeController extends Controller
                     $tenfile = "";
                     if(isset($input['tailieu'])){
                         $tailieu = $request->file('tailieu');
-                        $input['tailieu'] = $input['masothue'].$tailieu->getClientOriginalExtension();
+                        $input['tailieu'] = $input['masothue'].'.'.$tailieu->getClientOriginalExtension();
                         $tailieu->move(public_path() . '/data/dkdn/', $input['tailieu']);
                         $tenfile ="/data/dkdn/" . $input['tailieu'];
                     }
+                    if(isset($input['filedk'])){
+                        $filedk = $request->file('filedk');
+                        $input['filedk'] = $input['masothue'].'_1.'.$filedk->getClientOriginalExtension();
+                        $filedk->move(public_path() . '/data/dkdn/', $input['filedk']);
+                        $tenfiledk ="/data/dkdn/" . $input['filedk'];
+                    }
                     $model->tailieu = $tenfile;
+                    $model->filedk = $tenfiledk;
                     $model->username = $input['username'];
                     $model->password = md5($input['rpassword']);
                     $model->pl = 'DVLT';
@@ -340,6 +347,12 @@ class HomeController extends Controller
                         $data['masothue'] = $input['masothue'];
                         $data['user'] = $input['username'];
                         $data['madk'] = $ma;
+
+                        $phone = $model->tel;
+                        $content ="Thông báo đăng ký tài khoản. ". $data['tendn']." - ".
+                            $data['masothue']. " - ". $data['tg']." - ". $data['user']. " - ". $data['tencqcq'];
+                        guitinjson($phone,$content);
+
                         $maildn = $input['emaildn'];
                         $tendn = $input['tendn'];
                         $mailql = $tencqcq->emailqt;
@@ -485,6 +498,11 @@ class HomeController extends Controller
                 $maildn = $model->email;
                 $tendn = $model->name;
 
+                $phone = $model->tel;
+                $content ="Thông báo thay đổi mật khẩu tài khoản. ". $data['tendn']." - ".
+                    $data['username'];
+                guitinjson($phone,$content);
+
                 Mail::send('mail.successnewpassword', $data, function ($message) use ($maildn,$tendn) {
                     $message->to($maildn,$tendn)
                         ->subject('Thông báo thay đổi mật khẩu tài khoản');
@@ -599,6 +617,12 @@ class HomeController extends Controller
             $data['masothue'] = $input['masothue'];
             $data['user'] = $input['username'];
             $data['madk'] = $model->ma;
+
+            $phone = $model->tel;
+            $content ="Thông báo đăng ký tài khoản. ". $data['tendn']." - ".
+                $data['masothue']. " - ". $data['tg']." - ". $data['tencqcq']. " - ". $data['user'];
+            guitinjson($phone,$content);
+
             $maildn = $input['emaildn'];
             $tendn  =  $input['tendn'];
             $mailql = $tencqcq->emailqt;
@@ -647,6 +671,12 @@ class HomeController extends Controller
             $data['masothue'] = $input['masothue'];
             $data['user'] = $input['username'];
             $data['madk'] = $model->ma;
+
+            $phone = $model->tel;
+            $content ="Thông báo đăng ký tài khoản. ". $data['tendn']." - ".
+                $data['masothue']. " - ". $data['tg']." - ". $data['tencqcq']. " - ". $data['user'];
+            guitinjson($phone,$content);
+
             $a = $input['emaildn'];
             $b  =  $input['tendn'];
             Mail::send('mail.stlregister',$data, function ($message) use($a,$b) {
@@ -686,6 +716,12 @@ class HomeController extends Controller
             $data['masothue'] = $input['masothue'];
             $data['user'] = $input['username'];
             $data['madk'] = $model->ma;
+
+            $phone = $model->tel;
+            $content ="Thông báo đăng ký tài khoản. ". $data['tendn']." - ".
+                $data['masothue']. " - ". $data['tg']." - ". $data['tencqcq']. " - ". $data['user'];
+            guitinjson($phone,$content);
+
             $maildn = $input['emaildn'];
             $tendn  =  $input['tendn'];
             $mailql = $tencqcq->emailqt;
@@ -757,6 +793,12 @@ class HomeController extends Controller
                         $data['masothue'] = $input['masothue'];
                         $data['user'] = $input['username'];
                         $data['madk'] = $ma;
+
+                        $phone = $model->tel;
+                        $content ="Thông báo đăng ký tài khoản. ". $data['tendn']." - ".
+                            $data['masothue']. " - ". $data['tg']." - ". $data['tencqcq']. " - ". $data['user'];
+                        guitinjson($phone,$content);
+
                         $maildn = $input['emaildn'];
                         $tendn = $input['tendn'];
                         $mailql = $tencqcq->emailqt;
@@ -834,6 +876,12 @@ class HomeController extends Controller
                         $data['masothue'] = $input['masothue'];
                         $data['user'] = $input['username'];
                         $data['madk'] = $ma;
+
+                        $phone = $model->tel;
+                        $content ="Thông báo đăng ký tài khoản. ". $data['tendn']." - ".
+                            $data['masothue']. " - ". $data['tg']." - ". $data['tencqcq']. " - ". $data['user'];
+                        guitinjson($phone,$content);
+
                         $maildn = $input['emaildn'];
                         $tendn = $input['tendn'];
                         $mailql = $tencqcq->emailqt;
@@ -869,6 +917,12 @@ class HomeController extends Controller
             $data['masothue'] = $input['masothue'];
             $data['user'] = $input['username'];
             $data['madk'] = $model->ma;
+
+            $phone = $model->tel;
+            $content ="Thông báo đăng ký tài khoản. ". $data['tendn']." - ".
+                $data['masothue']. " - ". $data['tg']." - ". $data['tencqcq']. " - ". $data['user'];
+            guitinjson($phone,$content);
+
             $maildn = $input['emaildn'];
             $tendn  =  $input['tendn'];
             $mailql = $tencqcq->emailqt;
