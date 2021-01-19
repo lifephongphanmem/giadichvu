@@ -209,7 +209,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     </ul>
                 </li>
                 <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
-                    <a href="http://help.csdlgia.vn" class="dropdown-toggle" target="_blank">
+                    <a href="/data/help/hdsd.docx" class="dropdown-toggle" target="_blank">
                         <i class="fa fa-folder-open-o"></i>
 					<span class="badge badge-default">
 					Help</span>
