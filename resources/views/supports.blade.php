@@ -72,10 +72,10 @@
 								<img class="user-pic" src="{{url('images/avatar/default-user.png')}}">
 							</td>
 							<td>
-								<a href="" class="primary-link">Trần Đức Long</a>
+								<a href="" class="primary-link">Đinh Sầm Nguyên</a>
 							</td>
 							<td style="text-align: center">
-								<span class="bold theme-font">0396 074886</span>
+								<span class="bold theme-font">0366.468.026</span>
 							</td>
 						</tr>
 						</tbody>

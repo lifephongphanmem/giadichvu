@@ -316,6 +316,7 @@ class HomeController extends Controller
                         $tailieu->move(public_path() . '/data/dkdn/', $input['tailieu']);
                         $tenfile ="/data/dkdn/" . $input['tailieu'];
                     }
+                    $tenfiledk = "";
                     if(isset($input['filedk'])){
                         $filedk = $request->file('filedk');
                         $input['filedk'] = $input['masothue'].'_1.'.$filedk->getClientOriginalExtension();
@@ -349,8 +350,8 @@ class HomeController extends Controller
                         $data['madk'] = $ma;
 
                         $phone = $model->tel;
-                        $content ="Thông báo đăng ký tài khoản. ". $data['tendn']." - ".
-                            $data['masothue']. " - ". $data['tg']." - ". $data['user']. " - ". $data['tencqcq'];
+                        $content ="Thong bao dang ky TK. ".  $data['tg'].", user: ".$data['user'].", MST:".
+                            $data['masothue']. ". Lien he ho tro: 02583826741";
                         guitinjson($phone,$content);
 
                         $maildn = $input['emaildn'];

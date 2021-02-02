@@ -487,7 +487,7 @@ class KkGDvLtController extends Controller
                 $data['ttnguoinop'] = $input['ttnguoinop'];
 
                 $phone = $dn->teldn;
-                $content ="Thông báo nhận hồ sơ kê khai giá dịch vụ. ". $data['tendn']." - ".
+                $content ="Thong bao nhan ho so. ". $data['tg'].", DN:". $data['tendn']." - ".
                     $data['masothue']. " - ". $data['tg']." - ". $data['tencqcq']. " - ". $data['ttnguoinop'];
                 guitinjson($phone,$content);
 

@@ -562,6 +562,9 @@
                                 </div>
                             </div>
                             @endif
+                    </div>
+                                <div class="row">
+
                             @if($modelcb->filedk1 != '')
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -575,6 +578,8 @@
                                     </div>
                                 </div>
                             @endif
+                                </div>
+                    <div class="row">
                                 @if($modelcb->filedk2 != '')
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -588,6 +593,8 @@
                                     </div>
                                 </div>
                             @endif
+                    </div>
+                    <div class="row">
                                 @if($modelcb->filedk3 != '')
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -601,6 +608,7 @@
                                         </div>
                                     </div>
                                 @endif
+                    </div>
                             <input type="hidden" name="giaycnhangcsplus" id="giaycnhangcsplus" value="{{$modelcb->giaycnhangcs}}">
                             <input type="hidden" name="filedk1plus" id="filedk1plus" value="{{$modelcb->filedk1}}">
                             <input type="hidden" name="filedk2plus" id="filedk2plus" value="{{$modelcb->filedk2}}">
@@ -617,26 +625,26 @@
                                     <label class="control-label">File công nhận hạng cơ sở lưu trú<span class="require">*</span></label>
                                     {!!Form::file('giaycnhangcs',array('id'=>'giaycnhangcs','class' => 'passvalid','accept'=>'image/*'))!!}
                                 </div>
-                            <div class="form-group">
-                                <label class="control-label">File công nhận hạng cơ sở lưu trú<span class="require">*</span></label>
-                                {!!Form::file('filedk1',array('id'=>'filedk1','class' => 'passvalid','accept'=>'image/*'))!!}
-                            </div>
-                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">File công nhận hạng cơ sở lưu trú<span class="require">*</span></label>
+                                    {!!Form::file('filedk1',array('id'=>'filedk1','class' => 'passvalid','accept'=>'image/*'))!!}
+                                </div>
+                        </div>
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">File công nhận hạng cơ sở lưu trú<span class="require">*</span></label>
                                 {!!Form::file('filedk2',array('id'=>'filedk2','class' => 'passvalid','accept'=>'image/*'))!!}
-                            </div> <div class="form-group">
+                            </div>
+                            <div class="form-group">
                                 <label class="control-label">File công nhận hạng cơ sở lưu trú<span class="require">*</span></label>
                                 {!!Form::file('filedk3',array('id'=>'filedk3','class' => 'passvalid','accept'=>'image/*'))!!}
                             </div>
-                            </div>
-                    </div>
+                        </div>
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label class="control-label">Số quyết định giấy công nhận hạng cơ sở lưu trú</label>
                                 <input type="text" name="soqdgiaycnhangcs" id="soqdgiaycnhangcs" class="form-control" value="{{isset($modelcb) ? $modelcb->soqdgiaycnhangcs : '' }}">
-
                             </div>
                         </div>
                         <div class="col-md-4">
