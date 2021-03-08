@@ -369,7 +369,7 @@
                             <div class="form-group">
                                 <label class="control-label">Hồ sơ kê khai<span class="require">*</span></label>
                                 <!--input type="date" name="ngaynhap" id="ngaynhap" class="form-control required" autofocus-->
-                                @if(isset($model))
+                                @if(isset($modelcheck))
                                     {!! Form::select(
                                     'plhs',
                                     array(

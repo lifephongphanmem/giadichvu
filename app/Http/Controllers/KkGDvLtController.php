@@ -329,6 +329,7 @@ class KkGDvLtController extends Controller
     public function edit($id){
         if (Session::has('admin')) {
             if(session('admin')->level == 'T' || session('admin')->level == 'H' || session('admin')->level =='DVLT') {
+                $modelcheck = KkGDvLt::where('trangthai','Duyệt')->where('id',$id)->first();
                 $model = KkGDvLt::findOrFail($id);
                 $modelct = KkGDvLtCt::where('mahs', $model->mahs)
                     ->get();
@@ -338,6 +339,7 @@ class KkGDvLtController extends Controller
                     ->first();
                 return view('manage.dvlt.kkgia.kkgiadv.edit')
                     ->with('model', $model)
+                    ->with('modelcheck', $modelcheck)
                     ->with('modelct', $modelct)
                     ->with('modelcskd',$modelcskd)
                     ->with('modeldn',$modeldn)
