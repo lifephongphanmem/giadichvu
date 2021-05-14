@@ -177,7 +177,8 @@
     @endforeach
     </tbody>
 </table>
-<p>{!! nl2br(e($modelkk->ghichu)) !!}
+<p>
+    - Mức giá nêu trên đã bao gồm thuế giá GTGT <br>{!! nl2br(e($modelkk->ghichu)) !!}
 @if($modelkk->socvlk != '')<br>
     - Mức giá kê khai trước liền kề tại công văn số {{$modelkk->socvlk}} ngày {{getDayVn($modelkk->ngaycvlk)}} của {{$modeldn->tendn}}</p>
 @endif
@@ -259,7 +260,7 @@
     @endforeach
     </tbody>
 </table>
-<p>{!! nl2br(e($modelkk->ghichu)) !!}<br>
+<p>- Mức giá nêu trên đã bao gồm thuế giá GTGT <br>{!! nl2br(e($modelkk->ghichu)) !!}<br>
     Cơ sở kinh doanh chúng tôi cam kết thực hiện niêm yết giá và bán theo giá niêm yết.<br>
     Nếu sai cơ sở chúng tôi xin hoàn toàn chịu trách nhiệm trước pháp luật.<br>
     Khi cần quý khách có thể liên hệ theo các số điện thoại sau, nếu cơ sở chúng tôi không thực hiện đúng bảng giá đã niêm yết:<br>
