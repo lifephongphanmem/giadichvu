@@ -461,6 +461,16 @@
                                 @endif
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Đơn vị quản lý</label>
+                                <select class="form-control" name="cqcq" id="cqcq" required>
+                                    @foreach($modelcq as $tt)
+                                        <option value="{{$tt->maqhns}}" {{$tt->maqhns==$modeldn->cqcq? "selected":""}}>{{$tt->tendv}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                         <!--/span-->
                     </div>
                     <div class="row">
@@ -662,7 +672,7 @@
                     </div>
                     <input type="hidden" name="macskd" id="macskd" value="{{$modelcskd->macskd}}">
                     <input type="hidden" name="masothue" id="masothue" value="{{$modeldn->masothue}}">
-                    <input type="hidden" name="cqcq" id="cqcq" value="{{$modeldn->cqcq}}">
+                    <!--input type="hidden" name="cqcq" id="cqcq" value="{{$modeldn->cqcq}}"-->
                     <input type="hidden" name="tencskd" id="tencskd" value="{{$modelcskd->tencskd}}">
                     <input type="hidden" name="tendn" id="tendn" value="{{$modeldn->tendn}}">
                     <input type="hidden" name="loaihang" id="loaihang" value="{{$modelcskd->loaihang}}">

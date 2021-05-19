@@ -61,6 +61,7 @@ class KkGDvLtController extends Controller
     public function index($macskd,$nam){
         if (Session::has('admin')) {
             if(session('admin')->level == 'T' || session('admin')->level == 'H' || session('admin')->level == 'DVLT') {
+                $modelcq = DmDvQl::where('plql','TC')->get();
                 $model = KkGDvLt::where('macskd', $macskd)
                     ->whereYear('ngaynhap', $nam)
                     ->orderBy('id')
@@ -80,6 +81,7 @@ class KkGDvLtController extends Controller
                     $cp = 'no';
                 return view('manage.dvlt.kkgia.kkgiadv.index')
                     ->with('model', $model)
+                    ->with('modelcq', $modelcq)
                     ->with('nam', $nam)
                     ->with('macskd', $macskd)
                     ->with('modelcskd', $modelcskd)
@@ -96,6 +98,7 @@ class KkGDvLtController extends Controller
     public function create($macskd){
         if (Session::has('admin')) {
             if(session('admin')->level == 'T' || session('admin')->level == 'H' || session('admin')->level == 'DVLT') {
+                $modelcq = DmDvQl::where('plql','TC')->get();
                 $check = KkGDvLt::where('macskd',$macskd)
                     ->wherein('trangthai',['Bị trả lại','Chờ nhận'])
                     ->whereYear('ngaynhap', date('Y'))
@@ -136,6 +139,7 @@ class KkGDvLtController extends Controller
                         //dd($datehl);
                         return view('manage.dvlt.kkgia.kkgiadv.create')
                             ->with('modelcskd', $modelcskd)
+                            ->with('modelcq', $modelcq)
                             ->with('modeldn', $modeldn)
                             ->with('ngaynhap', $ngaynhap)
                             ->with('ngayhieuluc', $ngayhieuluc)
@@ -210,6 +214,7 @@ class KkGDvLtController extends Controller
     public function saochep($macskd){
         if (Session::has('admin')) {
             if(session('admin')->level == 'T' || session('admin')->level == 'H' || session('admin')->level == 'DVLT') {
+                $modelcq = DmDvQl::where('plql','TC')->get();
                 $check = KkGDvLt::where('macskd',$macskd)
                     ->wherein('trangthai',['Bị trả lại','Chờ nhận'])
                     ->whereYear('ngaynhap', date('Y'))->get()->toarray();
@@ -248,6 +253,7 @@ class KkGDvLtController extends Controller
                             ->first();
                         return view('manage.dvlt.kkgia.kkgiadv.create')
                             ->with('modelcskd', $modelcskd)
+                            ->with('modelcq', $modelcq)
                             ->with('modeldsph', $modeldsph)
                             ->with('modelcb', $modelcb)
                             ->with('ngaynhap', $ngaynhap)
@@ -329,6 +335,7 @@ class KkGDvLtController extends Controller
     public function edit($id){
         if (Session::has('admin')) {
             if(session('admin')->level == 'T' || session('admin')->level == 'H' || session('admin')->level =='DVLT') {
+                $modelcq = DmDvQl::where('plql','TC')->get();
                 $modelcheck = KkGDvLt::where('trangthai','Duyệt')->where('id',$id)->first();
                 $model = KkGDvLt::findOrFail($id);
                 $modelct = KkGDvLtCt::where('mahs', $model->mahs)
@@ -339,6 +346,7 @@ class KkGDvLtController extends Controller
                     ->first();
                 return view('manage.dvlt.kkgia.kkgiadv.edit')
                     ->with('model', $model)
+                    ->with('modelcq', $modelcq)
                     ->with('modelcheck', $modelcheck)
                     ->with('modelct', $modelct)
                     ->with('modelcskd',$modelcskd)

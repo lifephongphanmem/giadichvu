@@ -162,6 +162,7 @@
                             <th style="text-align: center" width="8%">Thông tin <br>Giấy chứng nhận<br> loại hạng</th>
                             <th style="text-align: center">Số công văn</th>
                             <th style="text-align: center">Số công văn<br> liền kề</th>
+                            <th style="text-align: center">Đơn vị quản lý</th>
                             <th style="text-align: center">Người chuyển</th>
                             <th style="text-align: center">Trạng thái</th>
                             <th style="text-align: center" width="25%">Thao tác</th>
@@ -175,6 +176,7 @@
                                 <td style="text-align: center">Số: {{$tt->soqdgiaycnhangcs}} <br> Từ ngày: {{getDayVn($tt->giaycnhangcstungay)}} <br> Đến ngày: {{getDayVn($tt->giaycnhangcsdenngay)}}</td>
                                 <td style="text-align: center" class="active">{{$tt->socv}}</td>
                                 <td style="text-align: center">{{$tt->socvlk}}</td>
+                                <td style="text-align: center">{{$modelcq->where('maqhns',$tt->cqcq)->first()->tendv}}</td>
                                 <td style="text-align: center">{{$tt->ttnguoinop}}</td>
                                 @if($tt->trangthai == "Chờ chuyển")
                                 <td align="center"><span class="badge badge-warning">{{$tt->trangthai}}</span></td>
