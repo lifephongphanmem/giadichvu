@@ -391,6 +391,16 @@
                                 @endif
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Đơn vị quản lý</label>
+                                <select class="form-control" name="cqcq" id="cqcq" required>
+                                    @foreach($modelcq as $tt)
+                                        <option value="{{$tt->maqhns}}" {{$tt->maqhns==$model->cqcq? "selected":""}}>{{$tt->tendv}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                         <!--/span-->
                     </div>
                     <div class="row">
