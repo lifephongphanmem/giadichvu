@@ -245,6 +245,7 @@ class ReportsController extends Controller
                 if($input['cqcq']=='all'&&$input['loaihang']=='all'){
                     $model = KkGDvLt::where('trangthai', 'Chờ duyệt')
                         ->OrWhere('trangthai', 'Duyệt')
+                        ->whereYear('ngaychuyen',$input['nam'])
                         ->whereMonth('ngaychuyen',$input['thang'])
                         ->orderBy('ngaychuyen')
                         ->get();
