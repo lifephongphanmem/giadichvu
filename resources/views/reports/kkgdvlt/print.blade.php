@@ -163,7 +163,7 @@
             <th style="text-align: left">{{getTtPhong($ctkk->sohieu)}}</th>
             <th style="text-align: right">{{number_format($ctkk->mucgialk)}}</th>
             <th style="text-align: right">{{number_format($ctkk->mucgiakk)}}</th>
-            <th>{!! nl2br(e($ctkk->ghichu)) !!}</th>
+            <th style="text-align: left">{!! nl2br(e($ctkk->ghichu)) !!}</th>
         </tr>
     @endforeach
     </tbody>
@@ -242,7 +242,7 @@
             <th style="text-align: left">{{$ctkk->loaip.' - '.$ctkk->qccl}}</th>
             <th style="text-align: left">{{getTtPhong($ctkk->sohieu)}}</th>
             <th style="text-align: right">{{number_format($ctkk->mucgiakk)}}</th>
-            <th>{!! nl2br(e($ctkk->ghichu)) !!}</th>
+            <th style="text-align: left">{!! nl2br(e($ctkk->ghichu)) !!}</th>
         </tr>
     @endforeach
     </tbody>

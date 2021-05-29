@@ -244,7 +244,7 @@
         <th style="text-align: center">Đối tượng</th>
         <th style="text-align: center">Áp dụng</th>
         <th width="15%">Mức giá niêm<br>yết</th>
-        <th>Ghi chú</th>
+        <th style="text-align: left">Ghi chú</th>
     </tr>
     </thead>
     <tbody>
@@ -255,7 +255,7 @@
             <th style="text-align: left">{{$ctkk->tendoituong}}</th>
             <th style="text-align: left">{{$ctkk->apdung}}</th>
             <th style="text-align: right">{{number_format($ctkk->mucgiakk)}}</th>
-            <th>{!! nl2br(e($ctkk->ghichu)) !!}</th>
+            <th style="text-align: left">{!! nl2br(e($ctkk->ghichu)) !!}</th>
         </tr>
     @endforeach
     </tbody>
