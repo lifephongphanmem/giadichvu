@@ -149,11 +149,11 @@
 <table cellspacing="0" cellpadding="0" border="1" style="margin: 20px auto; border-collapse: collapse;">
     <thead>
     <tr>
-        <th width="30%">Loại phòng/ Quy<br>cách chất lượng<br>phòng</th>
-        <th width="40%">Số hiệu<br>Phòng</th>
+        <th width="20%">Loại phòng/ Quy<br>cách chất lượng<br>phòng</th>
+        <th width="20%">Số hiệu<br>Phòng</th>
         <th width="10%">Mức giá kê<br>khai trước<br>liền kề</th>
         <th width="10%">Mức giá kê<br>khai</th>
-        <th>Ghi chú</th>
+        <th width="40%">Ghi chú</th>
     </tr>
     </thead>
     <tbody>
@@ -163,7 +163,7 @@
             <th style="text-align: left">{{getTtPhong($ctkk->sohieu)}}</th>
             <th style="text-align: right">{{number_format($ctkk->mucgialk)}}</th>
             <th style="text-align: right">{{number_format($ctkk->mucgiakk)}}</th>
-            <th>{{$ctkk->ghichu}}</th>
+            <th>{!! nl2br(e($ctkk->ghichu)) !!}</th>
         </tr>
     @endforeach
     </tbody>
@@ -230,10 +230,10 @@
 <table cellspacing="0" cellpadding="0" border="1" style="margin: 20px auto; border-collapse: collapse;">
     <thead>
     <tr>
-        <th width="30%">Loại phòng/ Quy<br>cách chất lượng<br>phòng</th>
-        <th width="40%">Số hiệu<br>Phòng</th>
+        <th width="20%">Loại phòng/ Quy<br>cách chất lượng<br>phòng</th>
+        <th width="25%">Số hiệu<br>Phòng</th>
         <th width="15%">Mức giá niêm<br>yết</th>
-        <th>Ghi chú</th>
+        <th width="40%">Ghi chú</th>
     </tr>
     </thead>
     <tbody>
@@ -242,7 +242,7 @@
             <th style="text-align: left">{{$ctkk->loaip.' - '.$ctkk->qccl}}</th>
             <th style="text-align: left">{{getTtPhong($ctkk->sohieu)}}</th>
             <th style="text-align: right">{{number_format($ctkk->mucgiakk)}}</th>
-            <th>{{$ctkk->ghichu}}</th>
+            <th>{!! nl2br(e($ctkk->ghichu)) !!}</th>
         </tr>
     @endforeach
     </tbody>

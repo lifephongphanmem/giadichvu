@@ -172,7 +172,7 @@
             <th style="text-align: left">{{$ctkk->apdung}}</th>
             <th style="text-align: right">{{number_format($ctkk->mucgialk)}}</th>
             <th style="text-align: right">{{number_format($ctkk->mucgiakk)}}</th>
-            <th>{{$ctkk->ghichu}}</th>
+            <th>{!! nl2br(e($ctkk->ghichu)) !!}</th>
         </tr>
     @endforeach
     </tbody>
@@ -255,7 +255,7 @@
             <th style="text-align: left">{{$ctkk->tendoituong}}</th>
             <th style="text-align: left">{{$ctkk->apdung}}</th>
             <th style="text-align: right">{{number_format($ctkk->mucgiakk)}}</th>
-            <th>{{$ctkk->ghichu}}</th>
+            <th>{!! nl2br(e($ctkk->ghichu)) !!}</th>
         </tr>
     @endforeach
     </tbody>

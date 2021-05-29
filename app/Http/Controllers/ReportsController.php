@@ -68,6 +68,7 @@ class ReportsController extends Controller
                 ->get();
             $modelcqcq = DmDvQl::where('maqhns',$modeldn->cqcq)
                 ->first();
+            //dd($modelkkct->toarray());
             return view('reports.kkgdvlt.print')
                 ->with('modelkk',$modelkk)
                 ->with('modeldn',$modeldn)
