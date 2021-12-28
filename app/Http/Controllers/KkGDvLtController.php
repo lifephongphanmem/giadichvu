@@ -909,7 +909,7 @@ class KkGDvLtController extends Controller
                 $sheet = $obj->getSheet(0);
                 $data = $sheet->toArray(null, true, true, true);// giữ lại tiêu đề A=>'val';
             });
-            dd($data);
+            //dd($data);
             for ($i = $inputs['tudong']; $i <= $inputs['dendong']; $i++) {
                 //dd($data[$i]);
                 if (!isset($data[$i][$inputs['loaip']]) || $data[$i][$inputs['loaip']] == '') {
