@@ -650,6 +650,7 @@
                                 {!!Form::file('filedk3',array('id'=>'filedk3','class' => 'passvalid','accept'=>'image/*'))!!}
                             </div>
                         </div>
+                        </div>
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
