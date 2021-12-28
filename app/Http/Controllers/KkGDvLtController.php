@@ -75,10 +75,12 @@ class KkGDvLtController extends Controller
                     ->orderBy('id','desc')
                     ->get();
                 $cb = CbKkGDvLt::where('macskd', $macskd)->first();
+
                 if(isset($cb))
                     $cp = 'yes';
                 else
                     $cp = 'no';
+
                 return view('manage.dvlt.kkgia.kkgiadv.index')
                     ->with('model', $model)
                     ->with('modelcq', $modelcq)
@@ -907,7 +909,7 @@ class KkGDvLtController extends Controller
                 $sheet = $obj->getSheet(0);
                 $data = $sheet->toArray(null, true, true, true);// giữ lại tiêu đề A=>'val';
             });
-            //dd($data);
+            dd($data);
             for ($i = $inputs['tudong']; $i <= $inputs['dendong']; $i++) {
                 //dd($data[$i]);
                 if (!isset($data[$i][$inputs['loaip']]) || $data[$i][$inputs['loaip']] == '') {
@@ -933,7 +935,7 @@ class KkGDvLtController extends Controller
             $modeldn = DnDvLt::where('masothue', $modelcskd->masothue)->first();
             $modeldsph = KkGDvLtCtDf::where('macskd',$inputs['macskd'])
                 ->get();
-
+            $modelcq = DmDvQl::where('plql','TC')->get();
             //dd($datehl);
             return view('manage.dvlt.kkgia.kkgiadv.create')
                 ->with('modelcskd', $modelcskd)
@@ -942,6 +944,7 @@ class KkGDvLtController extends Controller
                 ->with('ngayhieuluc', $ngayhieuluc)
                 ->with('modeldsph', $modeldsph)
                 ->with('ngaynhapdf', $datehl)
+                ->with('modelcq', $modelcq)
                 ->with('pageTitle', 'Kê khai giá dịch vụ lưu trú thêm mới');
 
         }else
