@@ -68,6 +68,8 @@ class ReportsController extends Controller
                 ->get();
             $modelcqcq = DmDvQl::where('maqhns',$modeldn->cqcq)
                 ->first();
+            $modeldvn = DmDvQl::where('maqhns',$modelkk->cqcq)
+                ->first();
             //dd($modelkkct->toarray());
             return view('reports.kkgdvlt.print')
                 ->with('modelkk',$modelkk)
@@ -75,6 +77,7 @@ class ReportsController extends Controller
                 ->with('modelcskd',$modelcskd)
                 ->with('modelkkct',$modelkkct)
                 ->with('modelcqcq',$modelcqcq)
+                ->with('modeldvn',$modeldvn)
                 ->with('pageTitle','Kê khai giá dịch vụ lưu trú');
 
         }else
