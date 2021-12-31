@@ -585,7 +585,7 @@ function getThXdHsDvLt($ngaychuyen,$ngayduyet){
     while (strtotime($ngaychuyen) <= strtotime($ngayduyet)) {
         $checkngay = \App\TtNgayNghiLe::where('ngaytu', '<=', $ngaychuyen)
             ->where('ngayden', '>=', $ngaychuyen)->first();
-        if (count($checkngay) > 0)
+        if (count((array)$checkngay) > 0)
             $ngaylv = $ngaylv;
         elseif (date('D', strtotime($ngaychuyen)) == 'Sat')
             $ngaylv = $ngaylv;

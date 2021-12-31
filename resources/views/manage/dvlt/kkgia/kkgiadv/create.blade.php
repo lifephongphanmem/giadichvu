@@ -639,7 +639,6 @@
                                     <label class="control-label">File công nhận hạng cơ sở lưu trú<span class="require">*</span></label>
                                     {!!Form::file('filedk1',array('id'=>'filedk1','class' => 'passvalid','accept'=>'image/*'))!!}
                                 </div>
-                        </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">File công nhận hạng cơ sở lưu trú<span class="require">*</span></label>
