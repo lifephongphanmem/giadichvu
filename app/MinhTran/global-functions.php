@@ -306,6 +306,12 @@ function getPermissionDefault($level) {
     return json_encode($roles[$level]);
 }
 
+function getNam() {
+    $a_nam = [];
+    for($i= date('Y')-10;$i<=date('Y') + 1 ; $i++)
+    $a_nam[$i] = $i;
+    return $a_nam;
+}
 
 function getDayVn($date) {
     if($date != null || $date != '')
@@ -673,4 +679,3 @@ function  guitinjson($YourPhone,$Content)
     }
 
 }
-?>

@@ -144,13 +144,14 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label style="color: blue;">Chọn năm kê khai</label>
-                                    <select name="namhs" id="namhs" class="form-control">
+                                    {!! Form::select('namhs',getNam(), $nam, ['id'=>'namhs', 'class'=>'form-control' ]) !!}
+                                    {{-- <select name="namhs" id="namhs" class="form-control">
                                         @if ($nam_start = intval(date('Y')) - 5 ) @endif
                                         @if ($nam_stop = intval(date('Y')) + 1 ) @endif
                                         @for($i = $nam_start; $i <= $nam_stop; $i++)
                                             <option value="{{$i}}" {{$i == $nam ? 'selected' : ''}}>Năm {{$i}}</option>
                                         @endfor
-                                    </select>
+                                    </select> --}}
                                 </div>
                             </div>
                         </div>
