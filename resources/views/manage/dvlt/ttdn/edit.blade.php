@@ -92,7 +92,7 @@
                                     <p class="help-block">
                                         <span class="label label-success label-sm">
                                         Help: &nbsp;</span>
-                                        <a target="_blank" href="http://help.csdlgia.vn/data/help/tienich/upfile/upfile.pdf">
+                                        <a target="_blank" href="/data/help/hdchiase.docx">
                                             Hướng dẫn cách chia sẻ giấy phép đăng ký kinh doanh </a>
                                     </p>
                                 </div>
