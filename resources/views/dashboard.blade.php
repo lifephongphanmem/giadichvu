@@ -32,28 +32,30 @@
 <div class="row">
     @if(canGeneral('dvlt','dvlt'))
         @if(can('dvlt','index'))
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="dashboard-stat purple-plum">
-                    <div class="visual">
-                        <i class="fa fa-building"></i>
-                    </div>
-                    <div class="details">
-                        <div class="number"></div>
-                        Thay đổi thông tin DN DVLT
-                        <div class="desc">
-                            <h5>Chờ nhận: {{$sl['cnttdndvlt']}} hồ sơ</h5>
-                            @if(session('admin')->level == 'DVLT')
-                            <h5>Bị trả lại {{$sl['btlttdndvlt']}} hồ sơ</h5>
-                            @endif
+            @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'satc' || session('admin')->sadmin == 'sa')
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="dashboard-stat purple-plum">
+                        <div class="visual">
+                            <i class="fa fa-building"></i>
                         </div>
+                        <div class="details">
+                            <div class="number"></div>
+                            Thay đổi thông tin DN DVLT
+                            <div class="desc">
+                                <h5>Chờ nhận: {{$sl['cnttdndvlt']}} hồ sơ</h5>
+                                @if(session('admin')->level == 'DVLT')
+                                <h5>Bị trả lại {{$sl['btlttdndvlt']}} hồ sơ</h5>
+                                @endif
+                            </div>
+                        </div>
+                        <a class="more" href="
+                        {{(session('admin')->level == 'T' || session('admin')->level == 'H' ) ? url('xetduyet_thaydoi_ttdoanhnghiep?&phanloai=DVLT')
+                        : url('ttdn_dich_vu_luu_tru')}}">
+                            Xem chi tiết <i class="m-icon-swapright m-icon-white"></i>
+                        </a>
                     </div>
-                    <a class="more" href="
-                    {{(session('admin')->level == 'T' || session('admin')->level == 'H' ) ? url('xetduyet_thaydoi_ttdoanhnghiep')
-                    : url('ttdn_dich_vu_luu_tru')}}">
-                        Xem chi tiết <i class="m-icon-swapright m-icon-white"></i>
-                    </a>
                 </div>
-            </div>
+            @endif
         @endif
         @if(can('kkdvlt','index'))
         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -65,17 +67,14 @@
                     <div class="number"></div>
                     Kê khai giá dịch vụ lưu trú
                     <div class="desc">
-
                         <h5>Chờ nhận: {{$sl['cnkkgdvlt']}} hồ sơ</h5>
                         @if(session('admin')->level == 'DVLT')
                             <h5>Bị trả lại {{$sl['btlkkgdvlt']}} hồ sơ</h5>
                         @endif
-
                     </div>
                 </div>
                 <a class="more" href="
-                    {{(session('admin')->level == 'T')? url('xet_duyet_ke_khai_dich_vu_luu_tru')
-                    : url('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh')}}">
+                    {{url('xet_duyet_ke_khai_dich_vu_luu_tru')}}">
                     Xem chi tiết <i class="m-icon-swapright m-icon-white"></i>
                 </a>
             </div>
@@ -93,8 +92,8 @@
                     Thay đổi thông tin DN DVVT
                     <div class="desc">
                         <h5>Chờ nhận: {{$sl['cnkkgdvlt']}} hồ sơ</h5>
-                        @if(session('admin')->level == 'DVLT')
-                            <h5>Bị trả lại {{$sl['btlkkgdvlt']}} hồ sơ</h5>
+                        @if(session('admin')->level == 'DVVT')
+                            <h5>Bị trả lại {{$sl['btlkkgdvvt']}} hồ sơ</h5>
                         @endif
                     </div>
                 </div>
