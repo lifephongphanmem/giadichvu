@@ -37,10 +37,8 @@ class HomeController extends Controller
             if(session('admin')->sadmin == 'satc' || session('admin')->sadmin == 'savt' ||session('admin')->sadmin == 'sa' )
                 return redirect('cau_hinh_he_thong');
             else{
-                if(session('admin')->sadmin == 'ssa'){
-
-                    //dd(session('admin')->permission);
-                    //dd(canGeneral('dvvt','dvvt'));
+                $array = array();
+                if(session('admin')->sadmin == 'ssa'){                    
                     $cnttdndvlt = TtDn::where('pl','DVLT')
                         ->where('trangthai','Chờ duyệt')
                         ->count();
@@ -61,7 +59,7 @@ class HomeController extends Controller
                         ->count();
                     $cnkkgdvlt = KkGDvLt::where('trangthai','Chờ nhận')
                         ->count();
-                    $btlkkgdvlt = KkGDvLt::where('trangthai','Chờ nhận')
+                    $btlkkgdvlt = KkGDvLt::where('trangthai','Bị trả lại')
                         ->count();
                     $cnttdndvvt = TtDn::where('pl','DVVT')
                         ->where('trangthai','Chờ duyệt')
@@ -85,7 +83,21 @@ class HomeController extends Controller
                         ->count();
                     $btlkkgvtkhac = KkDvVtKhac::where('trangthai','Bị trả lại')
                         ->count();
-                }elseif(session('admin')->level == 'T' || session('admin') == 'H'){
+                    $array['cnttdndvlt'] = $cnttdndvlt;
+                    $array['btlttdndvlt'] = $btlttdndvlt;
+                    $array['cnkkgdvlt'] = $cnkkgdvlt;
+                    $array['btlkkgdvlt'] = $btlkkgdvlt;
+                    $array['cnttdndvvt'] = $cnttdndvvt;
+                    $array['btlttdndvvt'] = $btlttdndvvt;
+                    $array['cnkkgvtxk'] = $cnkkgvtxk;
+                    $array['btlkkgvtxk'] = $btlkkgvtxk;
+                    $array['cnkkgvtxb'] = $cnkkgvtxb;
+                    $array['btlkkgvtxb'] = $btlkkgvtxb;
+                    $array['cnkkgvtxtx'] = $cnkkgvtxtx;
+                    $array['btlkkgvtxtx'] = $btlkkgvtxtx;
+                    $array['cnkkgvtkhac'] = $cnkkgvtkhac;
+                    $array['btlkkgvtkhac'] = $btlkkgvtkhac;
+                }elseif(session('admin')->level == 'T' || session('admin')->level == 'H'){
                     $cnttdndvlt = TtDn::where('pl','DVLT')
                         ->where('trangthai','Chờ duyệt')
                         ->where('cqcq',session('admin')->cqcq)
@@ -112,7 +124,7 @@ class HomeController extends Controller
                         ->count();
                     $cnkkgdvlt = KkGDvLt::where('trangthai','Chờ nhận')
                         ->where('cqcq',session('admin')->cqcq)
-                        ->count();
+                        ->count();                   
                     $btlkkgdvlt = KkGDvLt::where('trangthai','Bị trả lại')
                         ->where('cqcq',session('admin')->cqcq)
                         ->count();
@@ -148,6 +160,21 @@ class HomeController extends Controller
                     $btlkkgvtkhac = KkDvVtKhac::where('trangthai','Bị trả lại')
                         ->where('cqcq',session('admin')->cqcq)
                         ->count();
+
+                    $array['cnttdndvlt'] = $cnttdndvlt;
+                    $array['btlttdndvlt'] = $btlttdndvlt;
+                    $array['cnkkgdvlt'] = $cnkkgdvlt;
+                    $array['btlkkgdvlt'] = $btlkkgdvlt;
+                    $array['cnttdndvvt'] = $cnttdndvvt;
+                    $array['btlttdndvvt'] = $btlttdndvvt;
+                    $array['cnkkgvtxk'] = $cnkkgvtxk;
+                    $array['btlkkgvtxk'] = $btlkkgvtxk;
+                    $array['cnkkgvtxb'] = $cnkkgvtxb;
+                    $array['btlkkgvtxb'] = $btlkkgvtxb;
+                    $array['cnkkgvtxtx'] = $cnkkgvtxtx;
+                    $array['btlkkgvtxtx'] = $btlkkgvtxtx;
+                    $array['cnkkgvtkhac'] = $cnkkgvtkhac;
+                    $array['btlkkgvtkhac'] = $btlkkgvtkhac;
                 }else{
                     $cnttdndvlt = TtDn::where('pl','DVLT')
                         ->where('trangthai','Chờ duyệt')
@@ -211,23 +238,21 @@ class HomeController extends Controller
                     $btlkkgvtkhac = KkDvVtKhac::where('trangthai','Bị trả lại')
                         ->where('masothue',session('admin')->mahuyen)
                         ->count();
-                }
-                $array = array();
-                $array['cnttdndvlt'] = $cnttdndvlt;
-                $array['btlttdndvlt'] = $btlttdndvlt;
-                $array['cnkkgdvlt'] = $cnkkgdvlt;
-                $array['btlkkgdvlt'] = $btlkkgdvlt;
-                $array['cnttdndvvt'] = $cnttdndvvt;
-                $array['btlttdndvvt'] = $btlttdndvvt;
-                $array['cnkkgvtxk'] = $cnkkgvtxk;
-                $array['btlkkgvtxk'] = $btlkkgvtxk;
-                $array['cnkkgvtxb'] = $cnkkgvtxb;
-                $array['btlkkgvtxb'] = $btlkkgvtxb;
-                $array['cnkkgvtxtx'] = $cnkkgvtxtx;
-                $array['btlkkgvtxtx'] = $btlkkgvtxtx;
-                $array['cnkkgvtkhac'] = $cnkkgvtkhac;
-                $array['btlkkgvtkhac'] = $btlkkgvtkhac;
-                //dd($array);
+                    $array['cnttdndvlt'] = $cnttdndvlt;
+                    $array['btlttdndvlt'] = $btlttdndvlt;
+                    $array['cnkkgdvlt'] = $cnkkgdvlt;
+                    $array['btlkkgdvlt'] = $btlkkgdvlt;
+                    $array['cnttdndvvt'] = $cnttdndvvt;
+                    $array['btlttdndvvt'] = $btlttdndvvt;
+                    $array['cnkkgvtxk'] = $cnkkgvtxk;
+                    $array['btlkkgvtxk'] = $btlkkgvtxk;
+                    $array['cnkkgvtxb'] = $cnkkgvtxb;
+                    $array['btlkkgvtxb'] = $btlkkgvtxb;
+                    $array['cnkkgvtxtx'] = $cnkkgvtxtx;
+                    $array['btlkkgvtxtx'] = $btlkkgvtxtx;
+                    $array['cnkkgvtkhac'] = $cnkkgvtkhac;
+                    $array['btlkkgvtkhac'] = $btlkkgvtkhac;
+                }               
                 return view('dashboard')
                     ->with('sl',$array)
                     ->with('pageTitle','Tổng quan');

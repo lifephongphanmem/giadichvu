@@ -470,20 +470,9 @@ License: You must have a valid license purchased only from themeforest(the above
                 <li>
                     <a href="{{url('xetduyet_thaydoi_ttdoanhnghiep')}}">
                         <i class="fa fa-laptop"></i>
-                        <span class="title">Thông tin DN thay đổi</span>
-                        <!--span class="arrow"></span-->
+                        <span class="title">Thông tin DN thay đổi</span>                       
                     </a>
-                    <!--ul class="sub-menu">
-                        @if(session('admin')->sadmin == 'ssa')
-                            <li><a href="{{url('xetduyet_thaydoi_thongtindoanhnghiep/phanloai=dich_vu_luu_tru')}}">Thông tin DNDVLT thay đổi</a> </li>
-                            <li><a href="{{url('xetduyet_thaydoi_thongtindoanhnghiep/phanloai=dich_vu_van_tai')}}">Thông tin DNDVVT thay đổi</a> </li>
-                        @elseif(session('admin')->sadmin == 'satc')
-                            <li><a href="{{url('xetduyet_thaydoi_thongtindoanhnghiep/phanloai=dich_vu_luu_tru')}}">Thông tin DNDVLT thay đổi</a> </li>
-                        @elseif(session('admin')->sadmin == 'savt')
-                            <li><a href="{{url('xetduyet_thaydoi_thongtindoanhnghiep/phanloai=dich_vu_van_tai')}}">Thông tin DNDVVT thay đổi</a> </li>
-                        @endif
-                            <li><a href="">Thông tin doanh nghiệp thay đổi</a> </li>
-                    </ul-->
+                  
                 </li>
                 <li>
                     <a href="">

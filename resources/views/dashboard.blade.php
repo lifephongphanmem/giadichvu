@@ -32,7 +32,7 @@
 <div class="row">
     @if(canGeneral('dvlt','dvlt'))
         @if(can('dvlt','index'))
-            @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'satc' || session('admin')->sadmin == 'sa')
+            @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'satc' || session('admin')->sadmin == 'sa' || session('admin')->level == 'DVLT')
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="dashboard-stat purple-plum">
                         <div class="visual">
