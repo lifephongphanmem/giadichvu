@@ -73,10 +73,15 @@
                         @endif
                     </div>
                 </div>
+                @if(session('admin')->level == 'DVLT')
+                    {{url('ke_khai_dich_vu_luu_tru/co_so_kinh_doanh')}}">
+                    Xem chi tiết <i class="m-icon-swapright m-icon-white"></i>      
+                @else
                 <a class="more" href="
                     {{url('xet_duyet_ke_khai_dich_vu_luu_tru')}}">
                     Xem chi tiết <i class="m-icon-swapright m-icon-white"></i>
                 </a>
+                @endif
             </div>
         </div>
         @endif
