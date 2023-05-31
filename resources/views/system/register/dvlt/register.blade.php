@@ -371,6 +371,12 @@ License: You must have a valid license purchased only from themeforest(the above
     });
 </script>
 <script type="text/javascript">
+    $('#register-submit-btn').submit(function(){
+        $("#myButtonID", this)
+        .html("Đang xử lý...")
+        .attr('disabled', 'disabled');
+        return true;
+    });
     function validate(){
         var validator = $("#form-register").validate({
             rules: {
