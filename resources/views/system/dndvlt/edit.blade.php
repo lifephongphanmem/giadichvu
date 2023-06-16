@@ -93,6 +93,14 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Link chia sẻ giấy phép đăng ký kinh doanh<span class="require">*</span></label>
+                                        @if($model->tailieu != '')
+                                        
+                                            @if(str_contains($model->tailieu, 'google'))
+                                                <a href="{{ $model->tailieu }}" target="_blank">Link</a>
+                                            @else
+                                                <a href="{{ url( $model->tailieu) }}" target="_blank">Link</a>
+                                            @endif
+                                        @endif                                        
                                         {!!Form::text('tailieu', null, array('id' => 'tailieu','class' => 'form-control'))!!}
                                     </div>
                                 </div>
