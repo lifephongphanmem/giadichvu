@@ -350,6 +350,7 @@ class UsersController extends Controller
                     $pl = 'QL';
                 else
                     $pl=$model->level;
+                $model->cqcq = $input['cqcq'];
 
                 return redirect('users?&phanloai='.$pl);
             }else
