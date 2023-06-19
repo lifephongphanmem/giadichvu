@@ -244,10 +244,10 @@ class DnDvLtController extends Controller
 
     public function ttdnedit($id){
         if (Session::has('admin')) {
-            if(session('admin')->level == 'T' || session('admin')->level == 'H' || session('admin')->level == 'DVLT') {
+             if(session('admin')->level == 'T' || session('admin')->level == 'H' || session('admin')->level == 'DVLT') {
                 //Kiểm tra thông tin có thuộc quyền quản lý hay k
                 $model = DnDvLt::findOrFail($id);
-                if(session('admin')->sadmin == 'ssa' || session('admin')->cqcq == $model->cqcq) {
+                // if(session('admin')->sadmin == 'ssa' || session('admin')->cqcq == $model->cqcq) {
                     $ttcqcq = DmDvQl::where('plql', 'TC')
                         ->get();
 
@@ -255,9 +255,9 @@ class DnDvLtController extends Controller
                         ->with('model', $model)
                         ->with('ttcqcq', $ttcqcq)
                         ->with('pageTitle', 'Thông tin doanh nghiệp cung cấp dịch vụ lưu trú chỉnh sửa');
-                }else{
-                    return view('errors.noperm');
-                }
+                // }else{
+                //     return view('errors.noperm');
+                // }
             }else {
                 return view('errors.perm');
             }
