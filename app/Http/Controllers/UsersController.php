@@ -343,6 +343,7 @@ class UsersController extends Controller
                 $model->email = $input['email'];
                 $model->status = $input['status'];
                 $model->username = $input['username'];
+                $model->cqcq = $input['cqcq'];
                 if ($input['newpass'] != '')
                     $model->password = md5($input['newpass']);
                 $model->save();
@@ -350,7 +351,7 @@ class UsersController extends Controller
                     $pl = 'QL';
                 else
                     $pl=$model->level;
-                $model->cqcq = $input['cqcq'];
+                
 
                 return redirect('users?&phanloai='.$pl);
             }else
