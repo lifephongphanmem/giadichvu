@@ -833,6 +833,7 @@ class ReportsController extends Controller
     public function dvltbc6(Request $request){
         if (Session::has('admin')) {
             $inputs = $request->all();
+            $inputs['cqcq'] = (session('admin')->level == 'T') ? $inputs['cqcq'] : session('admin')->cqcq; 
             $modelcqcq = DmDvQl::where('maqhns',$inputs['cqcq'])->first();
             $model=$this->getvalBc6($inputs);
 
@@ -854,6 +855,7 @@ class ReportsController extends Controller
         }elseif($inputs['phanloai'] == 'CKK'){
 
         }else{*/
+           
             $model = CsKdDvLt::where('cqcq',$inputs['cqcq'])->get();
             foreach($model as $ttks){
                 $modelkk = KkGDvLt::where('trangthai','Duyệt')
@@ -881,6 +883,7 @@ class ReportsController extends Controller
     public function dvltbc6_excel(Request $request){
         if (Session::has('admin')) {
             $inputs = $request->all();
+            $inputs['cqcq'] = (session('admin')->level == 'T') ? $inputs['cqcq'] : session('admin')->cqcq; 
             $modelcqcq = DmDvQl::where('maqhns',$inputs['cqcq'])->first();
             $model=$this->getvalBc6($inputs);
 
@@ -914,7 +917,10 @@ class ReportsController extends Controller
         if (Session::has('admin')) {
 
             $input = $request->all();
+            $input['cqcq'] = (session('admin')->level == 'T') ? $input['cqcq'] : session('admin')->cqcq; 
+            
             $modelcqcq = DmDvQl::where('maqhns',$input['cqcq'])->first();
+           
             $modelgr = KkGDvLtH::where('cqcq',$input['cqcq'])
                 ->where('action','Nhận hồ sơ')
                 ->whereMonth('ngaynhan',$input['thang'])
