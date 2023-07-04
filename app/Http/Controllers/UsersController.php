@@ -337,21 +337,20 @@ class UsersController extends Controller
         if (Session::has('admin')) {
             $input = $request->all();
             $model = Users::findOrFail($id);
-            if(session('admin')->sadmin == 'ssa' || $model->cqcq == session('admin')->cqcq) {
+            if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'sa' || $model->cqcq == session('admin')->cqcq) {
                 $model->name = $input['name'];
                 //$model->phone = $input['phone'];
                 $model->email = $input['email'];
                 $model->status = $input['status'];
                 $model->username = $input['username'];
-                $model->cqcq = $input['cqcq'];
+                //$model->cqcq = $input['cqcq'];
                 if ($input['newpass'] != '')
                     $model->password = md5($input['newpass']);
                 $model->save();
                 if($model->level == 'T'|| $model->level == 'H')
                     $pl = 'QL';
                 else
-                    $pl=$model->level;
-                
+                    $pl=$model->level;                
 
                 return redirect('users?&phanloai='.$pl);
             }else
