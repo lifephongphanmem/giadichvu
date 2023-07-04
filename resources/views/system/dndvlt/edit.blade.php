@@ -108,7 +108,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">Đơn vị trục thuộc</label>
+                                        <label class="control-label">Đơn vị quản lý:</label>
                                         <select class="form-control select2me required" id="cqcq" name="cqcq">
                                             <option value="">--Chọn đơn vị--</option>
                                             @foreach($modelpb as $ttpb)
