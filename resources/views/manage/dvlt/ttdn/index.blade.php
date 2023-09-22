@@ -127,20 +127,10 @@
                                     <b>Giấy phép kinh doanh</b>
                                 </td>
                                 <td style="width:35%">
-                                <span class="text-muted">{{$model->giayphepkd}}
+                                <span class="text-muted"><a href="{{ url('/data/giaydkkd/'.$model->tailieu ) }}" target="_blank">{{$model->giayphepkd}}</a>
                                 </span>
                                 </td>
-                            </tr>
-                            <tr>
-                                <td style="width:15%">
-                                    <b>Link chia sẻ giấy phép đăng ký kinh doanh</b>
-                                </td>
-                                <td style="width:35%">
-                                <span class="text-muted"><a href="{{$model->tailieu}}" target="_blank">Xem chi tiết</a>
-                                </span>
-                                </td>
-                            </tr>
-
+                            </tr>                           
                             <tr>
                                 <td style="width:15%">
                                     <b>Chức danh người ký</b>
@@ -255,20 +245,10 @@
                                         <b>Giấy phép kinh doanh</b>
                                     </td>
                                     <td style="width:35%">
-                                <span class="text-muted">{{$modeltttd->giayphepkd}}
+                                <span class="text-muted"><a href="{{ url('/data/giaydkkd/'.$modeltttd->tailieu ) }}" target="_blank">{{$modeltttd->giayphepkd}}</a>
                                 </span>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td style="width:15%">
-                                        <b>Link chia sẻ giấy phép đăng ký kinh doanh</b>
-                                    </td>
-                                    <td style="width:35%">
-                                <span class="text-muted"><a href="{{$modeltttd->tailieu}}" target="_blank">Xem chi tiết</a>
-                                </span>
-                                    </td>
-                                </tr>
-
                                 <tr>
                                     <td style="width:15%">
                                         <b>Chức danh người ký</b>

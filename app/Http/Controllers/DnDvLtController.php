@@ -138,9 +138,7 @@ class DnDvLtController extends Controller
     public function update(Request $request, $id)
     {
         if (Session::has('admin')) {
-
             $update = $request->all();
-
             $model = DnDvLt::findOrFail($id);
             if(session('admin')->sadmin == 'ssa' || $model->cqcq == session('admin')->cqcq) {
                 $model->tendn = $update['tendn'];
@@ -150,8 +148,14 @@ class DnDvLtController extends Controller
                 $model->noidknopthue = $update['noidknopthue'];
                 $model->chucdanhky = $update['chucdanhky'];
                 $model->nguoiky = $update['nguoiky'];
-                $model->diadanh = $update['diadanh'];
-                $model->tailieu = $update['tailieu'];
+                $model->diadanh = $update['diadanh'];                
+                if (isset($update['tailieu'])) {                   
+                    $filedk = $request->file('tailieu'); 
+                    $filename = $model->masothue . '_giaydkkd.' . $filedk->getClientOriginalExtension();                   
+                    $model->tailieu = $filename;
+                    $filedk->move(public_path() . '/data/giaydkkd', $filename);
+                }
+                //$model->tailieu = $update['tailieu'];
                 $model->giayphepkd = $update['giayphepkd'];
                 $model->cqcq = $update['cqcq'];
                 $model->email = $update['email'];
@@ -268,6 +272,7 @@ class DnDvLtController extends Controller
     public function ttdnupdate(Request $request,$id){
         if (Session::has('admin')) {
             $update = $request->all();
+            
             if(session('admin')->level == 'T' || session('admin')->level == 'H'){
                 $model = DnDvLt::findOrFail($id);
                 $model->tendn = $update['tendn'];
@@ -277,13 +282,18 @@ class DnDvLtController extends Controller
                 $model->email = $update['email'];
                 $model->noidknopthue = $update['noidknopthue'];
                 $model->giayphepkd = $update['giayphepkd'];
+                if (isset($update['tailieu'])) {                   
+                    $filedk = $request->file('tailieu'); 
+                    $filename = $model->masothue . '_giaydkkd.' . $filedk->getClientOriginalExtension();                   
+                    $filedk->move(public_path() . '/data/giaydkkd', $filename);
+                    $model->tailieu = $filename;
+                }
+                
                 $model->chucdanhky = $update['chucdanhky'];
                 $model->nguoiky = $update['nguoiky'];
                 $model->diadanh = $update['diadanh'];
                 $model->cqcq = $update['cqcq'];
                 $model->save();
-
-                return redirect('ttdn_dich_vu_luu_tru');
             }else {
                 $check = TtDn::where('masothue',session('admin')->mahuyen)
                     ->delete();
@@ -298,7 +308,13 @@ class DnDvLtController extends Controller
                 $model->nguoiky = $update['nguoiky'];
                 $model->diadanh = $update['diadanh'];
                 $model->giayphepkd = $update['giayphepkd'];
-                $model->tailieu = $update['tailieu'];
+                if (isset($update['tailieu'])) {                   
+                    $filedk = $request->file('tailieu'); 
+                    $filename = $model->masothue . '_giaydkkd.' . $filedk->getClientOriginalExtension();    
+                    $filedk->move(public_path() . '/data/giaydkkd', $filename);
+                    $model->tailieu = $filename;
+                }
+                
                 $model->email = $update['email'];
                 $model->setting = '';
                 $model->dvxk = 0;

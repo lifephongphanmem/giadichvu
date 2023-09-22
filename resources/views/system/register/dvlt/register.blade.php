@@ -176,17 +176,17 @@ License: You must have a valid license purchased only from themeforest(the above
             <div class="col-md-12">
                 <div class="form-group">
                     <label class="control-label">Giấy đăng ký kinh doanh của doanh nghiệp</label>
-                    <input placeholder="Link chia sẻ giấy đăng ký kinh doanh của doanh nghiệp" name="tailieu" id="tailieu" type="file">
+                    <input name="tailieu" id="tailieu" type="file">
                 </div>
             </div>
         </div>
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
                     <input placeholder="Link chia sẻ giấy đăng ký kinh doanh của doanh nghiệp" name="filedk" id="filedk" type="file">
                 </div>
             </div>
-        </div>
+        </div> -->
         <!--div class="row">
             <div class="col-md-12">
                 <div class="form-group">

@@ -28,7 +28,8 @@
                 </div-->
                 <div class="portlet-body form">
                     <!-- BEGIN FORM-->
-                    {!! Form::model($model, ['method' => 'PATCH', 'url'=>'ttdn_dich_vu_luu_tru/'. $model->id, 'class'=>'horizontal-form','id'=>'update_tttaikhoan']) !!}
+                    {!! Form::model($model, ['method' => 'PATCH', 'url'=>'ttdn_dich_vu_luu_tru/'. $model->id, 'class'=>'horizontal-form','id'=>'update_tttaikhoan',
+                        'files' => true, 'enctype' => 'multipart/form-data',]) !!}
                         <meta name="csrf-token" content="{{ csrf_token() }}" />
                         <div class="form-body">
                             <div class="row">
@@ -81,26 +82,29 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Giấy phép đăng ký kinh doanh<span class="require">*</span></label>
+                                      
                                         {!!Form::text('giayphepkd', null, array('id' => 'giayphepkd','class' => 'form-control required'))!!}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">Link chia sẻ giấy phép đăng ký kinh doanh<span class="require">*</span></label>
-                                        {!!Form::text('tailieu', null, array('id' => 'tailieu','class' => 'form-control'))!!}
-                                    </div>
-                                    <p class="help-block">
-                                        <span class="label label-success label-sm">
-                                        Help: &nbsp;</span>
-                                        <a target="_blank" href="/data/help/hdchiase.docx">
-                                            Hướng dẫn cách chia sẻ giấy phép đăng ký kinh doanh </a>
-                                    </p>
+                                        <label class="control-label">Giấy phép đăng ký kinh doanh<span class="require">*</span></label>
+                                        @if($model->tailieu != '')                                        
+                                            <!-- @if(str_contains($model->tailieu, 'google'))
+                                                <a href="{{ $model->tailieu }}" target="_blank">Link</a>
+                                            @else -->
+                                                <a href="{{ url('/data/giaydkkd/'.$model->tailieu ) }}" target="_blank">Link</a>
+                                            <!-- @endif -->
+                                        @endif   
+                                        {!!Form::file('tailieu', null, array('id' => 'tailieu','class' => 'form-control'))!!}
+                                    </div>                                   
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Chức danh người ký<span class="require">*</span></label>
+                                        
                                         {!!Form::text('chucdanhky', null, array('id' => 'chucdanhky','class' => 'form-control required'))!!}
                                     </div>
                                 </div>

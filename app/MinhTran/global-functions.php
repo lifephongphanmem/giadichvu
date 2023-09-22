@@ -648,6 +648,7 @@ function guitin($YourPhone,$content)
     }
     print "Ket qua goi API: " . $xml->CodeResult . "\n";
 }
+
 function  guitinjson($YourPhone,$Content)
 {
 
