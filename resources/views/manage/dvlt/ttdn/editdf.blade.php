@@ -26,7 +26,8 @@
                 </div-->
                 <div class="portlet-body form">
                     <!-- BEGIN FORM-->
-                    {!! Form::model($model, ['method' => 'PATCH', 'url'=>'ttdn_dich_vu_luu_tru/df/'. $model->id, 'class'=>'horizontal-form','id'=>'update_tttaikhoan']) !!}
+                    {!! Form::model($model, ['method' => 'PATCH', 'url'=>'ttdn_dich_vu_luu_tru/df/'. $model->id, 'class'=>'horizontal-form','id'=>'update_tttaikhoan',
+                        'files' => true, 'enctype' => 'multipart/form-data',]) !!}
                         <meta name="csrf-token" content="{{ csrf_token() }}" />
                         <div class="form-body">
                             <div class="row">
@@ -78,18 +79,15 @@
                                     <div class="form-group">
                                         <label class="control-label">Giấy phép đăng ký kinh doanh<span class="require">*</span></label>
                                         {!!Form::text('giayphepkd', null, array('id' => 'giayphepkd','class' => 'form-control required'))!!}
-                                    </div>
-                                    <p class="help-block">
-                                        <span class="label label-success label-sm">
-                                        Help: &nbsp;</span>
-                                        <a target="_blank" href="http://help.csdlgia.vn/data/help/tienich/upfile/upfile.pdf">
-                                            Hướng dẫn cách chia sẻ giấy phép đăng ký kinh doanh </a>
-                                    </p>
+                                    </div>                                  
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">Link chia sẻ giấy phép đăng ký kinh doanh<span class="require">*</span></label>
-                                        {!!Form::text('tailieu', null, array('id' => 'tailieu','class' => 'form-control'))!!}
+                                        <label class="control-label">Giấy phép đăng ký kinh doanh</label>
+                                        @if($model->tailieu != '')  
+                                            <a href="{{ url('/data/giaydkkd/'.$model->tailieu ) }}" target="_blank">Link</a>                                           
+                                        @endif   
+                                        {!!Form::file('tailieu', null, array('id' => 'tailieu','class' => 'form-control'))!!}
                                     </div>
                                 </div>
                             </div>

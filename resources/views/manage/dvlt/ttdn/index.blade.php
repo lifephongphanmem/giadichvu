@@ -245,7 +245,7 @@
                                         <b>Giấy phép kinh doanh</b>
                                     </td>
                                     <td style="width:35%">
-                                <span class="text-muted"><a href="{{ url('/data/giaydkkd/'.$modeltttd->tailieu ) }}" target="_blank">{{$modeltttd->giayphepkd}}</a>
+                                <span class="text-muted"><a href="{{ url('/data/giaydkkd/'.$modeltttd->tailieu ) }}" target="_blank">{{$modeltttd->tailieu}}</a>
                                 </span>
                                     </td>
                                 </tr>

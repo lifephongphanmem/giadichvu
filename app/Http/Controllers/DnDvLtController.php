@@ -287,8 +287,7 @@ class DnDvLtController extends Controller
                     $filename = $model->masothue . '_giaydkkd.' . $filedk->getClientOriginalExtension();                   
                     $filedk->move(public_path() . '/data/giaydkkd', $filename);
                     $model->tailieu = $filename;
-                }
-                
+                }                
                 $model->chucdanhky = $update['chucdanhky'];
                 $model->nguoiky = $update['nguoiky'];
                 $model->diadanh = $update['diadanh'];
@@ -310,11 +309,10 @@ class DnDvLtController extends Controller
                 $model->giayphepkd = $update['giayphepkd'];
                 if (isset($update['tailieu'])) {                   
                     $filedk = $request->file('tailieu'); 
-                    $filename = $model->masothue . '_giaydkkd.' . $filedk->getClientOriginalExtension();    
+                    $filename = $model->masothue . '_giaydkkddf.' . $filedk->getClientOriginalExtension();    
                     $filedk->move(public_path() . '/data/giaydkkd', $filename);
                     $model->tailieu = $filename;
-                }
-                
+                }                
                 $model->email = $update['email'];
                 $model->setting = '';
                 $model->dvxk = 0;
@@ -391,7 +389,7 @@ class DnDvLtController extends Controller
 
     public function ttdncapnhat($id,Request $request){
         if (Session::has('admin')) {
-            $input =$request->all();
+            $input = $request->all();
             $model = TtDn::findOrFail($id);
             $model->tendn = $input['tendn'];
             $model->diachi = $input['diachi'];
@@ -403,7 +401,17 @@ class DnDvLtController extends Controller
             $model->nguoiky = $input['nguoiky'];
             $model->diadanh = $input['diadanh'];
             $model->giayphepkd = $input['giayphepkd'];
-            $model->tailieu = $input['tailieu'];
+            if (isset($input['tailieu'])) { 
+                $filedk = $request->file('tailieu'); 
+                $filename = $model->masothue . '_giaydkkddf1.' . $filedk->getClientOriginalExtension();    
+                $filedk->move(public_path() . '/data/giaydkkd', $filename);
+                $model->tailieu = $filename;
+            }else{
+                if($model-> tailieu == ''){
+                    $tt = DnDvLt::where('masothue', $model->masothue)->first();
+                    $model->tailieu = $tt->tailieu;
+                }
+            }               
             $model->setting = '';
             $model->dvxk = 0;
             $model->dvxb = 0;
