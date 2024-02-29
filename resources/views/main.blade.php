@@ -496,7 +496,15 @@ License: You must have a valid license purchased only from themeforest(the above
                         <li><a href="{{url('users')}}"> Quản lý tài khoản</a></li>
                         <li><a href="{{url('users/register')}}"> Tài khoản đăng ký</a></li>
                         <li><a href="{{url('cau_hinh_he_thong')}}">Cấu hình hệ thống</a></li>
+                        {{-- <li>
+                            <a href="">API kết nối<span class="arrow"></span> </a>
+                            <ul class="sub-menu">
+                                <li><a href="{{url('/quanlyapi/doanhnghiep')}}">Danh sách doanh nghiệp</a></li>
+                                <li><a href="{{url('/quanlyapi/hosokekhai')}}">Danh sách hồ sơ</a></li>
+                            </ul>
+                        </li> --}}
                     </ul>
+                    
                 </li>
                 @endif
             </ul>

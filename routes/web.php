@@ -1,4 +1,7 @@
 <?php
+
+use Illuminate\Support\Facades\Route;
+
 Route::get('/ajax/checkngay','AjaxController@checkngay');
 Route::get('/ajax/checkngaykk','AjaxController@checkngaykk');
 
@@ -680,4 +683,8 @@ Route::get('nangcapdl','NangCapController@nangcapdl');
 Route::resource('hsduyetdvlt','HsXdDvLtController');
 
 include('congbo/congbo.php');
-include('congbo/congbo.php');
+//Quản lý API
+// Route::group(['prefix'=>'quanlyapi'],function(){
+//     Route::get('doanhnghiep','APIController@DoanhNghiep');    
+//     Route::get('hosokekhai','APIController@HoSoKeKhai');    
+// });
