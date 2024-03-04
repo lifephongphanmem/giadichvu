@@ -34,15 +34,15 @@ class APIController extends Controller
         }
 
         //Thiết lập thông điệp
-        $a_API['Header'] = [
-            'Version' => '1.0',
-            'Tran_Code' => '',
-            'Export_Date' => date('d-m-Y h:i:sa'),
-            'Msg_ID' => '',
-            'Path' => $header['host'][0],
-        ];
-        $a_API['Body'] = [];
-        $a_API['Security'] = ['Signature' => ''];
+        // $a_API['Header'] = [
+        //     'Version' => '1.0',
+        //     'Tran_Code' => '',
+        //     'Export_Date' => date('d-m-Y h:i:sa'),
+        //     'Msg_ID' => '',
+        //     'Path' => $header['host'][0],
+        // ];
+        // $a_API['Body'] = [];
+        // $a_API['Security'] = ['Signature' => ''];
         //Lấy danh sách đơn vị
         if (strtolower($header['sadmin'][0]) == 'ssa') {
             $model = DnDvLt::where('trangthai', 'Kích hoạt')->get();
@@ -74,8 +74,9 @@ class APIController extends Controller
             $a_kq[$i]['ds_cskd'] = $a_cskd;
         }
 
-        $a_API['Body'] = $a_kq;
-        return response()->json($a_API, Response::HTTP_OK);
+        // $a_API['Body'] = $a_kq;
+        return response()->json($a_kq, Response::HTTP_OK);
+        // return response()->json(['matrave'=>0,'data'=>json_encode($a_kq)], Response::HTTP_OK);
     }
 
     public function HoSoKeKhai(Request $request)
@@ -100,15 +101,15 @@ class APIController extends Controller
         }
 
         //Thiết lập thông điệp
-        $a_API['Header'] = [
-            'Version' => '1.0',
-            'Tran_Code' => '',
-            'Export_Date' => date('d-m-Y h:i:sa'),
-            'Msg_ID' => '',
-            'Path' => $header['host'][0],
-        ];
-        $a_API['Body'] = [];
-        $a_API['Security'] = ['Signature' => ''];
+        // $a_API['Header'] = [
+        //     'Version' => '1.0',
+        //     'Tran_Code' => '',
+        //     'Export_Date' => date('d-m-Y h:i:sa'),
+        //     'Msg_ID' => '',
+        //     'Path' => $header['host'][0],
+        // ];
+        // $a_API['Body'] = [];
+        // $a_API['Security'] = ['Signature' => ''];
         //Lấy danh sách đơn vị
         if (strtolower($header['sadmin'][0]) == 'ssa') {
             $model_dn = DnDvLt::where('trangthai', 'Kích hoạt')->get();
@@ -146,7 +147,8 @@ class APIController extends Controller
             $a_kq[$i]['ds_cths'] = $a_ct;
         }
 
-        $a_API['Body'] = $a_kq;
-        return response()->json($a_API, Response::HTTP_OK);
+        // $a_API['Body'] = $a_kq;
+        return response()->json($a_kq, Response::HTTP_OK);
+        // return response()->json(['matrave'=>0,'data'=>$a_kq], Response::HTTP_OK);
     }
 }
