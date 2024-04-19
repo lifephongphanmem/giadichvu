@@ -120,6 +120,7 @@ class APIController extends Controller
         }
         $model_cskd = CsKdDvLt::wherein('masothue', array_column($model_dn->toarray(), 'masothue'))->get();
         $model = KkGDvLt::wherein('macskd', array_column($model_cskd->toarray(), 'macskd'))
+            ->where('trangthai', 'Duyệt')
             ->wherebetween('ngaynhap', [$header['tungay'][0], $header['denngay'][0]])->get();
         $model_chitiet = KkGDvLtCt::wherein('mahs', array_column($model->toarray(), 'mahs'))->get();
         $a_kq = $model->toarray();
@@ -140,7 +141,7 @@ class APIController extends Controller
                     'mucgialk' => $ct->mucgialk,
                     'mucgiakk' => $ct->mucgiakk,
                     'tendoituong' => $ct->tendoituong,
-                    'apdung'=> $ct->apdung,
+                    'apdung' => $ct->apdung,
                 ];
             }
 
