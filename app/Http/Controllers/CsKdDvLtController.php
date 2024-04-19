@@ -740,7 +740,7 @@ class CsKdDvLtController extends Controller
                 $content ="Thông báo thay đổi giấy chứng nhận loại hạng. ". $data['tendn']." - ".
                     $data['masothue']. " - ". $data['tg']." - ". $data['tencskd']. " - ". $data['loaihang'];               
                 guitinjson($phone,$content);
-                */
+                
 
                 $maildn = $dn->email;
                 $tendn = $dn->tendn;
@@ -752,6 +752,7 @@ class CsKdDvLtController extends Controller
                         ->subject('Thông báo thay đổi giấy chứng nhận loại hạng');
                     $message->from('qlgiakhanhhoa@gmail.com', 'Phần mềm CSDL giá');
                 });
+                */
             }
             if (session('admin')->level == 'T' || session('admin')->level == 'H')
                 return redirect('ttcskd_dich_vu_luu_tru/masothue=' . $inputs['masothue']);
