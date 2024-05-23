@@ -72,7 +72,7 @@ class CsKdDvLtController extends Controller
     public function create()
     {
         if (Session::has('admin')) {
-            if (session('admin')->level == 'DVLT') {
+            //if (session('admin')->level == 'DVLT') {
                 $model = TtPhong::where('masothue', session('admin')->mahuyen)
                     ->delete();
                 $ttdn = DnDvLt::where('masothue', session('admin')->mahuyen)
@@ -80,9 +80,9 @@ class CsKdDvLtController extends Controller
                 return view('manage.dvlt.ttcskd.create')
                     ->with('ttdn', $ttdn)
                     ->with('pageTitle', 'Kê khai thông tin cơ sở kinh doanh cung cấp dịch vụ lưu trú');
-            } else {
-                return view('errors.perm');
-            }
+            //} else {
+                //return view('errors.perm');
+            //}
         } else
             return view('errors.notlogin');
     }
