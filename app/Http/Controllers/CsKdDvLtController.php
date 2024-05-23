@@ -423,16 +423,16 @@ class CsKdDvLtController extends Controller
         if (Session::has('admin')) {
             if (session('admin')->level == 'T' || session('admin')->level == 'H' || session('admin')->level == 'DVLT') {
                 $model = CsKdDvLt::findOrFail($id);
-                if (session('admin')->sadmin == 'ssa' || session('admin')->cqcq == $model->cqcq) {
+                //if (session('admin')->sadmin == 'ssa' || session('admin')->cqcq == $model->cqcq) {
                     $modelttp = TtCsKdDvLt::where('macskd', $model->macskd)
                         ->get();
                     return view('manage.dvlt.ttcskd.edit')
                         ->with('model', $model)
                         ->with('modelttp', $modelttp)
                         ->with('pageTitle', 'Chỉnh sửa thông tin cơ sở kinh doanh dịch vụ lưu trú');
-                } else {
-                    return view('errors.noperm');
-                }
+                //} else {
+                    //return view('errors.noperm');
+                //}
             } else {
                 return view('errors.perm');
             }
