@@ -30,7 +30,7 @@ class KkGiaDvLt45sController extends Controller
                     ->count();
                 if($check == 0) {
                     $modelcskd = CsKdDvLt::where('macskd', $macskd)->first();
-                    if (session('admin')->sadmin == 'ssa' || session('admin')->cqcq == $modelcskd->cqcq) {
+                    //if (session('admin')->sadmin == 'ssa' || session('admin')->cqcq == $modelcskd->cqcq) {
                         $modelttp = TtCsKdDvLt::where('macskd', $macskd)
                             ->get();
 
@@ -85,8 +85,8 @@ class KkGiaDvLt45sController extends Controller
                             ->with('modeldn', $modeldn)
                             ->with('inputs', $inputs)
                             ->with('pageTitle', 'Kê khai giá dịch vụ lưu trú thêm mới');
-                    }else
-                        return view('errors.noperm');
+                    //}else
+                        //return view('errors.noperm');
                 }else
                     dd('Hiện tại đang tồn tại hồ sơ có trạng thái chờ duyệt, chờ chuyển or bị trả lại! Bạn không thể tạo thêm hồ sơ');
             }else
