@@ -714,7 +714,18 @@
                 <h4 id="modal-header-primary-label" class="modal-title">Báo cáo hồ sơ trả lại</h4>
             </div>
             <div class="modal-body">
-                <div class="form-horizontal">
+                <div class="form-horizontal">           
+                    <div class="form-group">
+                        <label class="col-md-4 control-label"><b>Đơn vị chủ quản</b></label>
+                        <div class="col-md-8">
+                            <select class="form-control select2me" name="cqcq" id="cqcq">
+                                <option value="all">--Tất cả--</option>
+                                @foreach($model as $cqcq)
+                                    <option value="{{$cqcq->maqhns}}">{{$cqcq->tendv}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>                      
                     <div class="form-group">
                         <label class="col-md-4 control-label"><b>Từ ngày</b></label>
                         <div class="col-md-8">

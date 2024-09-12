@@ -1037,10 +1037,15 @@ class ReportsController extends Controller
             $input = $request->all();
             $model = KkGDvLtH::join('cskddvlt','cskddvlt.macskd','=','kkgdvlth.macskd')
                 ->join('dndvlt','cskddvlt.masothue','=','dndvlt.masothue')
+                ->join('dmdvql','kkgdvlth.cqcq','=', 'dmdvql.maqhns')
                 ->whereBetween('kkgdvlth.created_at', [$input['ngaytu'], $input['ngayden']])
                 ->where('kkgdvlth.action','Trả lại hồ sơ')
-                ->select('kkgdvlth.*','dndvlt.tendn','cskddvlt.tencskd')
+                ->select('kkgdvlth.*','dndvlt.tendn','cskddvlt.tencskd','dmdvql.tendv')
                 ->get();
+            if($input['cqcq']!= 'all')
+            {
+                 $model = $model->where('cqcq', $input['cqcq']);
+            }
             return view('reports.kkgdvlt.bcth.BC12')
                 ->with('model',$model)
                 ->with('input',$input)

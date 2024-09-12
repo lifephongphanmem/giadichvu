@@ -87,7 +87,11 @@
         <td>{{$key+1}}</td>
         <td>Doanh nghiệp: {{$tt->tendn}}<br>Cơ sở Kinh doanh: {{$tt->tencskd}}</td>
         <td>Số hồ sơ: {{$tt->socv}}<br>Ngày chuyển: {{getDateTime($tt->ngaychuyen)}}</td>
-        <td>Lý do: {{$tt->lydo}}<br>Ngày trả lại: {{getDateTime($tt->created_at)}}</td>
+        <td>
+            <b>{{$tt->tendv}}</b>
+            <br/>Lý do: {{$tt->lydo}}
+            <br>Ngày trả lại: {{getDateTime($tt->created_at)}}
+        </td>
     </tr>
     @endforeach
     </tbody>
