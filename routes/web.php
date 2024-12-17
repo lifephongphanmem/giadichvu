@@ -59,7 +59,7 @@ Route::patch('cau_hinh_he_thong/{id}','GeneralConfigsController@update');
 //Route::get('xetduyet_thaydoi_thongtindoanhnghiep/{id}/show','XdTdTtDnController@show');
 //Route::get('xetduyet_thaydoi_thongtindoanhnghiep/{id}/duyet','XdTdTtDnController@duyet');
 //Route::post('xetduyet_thaydoi_thongtindoanhnghiep/tralai','XdTdTtDnController@tralai');
-//Route::post('xetduyet_thaydoi_thongtindoanhnghiep/delete','XdTdTtDnController@del');
+Route::post('xetduyet_thaydoi_thongtindoanhnghiep/delete','XdTdTtDnController@del');
 
 Route::resource('xetduyet_thaydoi_ttdoanhnghiep','XdTdTtDnController');
 Route::get('xetduyet_thaydoi_ttdoanhnghiep/{id}/duyet','XdTdTtDnController@duyet');
