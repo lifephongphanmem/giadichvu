@@ -86,7 +86,7 @@
                         @foreach($model as $key=>$tt)
                             <tr class="odd gradeX">
                                 <td style="text-align: center">{{$key + 1}}</td>
-                                <td style="text-align: center">{{getDateTime($tt->created_at)}}</td>
+                                <td style="text-align: center">{{getDateTime($tt->updated_at)}}</td>
                                 <td class="active" >{{$tt->tendn}}</td>
                                 <td>{{$tt->masothue}}</td>
                                 <td>
