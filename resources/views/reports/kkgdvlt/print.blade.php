@@ -157,7 +157,8 @@
     </tr>
     </thead>
     <tbody>
-    @foreach($modelkkct->sortBy('loaip') as $ctkk)
+    {{--@foreach($modelkkct->sortBy('loaip') as $ctkk)--}}
+    @foreach($modelkkct as $ctkk)
         <tr>
             <th style="text-align: left">{{$ctkk->loaip.'-'.$ctkk->qccl}}</th>
             <th style="text-align: left">{{getTtPhong($ctkk->sohieu)}}</th>

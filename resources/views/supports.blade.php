@@ -11,13 +11,13 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-md-6">
+	<div class="col-md-12">
 		<!-- BEGIN PORTLET -->
 		<div class="portlet light ">
 			<div class="portlet-title">
 				<div class="caption caption-md">
 					<i class="icon-bar-chart theme-font hide"></i>
-					<span class="caption-subject font-blue-madison bold uppercase">Phòng TKBT I - quản lý địa bàn các tỉnh phía Nam</span>
+					<span class="caption-subject font-blue-madison bold uppercase">Phòng triển khai và bảo trì</span>
 				</div>
 			</div>
 			<div class="portlet-body">
@@ -61,10 +61,10 @@
 								<img class="user-pic" src="{{url('images/avatar/default-user.png')}}">
 							</td>
 							<td>
-								<a href="" class="primary-link">Tạ Đình Hữu</a>
+								<a href="" class="primary-link">Ngô Thế Dương</a>
 							</td>
 							<td style="text-align: center">
-								<span class="bold theme-font">0917 179993</span>
+								<span class="bold theme-font">0916 678 911</span>
 							</td>
 						</tr>
 						<tr>
@@ -72,51 +72,10 @@
 								<img class="user-pic" src="{{url('images/avatar/default-user.png')}}">
 							</td>
 							<td>
-								<a href="" class="primary-link">Đinh Sầm Nguyên</a>
+								<a href="" class="primary-link">Nguyễn Trần Huynh</a>
 							</td>
 							<td style="text-align: center">
-								<span class="bold theme-font">0366.468.026</span>
-							</td>
-						</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-		<!-- END PORTLET -->
-	</div>
-	<div class="col-md-6">
-		<!-- BEGIN PORTLET -->
-		<div class="portlet light ">
-			<div class="portlet-title">
-				<div class="caption caption-md">
-					<i class="icon-bar-chart theme-font hide"></i>
-					<span class="caption-subject font-blue-madison bold uppercase">Phòng TKBT II - quản lý địa bàn các tỉnh phía Bắc </span>
-				</div>
-			</div>
-			<div class="portlet-body">
-				<div class="table-scrollable table-scrollable-borderless">
-					<table class="table table-hover table-light">
-						<thead>
-						<tr class="uppercase">
-							<th colspan="2" style="text-transform: uppercase">
-								Cán bộ hỗ trợ
-							</th>
-							<th>
-								TEL
-							</th>
-						</tr>
-						</thead>
-						<tbody>
-						<tr>
-							<td class="fit">
-								<img class="user-pic" src="{{url('images/avatar/default-user.png')}}">
-							</td>
-							<td>
-								<a href="" class="primary-link">Hoàng Văn Sáng</a>
-							</td>
-							<td style="text-align: center">
-								<span class="bold theme-font">0974 090 556</span>
+								<span class="bold theme-font">0964 304 891</span>
 							</td>
 						</tr>
 						<tr>
@@ -124,10 +83,10 @@
 								<img class="user-pic" src="{{url('images/avatar/default-user.png')}}">
 							</td>
 							<td>
-								<a href="" class="primary-link">Nguyễn Văn Dũng</a>
+								<a href="" class="primary-link">Trịnh Minh Khải</a>
 							</td>
 							<td style="text-align: center">
-								<span class="bold theme-font">0986 012094</span>
+								<span class="bold theme-font">0389 095 454</span>
 							</td>
 						</tr>
 						<tr>
@@ -138,18 +97,7 @@
 								<a href="" class="primary-link">Nguyễn Văn Đạt</a>
 							</td>
 							<td style="text-align: center">
-								<span class="bold theme-font">0966 305 359</span>
-							</td>
-						</tr>
-						<tr>
-							<td class="fit">
-								<img class="user-pic" src="{{url('images/avatar/default-user.png')}}">
-							</td>
-							<td>
-								<a href="" class="primary-link">Ngô Thế Dương</a>
-							</td>
-							<td style="text-align: center">
-								<span class="bold theme-font">0916 678 911</span>
+								<span class="bold theme-font">0329 970 512</span>
 							</td>
 						</tr>
 						</tbody>
